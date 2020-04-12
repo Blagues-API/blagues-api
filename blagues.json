@@ -1,7 +1,32 @@
 [
     {
         "id": 1,
-        "question": "Question",
-        "answer": "Answer"
+        "type": "dev",
+        "joke": "Les filles c'est comme les noms de domaine.",
+        "answer": "Celles que j'aime sont déjà prises."
+    },
+    {
+        "id": 2,
+        "type": "global",
+        "joke": "Quelle est la meilleure heure pour écouter de la musique ?",
+        "answer": "Deezer..."
+    },
+    {
+        "id": 3,
+        "type": "dev",
+        "joke": "Un développeur ne descend pas du métro.",
+        "answer": "Il libère la RAM..."
+    },
+    {
+        "id": 4,
+        "type": "dev",
+        "joke": "Où partent les développeurs en vacances ?",
+        "answer": "Au C-Shell."
+    },
+    {
+        "id": 5,
+        "type": "dev",
+        "joke": "Pourquoi les développeurs doivent-ils suivre une formation incendie ? ",
+        "answer": "A cause des pare-feux."
     }
 ]
