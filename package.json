@@ -1,0 +1,21 @@
+{
+  "name": "balgues-api",
+  "version": "1.0.0",
+  "description": "Blagues API française",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DraftProducts/blagues-api.git"
+  },
+  "author": "DraftMan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DraftProducts/blagues-api/issues"
+  },
+  "homepage": "https://blagues-api.xyz"
+}
