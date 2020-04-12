@@ -1,5 +1,4 @@
-[![Blagues API](https://user-images.githubusercontent.com/29425008/79066704-67798580-7cba-11ea-9f6a-394178dee59d.png)](http://blagues-api.xyz)
-
+[![Blagues API](https://raw.githubusercontent.com/DraftProducts/blagues-api/master/images/Logo.200.png)](http://blagues-api.xyz)
 # Blagues API
 
 API de blagues française par authentification Auth2.0 Bearer sous liscence MIT
