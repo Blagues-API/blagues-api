@@ -28,5 +28,227 @@
         "type": "dev",
         "joke": "Pourquoi les développeurs doivent-ils suivre une formation incendie ? ",
         "answer": "A cause des pare-feux."
+    },
+    {
+        "id": 6,
+        "type": "dark",
+        "joke": "Qu’est ce qui a 4 pattes et un bras ?",
+        "answer": "Un pitbull dans un jardin d’enfant !"
+    },
+    {
+        "id": 7,
+        "type": "dark",
+        "joke": "Ma fille vient de perdre sa première dent…",
+        "answer": "Ça lui apprendra à me répondre !"
+    },
+    {
+        "id": 8,
+        "type": "dark",
+        "joke": "Qui court plus vite qu’Usain Bolt ?",
+        "answer": "Un Somalien avec un ticket restaurant"
+    },
+    { 
+        "id": 9,
+        "type": "blondes",
+        "joke": "Pourquoi les alpinistes aiment-ils bien les blondes ?",
+        "answer": "Parce qu’ils n’ont pas peur du vide !"
+    },
+    {
+        "id": 10,
+        "type": "limit",
+        "joke": "Tu connais le cri du spermatozoïde ?",
+        "answer": "Bah la prochaine fois au lieu de l'avaler tu croques."
+    },
+    {
+        "id": 11,
+        "type": "global",
+        "joke": "Pourquoi Napoléon n'a jamais déménagé ?",
+        "answer": "Parce que Bonaparte"
+    },
+    {
+        "id": 12,
+        "type": "limit",
+        "joke": "Quel est le point commun entre un cunnilingus et un lapsus ?",
+        "answer": "Une erreur de langue et vous êtes vite dans la merde..."
+    },
+    {
+        "id": 13,
+        "type": "global",
+        "joke": "Quel super héros donne le plus vite l'heure ?",
+        "answer": "Speed heure man !"
+    },
+    {
+        "id": 14,
+        "type": "global",
+        "joke": "Tu connais la blague de la chaise ?",
+        "answer": "Elle est pliante",
+    },
+    {
+        "id": 15,
+        "type": "global",
+        "joke": "Pourquoi il n'y a pas de ballon à question pour un champion ?",
+        "answer": "Parce que Julien Lepers"
+    },
+    {
+        "id": 16,
+        "type": "global",
+        "joke": "Pourquoi les canards sont-il toujours à l'heure ?",
+        "answer": "Parce qu'ils sont dans l'étang"
+    },
+    {
+        "id": 17,
+        "type": "global",
+        "joke": "Tu as 4 poussins et tu n'en veux que 3, comment faire ?",
+        "answer": "Tu en pousses un"
+    },
+    {
+        "id": 18,
+        "type": "global",
+        "joke": "Quel est le comble pour un jardinier ?",
+        "answer": "Se mettre à poil devant ses tomates pour les faire rougir."
+    },
+    {
+        "id": 19,
+        "type": "global",
+        "joke": "Pourquoi il y a une baignoire au dessus des camions de pompiers belges ?",
+        "answer": "Pour mettre la sirène."
+    },
+    {
+        "id": 20,
+        "type": "global",
+        "joke": "Qu'est ce qu'un chou au milieu de l'océan ?",
+        "answer": "Un chou marin."
+    },
+    {
+        "id": 21,
+        "type": "global",
+        "joke": "Qu'est ce qu'un légume rigolo ?",
+        "answer": "Un chou marreur."
+    },
+    {
+        "id": 22,
+        "type": "limit",
+        "joke": "Quel est la différence entre un ascenseur et un vagin ?",
+        "answer": "Aucune, dans les deux cas tu mets ton doigt où t'habite"
+    },
+    {
+        "id": 23,
+        "type": "global",
+        "joke": "Pourquoi le lapin est bleu ?",
+        "answer": "Parce qu’on l’a peint"
+    },
+    {
+        "id": 24,
+        "type": "global",
+        "joke": "Quelle est la mamie qui fait peur aux voleurs ?",
+        "answer": "Mamie Traillette"
+    },
+    {
+        "id": 25,
+        "type": "blondes",
+        "joke": "Qu'est-ce qu'une blonde avec de l'eau dans la bouche ?",
+        "answer": "Une cruche"
+    },
+    {
+        "id": 26,
+        "type": "dark",
+        "joke": "Que fait un chinois sur une mobylette ?",
+        "answer": "Nèèèèmmmmm, Nèèèèmmmmm, Nèèèèmmmmm"
+    },
+    {
+        "id": 27,
+        "type": "global",
+        "joke": "Qu'est ce qu'un squelette dans une armoire ?",
+        "answer": "Une personne qui a gagné à cache-cache."
+    },
+    {
+        "id": 28,
+        "type": "dark",
+        "joke": "Savez vous pourquoi les chinois ne perdent jamais le nord?",
+        "answer": "Parce qu'ils ont le sudoku."
+    },
+    {
+        "id": 29,
+        "type": "global",
+        "joke": "Avec quel fromage, pouvons-nous nous faire grossir les seins?", 
+        "answer": "Du Boursin."
+    },
+    {
+        "id": 30,
+        "type": "global",
+        "joke": "Qu'est ce qui est vert et qui nique ?",
+        "answer": "Véronique."
+    },
+    {
+        "id": 31,
+        "type": "global",
+        "joke": "Comment appelle-t-on un chat tout-terrain ?",
+        "answer": "Un cat-cat."
+    },
+    {
+        "id": 32,
+        "type": "global",
+        "joke": "Comment appelle-t-on un chien qui a des lunettes ?",
+        "answer": "Un optichien."
+    },
+    {
+        "id": 33,
+        "type": "global",
+        "joke": "Quel est le comble pour un électricien ?",
+        "answer": "Ne pas être au courant."
+    },
+    {
+        "id": 34,
+        "type": "dev",
+        "joke": "Combien de développeurs faut-t-il pour remplacer une ampoule grillée ?",
+        "answer": "Aucun, c'est un problème Hardware."
+    },
+    {
+        "id": 35,
+        "type": "dark",
+        "joke": "Pourquoi la petite fille est tombée de la balançoire ?",
+        "answer": "Parce qu'elle n'a pas de bras."
+    },
+    {
+        "id": 36,
+        "type": "dark",
+        "joke": "Pourquoi le petit garçon a laissé tombé sa glace ?",
+        "answer": "Parce qu'il s'est fait renverser par un bus ! "
+    },
+    {
+        "id": 37,
+        "type": "dark",
+        "joke": "Que fait un DJ djihadiste ?",
+        "answer": "Il fait péter le son !"
+    },
+    {
+        "id": 38,
+        "type": "dark",
+        "joke": "Combien faut-il d'hommes pour peindre une voiture en rouge ?",
+        "answer": "Un seul ! Mais il faut le lancer très fort..."
+    },
+    {
+        "id": 39,
+        "type": "dark",
+        "joke": "Quels sont les derniers mots de mon grand-père avant sont décès ?",
+        "answer": "Arrête de bouger l'échelle !"
+    },
+    {
+        "id": 40,
+        "type": "dark",
+        "joke": "A quel endroit se trouvent les tétraplégiques ?",
+        "answer": "Là où on les as laissés.."
+    },
+    {
+        "id": 41,
+        "type": "dark",
+        "joke": "Savez-vous comment la femme d'Hitler est morte ?",
+        "answer": "Parce qu'elle s'est trompée de douche..."
+    },
+    {
+        "id": 42,
+        "type": "dark",
+        "joke": "C'est quoi le plus dur à mixer dans un groupe de légumes ?",
+        "answer": "Leurs fauteuils.."
     }
 ]
