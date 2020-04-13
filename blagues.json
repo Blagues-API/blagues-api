@@ -28,5 +28,11 @@
         "type": "dev",
         "joke": "Pourquoi les développeurs doivent-ils suivre une formation incendie ? ",
         "answer": "A cause des pare-feux."
+    },
+    {
+        "id": 6,
+        "type": "dark",
+        "joke": "Qu’est ce qui a 4 pattes et un bras ?",
+        "answer": "Un pitbull dans un jardin d’enfant !"
     }
 ]
