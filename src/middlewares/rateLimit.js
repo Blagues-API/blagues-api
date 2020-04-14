@@ -7,7 +7,7 @@ setInterval(() => {
 module.exports = (req, res, next) => {
     const requester = String(req.headers['x-forwarded-for'] || req.connection.remoteAddress || 'unknown');
 
-    const limit = req.user.limit || 100;
+    const limit = req.auth.limit || 100;
 
     if (!hostsStats[requester]) {
         hostsStats[requester] = 1;
