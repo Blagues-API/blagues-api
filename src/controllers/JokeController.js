@@ -10,7 +10,7 @@ const jokeById = (id) => {
 };
 
 const randomJokeByType = (type) => {
-  return random(jokes.filter(joke => joke.type === type));
+    return random(jokes.filter(joke => joke.type === type));
 };
 
 module.exports = { randomJoke, randomJokeByType, jokeById };
