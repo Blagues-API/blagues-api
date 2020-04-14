@@ -1,47 +1,71 @@
-const fetch = require('node-fetch')
-const btoa = require('btoa')
+const fetch = require('node-fetch');
+const btoa = require('btoa');
+const jwt = require('jsonwebtoken');
 
-const User = require('../models/User')
+const { Users } = require('../models');
+
+const { generateAPIToken } = require('../utils');
+
 const uri = encodeURIComponent(`${process.env.host_url}/login/callback`);
 
-function redirect () {
-    return function (req, res) {
+function redirect() {
+    return function(req, res) {
         return res.redirect(`https://discordapp.com/api/oauth2/authorize?client_id=${process.env.discord_client_id}&scope=identify&response_type=code&redirect_uri=${uri}`);
-    } 
+    };
 }
 
-function callback () {
-    return async function (req, res) {
+function callback() {
+    return async function(req, res) {
         if (!req.query.code) {
-            return res.status(400).json({ status: 400, error: 'Bad Request', message: 'Code query missing'})
+            return res.status(400).json({ status: 400, error: 'Bad Request', message: 'Code query missing' });
         }
-        const payloadRq = await fetch(`https://discordapp.com/api/oauth2/token?grant_type=authorization_code&code=${req.query.code}&redirect_uri=${uri}`,{
+        const authPayloadRq = await fetch(`https://discordapp.com/api/oauth2/token?grant_type=authorization_code&code=${req.query.code}&redirect_uri=${uri}`, {
             method: 'POST',
             headers: {
-              'Authorization': `Basic ${btoa(`${process.env.discord_client_id}:${process.env.discord_client_secret}`)}`,
+                'Authorization': `Basic ${btoa(`${process.env.discord_client_id}:${process.env.discord_client_secret}`)}`,
             },
         });
-        const payload = await payloadRq.json();
-        const userRq = await fetch('http://discordapp.com/api/users/@me', {
+        const authPayload = await authPayloadRq.json();
+        const userPayloadRq = await fetch('http://discordapp.com/api/users/@me', {
             headers: {
-                'Authorization': `Bearer ${payload.access_token}`,
+                'Authorization': `Bearer ${authPayload.access_token}`,
             },
-        })
-        const user = await userRq.json();
-        await User.upsert({
-            user_id: user.id,
-            user_name: user.username,
-            user_avatar: user.avatar,
-            user_token: payload.access_token,
-            user_token_refresh: payload.refresh_token,
-            limit: 100,
-        }, { fields: ['user_name', 'user_avatar', 'user_token', 'user_token_refresh'] });
-        
-        return res.redirect('/')
-    }
+        });
+        const userPayload = await userPayloadRq.json();
+        const user = await Users.findOne({ where: { user_id: userPayload.id }, raw: true });
+
+        if(user) {
+            await Users.update({
+                user_name: userPayload.username,
+                user_avatar: userPayload.avatar,
+                user_token: authPayload.access_token,
+                user_token_refresh: authPayload.refresh_token,
+            }, {
+                where: { user_id: userPayload.id },
+            });
+        } else {
+
+            const token = await generateAPIToken(jwt, userPayload.id, 100);
+
+            await Users.create({
+                user_id: userPayload.id,
+                user_name: userPayload.username,
+                user_avatar: userPayload.avatar,
+                user_token: authPayload.access_token,
+                user_token_refresh: authPayload.refresh_token,
+                token,
+                limit: 100,
+            });
+        }
+
+        const key = await jwt.sign(authPayload.access_token, process.env.jwt_encryption_web);
+        res.cookies.set('auth', key);
+
+        return res.redirect('/account');
+    };
 }
 
 module.exports = {
     redirect,
-    callback
-}
+    callback,
+};
