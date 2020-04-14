@@ -15,7 +15,7 @@
                     <div class="joke_type" id="type">
                         Blague de développeur
                     </div>
-                    <button id="next">UNE AUTRE !</button>
+                    <button id="next" onclick="nextJoke()">UNE AUTRE !</button>
                 </div>
             </div>
         </section>
@@ -60,7 +60,7 @@
             'beauf': 'Humour de Beauf',
             'blondes': 'Blagues sur les blondes',
         }
-        document.getElementById('next').addEventListener('click', () => {
+        const nextJoke = () => {
             fetch('/api/random', { headers: { 'Authorization': `Bearer <%= token %>` }})
             .then(r => r.json())
             .then(({ type, joke, answer }) => {
@@ -68,7 +68,7 @@
                 document.getElementById('answer').innerHTML = answer;
                 document.getElementById('type').innerHTML = typeRefs[type];
             })
-        })
+        }
 
         /* PrismJS 1.20.0
         https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+clike+javascript */
