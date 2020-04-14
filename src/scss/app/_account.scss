@@ -46,6 +46,38 @@
                 line-height: 28px;
                 font-size: 14px;
                 letter-spacing: .5px;
+                resize: none;
+                height: 200px!important;
+                &::selection {
+                    background: transparent!important;
+                }
+                &::-moz-selection {
+                    background: transparent!important;
+                }
+            }
+            .buttons{
+                display: flex;
+                margin-top: 10px;
+                button{
+                    flex: 1;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 40px;
+                    background-color: $matisse;
+                    padding: 10px 16px;
+                    font-size: 15px;
+                    color: $white;
+                    font-weight: bold;
+                    cursor: pointer;
+                    transition: background-color .3s;
+                    &:first-child{
+                        margin-right: 10px;
+                    }
+                    &:hover{
+                        background-color: $matisse-dark;
+                    }
+                }
             }
         }
     }

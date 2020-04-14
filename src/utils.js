@@ -1,10 +1,11 @@
 const moment = require('moment');
+const jwt = require('jsonwebtoken');
 
 const random = (items) => {
     return items[Math.floor(Math.random() * items.length)];
 };
 
-const generateAPIToken = (jwt, user_id, key, limit) => {
+const generateAPIToken = (user_id, key, limit) => {
     return jwt.sign({
         user_id,
         limit,

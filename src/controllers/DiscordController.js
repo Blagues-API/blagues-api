@@ -45,7 +45,7 @@ function callback() {
             });
         } else {
             const key = generateKey();
-            const token = await generateAPIToken(jwt, userPayload.id, key, 100);
+            const token = await generateAPIToken(userPayload.id, key, 100);
 
             await Users.create({
                 user_id: userPayload.id,
