@@ -250,5 +250,29 @@
         "type": "dark",
         "joke": "C'est quoi le plus dur à mixer dans un groupe de légumes ?",
         "answer": "Leurs fauteuils.."
+    },
+    {
+        "id": 43,
+        "type": "global",
+        "joke": "Quel est le comble pour une orange ?",
+        "answer": "Être toujours pressée."
+    },
+    {
+        "id": 44,
+        "type": "global",
+        "joke": "Que dit un canard quand il va au toilette ?",
+        "answer": "Je vais au petit coin."
+    },
+    {
+        "id": 45,
+        "type": "global",
+        "joke": "Que dit un zombie à un autre zombie ?",
+        "answer": "Alors, ça mord !?!"
+    },
+    {
+        "id": 46,
+        "type": "global",
+        "joke": "Que fait un hibou dans une casserole ?",
+        "answer": "Hi-bou"
     }
 ]
