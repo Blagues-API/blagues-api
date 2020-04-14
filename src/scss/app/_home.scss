@@ -34,10 +34,12 @@
                 padding: 10px 16px;
                 font-size: 15px;
                 color: $white;
-                border: none;
-                outline: 0;
                 font-weight: bold;
                 cursor: pointer;
+                transition: background-color .3s;
+                &:hover{
+                    background-color: $matisse-dark;
+                }
             }
         }
     }
