@@ -10,6 +10,7 @@ module.exports = (sequelize, Sequelize) => {
         user_token: Sequelize.TEXT,
         user_token_refresh: Sequelize.TEXT,
         token: Sequelize.TEXT,
+        token_key: Sequelize.STRING,
         limit: Sequelize.INTEGER,
     }, {
         indexes: [{
