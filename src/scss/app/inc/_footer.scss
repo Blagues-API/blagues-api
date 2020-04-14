@@ -1,0 +1,14 @@
+footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $bluewood;
+    color: $white;
+    height: 40px;
+    .copyright{
+        color: #FFFFFF;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 22px;
+    }
+}
