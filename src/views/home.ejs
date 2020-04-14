@@ -45,18 +45,28 @@
     }
     */
 })</code></pre>
+
                 </div>
             </div>
         </section>
     </div>
     <%- include('footer') -%>
     <script>
+        const typeRefs = {
+            'limit': 'Blague Limite limite',
+            'global': 'Blague Normale',
+            'dark': 'Humour noir',
+            'dev': 'Blague de développeurs',
+            'beauf': 'Humour de Beauf',
+            'blondes': 'Blagues sur les blondes',
+        }
         document.getElementById('next').addEventListener('click', () => {
-            fetch('/api/joke/random', { headers: { 'Authorization': `Bearer <%= token %>` }})
+            fetch('/api/random', { headers: { 'Authorization': `Bearer <%= token %>` }})
+            .then(r => r.json())
             .then(({ type, joke, answer }) => {
                 document.getElementById('joke').innerHTML = joke;
                 document.getElementById('answer').innerHTML = answer;
-                document.getElementById('type').innerHTML = type;
+                document.getElementById('type').innerHTML = typeRefs[type];
             })
         })
 
