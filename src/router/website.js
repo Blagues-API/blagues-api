@@ -1,14 +1,27 @@
 const express = require('express');
+
 const router = express.Router();
+
+const auth = require('../middlewares/auth-web');
 
 const DiscordController = require('../controllers/DiscordController');
 
+router.use(auth());
+
 router.get('/', (req, res) => {
-    res.render('home');
+    res.render('home', {
+        user: req.user,
+        token: process.env.token,
+    });
 });
 
 router.get('/account', (req, res) => {
-    res.render('account');
+    if(!req.user) {
+        return res.redirect('/login');
+    }
+    res.render('account', {
+        user: req.user,
+    });
 });
 
 router.get('/login', DiscordController.redirect());
