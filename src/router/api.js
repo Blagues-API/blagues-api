@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const { auth } = require('../middlewares')
+const auth = require('../middlewares/auth-api');
 
-const { randomJoke, randomJokeByType, jokeById } = require('../controllers/JokeController')
+const { randomJoke, randomJokeByType, jokeById } = require('../controllers/JokeController');
 
-router.use(auth())
+router.use(auth());
 
 router.get('/random', (req, res) => {
     res.json(randomJoke());
