@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 const { Users } = require('../models');
 
-const { generateAPIToken } = require('../utils');
+const { generateAPIToken, generateKey } = require('../utils');
 
 const uri = encodeURIComponent(`${process.env.host_url}/login/callback`);
 
@@ -44,8 +44,8 @@ function callback() {
                 where: { user_id: userPayload.id },
             });
         } else {
-
-            const token = await generateAPIToken(jwt, userPayload.id, 100);
+            const key = generateKey();
+            const token = await generateAPIToken(jwt, userPayload.id, key, 100);
 
             await Users.create({
                 user_id: userPayload.id,
@@ -53,6 +53,7 @@ function callback() {
                 user_avatar: userPayload.avatar,
                 user_token: authPayload.access_token,
                 user_token_refresh: authPayload.refresh_token,
+                token_key: key,
                 token,
                 limit: 100,
             });
