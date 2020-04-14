@@ -4,13 +4,13 @@ module.exports = function() {
     return async function(req, res, next) {
         const bearerToken = req.header('Authorization');
         if (!bearerToken) {
-            return res.status(400).send({
+            return res.status(400).json({
                 status: 400,
                 error: 'Bad Request',
                 message: 'Authorization header is required',
             });
         } else if (bearerToken.substring(0, 7) !== 'Bearer ') {
-            return res.status(400).send({
+            return res.status(400).json({
                 status: 400,
                 error: 'Bad Request',
                 message:  'Authorization header value must follow the Bearer <token> format',
@@ -22,7 +22,7 @@ module.exports = function() {
             req.auth = decoded;
             return next();
         } catch (error) {
-            return res.status(400).send({
+            return res.status(400).json({
                 status: 400,
                 error: 'Bad Request',
                 message:  'Invalid Token submitted',
