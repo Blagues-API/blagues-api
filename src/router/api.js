@@ -24,8 +24,7 @@ router.get('/id/:id', (req, res) => {
 });
 
 router.post('/regenerate', async (req, res) => {
-    console.log(req, res);
-    if(!req.body || req.body !== req.auth.key) {
+    if(!req.body || req.body.key !== req.auth.key) {
         return res.status(400).json({
             status: 400,
             error: 'Bad Request',
@@ -35,13 +34,13 @@ router.post('/regenerate', async (req, res) => {
 
     try {
         const key = generateKey();
-        const token = await generateAPIToken(req.auth.id, key, 100);
+        const token = await generateAPIToken(req.auth.user_id, key, 100);
 
         await Users.update({
             token_key: key,
             token: token,
         }, {
-            where: { user_id: req.auth.id },
+            where: { user_id: req.auth.user_id },
         });
 
         return res.status(200).json(token);

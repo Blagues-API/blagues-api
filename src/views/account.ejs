@@ -40,8 +40,11 @@
                 const btn = document.getElementById('regenerate-btn');
                 fetch('/api/regenerate', { 
                     method: 'POST', 
-                    headers: { 'Authorization': `Bearer <%= user.token %>` },
-                    body: `<%= user.token_key %>`
+                    headers: { 
+                        'Authorization': `Bearer <%= user.token %>`, 
+                        'Content-Type': 'application/json' 
+                    },
+                    body: JSON.stringify({ key: `<%= user.token_key %>` })
                 })
                 .then(r => r.json())
                 .then(newToken => {
