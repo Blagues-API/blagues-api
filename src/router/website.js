@@ -6,12 +6,15 @@ const auth = require('../middlewares/auth-web');
 
 const DiscordController = require('../controllers/DiscordController');
 
+const { jokesCount } = require('../controllers/JokeController');
+
 router.use(auth());
 
 router.get('/', (req, res) => {
     res.render('home', {
         user: req.user,
         token: process.env.token,
+        count: jokesCount(),
     });
 });
 
