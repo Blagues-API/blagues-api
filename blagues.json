@@ -388,5 +388,17 @@
         "type": "blondes",
         "joke": "Quelle est la plus intelligente : la blonde, la rousse ou la brune ?",
         "answer": "La rousse parce que c'est un dictionnaire."
+    },
+    {
+        "id": 66,
+        type: "global",
+        "joke": "Que fait un homme qui rentre dans un café ?",
+        "answer": "Plouf"
+    },
+    {
+        "id": 67,
+        "type": "limit",
+        "joke": "Pourquoi un homme rentre-t-il dans un bar ?",
+        "answer": "Parce qu'il est zoophile"
     }
 ]
