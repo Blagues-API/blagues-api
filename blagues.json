@@ -175,7 +175,7 @@
     },
     {
         "id": 30,
-        "type": "global",
+        "type": "limit",
         "joke": "Qu'est ce qui est vert et qui nique ?",
         "answer": "Véronique."
     },
@@ -199,9 +199,9 @@
     },
     {
         "id": 34,
-        "type": "dev",
-        "joke": "Combien de développeurs faut-t-il pour remplacer une ampoule grillée ?",
-        "answer": "Aucun, c'est un problème Hardware."
+        "type": "beauf",
+        "joke": "Ce que j’ai en commun avec mon mari ?",
+        "answer": "On s’est mariés le même jour..."
     },
     {
         "id": 35,
@@ -217,7 +217,7 @@
     },
     {
         "id": 37,
-        "type": "dark",
+        "type": "global",
         "joke": "Que fait un DJ djihadiste ?",
         "answer": "Il fait péter le son !"
     },
@@ -230,7 +230,7 @@
     {
         "id": 39,
         "type": "dark",
-        "joke": "Quels sont les derniers mots de mon grand-père avant sont décès ?",
+        "joke": "Quels sont les derniers mots de mon grand-père avant son décès ?",
         "answer": "Arrête de bouger l'échelle !"
     },
     {
@@ -243,7 +243,7 @@
         "id": 41,
         "type": "dark",
         "joke": "Savez-vous comment la femme d'Hitler est morte ?",
-        "answer": "Parce qu'elle s'est trompée de douche..."
+        "answer": "En se trompant de douche..."
     },
     {
         "id": 42,
@@ -267,7 +267,7 @@
         "id": 45,
         "type": "global",
         "joke": "Que dit un zombie à un autre zombie ?",
-        "answer": "Alors, ça mord !?!"
+        "answer": "Alors, ça mord ?"
     },
     {
         "id": 46,
@@ -279,7 +279,7 @@
         "id": 47,
         "type": "global",
         "joke": "Quel est le comble pour un coq ?",
-        "answer": "Avoir la chair de poule!"
+        "answer": "Avoir la chair de poule !"
     },
     {
         "id": 48,
@@ -295,20 +295,20 @@
     },
     {
         "id": 50,
-        "type": "global",
-        "joke": "Quand est-ce le retour du Jedi?",
-        "answer": "Entre mercredaille et jeudaille"
+        "type": "dark",
+        "joke": "Combien y-a-t-il de somaliens en Somalie ?",
+        "answer": "Environ 500 grammes"
     },
     {
         "id": 51,
         "type": "global",
-        "joke": "Que fait une fraise sur un cheval?",
+        "joke": "Que fait une fraise sur un cheval ?",
         "answer": "Tagada Tagada"
     },
     {
         "id": 52,
-        "type": "beauf",
-        "joke": "Pourquoi les gorilles ont-ils de gros trou de nez?",
+        "type": "global",
+        "joke": "Pourquoi les gorilles ont-ils de gros trou de nez ?",
         "answer": "Car ils ont de gros doigts."
     },
     {
@@ -320,32 +320,32 @@
     {
         "id": 54,
         "type": "blondes",
-        "joke": "Que fait une blonde quand l’eau du bain de bébé est trop chaude ?",
+        "joke": "Que font les blondes quand l’eau du bain de bébé est trop chaude ?",
         "answer": "Elles mettent des gants."
     },
     {
         "id": 55,
         "type": "beauf",
-        "joke": "Qu'est-ce qui est dur, blanc, avec le bout rouge, et qui sent la pisse ?",
-        "answer": "Une borne kilométrique."
+        "joke": "Quel est le point commun entre un homme et un chat ?",
+        "answer": "Les deux ont très peur de l’aspirateur"
     },
-    {
+    {    
         "id": 56,
         "type": "global",
-        "joke": "Comment appelle-t-on une journée de grève chez les fonctionnaires ?",
-        "answer": "Une journée d'action."
+        "joke": "Comment appelle-t-on un squelette qui parle ?",
+        "answer": "Un os parleur"
     },
     {
         "id": 57,
-        "type": "global",
+        "type": "dark",
         "joke": "Qu'est-ce qui a deux antennes et qui se cogne contre les murs ?",
         "answer": "Une petite fille avec deux fourchettes plantées dans les yeux."
     },
     {
         "id": 58,
         "type": "global",
-        "joke": "C'est l'histoire d'un pingouin qui respire par les fesses.",
-        "answer": "Un jour il s’assoit et il meurt."
+        "joke": "C'est l'histoire d'un pingouin qui respirait par les fesses.",
+        "answer": "Un jour il s'est assis et il est mort."
     },
     {
         "id": 59,
@@ -389,17 +389,17 @@
         "joke": "Quelle est la plus intelligente : la blonde, la rousse ou la brune ?",
         "answer": "La rousse parce que c'est un dictionnaire."
     },
-        {
+    {
         "id": 66,
         "type": "global",
-        "joke": "Que fait un homme qui rentre dans un café",
+        "joke": "Que fait un homme qui rentre dans un café ?",
         "answer": "Plouf"
     },
         {
         "id": 67,
         "type": "limit",
         "joke": "Pourquoi un homme rentre-t-il dans un bar ?",
-        "answer": "Parce qu'il est zoophile"
+        "answer": "Parce qu'il est zoophile."
     },
         {
         "id": 68,
@@ -407,17 +407,17 @@
         "joke": "Pourquoi les Mexicains mangent-ils aux toilettes ?",
         "answer": "Parce qu'ils aiment manger et pisser"
     },
-        {
+    {
         "id": 69,
         "type": "global",
-        "joke": "Comment appelles-t-on un nain livreur ?",
-        "answer": "Un nain portant (des colis)"
+        "joke": "Qu’est-ce qu’un éléphant dit à un homme tout nu ?",
+        "answer": "Et tu arrives à attraper des cacahuètes avec ça ?"
     },
     {
         "id": 70,
-        "type": "limit",
-        "joke": "Melon et Melèche vont chez le boucher.",
-        "answer": "Melon acheté les steaks et Melèche les saucisses."
+        "type": "global",
+        "joke": "Qu'est-ce qui est transparent et qui sent la banane ?",
+        "answer": "Un pet de singe"
     },
     {
         "id": 71,
@@ -442,47 +442,5 @@
         "type": "global",
         "joke": "Que dit un citron quand il braque une banque ?",
         "answer": "Pas un zeste !"
-    },
-    {
-        "id": 75,
-        "type": "global",
-        "joke": "Qu'est-ce qui est transparent et qui sent la banane ?",
-        "answer": "Un pet de singe"
-    },
-    {
-        "id": 76,
-        "type": "global",
-        "joke": "Qu’est-ce qu’un éléphant dit à un homme tout nu ?",
-        "answer": "Et tu arrives à attraper des cacahuètes avec ça ?"
-    },
-    {
-        "id": 77,
-        "type": "global",
-        "joke": "Qu'est-ce qui est jaune et qui va très vite ?",
-        "answer": "Une banane GTI"
-    },
-    {
-        "id": 78,
-        "type": "beauf",
-        "joke": "Quel est le point commun entre un homme et un chat ?",
-        "answer": "Les deux ont très peur de l’aspirateur"
-    },
-    {
-        "id": 79,
-        "type": "beauf",
-        "joke": "Ce que j’ai en commun avec mon mari ?",
-        "answer": "On s’est mariés le même jour..."
-    },
-    {
-        "id": 80,
-        "type": "dark",
-        "joke": "Combien y-a-t-il de somaliens en Somalie ?",
-        "answer": "Environ 500 grammes"
-    },
-    {    
-        "id": 81,
-        "type": "global",
-        "joke": "Comment appelle-t-on un squelette qui parle ?",
-        "answer": "Un os parleur"
-    },
+    },    
 ]
