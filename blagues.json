@@ -63,7 +63,7 @@
         "id": 11,
         "type": "global",
         "joke": "Pourquoi Napoléon n'a jamais déménagé ?",
-        "answer": "Parce qu'il avait un Bonaparte"
+        "answer": "Parce que Bonaparte"
     },
     {
         "id": 12,
@@ -389,41 +389,41 @@
         "joke": "Quelle est la plus intelligente : la blonde, la rousse ou la brune ?",
         "answer": "La rousse parce que c'est un dictionnaire."
     },
-        {
+    {
         "id": 66,
         "type": "global",
-        "joke": "Que fait un homme qui rentre dans un café",
+        "joke": "Que fait un homme qui rentre dans un café ?",
         "answer": "Plouf"
     },
-        {
+    {
         "id": 67,
         "type": "limit",
         "joke": "Pourquoi un homme rentre-t-il dans un bar ?",
         "answer": "Parce qu'il est zoophile"
     },
-        {
+    {
         "id": 68,
         "type": "global",
-        "joke": "Pourquoi les Mexicains mangent-ils aux toilettes ?",
-        "answer": "Parce qu'ils aiment manger et pisser"
+        "joke": "Pourquoi Harry Potter chuchotte ?",
+        "answer": "Parce que Dumbledore…"
     },
-        {
+    {
         "id": 69,
         "type": "global",
-        "joke": "Comment appelles-t-on un nain livreur ?",
-        "answer": "Un nain portant (des colis)"
+        "joke": "Qu’est-ce qui est petit, carré et rouge ?",
+        "answer": "Un petit carré rouge…"
     },
     {
         "id": 70,
-        "type": "limit",
-        "joke": "Melon et Melèche vont chez le boucher.",
-        "answer": "Melon acheté les steaks et Melèche les saucisses."
+        "type": "global",
+        "joke": "Quel dinosaure peut aller au micro-ondes ?",
+        "answer": "Le Pyrex"
     },
     {
         "id": 71,
-        "type": "limit",
-        "joke": "Melon et Melèche promènent leurs animaux.",
-        "answer": "Melon tient le chien et Melèche la chatte."
+        "type": "global",
+        "joke": "Comment appelle-t-on un squelette qui parle ?",
+        "answer": "Un os parleur"
     },
     {
         "id": 72,
@@ -479,10 +479,34 @@
         "joke": "Combien y-a-t-il de somaliens en Somalie ?",
         "answer": "Environ 500 grammes"
     },
-    {    
+    {
         "id": 81,
-        "type": "global",
-        "joke": "Comment appelle-t-on un squelette qui parle ?",
-        "answer": "Un os parleur"
+        "type": "dark",
+        "joke": "Quand Hitler s’est-il suicidé ?",
+        "answer": "Après avoir reçu sa facture de gaz…"
     },
+    {
+        "id": 82,
+        "type": "global",
+        "joke": "Qu'est ce qu'un lampadaire?",
+        "answer": "une lampe avec une seule bosse"
+    },
+    {
+        "id": 83,
+        "type": "dark",
+        "joke": "Quelle est la différence entre un divorce et la grammaire ?",
+        "answer": "En grammaire, c’est le masculin qui l’emporte."
+    },
+    {
+        "id": 84,
+        "type": "dark",
+        "joke": "Pourquoi les noirs n’ont-ils pas de lignes de la main ?",
+        "answer": "Parce qu’ils n’ont pas d’avenir"
+    },
+    {
+        "id": 85,
+        "type": "dark",
+        "joke": "Qu’est ce qu’un bossu sans bras et sans jambe ?",
+        "answer": "Une madeleine"
+    }
 ]
