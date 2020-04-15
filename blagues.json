@@ -310,5 +310,47 @@
         "type": "beauf",
         "joke": "Pourquoi les gorilles ont-ils de gros trou de nez?",
         "answer": "Car ils ont de gros doigts."
+    },
+    {
+        "id": 53,
+        "type": "dark",
+        "joke": "Quel est le point commun entre les Juifs et les baskets ?",
+        "answer": "On en trouve plus en 39 qu’en 45."
+    },
+    {
+        "id": 54,
+        "type": "blondes",
+        "joke": "Que fait une blonde quand l’eau du bain de bébé est trop chaude ?",
+        "answer": "Elles mettent des gants."
+    },
+    {
+        "id": 55,
+        "type": "beauf",
+        "joke": "Qu'est-ce qui est dur, blanc, avec le bout rouge, et qui sent la pisse ?",
+        "answer": "Une borne kilométrique."
+    },
+    {
+        "id": 56,
+        "type": "global",
+        "joke": "Comment appelle-t-on une journée de grève chez les fonctionnaires ?",
+        "answer": "Une journée d'action."
+    },
+    {
+        "id": 57,
+        "type": "global",
+        "joke": "Qu'est-ce qui a deux antennes et qui se cogne contre les murs ?",
+        "answer": "Une petite fille avec deux fourchettes plantées dans les yeux."
+    },
+    {
+        "id": 58,
+        "type": "global",
+        "joke": "C'est l'histoire d'un pingouin qui respire par les fesses.",
+        "answer": "Un jour il s’assoit et il meurt."
+    },
+    {
+        "id": 59,
+        "type": "global",
+        "joke": "Qu’est-ce qui court et qui se jette ?",
+        "answer": "Une courgette"
     }
 ]
