@@ -1,4 +1,4 @@
-[![Blagues API](https://raw.githubusercontent.com/DraftProducts/blagues-api/master/src/public/images/Logo.200.png)](http://blagues-api.xyz)
+[![Blagues API](https://raw.githubusercontent.com/DraftProducts/blagues-api/master/src/public/Logo.200.png)](http://blagues-api.xyz)
 # Blagues API
 
 API de blagues française par authentification Auth2.0 Bearer sous liscence MIT
