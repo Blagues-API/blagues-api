@@ -34,7 +34,7 @@ header{
             display: flex;
             align-items: center;
             .item{
-                font-weight: 700;
+                font-weight: bold; // 600
                 margin: 10px;
                 &.rounded{
                     display: flex;
@@ -49,16 +49,16 @@ header{
                 align-items: center;
                 margin-left: 10px;
                 .avatar {
-                  background-size: 36px;
-                  height: 40px;
-                  width: 40px;
-                  border-radius: 40px;
+                  background-size: 32px;
+                  height: 36px;
+                  width: 36px;
+                  border-radius: 18px;
                   border: 2px solid $white;
                 }
                 .username {
                   margin-left: 8px;
                   text-transform: none;
-                  font-weight: bold;
+                  font-weight: bold; // 600
                   font-size: 18px;
                 }
               }

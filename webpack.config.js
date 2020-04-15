@@ -14,7 +14,7 @@ module.exports = (env, argv) => {
         output: {
             filename: '[name].bundle.js',
             path: __dirname + '/dist',
-            publicPath: '/',
+            publicPath: '/files/',
         },
         module: {
             rules: [
@@ -52,7 +52,7 @@ module.exports = (env, argv) => {
                             options: {
                                 limit: 8192,
                                 name: '[name].[ext]',
-                                publicPath: '/images/',
+                                publicPath: '/',
                                 emitFile: false,
                             },
                         },

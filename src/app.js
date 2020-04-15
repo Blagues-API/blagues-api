@@ -17,8 +17,8 @@ app.use(cookies.express(['random key']));
 // app.use(secure);
 app.use(cors());
 
-app.use('/images', express.static(__dirname + '/public/images'));
-app.use('/', express.static(__dirname + '/../dist'));
+app.use('/', express.static(__dirname + '/public/'));
+app.use('/files', express.static(__dirname + '/../dist'));
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');

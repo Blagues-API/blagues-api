@@ -1,19 +1,19 @@
 <header>
     <div class="wrapper">
-        <a class="brand" href="/">
-            <img class="logo" src="/images/Logo.png" alt="Logo Blagues API">
+        <a class="brand" href="/" title="Accueil">
+            <img class="logo" src="/logo.svg" alt="Logo Blagues API">
             <h1 class="name">BLAGUES API</h1>
         </a>
         <div class="navigation">
-            <a class="item" href="https://github.com/DraftProducts/blagues-api">GITHUB</a>
-            <a class="item" href="https://discord.gg/PPNpVaF">DISCORD</a>
+            <a class="item" href="https://github.com/DraftProducts/blagues-api" title="Github de Blagues API">GITHUB</a>
+            <a class="item" href="https://discord.gg/PPNpVaF" title="Discord de Blagues API">DISCORD</a>
             <% if(auth) { %>
             <a class="user-place" href="/account">
                 <div class="avatar" style="background-image: url('https://cdn.discordapp.com/avatars/<%= auth.user_id %>/<%= auth.user_avatar %>.png?size=256')" ></div>
                 <span class="username"><%= auth.user_name %></span>
             </a>
             <% } else { %>
-            <a class="item rounded" href="/login">CONNEXION</a>
+            <a class="item rounded" href="/login" title="Connexion Discord">CONNEXION</a>
             <% } %>
         </div>
     </div>
