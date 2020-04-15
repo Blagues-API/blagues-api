@@ -29,7 +29,19 @@
             <div class="usecases">
                 <h3 class="title">Utilisation</h3>
                 <div class="example">
-                    <span class="language">JAVASCRIPT</span>
+                    <span class="language">BLAGUE ALÉATOIRE</span>
+                    <pre><code class="language-javascript">https://blagues-api.xyz/api/random</code></pre>
+                </div>
+                <div class="example">
+                    <span class="language">BLAGUE ALÉATOIRE CATÉGORISÉ</span>
+                    <pre><code class="language-javascript">https://blagues-api.xyz/api/type/:type:/random</code></pre>
+                </div>
+                <div class="example">
+                    <span class="language">BLAGUE PAR ID</span>
+                    <pre><code class="language-javascript">https://blagues-api.xyz/api/id/:id:</code></pre>
+                </div>
+                <div class="example">
+                    <span class="language">EXEMPLE</span>
                     <pre><code class="language-javascript">fetch('https://blagues-api.xyz/api/random', {
     headers: {
         'Authorization': `Bearer ${token}`
@@ -39,13 +51,13 @@
     console.log(response)
     /* Expected output:
     { 
-        id: 1, 
-        question: 'Question', 
-        anwser: 'Response' 
+        "id": 1, 
+        "type": "dev",
+        "joke": "Un développeur ne descend pas du métro.", 
+        "answer": "Il libère la RAM..."
     }
     */
 })</code></pre>
-
                 </div>
             </div>
         </section>
@@ -53,12 +65,12 @@
     <%- include('footer') -%>
     <script>
         const typeRefs = {
-            'limit': 'Blague Limite limite',
-            'global': 'Blague Normale',
-            'dark': 'Humour noir',
+            'limit': 'Blague limite limite',
+            'global': 'Blague normale',
+            'dark': 'Blague humour noir',
             'dev': 'Blague de développeurs',
-            'beauf': 'Humour de Beauf',
-            'blondes': 'Blagues sur les blondes',
+            'beauf': 'Humour de beaufs',
+            'blondes': 'Blagues blondes',
         }
         const nextJoke = () => {
             fetch('/api/random', { headers: { 'Authorization': `Bearer <%= token %>` }})
