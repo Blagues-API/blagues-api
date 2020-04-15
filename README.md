@@ -17,7 +17,7 @@ API de blagues française par authentification Auth2.0 Bearer sous liscence MIT
 
 ## Usage
 
-Avant toute utilisation de l'api veuillez générer votre token Bearer depuis la page **token** site [blagues-api.xyz](https://blagues-api.xyz/token) accessible depuis une authentification discord
+Avant toute utilisation de l'api veuillez générer votre token Bearer depuis la page **account** site [blagues-api.xyz](https://blagues-api.xyz) accessible depuis une authentification discord
 
 Une fois le token généré voici quelques exemples vous permettant d'utiliser l'api
 
@@ -25,7 +25,7 @@ Une fois le token généré voici quelques exemples vous permettant d'utiliser l
 
 import fetch from "node-fetch" 
 
-fetch('https://blagues-api.xyz/api/joke/random', {
+fetch('https://blagues-api.xyz/api/random', {
     headers: {
         'Authorization': 'Bearer <token>'
     }
