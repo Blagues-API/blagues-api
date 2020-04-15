@@ -274,5 +274,119 @@
         "type": "global",
         "joke": "Que fait un hibou dans une casserole ?",
         "answer": "Hi-bou"
+    },
+    {
+        "id": 47,
+        "type": "global",
+        "joke": "Quel est le comble pour un coq ?",
+        "answer": "Avoir la chair de poule!"
+    },
+    {
+        "id": 48,
+        "type": "global",
+        "joke": "Pourquoi les canards sont toujours à l'heure ?",
+        "answer": "Car ils sont dans l'étang"
+    },
+    {
+        "id": 49,
+        "type": "global",
+        "joke": "Qu'est ce qui est transparent et qui cours dans les champs ?",
+        "answer": "Un troupeau de vitre"
+    },
+    {
+        "id": 50,
+        "type": "global",
+        "joke": "Quand est-ce le retour du Jedi?",
+        "answer": "Entre mercredaille et jeudaille"
+    },
+    {
+        "id": 51,
+        "type": "global",
+        "joke": "Que fait une fraise sur un cheval?",
+        "answer": "Tagada Tagada"
+    },
+    {
+        "id": 52,
+        "type": "beauf",
+        "joke": "Pourquoi les gorilles ont-ils de gros trou de nez?",
+        "answer": "Car ils ont de gros doigts."
+    },
+    {
+        "id": 53,
+        "type": "dark",
+        "joke": "Quel est le point commun entre les Juifs et les baskets ?",
+        "answer": "On en trouve plus en 39 qu’en 45."
+    },
+    {
+        "id": 54,
+        "type": "blondes",
+        "joke": "Que fait une blonde quand l’eau du bain de bébé est trop chaude ?",
+        "answer": "Elles mettent des gants."
+    },
+    {
+        "id": 55,
+        "type": "beauf",
+        "joke": "Qu'est-ce qui est dur, blanc, avec le bout rouge, et qui sent la pisse ?",
+        "answer": "Une borne kilométrique."
+    },
+    {
+        "id": 56,
+        "type": "global",
+        "joke": "Comment appelle-t-on une journée de grève chez les fonctionnaires ?",
+        "answer": "Une journée d'action."
+    },
+    {
+        "id": 57,
+        "type": "global",
+        "joke": "Qu'est-ce qui a deux antennes et qui se cogne contre les murs ?",
+        "answer": "Une petite fille avec deux fourchettes plantées dans les yeux."
+    },
+    {
+        "id": 58,
+        "type": "global",
+        "joke": "C'est l'histoire d'un pingouin qui respire par les fesses.",
+        "answer": "Un jour il s’assoit et il meurt."
+    },
+    {
+        "id": 59,
+        "type": "global",
+        "joke": "Qu’est-ce qui court et qui se jette ?",
+        "answer": "Une courgette"
+    },
+    {
+        "id": 60,
+        "type": "global",
+        "joke": "Un œuf attend un autre œuf",
+        "answer": "Si dans 5 minutes, il n’est pas là, j’me casse !"
+    },
+    {
+        "id": 61,
+        "type": "global",
+        "joke": "C’est l’histoire d’un schtroumpf qui tombe",
+        "answer": "Et qui se fait un bleu…"
+    },
+    {
+        "id": 62,
+        "type": "global",
+        "joke": "Qu’est-ce qui est jaune et qui attend ?",
+        "answer": "Jonathan"
+    },
+    {
+        "id": 63,
+        "type": "global", 
+        "joke": "Quel fruit le poisson déteste-il le plus ?",
+        "answer": "La pêche"
+    },
+    {
+        "id": 64,
+        "type": "limit",
+        "joke": "Melon et Melèche jouent au Scrabble.",
+        "answer": "Melon pioche le W et Melèche le Q."
+    },
+    {
+        "id": 65,
+        "type": "blondes",
+        "joke": "Quelle est la plus intelligente : la blonde, la rousse ou la brune ?",
+        "answer": "La rousse parce que c'est un dictionnaire."
     }
 ]
