@@ -10,7 +10,7 @@ const uri = encodeURIComponent(`${process.env.host_url}/login/callback`);
 
 function redirect() {
     return function(req, res) {
-        return res.redirect(`https://discordapp.com/api/oauth2/authorize?client_id=${process.env.discord_client_id}&scope=identify&response_type=code&redirect_uri=${uri}`);
+        return res.redirect(301, `https://discordapp.com/api/oauth2/authorize?client_id=${process.env.discord_client_id}&scope=identify&response_type=code&redirect_uri=${uri}`);
     };
 }
 
