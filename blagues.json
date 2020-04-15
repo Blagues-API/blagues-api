@@ -274,5 +274,17 @@
         "type": "global",
         "joke": "Que fait un hibou dans une casserole ?",
         "answer": "Hi-bou"
+    },
+    {
+        "id": 47,
+        "type": "global",
+        "joke": "Que fait un homme qui rentre dans un café ?",
+        "answer": "Plouf"
+    },
+    {
+        "id": 48,
+        "type": "limit",
+        "joke": "Pourquoi un homme rentre-t-il dans un bar ?",
+        "answer": "Parce qu'il est zoophile"
     }
 ]
