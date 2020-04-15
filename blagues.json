@@ -424,5 +424,65 @@
         "type": "limit",
         "joke": "Melon et Melèche promènent leurs animaux.",
         "answer": "Melon tient le chien et Melèche la chatte."
-    }
+    },
+    {
+        "id": 72,
+        "type": "global",
+        "joke": "Qu'est-ce qui est jaune, orange, rouge et qui tourne très vite !",
+        "answer": "Un poussin dans un mixeur."
+    },
+    {
+        "id": 73,
+        "type": "global",
+        "joke": "Comment appelle-t-on un nain qui travaille à la Poste ?",
+        "answer": "Un nain posteur…"
+    },
+    {
+        "id": 74,
+        "type": "global",
+        "joke": "Que dit un citron quand il braque une banque ?",
+        "answer": "Pas un zeste !"
+    },
+    {
+        "id": 75,
+        "type": "global",
+        "joke": "Qu'est-ce qui est transparent et qui sent la banane ?",
+        "answer": "Un pet de singe"
+    },
+    {
+        "id": 76,
+        "type": "global",
+        "joke": "Qu’est-ce qu’un éléphant dit à un homme tout nu ?",
+        "answer": "Et tu arrives à attraper des cacahuètes avec ça ?"
+    },
+    {
+        "id": 77,
+        "type": "global",
+        "joke": "Qu'est-ce qui est jaune et qui va très vite ?",
+        "answer": "Une banane GTI"
+    },
+    {
+        "id": 78,
+        "type": "beauf",
+        "joke": "Quel est le point commun entre un homme et un chat ?",
+        "answer": "Les deux ont très peur de l’aspirateur"
+    },
+    {
+        "id": 79,
+        "type": "beauf",
+        "joke": "Ce que j’ai en commun avec mon mari ?",
+        "answer": "On s’est mariés le même jour..."
+    },
+    {
+        "id": 80,
+        "type": "dark",
+        "joke": "Combien y-a-t-il de somaliens en Somalie ?",
+        "answer": "Environ 500 grammes"
+    },
+    {    
+        "id": 81,
+        "type": "global",
+        "joke": "Comment appelle-t-on un squelette qui parle ?",
+        "answer": "Un os parleur"
+    },
 ]
