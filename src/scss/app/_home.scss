@@ -1,6 +1,9 @@
 .hero{
     background-color: $bluewood;
     padding: 40px;
+    @media (max-width: 420px) {
+        padding: 40px 20px;
+    }
     .joke{
         display: flex;
         flex-direction: column;
@@ -16,6 +19,10 @@
             line-height: 30px;
             color: #0067AD;
             margin-bottom: 16px;
+            @media (max-width: 420px) {
+                font-size: 18px;
+                line-height: 24px;
+            }
         }
         .footer{
             display: flex;
@@ -24,6 +31,9 @@
             .joke_type{
                 color: #888888;
                 font-size: 16px;
+                @media (max-width: 420px) {
+                    font-size: 14px;
+                }
             }
             #next{
                 display: flex;
@@ -36,6 +46,7 @@
                 color: $white;
                 font-weight: bold;
                 cursor: pointer;
+                white-space: nowrap;
                 transition: background-color .3s;
                 &:hover{
                     background-color: $matisse-dark;
@@ -49,6 +60,9 @@
     flex-direction: column;
     align-items: center;
     padding: 40px;
+    @media (max-width: 420px) {
+        padding: 40px 20px;
+    }
     .head{
         margin-bottom: 40px;
         .title{
@@ -57,6 +71,9 @@
             color: #0067AD;
             margin-bottom: 20px;
             text-align: center;
+            @media (max-width: 420px) {
+                font-size: 20px;
+            }
         }
         p{
             font-size: 14px;

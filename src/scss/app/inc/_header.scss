@@ -11,6 +11,9 @@ header{
         display: flex;
         justify-content: space-between;
         align-items: center;
+        @media (max-width: 720px) {
+            flex-direction: column;
+        }
         .brand{
             display: flex;
             align-items: center;
@@ -18,6 +21,12 @@ header{
             margin-right: 8%;
             user-select: none;
             cursor: pointer;
+            @media (max-width: 720px) {
+                width: 100%;
+                justify-content: center;
+                margin-right: 0;
+            }
+
             .logo {
                 width: 70px;
                 height: 70px;
@@ -33,6 +42,13 @@ header{
         .navigation{
             display: flex;
             align-items: center;
+
+            @media (max-width: 720px) {
+                width: 100%;
+                justify-content: center;
+                padding: 12px;
+            }
+
             .item{
                 font-weight: bold; // 600
                 margin: 10px;
@@ -43,23 +59,36 @@ header{
                     color: $matisse;
                     border-radius: 18px;
                 }
+                @media (max-width: 420px) {
+                    margin: 10px 5px;
+                }
             }
             .user-place {
                 display: flex;
                 align-items: center;
-                margin-left: 10px;
+                margin: 0 10px;
+                @media (max-width: 420px) {
+                    margin: 0 5px;
+                }
                 .avatar {
                   background-size: 32px;
                   height: 36px;
                   width: 36px;
                   border-radius: 18px;
                   border: 2px solid $white;
+                  @media (max-width: 420px) {
+                    display: none;
+                  }
                 }
                 .username {
                   margin-left: 8px;
                   text-transform: none;
                   font-weight: bold; // 600
                   font-size: 18px;
+                  @media (max-width: 420px) {
+                    font-size: 16px;
+                    margin-left: 0;
+                  }
                 }
               }
         }

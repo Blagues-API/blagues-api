@@ -3,6 +3,9 @@
     flex-direction: column;
     align-items: center;
     padding: 40px;
+    @media (max-width: 420px) {
+        padding: 40px 20px;
+    }
     .head{
         margin-bottom: 40px;
         .title{
@@ -46,8 +49,6 @@
                 line-height: 28px;
                 font-size: 14px;
                 letter-spacing: .5px;
-                resize: none;
-                height: 200px!important;
                 &::selection {
                     background: transparent!important;
                 }
