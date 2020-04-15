@@ -391,31 +391,31 @@
     },
         {
         "id": 66,
-        "type": "general",
+        "type": "global",
         "joke": "Que fait un homme qui rentre dans un café",
         "answer": "Plouf"
     },
         {
         "id": 67,
-        "type": "limite",
+        "type": "limit",
         "joke": "Pourquoi un homme rentre-t-il dans un bar ?",
         "answer": "Parce qu'il est zoophile"
     },
         {
         "id": 68,
-        "type": "general",
+        "type": "global",
         "joke": "Pourquoi les Mexicains mangent-ils aux toilettes ?",
         "answer": "Parce qu'ils aiment manger et pisser"
     },
         {
         "id": 69,
-        "type": "general",
+        "type": "global",
         "joke": "Comment appelles-t-on un nain livreue ?",
         "answer": "Un nain portant (des colis)"
     },
         {
         "id": 70,
-        "type": "general",
+        "type": "global",
         "joke": "Comm",
         "answer": "La rousse parce que c'est un dictionnaire."
     },
