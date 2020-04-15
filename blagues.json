@@ -497,5 +497,35 @@
         "type": "dark",
         "joke": "Qu’est ce qu’un bossu sans bras et sans jambe ?",
         "answer": "Une madeleine"
+    },
+    {
+        "id": 84,
+        "type": "global",
+        "joke": "Pourquoi les imprimantes n'aiment pas aller à la piscine?",
+        "answer": "Parce qu'elles n'ont papier"
+    },
+    {
+        "id": 85,
+        "type": "global",
+        "joke": "Quel est le point commun entre un déménageur et un arbitre de football?",
+        "answer": "Ils aiment tous les deux sortirent des cartons"
+    },
+    {
+        "id": 86,
+        "type": "global",
+        "joke": "Donald Duck et Daffy Duck se bagarrent. Qu'est ce que ca fait?",
+        "answer": "Un conflit de canard"
+    },
+    {
+        "id": 87,
+        "type": "global",
+        "joke": "Quel est le comble du comble?",
+        "answer": "Qu’un muet dise à un sourd qu’un aveugle les regarde"
+    },
+    {
+        "id": 88,
+        "type": "dark",
+        "joke": "Maman, j’ai peur du noir",
+        "answer": "Ne t’inquiète pas il est bien attaché"
     }
 ]
