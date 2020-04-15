@@ -410,23 +410,17 @@
         {
         "id": 69,
         "type": "global",
-        "joke": "Comment appelles-t-on un nain livreue ?",
+        "joke": "Comment appelles-t-on un nain livreur ?",
         "answer": "Un nain portant (des colis)"
     },
-        {
-        "id": 70,
-        "type": "global",
-        "joke": "Comm",
-        "answer": "La rousse parce que c'est un dictionnaire."
-    },
     {
-        "id": 71,
+        "id": 70,
         "type": "limit",
         "joke": "Melon et Melèche vont chez le boucher.",
         "answer": "Melon acheté les steaks et Melèche les saucisses."
     },
     {
-        "id": 72,
+        "id": 71,
         "type": "limit",
         "joke": "Melon et Melèche promènent leurs animaux.",
         "answer": "Melon tient le chien et Melèche la chatte."
