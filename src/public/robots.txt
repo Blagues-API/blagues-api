@@ -1,2 +1,4 @@
+Sitemap: http://blagues-api.xyz/sitemap.xml
+
 User-agent: *
 Disallow: 
