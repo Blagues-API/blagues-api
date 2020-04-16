@@ -50,7 +50,7 @@ header{
             }
 
             .item{
-                font-weight: bold; // 600
+                font-weight: 600;
                 margin: 10px;
                 &.rounded{
                     display: flex;
@@ -83,7 +83,7 @@ header{
                 .username {
                   margin-left: 8px;
                   text-transform: none;
-                  font-weight: bold; // 600
+                  font-weight: 600;
                   font-size: 18px;
                   @media (max-width: 420px) {
                     font-size: 16px;
