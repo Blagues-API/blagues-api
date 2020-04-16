@@ -527,5 +527,35 @@
         "type": "dark",
         "joke": "Maman, j’ai peur du noir",
         "answer": "Ne t’inquiète pas il est bien attaché"
+    },
+    {
+        "id": 89,
+        "type": "global",
+        "joke": "Que font les dinausaures quand ils ne sont pas d'accord ?",
+        "answer": "Un tirageausaure"
+    },
+    {
+        "id": 90,
+        "type": "global",
+        "joke": "L'école et l'alcool riment, vous savez pourquoi ?",
+        "answer": "Car les deux saoulent"
+    },
+    {
+        "id": 91,
+        "type": "dark",
+        "joke": "Quel est le point commun entre un surdoué et un pédophile ?",
+        "answer": "Ils ont tout les deux sauté la classe de CE1"
+    },
+    {
+        "id": 92,
+        "type": "global",
+        "joke": "Comment est-ce que les abeilles communiquent entre elles ?",
+        "answer": "Par e-miel."
+    },
+    {
+        "id": 93,
+        "type": "global",
+        "joke": "Quel est l'animal le plus connecté ?",
+        "answer": "Le porc USB."
     }
 ]
