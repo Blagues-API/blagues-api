@@ -803,5 +803,53 @@
         "type": "global",
         "joke": "Qu'est-ce qui est bleu blancs et rouge ?",
         "answer": "Un schtroumf qui saigne du nez"
+    },
+    {
+        "id": 135,
+        "type": "beauf",
+        "joke": "Comment la chouette sais que son mari fait la gueule ?",
+        "answer": "Parce qu'Hiboude."
+    },
+    {
+        "id": 136,
+        "type": "beauf",
+        "joke": "Que dit un oeuf qui attend son pote depuis 1 heure ?",
+        "answer": "S'il arrive pas dans 10 minutes, j'me casse !"
+    },
+    {
+        "id": 137,
+        "type": "beauf",
+        "joke": "Qui est le plus menteur entre un boucher et un jardinier ?",
+        "answer": "C'est le jardinier car il raconte que des salades !"
+    },
+    {
+        "id": 138,
+        "type": "beauf",
+        "joke": "Pourquoi aucun éléphant n'est informaticien ?",
+        "answer": "Parce qu'ils ont peur de la souris."
+    },
+    {
+        "id": 139,
+        "type": "beauf",
+        "joke": "Pourquoi les moutons aiment le chewing-gum ?",
+        "answer": "Car c'est bon pour la laine (l'haleine)."
+    },
+    {
+        "id": 140,
+        "type": "beauf",
+        "joke": "Pourquoi les petits poissons ne partent pas à l'école ?",
+        "answer": "Parce qu'ils s'en fish !"
+    },
+    {
+        "id": 141,
+        "type": "global",
+        "joke": "Que fait une lampe qui se fait agresser ?",
+        "answer": "Elle crie à LED."
+    },
+    {
+        "id": 142,
+        "type": "beauf",
+        "joke": "Pourquoi quand on vise on ferme un œil ?",
+        "answer": "Car si on fermait les deux on verrait plus rien."
     }
 ]
