@@ -851,5 +851,65 @@
         "type": "beauf",
         "joke": "Pourquoi quand on vise on ferme un œil ?",
         "answer": "Car si on fermait les deux on verrait plus rien."
+    },
+    {
+        "id": 143,
+        "type": "blondes",
+        "joke": "Quel est la différence entre une blonde et une patate ?",
+        "answer": "La patate est cultivée."
+    },
+    {
+        "id": 144,
+        "type": "global",
+        "joke": "Pourquoi les sorcières utilisent des balais pour voler ?",
+        "answer": "Car un aspirateur c'est trop lourd !"
+    },
+    {
+        "id": 145,
+        "type": "global",
+        "joke": "Qu'est ce qu'une diarrhée mentale ?",
+        "answer": "C'est quand à chaque fois que t'as une idée, c'est de la merde !"
+    },
+    {
+        "id": 146,
+        "type": "beauf",
+        "joke": "Pourquoi Harry Potter chuchote ?",
+        "answer": "Parce que Dumbledore ..."
+    },
+    {
+        "id": 147,
+        "type": "blondes",
+        "joke": "Pourquoi les blondes portent des ceintures D&G ?",
+        "answer": "Pour ne pas confondre la droite et la gauche !"
+    },
+    {
+        "id": 148,
+        "type": "global",
+        "joke": "Connaissez vous la blague sur les magasins?",
+        "answer": "En tout ça elle a supermarché !"
+    },
+    {
+        "id": 149,
+        "type": "dark",
+        "joke": "Qu'est-ce qu'il faut dire au noir pour qu'il parte dormir ?",
+        "answer": "DARK VADOR"
+    },
+    {
+        "id": 150,
+        "type": "global",
+        "joke": "Que dis-t-on a quelqu'un de triste qui joue aux jeux vidéos ?",
+        "answer": "On dit qu'il se console !"
+    },
+    {
+        "id": 151,
+        "type": "dev",
+        "joke": "Pourquoi les développeurs vont en boîte de nuit",
+        "answer": "Pour faire la java"
+    },
+    {
+        "id": 152,
+        "type": "dev",
+        "joke": "Que dis un informaticien quand il s'ennuie?",
+        "answer": "Je me fichier"
     }
 ]
