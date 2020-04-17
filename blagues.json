@@ -689,5 +689,35 @@
         "type": "global",
         "joke": "À quel moment la poule a-t-elle le plus mal au cul ?",
         "answer": "Quand elle passe du coq à l'âne"
+    },
+    {
+        "id": 116,
+        "type": "global",
+        "joke": "C'est une femme qui prend son bain, son chien pète elle se noie pourquoi ?",
+        "answer": "Parce que son chien c'est un Pékinois."
+    },
+    {
+        "id": 117,
+        "type": "global",
+        "joke": "Savez-vous pourquoi le père Noël rit tout le temps ?",
+        "answer": "Parce que ce n'est pas lui qui paye les cadeaux !"
+    },
+    {
+        "id": 118,
+        "type": "global",
+        "joke": "Tu connais la blague du photographe ?",
+        "answer": "Elle n'est pas encore développée !"
+    },
+    {
+        "id": 119,
+        "type": "global",
+        "joke": "Qu'est-ce qui est jaune et qui court vite ?",
+        "answer": "Un citron pressé."
+    },
+    {
+        "id": 120,
+        "type": "limit",
+        "joke": "Le viagra c'est comme l'enfer,",
+        "answer": "Satan l'habite."
     }
 ]
