@@ -557,5 +557,47 @@
         "type": "global",
         "joke": "Quel est l'animal le plus connecté ?",
         "answer": "Le porc USB."
+    },
+    {
+        "id": 94,
+        "type": "beauf",
+        "joke": "Qu’elle est le point commun entre un ado qui s’ennuie en cours et une pute qui se gratte ?",
+        "answer": "Le morpion."
+    },
+    {
+        "id": 95,
+        "type": "beauf",
+        "joke": "Quel est le point commun entre un gynécologue myope et un chien en bonne santé ?",
+        "answer": "Ils ont tous les deux le nez mouillé."
+    },
+    {
+        "id": 96,
+        "type": "global",
+        "joke": "Quel est le point commun entre un motard célibataire et sa moto ?",
+        "answer": "Ils dorment tous les deux sur la béquille."
+    },
+    {
+        "id": 97,
+        "type": "beauf",
+        "joke": "Quelle est la différence entre un zèbre et un barman ?",
+        "answer": "Le zèbre a des barres autour de son trou du cul. Le barman a des trous du cul autour de son bar."
+    },
+    {
+        "id": 98,
+        "type": "global",
+        "joke": "Un mathématicien n’urine pas.",
+        "answer": "Il fait π π."
+    },
+    {
+        "id": 99,
+        "type": "global",
+        "joke": "Qu'est-ce qu'un Parafaitpasdebruit ?",
+        "answer": "Un parachute."
+    },
+    {
+        "id": 100,
+        "type": "global",
+        "joke": "Il y a un boucher qui mesure 1 mètre 80, mais combien pèse-t-il ?",
+        "answer": "La viande, parce que les bouchers pèsent la viande."
     }
 ]
