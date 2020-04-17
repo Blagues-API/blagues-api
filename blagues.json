@@ -599,5 +599,125 @@
         "type": "global",
         "joke": "Il y a un boucher qui mesure 1 mètre 80, mais combien pèse-t-il ?",
         "answer": "La viande, parce que les bouchers pèsent la viande."
+    },
+    {
+        "id": 101,
+        "type": "global",
+        "joke": "Un jour, Dieu dit à Casto de ramer.",
+        "answer": "Et depuis, Castorama..."
+    },
+    {
+        "id": 102,
+        "type": "global",
+        "joke": "Pourquoi un chasseur emmène-t-il son fusil aux toilettes ?",
+        "answer": "Pour tirer la chasse."
+    },
+    {
+        "id": 103,
+        "type": "global",
+        "joke": "Vous connaissez l'histoire de l'armoire ?",
+        "answer": "Elle n'est pas commode..."
+    },
+    {
+        "id": 104,
+        "type": "global",
+        "joke": "Pourquoi les Martiens ne renversent-ils jamais de café sur la table ?",
+        "answer": "Parce qu'ils ont des soucoupes !"
+    },
+    {
+        "id": 105,
+        "type": "limit",
+        "joke": "C'est l'histoire du nain aux 26 enfants.",
+        "answer": "Elle est courte mais elle est bonne."
+    },
+    {
+        "id": 106,
+        "type": "global",
+        "joke": "C'est l'histoire du p'tit dej', vous la connaissez ?",
+        "answer": "Non, pas de bol..."
+    },
+    {
+        "id": 107,
+        "type": "global",
+        "joke": "Dans la phrase \"le voleur a volé une télévision\", où est le sujet ?",
+        "answer": "En prison !"
+    },
+    {
+        "id": 108,
+        "type": "global",
+        "joke": "C'est l'histoire d'un poil. Avant, il était bien.",
+        "answer": "Maintenant, il est pubien."
+    },
+    {
+        "id": 109,
+        "type": "dark",
+        "joke": "Comment appelle-t-on un chien qui n'a pas de pattes ?",
+        "answer": "On ne l'appelle pas, on va le chercher..."
+    },
+    {
+        "id": 110,
+        "type": "global",
+        "joke": "Que fait une vache quand elle a les yeux fermés ?",
+        "answer": "Elle fabrique du lait concentré !"
+    },
+    {
+        "id": 111,
+        "type": "beauf",
+        "joke": "Quelle est la différence entre une femme et un dobermann ?",
+        "answer": "Le prix du collier."
+    },
+    {
+        "id": 112,
+        "type": "limit",
+        "joke": "Pourquoi cendrillon est-elle morte à minuit ?",
+        "answer": "Parce que son tampon s'est transformé en citrouille !"
+    },
+    {
+        "id": 113,
+        "type": "limit",
+        "joke": "L'amour, c'est comme les cartes :",
+        "answer": "Quand on n'a pas de partenaires, mieux vaut avoir une bonne main."
+    },
+    {
+        "id": 114,
+        "type": "global",
+        "joke": "Quel est le point commun entre un sourd et un gynécologue ?",
+        "answer": "Les deux savent lire sur les lèvres."
+    },
+    {
+        "id": 115,
+        "type": "global",
+        "joke": "À quel moment la poule a-t-elle le plus mal au cul ?",
+        "answer": "Quand elle passe du coq à l'âne"
+    },
+    {
+        "id": 116,
+        "type": "global",
+        "joke": "C'est une femme qui prend son bain, son chien pète elle se noie pourquoi ?",
+        "answer": "Parce que son chien c'est un Pékinois."
+    },
+    {
+        "id": 117,
+        "type": "global",
+        "joke": "Savez-vous pourquoi le père Noël rit tout le temps ?",
+        "answer": "Parce que ce n'est pas lui qui paye les cadeaux !"
+    },
+    {
+        "id": 118,
+        "type": "global",
+        "joke": "Tu connais la blague du photographe ?",
+        "answer": "Elle n'est pas encore développée !"
+    },
+    {
+        "id": 119,
+        "type": "global",
+        "joke": "Qu'est-ce qui est jaune et qui court vite ?",
+        "answer": "Un citron pressé."
+    },
+    {
+        "id": 120,
+        "type": "limit",
+        "joke": "Le viagra c'est comme l'enfer,",
+        "answer": "Satan l'habite."
     }
 ]
