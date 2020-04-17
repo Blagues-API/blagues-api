@@ -719,5 +719,89 @@
         "type": "limit",
         "joke": "Le viagra c'est comme l'enfer,",
         "answer": "Satan l'habite."
+    },
+    {
+        "id": 121,
+        "type": "dark",
+        "joke": "Comment est ce qu'on appelle un boomerang qui ne revient pas ?",
+        "answer": "Un chat mort."
+    },
+    {
+        "id": 122,
+        "type": "limit",
+        "joke": "Quel est la dernière chose que Lady Dianna ai mangée ?",
+        "answer": "Le volant"
+    },
+    {
+        "id": 123,
+        "type": "limit",
+        "joke": "Qu'est-ce que ça fait quand tu lances une gousse d'ail contre un mur ?",
+        "answer": "Le retour du jet d'ail."
+    },
+    {
+        "id": 124,
+        "type": "dark",
+        "joke": "Qu'est ce qui est pire qu'un bébé dans une poubelle ?",
+        "answer": "Un bébé dans deux poubelles."
+    },
+    {
+        "id": 125,
+        "type": "dark",
+        "joke": "Grâce à quoi peut-on enlever le chewing-gum dans les cheveux ?",
+        "answer": "Le cancer."
+    },
+    {
+        "id": 126,
+        "type": "dark",
+        "joke": "Quel est le point commun entre une Ferrari et une enfant de 5 ans ?",
+        "answer": "Quand tu rentres dedans, tu déchires tout"
+    },
+    {
+        "id": 127,
+        "type": "blondes",
+        "joke": "Que dit une blonde quand elle voit une peau de banane sur le trottoir?",
+        "answer": "Oh mnce! je vais encore tomber !"
+    },
+    {
+        "id": 128,
+        "type": "blondes",
+        "joke": "Pourquoi les blondes passent-elles à la caisse avec un seau d’eau ?",
+        "answer": "Pour payer en liquide."
+    },
+    {
+        "id": 129,
+        "type": "blondes",
+        "joke": "Pourquoi les blondes ne mangent-elles pas de bananes?",
+        "answer": "Parce qu’elles ne trouvent pas la fermeture éclair !"
+    },
+    {
+        "id": 130,
+        "type": "global",
+        "joke": "Quelle mamie fait peur aux voleurs ?",
+        "answer": "Mamie Traillette."
+    },
+    {
+        "id": 131,
+        "type": "global",
+        "joke": "Comment fait-on pour allumer un barbecue breton ?",
+        "answer": "On utilise des breizh."
+    },
+    {
+        "id": 132,
+        "type": "global",
+        "joke": "Quelles desserts porte des sous-vêtements ?",
+        "answer": "Les bananes à slips."
+    },
+    {
+        "id": 133,
+        "type": "dark",
+        "joke": "Qu'est-ce qui est bleu blancs et rouge ?",
+        "answer": "Un schtroumf a qui on a couper la tête"
+    },
+    {
+        "id": 134,
+        "type": "global",
+        "joke": "Qu'est-ce qui est bleu blancs et rouge ?",
+        "answer": "Un schtroumf qui saigne du nez"
     }
 ]
