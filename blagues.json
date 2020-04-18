@@ -719,5 +719,197 @@
         "type": "limit",
         "joke": "Le viagra c'est comme l'enfer,",
         "answer": "Satan l'habite."
+    },
+    {
+        "id": 121,
+        "type": "dark",
+        "joke": "Comment est ce qu'on appelle un boomerang qui ne revient pas ?",
+        "answer": "Un chat mort."
+    },
+    {
+        "id": 122,
+        "type": "limit",
+        "joke": "Quel est la dernière chose que Lady Dianna ai mangée ?",
+        "answer": "Le volant"
+    },
+    {
+        "id": 123,
+        "type": "limit",
+        "joke": "Qu'est-ce que ça fait quand tu lances une gousse d'ail contre un mur ?",
+        "answer": "Le retour du jet d'ail."
+    },
+    {
+        "id": 124,
+        "type": "dark",
+        "joke": "Qu'est ce qui est pire qu'un bébé dans une poubelle ?",
+        "answer": "Un bébé dans deux poubelles."
+    },
+    {
+        "id": 125,
+        "type": "dark",
+        "joke": "Grâce à quoi peut-on enlever le chewing-gum dans les cheveux ?",
+        "answer": "Le cancer."
+    },
+    {
+        "id": 126,
+        "type": "dark",
+        "joke": "Quel est le point commun entre une Ferrari et une enfant de 5 ans ?",
+        "answer": "Quand tu rentres dedans, tu déchires tout"
+    },
+    {
+        "id": 127,
+        "type": "blondes",
+        "joke": "Que dit une blonde quand elle voit une peau de banane sur le trottoir?",
+        "answer": "Oh mnce! je vais encore tomber !"
+    },
+    {
+        "id": 128,
+        "type": "blondes",
+        "joke": "Pourquoi les blondes passent-elles à la caisse avec un seau d’eau ?",
+        "answer": "Pour payer en liquide."
+    },
+    {
+        "id": 129,
+        "type": "blondes",
+        "joke": "Pourquoi les blondes ne mangent-elles pas de bananes?",
+        "answer": "Parce qu’elles ne trouvent pas la fermeture éclair !"
+    },
+    {
+        "id": 130,
+        "type": "global",
+        "joke": "Quelle mamie fait peur aux voleurs ?",
+        "answer": "Mamie Traillette."
+    },
+    {
+        "id": 131,
+        "type": "global",
+        "joke": "Comment fait-on pour allumer un barbecue breton ?",
+        "answer": "On utilise des breizh."
+    },
+    {
+        "id": 132,
+        "type": "global",
+        "joke": "Quelles desserts porte des sous-vêtements ?",
+        "answer": "Les bananes à slips."
+    },
+    {
+        "id": 133,
+        "type": "dark",
+        "joke": "Qu'est-ce qui est bleu blancs et rouge ?",
+        "answer": "Un schtroumf a qui on a couper la tête"
+    },
+    {
+        "id": 134,
+        "type": "global",
+        "joke": "Qu'est-ce qui est bleu blancs et rouge ?",
+        "answer": "Un schtroumf qui saigne du nez"
+    },
+    {
+        "id": 135,
+        "type": "beauf",
+        "joke": "Comment la chouette sais que son mari fait la gueule ?",
+        "answer": "Parce qu'Hiboude."
+    },
+    {
+        "id": 136,
+        "type": "beauf",
+        "joke": "Que dit un oeuf qui attend son pote depuis 1 heure ?",
+        "answer": "S'il arrive pas dans 10 minutes, j'me casse !"
+    },
+    {
+        "id": 137,
+        "type": "beauf",
+        "joke": "Qui est le plus menteur entre un boucher et un jardinier ?",
+        "answer": "C'est le jardinier car il raconte que des salades !"
+    },
+    {
+        "id": 138,
+        "type": "beauf",
+        "joke": "Pourquoi aucun éléphant n'est informaticien ?",
+        "answer": "Parce qu'ils ont peur de la souris."
+    },
+    {
+        "id": 139,
+        "type": "beauf",
+        "joke": "Pourquoi les moutons aiment le chewing-gum ?",
+        "answer": "Car c'est bon pour la laine (l'haleine)."
+    },
+    {
+        "id": 140,
+        "type": "beauf",
+        "joke": "Pourquoi les petits poissons ne partent pas à l'école ?",
+        "answer": "Parce qu'ils s'en fish !"
+    },
+    {
+        "id": 141,
+        "type": "global",
+        "joke": "Que fait une lampe qui se fait agresser ?",
+        "answer": "Elle crie à LED."
+    },
+    {
+        "id": 142,
+        "type": "beauf",
+        "joke": "Pourquoi quand on vise on ferme un œil ?",
+        "answer": "Car si on fermait les deux on verrait plus rien."
+    },
+    {
+        "id": 143,
+        "type": "blondes",
+        "joke": "Quel est la différence entre une blonde et une patate ?",
+        "answer": "La patate est cultivée."
+    },
+    {
+        "id": 144,
+        "type": "global",
+        "joke": "Pourquoi les sorcières utilisent des balais pour voler ?",
+        "answer": "Car un aspirateur c'est trop lourd !"
+    },
+    {
+        "id": 145,
+        "type": "global",
+        "joke": "Qu'est ce qu'une diarrhée mentale ?",
+        "answer": "C'est quand à chaque fois que t'as une idée, c'est de la merde !"
+    },
+    {
+        "id": 146,
+        "type": "beauf",
+        "joke": "Pourquoi Harry Potter chuchote ?",
+        "answer": "Parce que Dumbledore ..."
+    },
+    {
+        "id": 147,
+        "type": "blondes",
+        "joke": "Pourquoi les blondes portent des ceintures D&G ?",
+        "answer": "Pour ne pas confondre la droite et la gauche !"
+    },
+    {
+        "id": 148,
+        "type": "global",
+        "joke": "Connaissez vous la blague sur les magasins?",
+        "answer": "En tout ça elle a supermarché !"
+    },
+    {
+        "id": 149,
+        "type": "dark",
+        "joke": "Qu'est-ce qu'il faut dire au noir pour qu'il parte dormir ?",
+        "answer": "DARK VADOR"
+    },
+    {
+        "id": 150,
+        "type": "global",
+        "joke": "Que dis-t-on a quelqu'un de triste qui joue aux jeux vidéos ?",
+        "answer": "On dit qu'il se console !"
+    },
+    {
+        "id": 151,
+        "type": "dev",
+        "joke": "Pourquoi les développeurs vont en boîte de nuit",
+        "answer": "Pour faire la java"
+    },
+    {
+        "id": 152,
+        "type": "dev",
+        "joke": "Que dis un informaticien quand il s'ennuie?",
+        "answer": "Je me fichier"
     }
 ]
