@@ -17,7 +17,7 @@
   "bugs": {
     "url": "https://github.com/DraftProducts/blagues-api/issues"
   },
-  "homepage": "https://blagues-api.xyz",
+  "homepage": "https://blagues-api.fr",
   "dependencies": {
     "body-parser": "^1.19.0",
     "btoa": "^1.2.1",
