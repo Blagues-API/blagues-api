@@ -88,6 +88,53 @@
         </section>
     </div>
     <%- include('footer') -%>
+    <script type="application/ld+json">
+        [{
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "url": "https://blagues-api.xyz",
+          "logo": "https://blagues-api.xyz/Logo.200.png"
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [{
+              "@type": "Question",
+              "name": "Qui peut contribuer ajouter des blagues ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Absolument tout le monde, cette api est communautaire et tout le monde peut ajouter des blagues a condition qu'elles soient correctement catégorisés."
+              }
+            }, {
+              "@type": "Question",
+              "name": "Comment contribuer à l'api ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Vous pouvez contribuer depuis notre <a href='https://discord.gg/PPNpVaF'>serveur discord</a> ou sur le <a href='https://github.com/DraftProducts/blagues-api/blob/master/blagues.json'>github</a> en faisant une pull-request."
+              }
+            }, {
+              "@type": "Question",
+              "name": "Quelles sont les restictions au niveau des requêtes ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "L'api limite chaque token d'authentification a 100 requêtes par 10 secondes, ce cota peut être modifié sur demande"
+              }
+            }, {
+              "@type": "Question",
+              "name": "Combien y a t'il de blagues ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Il n'y a pas de limite, le nombre évolue constament et de nouvelles blagues sont ajoutés chaque jour. Néanmoins vous pouvez retrouver un compteur sur le site web."
+              }
+            }, {
+              "@type": "Question",
+              "name": "Quelles sont les catégories de blagues disponibles",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text":"Les différents types sont: Tout publique, Développeurs, Humour Noir, Limite Limite, Beauf, Blondes"}
+              }]
+          }]
+    </script>
     <script>
         const typeRefs = {
             'limit': 'Blague limite limite',
