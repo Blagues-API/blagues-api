@@ -911,5 +911,35 @@
         "type": "dev",
         "joke": "Que dis un informaticien quand il s'ennuie?",
         "answer": "Je me fichier"
+    },
+    {
+        "id": 153,
+        "type": "global",
+        "joke": "Qu'est-ce qu'un cadeau qui s'en va ?",
+        "answer": "Une surprise party"
+    },
+    {
+        "id": 154,
+        "type": "global",
+        "joke": "Quel est le pays le plus cool au monde ?",
+        "answer": "Le Yééémen"
+    },
+    {
+        "id": 155,
+        "type": "global",
+        "joke": "Pourquoi Winnie l'ourson veut absolument se marier ?",
+        "answer": "Pour partir en lune de miel."
+    },
+    {
+        "id": 156,
+        "type": "global",
+        "joke": "Que dit un italien pour dire au revoir ?",
+        "answer": "Pasta la vista baby."
+    },
+    {
+        "id": 156,
+        "type": "global",
+        "joke": "Je peux tourner sans bouger. Qui suis-je ?",
+        "answer": "Le Lait."
     }
 ]
