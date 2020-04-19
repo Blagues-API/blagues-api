@@ -4,4 +4,11 @@ body {
         background-color: $gallery;
         min-height: calc(100vh - 110px);
     }
+    strong{
+        font-weight: bold;
+    }
+}
+
+a{
+    color: $matisse;
 }
