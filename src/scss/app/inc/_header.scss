@@ -21,6 +21,8 @@ header{
             margin-right: 8%;
             user-select: none;
             cursor: pointer;
+            color: $white;
+            text-decoration: none;
             @media (max-width: 720px) {
                 width: 100%;
                 justify-content: center;
