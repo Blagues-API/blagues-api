@@ -24,11 +24,11 @@
                 <h2 class="title">Qu’est ce que Blagues API ?</h2>
                 <p><strong>Blagues API</strong> est une API de blagues, rassemblant les meilleurs blagues avec un total de <strong><%= count %> blagues</strong> françaises.</p>
                 <p>Des blagues proposés par la communauté et catégorisés.</p>
-                <p>L’API est accessible <strong>gratuitement</strong> et rassemble sur le <a href="https://discord.gg/PPNpVaF" title="Discord de Blagues API">discord</a>  une commnauté francophone.</p>  
+                <p>L’API est accessible <strong>gratuitement</strong> et rassemble sur le <a href="https://discord.gg/PPNpVaF" title="Discord de Blagues API">discord</a>  une communauté francophone.</p>  
             </div>
             <div class="usecases">
                 <h3 class="title">Utilisation</h3>
-                <p>Différentes <strong>routes</strong> vous sont sont rendues disponibles afin d'adapter l'api a votre projet. Les différents mots clés vous permettront de récupérer une blague aléatoirement dans un thème ou type de blague spécifique.</p>
+                <p>Différentes routes vous sont sont rendues disponibles afin d'adapter l'api a votre projet. Les différents mots clés vous permettront de récupérer une blague aléatoirement dans un thème ou type de blague spécifique.</p>
                 <div class="example">
                     <h4 class="language">BLAGUE ALÉATOIRE</h4>
                     <pre><code class="language-javascript">GET /api/random</code></pre>
@@ -43,10 +43,11 @@
                 </div>
             </div>
             <div class="usecases">
-                <h3 class="title">Authorisation</h3>
+                <h3 class="title">Authentification</h3>
                 <p>
                     L'api de blagues utilise un token d'authentification Bearer pour les requêtes. Vous pouvez le gérer depuis votre profil.<br>
-                    Les requêtes doivent toutes être effectuées via <a href="http://en.wikipedia.org/wiki/HTTP_Secure">HTTPS</a>. Tous les appels effectuées sans authentification ou en HTTP échouront.
+                    Les requêtes doivent toutes être effectuées via <a href="http://en.wikipedia.org/wiki/HTTP_Secure">HTTPS</a>. Tous les appels effectuées sans authentification ou en HTTP échouront.<br>
+                    Si vous avez des difficultés à obtenir un certificat HTTPS, voici <a href="https://certbot.eff.org/">Certbot</a>, un outil qui permet d'en obtenir un gratuitement ! 
                 </p>
                 <div class="example">
                     <pre><code class="language-bash">curl https://www.blagues-api.fr/api/random \
@@ -56,7 +57,7 @@
             <div class="usecases">
                 <h3 class="title">Exemple</h3>
                 <p>
-                    Voici un exemple sous forme de cas d'utilisation de l'api dans le cas où l'on souhaite récupérer une blague aléatoirement dans le répertoire toutes catégories confondues
+                    Voici un exemple sous forme de cas d'utilisation de l'api dans le cas où l'on souhaite récupérer une blague aléatoirement dans le répertoire toute catégorie confondue
                 </p>
                 <div class="example">
                     <span class="language">JAVASCRIPT</span>
