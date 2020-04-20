@@ -941,5 +941,131 @@
         "type": "global",
         "joke": "Je peux tourner sans bouger. Qui suis-je ?",
         "answer": "Le Lait."
+    },
+    {
+        "id": 157,
+        "type": "global",
+        "joke": "Que boit un vampire en soirée ?",
+        "answer": "Du sangpagne. Sang-té !"
+    },
+    {
+        "id": 158,
+        "type": "global",
+        "joke": "Pourquoi est-ce difficile de conduire dans le Nord ?",
+        "answer": "Parce que les voitures arrêtent pas de caler."
+    },
+    {
+        "id": 159,
+        "type": "dev",
+        "joke": "Quel est le meilleur magazine pour développeurs ?",
+        "answer": "Pomme d'api"
+    },
+    {
+        "id": 160,
+        "type": "dev",
+        "joke": "Pourquoi les développeurs ne portent ils pas de chaussures à lacets ?",
+        "answer": "Car il préfèrent les scratch."
+    },
+    {
+        "id": 161,
+        "type": "beauf",
+        "joke": "Qu'est-ce qu'un comptable ?",
+        "answer": "Un con derrière une table."
+    },
+    {
+        "id": 162,
+        "type": "global",
+        "joke": "C’est un bœuf, qui court…",
+        "answer": "Puis qui se viande."
+    },
+    {
+        "id": 163,
+        "type": "global",
+        "joke": "Pourquoi le patinage artistique est pénible ?",
+        "answer": "Car le patin agace"
+    },
+    {
+        "id": 164,
+        "type": "global",
+        "joke": "Que faire pour sauver la vie d’une mouche qui se noie ?",
+        "answer": "Du mouche à mouche"
+    },
+    {
+        "id": 165,
+        "type": "global",
+        "joke": "Les enfants c’est comme les prouts",
+        "answer": "On ne supporte que les siens"
+    },
+    {
+        "id": 166,
+        "type": "global",
+        "joke": "Comment se nomme la Barbie la plus poilue ?",
+        "answer": "La Barbie chette !"
+    },
+    {
+        "id": 167,
+        "type": "limit",
+        "joke": "Quelle est la différence entre un rappeur et un campeur ?",
+        "answer": "Le rappeur niq** ta mère et le campeur monte ta tente"
+    },
+    {
+        "id": 168,
+        "type": "global",
+        "joke": "T’es tombé ?",
+        "answer": "Non je fais un câlin au plancher il avait l’air triste."
+    },
+    {
+        "id": 169,
+        "type": "global",
+        "joke": "Pourquoi les policiers n’ont pas d’acné ?",
+        "answer": "Car ils ont la peau lisse !"
+    },
+    {
+        "id": 170,
+        "type": "global",
+        "joke": "Quel est le gateau préféré des nuages ?",
+        "answer": "L’éclair !"
+    },
+    {
+        "id": 171,
+        "type": "dev",
+        "joke": "Que fait un développeur avant d'aller faire les courses ?",
+        "answer": "Il fait sa lisp"
+    },
+    {
+        "id": 172,
+        "type": "dev",
+        "joke": "Que prend un développeur avant d'écrire ?",
+        "answer": "Il prends de la MD"
+    },
+    {
+        "id": 173,
+        "type": "dev",
+        "joke": "Quel est la maladie la plus répandue chez les développeurs Rust ?",
+        "answer": "Le tétanos"
+    },
+    {
+        "id": 174,
+        "type": "global",
+        "joke": "Que dit une antenne TV à un paratonnerre?",
+        "answer": "Tu y crois toi au coup de foudre?"
+    },
+    {
+        "id": 175,
+        "type": "global",
+        "joke": "Pourquoi une feuille se noie quand on la met dans l'eau?",
+        "answer": "Parce-qu'elle n'a pas pieds.(papiers)"
+    },
+    {
+        "id": 176,
+        "type": "global",
+        "joke": "Qu'est-ce qu'un dromaludaire?",
+        "answer": "Un Chalumeau a 2 bosses."
+    },
+    {
+        "id": 177,
+        "type": "global",
+        "joke": "Qu'est-ce qu'un p'tit fien?",
+        "answer": "C'est un Canif !"
     }
 ]
