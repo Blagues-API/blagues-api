@@ -1,17 +1,23 @@
 [![Blagues API](https://raw.githubusercontent.com/DraftProducts/blagues-api/master/src/public/Logo.200.png)](http://www.blagues-api.fr)
 # Blagues API
 
-API de blagues française par authentification Auth2.0 Bearer sous liscence MIT
+API de blagues française par authentification Auth2.0 Bearer sous licence MIT
 
 ## Sommaire
 
 > Retrouvez ici les différentes catégories du README
 
-- [Usage](#usage)
-- [Contribuer](#contribuer)
-- [FAQ](#faq)
-- [Support](#support)
-- [License](#license)
+- [Blagues API](#blagues-api)
+  - [Sommaire](#sommaire)
+  - [Usage](#usage)
+  - [Contribuer](#contribuer)
+    - [Step 1](#step-1)
+    - [Step 2](#step-2)
+    - [Step 3](#step-3)
+  - [FAQ](#faq)
+  - [Support](#support)
+  - [Donations](#donations)
+  - [License](#license)
 
 ---
 
@@ -67,7 +73,7 @@ fetch('https://www.blagues-api.fr/api/random', {
 ## FAQ
 
 - **Pouvons nous ajouter des blagues ?**
-    - Oui bien sûr en étdiant le fichier blagues.json et en le soumetant avec une pull request 
+    - Oui bien sûr en éditant le fichier blagues.json et en le soumetant avec une pull request 
 ---
 
 ## Support
@@ -82,7 +88,7 @@ Voici quelques liens pour obtenir de l'aide
 
 ## Donations
 
-- Si vous souhaitez me soutenir, c'est possible grace à paypal
+- Si vous souhaitez me soutenir, c'est possible grâce à paypal
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/draftproducts)
 

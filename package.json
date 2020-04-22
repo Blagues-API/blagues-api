@@ -1,5 +1,5 @@
 {
-  "name": "balgues-api",
+  "name": "blagues-api",
   "version": "1.0.0",
   "description": "Blagues API française",
   "main": "index.js",
