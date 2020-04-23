@@ -7,17 +7,12 @@ API de blagues française par authentification Auth2.0 Bearer sous licence MIT
 
 > Retrouvez ici les différentes catégories du README
 
-- [Blagues API](#blagues-api)
-  - [Sommaire](#sommaire)
-  - [Usage](#usage)
-  - [Contribuer](#contribuer)
-    - [Step 1](#step-1)
-    - [Step 2](#step-2)
-    - [Step 3](#step-3)
-  - [FAQ](#faq)
-  - [Support](#support)
-  - [Donations](#donations)
-  - [License](#license)
+- [Sommaire](#sommaire)
+- [Usage](#usage)
+- [Contribuer](#contribuer)
+- [FAQ](#faq)
+- [Support](#support)
+- [License](#license)
 
 ---
 
@@ -52,7 +47,7 @@ fetch('https://www.blagues-api.fr/api/random', {
 
 > Pour commencer...
 
-### Step 1
+### Étape 1
 
 - **Option 1**
     - 🍴 Fork le repo!
@@ -60,11 +55,11 @@ fetch('https://www.blagues-api.fr/api/random', {
 - **Option 2**
     - 👯 Clone le repo sur ta machine locale avec `https://github.com/DraftProducts/blagues-api.git`
 
-### Step 2
+### Étape 2
 
 - **Fais tes modifications !** 🔨🔨🔨
 
-### Step 3
+### Étape 3
 
 - 🔃 Crée une nouvelle pull request avec <a href="https://github.com/DraftProducts/blagues-api/compare/" target="_blank">`https://github.com/DraftProducts/blagues-api/compare/`</a>.
 
