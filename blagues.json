@@ -1067,5 +1067,65 @@
         "type": "global",
         "joke": "Qu'est-ce qu'un p'tit fien?",
         "answer": "C'est un Canif !"
+    },
+    {
+        "id": 178,
+        "type": "global",
+        "joke": "Quelle est la chanteuse préférée des serruriers ?",
+        "answer": "Alicia Keys."
+    },
+    {
+        "id": 179,
+        "type": "global",
+        "joke": "Combien de fils a la mère de Justin ?",
+        "answer": "Juste un."
+    },
+    {
+        "id": 180,
+        "type": "global",
+        "joke": "Qu’est ce qu’une baguette avec une boussole ?",
+        "answer": "Du pain perdu"
+    },
+    {
+        "id": 181,
+        "type": "global",
+        "joke": "Le prof dit à son élève : Ton devoir était mauvais.",
+        "answer": "QUOI ! Vous l'avez mangé ?"
+    },
+    {
+        "id": 182,
+        "type": "global",
+        "joke": "À quoi servent les archipels ?",
+        "answer": "À faire des archi-trous !"
+    },
+    {
+        "id": 183,
+        "type": "global",
+        "joke": "Pourquoi il n'y a plus de Mammouth ?",
+        "answer": "Parce qu'il n'y a plus de Papouth."
+    },
+    {
+        "id": 184,
+        "type": "global", 
+        "joke": "Entre un aviateur et un marin, lequel écrit le moins ?",
+        "answer": "Le marin, parce qu'il a jeté l'encre."
+    },
+    {
+        "id": 185,
+        "type": "global",
+        "joke": "Quel est le comble pour un électricien ?", 
+        "answer": "D'avoir des ampoules aux pieds."
+    },
+    {
+        "id": 186,
+        "type": "global",
+        "joke": "Qu'est-ce qu'une manifestation d'aveugles ?",
+        "answer": "Le festival de Cannes"
+    },
+    {
+        "id": 187,
+        "type": "dark",
+        "joke": "Comment appelle-t-on un développeur pédophile  ?",
+        "answer": "Un pédofile"
     }
 ]
