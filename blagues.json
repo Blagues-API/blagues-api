@@ -1127,5 +1127,83 @@
         "type": "dark",
         "joke": "Comment appelle-t-on un développeur pédophile  ?",
         "answer": "Un pédofile"
+    },
+    {
+        "id": 188,
+        "type": "global",
+        "joke": "Comment appelle-t-on un ascenseur en Amérique ?",
+        "answer": "En appuyant sur le bouton…"
+    },
+    {
+        "id": 189,
+        "type": "global",
+        "joke": "C’est l’histoire d’une fleur qui court, qui court..",
+        "answer": "Et qui se plante"
+    },
+    {
+        "id": 190,
+        "type": "global",
+        "joke": "Comment appelle-t-on une fracture du crâne ?",
+        "answer": "Un dégât des os"
+    },
+    {
+        "id": 191,
+        "type": "global",
+        "joke": "Qu’est ce qui est transparent et qui sent la carotte ?",
+        "answer": "Un pet de lapin"
+    },
+    {
+        "id": 192,
+        "type": "beauf",
+        "joke": "Qu’est qu’un cochon qui rit ?",
+        "answer": "Un porc tout gai."
+    },
+    {
+        "id": 193,
+        "type": "global",
+        "joke": "Quel est l’ami du feu ?",
+        "answer": "Le pot-au-feu"
+    },
+    {
+        "id": 194,
+        "type": "global",
+        "joke": "Qu’est-ce qu’un comptable ?",
+        "answer": "C’est un con avec une table."
+    },
+    {
+        "id": 195,
+        "type": "global",
+        "joke": "Comment appelle-t-on un covoiturage au Sénégal ?",
+        "answer": "Un Babacar"
+    },
+    {
+        "id": 196,
+        "type": "global",
+        "joke": "Que fait-on aux voleurs de salades ?",
+        "answer": "On les tue…"
+    },
+    {
+        "id": 197,
+        "type": "global",
+        "joke": "Qu’est-ce que fait un pou dans une cloche ?",
+        "answer": "Pou Ding"
+    },
+    {
+        "id": 198,
+        "type": "global",
+        "joke": "Quel est le légume le plus courageux ?",
+        "answer": "Le pois chiche"
+    },
+    {
+        "id": 199,
+        "type": "global",
+        "joke": "Un jour, Dieu demanda au coca de coller…",
+        "answer": "et le Coca Cola…"
+    },
+    {
+        "id": 200,
+        "type": "global",
+        "joke": "Qu’est-ce qu’un belge avec une tronçonneuse dans un champ de céréales ?",
+        "answer": "Un céréale killer"
     }
 ]
