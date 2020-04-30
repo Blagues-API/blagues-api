@@ -1178,9 +1178,9 @@
     },
     {
         "id": 196,
-    "type": "global",
-    "joke": "Que fait-on aux voleurs de salades ?",
-    "answer": "On les tue…"
+        "type": "global",
+        "joke": "Que fait-on aux voleurs de salades ?",
+        "answer": "On les tue…"
     },
     {
         "id": 197,
@@ -1204,6 +1204,6 @@
         "id": 200,
         "type": "global",
         "joke": "Qu’est-ce qu’un belge avec une tronçonneuse dans un champ de céréales ?",
-        "answer": "Un céréales killer"
+        "answer": "Un céréale killer"
     }
 ]
