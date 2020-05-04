@@ -508,7 +508,7 @@
         "id": 85,
         "type": "global",
         "joke": "Quel est le point commun entre un déménageur et un arbitre de football?",
-        "answer": "Ils aiment tous les deux sortirent des cartons"
+        "answer": "Ils aiment tous les deux sortir des cartons"
     },
     {
         "id": 86,
@@ -886,7 +886,7 @@
         "id": 148,
         "type": "global",
         "joke": "Connaissez vous la blague sur les magasins?",
-        "answer": "En tout ça elle a supermarché !"
+        "answer": "En tout cas, elle a supermarché !"
     },
     {
         "id": 149,
@@ -1065,8 +1065,8 @@
     {
         "id": 177,
         "type": "global",
-        "joke": "Qu'est-ce qu'un p'tit fien?",
-        "answer": "C'est un Canif !"
+        "joke": "Qu'est-ce qu'un Canif",
+        "answer": "C'est un p'tit fien"
     },
     {
         "id": 178,
