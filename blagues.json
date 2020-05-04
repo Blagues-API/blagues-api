@@ -760,7 +760,7 @@
         "id": 127,
         "type": "blondes",
         "joke": "Que dit une blonde quand elle voit une peau de banane sur le trottoir?",
-        "answer": "Oh mnce! je vais encore tomber !"
+        "answer": "Oh mince! je vais encore tomber !"
     },
     {
         "id": 128,
@@ -1199,5 +1199,125 @@
         "type": "global",
         "joke": "Un jour, Dieu demanda au coca de coller…",
         "answer": "et le Coca Cola…"
+    },
+    {
+        "id": 200,
+        "type": "blondes",
+        "joke": "Comment fait-on pour occuper une blonde ?",
+        "answer": "On la met dans une pièce ronde en lui disant de chercher les coins."
+    },
+    {
+        "id": 201,
+        "type": "global",
+        "joke": "Quel est le seul animal qui nourrit lui-même sa voiture ?",
+        "answer": "La chèvre car elle nourrit son cabri au lait !"
+    },
+    {
+        "id": 202,
+        "type": "global",
+        "joke": "Dans quel pays ne bronze-t-on pas du nez ?",
+        "answer": "Au Népal"
+    },
+    {
+        "id": 203,
+        "type": "global",
+        "joke": "Pourquoi est-ce que les anges sont sourds ?",
+        "answer": "Parce que Jésus Christ"
+    },
+    {
+        "id": 204,
+        "type": "global",
+        "joke": "Qu’est-ce qui fait nioc-nioc ?",
+        "answer": "Un canard qui essaye de parler le verlan"
+    },
+    {
+        "id": 205,
+        "type": "global",
+        "joke": "Quels sont les fruits que nous trouvons dans toutes les maisons ?",
+        "answer": "Les coins et les mûres."
+    },
+    {
+        "id": 206,
+        "type": "global",
+        "joke": "Comment appelle-t-on la mère du phoque ?",
+        "answer": "Mother phoquer"
+    },
+    {
+        "id": 207,
+        "type": "global",
+        "joke": "Quelle est la devise des chats diaboliques?",
+        "answer": "Satan est par minou"
+    },
+    {
+        "id": 208,
+        "type": "global",
+        "joke": "Quel sont les deux animaux les plus intelligents ?",
+        "answer": "Le Cerf et le Veau"
+    },
+    {
+        "id": 209,
+        "type": "global",
+        "joke": "Pourquoi on met une selle sur un cheval ?",
+        "answer": "Parce qu’en dessous elle tomberait."
+    },
+    {
+        "id": 210,
+        "type": "global",
+        "joke": "De quel pays viennent les cochons ?",
+        "answer": "Des quatre groins du monde"
+    },
+    {
+        "id": 211,
+        "type": "global",
+        "joke": "Quel est le comble pour une taupe?",
+        "answer": "D’amuser la galerie !"
+    },
+    {
+        "id": 212,
+        "type": "global",
+        "joke": "Que prend un éléphant quand il va au restaurant?",
+        "answer": "Il prend de la place !"
+    },
+    {
+        "id": 213,
+        "type": "global",
+        "joke": "Qu’est ce qui a 3 bosses?",
+        "answer": "Un chameau qui c’est cogné."
+    },
+    {
+        "id": 214,
+        "type": "global",
+        "joke": "Quel est le comble pour un cycliste ?",
+        "answer": "De faire un régime sans sel."
+    },
+    {
+        "id": 215,
+        "type": "global",
+        "joke": "Quelle est la ville la plus rapide de Suisse ?",
+        "answer": "Nyon"
+    },
+    {
+        "id": 216,
+        "type": "global",
+        "joke": "Tu connais la blague du papier?",
+        "answer": "Elle déchire."
+    },
+    {
+        "id": 217,
+        "type": "global",
+        "joke": "Pourquoi une brioche ne va jamais aux sports d’hiver ?",
+        "answer": "Parce qu'elle sait Pasquier"
+    },
+    {
+        "id": 218,
+        "type": "global",
+        "joke": "Pourquoi les mamies sont-elles très efficaces pour faire le ménage ?",
+        "answer": "Parce qu'elles ont 80 balais."
+    },
+    {
+        "id": 219,
+        "type": "global",
+        "joke": "Tu connais la blague de la gomme ?",
+        "answer": "Elle dégomme."
     }
 ]
