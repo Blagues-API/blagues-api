@@ -78,7 +78,7 @@ BlagueAPIBot.on('messageReactionAdd', async (messageReaction, user) => {
 
     const [, rawType, joke, answer] = regex.exec(message.content);
 
-    await user.send(`{\n    "id": "ID",\n    "type": "${types[rawType]}",\n    "joke": "${joke}",\n    "answer": "${answer.replace(/"/, '\\"')}"\n}`, {
+    await user.send(`{\n    "id": ,\n    "type": "${types[rawType]}",\n    "joke": "${joke}",\n    "answer": "${answer.replace(/"/, '\\"')}"\n}`, {
         code: 'json',
     });
 
