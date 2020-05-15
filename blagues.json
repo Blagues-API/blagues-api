@@ -488,9 +488,9 @@
     },
     {
         "id": 82,
-        "type": "dark",
-        "joke": "Pourquoi les noirs n’ont-ils pas de lignes de la main ?",
-        "answer": "Parce qu’ils n’ont pas d’avenir"
+        "type": "global",
+        "joke": "Quelle est la différence entre un chewing-gum et un avion ?",
+        "answer": "Le chewing-gum colle et l’avion décolle."
     },
     {
         "id": 83,
