@@ -20,6 +20,7 @@ module.exports = function() {
         try {
             const decoded = await jwt.verify(token, process.env.jwt_encryption_api);
             req.auth = decoded;
+            console.log(`API call: ${decoded.user_id}`);
             return next();
         } catch (error) {
             return res.status(400).json({
