@@ -1319,5 +1319,300 @@
         "type": "global",
         "joke": "Tu connais la blague de la gomme ?",
         "answer": "Elle dégomme."
+    },
+    {
+        "id": 220,
+        "type": "global",
+        "joke": "Quel est la différence entre une machine et du ketchup ?",
+        "answer": "Aucune, ils sont tout les deux au-tomate"
+    },
+    {
+        "id": 221,
+        "type": "dev",
+        "joke": "Que se passe-t-il quand on secoue une clef USB ?",
+        "answer": "Les fichiers se mélangent."
+    },
+    {
+        "id": 222,
+        "type": "global",
+        "joke": "Oh, Léon ! Ton prénom à l'envers donne Noël !",
+        "answer": "Et oui, tout le monde n'a pas cette chance mon cher Luc..."
+    },
+    {
+        "id": 223,
+        "type": "global",
+        "joke": "On m'a dit que pour faire ses courses pendant le confinement il suffisait de porter un masque et des gants...",
+        "answer": "C'était un mensonge, tous les autres étaient habillés !"
+    },
+    {
+        "id": 224,
+        "type": "global",
+        "joke": "Chérie, pendant que tu dormais tu m'as traité de connard",
+        "answer": "Je ne dormais pas..."
+    },  
+    {
+        "id": 225,
+        "type": "global",
+        "joke": "Ce matin en voulant m'habiller, le bouton de ma chemise m'est resté dans les mains. En voulant mettre mes chaussures, mon lacet m'est resté dans les mains.",
+        "answer": "Je me suis dit \"Vaut mieux pas que j'aille pisser\""
+    },
+    {
+        "id": 226,
+        "type": "global",
+        "joke": "On ne dit pas « l’électronique » mais....",
+        "answer": "« l’électricien fait l’amour »"
+    },
+    {
+        "id": 227,
+        "type": "global",
+        "joke": "Qui se débrouille le mieux au karaté ?",
+        "answer": "L’électricité, car elle connait beaucoup de prises."
+    },
+    {
+        "id": 228,
+        "type": "global",
+        "joke": "La vitamine C…",
+        "answer": "Mais elle ne dira rien."
+    },
+    {
+        "id": 229,
+        "type": "global",
+        "joke": "Que dit un pistolet à une mitraillette ?",
+        "answer": "Ça fait longtemps que tu bégayes ?"
+    },
+    {
+        "id": 230,
+        "type": "global",
+        "joke": "Un clown arrive chez le docteur",
+        "answer": "Docteur, vite, je me sens tout drôle..."
+    },
+    {
+        "id": 231,
+        "type": "global",
+        "joke": "Qu’est ce qui est rouge et qui attend ?",
+        "answer": "Mon compte en banque."
+    },
+    {
+        "id": 232,
+        "type": "global",
+        "joke": "Il y a quoi au milieu de l’océan ?",
+        "answer": "Un é"
+    },
+    {
+        "id": 233,
+        "type": "global",
+        "joke": "Comment appelle-t-on une personne agréable à Paris ?",
+        "answer": "Un touriste."
+    },
+    {
+        "id": 234,
+        "type": "global",
+        "joke": "Quel est l’ami du feu ?",
+        "answer": "Le pot-au-feu"
+    },
+    {
+        "id": 235,
+        "type": "global",
+        "joke": "Pour ne plus puer de la gueule…",
+        "answer": "Faut-il arrêter de dire de la merde ?"
+    },
+    {
+        "id": 236,
+        "type": "global",
+        "joke": "Qu’est-ce qui est noir et blanc et qui rebondit ?",
+        "answer": "Un pingouin sur un trampoline."
+    },
+    {
+        "id": 237,
+        "type": "global",
+        "joke": "Comment reconnaître un ministre qui ment ?",
+        "answer": "Ses lèvres bougent"
+    },
+    {
+        "id": 238,
+        "type": "global",
+        "joke": "Comment appelle-t-on une fleur très occupée ?",
+        "answer": "Une fleur over-bookée"
+    },
+    {
+        "id": 239,
+        "type": "global",
+        "joke": "Soupçonné de vol dans une boulangerie",
+        "answer": "Florent Pagny nie."
+    },
+    {
+        "id": 240,
+        "type": "global",
+        "joke": "Quel est le contraire d’un chat ?",
+        "answer": "Un pacha."
+    },
+    {
+        "id": 241,
+        "type": "blondes",
+        "joke": "Pourquoi une blonde a-t-elle les cheveux mouillés quand elle va se coucher ?",
+        "answer": "Parce qu’elle a dit bonne nuit à son poisson rouge."
+    },
+    {
+        "id": 242,
+        "type": "blondes",
+        "joke": "Pourquoi les blondes portent-elles des ceintures D&G ?",
+        "answer": "Pour reconnaître leur droite et leur gauche"
+    },
+    {
+        "id": 243,
+        "type": "blondes",
+        "joke": "Qu’est-ce qu’une brune entre 2 blondes ?",
+        "answer": "Une interprète."
+    },
+    {
+        "id": 244,
+        "type": "blondes",
+        "joke": "Comment occuper une blonde toute la journée ?",
+        "answer": "Lui donner un papier ou l’on écrit « voir au verso » de chaque côté."
+    },
+    {
+        "id": 245,
+        "type": "limit",
+        "joke": "Pourquoi les poules n’ont-elles pas de seins ?",
+        "answer": "Parce que les coqs n’ont pas de main !"
+    },
+    {
+        "id": 246,
+        "type": "limit",
+        "joke": "Pendant l’acte, ma femme me dit : Dis-moi des choses sales !",
+        "answer": "La cuisine, la salle de bain..."
+    },
+    {
+        "id": 247,
+        "type": "dark",
+        "joke": "Pourquoi Jésus ne mange jamais de cacahuètes ?",
+        "answer": "Parce qu’il a des trous dans les mains."
+    },
+    {
+        "id": 248,
+        "type": "dark",
+        "joke": "Chéri, je me sens grosse et laide…S’il te plait, fais-moi un compliment…",
+        "answer": "Tu as une bonne vue !"
+    },
+    {
+        "id": 249,
+        "type": "dark", 
+        "joke": "Thomas, penses-tu que je suis une mauvaise mère?",
+        "answer": "Mon nom est Paul…"
+    },
+    {
+        "id": 250,
+        "type": "dark",
+        "joke": "Qu’est-ce qu’un lépreux dans un bain ?",
+        "answer": "Un Efferalgan"
+    },
+    {
+        "id": 251,
+        "type": "dark",
+        "joke": "Comment appelle-t-on une femme qui a perdu son intelligence ?",
+        "answer": "Une veuve."
+    },
+    {
+        "id": 252,
+        "type": "dark",
+        "joke": "Quelle est la différence entre la sodomie et les choux-fleurs ?",
+        "answer": "Même avec du beurre, les enfants n’aiment pas."
+    },
+    {
+        "id": 253,
+        "type": "dark",
+        "joke": "Qu’est-ce qui fait rire 9 personnes sur 10 ?",
+        "answer": "Un viol collectif"
+    },
+    {
+        "id": 254,
+        "type": "dark",
+        "joke": "Je suis bipolaire et je vous aime tous.",
+        "answer": "Bande d’enculés."
+    },
+    {
+        "id": 255,
+        "type": "dark",
+        "joke": "Quel est le point commun entre des chaussures et des juifs ?",
+        "answer": "Il y en a plus en 39 qu’en 45"
+    },
+    {
+        "id": 256,
+        "type": "dark",
+        "joke": "Comment appelle-t-on deux noirs dans un sac de couchage ?",
+        "answer": "Un Twix"
+    },
+    {
+        "id": 257,
+        "type": "dark",
+        "joke": "Quel est le plus gros dilemme pour un juif ?",
+        "answer": "Du jambon gratuit"
+    },
+    {
+        "id": 258,
+        "type": "dark",
+        "joke": "Qu’est-ce qu’un juif en forêt ?",
+        "answer": "Rabbin des bois"
+    },
+    {
+        "id": 259,
+        "type": "limit",    
+        "joke": "Comment appelle-t-on une lesbienne qui n’a pas de sein ?",
+        "answer": "Une omoplate"
+    },
+    {
+        "id": 260,
+        "type": "global",
+        "joke": "Pourquoi tu vends ton perroquet ?",
+        "answer": "Parce qu’hier, ce bâtard a essayé de me vendre !"
+    },
+    {
+        "id": 261,
+        "type": "global",
+        "joke": "Un jour, Dieu demanda à David de guetter",
+        "answer": "Et David guetta."
+    },
+    {
+        "id": 262,
+        "type": "global",
+        "joke": "Que font 2 brosses à dents le 14 Juillet ?",
+        "answer": "Un feu dentifrice !"
+    },
+    {
+        "id": 263,
+        "type": "global",
+        "joke": "Que ce qui est plus fort qu’un lion ?",
+        "answer": "Deux lions."
+    },
+    {
+        "id": 264,
+        "type": "global",
+        "joke": "Qu’est-ce qu’un petit cheval dans une piscine ?",
+        "answer": "Un poney de bain."
+    },
+    {
+        "id": 265,
+        "type": "global",
+        "joke": "Pourquoi le ciel est si haut ?",
+        "answer": "Pour que les oiseaux ne se cognent pas la tête."
+    },
+    {
+        "id": 266,
+        "type": "global",
+        "joke": "Qui s’occupe de la décoration à l’Elysée ?",
+        "answer": "Le ministère de l’intérieur"
+    },  
+    {
+        "id": 267,
+        "type": "global",
+        "joke": "Pourquoi les indiens mettent ils leur argent en bourse ?",
+        "answer": "Car ça rapporte des sioux."
+    },
+    {
+        "id": 268,
+        "type": "global",
+        "joke": "Quel est le comble pour un dentiste ?",
+       "answer": "C’est d’habiter dans un palais."
     }
 ]
+    
