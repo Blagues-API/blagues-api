@@ -1,7 +1,7 @@
 const { Client } = require('discord.js');
 
 const jokes = require('../blagues.json');
-const regex = /(?:> \*\*Type\*\*: (.\S+)(?: \(by <@[0-9]+>\)\s+)?\s?)(?:> \*\*Blague\*\*: (.+)\s+)(?:> \*\*Réponse\*\*: (.+)\s+)(?:> ▬+)/mi;
+const regex = /(?:> \*\*Type\*\*: (.+)\s+)(?:> \*\*Blague\*\*: (.+)\s+)(?:> \*\*Réponse\*\*: (.+)\s+)(?:> ▬+)/mi;
 
 const adminUsers = ['555068713343254533', '207190782673813504', '164738865649811457'];
 const jokeRole = '699244416849674310';
