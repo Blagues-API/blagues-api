@@ -1612,7 +1612,13 @@
         "id": 268,
         "type": "global",
         "joke": "Quel est le comble pour un dentiste ?",
-       "answer": "C’est d’habiter dans un palais."
+        "answer": "C’est d’habiter dans un palais."
+    },
+    {
+        "id": 269,
+        "type": "global",
+        "joke": "Qu’est-ce qu’un euro dans un avion qui décolle ?",
+        "answer": "Une pièce montée..."
     }
 ]
     
