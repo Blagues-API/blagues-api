@@ -92,12 +92,32 @@
         width: 100%;
         padding: 16px;
         margin: 20px auto;
-        .title{
-            font-size: 22px;
-            color: #5F5F5F;
-            text-align: center;
-            margin: 10px 0 16px;
-            font-weight: bold;
+        .title-container{
+            position: relative;
+            margin: 0 auto;
+            text-decoration: none!important;
+            .title{
+                font-size: 22px;
+                color: #5F5F5F;
+                text-align: center;
+                margin: 10px 0 16px;
+                font-weight: bold;
+                cursor: pointer;
+                &::after{
+                    content: '#';
+                    position: absolute;
+                    left: -14px;
+                    top: 12px;
+                    color: #c5c5c5;
+                    font-weight: 400;
+                    font-size: 18px;
+                    opacity: 0;
+                    transition: .1s opacity ease-in-out;
+                }
+                &:hover::after{
+                    opacity: 1;
+                }
+            }
         }
         p{
             font-size: 14px;

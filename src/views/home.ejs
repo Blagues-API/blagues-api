@@ -26,8 +26,10 @@
                 <p>Des blagues proposés par la communauté et catégorisés.</p>
                 <p>L’API est accessible <strong>gratuitement</strong> et rassemble sur le <a href="https://discord.gg/PPNpVaF" title="Discord de Blagues API">discord</a>  une communauté francophone.</p>  
             </div>
-            <div class="usecases">
-                <h3 class="title">Utilisation</h3>
+            <div class="usecases" id="use">
+                <a href="#use" class="title-container">
+                    <h3 class="title">Utilisation</h3>
+                </a>
                 <p>Différentes routes vous sont sont rendues disponibles afin d'adapter l'api a votre projet. Les différents mots clés vous permettront de récupérer une blague aléatoirement dans un thème ou type de blague spécifique.</p>
                 <div class="example">
                     <h4 class="language">BLAGUE ALÉATOIRE</h4>
@@ -42,8 +44,10 @@
                     <pre><code class="language-javascript">GET/api/id/:id:</code></pre>
                 </div>
             </div>
-            <div class="usecases">
-                <h3 class="title">Utilisation avancé</h3>
+            <div class="usecases" id="advanced-use">
+                <a href="#advanced-use" class="title-container">
+                    <h3 class="title">Utilisation avancé</h3>
+                </a>
                 <p>Parfois certains types d'humour dérangent certaines personnes, hors blagues-api est une api publique qui s'est donné comme mission de convenir aux tous types d'humour. C'est pour cela que nous vous offrons la possibilité de filtrer les blagues et donc d'en retirer celles qui font partie d'une catégorie qui ne vous convient pas.</p>
                 <div class="example">
                     <h4 class="language">UTILISATION D'UN SEUL FILTRE</h4>
@@ -54,8 +58,10 @@
                     <pre><code class="language-javascript">GET /api/random?disallow=dark&disallow=limit&disallow=dev</code></pre>
                 </div>
             </div>
-            <div class="usecases">
-                <h3 class="title">Authentification</h3>
+            <div class="usecases" id="auth">
+                <a href="#auth" class="title-container">
+                    <h3 class="title">Authentification</h3>
+                </a>
                 <p>
                     L'api de blagues utilise un token d'authentification Bearer pour les requêtes. Vous pouvez le gérer depuis votre profil.<br>
                     Les requêtes doivent toutes être effectuées via <a href="http://en.wikipedia.org/wiki/HTTP_Secure">HTTPS</a>. Tous les appels effectuées sans authentification ou en HTTP échouront.<br>
@@ -66,8 +72,10 @@
 -H "Authorization: Bearer [TOKEN]" \</code></pre>
                 </div>
             </div>
-            <div class="usecases">
-                <h3 class="title">Exemple</h3>
+            <div class="usecases" id="example">
+                <a href="#example" class="title-container">
+                    <h3 class="title">Exemple</h3>
+                </a>
                 <p>
                     Voici un exemple sous forme de cas d'utilisation de l'api dans le cas où l'on souhaite récupérer une blague aléatoirement dans le répertoire toute catégorie confondue
                 </p>
@@ -92,8 +100,10 @@
 })</code></pre>
                 </div>
             </div>
-            <div class="usecases">
-                <h3 class="title">Remerciments</h3>
+            <div class="usecases" id="thanks">
+                <a href="#thanks" class="title-container">
+                    <h3 class="title">Remerciments</h3>
+                </a>
                 <p>
                     Un grand merci à toute la communauté qui a contribué au projet que ça soit sur le discord ou sur le github en apportant leurs ajouts et modifications au code de l'api mais également à tous ceux qui ont proposé leurs blagues afin d'agrandir le répertoire de l'api. Le nombre de blagues françaises continue de grandir de jours en jours. Merci à vous !   
                 </p>
