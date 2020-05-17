@@ -8,12 +8,12 @@
         <section class="hero">
             <div class="joke">
                 <div class="content">
-                    <span id="joke">Un développeur ne descend pas du métro.</span><br>
-                    <span id="answer">Il libère la RAM...</span>
+                    <span id="joke"><%= randomJoke.joke %></span><br>
+                    <span id="answer"><%= randomJoke.answer %></span>
                 </div>
                 <div class="footer">
                     <div class="joke_type" id="type">
-                        Blague de développeur
+                        <%= getTypeName(randomJoke.type) %>
                     </div>
                     <button id="next" onclick="nextJoke()">UNE AUTRE !</button>
                 </div>
@@ -40,6 +40,18 @@
                 <div class="example">
                     <h4 class="language">BLAGUE PAR ID</h4>
                     <pre><code class="language-javascript">GET/api/id/:id:</code></pre>
+                </div>
+            </div>
+            <div class="usecases">
+                <h3 class="title">Utilisation avancé</h3>
+                <p>Parfois certains types d'humour dérangent certaines personnes, hors blagues-api est une api publique qui s'est donné comme mission de convenir aux tous types d'humour. C'est pour cela que nous vous offrons la possibilité de filtrer les blagues et donc d'en retirer celles qui font partie d'une catégorie qui ne vous convient pas.</p>
+                <div class="example">
+                    <h4 class="language">UTILISATION D'UN SEUL FILTRE</h4>
+                    <pre><code class="language-javascript">GET /api/random?disallow=dark</code></pre>
+                </div>
+                <div class="example">
+                    <h4 class="language">UTILISATION DE PLUSIEURS FILTRES</h4>
+                    <pre><code class="language-javascript">GET /api/random?disallow=dark&disallow=limit&disallow=dev</code></pre>
                 </div>
             </div>
             <div class="usecases">
