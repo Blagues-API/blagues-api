@@ -7,20 +7,52 @@ const auth = require('../middlewares/auth-api');
 
 const { Users } = require('../models');
 
-const { randomJoke, randomJokeByType, jokeById } = require('../controllers/JokeController');
+const { randomJoke, randomJokeByType, jokeById, types } = require('../controllers/JokeController');
 
 router.use(auth());
 
+router.get('/types', (req, res) => {
+    return res.json({
+        count: types.length,
+        accepted_types: Object.keys(types),
+        types,
+    });
+});
+
 router.get('/random', (req, res) => {
-    res.json(randomJoke());
+    const joke = randomJoke(req.query.disallow);
+    if(joke.error) {
+        return res.status(400).json({
+            status: 400,
+            error: 'Bad Request',
+            message: joke.message,
+        });
+    }
+    return res.status(200).json(joke.response);
 });
 
 router.get('/type/:type/random', (req, res) => {
-    res.json(randomJokeByType(req.params.type));
+    const joke = randomJokeByType(req.params.type);
+    if(joke.error) {
+        return res.status(400).json({
+            status: 400,
+            error: 'Bad Request',
+            message: joke.message,
+        });
+    }
+    return res.status(200).json(joke.response);
 });
 
 router.get('/id/:id', (req, res) => {
-    res.json(jokeById(req.params.id));
+    const joke = jokeById(req.params.id);
+    if(joke.error) {
+        return res.status(400).json({
+            status: 400,
+            error: 'Bad Request',
+            message: joke.message,
+        });
+    }
+    return res.status(200).json(joke.response);
 });
 
 router.post('/regenerate', async (req, res) => {
@@ -54,7 +86,7 @@ router.post('/regenerate', async (req, res) => {
 });
 
 router.get('*', (req, res) => {
-    res.send('Try /api/random, /api/type/<joke_type>/random, or /api/id/<joke_id>');
+    return res.send('Check documentation: https://www.blagues-api.fr/');
 });
 
 module.exports = router;
