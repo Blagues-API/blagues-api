@@ -23,6 +23,18 @@ app.use('/files', express.static(__dirname + '/../dist'));
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 
+app.locals.getTypeName = function(key) {
+    const types = {
+        'limit': 'Blague limite limite',
+        'global': 'Blague normale',
+        'dark': 'Blague humour noir',
+        'dev': 'Blague de développeurs',
+        'beauf': 'Humour de beaufs',
+        'blondes': 'Blagues blondes',
+    };
+    return types[key];
+};
+
 app.use('/', routes);
 
 module.exports = app;
