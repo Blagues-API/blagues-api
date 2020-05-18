@@ -70,19 +70,29 @@ BlagueAPIBot.on('messageReactionAdd', async (messageReaction, user) => {
     let message = messageReaction.message;
     if (message.partial) message = await message.fetch();
 
-    if(message.channel.id !== suggestsChannel || messageReaction.emoji.id !== '705115434969595966' || user.bot || !adminUsers.includes(user.id)) return;
+    if(message.channel.id !== suggestsChannel || user.bot || !adminUsers.includes(user.id)) return;
 
-    messageReaction.users.remove(user);
+    if(messageReaction.emoji.id === '705115434969595966') {
+        messageReaction.users.remove(user);
 
-    if(!regex.test(message.content)) return;
+        if(!regex.test(message.content)) return;
 
-    const [, rawType, joke, answer] = regex.exec(message.content);
+        const [, rawType, joke, answer] = regex.exec(message.content);
 
-    await user.send(`{\n    "id": ,\n    "type": "${types[rawType]}",\n    "joke": "${joke}",\n    "answer": "${answer.replace(/"/, '\\"')}"\n},`, {
-        code: 'json',
-    });
+        await user.send(`{\n    "id": ,\n    "type": "${types[rawType]}",\n    "joke": "${joke}",\n    "answer": "${answer.replace(/"/, '\\"')}"\n},`, {
+            code: 'json',
+        });
 
-    message.react('🎉');
+        message.react('🎉');
+    }
+
+    if(messageReaction.emoji.name === '❌') {
+        messageReaction.users.remove(user);
+        const accept = message.reactions.get('705115434969595966');
+        if(accept) {
+            accept.remove();
+        }
+    }
 });
 
 const types = {
