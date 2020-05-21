@@ -79,7 +79,7 @@ BlagueAPIBot.on('messageReactionAdd', async (messageReaction, user) => {
 
         const [, rawType, joke, answer] = regex.exec(message.content);
 
-        await user.send(`{\n    "id": ,\n    "type": "${types[rawType]}",\n    "joke": "${joke}",\n    "answer": "${answer.replace(/"/, '\\"')}"\n},`, {
+        await user.send(`{\n    "id": ,\n    "type": "${types[rawType.toLowerCase()]}",\n    "joke": "${joke}",\n    "answer": "${answer.replace(/"/, '\\"')}"\n},`, {
             code: 'json',
         });
 
@@ -87,8 +87,7 @@ BlagueAPIBot.on('messageReactionAdd', async (messageReaction, user) => {
     }
 
     if(messageReaction.emoji.name === '❌') {
-        messageReaction.users.remove(user);
-        const accept = message.reactions.get('705115434969595966');
+        const accept = message.reactions.cache.get('705115434969595966');
         if(accept) {
             accept.remove();
         }
@@ -96,12 +95,13 @@ BlagueAPIBot.on('messageReactionAdd', async (messageReaction, user) => {
 });
 
 const types = {
-    'Général': 'global',
-    'Noir': 'dark',
-    'Développeur': 'dev',
-    'Limite limite': 'limit',
-    'Beauf': 'beauf',
-    'Blondes': 'blondes',
+    'général': 'global',
+    'noir': 'dark',
+    'développeur': 'dev',
+    'limite limite': 'limit',
+    'limite': 'limit',
+    'beauf': 'beauf',
+    'blondes': 'blondes',
 };
 
 BlagueAPIBot.login(process.env.discord_bot_token);
