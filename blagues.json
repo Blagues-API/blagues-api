@@ -1359,8 +1359,8 @@
     {
         "id": 226,
         "type": "global",
-        "joke": "On ne dit pas « l’électronique » mais....",
-        "answer": "« l’électricien fait l’amour »"
+        "joke": "On ne dit pas « l’électronique » mais...",
+        "answer": "L’électricien fait l’amour."
     },
     {
         "id": 227,
@@ -1372,7 +1372,7 @@
         "id": 228,
         "type": "global",
         "joke": "La vitamine C…",
-        "answer": "Mais elle ne dira rien."
+        "answer": "Mais ne dira rien."
     },
     {
         "id": 229,
@@ -1619,6 +1619,185 @@
         "type": "global",
         "joke": "Qu’est-ce qu’un euro dans un avion qui décolle ?",
         "answer": "Une pièce montée..."
+    },
+    {
+        "id": 270,
+        "type": "global",
+        "joke": "Quel est le comble de Buzz ?",
+        "answer": "D'aller plus vite que l'éclair. "
+    },
+    {
+        "id": 271,
+        "type": "global",
+        "joke": "Que fais un gros poussin ?",
+        "answer": "PIOU-PIOU"
+    },
+    {
+        "id": 272,
+        "type": "beauf",
+        "joke": "Pourquoi les bots ne parlent pas avec les humains ?",
+        "answer": "Pour ne pas leur ressembler."
+    },
+    {
+        "id": 273,
+        "type": "global",
+        "joke": "Pourquoi les coquilles ne font pas de régime ?",
+        "answer": "Parce qu'elles sont palourdes !"
+    },
+    {
+        "id": 274,
+        "type": "dark",
+        "joke": "Qu'est ce qu'un pruneau ?",
+        "answer": "Un synonyme de personne âgée : qui est ridée et qui fait chier"
+    },
+    {
+        "id": 275,
+        "type": "beauf",
+        "joke": "Qu'est ce qu'oune péniche ?",
+        "answer": "C'est oune zizi portouguaiche"
+    },
+    {
+        "id": 276,
+        "type": "undefined",
+        "joke": "Les parents sont deux êtres qui t'apprennent à marcher et à parler",
+        "answer": "Pour ensuite te dire de t'asseoir et de fermer ta gueule "
+    },
+    {
+        "id": 277,
+        "type": "global",
+        "joke": "L'autobus est une invention géniale !",
+        "answer": "Il roule deux fois plus vite quand tu cours après que quand t'es assis dedans"
+    },
+    {
+        "id": 278,
+        "type": "global",
+        "joke": "Les ciseaux à bois...",
+        "answer": "Les chiens aussi"
+    },
+    {
+        "id": 279,
+        "type": "global",
+        "joke": "Qu'est ce que le Gospel ?",
+        "answer": "C'est quand ton gamin a pris un coup de soleil"
+    },
+    {
+        "id": 280,
+        "type": "dark",
+        "joke": "Qu'est ce que la beauté intérieure ?",
+        "answer": "Un concept inventé par les moches pour pouvoir se reproduire"
+    },
+    {
+        "id": 281,
+        "type": "global",
+        "joke": "Moi j'ai un Archipel",
+        "answer": "ça creuse des archi trous "
+    },
+    {
+        "id": 282,
+        "type": "limit",
+        "joke": "Avez vous déjà eu des sentiments partagés ? ",
+        "answer": "Genre quand ta belle mère recule vers le ravin avec ta voiture toute neuve"
+    },
+    {
+        "id": 283,
+        "type": "limit",
+        "joke": "Une définition simple de l'amour :",
+        "answer": "C'est comme un jeu de cartes, si t'as pas de partenaire(s) il vaut mieux avoir une bonne main "
+    },
+    {
+        "id": 284,
+        "type": "global",
+        "joke": "Maman, où est mon perroquet?",
+        "answer": "Au quai."
+    },
+    {
+        "id": 285,
+        "type": "blondes",
+        "joke": "Pourquoi mon ordinateur ne marche plus? Qu'as tu fais?",
+        "answer": "Vu qu'il était sale je l'ai nettoyé avec de l'eau. "
+    },
+    {
+        "id": 286,
+        "type": "global",
+        "joke": "Quand est-ce que les chiens aboient ?",
+        "answer": "Lorsqu’ils ont un chat dans la gorge."
+    },
+    {
+        "id": 287,
+        "type": "dev",
+        "joke": "Comment un développeur tente-t-il de réparer sa voiture lorsqu'elle a un problème ?",
+        "answer": "Il sort de la voiture, ferme toutes les fenêtres, retourne dans la voiture, et essaie de redémarrer."
+    },
+    {
+        "id": 288,
+        "type": "global",
+        "joke": "Que dit un égoïste qui veut partager?",
+        "answer": "On fait moi-moi."
+    },
+    {
+        "id": 289,
+        "type": "global",
+        "joke": "Qu'est-ce que deux fous avec des mitraillettes ?",
+        "answer": "Une fousillade."
+    },
+    {
+        "id": 290,
+        "type": "global",
+        "joke": "Que dit le juge au manchot ?",
+        "answer": "Allez allez, témoignons !"
+    },
+    {
+        "id": 291,
+        "type": "global",
+        "joke": "Tu connais la blague du con qui dit non ?",
+        "answer": "Non…"
+    },
+    {
+        "id": 292,
+        "type": "global",
+        "joke": "Quel est le comble pour un plombier ?",
+        "answer": "Que ses clients prennent la fuite !"
+    },
+    {
+        "id": 293,
+        "type": "global",
+        "joke": "2 fesses se croisent",
+        "answer": "Alors, ca gaze ?"
+    },
+    {
+        "id": 294,
+        "type": "undefined",
+        "joke": "Où est fabriqué le viagra ?",
+        "answer": "Au Boukistan"
+    },
+    {
+        "id": 295,
+        "type": "undefined",
+        "joke": "Qu’est-ce qu’une gifle ?",
+        "answer": "C’est comme une bifle, mais avec la main !"
+    },
+    {
+        "id": 296,
+        "type": "undefined",
+        "joke": "Pourquoi j’ai appelé mon pénis Bidou ?",
+        "answer": "Parce que quand je vais pisser, je s’coue Bidou."
+    },
+    {
+        "id": 297,
+        "type": "undefined",
+        "joke": "Quel est le seul instrument à vent avec une corde ?",
+        "answer": "Le string"
+    },
+    {
+        "id": 298,
+        "type": "global",
+        "joke": "Quand 2 poissons s’énervent..",
+        "answer": "Est-ce qu’on peut dire que le thon monte ?"
+    },
+    {
+        "id": 299,
+        "type": "beauf",
+        "joke": "Pourquoi les hommes amènent leur femme en vacances ?",
+        "answer": "Pour que les vacances paraissent plus longues…"
     }
 ]
-    
