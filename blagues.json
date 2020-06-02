@@ -1760,31 +1760,31 @@
     },
     {
         "id": 293,
-        "type": "global",
+        "type": "limit",
         "joke": "2 fesses se croisent",
         "answer": "Alors, ca gaze ?"
     },
     {
         "id": 294,
-        "type": "undefined",
+        "type": "limit",
         "joke": "Où est fabriqué le viagra ?",
         "answer": "Au Boukistan"
     },
     {
         "id": 295,
-        "type": "undefined",
+        "type": "limit",
         "joke": "Qu’est-ce qu’une gifle ?",
         "answer": "C’est comme une bifle, mais avec la main !"
     },
     {
         "id": 296,
-        "type": "undefined",
+        "type": "limit",
         "joke": "Pourquoi j’ai appelé mon pénis Bidou ?",
         "answer": "Parce que quand je vais pisser, je s’coue Bidou."
     },
     {
         "id": 297,
-        "type": "undefined",
+        "type": "limit",
         "joke": "Quel est le seul instrument à vent avec une corde ?",
         "answer": "Le string"
     },
@@ -1797,7 +1797,127 @@
     {
         "id": 299,
         "type": "beauf",
-        "joke": "Pourquoi les hommes amènent leur femme en vacances ?",
-        "answer": "Pour que les vacances paraissent plus longues…"
+        "joke": "Pourquoi les hommes amènent-ils leur femme en vacances ?",
+        "answer": "Pour que les vacances paraissent plus longues..."
+    },
+    {
+        "id": 300,
+        "type": "beauf",
+        "joke": "Que fait Jean quand il voit une femme crocodile ?",
+        "answer": "Il lacoste !"
+    },
+    {
+        "id": 301,
+        "type": "global",
+        "joke": "Qu'est-ce qui commence par un E, finit par un E et qui ne contient qu'une lettre?",
+        "answer": "Une enveloppe !"
+    },
+    {
+        "id": 302,
+        "type": "limit",
+        "joke": "Qu’est-ce qui se lève quand tu t’en sers, qui s’abaisse quand tu as fini de t’en servir et qui goutte après usage ?",
+        "answer": "Un parapluie"
+    },
+    {
+        "id": 303,
+        "type": "global",
+        "joke": "Babi et Baba sont sur un bateau Baba tombe à l’eau. Que ce passe-t-il ?",
+        "answer": "Babi bêle et Baba coule"
+    },
+    {
+        "id": 304,
+        "type": "global",
+        "joke": "Que s'est il passé en 1769 ? Napoléon est né ! Et que s'est il passé en 1789 ?",
+        "answer": "Il a eu 20 ans !"
+    },
+    {
+        "id": 305,
+        "type": "global",
+        "joke": "Rien ne sert de courir...",
+        "answer": "... Je suis déjà en retard"
+    },
+    {
+        "id": 306,
+        "type": "beauf",
+        "joke": "Quand mon verre est plein, je le vide",
+        "answer": "Quand mon verre est vide, je me plains !"
+    },
+    {
+        "id": 307,
+        "type": "global",
+        "joke": "Attention au chien ! ",
+        "answer": "Il est si petit que vous pourriez marcher dessus "
+    },
+    {
+        "id": 308,
+        "type": "global",
+        "joke": "Ne pas déranger svp ",
+        "answer": "Je n'ai pas rangé pour rien... "
+    },
+    {
+        "id": 309,
+        "type": "global",
+        "joke": "Merci de ne pas frapper",
+        "answer": "Et soyez gentil, de ne pas sonner non plus "
+    },
+    {
+        "id": 310,
+        "type": "global",
+        "joke": "N'hésitez pas à demander si la maison fait crédit",
+        "answer": "Nous avons une façon absolument délicieuse de refuser "
+    },
+    {
+        "id": 311,
+        "type": "global",
+        "joke": "Sur ce serveur le 12 mai 2020",
+        "answer": "Il ne se passa strictement rien "
+    },
+    {
+        "id": 312,
+        "type": "global",
+        "joke": "Pourquoi la girafe se fait arrêter par la police ? ",
+        "answer": "Parce que c’est un cou-monté !"
+    },
+    {
+        "id": 313,
+        "type": "global",
+        "joke": "Pourquoi les coccinelles n’aiment-elles pas courir ?",
+        "answer": "Parce qu’elles ont toujours des points de cotés !"
+    },
+    {
+        "id": 314,
+        "type": "global",
+        "joke": "On ne dit pas démanger",
+        "answer": "On dit vomir"
+    },
+    {
+        "id": 315,
+        "type": "dark",
+        "joke": "Que disait Eve pour faire avancer le bâteau",
+        "answer": "Ramadan"
+    },
+    {
+        "id": 316,
+        "type": "limit",
+        "joke": "Que signifie expatriées ?",
+        "answer": "Anciennes petites amies non rangées"
+    },
+    {
+        "id": 317,
+        "type": "global",
+        "joke": "Qui est l'idiot qui a créé la cédille ?",
+        "answer": "Monsieur Duçon"
+    },
+    {
+        "id": 318,
+        "type": "global",
+        "joke": "Que signifie Mercato ?",
+        "answer": "C'est une maman pratiquante "
+    },
+    {
+        "id": 319,
+        "type": "limit",
+        "joke": "Tu sais ce que c'est un suppositoire ?",
+        "answer": "C'est une invention qui restera dans les annales"
     }
 ]
