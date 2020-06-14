@@ -777,8 +777,8 @@
     {
         "id": 130,
         "type": "global",
-        "joke": "Quelle mamie fait peur aux voleurs ?",
-        "answer": "Mamie Traillette."
+        "joke": "Est ce que si on trempe un Mac dans l'eau ça fera",
+        "answer": "Un McDo ?"
     },
     {
         "id": 131,
@@ -1919,5 +1919,197 @@
         "type": "limit",
         "joke": "Tu sais ce que c'est un suppositoire ?",
         "answer": "C'est une invention qui restera dans les annales"
+    },
+    {
+        "id": 320,
+        "type": "global",
+        "joke": "Les pharmacies...",
+        "answer": "... c'est les confiseries des vieux"
+    },
+    {
+        "id": 321,
+        "type": "beauf",
+        "joke": "Une jardinerie est un endroit merveilleux",
+        "answer": "Si tu te prends trois râteaux on t'offre une pelle"
+    },
+    {
+        "id": 322,
+        "type": "global",
+        "joke": "Pourquoi Toto veut se marier avec la mère de son père ?",
+        "answer": "Ben son père s'est bien marié avec la sienne..."
+    },
+    {
+        "id": 323,
+        "type": "global",
+        "joke": "Que demande un chat dans une pharmacie ?",
+        "answer": "Avez- vous du sirop pour ma toux ?"
+    },
+    {
+        "id": 324,
+        "type": "global",
+        "joke": "Que faisaient les dinosaures quand ils n'arrivaient pas à se décider ?",
+        "answer": "Des tirageosaures"
+    },
+    {
+        "id": 325,
+        "type": "global",
+        "joke": "Pourquoi est-ce c'est difficile de conduire dans le Nord ?",
+        "answer": "Parce que les voitures arrêtent PAS DE CALER."
+    },
+    {
+        "id": 326,
+        "type": "global",
+        "joke": "Pourquoi est-ce qu'on met tous les crocos en prison ?",
+        "answer": "Parce que les crocos dealent."
+    },
+    {
+        "id": 327,
+        "type": "global",
+        "joke": "Quel est le jambon que tout le monde déteste ?",
+        "answer": "Le sale ami."
+    },
+    {
+        "id": 328,
+        "type": "global",
+        "joke": "Qu'est ce qu'un cadeau qui s'en va ?",
+        "answer": "Une surprise party"
+    },
+    {
+        "id": 329,
+        "type": "global",
+        "joke": "Quelle est la différence entre toi et un sapin ?",
+        "answer": "Un sapin c'est un conifère et toi t'es con et on peut rien y faire"
+    },
+    {
+        "id": 330,
+        "type": "dark",
+        "joke": "Ta mère est tellement grosse",
+        "answer": "Que quand elle sort y a une éclipse"
+    },
+    {
+        "id": 331,
+        "type": "dark",
+        "joke": "Tout est bon dans le cochon",
+        "answer": "Je ne mangerai pas ta mère pour autant"
+    },
+    {
+        "id": 332,
+        "type": "dark",
+        "joke": "Vous saviez que la famille Le Pen a du sang arabe ?",
+        "answer": "Sur le capot de leur voiture..."
+    },
+    {
+        "id": 333,
+        "type": "global",
+        "joke": "Quelle est l'émission TV préférée des jardiniers constipés ?",
+        "answer": "Silence ça pousse"
+    },
+    {
+        "id": 334,
+        "type": "global",
+        "joke": "Qu'est ce qu'une frite enceinte ?",
+        "answer": "Une patate sautée"
+    },
+    {
+        "id": 335,
+        "type": "global",
+        "joke": "Que dit un coronavirus quand il braque une banque ?",
+        "answer": "Donner moi l'argent, sinon je fais toussoter !"
+    },
+    {
+        "id": 336,
+        "type": "dark",
+        "joke": "Qu’est-ce qu’un homme avec une mitraillette dans un champ de blé ?",
+        "answer": "Un céréales killer."
+    },
+    {
+        "id": 337,
+        "type": "global",
+        "joke": "Peux-tu me dire si le clignotant fonctionne ?",
+        "answer": "Oui, non, oui, non, oui, non."
+    },
+    {
+        "id": 338,
+        "type": "beauf",
+        "joke": "Quel est le meilleur site pour un homme qui cherche un lave-vaisselle ?",
+        "answer": "Un site de rencontres."
+    },
+    {
+        "id": 339,
+        "type": "beauf",
+        "joke": "Quel est le point commun entre la poitrine d'une femme et un train électrique ?",
+        "answer": "C’est fait pour les enfants mais c’est papa qui joue avec."
+    },
+    {
+        "id": 340,
+        "type": "beauf",
+        "joke": "Que dit une bière quand elle tombe dans l'eau ?",
+        "answer": "Je sais panaché"
+    },
+    {
+        "id": 341,
+        "type": "global",
+        "joke": "Deux pommes de terre traversent la route, l'une d'elles se fait écraser",
+        "answer": "Oh purée !"
+    },
+    {
+        "id": 342,
+        "type": "global",
+        "joke": "C’est en forgeant qu’on devient forgeron.",
+        "answer": "Et c’est en sciant que Léonard devint scie !"
+    },
+    {
+        "id": 343,
+        "type": "global",
+        "joke": "Jésus a marché sur l'eau. Une courgette est composé a 98% d'eau. J.ai marché sur une courgette.",
+        "answer": "je suis a 98% Jésus"
+    },
+    {
+        "id": 344,
+        "type": "dark",
+        "joke": "Quel est la différence entre Jésus et un tableau de Picasso ?",
+        "answer": "Le tableau s'accroche avec un seul clou"
+    },
+    {
+        "id": 345,
+        "type": "global",
+        "joke": "Comment est-ce que la chouette sait que son mari fait la gueule ?",
+        "answer": "Parce qu’HIBOUDE."
+    },
+    {
+        "id": 346,
+        "type": "global",
+        "joke": "Qu'est-ce qu'un tennisman adore faire ?",
+        "answer": "Rendre des services !"
+    },
+    {
+        "id": 347,
+        "type": "limit",
+        "joke": "Comment appelle-t-on six prostituées Allemandes ?",
+        "answer": "Une scie sauteuse Bosch"
+    },
+    {
+        "id": 348,
+        "type": "blondes",
+        "joke": "Qu'est-ce qu'une blonde avec de l'eau dans la bouche ?",
+        "answer": "Une cruche"
+    },
+    {
+        "id": 349,
+        "type": "global",
+        "joke": "Pourquoi quand on vise on ferme un œil ?",
+        "answer": "Car si on fermait les deux on verrait plus rien."
+    },
+    {
+        "id": 350,
+        "type": "dark",
+        "joke": "Qu'est ce qu'un pruneau ?",
+        "answer": "Un synonyme de personne âgée : qui est ridée et qui fait chier"
+    },
+    {
+        "id": 351,
+        "type": "global",
+        "joke": "Quel est la différence entre un marin et un boucher?",
+        "answer": "Le boucher voit le porc avant les côtes "
     }
 ]
