@@ -2111,5 +2111,263 @@
         "type": "global",
         "joke": "Quel est la différence entre un marin et un boucher?",
         "answer": "Le boucher voit le porc avant les côtes "
+    },
+    {
+        "id": 352,
+        "type": "dark",
+        "joke": "Une jeune soupçonnée de sorcellerie demande à sa mère : \"Pourquoi est-ce qu'on flotte?\"",
+        "answer": "\"Pour la même raison qu'on brûle.\""
+    },
+    {
+        "id": 353,
+        "type": "global",
+        "joke": "Comment appelle t-on un chat dans l'espace ?",
+        "answer": "Un chatellite "
+    },
+    {   
+        "id": 354,
+        "type": "global",
+        "joke": "Qu’est-ce qu’un cochon volant ?",
+        "answer": "Un aéroport."
+    },
+    {
+        "id": 355,
+        "type": "global",
+        "joke": "Quel est le comble pour un porte-charge?",
+        "answer": "C'est de mal se porter."
+    },
+    {
+        "id": 356,
+        "type": "global",
+        "joke": "Pourquoi méprise-tu les canard ?",
+        "answer": "Parce qu'à chaque fois que je vais au coin il se moque de moi."
+    },
+    {
+        "id": 357,
+        "type": "beauf",
+        "joke": "Quel est le point commun entre un mauvais musicien et un cancre? ",
+        "answer": "Les deux ont de mauvaises notes."
+    },
+    {
+        "id": 358,
+        "type": "beauf",
+        "joke": "Les peintres utilisent, de l'imagination, de la créativité et...",
+        "answer": "De la peinture."
+    },
+    {
+        "id": 359,
+        "type": "beauf",
+        "joke": "Une mère demande à son fils : quel est ton animal préféré?",
+        "answer": "Le zébu parce qu'on a un point commun."
+    },
+    {
+        "id": 400,
+        "type": "limit",
+        "joke": "que fait un oiseau au dessus d’un camp de concentration ?",
+        "answer": "cuit cuit !"
+    },
+    {
+        "id": 401,
+        "type": "global",
+        "joke": "Mr et madame Sop ont un fils comment s'appelle-t-il ?",
+        "answer": "Alain 
+    },
+    {
+        "id": 402,
+        "type": "dark",
+        "joke": "Deux belges se déplacent dans le désert en tenant une portière",
+        "answer": "J'ai trop chaud ouvre la fenêtre s'il te plaît"
+    },
+    {
+        "id": 403,
+        "type": "global",
+        "joke": "Dieu créa la France, un trop beau pays, de belles formes, la mer, l'océan, les montagnes...",
+        "answer": "Alors pour compenser il a créé le français"
+    },
+    {
+        "id": 404,
+        "type": "dark",
+        "joke": "Ma b*te, je l’ai appelée la vie.",
+        "answer": "Parce que la vie est dure..."
+    },
+    {
+        "id": 405,
+        "type": "beauf",
+        "joke": "Qu'est-ce qui est pire qu'un meurtrier?",
+        "answer": "Un policier fanatique."
+    },
+    {
+        "id": 406,
+        "type": "global",
+        "joke": "Je suis Tintin, mais je ne suis pas Tintin. Qui suis-je ?",
+        "answer": "Milou"
+    },
+    {
+        "id": 407,
+        "type": "global",   
+        "joke": "Qu'est-ce qu'un squelette dans une armoire.",
+        "answer": "Quelqu'un qui a gagné un cache-cache."
+    },
+    {
+        "id": 408,
+        "type": "global",
+        "joke": "Que disent deux mouettes lorsqu’elles veulent partager quelque chose ?",
+        "answer": "« On fait mouette-mouette ? »"
+    },
+    {
+        "id": 409,
+        "type": "dark",
+        "joke": "Que font 1+2-1x2?",
+        "answer": "Le nombre de jambe d'un machot."
+    },
+    {
+        "id": 410,
+        "type": "dark",
+        "joke": "Quel est la différence entre des pizzas et des juifs ?",
+        "answer": "Le temps de cuisson."
+    },
+    {
+        "id": 411,
+        "type": "limit",
+        "joke": "Qu’elle est la pire musique pour les juifs ?",
+        "answer": "En feu, Soprano"
+    },
+    {
+        "id": 412,
+        "type": "limit",
+        "joke": "Quelle est la vitesse maximale autorisée lors d'un rapport ?",
+        "answer": "68km/h car à 69..... Ça fait une tête à queue."
+    },
+    {
+        "id": 413,
+        "type": "global",
+        "joke": "Quel est le comble d'un comble ? ",
+        "answer": "C'est qu'un muet dit à un sourd qu'un aveugle les espionne. "
+    },
+    {
+        "id": 414,
+        "type": "global",
+        "joke": " Quel est le meilleur ami d'un grand-père ?",
+        "answer": "Le potager"
+    },
+    {
+        "id": 415,
+        "type": "dark",
+        "joke": " Que dis-t-on en Afrique quand un lieu est bondé ?",
+        "answer": "Il est noir de monde..."
+    },
+    {
+        "id": 416,
+        "type": "global",
+        "joke": "Qu'elle est l'insulte la plus utilisée en 1940 après le traité de Vichy?",
+        "answer": "Pétain"
+    },
+    {
+        "id": 417,
+        "type": "global",
+        "joke": " Tu as aucune référence....",
+        "answer": "Peut-être car je suis pas à vendre !"
+    },
+    {
+        "id": 418,
+        "type": "limit",
+        "joke": " Qu'elle est  la tarte préférée des putes ?",
+        "answer": "La tarte catin"
+    },
+    {
+        "id": 419,
+        "type": "dark",
+        "joke": "Un français et un arabe sont sur un immeuble. Le quel saute en premier ? ",
+        "answer": "L’immeuble"
+    },
+    {
+        "id": 420,
+        "type": "dark",
+        "joke": "Une fillette est retrouvée égorgée dans la rue… L’enquêteur questionne le légiste : Elle a été violée ? ",
+        "answer": "– Non pas encore, j’attendais votre autorisation."
+    },  
+    {
+        "id": 421,
+        "type": "dark",        
+        "joke": "– Maman, maman, je ne veux plus dormir avec mon petit frère.",
+        "answer": "– Tais-toi ! Je t’ai déjà dit qu’on avait pas assez d’argent pour l’enterrer."
+    },
+    {
+        "id": 422,
+        "type": "global",
+        "joke": "Lors de tes piques-niques",
+        "answer": "Tu manges avec ou sandwich ?"
+    },
+    {
+        "id": 423,
+        "type": "beauf",
+        "joke": "Connaissez vous le slogan \"ça fait du bien par où ça passe\" ?",
+        "answer": "C'est une pub de suppositoires je crois..."
+    },
+    {
+        "id": 424,
+        "type": "global",
+        "joke": "Qu’est ce qui sépare l’espèce humaine du singe ?",
+        "answer": "La mer Méditerranée."
+    },
+    {
+        "id": 425,
+        "type": "limit",
+        "joke": "Que disent deux fesses sur un bateau ?",
+        "answer": "Dis donc ça commence à ramer du cul"
+    },
+    {
+        "id": 426,
+        "type": "beauf",
+        "joke": " Un médecin félicite le mari d'un couple pour le nouveau né. La femme demande au médecin pourquoi elle n'est pas félicitée.",
+        "answer": "Quand un plat est réussi, on félicite le cuisinier pas le four !"
+    },
+    {
+        "id": 427,
+        "type": "global",
+        "joke": "Mon plus grand défaut est l'honnêteté... Vous pensez le contraire ?",
+        "answer": "J'en ai rien à foutre de ce que vous pensez"
+    },  
+    {
+        "id": 428,
+        "type": "dark",
+        "joke": "Que chante un juif devant un feu de camp ?",
+        "answer": "\"Vous les copains je ne vous oublierais jamais!\""
+    },
+    {
+        "id": 429,
+        "type": "global",
+        "joke": "De quelle couleur est le cheval blanc d'Henri IV ?",
+        "answer": "Jaune, car il s'est pissé dessus"
+    },
+    {
+        "id": 430,
+        "type": "global",
+        "joke": "J'ai lu un livre de Victor Hugo.",
+        "answer": "Il ne devait pas boire que du Fanta à l'apéro celui là..."
+    },
+    {
+        "id": 431,
+        "type": "limit",
+        "joke": "Ce n'est pas bien de regarder sous les jupes des filles",
+        "answer": "Il faut regarder sous la culotte"
+    },
+    {
+        "id": 432,
+        "type": "global",
+        "joke": "Quel est la différence entre un marin et un boucher ?",
+        "answer": "Le marin voit les côtes avant le port et le boucher voit le porc avant les côtes."
+    },
+    {
+        "id": 433,
+        "type": "dark",
+        "joke": "Un homme à l'hôpital dit à son infirmière : Vous êtes mon infirmière préférée, voudriez-vous passer me voir quand je serai sorti de l'hôpital ?",
+        "answer": "Je suis désolée, mais j'ai horreur, des cimetières."
+    },
+    {
+        "id": 434,
+        "type": "global",
+        "joke": "Je me présente, je suis Tamayo",
+        "answer": "Et lui c'est Monketchup ?"
     }
 ]
