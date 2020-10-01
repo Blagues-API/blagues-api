@@ -92,7 +92,7 @@
     {
         "id": 16,
         "type": "global",
-        "joke": "Pourquoi les canards sont-il toujours à l'heure ?",
+        "joke": "Pourquoi les canards sont-ils toujours à l'heure ?",
         "answer": "Parce qu'ils sont dans l'étang"
     },
     {
@@ -176,7 +176,7 @@
     {
         "id": 30,
         "type": "limit",
-        "joke": "Qu'est ce qui est vert et qui nique ?",
+        "joke": "Qu'est-ce qui est vert et qui nique ?",
         "answer": "Véronique."
     },
     {
@@ -237,7 +237,7 @@
         "id": 40,
         "type": "dark",
         "joke": "A quel endroit se trouvent les tétraplégiques ?",
-        "answer": "Là où on les as laissés.."
+        "answer": "Là où on les a laissés.."
     },
     {
         "id": 41,
@@ -249,7 +249,7 @@
         "id": 42,
         "type": "dark",
         "joke": "C'est quoi le plus dur à mixer dans un groupe de légumes ?",
-        "answer": "Leurs fauteuils.."
+        "answer": "Leurs fauteuils..."
     },
     {
         "id": 43,
@@ -260,7 +260,7 @@
     {
         "id": 44,
         "type": "global",
-        "joke": "Que dit un canard quand il va au toilette ?",
+        "joke": "Que dit un canard quand il va aux toilettes ?",
         "answer": "Je vais au petit coin."
     },
     {
@@ -308,7 +308,7 @@
     {
         "id": 52,
         "type": "global",
-        "joke": "Pourquoi les gorilles ont-ils de gros trou de nez ?",
+        "joke": "Pourquoi les gorilles ont-ils de gros trous de nez ?",
         "answer": "Car ils ont de gros doigts."
     },
     {
@@ -1149,13 +1149,13 @@
     {
         "id": 191,
         "type": "global",
-        "joke": "Qu’est ce qui est transparent et qui sent la carotte ?",
+        "joke": "Qu’est-ce qui est transparent et qui sent la carotte ?",
         "answer": "Un pet de lapin"
     },
     {
         "id": 192,
         "type": "beauf",
-        "joke": "Qu’est qu’un cochon qui rit ?",
+        "joke": "Qu’est-ce qu’un cochon qui rit ?",
         "answer": "Un porc tout gai."
     },
     {
@@ -1192,7 +1192,7 @@
         "id": 198,
         "type": "global",
         "joke": "Quel est le légume le plus courageux ?",
-        "answer": "Le pois chiche"
+        "answer": "Le pois-chiche"
     },
     {
         "id": 199,
@@ -1222,7 +1222,7 @@
         "id": 203,
         "type": "global",
         "joke": "Pourquoi est-ce que les anges sont sourds ?",
-        "answer": "Parce que Jésus Christ"
+        "answer": "Parce que Jésus-Christ"
     },
     {
         "id": 204,
@@ -1245,7 +1245,7 @@
     {
         "id": 207,
         "type": "global",
-        "joke": "Quelle est la devise des chats diaboliques?",
+        "joke": "Quelle est la devise des chats diaboliques ?",
         "answer": "Satan est par minou"
     },
     {
@@ -1269,20 +1269,20 @@
     {
         "id": 211,
         "type": "global",
-        "joke": "Quel est le comble pour une taupe?",
+        "joke": "Quel est le comble pour une taupe ?",
         "answer": "D’amuser la galerie !"
     },
     {
         "id": 212,
         "type": "global",
-        "joke": "Que prend un éléphant quand il va au restaurant?",
+        "joke": "Que prend un éléphant quand il va au restaurant ?",
         "answer": "Il prend de la place !"
     },
     {
         "id": 213,
         "type": "global",
         "joke": "Qu’est ce qui a 3 bosses?",
-        "answer": "Un chameau qui c’est cogné."
+        "answer": "Un chameau qui s’est cogné."
     },
     {
         "id": 214,
@@ -1323,8 +1323,8 @@
     {
         "id": 220,
         "type": "global",
-        "joke": "Quel est la différence entre une machine et du ketchup ?",
-        "answer": "Aucune, ils sont tout les deux au-tomate"
+        "joke": "Quelle est la différence entre une machine et du ketchup ?",
+        "answer": "Aucune, ils sont tous les deux au-tomate"
     },
     {
         "id": 221,
@@ -1366,7 +1366,7 @@
         "id": 227,
         "type": "global",
         "joke": "Qui se débrouille le mieux au karaté ?",
-        "answer": "L’électricité, car elle connait beaucoup de prises."
+        "answer": "L’électricité, car elle connaît beaucoup de prises."
     },
     {
         "id": 228,
@@ -1389,7 +1389,7 @@
     {
         "id": 231,
         "type": "global",
-        "joke": "Qu’est ce qui est rouge et qui attend ?",
+        "joke": "Qu’est-ce qui est rouge et qui attend ?",
         "answer": "Mon compte en banque."
     },
     {
@@ -1468,13 +1468,13 @@
         "id": 244,
         "type": "blondes",
         "joke": "Comment occuper une blonde toute la journée ?",
-        "answer": "Lui donner un papier ou l’on écrit « voir au verso » de chaque côté."
+        "answer": "Lui donner un papier où l’on écrit « voir au verso » de chaque côté."
     },
     {
         "id": 245,
         "type": "limit",
         "joke": "Pourquoi les poules n’ont-elles pas de seins ?",
-        "answer": "Parce que les coqs n’ont pas de main !"
+        "answer": "Parce que les coqs n’ont pas de mains !"
     },
     {
         "id": 246,
@@ -1491,7 +1491,7 @@
     {
         "id": 248,
         "type": "dark",
-        "joke": "Chéri, je me sens grosse et laide…S’il te plait, fais-moi un compliment…",
+        "joke": "Chéri, je me sens grosse et laide… S’il te plait, fais-moi un compliment…",
         "answer": "Tu as une bonne vue !"
     },
     {
@@ -1605,7 +1605,7 @@
     {
         "id": 267,
         "type": "global",
-        "joke": "Pourquoi les indiens mettent ils leur argent en bourse ?",
+        "joke": "Pourquoi les indiens mettent-ils leur argent en bourse ?",
         "answer": "Car ça rapporte des sioux."
     },
     {
@@ -1629,7 +1629,7 @@
     {
         "id": 271,
         "type": "global",
-        "joke": "Que fais un gros poussin ?",
+        "joke": "Que fait un gros poussin ?",
         "answer": "PIOU-PIOU"
     },
     {
@@ -1647,7 +1647,7 @@
     {
         "id": 274,
         "type": "dark",
-        "joke": "Qu'est ce qu'un pruneau ?",
+        "joke": "Qu'est-ce qu'un pruneau ?",
         "answer": "Un synonyme de personne âgée : qui est ridée et qui fait chier"
     },
     {
@@ -1677,13 +1677,13 @@
     {
         "id": 279,
         "type": "global",
-        "joke": "Qu'est ce que le Gospel ?",
+        "joke": "Qu'est-ce que le Gospel ?",
         "answer": "C'est quand ton gamin a pris un coup de soleil"
     },
     {
         "id": 280,
         "type": "dark",
-        "joke": "Qu'est ce que la beauté intérieure ?",
+        "joke": "Qu'est-ce que la beauté intérieure ?",
         "answer": "Un concept inventé par les moches pour pouvoir se reproduire"
     },
     {
@@ -1695,7 +1695,7 @@
     {
         "id": 282,
         "type": "limit",
-        "joke": "Avez vous déjà eu des sentiments partagés ? ",
+        "joke": "Avez-vous déjà eu des sentiments partagés ? ",
         "answer": "Genre quand ta belle mère recule vers le ravin avec ta voiture toute neuve"
     },
     {
@@ -1713,7 +1713,7 @@
     {
         "id": 285,
         "type": "blondes",
-        "joke": "Pourquoi mon ordinateur ne marche plus? Qu'as tu fais?",
+        "joke": "Pourquoi mon ordinateur ne marche plus? Qu'as-tu fais?",
         "answer": "Vu qu'il était sale je l'ai nettoyé avec de l'eau. "
     },
     {
@@ -1726,7 +1726,7 @@
         "id": 287,
         "type": "dev",
         "joke": "Comment un développeur tente-t-il de réparer sa voiture lorsqu'elle a un problème ?",
-        "answer": "Il sort de la voiture, ferme toutes les fenêtres, retourne dans la voiture, et essai de redémarrer."
+        "answer": "Il sort de la voiture, ferme toutes les fenêtres, retourne dans la voiture, et essaie de redémarrer."
     },
     {
         "id": 288,
@@ -1762,7 +1762,7 @@
         "id": 293,
         "type": "limit",
         "joke": "2 fesses se croisent",
-        "answer": "Alors, ca gaze ?"
+        "answer": "Alors, ça gaze ?"
     },
     {
         "id": 294,
@@ -1809,7 +1809,7 @@
     {
         "id": 301,
         "type": "global",
-        "joke": "Qu'est-ce qui commence par un E, finit par un E et qui ne contient qu'une lettre?",
+        "joke": "Qu'est-ce qui commence par un E, finit par un E et qui ne contient qu'une lettre ?",
         "answer": "Une enveloppe !"
     },
     {
@@ -1821,7 +1821,7 @@
     {
         "id": 303,
         "type": "global",
-        "joke": "Babi et Baba sont sur un bateau Baba tombe à l’eau. Que ce passe-t-il ?",
+        "joke": "Babi et Baba sont sur un bateau Baba tombe à l’eau. Que se passe-t-il ?",
         "answer": "Babi bêle et Baba coule"
     },
     {
@@ -1858,7 +1858,7 @@
         "id": 309,
         "type": "global",
         "joke": "Merci de ne pas frapper",
-        "answer": "Et soyez gentil, de ne pas sonner non plus "
+        "answer": "Et soyez gentil, de ne pas sonner non plus"
     },
     {
         "id": 310,
@@ -1912,7 +1912,7 @@
         "id": 318,
         "type": "global",
         "joke": "Que signifie Mercato ?",
-        "answer": "C'est une maman pratiquante "
+        "answer": "C'est une maman pratiquante"
     },
     {
         "id": 319,
@@ -1942,7 +1942,7 @@
         "id": 323,
         "type": "global",
         "joke": "Que demande un chat dans une pharmacie ?",
-        "answer": "Avez- vous du sirop pour ma toux ?"
+        "answer": "Avez-vous du sirop pour ma toux ?"
     },
     {
         "id": 324,
@@ -2062,7 +2062,7 @@
         "id": 343,
         "type": "global",
         "joke": "Jésus a marché sur l'eau. Une courgette est composé a 98% d'eau. J.ai marché sur une courgette.",
-        "answer": "je suis a 98% Jésus"
+        "answer": "je suis à 98% Jésus"
     },
     {
         "id": 344,
@@ -2193,7 +2193,7 @@
     {
         "id": 405,
         "type": "beauf",
-        "joke": "Qu'est-ce qui est pire qu'un meurtrier?",
+        "joke": "Qu'est-ce qui est pire qu'un meurtrier ?",
         "answer": "Un policier fanatique."
     },
     {
@@ -2229,7 +2229,7 @@
     {
         "id": 411,
         "type": "limit",
-        "joke": "Qu’elle est la pire musique pour les juifs ?",
+        "joke": "Quelle est la pire musique pour les juifs ?",
         "answer": "En feu, Soprano"
     },
     {
@@ -2253,13 +2253,13 @@
     {
         "id": 415,
         "type": "dark",
-        "joke": " Que dis-t-on en Afrique quand un lieu est bondé ?",
+        "joke": " Que dit-on en Afrique quand un lieu est bondé ?",
         "answer": "Il est noir de monde..."
     },
     {
         "id": 416,
         "type": "global",
-        "joke": "Qu'elle est l'insulte la plus utilisée en 1940 après le traité de Vichy?",
+        "joke": "Qu'elle est l'insulte la plus utilisée en 1940 après le traité de Vichy ?",
         "answer": "Pétain"
     },
     {
@@ -2271,7 +2271,7 @@
     {
         "id": 418,
         "type": "limit",
-        "joke": " Qu'elle est  la tarte préférée des putes ?",
+        "joke": " Quelle est la tarte préférée des putes ?",
         "answer": "La tarte catin"
     },
     {
@@ -2301,7 +2301,7 @@
     {
         "id": 423,
         "type": "beauf",
-        "joke": "Connaissez vous le slogan \"ça fait du bien par où ça passe\" ?",
+        "joke": "Connaissez-vous le slogan \"ça fait du bien par où ça passe\" ?",
         "answer": "C'est une pub de suppositoires je crois..."
     },
     {
@@ -2332,7 +2332,7 @@
         "id": 428,
         "type": "dark",
         "joke": "Que chante un juif devant un feu de camp ?",
-        "answer": "\"Vous les copains je ne vous oublierais jamais!\""
+        "answer": "\"Vous les copains je ne vous oublierai jamais !\""
     },
     {
         "id": 429,
