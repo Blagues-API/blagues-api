@@ -97,6 +97,7 @@ BlagueAPIBot.on('messageReactionAdd', async (messageReaction, user) => {
 const types = {
     'général': 'global',
     'noir': 'dark',
+    'dark': 'dark',
     'développeur': 'dev',
     'limite limite': 'limit',
     'limite': 'limit',
