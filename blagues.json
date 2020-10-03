@@ -1658,7 +1658,7 @@
     },
     {
         "id": 276,
-        "type": "undefined",
+        "type": "limit",
         "joke": "Les parents sont deux êtres qui t'apprennent à marcher et à parler",
         "answer": "Pour ensuite te dire de t'asseoir et de fermer ta gueule "
     },
@@ -2369,5 +2369,173 @@
         "type": "global",
         "joke": "Je me présente, je suis Tamayo",
         "answer": "Et lui c'est Monketchup ?"
+    },
+    {
+        "id": 435,
+        "type": "dark",
+        "joke": "Un juif est dans un ascenseur. Soudain, l'homme à côté de lui lâche un gros pet. Le juif le regarde l'air choqué.",
+        "answer": "Oh, ça va ! C'est du gaz, ça n'a jamais tué personne !"
+    },
+    {
+        "id": 436,
+        "type": "limit",
+        "joke": "Comment appelle t'on le penis d'un pretre ?",
+        "answer": "La verite car la verite sors toujours de la bouche des enfants"
+    },
+    {
+        "id": 437,
+        "type": "dev",
+        "joke": " Que fait un développeur quand il a peur?",
+        "answer": " Il csharpe"
+    },
+    {
+        "id": 438,
+        "type": "dark",
+        "joke": "Ou doit-on prendre le bus pour aller au cimetière ?",
+        "answer": "En pleine gueule"
+    },
+    {
+        "id": 439,
+        "type": "dark",
+        "joke": "Qu'est ce qui permet d'enlever le chewing gum des ses cheveux ?",
+        "answer": "Le cancer"
+    },
+    {
+        "id": 440,
+        "type": "global",
+        "joke": "Quel est la marque de biscuit préférée de Brigitte Macron ?",
+        "answer": "Les petits écoliers"
+    },
+    {
+        "id": 441,
+        "type": "dark",
+        "joke": "Quel est le point commun entre l'humour noir et la nourriture ? ",
+        "answer": "Certains en ont, mais d'autres non "
+    },
+    {
+        "id": 442,
+        "type": "dark",
+        "joke": "Pourquoi personne ne sait nager au Maroc ?",
+        "answer": "Par ce que tous ceux qui savent, sont déjà en France."
+    },
+    {
+        "id": 443,
+        "type": "dark",
+        "joke": "Un noir va aux toilettes et en ressort blanc, qu'a t'il fait ??",
+        "answer": "il a chié sa race "
+    },
+    {
+        "id": 444,
+        "type": "global",
+        "joke": "Qu'est ce que deux sourds qui se battent ?",
+        "answer": "Un malentendu "
+    },
+    {
+        "id": 445,
+        "type": "global",
+        "joke": "On m’a toujours dit que Mozart était mort. ",
+        "answer": "Pourtant, à chaque fois que j’ouvre mon frigo, Mozart est là... "
+    },
+    {
+        "id": 446,
+        "type": "global",
+        "joke": "J'ai 36 têtes, 28 bras et 12 jambes, qui suis-je ?",
+        "answer": "Un mythomane"
+    },
+    {
+        "id": 447,
+        "type": "limit",
+        "joke": "Que fait un zoophile qui veut sauter ? ",
+        "answer": "Il prend son élan"
+    },
+    {
+        "id": 448,
+        "type": "beauf",
+        "joke": "Comment reconnait-on un aveugle sur une plage naturiste ?",
+        "answer": "C'est pas dur !"
+    },
+    {
+        "id": 449,
+        "type": "global",
+        "joke": "Pourquoi les tirelires sont en forme de cochon ?",
+        "answer": "Pour que les arabes n'y touchent pas"
+    },
+    {
+        "id": 450,
+        "type": "dark",
+        "joke": "J'ai vu un enfant sur un vélo, j'ai cru que c'était le mien donc je suis allé vérifier dans le garage... ",
+        "answer": "Mais je me suis trompé, il était toujours là, enchaîné, à réclamer à boire et à manger "
+    },
+    {
+        "id": 451,
+        "type": "dark",
+        "joke": "Que fait on après avoir serré la main d'un lépreux ? ",
+        "answer": "On la lui rend "
+    },
+    {
+        "id": 452,
+        "type": "dark",
+        "joke": "Pourquoi New-York ne peut pas jouer aux échecs ?",
+        "answer": "Parce qu'il lui manque deux tours"
+    },
+    {
+        "id": 453,
+        "type": "dark",
+        "joke": "Pourquoi Paris ne peut pas jouer aux échecs ?",
+        "answer": "Parce qu'il lui manque la Dame"
+    },
+    {
+        "id": 454,
+        "type": "dark",
+        "joke": "Que fait un prêtre après avoir sodomiser un chauve ?",
+        "answer": "Il le repose dans son berceau"
+    },
+    {
+        "id": 455,
+        "type": "blondes",
+        "joke": "Pourquoi c'est plus long de faire un bonhomme de neige blonde ?",
+        "answer": "Parce qu'il faut vider la tête"
+    },
+    {
+        "id": 456,
+        "type": "blondes",
+        "joke": "Combien faut il de blonde pour visser une ampoule ? ",
+        "answer": "Une qui tien l'ampoule, et quatre qui font tourner la blonde"
+    },
+    {
+        "id": 457,
+        "type": "beauf",
+        "joke": "Bon on joue au poker ou on s'encule ?",
+        "answer": "Perso j'aime pas trop le poker alors..."
+    },
+    {
+        "id": 458,
+        "type": "blondes",
+        "joke": "Mon Chat est mort... Je voudrais tellement en avoir un autre pareil",
+        "answer": "Mais qu’est ce que tu ferais de deux chats morts ?"
+    },
+    {
+        "id": 459,
+        "type": "global",
+        "joke": "Comment apelle t'on un cochon qui vole?",
+        "answer": "Un aéro-porc !"
+    },
+    {
+        "id": 460,
+        "type": "dark",
+        "joke": "Que faisait les parents de Gilbert Montagne pour le punir ?",
+        "answer": "Il déplaçaient les meubles"
+    },
+    {
+        "id": 461,
+        "type": "global",
+        "joke": "Comment s'appelle la femelle du hamster ? ",
+        "answer": "Amsterdam"
+    },
+    {
+        "id": 462,
+        "type": "global",
+        "joke": "Comment est mort capitaine Crochet ? ",
+        "answer": "En se grattant les couilles ! "
     }
 ]
