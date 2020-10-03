@@ -15,7 +15,9 @@ const BlagueAPIBot = new Client({
 
 BlagueAPIBot.on('ready', () => {
     console.log(`${BlagueAPIBot.user.tag} connecté !`);
-    BlagueAPIBot.user.setActivity(`les ${jokes.length} blagues`, { type: 'WATCHING' });
+    setInterval(() => {
+        BlagueAPIBot.user.setActivity(`les ${jokes.length} blagues`, { type: 'WATCHING' });
+    }, 24 * 60 * 60 * 1000);
 });
 
 BlagueAPIBot.on('message', async message => {
