@@ -31,13 +31,12 @@ BlagueAPIBot.on('message', async message => {
 
     if(!regex.test(message.content)) {
         message.delete();
-        return channel.send('', {
+        return channel.send(message.author.toString(), {
             embed: {
                 author: {
-                    name: message.member.displayName,
+                    name: 'Votre blague est invalide',
                     icon_url: message.author.displayAvatarURL({ format: 'png' }),
                 },
-                title: 'Votre blague est invalide',
                 description: 'Il semblerait que votre blague ne respecte pas le format demandé',
                 fields: [{
                     name: 'Format demandé',
@@ -65,13 +64,12 @@ BlagueAPIBot.on('message', async message => {
 
     if(bestMatch.rating > 0.7) {
         const duplicatedJoke = jokes[bestMatchIndex];
-        await channel.send('', {
+        await channel.send(message.author.toString(), {
             embed: {
                 author: {
-                    name: message.member.displayName,
+                    name: 'Êtes vous sûr que cette blague n\'existe pas déjà ?',
                     icon_url: message.author.displayAvatarURL({ format: 'png' }),
                 },
-                title: 'Êtes vous sûr que cette blague n\'existe pas déjà ?',
                 description: 'Il semblerait qu\'une blague ressemble beaucoup à la votre, êtes vous sûr que ce n\'est pas la même ?',
                 fields: [{
                     name: 'Votre blague',
@@ -116,9 +114,28 @@ BlagueAPIBot.on('messageReactionAdd', async (messageReaction, user) => {
 
         const [, rawType, joke, answer] = regex.exec(message.content);
 
-        await user.send(`{\n    "id": ,\n    "type": "${types[rawType.toLowerCase()]}",\n    "joke": "${joke}",\n    "answer": "${answer.replace(/"/, '\\"')}"\n},`, {
-            code: 'json',
-        });
+        try {
+            await user.send(`{\n    "id": ,\n    "type": "${types[rawType.toLowerCase()]}",\n    "joke": "${joke}",\n    "answer": "${answer.replace(/"/, '\\"')}"\n},`, {
+                code: 'json',
+            });
+        } catch (error) {
+            const channel = message.guild.channels.cache.get(logsChannel);
+            await channel.send(user.toString(), {
+                embed: {
+                    author: {
+                        name: 'Vos messages privés sont fermés !',
+                        icon_url: user.displayAvatarURL({ format: 'png' }),
+                    },
+                    description: 'Je ne peux pas vous envoyer la blague en messages privés.',
+                    color: 0xcd6e57,
+                    footer: {
+                        text: 'Blagues API',
+                        icon: message.guild.iconURL({ format: 'png' }),
+                    },
+                    timestamp: new Date(),
+                },
+            });
+        }
 
         message.react('🎉');
     }
