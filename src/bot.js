@@ -9,7 +9,7 @@ const adminUsers = ['555068713343254533', '207190782673813504', '164738865649811
 const jokeRole = '699244416849674310';
 
 const suggestsChannel = '698826767221391390';
-const generalChannel = '698822532467523608';
+const logsChannel = '763778635857133599';
 
 const BlagueAPIBot = new Client({
     partials: ['MESSAGE', 'REACTION'],
@@ -27,7 +27,7 @@ BlagueAPIBot.on('ready', () => {
 BlagueAPIBot.on('message', async message => {
     if(message.channel.id !== suggestsChannel) return;
 
-    const channel = message.guild.channels.cache.get(generalChannel);
+    const channel = message.guild.channels.cache.get(logsChannel);
 
     if(!regex.test(message.content)) {
         message.delete();
