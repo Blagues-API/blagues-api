@@ -34,6 +34,7 @@
     "moment": "^2.24.0",
     "sequelize": "^5.21.6",
     "sqlite3": "^4.1.1",
+    "string-similarity": "^4.0.2",
     "util": "^0.12.2"
   },
   "devDependencies": {
@@ -47,7 +48,7 @@
     "sass-loader": "^8.0.2",
     "url-loader": "^4.1.0",
     "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11",
+    "webpack-cli": "^3.3.12",
     "webpack-node-externals": "^1.7.2"
   }
 }

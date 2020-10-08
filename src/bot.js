@@ -1,5 +1,7 @@
 const { Client } = require('discord.js');
 
+const { findBestMatch } = require('string-similarity');
+
 const jokes = require('../blagues.json');
 const regex = /(?:> \*\*Type\*\*: (.+)\s+)(?:> \*\*Blague\*\*: (.+)\s+)(?:> \*\*Réponse\*\*: (.+)\s+)(?:> ▬+)/mi;
 
@@ -48,6 +50,37 @@ BlagueAPIBot.on('message', async message => {
                     value: '`Général` • `Développeur` • `Noir` • `Limite limite` • `Beauf` • `Blondes`',
                 }],
                 color: 0xce0000,
+                footer: {
+                    text: 'Blagues API',
+                    icon: message.guild.iconURL({ format: 'png' }),
+                },
+                timestamp: new Date(),
+            },
+        });
+    }
+
+    const [,, joke, answer] = regex.exec(message.content);
+
+    const { bestMatch, bestMatchIndex } = findBestMatch(joke, jokes.map(e => e.joke));
+
+    if(bestMatch.rating > 0.7) {
+        const duplicatedJoke = jokes[bestMatchIndex];
+        await channel.send('', {
+            embed: {
+                author: {
+                    name: message.member.displayName,
+                    icon_url: message.author.displayAvatarURL({ format: 'png' }),
+                },
+                title: 'Êtes vous sûr que cette blague n\'existe pas déjà ?',
+                description: 'Il semblerait qu\'une blague ressemble beaucoup à la votre, êtes vous sûr que ce n\'est pas la même ?',
+                fields: [{
+                    name: 'Votre blague',
+                    value: `>>> **Blague**: ${joke}\n**Réponse**: ${answer}`,
+                }, {
+                    name: 'Blague ressemblante',
+                    value: `>>> **Blague**: ${duplicatedJoke.joke}\n**Réponse**: ${duplicatedJoke.answer}`,
+                }],
+                color: 0xcd6e57,
                 footer: {
                     text: 'Blagues API',
                     icon: message.guild.iconURL({ format: 'png' }),
