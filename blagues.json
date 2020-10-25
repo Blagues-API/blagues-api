@@ -2537,5 +2537,107 @@
         "type": "global",
         "joke": "Comment est mort capitaine Crochet ? ",
         "answer": "En se grattant les couilles ! "
-    }
+    },
+    {
+        "id": 463,
+        "type": "global",
+        "joke": "Dark Vador va à la boulangerie",
+        "answer": "-	3 pains et 2 tarte tatin, comme d’habitude ? <br> -	Bonne mémoire <br> -	Facile m’sieur Vador : pain pain pain tarte tatin tarte tatin
+"
+    },
+    {
+        "id": 464,
+        "type": "global",
+        "joke": "Monsieur et Madame KHAL ont 1 fils et 2 filles comment s’appellent-ils ?",
+        "answer": "Anna, Lise, Mehdi (analyse médicale)"
+    },
+    {
+        "id": 465,
+        "type": "global",
+        "joke": "La vitesse de la lumière dépend de la distance qui nous sépare de l’interrupteur"
+    },
+    {
+        "id": 466,
+        "type": "global",
+        "joke": "Qu’est-ce qui est jaune et qui attend ?",
+        "answer": "Jonathan"
+    },
+    {
+        "id": 467,
+        "type": "global",
+        "joke": "Mr et Mme En faillite ont une fille, comment s’appelle-t-elle ?",
+        "answer": "Mélusine (mets l’usine en faillite)"
+    },
+    {
+        "id": 468,
+        "type": "global",
+        "joke": "Monsieur et Madame Assin ont un fils? ",
+        "answer": "Marc"
+    },
+    {
+        "id": 469,
+        "type": "global",
+        "joke": "Quel est le 2me prénom de neymar ?",
+        "answer": "Jean (j’en ai marre)"
+    },
+    {
+        "id": 470,
+        "type": "global",
+        "joke": "Le proton des alpes ne vaut pas l’atome de savoie"
+    },
+    {
+        "id": 471,
+        "type": "dark",
+        "joke": "Mathurin et Denis sont deux malades mentaux qui résident dans un hôpital psychiatrique. Un beau jour où ils passaient près de la piscine de l'hôpital, Mathurin tombe soudainement à l'eau et coule à pic. Denis saute à son tour et va chercher Mathurin au fond pour le ramener à la surface. Quand le directeur de l'hôpital apprit l'acte héroïque de Denis, il a immédiatement ordonné de le laisser sortir de l'hôpital parce qu'il le jugeait être mentalement stable à cause de cet acte de bravoure. Le Directeur va rencontrer Denis pour lui apprendre la nouvelle, il lui dit : - Denis, j'ai une bonne et une mauvaise nouvelle à t'apprendre ! La bonne, c'est que nous te laissons sortir de l'hôpital parce que tu as été capable d'accomplir un acte de bravoure en sauvant la vie d'une autre personne. Je crois que tu as retrouvé ton équilibre mental. La mauvaise, c'est que Mathurin s'est pendu, dans la salle de bain, avec la ceinture de sa robe de chambre. Denis de répondre au Directeur : - Il ne s'est pas pendu. C'est moi qui l'ai accroché là pour qu'il sèche …"
+    },
+    {
+        "id": 472,
+        "type": "global",
+        "joke": "C'est l'histoire d'un gars qui vient de passer des examens de santé à l'hôpital. Le médecin annonce au patient qu'il est gravement malade et qu'il va mourir. Le gars demande ce qu'il peut faire pour le guérir. Le médecin lui répond : Vous n'avez qu'à faire des bains de boue. - Pourquoi ça va me guérir ? - Non, mais ça vous habituera à la terre."
+    },
+    {
+        "id": 473,
+        "type": "global",
+        "joke": "Que dit un aveugle lorsqu'on lui donne du papier de verre ? ",
+        "answer": "C'est écrit serrer."
+    },
+    {
+        "id": 474,
+        "type": "dark",
+        "joke": "Madame téléphone à son mari de son lieu de vacances : - Tout va bien ? Le chat est en forme ? - Non, il est mort ! - Tu pourrais me ménager, me préparer à cette terrible nouvelle. Tu aurais pu me dire qu'il se promenait sur le bord du balcon. Et maman, elle va bien ? - Elle se promenait sur le bord du balcon..."
+    },
+    {
+        "id": 475,
+        "type": "global",
+        "joke": "C'est un gars qui en revenant de la chasse de la jungle dit à son ami : - J'ai tué 10 éléphants, 11 serpents, 7 lions, 3 panthères et 9 pânou-pânou. Son ami lui demande c'est quoi ça des pânou-pânou ? - Je sais pas trop, il y avait dans le fond de la forêt des cries qui faisaient : "PÂNOU-PÂNOU !!!""
+    },
+    {
+        "id": 476,
+        "type": "global",
+        "joke": "Quel est le pluriel d'un coca ? ",
+        "answer": "Des haltères (car un coca désaltère)."
+    },
+    {
+        "id": 477,
+        "type": "global",
+        "joke": "Une sauterelle et un mille-pattes se sont donnés rendez-vous chez une fourmi. La sauterelle et la fourmi attendent plus d'une heure, le mille-pattes arrive enfin mais tout essoufflé : - mais que faisais-tu ? demande la sauterelle - Eh bien, dehors, il y a un écriteau : "essuyez vos pieds !" répond le mille-pattes."
+    },
+    {
+        "id": 478,
+        "type": "global",
+        "joke": "Quel est le sport le plus fruité ?",
+        "answer": "la boxe, car quand tu te prends une pêche dans la poire et que tu tombes dans les pommes, t’as pas intérêt à ramener ta fraise, et tout ça pour des prunes !"
+    },
+    {
+        "id": 479,
+        "type": "global",
+        "joke": "Qu’est-ce qu’un yaourt qui court dans la forêt ? ",
+        "answer": "un yaourt nature !"
+    },
+    {
+        "id": 480,
+        "type": "global",
+        "joke": "Pourquoi les gens qui font le ménage préfèrent-ils travailler chez les musiciens ?",
+        "answer": "Parce qu’ils ont un do mi si la sol fa si la si ré (un domicile à sol facile à cirer) !"
+    };
 ]
