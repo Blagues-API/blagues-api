@@ -2170,7 +2170,7 @@
         "id": 401,
         "type": "global",
         "joke": "Mr et madame Sop ont un fils comment s'appelle-t-il ?",
-        "answer": "Alain" 
+        "answer": "Alain"
     },
     {
         "id": 402,
@@ -2247,13 +2247,13 @@
     {
         "id": 414,
         "type": "global",
-        "joke": " Quel est le meilleur ami d'un grand-père ?",
+        "joke": "Quel est le meilleur ami d'un grand-père ?",
         "answer": "Le potager"
     },
     {
         "id": 415,
         "type": "dark",
-        "joke": " Que dit-on en Afrique quand un lieu est bondé ?",
+        "joke": "Que dit-on en Afrique quand un lieu est bondé ?",
         "answer": "Il est noir de monde..."
     },
     {
@@ -2265,13 +2265,13 @@
     {
         "id": 417,
         "type": "global",
-        "joke": " Tu as aucune référence....",
+        "joke": "Tu as aucune référence....",
         "answer": "Peut-être car je suis pas à vendre !"
     },
     {
         "id": 418,
         "type": "limit",
-        "joke": " Quelle est la tarte préférée des putes ?",
+        "joke": "Quelle est la tarte préférée des putes ?",
         "answer": "La tarte catin"
     },
     {
@@ -2319,7 +2319,7 @@
     {
         "id": 426,
         "type": "beauf",
-        "joke": " Un médecin félicite le mari d'un couple pour le nouveau né. La femme demande au médecin pourquoi elle n'est pas félicitée.",
+        "joke": "Un médecin félicite le mari d'un couple pour le nouveau né. La femme demande au médecin pourquoi elle n'est pas félicitée.",
         "answer": "Quand un plat est réussi, on félicite le cuisinier pas le four !"
     },
     {
@@ -2385,8 +2385,8 @@
     {
         "id": 437,
         "type": "dev",
-        "joke": " Que fait un développeur quand il a peur?",
-        "answer": " Il csharpe"
+        "joke": "Que fait un développeur quand il a peur ?",
+        "answer": "Il csharpe"
     },
     {
         "id": 438,
