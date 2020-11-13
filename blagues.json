@@ -1520,9 +1520,9 @@
     },
     {
         "id": 253,
-        "type": "dark",
-        "joke": "Qu’est-ce qui fait rire 9 personnes sur 10 ?",
-        "answer": "Un viol collectif"
+        "type": "dev",
+        "joke": "Quel est le shell préféré des adolescents ?",
+        "answer": "Le WESH"
     },
     {
         "id": 254,
@@ -2282,10 +2282,10 @@
     },
     {
         "id": 380,
-        "type": "dark",
-        "joke": "Une fillette est retrouvée égorgée dans la rue… L’enquêteur questionne le légiste : Elle a été violée ? ",
-        "answer": "– Non pas encore, j’attendais votre autorisation."
-    },  
+        "type": "global",
+        "joke": "Monsieur et madame Cale ont un fils, comment s'appelle t-il?",
+        "answer": "Medhi"
+    },
     {
         "id": 381,
         "type": "dark",        
@@ -2765,17 +2765,5 @@
         "type": "global",
         "joke": "Monsieur et madame China ont un fils, comment s'appelle t-il?",
         "answer": "Medhi"
-    },
-    {
-        "id": 461,
-        "type": "global",
-        "joke": "Monsieur et madame Cale ont un fils, comment s'appelle t-il?",
-        "answer": "Medhi"
-    },
-    {
-        "id": 462,
-        "type": "dev",
-        "joke": "Quel est le shell préféré des adolescents ?",
-        "answer": "Le WESH"
     }
 ]
