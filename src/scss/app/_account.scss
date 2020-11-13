@@ -1,85 +1,85 @@
-.token-page{
+.token-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  @media (max-width: 420px) {
+    padding: 40px 20px;
+  }
+  .head {
+    margin-bottom: 40px;
+    .title {
+      font-weight: bold;
+      font-size: 26px;
+      color: #0067ad;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    p {
+      font-size: 14px;
+      text-align: center;
+      color: #393939;
+      margin-bottom: 3px;
+      font-weight: bold; //  600
+    }
+  }
+  .card {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 40px;
-    @media (max-width: 420px) {
-        padding: 40px 20px;
-    }
-    .head{
-        margin-bottom: 40px;
-        .title{
-            font-weight: bold;
-            font-size: 26px;
-            color: #0067AD;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        p{
-            font-size: 14px;
-            text-align: center;
-            color: #393939;
-            margin-bottom: 3px;
-            font-weight: bold; //  600
-        }
-    }
-    .card{
-        display: flex;
-        flex-direction: column;
-        background: $white;
-        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
-        max-width: 500px;
-        width: 100%;
+    background: $white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    max-width: 500px;
+    width: 100%;
+    padding: 16px;
+    margin: 0 auto;
+    .token {
+      display: flex;
+      flex-direction: column;
+      .language {
+        font-size: 12px;
+        color: #8b8b8b;
+        margin: 0 0 6px 2px;
+        font-weight: bold;
+      }
+      .code {
+        background-color: #202020;
+        word-break: break-all;
         padding: 16px;
-        margin: 0 auto;
-        .token{
-            display: flex;
-            flex-direction: column;
-            .language{
-                font-size: 12px;
-                color: #8B8B8B;
-                margin: 0 0 6px 2px;
-                font-weight: bold;
-            }
-            .code{
-                background-color: #202020;
-                word-break: break-all;
-                padding: 16px;
-                color: white;
-                line-height: 28px;
-                font-size: 14px;
-                letter-spacing: .5px;
-                &::selection {
-                    background: transparent!important;
-                }
-                &::-moz-selection {
-                    background: transparent!important;
-                }
-            }
-            .buttons{
-                display: flex;
-                margin-top: 10px;
-                button{
-                    flex: 1;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    height: 40px;
-                    background-color: $matisse;
-                    padding: 10px 16px;
-                    font-size: 15px;
-                    color: $white;
-                    font-weight: bold;
-                    cursor: pointer;
-                    transition: background-color .3s;
-                    &:first-child{
-                        margin-right: 10px;
-                    }
-                    &:hover{
-                        background-color: $matisse-dark;
-                    }
-                }
-            }
+        color: white;
+        line-height: 28px;
+        font-size: 14px;
+        letter-spacing: 0.5px;
+        &::selection {
+          background: transparent !important;
         }
+        &::-moz-selection {
+          background: transparent !important;
+        }
+      }
+      .buttons {
+        display: flex;
+        margin-top: 10px;
+        button {
+          flex: 1;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 40px;
+          background-color: $matisse;
+          padding: 10px 16px;
+          font-size: 15px;
+          color: $white;
+          font-weight: bold;
+          cursor: pointer;
+          transition: background-color 0.3s;
+          &:first-child {
+            margin-right: 10px;
+          }
+          &:hover {
+            background-color: $matisse-dark;
+          }
+        }
+      }
     }
+  }
 }
