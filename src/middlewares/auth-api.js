@@ -1,33 +1,34 @@
-const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken')
 
-module.exports = function() {
-    return async function(req, res, next) {
-        const bearerToken = req.header('Authorization');
-        if (!bearerToken) {
-            return res.status(400).json({
-                status: 400,
-                error: 'Bad Request',
-                message: 'Authorization header is required',
-            });
-        } else if (bearerToken.substring(0, 7) !== 'Bearer ') {
-            return res.status(400).json({
-                status: 400,
-                error: 'Bad Request',
-                message:  'Authorization header value must follow the Bearer <token> format',
-            });
-        }
-        const token = bearerToken.split(' ')[1] || null;
-        try {
-            const decoded = await jwt.verify(token, process.env.jwt_encryption_api);
-            req.auth = decoded;
-            console.log(`API call: ${decoded.user_id}`);
-            return next();
-        } catch (error) {
-            return res.status(400).json({
-                status: 400,
-                error: 'Bad Request',
-                message:  'Invalid Token submitted',
-            });
-        }
-    };
-};
+module.exports = function () {
+  return async function (req, res, next) {
+    const bearerToken = req.header('Authorization')
+    if (!bearerToken) {
+      return res.status(400).json({
+        status: 400,
+        error: 'Bad Request',
+        message: 'Authorization header is required',
+      })
+    } else if (bearerToken.substring(0, 7) !== 'Bearer ') {
+      return res.status(400).json({
+        status: 400,
+        error: 'Bad Request',
+        message:
+          'Authorization header value must follow the Bearer <token> format',
+      })
+    }
+    const token = bearerToken.split(' ')[1] || null
+    try {
+      const decoded = await jwt.verify(token, process.env.jwt_encryption_api)
+      req.auth = decoded
+      console.log(`API call: ${decoded.user_id}`)
+      return next()
+    } catch (error) {
+      return res.status(400).json({
+        status: 400,
+        error: 'Bad Request',
+        message: 'Invalid Token submitted',
+      })
+    }
+  }
+}

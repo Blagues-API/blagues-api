@@ -1,52 +1,65 @@
-const jokes = require('../../blagues.json');
-const { random } = require('../utils');
+const jokes = require('../../blagues.json')
+const { random } = require('../utils')
 
 const typesRefs = {
-    'global': 'Général',
-    'dark': 'Noir',
-    'dev': 'Développeur',
-    'limit': 'Limite limite',
-    'beauf': 'Beauf',
-    'blondes': 'Blondes',
-};
+  global: 'Général',
+  dark: 'Noir',
+  dev: 'Développeur',
+  limit: 'Limite limite',
+  beauf: 'Beauf',
+  blondes: 'Blondes',
+}
 
-const randomJoke = (disallow) => {
-    const typesForbidden = Array.isArray(disallow) ? disallow : Array.of(disallow);
-    if(disallow && typesForbidden.some(type => !Object.keys(typesRefs).includes(type))) {
-        return {
-            error: true,
-            message: 'Bad type provided',
-        };
+const randomJoke = disallow => {
+  const typesForbidden = Array.isArray(disallow) ? disallow : Array.of(disallow)
+  if (
+    disallow &&
+    typesForbidden.some(type => !Object.keys(typesRefs).includes(type))
+  ) {
+    return {
+      error: true,
+      message: 'Bad type provided',
     }
-    return {
-        error: false,
-        response: random(disallow ? jokes.filter(joke => !typesForbidden.includes(joke.type)) : jokes),
-    };
-};
+  }
+  return {
+    error: false,
+    response: random(
+      disallow
+        ? jokes.filter(joke => !typesForbidden.includes(joke.type))
+        : jokes,
+    ),
+  }
+}
 
-const jokeById = (id) => {
-    const searchedJoke = jokes.find(joke => joke.id === id);
-    return {
-        error: !!searchedJoke,
-        response: searchedJoke,
-    };
-};
+const jokeById = id => {
+  const searchedJoke = jokes.find(joke => joke.id === id)
+  return {
+    error: !!searchedJoke,
+    response: searchedJoke,
+  }
+}
 
-const randomJokeByType = (type) => {
-    if(!Object.keys(typesRefs).includes(type)) {
-        return {
-            error: true,
-            message: 'Bad type provided',
-        };
+const randomJokeByType = type => {
+  if (!Object.keys(typesRefs).includes(type)) {
+    return {
+      error: true,
+      message: 'Bad type provided',
     }
-    return {
-        error: false,
-        response: random(jokes.filter(joke => joke.type === type)),
-    };
-};
+  }
+  return {
+    error: false,
+    response: random(jokes.filter(joke => joke.type === type)),
+  }
+}
 
 const jokesCount = () => {
-    return jokes.length;
-};
+  return jokes.length
+}
 
-module.exports = { randomJoke, randomJokeByType, jokeById, jokesCount, typesRefs };
+module.exports = {
+  randomJoke,
+  randomJokeByType,
+  jokeById,
+  jokesCount,
+  typesRefs,
+}
