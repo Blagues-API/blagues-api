@@ -66,7 +66,7 @@ BlagueAPIBot.on('message', async message => {
         color: 0xce0000,
         footer: {
           text: 'Blagues API',
-          icon: message.guild.iconURL({ format: 'png' }),
+          icon_url: message.guild.iconURL({ format: 'png' }),
         },
         timestamp: new Date(),
       },
@@ -103,7 +103,7 @@ BlagueAPIBot.on('message', async message => {
         color: 0xcd6e57,
         footer: {
           text: 'Blagues API',
-          icon: message.guild.iconURL({ format: 'png' }),
+          icon_url: message.guild.iconURL({ format: 'png' }),
         },
         timestamp: new Date(),
       },
@@ -166,7 +166,7 @@ BlagueAPIBot.on('messageReactionAdd', async (messageReaction, user) => {
           color: 0xcd6e57,
           footer: {
             text: 'Blagues API',
-            icon: message.guild.iconURL({ format: 'png' }),
+            icon_url: message.guild.iconURL({ format: 'png' }),
           },
           timestamp: new Date(),
         },
