@@ -1,4 +1,5 @@
 const { Client } = require('discord.js')
+const { stripIndents } = require('common-tags')
 
 const { findBestMatch } = require('string-similarity')
 
@@ -30,10 +31,57 @@ BlagueAPIBot.on('ready', () => {
       type: 'WATCHING',
     })
   }, 24 * 60 * 60 * 1000)
+
+  setInterval(async () => {
+    const channel = BlagueAPIBot.channels.cache.get(suggestsChannel)
+    const messages = await channel.messages.fetch({ limit: 10 })
+    const message = messages.find(m => m.author.id === BlagueAPIBot.user.id)
+    if (!message || message.id !== messages.first().id) {
+      if (message) await message.delete()
+
+      return channel.send({
+        embed: {
+          title: 'Bienvenue à toi ! 👋',
+          description: stripIndents`
+            Si tu le souhaites, tu peux proposer tes blagues afin qu'elles soient ajoutés à l'api Blagues API qui est une api qui regroupe actuellement **${jokes.length}** blagues françaises.
+            Elles sont toutes issues de ce salon proposé par la communauté.
+
+            >>> Tous les types de blagues sont acceptés à condition qu'elles soient correctement catégorisées et qu'elles respectent le format demandé.`,
+          fields: [
+            {
+              name: 'Voici les différents types:',
+              value:
+                '> `Général`, `Développeur`, `Noir`, `Limite Limite`, `Beauf`, `Blondes`',
+            },
+            {
+              name: 'Exemple:',
+              value: stripIndents`
+                > **Type**: Développeur
+                > **Blague**: Quand est ce qu'un Windows ne bug pas ?
+                > **Réponse**: Lorsque l'ordinateur est éteint.
+              `,
+            },
+            {
+              name: 'Voici le schéma a copier coller !',
+              value: stripIndents`
+                \`\`\`
+                > **Type**:
+                > **Blague**:
+                > **Réponse**:
+                > ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+                \`\`\`
+              `,
+            },
+          ],
+          color: 0x0067ad,
+        },
+      })
+    }
+  }, 10000)
 })
 
 BlagueAPIBot.on('message', async message => {
-  if (message.channel.id !== suggestsChannel) return
+  if (message.channel.id !== suggestsChannel || message.author.bot) return
 
   const channel = message.guild.channels.cache.get(logsChannel)
 
@@ -143,15 +191,14 @@ BlagueAPIBot.on('messageReactionAdd', async (messageReaction, user) => {
 
     try {
       await user.send(
-        `{\n    "id": ,\n    "type": "${
-          types[rawType.toLowerCase()]
-        }",\n    "joke": "${joke}",\n    "answer": "${answer.replace(
-          /"/,
-          '\\"',
-        )}"\n},`,
-        {
-          code: 'json',
-        },
+        stripIndents`
+          {
+              "id": ,
+              "type": "${types[rawType.toLowerCase()]}",
+              "joke": "${joke}",
+              "answer": "${answer.replace(/"/g, '\\"')}"
+          },`,
+        { code: 'json' },
       )
     } catch (error) {
       const channel = message.guild.channels.cache.get(logsChannel)
