@@ -1,70 +1,46 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const nodeExternals = require('webpack-node-externals');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const path = require('path')
 
 module.exports = (env, argv) => {
-    const prod = argv.mode === 'production';
+  const prod = argv.mode === 'production'
 
-    return {
-        entry: ['./index.js', './src/scss/app.scss'],
-        externals: [nodeExternals()],
-        watchOptions: {
-            aggregateTimeout: 300,
-            poll: true,
+  return {
+    entry: ['./src/scss/app.scss'],
+    watchOptions: {
+      aggregateTimeout: 300,
+      poll: true,
+    },
+    output: {
+      path: path.join(__dirname, './build'),
+      publicPath: '/files/',
+    },
+    module: {
+      rules: [
+        {
+          test: /\.scss$/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: !prod,
+              },
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                sourceMap: !prod,
+              },
+            },
+          ],
         },
-        output: {
-            filename: '[name].bundle.js',
-            path: __dirname + '/dist',
-            publicPath: '/files/',
-        },
-        module: {
-            rules: [
-                {
-                    test: /\.js$/,
-                    exclude: /node_modules/,
-                    use: {
-                        loader: 'babel-loader',
-                    },
-                },
-                {
-                    test: /\.scss$/,
-                    use: [
-                        MiniCssExtractPlugin.loader,
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                sourceMap: !prod,
-                            },
-                        },
-                        {
-                            loader: 'sass-loader',
-                            options: {
-                                sourceMap: !prod,
-                            },
-                        },
-                    ],
-                },
-                {
-                    test: /\.(png|jpg|gif|svg)$/,
-                    exclude: /node_modules/,
-                    use: [
-                        {
-                            loader: 'url-loader',
-                            options: {
-                                limit: 8192,
-                                name: '[name].[ext]',
-                                publicPath: '/',
-                                emitFile: false,
-                            },
-                        },
-                    ],
-                },
-            ],
-        },
-        plugins: [
-            new MiniCssExtractPlugin({
-                filename: '[name].bundle.css',
-            }),
-        ],
-        devtool: 'source-map',
-    };
-};
+      ],
+    },
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: 'style.css',
+      }),
+    ],
+    devtool: 'source-map',
+  }
+}
