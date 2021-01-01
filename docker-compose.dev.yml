@@ -1,0 +1,26 @@
+version: '3'
+services:
+  blagues-api:
+    container_name: blagues-api
+    build:
+      context: ./
+      dockerfile: ./Dockerfile.dev
+    volumes:
+      - ./src:/app/src:cached
+      - ./blagues.json:/usr/src/app/blagues.json:cached
+      - ./database.sqlite:/database.sqlite:cached
+    env_file:
+      - ./.env
+    ports:
+      - '3001:3001'
+  webpack_dev:
+    container_name: webpack_dev
+    build:
+      context: ./
+      dockerfile: ./Dockerfile.dev
+    volumes:
+      - ./src:/app/src:cached
+      - ./blagues.json:/usr/src/app/blagues.json:cached
+    env_file:
+      - ./.env
+    command: npx webpack --mode development --watch
