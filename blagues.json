@@ -1,2769 +1,2768 @@
 [
-    {
-        "id": 1,
-        "type": "dev",
-        "joke": "Les filles c'est comme les noms de domaine.",
-        "answer": "Celles que j'aime sont déjà prises."
-    },
-    {
-        "id": 2,
-        "type": "global",
-        "joke": "Quelle est la meilleure heure pour écouter de la musique ?",
-        "answer": "Deezer..."
-    },
-    {
-        "id": 3,
-        "type": "dev",
-        "joke": "Un développeur ne descend pas du métro.",
-        "answer": "Il libère la RAM..."
-    },
-    {
-        "id": 4,
-        "type": "dev",
-        "joke": "Où partent les développeurs en vacances ?",
-        "answer": "Au C-Shell."
-    },
-    {
-        "id": 5,
-        "type": "dev",
-        "joke": "Pourquoi les développeurs doivent-ils suivre une formation incendie ? ",
-        "answer": "A cause des pare-feux."
-    },
-    {
-        "id": 6,
-        "type": "dark",
-        "joke": "Qu’est ce qui a 4 pattes et un bras ?",
-        "answer": "Un pitbull dans un jardin d’enfant !"
-    },
-    {
-        "id": 7,
-        "type": "dark",
-        "joke": "Ma fille vient de perdre sa première dent…",
-        "answer": "Ça lui apprendra à me répondre !"
-    },
-    {
-        "id": 8,
-        "type": "dark",
-        "joke": "Qui court plus vite qu’Usain Bolt ?",
-        "answer": "Un Somalien avec un ticket restaurant"
-    },
-    { 
-        "id": 9,
-        "type": "blondes",
-        "joke": "Pourquoi les alpinistes aiment-ils bien les blondes ?",
-        "answer": "Parce qu’ils n’ont pas peur du vide !"
-    },
-    {
-        "id": 10,
-        "type": "limit",
-        "joke": "Tu connais le cri du spermatozoïde ?",
-        "answer": "Bah la prochaine fois au lieu de l'avaler tu croques."
-    },
-    {
-        "id": 11,
-        "type": "global",
-        "joke": "Pourquoi Napoléon n'a jamais déménagé ?",
-        "answer": "Parce que Bonaparte"
-    },
-    {
-        "id": 12,
-        "type": "limit",
-        "joke": "Quel est le point commun entre un cunnilingus et un lapsus ?",
-        "answer": "Une erreur de langue et vous êtes vite dans la merde..."
-    },
-    {
-        "id": 13,
-        "type": "global",
-        "joke": "Quel super héros donne le plus vite l'heure ?",
-        "answer": "Speed heure man !"
-    },
-    {
-        "id": 14,
-        "type": "global",
-        "joke": "Tu connais la blague de la chaise ?",
-        "answer": "Elle est pliante"
-    },
-    {
-        "id": 15,
-        "type": "global",
-        "joke": "Pourquoi il n'y a pas de ballon à question pour un champion ?",
-        "answer": "Parce que Julien Lepers"
-    },
-    {
-        "id": 16,
-        "type": "global",
-        "joke": "Pourquoi les canards sont-ils toujours à l'heure ?",
-        "answer": "Parce qu'ils sont dans l'étang"
-    },
-    {
-        "id": 17,
-        "type": "global",
-        "joke": "Tu as 4 poussins et tu n'en veux que 3, comment faire ?",
-        "answer": "Tu en pousses un"
-    },
-    {
-        "id": 18,
-        "type": "global",
-        "joke": "Quel est le comble pour un jardinier ?",
-        "answer": "Se mettre à poil devant ses tomates pour les faire rougir."
-    },
-    {
-        "id": 19,
-        "type": "global",
-        "joke": "Pourquoi il y a une baignoire au dessus des camions de pompiers belges ?",
-        "answer": "Pour mettre la sirène."
-    },
-    {
-        "id": 20,
-        "type": "global",
-        "joke": "Qu'est ce qu'un chou au milieu de l'océan ?",
-        "answer": "Un chou marin."
-    },
-    {
-        "id": 21,
-        "type": "global",
-        "joke": "Qu'est ce qu'un légume rigolo ?",
-        "answer": "Un chou marreur."
-    },
-    {
-        "id": 22,
-        "type": "limit",
-        "joke": "Quel est la différence entre un ascenseur et un vagin ?",
-        "answer": "Aucune, dans les deux cas tu mets ton doigt où t'habite"
-    },
-    {
-        "id": 23,
-        "type": "global",
-        "joke": "Pourquoi le lapin est bleu ?",
-        "answer": "Parce qu’on l’a peint"
-    },
-    {
-        "id": 24,
-        "type": "global",
-        "joke": "Quelle est la mamie qui fait peur aux voleurs ?",
-        "answer": "Mamie Traillette"
-    },
-    {
-        "id": 25,
-        "type": "blondes",
-        "joke": "Qu'est-ce qu'une blonde avec de l'eau dans la bouche ?",
-        "answer": "Une cruche"
-    },
-    {
-        "id": 26,
-        "type": "dark",
-        "joke": "Que fait un chinois sur une mobylette ?",
-        "answer": "Nèèèèmmmmm, Nèèèèmmmmm, Nèèèèmmmmm"
-    },
-    {
-        "id": 27,
-        "type": "global",
-        "joke": "Qu'est ce qu'un squelette dans une armoire ?",
-        "answer": "Une personne qui a gagné à cache-cache."
-    },
-    {
-        "id": 28,
-        "type": "dark",
-        "joke": "Savez vous pourquoi les chinois ne perdent jamais le nord?",
-        "answer": "Parce qu'ils ont le sudoku."
-    },
-    {
-        "id": 29,
-        "type": "global",
-        "joke": "Avec quel fromage, pouvons-nous nous faire grossir les seins?", 
-        "answer": "Du Boursin."
-    },
-    {
-        "id": 30,
-        "type": "limit",
-        "joke": "Qu'est-ce qui est vert et qui nique ?",
-        "answer": "Véronique."
-    },
-    {
-        "id": 31,
-        "type": "global",
-        "joke": "Comment appelle-t-on un chat tout-terrain ?",
-        "answer": "Un cat-cat."
-    },
-    {
-        "id": 32,
-        "type": "global",
-        "joke": "Comment appelle-t-on un chien qui a des lunettes ?",
-        "answer": "Un optichien."
-    },
-    {
-        "id": 33,
-        "type": "global",
-        "joke": "Quel est le comble pour un électricien ?",
-        "answer": "Ne pas être au courant."
-    },
-    {
-        "id": 34,
-        "type": "beauf",
-        "joke": "Ce que j’ai en commun avec mon mari ?",
-        "answer": "On s’est mariés le même jour..."
-    },
-    {
-        "id": 35,
-        "type": "dark",
-        "joke": "Pourquoi la petite fille est tombée de la balançoire ?",
-        "answer": "Parce qu'elle n'a pas de bras."
-    },
-    {
-        "id": 36,
-        "type": "dark",
-        "joke": "Pourquoi le petit garçon a fait tombé sa glace ?",
-        "answer": "Parce qu'il s'est fait renverser par un bus ! "
-    },
-    {
-        "id": 37,
-        "type": "global",
-        "joke": "Que fait un DJ djihadiste ?",
-        "answer": "Il fait péter le son !"
-    },
-    {
-        "id": 38,
-        "type": "dark",
-        "joke": "Combien faut-il d'hommes pour peindre une voiture en rouge ?",
-        "answer": "Un seul ! Mais il faut le lancer très fort..."
-    },
-    {
-        "id": 39,
-        "type": "dark",
-        "joke": "Quels sont les derniers mots de mon grand-père avant son décès ?",
-        "answer": "Arrête de bouger l'échelle !"
-    },
-    {
-        "id": 40,
-        "type": "dark",
-        "joke": "A quel endroit se trouvent les tétraplégiques ?",
-        "answer": "Là où on les a laissés.."
-    },
-    {
-        "id": 41,
-        "type": "dark",
-        "joke": "Savez-vous comment la femme d'Hitler est morte ?",
-        "answer": "En se trompant de douche..."
-    },
-    {
-        "id": 42,
-        "type": "dark",
-        "joke": "C'est quoi le plus dur à mixer dans un groupe de légumes ?",
-        "answer": "Leurs fauteuils..."
-    },
-    {
-        "id": 43,
-        "type": "global",
-        "joke": "Quel est le comble pour une orange ?",
-        "answer": "Être toujours pressée."
-    },
-    {
-        "id": 44,
-        "type": "global",
-        "joke": "Que dit un canard quand il va aux toilettes ?",
-        "answer": "Je vais au petit coin."
-    },
-    {
-        "id": 45,
-        "type": "global",
-        "joke": "Que dit un zombie à un autre zombie ?",
-        "answer": "Alors, ça mord ?"
-    },
-    {
-        "id": 46,
-        "type": "global",
-        "joke": "Que fait un hibou dans une casserole ?",
-        "answer": "Hi-bou"
-    },
-    {
-        "id": 47,
-        "type": "global",
-        "joke": "Quel est le comble pour un coq ?",
-        "answer": "Avoir la chair de poule !"
-    },
-    {
-        "id": 48,
-        "type": "global",
-        "joke": "Pourquoi les canards sont toujours à l'heure ?",
-        "answer": "Car ils sont dans l'étang"
-    },
-    {
-        "id": 49,
-        "type": "global",
-        "joke": "Qu'est ce qui est transparent et qui cours dans les champs ?",
-        "answer": "Un troupeau de vitre"
-    },
-    {
-        "id": 50,
-        "type": "dark",
-        "joke": "Combien y-a-t-il de somaliens en Somalie ?",
-        "answer": "Environ 500 grammes"
-    },
-    {
-        "id": 51,
-        "type": "global",
-        "joke": "Que fait une fraise sur un cheval ?",
-        "answer": "Tagada Tagada"
-    },
-    {
-        "id": 52,
-        "type": "global",
-        "joke": "Pourquoi les gorilles ont-ils de gros trous de nez ?",
-        "answer": "Car ils ont de gros doigts."
-    },
-    {
-        "id": 53,
-        "type": "dark",
-        "joke": "Quel est le point commun entre les Juifs et les baskets ?",
-        "answer": "On en trouve plus en 39 qu’en 45."
-    },
-    {
-        "id": 54,
-        "type": "blondes",
-        "joke": "Que font les blondes quand l’eau du bain de bébé est trop chaude ?",
-        "answer": "Elles mettent des gants."
-    },
-    {
-        "id": 55,
-        "type": "beauf",
-        "joke": "Quel est le point commun entre un homme et un chat ?",
-        "answer": "Les deux ont très peur de l’aspirateur"
-    },
-    {    
-        "id": 56,
-        "type": "global",
-        "joke": "Comment appelle-t-on un squelette qui parle ?",
-        "answer": "Un os parleur"
-    },
-    {
-        "id": 57,
-        "type": "dark",
-        "joke": "Qu'est-ce qui a deux antennes et qui se cogne contre les murs ?",
-        "answer": "Une petite fille avec deux fourchettes plantées dans les yeux."
-    },
-    {
-        "id": 58,
-        "type": "global",
-        "joke": "C'est l'histoire d'un pingouin qui respirait par les fesses.",
-        "answer": "Un jour il s'est assis et il est mort."
-    },
-    {
-        "id": 59,
-        "type": "global",
-        "joke": "Qu’est-ce qui court et qui se jette ?",
-        "answer": "Une courgette"
-    },
-    {
-        "id": 60,
-        "type": "global",
-        "joke": "Un œuf attend un autre œuf",
-        "answer": "Si dans 5 minutes, il n’est pas là, j’me casse !"
-    },
-    {
-        "id": 61,
-        "type": "global",
-        "joke": "C’est l’histoire d’un schtroumpf qui tombe",
-        "answer": "Et qui se fait un bleu…"
-    },
-    {
-        "id": 62,
-        "type": "global",
-        "joke": "Qu’est-ce qui est jaune et qui attend ?",
-        "answer": "Jonathan"
-    },
-    {
-        "id": 63,
-        "type": "global", 
-        "joke": "Quel fruit le poisson déteste-il le plus ?",
-        "answer": "La pêche"
-    },
-    {
-        "id": 64,
-        "type": "limit",
-        "joke": "Melon et Melèche jouent au Scrabble.",
-        "answer": "Melon pioche le W et Melèche le Q."
-    },
-    {
-        "id": 65,
-        "type": "blondes",
-        "joke": "Quelle est la plus intelligente : la blonde, la rousse ou la brune ?",
-        "answer": "La rousse parce que c'est un dictionnaire."
-    },
-    {
-        "id": 66,
-        "type": "global",
-        "joke": "Que fait un homme qui rentre dans un café ?",
-        "answer": "Plouf"
-    },
-    {
-        "id": 67,
-        "type": "limit",
-        "joke": "Pourquoi un homme rentre-t-il dans un bar ?",
-        "answer": "Parce qu'il est zoophile."
-    },
-    {
-        "id": 68,
-        "type": "global",
-        "joke": "Pourquoi Harry Potter chuchotte ?",
-        "answer": "Parce que Dumbledore…"
-    },
-    {
-        "id": 69,
-        "type": "global",
-        "joke": "Qu’est-ce qu’un éléphant dit à un homme tout nu ?",
-        "answer": "Et tu arrives à attraper des cacahuètes avec ça ?"
-    },
-    {
-        "id": 70,
-        "type": "global",
-        "joke": "Qu'est-ce qui est transparent et qui sent la banane ?",
-        "answer": "Un pet de singe"
-
-    },
-    {
-        "id": 71,
-        "type": "global",
-        "joke": "Comment appelle-t-on un squelette qui parle ?",
-        "answer": "Un os parleur"
-    },
-    {
-        "id": 72,
-        "type": "global",
-        "joke": "Qu'est-ce qui est jaune, orange, rouge et qui tourne très vite !",
-        "answer": "Un poussin dans un mixeur."
-    },
-    {
-        "id": 73,
-        "type": "global",
-        "joke": "Comment appelle-t-on un nain qui travaille à la Poste ?",
-        "answer": "Un nain posteur…"
-    },
-    {
-        "id": 74,
-        "type": "global",
-        "joke": "Que dit un citron quand il braque une banque ?",
-        "answer": "Pas un zeste !"
-    },
-    {
-        "id": 75,
-        "type": "dark",
-        "joke": "Quel dinosaure peut aller au micro-ondes ?",
-        "answer": "Le Pyrex"
-    },
-    {
-        "id": 76,
-        "type": "beauf",
-        "joke": "Quel est le point commun entre un homme et un chat ?",
-        "answer": "Les deux ont très peur de l’aspirateur"
-    },
-    {
-        "id": 77,
-        "type": "beauf",
-        "joke": "Ce que j’ai en commun avec mon mari ?",
-        "answer": "On s’est mariés le même jour..."
-    },
-    {
-        "id": 78,
-        "type": "dark",
-        "joke": "Combien y-a-t-il de somaliens en Somalie ?",
-        "answer": "Environ 500 grammes"
-    },
-    {
-        "id": 79,
-        "type": "dark",
-        "joke": "Quand Hitler s’est-il suicidé ?",
-        "answer": "Après avoir reçu sa facture de gaz…"
-    },
-    {
-        "id": 80,
-        "type": "global",
-        "joke": "Qu'est ce qu'un lampadaire ?",
-        "answer": "une lampe avec une seule bosse"
-    },
-    {
-        "id": 81,
-        "type": "dark",
-        "joke": "Quelle est la différence entre un divorce et la grammaire ?",
-        "answer": "En grammaire, c’est le masculin qui l’emporte."
-    },
-    {
-        "id": 82,
-        "type": "global",
-        "joke": "Quelle est la différence entre un chewing-gum et un avion ?",
-        "answer": "Le chewing-gum colle et l’avion décolle."
-    },
-    {
-        "id": 83,
-        "type": "dark",
-        "joke": "Qu’est ce qu’un bossu sans bras et sans jambe ?",
-        "answer": "Une madeleine"
-    },
-    {
-        "id": 84,
-        "type": "global",
-        "joke": "Pourquoi les imprimantes n'aiment pas aller à la piscine?",
-        "answer": "Parce qu'elles n'ont papier"
-    },
-    {
-        "id": 85,
-        "type": "global",
-        "joke": "Quel est le point commun entre un déménageur et un arbitre de football?",
-        "answer": "Ils aiment tous les deux sortir des cartons"
-    },
-    {
-        "id": 86,
-        "type": "global",
-        "joke": "Donald Duck et Daffy Duck se bagarrent. Qu'est ce que ca fait?",
-        "answer": "Un conflit de canard"
-    },
-    {
-        "id": 87,
-        "type": "global",
-        "joke": "Quel est le comble du comble?",
-        "answer": "Qu’un muet dise à un sourd qu’un aveugle les regarde"
-    },
-    {
-        "id": 88,
-        "type": "dark",
-        "joke": "Maman, j’ai peur du noir",
-        "answer": "Ne t’inquiète pas il est bien attaché"
-    },
-    {
-        "id": 89,
-        "type": "global",
-        "joke": "Que font les dinausaures quand ils ne sont pas d'accord ?",
-        "answer": "Un tirageausaure"
-    },
-    {
-        "id": 90,
-        "type": "global",
-        "joke": "L'école et l'alcool riment, vous savez pourquoi ?",
-        "answer": "Car les deux saoulent"
-    },
-    {
-        "id": 91,
-        "type": "dark",
-        "joke": "Quel est le point commun entre un surdoué et un pédophile ?",
-        "answer": "Ils ont tout les deux sauté la classe de CE1"
-    },
-    {
-        "id": 92,
-        "type": "global",
-        "joke": "Comment est-ce que les abeilles communiquent entre elles ?",
-        "answer": "Par e-miel."
-    },
-    {
-        "id": 93,
-        "type": "global",
-        "joke": "Quel est l'animal le plus connecté ?",
-        "answer": "Le porc USB."
-    },
-    {
-        "id": 94,
-        "type": "beauf",
-        "joke": "Qu’elle est le point commun entre un ado qui s’ennuie en cours et une pute qui se gratte ?",
-        "answer": "Le morpion."
-    },
-    {
-        "id": 95,
-        "type": "beauf",
-        "joke": "Quel est le point commun entre un gynécologue myope et un chien en bonne santé ?",
-        "answer": "Ils ont tous les deux le nez mouillé."
-    },
-    {
-        "id": 96,
-        "type": "global",
-        "joke": "Quel est le point commun entre un motard célibataire et sa moto ?",
-        "answer": "Ils dorment tous les deux sur la béquille."
-    },
-    {
-        "id": 97,
-        "type": "beauf",
-        "joke": "Quelle est la différence entre un zèbre et un barman ?",
-        "answer": "Le zèbre a des barres autour de son trou du cul. Le barman a des trous du cul autour de son bar."
-    },
-    {
-        "id": 98,
-        "type": "global",
-        "joke": "Un mathématicien n’urine pas.",
-        "answer": "Il fait π π."
-    },
-    {
-        "id": 99,
-        "type": "global",
-        "joke": "Qu'est-ce qu'un Parafaitpasdebruit ?",
-        "answer": "Un parachute."
-    },
-    {
-        "id": 100,
-        "type": "global",
-        "joke": "Il y a un boucher qui mesure 1 mètre 80, mais combien pèse-t-il ?",
-        "answer": "La viande, parce que les bouchers pèsent la viande."
-    },
-    {
-        "id": 101,
-        "type": "global",
-        "joke": "Un jour, Dieu dit à Casto de ramer.",
-        "answer": "Et depuis, Castorama..."
-    },
-    {
-        "id": 102,
-        "type": "global",
-        "joke": "Pourquoi un chasseur emmène-t-il son fusil aux toilettes ?",
-        "answer": "Pour tirer la chasse."
-    },
-    {
-        "id": 103,
-        "type": "global",
-        "joke": "Vous connaissez l'histoire de l'armoire ?",
-        "answer": "Elle n'est pas commode..."
-    },
-    {
-        "id": 104,
-        "type": "global",
-        "joke": "Pourquoi les Martiens ne renversent-ils jamais de café sur la table ?",
-        "answer": "Parce qu'ils ont des soucoupes !"
-    },
-    {
-        "id": 105,
-        "type": "limit",
-        "joke": "C'est l'histoire du nain aux 26 enfants.",
-        "answer": "Elle est courte mais elle est bonne."
-    },
-    {
-        "id": 106,
-        "type": "global",
-        "joke": "C'est l'histoire du p'tit dej', vous la connaissez ?",
-        "answer": "Non, pas de bol..."
-    },
-    {
-        "id": 107,
-        "type": "global",
-        "joke": "Dans la phrase \"le voleur a volé une télévision\", où est le sujet ?",
-        "answer": "En prison !"
-    },
-    {
-        "id": 108,
-        "type": "global",
-        "joke": "C'est l'histoire d'un poil. Avant, il était bien.",
-        "answer": "Maintenant, il est pubien."
-    },
-    {
-        "id": 109,
-        "type": "dark",
-        "joke": "Comment appelle-t-on un chien qui n'a pas de pattes ?",
-        "answer": "On ne l'appelle pas, on va le chercher..."
-    },
-    {
-        "id": 110,
-        "type": "global",
-        "joke": "Que fait une vache quand elle a les yeux fermés ?",
-        "answer": "Elle fabrique du lait concentré !"
-    },
-    {
-        "id": 111,
-        "type": "beauf",
-        "joke": "Quelle est la différence entre une femme et un dobermann ?",
-        "answer": "Le prix du collier."
-    },
-    {
-        "id": 112,
-        "type": "limit",
-        "joke": "Pourquoi cendrillon est-elle morte à minuit ?",
-        "answer": "Parce que son tampon s'est transformé en citrouille !"
-    },
-    {
-        "id": 113,
-        "type": "limit",
-        "joke": "L'amour, c'est comme les cartes :",
-        "answer": "Quand on n'a pas de partenaires, mieux vaut avoir une bonne main."
-    },
-    {
-        "id": 114,
-        "type": "global",
-        "joke": "Quel est le point commun entre un sourd et un gynécologue ?",
-        "answer": "Les deux savent lire sur les lèvres."
-    },
-    {
-        "id": 115,
-        "type": "global",
-        "joke": "À quel moment la poule a-t-elle le plus mal au cul ?",
-        "answer": "Quand elle passe du coq à l'âne"
-    },
-    {
-        "id": 116,
-        "type": "global",
-        "joke": "C'est une femme qui prend son bain, son chien pète elle se noie pourquoi ?",
-        "answer": "Parce que son chien c'est un Pékinois."
-    },
-    {
-        "id": 117,
-        "type": "global",
-        "joke": "Savez-vous pourquoi le père Noël rit tout le temps ?",
-        "answer": "Parce que ce n'est pas lui qui paye les cadeaux !"
-    },
-    {
-        "id": 118,
-        "type": "global",
-        "joke": "Tu connais la blague du photographe ?",
-        "answer": "Elle n'est pas encore développée !"
-    },
-    {
-        "id": 119,
-        "type": "global",
-        "joke": "Qu'est-ce qui est jaune et qui court vite ?",
-        "answer": "Un citron pressé."
-    },
-    {
-        "id": 120,
-        "type": "limit",
-        "joke": "Le viagra c'est comme l'enfer,",
-        "answer": "Satan l'habite."
-    },
-    {
-        "id": 121,
-        "type": "dark",
-        "joke": "Comment est ce qu'on appelle un boomerang qui ne revient pas ?",
-        "answer": "Un chat mort."
-    },
-    {
-        "id": 122,
-        "type": "limit",
-        "joke": "Quel est la dernière chose que Lady Dianna ai mangée ?",
-        "answer": "Le volant"
-    },
-    {
-        "id": 123,
-        "type": "limit",
-        "joke": "Qu'est-ce que ça fait quand tu lances une gousse d'ail contre un mur ?",
-        "answer": "Le retour du jet d'ail."
-    },
-    {
-        "id": 124,
-        "type": "dark",
-        "joke": "Qu'est ce qui est pire qu'un bébé dans une poubelle ?",
-        "answer": "Un bébé dans deux poubelles."
-    },
-    {
-        "id": 125,
-        "type": "dark",
-        "joke": "Grâce à quoi peut-on enlever le chewing-gum dans les cheveux ?",
-        "answer": "Le cancer."
-    },
-    {
-        "id": 126,
-        "type": "dark",
-        "joke": "Quel est le point commun entre une Ferrari et une enfant de 5 ans ?",
-        "answer": "Quand tu rentres dedans, tu déchires tout"
-    },
-    {
-        "id": 127,
-        "type": "blondes",
-        "joke": "Que dit une blonde quand elle voit une peau de banane sur le trottoir?",
-        "answer": "Oh mince! je vais encore tomber !"
-    },
-    {
-        "id": 128,
-        "type": "blondes",
-        "joke": "Pourquoi les blondes passent-elles à la caisse avec un seau d’eau ?",
-        "answer": "Pour payer en liquide."
-    },
-    {
-        "id": 129,
-        "type": "blondes",
-        "joke": "Pourquoi les blondes ne mangent-elles pas de bananes?",
-        "answer": "Parce qu’elles ne trouvent pas la fermeture éclair !"
-    },
-    {
-        "id": 130,
-        "type": "global",
-        "joke": "Est ce que si on trempe un Mac dans l'eau ça fera",
-        "answer": "Un McDo ?"
-    },
-    {
-        "id": 131,
-        "type": "global",
-        "joke": "Comment fait-on pour allumer un barbecue breton ?",
-        "answer": "On utilise des breizh."
-    },
-    {
-        "id": 132,
-        "type": "global",
-        "joke": "Quels desserts portent des sous-vêtements ?",
-        "answer": "Les bananes à slips."
-    },
-    {
-        "id": 133,
-        "type": "dark",
-        "joke": "Qu'est-ce qui est bleu blancs et rouge ?",
-        "answer": "Un schtroumf à qui on a couper la tête"
-    },
-    {
-        "id": 134,
-        "type": "global",
-        "joke": "Qu'est-ce qui est bleu blancs et rouge ?",
-        "answer": "Un schtroumf qui saigne du nez"
-    },
-    {
-        "id": 135,
-        "type": "beauf",
-        "joke": "Comment la chouette sais que son mari fait la gueule ?",
-        "answer": "Parce qu'Hiboude."
-    },
-    {
-        "id": 136,
-        "type": "beauf",
-        "joke": "Que dit un oeuf qui attend son pote depuis 1 heure ?",
-        "answer": "S'il arrive pas dans 10 minutes, j'me casse !"
-    },
-    {
-        "id": 137,
-        "type": "beauf",
-        "joke": "Qui est le plus menteur entre un boucher et un jardinier ?",
-        "answer": "C'est le jardinier car il raconte que des salades !"
-    },
-    {
-        "id": 138,
-        "type": "beauf",
-        "joke": "Pourquoi aucun éléphant n'est informaticien ?",
-        "answer": "Parce qu'ils ont peur de la souris."
-    },
-    {
-        "id": 139,
-        "type": "beauf",
-        "joke": "Pourquoi les moutons aiment le chewing-gum ?",
-        "answer": "Car c'est bon pour la laine (l'haleine)."
-    },
-    {
-        "id": 140,
-        "type": "beauf",
-        "joke": "Pourquoi les petits poissons ne partent pas à l'école ?",
-        "answer": "Parce qu'ils s'en fish !"
-    },
-    {
-        "id": 141,
-        "type": "global",
-        "joke": "Que fait une lampe qui se fait agresser ?",
-        "answer": "Elle crie à LED."
-    },
-    {
-        "id": 142,
-        "type": "beauf",
-        "joke": "Pourquoi quand on vise on ferme un œil ?",
-        "answer": "Car si on fermait les deux on verrait plus rien."
-    },
-    {
-        "id": 143,
-        "type": "blondes",
-        "joke": "Quel est la différence entre une blonde et une patate ?",
-        "answer": "La patate est cultivée."
-    },
-    {
-        "id": 144,
-        "type": "global",
-        "joke": "Pourquoi les sorcières utilisent des balais pour voler ?",
-        "answer": "Car un aspirateur c'est trop lourd !"
-    },
-    {
-        "id": 145,
-        "type": "global",
-        "joke": "Qu'est ce qu'une diarrhée mentale ?",
-        "answer": "C'est quand à chaque fois que t'as une idée, c'est de la merde !"
-    },
-    {
-        "id": 146,
-        "type": "beauf",
-        "joke": "Pourquoi Harry Potter chuchote ?",
-        "answer": "Parce que Dumbledore ..."
-    },
-    {
-        "id": 147,
-        "type": "blondes",
-        "joke": "Pourquoi les blondes portent des ceintures D&G ?",
-        "answer": "Pour ne pas confondre la droite et la gauche !"
-    },
-    {
-        "id": 148,
-        "type": "global",
-        "joke": "Connaissez vous la blague sur les magasins?",
-        "answer": "En tout cas, elle a supermarché !"
-    },
-    {
-        "id": 149,
-        "type": "dark",
-        "joke": "Qu'est-ce qu'il faut dire au noir pour qu'il parte dormir ?",
-        "answer": "DARK VADOR"
-    },
-    {
-        "id": 150,
-        "type": "global",
-        "joke": "Que dis-t-on a quelqu'un de triste qui joue aux jeux vidéos ?",
-        "answer": "On dit qu'il se console !"
-    },
-    {
-        "id": 151,
-        "type": "dev",
-        "joke": "Pourquoi les développeurs vont en boîte de nuit",
-        "answer": "Pour faire la java"
-    },
-    {
-        "id": 152,
-        "type": "dev",
-        "joke": "Que dis un informaticien quand il s'ennuie?",
-        "answer": "Je me fichier"
-    },
-    {
-        "id": 153,
-        "type": "global",
-        "joke": "Qu'est-ce qu'un cadeau qui s'en va ?",
-        "answer": "Une surprise party"
-    },
-    {
-        "id": 154,
-        "type": "global",
-        "joke": "Quel est le pays le plus cool au monde ?",
-        "answer": "Le Yééémen"
-    },
-    {
-        "id": 155,
-        "type": "global",
-        "joke": "Pourquoi Winnie l'ourson veut absolument se marier ?",
-        "answer": "Pour partir en lune de miel."
-    },
-    {
-        "id": 156,
-        "type": "global",
-        "joke": "Que dit un italien pour dire au revoir ?",
-        "answer": "Pasta la vista baby."
-    },
-    {
-        "id": 156,
-        "type": "global",
-        "joke": "Je peux tourner sans bouger. Qui suis-je ?",
-        "answer": "Le Lait."
-    },
-    {
-        "id": 157,
-        "type": "global",
-        "joke": "Que boit un vampire en soirée ?",
-        "answer": "Du sangpagne. Sang-té !"
-    },
-    {
-        "id": 158,
-        "type": "global",
-        "joke": "Pourquoi est-ce difficile de conduire dans le Nord ?",
-        "answer": "Parce que les voitures arrêtent pas de caler."
-    },
-    {
-        "id": 159,
-        "type": "dev",
-        "joke": "Quel est le meilleur magazine pour développeurs ?",
-        "answer": "Pomme d'api"
-    },
-    {
-        "id": 160,
-        "type": "dev",
-        "joke": "Pourquoi les développeurs ne portent ils pas de chaussures à lacets ?",
-        "answer": "Car il préfèrent les scratch."
-    },
-    {
-        "id": 161,
-        "type": "beauf",
-        "joke": "Qu'est-ce qu'un comptable ?",
-        "answer": "Un con derrière une table."
-    },
-    {
-        "id": 162,
-        "type": "global",
-        "joke": "C’est un bœuf, qui court…",
-        "answer": "Puis qui se viande."
-    },
-    {
-        "id": 163,
-        "type": "global",
-        "joke": "Pourquoi le patinage artistique est pénible ?",
-        "answer": "Car le patin agace"
-    },
-    {
-        "id": 164,
-        "type": "global",
-        "joke": "Que faire pour sauver la vie d’une mouche qui se noie ?",
-        "answer": "Du mouche à mouche"
-    },
-    {
-        "id": 165,
-        "type": "global",
-        "joke": "Les enfants c’est comme les pets",
-        "answer": "On ne supporte que les siens"
-    },
-    {
-        "id": 166,
-        "type": "global",
-        "joke": "Comment se nomme la Barbie la plus poilue ?",
-        "answer": "La Barbie chette !"
-    },
-    {
-        "id": 167,
-        "type": "limit",
-        "joke": "Quelle est la différence entre un rappeur et un campeur ?",
-        "answer": "Le rappeur niq** ta mère et le campeur monte ta tente"
-    },
-    {
-        "id": 168,
-        "type": "global",
-        "joke": "T’es tombé ?",
-        "answer": "Non je fais un câlin au plancher il avait l’air triste."
-    },
-    {
-        "id": 169,
-        "type": "global",
-        "joke": "Pourquoi les policiers n’ont pas d’acné ?",
-        "answer": "Car ils ont la peau lisse !"
-    },
-    {
-        "id": 170,
-        "type": "global",
-        "joke": "Quel est le gateau préféré des nuages ?",
-        "answer": "L’éclair !"
-    },
-    {
-        "id": 171,
-        "type": "dev",
-        "joke": "Que fait un développeur avant d'aller faire les courses ?",
-        "answer": "Il fait sa lisp"
-    },
-    {
-        "id": 172,
-        "type": "dev",
-        "joke": "Que prend un développeur avant d'écrire ?",
-        "answer": "Il prends de la MD"
-    },
-    {
-        "id": 173,
-        "type": "dev",
-        "joke": "Quel est la maladie la plus répandue chez les développeurs Rust ?",
-        "answer": "Le tétanos"
-    },
-    {
-        "id": 174,
-        "type": "global",
-        "joke": "Que dit une antenne TV à un paratonnerre?",
-        "answer": "Tu y crois toi au coup de foudre?"
-    },
-    {
-        "id": 175,
-        "type": "global",
-        "joke": "Pourquoi une feuille se noie quand on la met dans l'eau?",
-        "answer": "Parce-qu'elle n'a pas pieds.(papiers)"
-    },
-    {
-        "id": 176,
-        "type": "global",
-        "joke": "Qu'est-ce qu'un dromaludaire?",
-        "answer": "Un Chalumeau a 2 bosses."
-    },
-    {
-        "id": 177,
-        "type": "global",
-        "joke": "Qu'est-ce qu'un Canif",
-        "answer": "C'est un p'tit fien"
-    },
-    {
-        "id": 178,
-        "type": "global",
-        "joke": "Quelle est la chanteuse préférée des serruriers ?",
-        "answer": "Alicia Keys."
-    },
-    {
-        "id": 179,
-        "type": "global",
-        "joke": "Combien de fils a la mère de Justin ?",
-        "answer": "Juste un."
-    },
-    {
-        "id": 180,
-        "type": "global",
-        "joke": "Qu’est ce qu’une baguette avec une boussole ?",
-        "answer": "Du pain perdu"
-    },
-    {
-        "id": 181,
-        "type": "global",
-        "joke": "Le prof dit à son élève : Ton devoir était mauvais.",
-        "answer": "QUOI ! Vous l'avez mangé ?"
-    },
-    {
-        "id": 182,
-        "type": "global",
-        "joke": "À quoi servent les archipels ?",
-        "answer": "À faire des archi-trous !"
-    },
-    {
-        "id": 183,
-        "type": "global",
-        "joke": "Pourquoi il n'y a plus de Mammouth ?",
-        "answer": "Parce qu'il n'y a plus de Papouth."
-    },
-    {
-        "id": 184,
-        "type": "global", 
-        "joke": "Entre un aviateur et un marin, lequel écrit le moins ?",
-        "answer": "Le marin, parce qu'il a jeté l'encre."
-    },
-    {
-        "id": 185,
-        "type": "global",
-        "joke": "Quel est le comble pour un électricien ?", 
-        "answer": "D'avoir des ampoules aux pieds."
-    },
-    {
-        "id": 186,
-        "type": "global",
-        "joke": "Qu'est-ce qu'une manifestation d'aveugles ?",
-        "answer": "Le festival de Cannes"
-    },
-    {
-        "id": 187,
-        "type": "dark",
-        "joke": "Comment appelle-t-on un développeur pédophile  ?",
-        "answer": "Un pédofile"
-    },
-    {
-        "id": 188,
-        "type": "global",
-        "joke": "Comment appelle-t-on un ascenseur en Amérique ?",
-        "answer": "En appuyant sur le bouton…"
-    },
-    {
-        "id": 189,
-        "type": "global",
-        "joke": "C’est l’histoire d’une fleur qui court, qui court..",
-        "answer": "Et qui se plante"
-    },
-    {
-        "id": 190,
-        "type": "global",
-        "joke": "Comment appelle-t-on une fracture du crâne ?",
-        "answer": "Un dégât des os"
-    },
-    {
-        "id": 191,
-        "type": "global",
-        "joke": "Qu’est-ce qui est transparent et qui sent la carotte ?",
-        "answer": "Un pet de lapin"
-    },
-    {
-        "id": 192,
-        "type": "beauf",
-        "joke": "Qu’est-ce qu’un cochon qui rit ?",
-        "answer": "Un porc tout gai."
-    },
-    {
-        "id": 193,
-        "type": "global",
-        "joke": "Quel est l’ami du feu ?",
-        "answer": "Le pot-au-feu"
-    },
-    {
-        "id": 194,
-        "type": "global",
-        "joke": "Qu’est-ce qu’un comptable ?",
-        "answer": "C’est un con avec une table."
-    },
-    {
-        "id": 195,
-        "type": "global",
-        "joke": "Comment appelle-t-on un covoiturage au Sénégal ?",
-        "answer": "Un Babacar"
-    },
-    {
-        "id": 196,
-        "type": "global",
-        "joke": "Que fait-on aux voleurs de salades ?",
-        "answer": "On les tue…"
-    },
-    {
-        "id": 197,
-        "type": "global",
-        "joke": "Qu’est-ce que fait un pou dans une cloche ?",
-        "answer": "Pou Ding"
-    },
-    {
-        "id": 198,
-        "type": "global",
-        "joke": "Quel est le légume le plus courageux ?",
-        "answer": "Le pois-chiche"
-    },
-    {
-        "id": 199,
-        "type": "global",
-        "joke": "Un jour, Dieu demanda au coca de coller…",
-        "answer": "et le Coca Cola…"
-    },
-    {
-        "id": 200,
-        "type": "blondes",
-        "joke": "Comment fait-on pour occuper une blonde ?",
-        "answer": "On la met dans une pièce ronde en lui disant de chercher les coins."
-    },
-    {
-        "id": 201,
-        "type": "global",
-        "joke": "Quel est le seul animal qui nourrit lui-même sa voiture ?",
-        "answer": "La chèvre car elle nourrit son cabri au lait !"
-    },
-    {
-        "id": 202,
-        "type": "global",
-        "joke": "Dans quel pays ne bronze-t-on pas du nez ?",
-        "answer": "Au Népal"
-    },
-    {
-        "id": 203,
-        "type": "global",
-        "joke": "Pourquoi est-ce que les anges sont sourds ?",
-        "answer": "Parce que Jésus-Christ"
-    },
-    {
-        "id": 204,
-        "type": "global",
-        "joke": "Qu’est-ce qui fait nioc-nioc ?",
-        "answer": "Un canard qui essaye de parler le verlan"
-    },
-    {
-        "id": 205,
-        "type": "global",
-        "joke": "Quels sont les fruits que nous trouvons dans toutes les maisons ?",
-        "answer": "Les coins et les mûres."
-    },
-    {
-        "id": 206,
-        "type": "global",
-        "joke": "Comment appelle-t-on la mère du phoque ?",
-        "answer": "Mother phoquer"
-    },
-    {
-        "id": 207,
-        "type": "global",
-        "joke": "Quelle est la devise des chats diaboliques ?",
-        "answer": "Satan est par minou"
-    },
-    {
-        "id": 208,
-        "type": "global",
-        "joke": "Quel sont les deux animaux les plus intelligents ?",
-        "answer": "Le Cerf et le Veau"
-    },
-    {
-        "id": 209,
-        "type": "global",
-        "joke": "Pourquoi on met une selle sur un cheval ?",
-        "answer": "Parce qu’en dessous elle tomberait."
-    },
-    {
-        "id": 210,
-        "type": "global",
-        "joke": "De quel pays viennent les cochons ?",
-        "answer": "Des quatre groins du monde"
-    },
-    {
-        "id": 211,
-        "type": "global",
-        "joke": "Quel est le comble pour une taupe ?",
-        "answer": "D’amuser la galerie !"
-    },
-    {
-        "id": 212,
-        "type": "global",
-        "joke": "Que prend un éléphant quand il va au restaurant ?",
-        "answer": "Il prend de la place !"
-    },
-    {
-        "id": 213,
-        "type": "global",
-        "joke": "Qu’est ce qui a 3 bosses?",
-        "answer": "Un chameau qui s’est cogné."
-    },
-    {
-        "id": 214,
-        "type": "global",
-        "joke": "Quel est le comble pour un cycliste ?",
-        "answer": "De faire un régime sans sel."
-    },
-    {
-        "id": 215,
-        "type": "global",
-        "joke": "Quelle est la ville la plus rapide de Suisse ?",
-        "answer": "Nyon"
-    },
-    {
-        "id": 216,
-        "type": "global",
-        "joke": "Tu connais la blague du papier?",
-        "answer": "Elle déchire."
-    },
-    {
-        "id": 217,
-        "type": "global",
-        "joke": "Pourquoi une brioche ne va jamais aux sports d’hiver ?",
-        "answer": "Parce qu'elle sait Pasquier"
-    },
-    {
-        "id": 218,
-        "type": "global",
-        "joke": "Pourquoi les mamies sont-elles très efficaces pour faire le ménage ?",
-        "answer": "Parce qu'elles ont 80 balais."
-    },
-    {
-        "id": 219,
-        "type": "global",
-        "joke": "Tu connais la blague de la gomme ?",
-        "answer": "Elle dégomme."
-    },
-    {
-        "id": 220,
-        "type": "global",
-        "joke": "Quelle est la différence entre une machine et du ketchup ?",
-        "answer": "Aucune, ils sont tous les deux au-tomate"
-    },
-    {
-        "id": 221,
-        "type": "dev",
-        "joke": "Que se passe-t-il quand on secoue une clef USB ?",
-        "answer": "Les fichiers se mélangent."
-    },
-    {
-        "id": 222,
-        "type": "global",
-        "joke": "Oh, Léon ! Ton prénom à l'envers donne Noël !",
-        "answer": "Et oui, tout le monde n'a pas cette chance mon cher Luc..."
-    },
-    {
-        "id": 223,
-        "type": "global",
-        "joke": "On m'a dit que pour faire ses courses pendant le confinement il suffisait de porter un masque et des gants...",
-        "answer": "C'était un mensonge, tous les autres étaient habillés !"
-    },
-    {
-        "id": 224,
-        "type": "global",
-        "joke": "Chérie, pendant que tu dormais tu m'as traité de connard",
-        "answer": "Je ne dormais pas..."
-    },  
-    {
-        "id": 225,
-        "type": "global",
-        "joke": "Ce matin en voulant m'habiller, le bouton de ma chemise m'est resté dans les mains. En voulant mettre mes chaussures, mon lacet m'est resté dans les mains.",
-        "answer": "Je me suis dit \"Vaut mieux pas que j'aille pisser\""
-    },
-    {
-        "id": 226,
-        "type": "global",
-        "joke": "On ne dit pas « l’électronique » mais...",
-        "answer": "L’électricien fait l’amour."
-    },
-    {
-        "id": 227,
-        "type": "global",
-        "joke": "Qui se débrouille le mieux au karaté ?",
-        "answer": "L’électricité, car elle connaît beaucoup de prises."
-    },
-    {
-        "id": 228,
-        "type": "global",
-        "joke": "La vitamine C…",
-        "answer": "Mais ne dira rien."
-    },
-    {
-        "id": 229,
-        "type": "global",
-        "joke": "Que dit un pistolet à une mitraillette ?",
-        "answer": "Ça fait longtemps que tu bégayes ?"
-    },
-    {
-        "id": 230,
-        "type": "global",
-        "joke": "Un clown arrive chez le docteur",
-        "answer": "Docteur, vite, je me sens tout drôle..."
-    },
-    {
-        "id": 231,
-        "type": "global",
-        "joke": "Qu’est-ce qui est rouge et qui attend ?",
-        "answer": "Mon compte en banque."
-    },
-    {
-        "id": 232,
-        "type": "global",
-        "joke": "Il y a quoi au milieu de l’océan ?",
-        "answer": "Un é"
-    },
-    {
-        "id": 233,
-        "type": "global",
-        "joke": "Comment appelle-t-on une personne agréable à Paris ?",
-        "answer": "Un touriste."
-    },
-    {
-        "id": 234,
-        "type": "global",
-        "joke": "Quel est l’ami du feu ?",
-        "answer": "Le pot-au-feu"
-    },
-    {
-        "id": 235,
-        "type": "global",
-        "joke": "Pour ne plus puer de la gueule…",
-        "answer": "Faut-il arrêter de dire de la merde ?"
-    },
-    {
-        "id": 236,
-        "type": "global",
-        "joke": "Qu’est-ce qui est noir et blanc et qui rebondit ?",
-        "answer": "Un pingouin sur un trampoline."
-    },
-    {
-        "id": 237,
-        "type": "global",
-        "joke": "Comment reconnaître un ministre qui ment ?",
-        "answer": "Ses lèvres bougent"
-    },
-    {
-        "id": 238,
-        "type": "global",
-        "joke": "Comment appelle-t-on une fleur très occupée ?",
-        "answer": "Une fleur over-bookée"
-    },
-    {
-        "id": 239,
-        "type": "global",
-        "joke": "Soupçonné de vol dans une boulangerie",
-        "answer": "Florent Pagny nie."
-    },
-    {
-        "id": 240,
-        "type": "global",
-        "joke": "Quel est le contraire d’un chat ?",
-        "answer": "Un pacha."
-    },
-    {
-        "id": 241,
-        "type": "blondes",
-        "joke": "Pourquoi une blonde a-t-elle les cheveux mouillés quand elle va se coucher ?",
-        "answer": "Parce qu’elle a dit bonne nuit à son poisson rouge."
-    },
-    {
-        "id": 242,
-        "type": "blondes",
-        "joke": "Pourquoi les blondes portent-elles des ceintures D&G ?",
-        "answer": "Pour reconnaître leur droite et leur gauche"
-    },
-    {
-        "id": 243,
-        "type": "blondes",
-        "joke": "Qu’est-ce qu’une brune entre 2 blondes ?",
-        "answer": "Une interprète."
-    },
-    {
-        "id": 244,
-        "type": "blondes",
-        "joke": "Comment occuper une blonde toute la journée ?",
-        "answer": "Lui donner un papier où l’on écrit « voir au verso » de chaque côté."
-    },
-    {
-        "id": 245,
-        "type": "limit",
-        "joke": "Pourquoi les poules n’ont-elles pas de seins ?",
-        "answer": "Parce que les coqs n’ont pas de mains !"
-    },
-    {
-        "id": 246,
-        "type": "limit",
-        "joke": "Pendant l’acte, ma femme me dit : Dis-moi des choses sales !",
-        "answer": "La cuisine, la salle de bain..."
-    },
-    {
-        "id": 247,
-        "type": "dark",
-        "joke": "Pourquoi Jésus ne mange jamais de cacahuètes ?",
-        "answer": "Parce qu’il a des trous dans les mains."
-    },
-    {
-        "id": 248,
-        "type": "dark",
-        "joke": "Chéri, je me sens grosse et laide… S’il te plait, fais-moi un compliment…",
-        "answer": "Tu as une bonne vue !"
-    },
-    {
-        "id": 249,
-        "type": "dark", 
-        "joke": "Thomas, penses-tu que je suis une mauvaise mère?",
-        "answer": "Mon nom est Paul…"
-    },
-    {
-        "id": 250,
-        "type": "dark",
-        "joke": "Qu’est-ce qu’un lépreux dans un bain ?",
-        "answer": "Un Efferalgan"
-    },
-    {
-        "id": 251,
-        "type": "dark",
-        "joke": "Comment appelle-t-on une femme qui a perdu son intelligence ?",
-        "answer": "Une veuve."
-    },
-    {
-        "id": 252,
-        "type": "dark",
-        "joke": "Quelle est la différence entre la sodomie et les choux-fleurs ?",
-        "answer": "Même avec du beurre, les enfants n’aiment pas."
-    },
-    {
-        "id": 253,
-        "type": "dev",
-        "joke": "Quel est le shell préféré des adolescents ?",
-        "answer": "Le WESH"
-    },
-    {
-        "id": 254,
-        "type": "dark",
-        "joke": "Je suis bipolaire et je vous aime tous.",
-        "answer": "Bande d’enculés."
-    },
-    {
-        "id": 255,
-        "type": "dark",
-        "joke": "Quel est le point commun entre des chaussures et des juifs ?",
-        "answer": "Il y en a plus en 39 qu’en 45"
-    },
-    {
-        "id": 256,
-        "type": "dark",
-        "joke": "Comment appelle-t-on deux noirs dans un sac de couchage ?",
-        "answer": "Un Twix"
-    },
-    {
-        "id": 257,
-        "type": "dark",
-        "joke": "Quel est le plus gros dilemme pour un juif ?",
-        "answer": "Du jambon gratuit"
-    },
-    {
-        "id": 258,
-        "type": "dark",
-        "joke": "Qu’est-ce qu’un juif en forêt ?",
-        "answer": "Rabbin des bois"
-    },
-    {
-        "id": 259,
-        "type": "limit",    
-        "joke": "Comment appelle-t-on une lesbienne qui n’a pas de sein ?",
-        "answer": "Une omoplate"
-    },
-    {
-        "id": 260,
-        "type": "global",
-        "joke": "Pourquoi tu vends ton perroquet ?",
-        "answer": "Parce qu’hier, ce bâtard a essayé de me vendre !"
-    },
-    {
-        "id": 261,
-        "type": "global",
-        "joke": "Un jour, Dieu demanda à David de guetter",
-        "answer": "Et David guetta."
-    },
-    {
-        "id": 262,
-        "type": "global",
-        "joke": "Que font 2 brosses à dents le 14 Juillet ?",
-        "answer": "Un feu dentifrice !"
-    },
-    {
-        "id": 263,
-        "type": "global",
-        "joke": "Que ce qui est plus fort qu’un lion ?",
-        "answer": "Deux lions."
-    },
-    {
-        "id": 264,
-        "type": "global",
-        "joke": "Qu’est-ce qu’un petit cheval dans une piscine ?",
-        "answer": "Un poney de bain."
-    },
-    {
-        "id": 265,
-        "type": "global",
-        "joke": "Pourquoi le ciel est si haut ?",
-        "answer": "Pour que les oiseaux ne se cognent pas la tête."
-    },
-    {
-        "id": 266,
-        "type": "global",
-        "joke": "Qui s’occupe de la décoration à l’Elysée ?",
-        "answer": "Le ministère de l’intérieur"
-    },  
-    {
-        "id": 267,
-        "type": "global",
-        "joke": "Pourquoi les indiens mettent-ils leur argent en bourse ?",
-        "answer": "Car ça rapporte des sioux."
-    },
-    {
-        "id": 268,
-        "type": "global",
-        "joke": "Quel est le comble pour un dentiste ?",
-        "answer": "C’est d’habiter dans un palais."
-    },
-    {
-        "id": 269,
-        "type": "global",
-        "joke": "Qu’est-ce qu’un euro dans un avion qui décolle ?",
-        "answer": "Une pièce montée..."
-    },
-    {
-        "id": 270,
-        "type": "global",
-        "joke": "Quel est le comble de Buzz ?",
-        "answer": "D'aller plus vite que l'éclair. "
-    },
-    {
-        "id": 271,
-        "type": "global",
-        "joke": "Que fait un gros poussin ?",
-        "answer": "PIOU-PIOU"
-    },
-    {
-        "id": 272,
-        "type": "beauf",
-        "joke": "Pourquoi les bots ne parlent pas avec les humains ?",
-        "answer": "Pour ne pas leur ressembler."
-    },
-    {
-        "id": 273,
-        "type": "global",
-        "joke": "Pourquoi les coquilles ne font pas de régime ?",
-        "answer": "Parce qu'elles sont palourdes !"
-    },
-    {
-        "id": 274,
-        "type": "dark",
-        "joke": "Qu'est-ce qu'un pruneau ?",
-        "answer": "Un synonyme de personne âgée : qui est ridée et qui fait chier"
-    },
-    {
-        "id": 275,
-        "type": "beauf",
-        "joke": "Qu'est ce qu'oune péniche ?",
-        "answer": "C'est oune zizi portouguaiche"
-    },
-    {
-        "id": 276,
-        "type": "limit",
-        "joke": "Les parents sont deux êtres qui t'apprennent à marcher et à parler",
-        "answer": "Pour ensuite te dire de t'asseoir et de fermer ta gueule "
-    },
-    {
-        "id": 277,
-        "type": "global",
-        "joke": "L'autobus est une invention géniale !",
-        "answer": "Il roule deux fois plus vite quand tu cours après que quand t'es assis dedans"
-    },
-    {
-        "id": 278,
-        "type": "global",
-        "joke": "Les ciseaux à bois...",
-        "answer": "Les chiens aussi"
-    },
-    {
-        "id": 279,
-        "type": "global",
-        "joke": "Qu'est-ce que le Gospel ?",
-        "answer": "C'est quand ton gamin a pris un coup de soleil"
-    },
-    {
-        "id": 280,
-        "type": "dark",
-        "joke": "Qu'est-ce que la beauté intérieure ?",
-        "answer": "Un concept inventé par les moches pour pouvoir se reproduire"
-    },
-    {
-        "id": 281,
-        "type": "global",
-        "joke": "Moi j'ai un Archipel",
-        "answer": "ça creuse des archi trous "
-    },
-    {
-        "id": 282,
-        "type": "limit",
-        "joke": "Avez-vous déjà eu des sentiments partagés ? ",
-        "answer": "Genre quand ta belle mère recule vers le ravin avec ta voiture toute neuve"
-    },
-    {
-        "id": 283,
-        "type": "limit",
-        "joke": "Une définition simple de l'amour :",
-        "answer": "C'est comme un jeu de cartes, si t'as pas de partenaire(s) il vaut mieux avoir une bonne main "
-    },
-    {
-        "id": 284,
-        "type": "global",
-        "joke": "Maman, où est mon perroquet?",
-        "answer": "Au quai."
-    },
-    {
-        "id": 285,
-        "type": "blondes",
-        "joke": "Pourquoi mon ordinateur ne marche plus? Qu'as-tu fais?",
-        "answer": "Vu qu'il était sale je l'ai nettoyé avec de l'eau. "
-    },
-    {
-        "id": 286,
-        "type": "global",
-        "joke": "Quand est-ce que les chiens aboient ?",
-        "answer": "Lorsqu’ils ont un chat dans la gorge."
-    },
-    {
-        "id": 287,
-        "type": "dev",
-        "joke": "Comment un développeur tente-t-il de réparer sa voiture lorsqu'elle a un problème ?",
-        "answer": "Il sort de la voiture, ferme toutes les fenêtres, retourne dans la voiture, et essaie de redémarrer."
-    },
-    {
-        "id": 288,
-        "type": "global",
-        "joke": "Que dit un égoïste qui veut partager?",
-        "answer": "On fait moi-moi."
-    },
-    {
-        "id": 289,
-        "type": "global",
-        "joke": "Qu'est-ce que deux fous avec des mitraillettes ?",
-        "answer": "Une fousillade."
-    },
-    {
-        "id": 290,
-        "type": "global",
-        "joke": "Que dit le juge au manchot ?",
-        "answer": "Allez allez, témoignons !"
-    },
-    {
-        "id": 291,
-        "type": "global",
-        "joke": "Tu connais la blague du con qui dit non ?",
-        "answer": "Non…"
-    },
-    {
-        "id": 292,
-        "type": "global",
-        "joke": "Quel est le comble pour un plombier ?",
-        "answer": "Que ses clients prennent la fuite !"
-    },
-    {
-        "id": 293,
-        "type": "limit",
-        "joke": "2 fesses se croisent",
-        "answer": "Alors, ça gaze ?"
-    },
-    {
-        "id": 294,
-        "type": "limit",
-        "joke": "Où est fabriqué le viagra ?",
-        "answer": "Au Boukistan"
-    },
-    {
-        "id": 295,
-        "type": "limit",
-        "joke": "Qu’est-ce qu’une gifle ?",
-        "answer": "C’est comme une bifle, mais avec la main !"
-    },
-    {
-        "id": 296,
-        "type": "limit",
-        "joke": "Pourquoi j’ai appelé mon pénis Bidou ?",
-        "answer": "Parce que quand je vais pisser, je s’coue Bidou."
-    },
-    {
-        "id": 297,
-        "type": "limit",
-        "joke": "Quel est le seul instrument à vent avec une corde ?",
-        "answer": "Le string"
-    },
-    {
-        "id": 298,
-        "type": "global",
-        "joke": "Quand 2 poissons s’énervent..",
-        "answer": "Est-ce qu’on peut dire que le thon monte ?"
-    },
-    {
-        "id": 299,
-        "type": "beauf",
-        "joke": "Pourquoi les hommes amènent-ils leur femme en vacances ?",
-        "answer": "Pour que les vacances paraissent plus longues..."
-    },
-    {
-        "id": 300,
-        "type": "beauf",
-        "joke": "Que fait Jean quand il voit une femme crocodile ?",
-        "answer": "Il lacoste !"
-    },
-    {
-        "id": 301,
-        "type": "global",
-        "joke": "Qu'est-ce qui commence par un E, finit par un E et qui ne contient qu'une lettre ?",
-        "answer": "Une enveloppe !"
-    },
-    {
-        "id": 302,
-        "type": "limit",
-        "joke": "Qu’est-ce qui se lève quand tu t’en sers, qui s’abaisse quand tu as fini de t’en servir et qui goutte après usage ?",
-        "answer": "Un parapluie"
-    },
-    {
-        "id": 303,
-        "type": "global",
-        "joke": "Babi et Baba sont sur un bateau Baba tombe à l’eau. Que se passe-t-il ?",
-        "answer": "Babi bêle et Baba coule"
-    },
-    {
-        "id": 304,
-        "type": "global",
-        "joke": "Que s'est il passé en 1769 ? Napoléon est né ! Et que s'est il passé en 1789 ?",
-        "answer": "Il a eu 20 ans !"
-    },
-    {
-        "id": 305,
-        "type": "global",
-        "joke": "Rien ne sert de courir...",
-        "answer": "... Je suis déjà en retard"
-    },
-    {
-        "id": 306,
-        "type": "beauf",
-        "joke": "Quand mon verre est plein, je le vide",
-        "answer": "Quand mon verre est vide, je me plains !"
-    },
-    {
-        "id": 307,
-        "type": "global",
-        "joke": "Attention au chien ! ",
-        "answer": "Il est si petit que vous pourriez marcher dessus "
-    },
-    {
-        "id": 308,
-        "type": "global",
-        "joke": "Ne pas déranger svp ",
-        "answer": "Je n'ai pas rangé pour rien... "
-    },
-    {
-        "id": 309,
-        "type": "global",
-        "joke": "Merci de ne pas frapper",
-        "answer": "Et soyez gentil, de ne pas sonner non plus"
-    },
-    {
-        "id": 310,
-        "type": "global",
-        "joke": "N'hésitez pas à demander si la maison fait crédit",
-        "answer": "Nous avons une façon absolument délicieuse de refuser "
-    },
-    {
-        "id": 311,
-        "type": "global",
-        "joke": "Sur ce serveur le 12 mai 2020",
-        "answer": "Il ne se passa strictement rien "
-    },
-    {
-        "id": 312,
-        "type": "global",
-        "joke": "Pourquoi la girafe se fait arrêter par la police ? ",
-        "answer": "Parce que c’est un cou-monté !"
-    },
-    {
-        "id": 313,
-        "type": "global",
-        "joke": "Pourquoi les coccinelles n’aiment-elles pas courir ?",
-        "answer": "Parce qu’elles ont toujours des points de cotés !"
-    },
-    {
-        "id": 314,
-        "type": "global",
-        "joke": "On ne dit pas démanger",
-        "answer": "On dit vomir"
-    },
-    {
-        "id": 315,
-        "type": "dark",
-        "joke": "Que disait Eve pour faire avancer le bâteau",
-        "answer": "Ramadan"
-    },
-    {
-        "id": 316,
-        "type": "limit",
-        "joke": "Que signifie expatriées ?",
-        "answer": "Anciennes petites amies non rangées"
-    },
-    {
-        "id": 317,
-        "type": "global",
-        "joke": "Qui est l'idiot qui a créé la cédille ?",
-        "answer": "Monsieur Duçon"
-    },
-    {
-        "id": 318,
-        "type": "global",
-        "joke": "Que signifie Mercato ?",
-        "answer": "C'est une maman pratiquante"
-    },
-    {
-        "id": 319,
-        "type": "limit",
-        "joke": "Tu sais ce que c'est un suppositoire ?",
-        "answer": "C'est une invention qui restera dans les annales"
-    },
-    {
-        "id": 320,
-        "type": "global",
-        "joke": "Les pharmacies...",
-        "answer": "... c'est les confiseries des vieux"
-    },
-    {
-        "id": 321,
-        "type": "beauf",
-        "joke": "Une jardinerie est un endroit merveilleux",
-        "answer": "Si tu te prends trois râteaux on t'offre une pelle"
-    },
-    {
-        "id": 322,
-        "type": "global",
-        "joke": "Pourquoi Toto veut se marier avec la mère de son père ?",
-        "answer": "Ben son père s'est bien marié avec la sienne..."
-    },
-    {
-        "id": 323,
-        "type": "global",
-        "joke": "Que demande un chat dans une pharmacie ?",
-        "answer": "Avez-vous du sirop pour ma toux ?"
-    },
-    {
-        "id": 324,
-        "type": "global",
-        "joke": "Que faisaient les dinosaures quand ils n'arrivaient pas à se décider ?",
-        "answer": "Des tirageosaures"
-    },
-    {
-        "id": 325,
-        "type": "global",
-        "joke": "Pourquoi est-ce c'est difficile de conduire dans le Nord ?",
-        "answer": "Parce que les voitures arrêtent PAS DE CALER."
-    },
-    {
-        "id": 326,
-        "type": "global",
-        "joke": "Pourquoi est-ce qu'on met tous les crocos en prison ?",
-        "answer": "Parce que les crocos dealent."
-    },
-    {
-        "id": 327,
-        "type": "global",
-        "joke": "Quel est le jambon que tout le monde déteste ?",
-        "answer": "Le sale ami."
-    },
-    {
-        "id": 328,
-        "type": "global",
-        "joke": "Qu'est ce qu'un cadeau qui s'en va ?",
-        "answer": "Une surprise party"
-    },
-    {
-        "id": 329,
-        "type": "global",
-        "joke": "Quelle est la différence entre toi et un sapin ?",
-        "answer": "Un sapin c'est un conifère et toi t'es con et on peut rien y faire"
-    },
-    {
-        "id": 330,
-        "type": "dark",
-        "joke": "Ta mère est tellement grosse",
-        "answer": "Que quand elle sort y a une éclipse"
-    },
-    {
-        "id": 331,
-        "type": "dark",
-        "joke": "Tout est bon dans le cochon",
-        "answer": "Je ne mangerai pas ta mère pour autant"
-    },
-    {
-        "id": 332,
-        "type": "dark",
-        "joke": "Vous saviez que la famille Le Pen a du sang arabe ?",
-        "answer": "Sur le capot de leur voiture..."
-    },
-    {
-        "id": 333,
-        "type": "global",
-        "joke": "Quelle est l'émission TV préférée des jardiniers constipés ?",
-        "answer": "Silence ça pousse"
-    },
-    {
-        "id": 334,
-        "type": "global",
-        "joke": "Qu'est ce qu'une frite enceinte ?",
-        "answer": "Une patate sautée"
-    },
-    {
-        "id": 335,
-        "type": "global",
-        "joke": "Que dit un coronavirus quand il braque une banque ?",
-        "answer": "Donner moi l'argent, sinon je fais toussoter !"
-    },
-    {
-        "id": 336,
-        "type": "dark",
-        "joke": "Qu’est-ce qu’un homme avec une mitraillette dans un champ de blé ?",
-        "answer": "Un céréales killer."
-    },
-    {
-        "id": 337,
-        "type": "global",
-        "joke": "Peux-tu me dire si le clignotant fonctionne ?",
-        "answer": "Oui, non, oui, non, oui, non."
-    },
-    {
-        "id": 338,
-        "type": "beauf",
-        "joke": "Quel est le meilleur site pour un homme qui cherche un lave-vaisselle ?",
-        "answer": "Un site de rencontres."
-    },
-    {
-        "id": 339,
-        "type": "beauf",
-        "joke": "Quel est le point commun entre la poitrine d'une femme et un train électrique ?",
-        "answer": "C’est fait pour les enfants mais c’est papa qui joue avec."
-    },
-    {
-        "id": 340,
-        "type": "beauf",
-        "joke": "Que dit une bière quand elle tombe dans l'eau ?",
-        "answer": "Je sais panaché"
-    },
-    {
-        "id": 341,
-        "type": "global",
-        "joke": "Deux pommes de terre traversent la route, l'une d'elles se fait écraser",
-        "answer": "Oh purée !"
-    },
-    {
-        "id": 342,
-        "type": "global",
-        "joke": "C’est en forgeant qu’on devient forgeron.",
-        "answer": "Et c’est en sciant que Léonard devint scie !"
-    },
-    {
-        "id": 343,
-        "type": "global",
-        "joke": "Jésus a marché sur l'eau. Une courgette est composé a 98% d'eau. J.ai marché sur une courgette.",
-        "answer": "je suis à 98% Jésus"
-    },
-    {
-        "id": 344,
-        "type": "dark",
-        "joke": "Quel est la différence entre Jésus et un tableau de Picasso ?",
-        "answer": "Le tableau s'accroche avec un seul clou"
-    },
-    {
-        "id": 345,
-        "type": "global",
-        "joke": "Comment est-ce que la chouette sait que son mari fait la gueule ?",
-        "answer": "Parce qu’HIBOUDE."
-    },
-    {
-        "id": 346,
-        "type": "global",
-        "joke": "Qu'est-ce qu'un tennisman adore faire ?",
-        "answer": "Rendre des services !"
-    },
-    {
-        "id": 347,
-        "type": "limit",
-        "joke": "Comment appelle-t-on six prostituées Allemandes ?",
-        "answer": "Une scie sauteuse Bosch"
-    },
-    {
-        "id": 348,
-        "type": "blondes",
-        "joke": "Qu'est-ce qu'une blonde avec de l'eau dans la bouche ?",
-        "answer": "Une cruche"
-    },
-    {
-        "id": 349,
-        "type": "global",
-        "joke": "Pourquoi quand on vise on ferme un œil ?",
-        "answer": "Car si on fermait les deux on verrait plus rien."
-    },
-    {
-        "id": 350,
-        "type": "dark",
-        "joke": "Qu'est ce qu'un pruneau ?",
-        "answer": "Un synonyme de personne âgée : qui est ridée et qui fait chier"
-    },
-    {
-        "id": 351,
-        "type": "global",
-        "joke": "Quel est la différence entre un marin et un boucher?",
-        "answer": "Le boucher voit le porc avant les côtes "
-    },
-    {
-        "id": 352,
-        "type": "dark",
-        "joke": "Une jeune soupçonnée de sorcellerie demande à sa mère : \"Pourquoi est-ce qu'on flotte?\"",
-        "answer": "\"Pour la même raison qu'on brûle.\""
-    },
-    {
-        "id": 353,
-        "type": "global",
-        "joke": "Comment appelle t-on un chat dans l'espace ?",
-        "answer": "Un chatellite "
-    },
-    {   
-        "id": 354,
-        "type": "global",
-        "joke": "Qu’est-ce qu’un cochon volant ?",
-        "answer": "Un aéroport."
-    },
-    {
-        "id": 355,
-        "type": "global",
-        "joke": "Quel est le comble pour un porte-charge?",
-        "answer": "C'est de mal se porter."
-    },
-    {
-        "id": 356,
-        "type": "global",
-        "joke": "Pourquoi méprise-tu les canard ?",
-        "answer": "Parce qu'à chaque fois que je vais au coin il se moque de moi."
-    },
-    {
-        "id": 357,
-        "type": "beauf",
-        "joke": "Quel est le point commun entre un mauvais musicien et un cancre? ",
-        "answer": "Les deux ont de mauvaises notes."
-    },
-    {
-        "id": 358,
-        "type": "beauf",
-        "joke": "Les peintres utilisent, de l'imagination, de la créativité et...",
-        "answer": "De la peinture."
-    },
-    {
-        "id": 359,
-        "type": "beauf",
-        "joke": "Une mère demande à son fils : quel est ton animal préféré?",
-        "answer": "Le zébu parce qu'on a un point commun."
-    },
-    {
-        "id": 360,
-        "type": "limit",
-        "joke": "Que fait un oiseau au dessus d’un camp de concentration ?",
-        "answer": "cuit cuit !"
-    },
-    {
-        "id": 361,
-        "type": "global",
-        "joke": "Mr et madame Sop ont un fils comment s'appelle-t-il ?",
-        "answer": "Alain"
-    },
-    {
-        "id": 362,
-        "type": "dark",
-        "joke": "Deux belges se déplacent dans le désert en tenant une portière",
-        "answer": "J'ai trop chaud ouvre la fenêtre s'il te plaît"
-    },
-    {
-        "id": 363,
-        "type": "global",
-        "joke": "Dieu créa la France, un trop beau pays, de belles formes, la mer, l'océan, les montagnes...",
-        "answer": "Alors pour compenser il a créé le français"
-    },
-    {
-        "id": 364,
-        "type": "dark",
-        "joke": "Ma b*te, je l’ai appelée la vie.",
-        "answer": "Parce que la vie est dure..."
-    },
-    {
-        "id": 365,
-        "type": "beauf",
-        "joke": "Qu'est-ce qui est pire qu'un meurtrier ?",
-        "answer": "Un policier fanatique."
-    },
-    {
-        "id": 366,
-        "type": "global",
-        "joke": "Je suis Tintin, mais je ne suis pas Tintin. Qui suis-je ?",
-        "answer": "Milou"
-    },
-    {
-        "id": 367,
-        "type": "global",   
-        "joke": "Qu'est-ce qu'un squelette dans une armoire.",
-        "answer": "Quelqu'un qui a gagné un cache-cache."
-    },
-    {
-        "id": 368,
-        "type": "global",
-        "joke": "Que disent deux mouettes lorsqu’elles veulent partager quelque chose ?",
-        "answer": "« On fait mouette-mouette ? »"
-    },
-    {
-        "id": 369,
-        "type": "dark",
-        "joke": "Que font 1+2-1x2?",
-        "answer": "Le nombre de jambe d'un machot."
-    },
-    {
-        "id": 370,
-        "type": "dark",
-        "joke": "Quel est la différence entre des pizzas et des juifs ?",
-        "answer": "Le temps de cuisson."
-    },
-    {
-        "id": 371,
-        "type": "limit",
-        "joke": "Quelle est la pire musique pour les juifs ?",
-        "answer": "En feu, Soprano"
-    },
-    {
-        "id": 372,
-        "type": "limit",
-        "joke": "Quelle est la vitesse maximale autorisée lors d'un rapport ?",
-        "answer": "68km/h car à 69..... Ça fait une tête à queue."
-    },
-    {
-        "id": 373,
-        "type": "global",
-        "joke": "Quel est le comble d'un comble ? ",
-        "answer": "C'est qu'un muet dit à un sourd qu'un aveugle les espionne. "
-    },
-    {
-        "id": 374,
-        "type": "global",
-        "joke": "Quel est le meilleur ami d'un grand-père ?",
-        "answer": "Le potager"
-    },
-    {
-        "id": 375,
-        "type": "dark",
-        "joke": "Que dit-on en Afrique quand un lieu est bondé ?",
-        "answer": "Il est noir de monde..."
-    },
-    {
-        "id": 376,
-        "type": "global",
-        "joke": "Qu'elle est l'insulte la plus utilisée en 1940 après le traité de Vichy ?",
-        "answer": "Pétain"
-    },
-    {
-        "id": 377,
-        "type": "global",
-        "joke": "Tu as aucune référence....",
-        "answer": "Peut-être car je suis pas à vendre !"
-    },
-    {
-        "id": 378,
-        "type": "limit",
-        "joke": "Quelle est la tarte préférée des putes ?",
-        "answer": "La tarte catin"
-    },
-    {
-        "id": 379,
-        "type": "dark",
-        "joke": "Un français et un arabe sont sur un immeuble. Le quel saute en premier ? ",
-        "answer": "L’immeuble"
-    },
-    {
-        "id": 380,
-        "type": "global",
-        "joke": "Monsieur et madame Cale ont un fils, comment s'appelle t-il?",
-        "answer": "Medhi"
-    },
-    {
-        "id": 381,
-        "type": "dark",        
-        "joke": "– Maman, maman, je ne veux plus dormir avec mon petit frère.",
-        "answer": "– Tais-toi ! Je t’ai déjà dit qu’on avait pas assez d’argent pour l’enterrer."
-    },
-    {
-        "id": 382,
-        "type": "global",
-        "joke": "Lors de tes piques-niques",
-        "answer": "Tu manges avec ou sandwich ?"
-    },
-    {
-        "id": 383,
-        "type": "beauf",
-        "joke": "Connaissez-vous le slogan \"ça fait du bien par où ça passe\" ?",
-        "answer": "C'est une pub de suppositoires je crois..."
-    },
-    {
-        "id": 384,
-        "type": "global",
-        "joke": "Qu’est ce qui sépare l’espèce humaine du singe ?",
-        "answer": "La mer Méditerranée."
-    },
-    {
-        "id": 385,
-        "type": "limit",
-        "joke": "Que disent deux fesses sur un bateau ?",
-        "answer": "Dis donc ça commence à ramer du cul"
-    },
-    {
-        "id": 386,
-        "type": "beauf",
-        "joke": "Un médecin félicite le mari d'un couple pour le nouveau né. La femme demande au médecin pourquoi elle n'est pas félicitée.",
-        "answer": "Quand un plat est réussi, on félicite le cuisinier pas le four !"
-    },
-    {
-        "id": 387,
-        "type": "global",
-        "joke": "Mon plus grand défaut est l'honnêteté... Vous pensez le contraire ?",
-        "answer": "J'en ai rien à foutre de ce que vous pensez"
-    },  
-    {
-        "id": 388,
-        "type": "dark",
-        "joke": "Que chante un juif devant un feu de camp ?",
-        "answer": "\"Vous les copains je ne vous oublierai jamais !\""
-    },
-    {
-        "id": 389,
-        "type": "global",
-        "joke": "De quelle couleur est le cheval blanc d'Henri IV ?",
-        "answer": "Jaune, car il s'est pissé dessus"
-    },
-    {
-        "id": 390,
-        "type": "global",
-        "joke": "J'ai lu un livre de Victor Hugo.",
-        "answer": "Il ne devait pas boire que du Fanta à l'apéro celui là..."
-    },
-    {
-        "id": 391,
-        "type": "limit",
-        "joke": "Ce n'est pas bien de regarder sous les jupes des filles",
-        "answer": "Il faut regarder sous la culotte"
-    },
-    {
-        "id": 392,
-        "type": "global",
-        "joke": "Quel est la différence entre un marin et un boucher ?",
-        "answer": "Le marin voit les côtes avant le port et le boucher voit le porc avant les côtes."
-    },
-    {
-        "id": 393,
-        "type": "dark",
-        "joke": "Un homme à l'hôpital dit à son infirmière : Vous êtes mon infirmière préférée, voudriez-vous passer me voir quand je serai sorti de l'hôpital ?",
-        "answer": "Je suis désolée, mais j'ai horreur, des cimetières."
-    },
-    {
-        "id": 394,
-        "type": "global",
-        "joke": "Je me présente, je suis Tamayo",
-        "answer": "Et lui c'est Monketchup ?"
-    },
-    {
-        "id": 395,
-        "type": "dark",
-        "joke": "Un juif est dans un ascenseur. Soudain, l'homme à côté de lui lâche un gros pet. Le juif le regarde l'air choqué.",
-        "answer": "Oh, ça va ! C'est du gaz, ça n'a jamais tué personne !"
-    },
-    {
-        "id": 396,
-        "type": "limit",
-        "joke": "Comment appelle t'on le penis d'un pretre ?",
-        "answer": "La verite car la verite sors toujours de la bouche des enfants"
-    },
-    {
-        "id": 397,
-        "type": "dev",
-        "joke": "Que fait un développeur quand il a peur ?",
-        "answer": "Il csharpe"
-    },
-    {
-        "id": 398,
-        "type": "dark",
-        "joke": "Ou doit-on prendre le bus pour aller au cimetière ?",
-        "answer": "En pleine gueule"
-    },
-    {
-        "id": 399,
-        "type": "dark",
-        "joke": "Qu'est ce qui permet d'enlever le chewing gum des ses cheveux ?",
-        "answer": "Le cancer"
-    },
-    {
-        "id": 400,
-        "type": "global",
-        "joke": "Quel est la marque de biscuit préférée de Brigitte Macron ?",
-        "answer": "Les petits écoliers"
-    },
-    {
-        "id": 401,
-        "type": "dark",
-        "joke": "Quel est le point commun entre l'humour noir et la nourriture ? ",
-        "answer": "Certains en ont, mais d'autres non "
-    },
-    {
-        "id": 402,
-        "type": "dark",
-        "joke": "Pourquoi personne ne sait nager au Maroc ?",
-        "answer": "Par ce que tous ceux qui savent, sont déjà en France."
-    },
-    {
-        "id": 403,
-        "type": "dark",
-        "joke": "Un noir va aux toilettes et en ressort blanc, qu'a t'il fait ??",
-        "answer": "il a chié sa race "
-    },
-    {
-        "id": 404,
-        "type": "global",
-        "joke": "Qu'est ce que deux sourds qui se battent ?",
-        "answer": "Un malentendu "
-    },
-    {
-        "id": 405,
-        "type": "global",
-        "joke": "On m’a toujours dit que Mozart était mort. ",
-        "answer": "Pourtant, à chaque fois que j’ouvre mon frigo, Mozart est là... "
-    },
-    {
-        "id": 406,
-        "type": "global",
-        "joke": "J'ai 36 têtes, 28 bras et 12 jambes, qui suis-je ?",
-        "answer": "Un mythomane"
-    },
-    {
-        "id": 407,
-        "type": "limit",
-        "joke": "Que fait un zoophile qui veut sauter ? ",
-        "answer": "Il prend son élan"
-    },
-    {
-        "id": 408,
-        "type": "beauf",
-        "joke": "Comment reconnait-on un aveugle sur une plage naturiste ?",
-        "answer": "C'est pas dur !"
-    },
-    {
-        "id": 409,
-        "type": "global",
-        "joke": "Pourquoi les tirelires sont en forme de cochon ?",
-        "answer": "Pour que les arabes n'y touchent pas"
-    },
-    {
-        "id": 410,
-        "type": "dark",
-        "joke": "J'ai vu un enfant sur un vélo, j'ai cru que c'était le mien donc je suis allé vérifier dans le garage... ",
-        "answer": "Mais je me suis trompé, il était toujours là, enchaîné, à réclamer à boire et à manger "
-    },
-    {
-        "id": 411,
-        "type": "dark",
-        "joke": "Que fait on après avoir serré la main d'un lépreux ? ",
-        "answer": "On la lui rend "
-    },
-    {
-        "id": 412,
-        "type": "dark",
-        "joke": "Pourquoi New-York ne peut pas jouer aux échecs ?",
-        "answer": "Parce qu'il lui manque deux tours"
-    },
-    {
-        "id": 413,
-        "type": "dark",
-        "joke": "Pourquoi Paris ne peut pas jouer aux échecs ?",
-        "answer": "Parce qu'il lui manque la Dame"
-    },
-    {
-        "id": 414,
-        "type": "dark",
-        "joke": "Que fait un prêtre après avoir sodomiser un chauve ?",
-        "answer": "Il le repose dans son berceau"
-    },
-    {
-        "id": 415,
-        "type": "blondes",
-        "joke": "Pourquoi c'est plus long de faire un bonhomme de neige blonde ?",
-        "answer": "Parce qu'il faut vider la tête"
-    },
-    {
-        "id": 416,
-        "type": "blondes",
-        "joke": "Combien faut il de blonde pour visser une ampoule ? ",
-        "answer": "Une qui tien l'ampoule, et quatre qui font tourner la blonde"
-    },
-    {
-        "id": 417,
-        "type": "beauf",
-        "joke": "Bon on joue au poker ou on s'encule ?",
-        "answer": "Perso j'aime pas trop le poker alors..."
-    },
-    {
-        "id": 418,
-        "type": "blondes",
-        "joke": "Mon Chat est mort... Je voudrais tellement en avoir un autre pareil",
-        "answer": "Mais qu’est ce que tu ferais de deux chats morts ?"
-    },
-    {
-        "id": 419,
-        "type": "global",
-        "joke": "Comment apelle t'on un cochon qui vole?",
-        "answer": "Un aéro-porc !"
-    },
-    {
-        "id": 420,
-        "type": "dark",
-        "joke": "Que faisait les parents de Gilbert Montagne pour le punir ?",
-        "answer": "Il déplaçaient les meubles"
-    },
-    {
-        "id": 421,
-        "type": "global",
-        "joke": "Comment s'appelle la femelle du hamster ? ",
-        "answer": "Amsterdam"
-    },
-    {
-        "id": 422,
-        "type": "global",
-        "joke": "Comment est mort capitaine Crochet ? ",
-        "answer": "En se grattant les couilles ! "
-    },
-    {
-        "id": 423,
-        "type": "global",
-        "joke": "Comment nintendo ont fais leurs consoles ?",
-        "answer": "ils ont demandé à une déesse, puis à deux, puis à trois..."
-    },
-    {
-        "id": 424,
-        "type": "global",
-        "joke": "Que fait un cendrier devant un ascenseur ?",
-        "answer": "Il veut des cendres"
-    },
-    {
-        "id": 425,
-        "type": "global",
-        "joke": "Que dit une noisette quand elle tombe à l'eau ?",
-        "answer": "je me noix "
-    },
-    {
-        "id": 426,
-        "type": "dark",
-        "joke": "Que faire lorsqu’on trouve un épileptique en crise dans une baignoire ?",
-        "answer": "Ajouter de la lessive et y jeter son linge sale."
-    },
-    {
-        "id": 427,
-        "type": "dark",
-        "joke": "Papa, papa, j’aime pas grand mère…",
-        "answer": "Bein tu n’as qu’à la laisser sur le bord de l’assiette."
-    },
-    {
-        "id": 428,
-        "type": "dark",
-        "joke": "Maman, maman papa c’est pendu dans le jardin !",
-        "answer": "Poisson d’avril ! il s’est pendu dans le grenier !"
-    },
-    {
-        "id": 429,
-        "type": "dark",
-        "joke": "Qu'est ce qui est vert et qui pue ?",
-        "answer": "Un scout mort au fond d’un bois"
-    },
-    {
-        "id": 430,
-        "type": "dev",
-        "joke": "De quelle couleur sont tes yeux ?",
-        "answer": "#1292f4 et toi ?"
-    },
-    {
-        "id": 431,
-        "type": "dev",
-        "joke": "Il y a 10 types de gens dans le monde.",
-        "answer": "Ceux qui parlent binaire, et les autres."
-    },
-    {
-        "id": 432,
-        "type": "dev",
-        "joke": "Que fait un développeur s'il veut se marier ?",
-        "answer": "Une fille en C"
-    },
-    {
-        "id": 433,
-        "type": "blondes",
-        "joke": "Une blonde et une brune se jettent en bas d'un immeuble de dix étages. Laquelle atteint le sol en premier ? ",
-        "answer": "La brune, parce que la blonde s'est perdue en chemin"
-    },
-    {
-        "id": 434,
-        "type": "global",
-        "joke": "Quel est le comble pour un plombier ?",
-        "answer": "Que ses clients prennent la fuite !"
-    },
-    {
-        "id": 435,
-        "type": "global",
-        "joke": "Quelle est la meilleure heure pour écouter de la musique ? ",
-        "answer": "Deezer"
-    },
-    {
-        "id": 436,
-        "type": "global",
-        "joke": "À quoi sert Internet Explorer ?",
-        "answer": "À télécharger Google Chrome."
-    },
-    {
-        "id": 437,
-        "type": "global",
-        "joke": "Tu sais pourquoi l'iPhone 6 se plie ? ",
-        "answer": "Parce que l'Apple Store."
-    },
-    {
-        "id": 438,
-        "type": "global",
-        "joke": "Comment on appelle un mec qui répare des tablettes Microsoft ?",
-        "answer": "Un technicien de surface."
-    },
-    {
-        "id": 439,
-        "type": "global",
-        "joke": "Pourquoi dit-on que les poissons travaillent illégalement ?",
-        "answer": "Parce qu’ils n’ont pas de FISH de paie."
-    },
-    {
-        "id": 440,
-        "type": "global",
-        "joke": "Quel est le bar préféré des espagnols ?",
-        "answer": "Le bar Celone"
-    },
-    {
-        "id": 441,
-        "type": "global",
-        "joke": "Pourquoi est-ce que les vêtements sont toujours fatigués quand ils sortent de la machine ?",
-        "answer": "Parce qu’ils sont lessivés."
-    },
-    {
-        "id": 442,
-        "type": "global",
-        "joke": "Pourquoi est-ce que les livres ont-ils toujours chaud ?",
-        "answer": "Parce qu’ils ont une couverture"
-    },
-    {
-        "id": 443,
-        "type": "limit",
-        "joke": "Qu’est-ce qui est pire que de doigter sa sœur ? ",
-        "answer": "Y trouver l’alliance de son père."
-    },
-    {
-        "id": 444,
-        "type": "global",
-        "joke": "Qui chante le mieux lors d'une tempête ?",
-        "answer": "Storm Maé"
-    },
-    {
-        "id": 445,
-        "type": "dark",
-        "joke": "Qu'est-ce qui est vert, rouge et qui va à 200 km/h ?",
-        "answer": "Une grenouille dans un mixeur"
-    },
-    {
-        "id": 446,
-        "type": "dev",
-        "joke": "Que met un développeur sur sa voiture en hiver?",
-        "answer": "Une bash."
-    },
-    {
-        "id": 447,
-        "type": "limit",
-        "joke": "Hier, j'ai espionné un pote pour savoir son MDP, après quelques coups d'oeil je le vois taper \"PÉNIS\"...",
-        "answer": "Le PC l'a jugé \"Trop court\"..."
-    },
-    {
-        "id": 448,
-        "type": "global",
-        "joke": "Comment appelle t'on un chat compressé ?",
-        "answer": "Un Kitkat"
-    },
-    {
-        "id": 449,
-        "type": "dark",
-        "joke": "Comment réparer un téléphone tombé à l'eau ?",
-        "answer": "Vous le recouvrez de riz dans une boîte hermétique puis laissez passer une nuit, pendant votre sommeil, de petits chinois, attirés par le riz, viendront réparer votre téléphone !"
-    },
-    {
-        "id": 450,
-        "type": "global",
-        "joke": "Quelle est la différence entre un cendrier et une théière ?",
-        "answer": "Le cendrier c'est pour des cendres (descendre), la théière, c'est pour mon thé (monter)."
-    },
-    {
-        "id": 451,
-        "type": "dark",
-        "joke": "Comment avoir 1 million de followers en Afrique ?",
-        "answer": "Suffit de courir avec une bouteille d'eau"
-    },
-    {
-        "id": 452,
-        "type": "global",
-        "joke": "Pourquoi les chinois de croient pas au père noël ?",
-        "answer": "Car c'est eux qui font les jouets"
-    },
-    {
-        "id": 453,
-        "type": "dark",
-        "joke": "Quelle est la différence entre un livre et un arabe",
-        "answer": "Le livre a ses papiers"
-    },
-    {
-        "id": 454,
-        "type": "dark",
-        "joke": "Pourquoi il n'y a pas de piscine en Algérie ?",
-        "answer": "Parce que tous ceux qui savent nager sont en France "
-    },
-    {
-        "id": 455,
-        "type": "dark",
-        "joke": "Quelle est la différence entre un bébé et un oignon ?",
-        "answer": "Pour l'oignon j'ai pleuré quand je l'ai découpé"
-    },
-    {
-        "id": 456,
-        "type": "dark",
-        "joke": "Un jour quelqu'un a dit a Inch d'aller a Marrakech ...",
-        "answer": "Et Inch alla !"
-    },
-    {
-        "id": 457,
-        "type": "limit",
-        "joke": "Quelle est le point commun entre les épinards et la sodomie ?",
-        "answer": "Même avec du beurre, les enfants n'aiment aucun des deux..."
-    },
-    {
-        "id": 458,
-        "type": "dark",
-        "joke": "Qu'est ce qui est mieux que de gagner une médaille d'or aux jeux paralympiques ?",
-        "answer": "Marcher."
-    },
-    {
-        "id": 459,
-        "type": "dark",
-        "joke": "Avec quoi fait-on sortir un bébé d'un mixeur ?",
-        "answer": "Une paille."
-    },
-    {
-        "id": 460,
-        "type": "global",
-        "joke": "Monsieur et madame China ont un fils, comment s'appelle t-il?",
-        "answer": "Medhi"
-    }
+  {
+    "id": 1,
+    "type": "dev",
+    "joke": "Les filles c'est comme les noms de domaine.",
+    "answer": "Celles que j'aime sont déjà prises."
+  },
+  {
+    "id": 2,
+    "type": "global",
+    "joke": "Quelle est la meilleure heure pour écouter de la musique ?",
+    "answer": "Deezer..."
+  },
+  {
+    "id": 3,
+    "type": "dev",
+    "joke": "Un développeur ne descend pas du métro.",
+    "answer": "Il libère la RAM..."
+  },
+  {
+    "id": 4,
+    "type": "dev",
+    "joke": "Où partent les développeurs en vacances ?",
+    "answer": "Au C-Shell."
+  },
+  {
+    "id": 5,
+    "type": "dev",
+    "joke": "Pourquoi les développeurs doivent-ils suivre une formation incendie ? ",
+    "answer": "A cause des pare-feux."
+  },
+  {
+    "id": 6,
+    "type": "dark",
+    "joke": "Qu’est ce qui a 4 pattes et un bras ?",
+    "answer": "Un pitbull dans un jardin d’enfant !"
+  },
+  {
+    "id": 7,
+    "type": "dark",
+    "joke": "Ma fille vient de perdre sa première dent…",
+    "answer": "Ça lui apprendra à me répondre !"
+  },
+  {
+    "id": 8,
+    "type": "dark",
+    "joke": "Qui court plus vite qu’Usain Bolt ?",
+    "answer": "Un Somalien avec un ticket restaurant"
+  },
+  {
+    "id": 9,
+    "type": "blondes",
+    "joke": "Pourquoi les alpinistes aiment-ils bien les blondes ?",
+    "answer": "Parce qu’ils n’ont pas peur du vide !"
+  },
+  {
+    "id": 10,
+    "type": "limit",
+    "joke": "Tu connais le cri du spermatozoïde ?",
+    "answer": "Bah la prochaine fois au lieu de l'avaler tu croques."
+  },
+  {
+    "id": 11,
+    "type": "global",
+    "joke": "Pourquoi Napoléon n'a jamais déménagé ?",
+    "answer": "Parce que Bonaparte"
+  },
+  {
+    "id": 12,
+    "type": "limit",
+    "joke": "Quel est le point commun entre un cunnilingus et un lapsus ?",
+    "answer": "Une erreur de langue et vous êtes vite dans la merde..."
+  },
+  {
+    "id": 13,
+    "type": "global",
+    "joke": "Quel super héros donne le plus vite l'heure ?",
+    "answer": "Speed heure man !"
+  },
+  {
+    "id": 14,
+    "type": "global",
+    "joke": "Tu connais la blague de la chaise ?",
+    "answer": "Elle est pliante"
+  },
+  {
+    "id": 15,
+    "type": "global",
+    "joke": "Pourquoi il n'y a pas de ballon à question pour un champion ?",
+    "answer": "Parce que Julien Lepers"
+  },
+  {
+    "id": 16,
+    "type": "global",
+    "joke": "Pourquoi les canards sont-ils toujours à l'heure ?",
+    "answer": "Parce qu'ils sont dans l'étang"
+  },
+  {
+    "id": 17,
+    "type": "global",
+    "joke": "Tu as 4 poussins et tu n'en veux que 3, comment faire ?",
+    "answer": "Tu en pousses un"
+  },
+  {
+    "id": 18,
+    "type": "global",
+    "joke": "Quel est le comble pour un jardinier ?",
+    "answer": "Se mettre à poil devant ses tomates pour les faire rougir."
+  },
+  {
+    "id": 19,
+    "type": "global",
+    "joke": "Pourquoi il y a une baignoire au dessus des camions de pompiers belges ?",
+    "answer": "Pour mettre la sirène."
+  },
+  {
+    "id": 20,
+    "type": "global",
+    "joke": "Qu'est ce qu'un chou au milieu de l'océan ?",
+    "answer": "Un chou marin."
+  },
+  {
+    "id": 21,
+    "type": "global",
+    "joke": "Qu'est ce qu'un légume rigolo ?",
+    "answer": "Un chou marreur."
+  },
+  {
+    "id": 22,
+    "type": "limit",
+    "joke": "Quel est la différence entre un ascenseur et un vagin ?",
+    "answer": "Aucune, dans les deux cas tu mets ton doigt où t'habite"
+  },
+  {
+    "id": 23,
+    "type": "global",
+    "joke": "Pourquoi le lapin est bleu ?",
+    "answer": "Parce qu’on l’a peint"
+  },
+  {
+    "id": 24,
+    "type": "global",
+    "joke": "Quelle est la mamie qui fait peur aux voleurs ?",
+    "answer": "Mamie Traillette"
+  },
+  {
+    "id": 25,
+    "type": "blondes",
+    "joke": "Qu'est-ce qu'une blonde avec de l'eau dans la bouche ?",
+    "answer": "Une cruche"
+  },
+  {
+    "id": 26,
+    "type": "dark",
+    "joke": "Que fait un chinois sur une mobylette ?",
+    "answer": "Nèèèèmmmmm, Nèèèèmmmmm, Nèèèèmmmmm"
+  },
+  {
+    "id": 27,
+    "type": "global",
+    "joke": "Qu'est ce qu'un squelette dans une armoire ?",
+    "answer": "Une personne qui a gagné à cache-cache."
+  },
+  {
+    "id": 28,
+    "type": "dark",
+    "joke": "Savez vous pourquoi les chinois ne perdent jamais le nord?",
+    "answer": "Parce qu'ils ont le sudoku."
+  },
+  {
+    "id": 29,
+    "type": "global",
+    "joke": "Avec quel fromage, pouvons-nous nous faire grossir les seins?",
+    "answer": "Du Boursin."
+  },
+  {
+    "id": 30,
+    "type": "limit",
+    "joke": "Qu'est-ce qui est vert et qui nique ?",
+    "answer": "Véronique."
+  },
+  {
+    "id": 31,
+    "type": "global",
+    "joke": "Comment appelle-t-on un chat tout-terrain ?",
+    "answer": "Un cat-cat."
+  },
+  {
+    "id": 32,
+    "type": "global",
+    "joke": "Comment appelle-t-on un chien qui a des lunettes ?",
+    "answer": "Un optichien."
+  },
+  {
+    "id": 33,
+    "type": "global",
+    "joke": "Quel est le comble pour un électricien ?",
+    "answer": "Ne pas être au courant."
+  },
+  {
+    "id": 34,
+    "type": "beauf",
+    "joke": "Ce que j’ai en commun avec mon mari ?",
+    "answer": "On s’est mariés le même jour..."
+  },
+  {
+    "id": 35,
+    "type": "dark",
+    "joke": "Pourquoi la petite fille est tombée de la balançoire ?",
+    "answer": "Parce qu'elle n'a pas de bras."
+  },
+  {
+    "id": 36,
+    "type": "dark",
+    "joke": "Pourquoi le petit garçon a fait tombé sa glace ?",
+    "answer": "Parce qu'il s'est fait renverser par un bus ! "
+  },
+  {
+    "id": 37,
+    "type": "global",
+    "joke": "Que fait un DJ djihadiste ?",
+    "answer": "Il fait péter le son !"
+  },
+  {
+    "id": 38,
+    "type": "dark",
+    "joke": "Combien faut-il d'hommes pour peindre une voiture en rouge ?",
+    "answer": "Un seul ! Mais il faut le lancer très fort..."
+  },
+  {
+    "id": 39,
+    "type": "dark",
+    "joke": "Quels sont les derniers mots de mon grand-père avant son décès ?",
+    "answer": "Arrête de bouger l'échelle !"
+  },
+  {
+    "id": 40,
+    "type": "dark",
+    "joke": "A quel endroit se trouvent les tétraplégiques ?",
+    "answer": "Là où on les a laissés.."
+  },
+  {
+    "id": 41,
+    "type": "dark",
+    "joke": "Savez-vous comment la femme d'Hitler est morte ?",
+    "answer": "En se trompant de douche..."
+  },
+  {
+    "id": 42,
+    "type": "dark",
+    "joke": "C'est quoi le plus dur à mixer dans un groupe de légumes ?",
+    "answer": "Leurs fauteuils..."
+  },
+  {
+    "id": 43,
+    "type": "global",
+    "joke": "Quel est le comble pour une orange ?",
+    "answer": "Être toujours pressée."
+  },
+  {
+    "id": 44,
+    "type": "global",
+    "joke": "Que dit un canard quand il va aux toilettes ?",
+    "answer": "Je vais au petit coin."
+  },
+  {
+    "id": 45,
+    "type": "global",
+    "joke": "Que dit un zombie à un autre zombie ?",
+    "answer": "Alors, ça mord ?"
+  },
+  {
+    "id": 46,
+    "type": "global",
+    "joke": "Que fait un hibou dans une casserole ?",
+    "answer": "Hi-bou"
+  },
+  {
+    "id": 47,
+    "type": "global",
+    "joke": "Quel est le comble pour un coq ?",
+    "answer": "Avoir la chair de poule !"
+  },
+  {
+    "id": 48,
+    "type": "global",
+    "joke": "Pourquoi les canards sont toujours à l'heure ?",
+    "answer": "Car ils sont dans l'étang"
+  },
+  {
+    "id": 49,
+    "type": "global",
+    "joke": "Qu'est ce qui est transparent et qui cours dans les champs ?",
+    "answer": "Un troupeau de vitre"
+  },
+  {
+    "id": 50,
+    "type": "dark",
+    "joke": "Combien y-a-t-il de somaliens en Somalie ?",
+    "answer": "Environ 500 grammes"
+  },
+  {
+    "id": 51,
+    "type": "global",
+    "joke": "Que fait une fraise sur un cheval ?",
+    "answer": "Tagada Tagada"
+  },
+  {
+    "id": 52,
+    "type": "global",
+    "joke": "Pourquoi les gorilles ont-ils de gros trous de nez ?",
+    "answer": "Car ils ont de gros doigts."
+  },
+  {
+    "id": 53,
+    "type": "dark",
+    "joke": "Quel est le point commun entre les Juifs et les baskets ?",
+    "answer": "On en trouve plus en 39 qu’en 45."
+  },
+  {
+    "id": 54,
+    "type": "blondes",
+    "joke": "Que font les blondes quand l’eau du bain de bébé est trop chaude ?",
+    "answer": "Elles mettent des gants."
+  },
+  {
+    "id": 55,
+    "type": "beauf",
+    "joke": "Quel est le point commun entre un homme et un chat ?",
+    "answer": "Les deux ont très peur de l’aspirateur"
+  },
+  {
+    "id": 56,
+    "type": "global",
+    "joke": "Comment appelle-t-on un squelette qui parle ?",
+    "answer": "Un os parleur"
+  },
+  {
+    "id": 57,
+    "type": "dark",
+    "joke": "Qu'est-ce qui a deux antennes et qui se cogne contre les murs ?",
+    "answer": "Une petite fille avec deux fourchettes plantées dans les yeux."
+  },
+  {
+    "id": 58,
+    "type": "global",
+    "joke": "C'est l'histoire d'un pingouin qui respirait par les fesses.",
+    "answer": "Un jour il s'est assis et il est mort."
+  },
+  {
+    "id": 59,
+    "type": "global",
+    "joke": "Qu’est-ce qui court et qui se jette ?",
+    "answer": "Une courgette"
+  },
+  {
+    "id": 60,
+    "type": "global",
+    "joke": "Un œuf attend un autre œuf",
+    "answer": "Si dans 5 minutes, il n’est pas là, j’me casse !"
+  },
+  {
+    "id": 61,
+    "type": "global",
+    "joke": "C’est l’histoire d’un schtroumpf qui tombe",
+    "answer": "Et qui se fait un bleu…"
+  },
+  {
+    "id": 62,
+    "type": "global",
+    "joke": "Qu’est-ce qui est jaune et qui attend ?",
+    "answer": "Jonathan"
+  },
+  {
+    "id": 63,
+    "type": "global",
+    "joke": "Quel fruit le poisson déteste-il le plus ?",
+    "answer": "La pêche"
+  },
+  {
+    "id": 64,
+    "type": "limit",
+    "joke": "Melon et Melèche jouent au Scrabble.",
+    "answer": "Melon pioche le W et Melèche le Q."
+  },
+  {
+    "id": 65,
+    "type": "blondes",
+    "joke": "Quelle est la plus intelligente : la blonde, la rousse ou la brune ?",
+    "answer": "La rousse parce que c'est un dictionnaire."
+  },
+  {
+    "id": 66,
+    "type": "global",
+    "joke": "Que fait un homme qui rentre dans un café ?",
+    "answer": "Plouf"
+  },
+  {
+    "id": 67,
+    "type": "limit",
+    "joke": "Pourquoi un homme rentre-t-il dans un bar ?",
+    "answer": "Parce qu'il est zoophile."
+  },
+  {
+    "id": 68,
+    "type": "global",
+    "joke": "Pourquoi Harry Potter chuchotte ?",
+    "answer": "Parce que Dumbledore…"
+  },
+  {
+    "id": 69,
+    "type": "global",
+    "joke": "Qu’est-ce qu’un éléphant dit à un homme tout nu ?",
+    "answer": "Et tu arrives à attraper des cacahuètes avec ça ?"
+  },
+  {
+    "id": 70,
+    "type": "global",
+    "joke": "Qu'est-ce qui est transparent et qui sent la banane ?",
+    "answer": "Un pet de singe"
+  },
+  {
+    "id": 71,
+    "type": "global",
+    "joke": "Comment appelle-t-on un squelette qui parle ?",
+    "answer": "Un os parleur"
+  },
+  {
+    "id": 72,
+    "type": "global",
+    "joke": "Qu'est-ce qui est jaune, orange, rouge et qui tourne très vite !",
+    "answer": "Un poussin dans un mixeur."
+  },
+  {
+    "id": 73,
+    "type": "global",
+    "joke": "Comment appelle-t-on un nain qui travaille à la Poste ?",
+    "answer": "Un nain posteur…"
+  },
+  {
+    "id": 74,
+    "type": "global",
+    "joke": "Que dit un citron quand il braque une banque ?",
+    "answer": "Pas un zeste !"
+  },
+  {
+    "id": 75,
+    "type": "dark",
+    "joke": "Quel dinosaure peut aller au micro-ondes ?",
+    "answer": "Le Pyrex"
+  },
+  {
+    "id": 76,
+    "type": "beauf",
+    "joke": "Quel est le point commun entre un homme et un chat ?",
+    "answer": "Les deux ont très peur de l’aspirateur"
+  },
+  {
+    "id": 77,
+    "type": "beauf",
+    "joke": "Ce que j’ai en commun avec mon mari ?",
+    "answer": "On s’est mariés le même jour..."
+  },
+  {
+    "id": 78,
+    "type": "dark",
+    "joke": "Combien y-a-t-il de somaliens en Somalie ?",
+    "answer": "Environ 500 grammes"
+  },
+  {
+    "id": 79,
+    "type": "dark",
+    "joke": "Quand Hitler s’est-il suicidé ?",
+    "answer": "Après avoir reçu sa facture de gaz…"
+  },
+  {
+    "id": 80,
+    "type": "global",
+    "joke": "Qu'est ce qu'un lampadaire ?",
+    "answer": "une lampe avec une seule bosse"
+  },
+  {
+    "id": 81,
+    "type": "dark",
+    "joke": "Quelle est la différence entre un divorce et la grammaire ?",
+    "answer": "En grammaire, c’est le masculin qui l’emporte."
+  },
+  {
+    "id": 82,
+    "type": "global",
+    "joke": "Quelle est la différence entre un chewing-gum et un avion ?",
+    "answer": "Le chewing-gum colle et l’avion décolle."
+  },
+  {
+    "id": 83,
+    "type": "dark",
+    "joke": "Qu’est ce qu’un bossu sans bras et sans jambe ?",
+    "answer": "Une madeleine"
+  },
+  {
+    "id": 84,
+    "type": "global",
+    "joke": "Pourquoi les imprimantes n'aiment pas aller à la piscine?",
+    "answer": "Parce qu'elles n'ont papier"
+  },
+  {
+    "id": 85,
+    "type": "global",
+    "joke": "Quel est le point commun entre un déménageur et un arbitre de football?",
+    "answer": "Ils aiment tous les deux sortir des cartons"
+  },
+  {
+    "id": 86,
+    "type": "global",
+    "joke": "Donald Duck et Daffy Duck se bagarrent. Qu'est ce que ca fait?",
+    "answer": "Un conflit de canard"
+  },
+  {
+    "id": 87,
+    "type": "global",
+    "joke": "Quel est le comble du comble?",
+    "answer": "Qu’un muet dise à un sourd qu’un aveugle les regarde"
+  },
+  {
+    "id": 88,
+    "type": "dark",
+    "joke": "Maman, j’ai peur du noir",
+    "answer": "Ne t’inquiète pas il est bien attaché"
+  },
+  {
+    "id": 89,
+    "type": "global",
+    "joke": "Que font les dinausaures quand ils ne sont pas d'accord ?",
+    "answer": "Un tirageausaure"
+  },
+  {
+    "id": 90,
+    "type": "global",
+    "joke": "L'école et l'alcool riment, vous savez pourquoi ?",
+    "answer": "Car les deux saoulent"
+  },
+  {
+    "id": 91,
+    "type": "dark",
+    "joke": "Quel est le point commun entre un surdoué et un pédophile ?",
+    "answer": "Ils ont tout les deux sauté la classe de CE1"
+  },
+  {
+    "id": 92,
+    "type": "global",
+    "joke": "Comment est-ce que les abeilles communiquent entre elles ?",
+    "answer": "Par e-miel."
+  },
+  {
+    "id": 93,
+    "type": "global",
+    "joke": "Quel est l'animal le plus connecté ?",
+    "answer": "Le porc USB."
+  },
+  {
+    "id": 94,
+    "type": "beauf",
+    "joke": "Qu’elle est le point commun entre un ado qui s’ennuie en cours et une pute qui se gratte ?",
+    "answer": "Le morpion."
+  },
+  {
+    "id": 95,
+    "type": "beauf",
+    "joke": "Quel est le point commun entre un gynécologue myope et un chien en bonne santé ?",
+    "answer": "Ils ont tous les deux le nez mouillé."
+  },
+  {
+    "id": 96,
+    "type": "global",
+    "joke": "Quel est le point commun entre un motard célibataire et sa moto ?",
+    "answer": "Ils dorment tous les deux sur la béquille."
+  },
+  {
+    "id": 97,
+    "type": "beauf",
+    "joke": "Quelle est la différence entre un zèbre et un barman ?",
+    "answer": "Le zèbre a des barres autour de son trou du cul. Le barman a des trous du cul autour de son bar."
+  },
+  {
+    "id": 98,
+    "type": "global",
+    "joke": "Un mathématicien n’urine pas.",
+    "answer": "Il fait π π."
+  },
+  {
+    "id": 99,
+    "type": "global",
+    "joke": "Qu'est-ce qu'un Parafaitpasdebruit ?",
+    "answer": "Un parachute."
+  },
+  {
+    "id": 100,
+    "type": "global",
+    "joke": "Il y a un boucher qui mesure 1 mètre 80, mais combien pèse-t-il ?",
+    "answer": "La viande, parce que les bouchers pèsent la viande."
+  },
+  {
+    "id": 101,
+    "type": "global",
+    "joke": "Un jour, Dieu dit à Casto de ramer.",
+    "answer": "Et depuis, Castorama..."
+  },
+  {
+    "id": 102,
+    "type": "global",
+    "joke": "Pourquoi un chasseur emmène-t-il son fusil aux toilettes ?",
+    "answer": "Pour tirer la chasse."
+  },
+  {
+    "id": 103,
+    "type": "global",
+    "joke": "Vous connaissez l'histoire de l'armoire ?",
+    "answer": "Elle n'est pas commode..."
+  },
+  {
+    "id": 104,
+    "type": "global",
+    "joke": "Pourquoi les Martiens ne renversent-ils jamais de café sur la table ?",
+    "answer": "Parce qu'ils ont des soucoupes !"
+  },
+  {
+    "id": 105,
+    "type": "limit",
+    "joke": "C'est l'histoire du nain aux 26 enfants.",
+    "answer": "Elle est courte mais elle est bonne."
+  },
+  {
+    "id": 106,
+    "type": "global",
+    "joke": "C'est l'histoire du p'tit dej', vous la connaissez ?",
+    "answer": "Non, pas de bol..."
+  },
+  {
+    "id": 107,
+    "type": "global",
+    "joke": "Dans la phrase \"le voleur a volé une télévision\", où est le sujet ?",
+    "answer": "En prison !"
+  },
+  {
+    "id": 108,
+    "type": "global",
+    "joke": "C'est l'histoire d'un poil. Avant, il était bien.",
+    "answer": "Maintenant, il est pubien."
+  },
+  {
+    "id": 109,
+    "type": "dark",
+    "joke": "Comment appelle-t-on un chien qui n'a pas de pattes ?",
+    "answer": "On ne l'appelle pas, on va le chercher..."
+  },
+  {
+    "id": 110,
+    "type": "global",
+    "joke": "Que fait une vache quand elle a les yeux fermés ?",
+    "answer": "Elle fabrique du lait concentré !"
+  },
+  {
+    "id": 111,
+    "type": "beauf",
+    "joke": "Quelle est la différence entre une femme et un dobermann ?",
+    "answer": "Le prix du collier."
+  },
+  {
+    "id": 112,
+    "type": "limit",
+    "joke": "Pourquoi cendrillon est-elle morte à minuit ?",
+    "answer": "Parce que son tampon s'est transformé en citrouille !"
+  },
+  {
+    "id": 113,
+    "type": "limit",
+    "joke": "L'amour, c'est comme les cartes :",
+    "answer": "Quand on n'a pas de partenaires, mieux vaut avoir une bonne main."
+  },
+  {
+    "id": 114,
+    "type": "global",
+    "joke": "Quel est le point commun entre un sourd et un gynécologue ?",
+    "answer": "Les deux savent lire sur les lèvres."
+  },
+  {
+    "id": 115,
+    "type": "global",
+    "joke": "À quel moment la poule a-t-elle le plus mal au cul ?",
+    "answer": "Quand elle passe du coq à l'âne"
+  },
+  {
+    "id": 116,
+    "type": "global",
+    "joke": "C'est une femme qui prend son bain, son chien pète elle se noie pourquoi ?",
+    "answer": "Parce que son chien c'est un Pékinois."
+  },
+  {
+    "id": 117,
+    "type": "global",
+    "joke": "Savez-vous pourquoi le père Noël rit tout le temps ?",
+    "answer": "Parce que ce n'est pas lui qui paye les cadeaux !"
+  },
+  {
+    "id": 118,
+    "type": "global",
+    "joke": "Tu connais la blague du photographe ?",
+    "answer": "Elle n'est pas encore développée !"
+  },
+  {
+    "id": 119,
+    "type": "global",
+    "joke": "Qu'est-ce qui est jaune et qui court vite ?",
+    "answer": "Un citron pressé."
+  },
+  {
+    "id": 120,
+    "type": "limit",
+    "joke": "Le viagra c'est comme l'enfer,",
+    "answer": "Satan l'habite."
+  },
+  {
+    "id": 121,
+    "type": "dark",
+    "joke": "Comment est ce qu'on appelle un boomerang qui ne revient pas ?",
+    "answer": "Un chat mort."
+  },
+  {
+    "id": 122,
+    "type": "limit",
+    "joke": "Quel est la dernière chose que Lady Dianna ai mangée ?",
+    "answer": "Le volant"
+  },
+  {
+    "id": 123,
+    "type": "limit",
+    "joke": "Qu'est-ce que ça fait quand tu lances une gousse d'ail contre un mur ?",
+    "answer": "Le retour du jet d'ail."
+  },
+  {
+    "id": 124,
+    "type": "dark",
+    "joke": "Qu'est ce qui est pire qu'un bébé dans une poubelle ?",
+    "answer": "Un bébé dans deux poubelles."
+  },
+  {
+    "id": 125,
+    "type": "dark",
+    "joke": "Grâce à quoi peut-on enlever le chewing-gum dans les cheveux ?",
+    "answer": "Le cancer."
+  },
+  {
+    "id": 126,
+    "type": "dark",
+    "joke": "Quel est le point commun entre une Ferrari et une enfant de 5 ans ?",
+    "answer": "Quand tu rentres dedans, tu déchires tout"
+  },
+  {
+    "id": 127,
+    "type": "blondes",
+    "joke": "Que dit une blonde quand elle voit une peau de banane sur le trottoir?",
+    "answer": "Oh mince! je vais encore tomber !"
+  },
+  {
+    "id": 128,
+    "type": "blondes",
+    "joke": "Pourquoi les blondes passent-elles à la caisse avec un seau d’eau ?",
+    "answer": "Pour payer en liquide."
+  },
+  {
+    "id": 129,
+    "type": "blondes",
+    "joke": "Pourquoi les blondes ne mangent-elles pas de bananes?",
+    "answer": "Parce qu’elles ne trouvent pas la fermeture éclair !"
+  },
+  {
+    "id": 130,
+    "type": "global",
+    "joke": "Est ce que si on trempe un Mac dans l'eau ça fera",
+    "answer": "Un McDo ?"
+  },
+  {
+    "id": 131,
+    "type": "global",
+    "joke": "Comment fait-on pour allumer un barbecue breton ?",
+    "answer": "On utilise des breizh."
+  },
+  {
+    "id": 132,
+    "type": "global",
+    "joke": "Quels desserts portent des sous-vêtements ?",
+    "answer": "Les bananes à slips."
+  },
+  {
+    "id": 133,
+    "type": "dark",
+    "joke": "Qu'est-ce qui est bleu blancs et rouge ?",
+    "answer": "Un schtroumf à qui on a couper la tête"
+  },
+  {
+    "id": 134,
+    "type": "global",
+    "joke": "Qu'est-ce qui est bleu blancs et rouge ?",
+    "answer": "Un schtroumf qui saigne du nez"
+  },
+  {
+    "id": 135,
+    "type": "beauf",
+    "joke": "Comment la chouette sais que son mari fait la gueule ?",
+    "answer": "Parce qu'Hiboude."
+  },
+  {
+    "id": 136,
+    "type": "beauf",
+    "joke": "Que dit un oeuf qui attend son pote depuis 1 heure ?",
+    "answer": "S'il arrive pas dans 10 minutes, j'me casse !"
+  },
+  {
+    "id": 137,
+    "type": "beauf",
+    "joke": "Qui est le plus menteur entre un boucher et un jardinier ?",
+    "answer": "C'est le jardinier car il raconte que des salades !"
+  },
+  {
+    "id": 138,
+    "type": "beauf",
+    "joke": "Pourquoi aucun éléphant n'est informaticien ?",
+    "answer": "Parce qu'ils ont peur de la souris."
+  },
+  {
+    "id": 139,
+    "type": "beauf",
+    "joke": "Pourquoi les moutons aiment le chewing-gum ?",
+    "answer": "Car c'est bon pour la laine (l'haleine)."
+  },
+  {
+    "id": 140,
+    "type": "beauf",
+    "joke": "Pourquoi les petits poissons ne partent pas à l'école ?",
+    "answer": "Parce qu'ils s'en fish !"
+  },
+  {
+    "id": 141,
+    "type": "global",
+    "joke": "Que fait une lampe qui se fait agresser ?",
+    "answer": "Elle crie à LED."
+  },
+  {
+    "id": 142,
+    "type": "beauf",
+    "joke": "Pourquoi quand on vise on ferme un œil ?",
+    "answer": "Car si on fermait les deux on verrait plus rien."
+  },
+  {
+    "id": 143,
+    "type": "blondes",
+    "joke": "Quel est la différence entre une blonde et une patate ?",
+    "answer": "La patate est cultivée."
+  },
+  {
+    "id": 144,
+    "type": "global",
+    "joke": "Pourquoi les sorcières utilisent des balais pour voler ?",
+    "answer": "Car un aspirateur c'est trop lourd !"
+  },
+  {
+    "id": 145,
+    "type": "global",
+    "joke": "Qu'est ce qu'une diarrhée mentale ?",
+    "answer": "C'est quand à chaque fois que t'as une idée, c'est de la merde !"
+  },
+  {
+    "id": 146,
+    "type": "beauf",
+    "joke": "Pourquoi Harry Potter chuchote ?",
+    "answer": "Parce que Dumbledore ..."
+  },
+  {
+    "id": 147,
+    "type": "blondes",
+    "joke": "Pourquoi les blondes portent des ceintures D&G ?",
+    "answer": "Pour ne pas confondre la droite et la gauche !"
+  },
+  {
+    "id": 148,
+    "type": "global",
+    "joke": "Connaissez vous la blague sur les magasins?",
+    "answer": "En tout cas, elle a supermarché !"
+  },
+  {
+    "id": 149,
+    "type": "dark",
+    "joke": "Qu'est-ce qu'il faut dire au noir pour qu'il parte dormir ?",
+    "answer": "DARK VADOR"
+  },
+  {
+    "id": 150,
+    "type": "global",
+    "joke": "Que dis-t-on a quelqu'un de triste qui joue aux jeux vidéos ?",
+    "answer": "On dit qu'il se console !"
+  },
+  {
+    "id": 151,
+    "type": "dev",
+    "joke": "Pourquoi les développeurs vont en boîte de nuit",
+    "answer": "Pour faire la java"
+  },
+  {
+    "id": 152,
+    "type": "dev",
+    "joke": "Que dis un informaticien quand il s'ennuie?",
+    "answer": "Je me fichier"
+  },
+  {
+    "id": 153,
+    "type": "global",
+    "joke": "Qu'est-ce qu'un cadeau qui s'en va ?",
+    "answer": "Une surprise party"
+  },
+  {
+    "id": 154,
+    "type": "global",
+    "joke": "Quel est le pays le plus cool au monde ?",
+    "answer": "Le Yééémen"
+  },
+  {
+    "id": 155,
+    "type": "global",
+    "joke": "Pourquoi Winnie l'ourson veut absolument se marier ?",
+    "answer": "Pour partir en lune de miel."
+  },
+  {
+    "id": 156,
+    "type": "global",
+    "joke": "Que dit un italien pour dire au revoir ?",
+    "answer": "Pasta la vista baby."
+  },
+  {
+    "id": 156,
+    "type": "global",
+    "joke": "Je peux tourner sans bouger. Qui suis-je ?",
+    "answer": "Le Lait."
+  },
+  {
+    "id": 157,
+    "type": "global",
+    "joke": "Que boit un vampire en soirée ?",
+    "answer": "Du sangpagne. Sang-té !"
+  },
+  {
+    "id": 158,
+    "type": "global",
+    "joke": "Pourquoi est-ce difficile de conduire dans le Nord ?",
+    "answer": "Parce que les voitures arrêtent pas de caler."
+  },
+  {
+    "id": 159,
+    "type": "dev",
+    "joke": "Quel est le meilleur magazine pour développeurs ?",
+    "answer": "Pomme d'api"
+  },
+  {
+    "id": 160,
+    "type": "dev",
+    "joke": "Pourquoi les développeurs ne portent ils pas de chaussures à lacets ?",
+    "answer": "Car il préfèrent les scratch."
+  },
+  {
+    "id": 161,
+    "type": "beauf",
+    "joke": "Qu'est-ce qu'un comptable ?",
+    "answer": "Un con derrière une table."
+  },
+  {
+    "id": 162,
+    "type": "global",
+    "joke": "C’est un bœuf, qui court…",
+    "answer": "Puis qui se viande."
+  },
+  {
+    "id": 163,
+    "type": "global",
+    "joke": "Pourquoi le patinage artistique est pénible ?",
+    "answer": "Car le patin agace"
+  },
+  {
+    "id": 164,
+    "type": "global",
+    "joke": "Que faire pour sauver la vie d’une mouche qui se noie ?",
+    "answer": "Du mouche à mouche"
+  },
+  {
+    "id": 165,
+    "type": "global",
+    "joke": "Les enfants c’est comme les pets",
+    "answer": "On ne supporte que les siens"
+  },
+  {
+    "id": 166,
+    "type": "global",
+    "joke": "Comment se nomme la Barbie la plus poilue ?",
+    "answer": "La Barbie chette !"
+  },
+  {
+    "id": 167,
+    "type": "limit",
+    "joke": "Quelle est la différence entre un rappeur et un campeur ?",
+    "answer": "Le rappeur niq** ta mère et le campeur monte ta tente"
+  },
+  {
+    "id": 168,
+    "type": "global",
+    "joke": "T’es tombé ?",
+    "answer": "Non je fais un câlin au plancher il avait l’air triste."
+  },
+  {
+    "id": 169,
+    "type": "global",
+    "joke": "Pourquoi les policiers n’ont pas d’acné ?",
+    "answer": "Car ils ont la peau lisse !"
+  },
+  {
+    "id": 170,
+    "type": "global",
+    "joke": "Quel est le gateau préféré des nuages ?",
+    "answer": "L’éclair !"
+  },
+  {
+    "id": 171,
+    "type": "dev",
+    "joke": "Que fait un développeur avant d'aller faire les courses ?",
+    "answer": "Il fait sa lisp"
+  },
+  {
+    "id": 172,
+    "type": "dev",
+    "joke": "Que prend un développeur avant d'écrire ?",
+    "answer": "Il prends de la MD"
+  },
+  {
+    "id": 173,
+    "type": "dev",
+    "joke": "Quel est la maladie la plus répandue chez les développeurs Rust ?",
+    "answer": "Le tétanos"
+  },
+  {
+    "id": 174,
+    "type": "global",
+    "joke": "Que dit une antenne TV à un paratonnerre?",
+    "answer": "Tu y crois toi au coup de foudre?"
+  },
+  {
+    "id": 175,
+    "type": "global",
+    "joke": "Pourquoi une feuille se noie quand on la met dans l'eau?",
+    "answer": "Parce-qu'elle n'a pas pieds.(papiers)"
+  },
+  {
+    "id": 176,
+    "type": "global",
+    "joke": "Qu'est-ce qu'un dromaludaire?",
+    "answer": "Un Chalumeau a 2 bosses."
+  },
+  {
+    "id": 177,
+    "type": "global",
+    "joke": "Qu'est-ce qu'un Canif",
+    "answer": "C'est un p'tit fien"
+  },
+  {
+    "id": 178,
+    "type": "global",
+    "joke": "Quelle est la chanteuse préférée des serruriers ?",
+    "answer": "Alicia Keys."
+  },
+  {
+    "id": 179,
+    "type": "global",
+    "joke": "Combien de fils a la mère de Justin ?",
+    "answer": "Juste un."
+  },
+  {
+    "id": 180,
+    "type": "global",
+    "joke": "Qu’est ce qu’une baguette avec une boussole ?",
+    "answer": "Du pain perdu"
+  },
+  {
+    "id": 181,
+    "type": "global",
+    "joke": "Le prof dit à son élève : Ton devoir était mauvais.",
+    "answer": "QUOI ! Vous l'avez mangé ?"
+  },
+  {
+    "id": 182,
+    "type": "global",
+    "joke": "À quoi servent les archipels ?",
+    "answer": "À faire des archi-trous !"
+  },
+  {
+    "id": 183,
+    "type": "global",
+    "joke": "Pourquoi il n'y a plus de Mammouth ?",
+    "answer": "Parce qu'il n'y a plus de Papouth."
+  },
+  {
+    "id": 184,
+    "type": "global",
+    "joke": "Entre un aviateur et un marin, lequel écrit le moins ?",
+    "answer": "Le marin, parce qu'il a jeté l'encre."
+  },
+  {
+    "id": 185,
+    "type": "global",
+    "joke": "Quel est le comble pour un électricien ?",
+    "answer": "D'avoir des ampoules aux pieds."
+  },
+  {
+    "id": 186,
+    "type": "global",
+    "joke": "Qu'est-ce qu'une manifestation d'aveugles ?",
+    "answer": "Le festival de Cannes"
+  },
+  {
+    "id": 187,
+    "type": "dark",
+    "joke": "Comment appelle-t-on un développeur pédophile  ?",
+    "answer": "Un pédofile"
+  },
+  {
+    "id": 188,
+    "type": "global",
+    "joke": "Comment appelle-t-on un ascenseur en Amérique ?",
+    "answer": "En appuyant sur le bouton…"
+  },
+  {
+    "id": 189,
+    "type": "global",
+    "joke": "C’est l’histoire d’une fleur qui court, qui court..",
+    "answer": "Et qui se plante"
+  },
+  {
+    "id": 190,
+    "type": "global",
+    "joke": "Comment appelle-t-on une fracture du crâne ?",
+    "answer": "Un dégât des os"
+  },
+  {
+    "id": 191,
+    "type": "global",
+    "joke": "Qu’est-ce qui est transparent et qui sent la carotte ?",
+    "answer": "Un pet de lapin"
+  },
+  {
+    "id": 192,
+    "type": "beauf",
+    "joke": "Qu’est-ce qu’un cochon qui rit ?",
+    "answer": "Un porc tout gai."
+  },
+  {
+    "id": 193,
+    "type": "global",
+    "joke": "Quel est l’ami du feu ?",
+    "answer": "Le pot-au-feu"
+  },
+  {
+    "id": 194,
+    "type": "global",
+    "joke": "Qu’est-ce qu’un comptable ?",
+    "answer": "C’est un con avec une table."
+  },
+  {
+    "id": 195,
+    "type": "global",
+    "joke": "Comment appelle-t-on un covoiturage au Sénégal ?",
+    "answer": "Un Babacar"
+  },
+  {
+    "id": 196,
+    "type": "global",
+    "joke": "Que fait-on aux voleurs de salades ?",
+    "answer": "On les tue…"
+  },
+  {
+    "id": 197,
+    "type": "global",
+    "joke": "Qu’est-ce que fait un pou dans une cloche ?",
+    "answer": "Pou Ding"
+  },
+  {
+    "id": 198,
+    "type": "global",
+    "joke": "Quel est le légume le plus courageux ?",
+    "answer": "Le pois-chiche"
+  },
+  {
+    "id": 199,
+    "type": "global",
+    "joke": "Un jour, Dieu demanda au coca de coller…",
+    "answer": "et le Coca Cola…"
+  },
+  {
+    "id": 200,
+    "type": "blondes",
+    "joke": "Comment fait-on pour occuper une blonde ?",
+    "answer": "On la met dans une pièce ronde en lui disant de chercher les coins."
+  },
+  {
+    "id": 201,
+    "type": "global",
+    "joke": "Quel est le seul animal qui nourrit lui-même sa voiture ?",
+    "answer": "La chèvre car elle nourrit son cabri au lait !"
+  },
+  {
+    "id": 202,
+    "type": "global",
+    "joke": "Dans quel pays ne bronze-t-on pas du nez ?",
+    "answer": "Au Népal"
+  },
+  {
+    "id": 203,
+    "type": "global",
+    "joke": "Pourquoi est-ce que les anges sont sourds ?",
+    "answer": "Parce que Jésus-Christ"
+  },
+  {
+    "id": 204,
+    "type": "global",
+    "joke": "Qu’est-ce qui fait nioc-nioc ?",
+    "answer": "Un canard qui essaye de parler le verlan"
+  },
+  {
+    "id": 205,
+    "type": "global",
+    "joke": "Quels sont les fruits que nous trouvons dans toutes les maisons ?",
+    "answer": "Les coins et les mûres."
+  },
+  {
+    "id": 206,
+    "type": "global",
+    "joke": "Comment appelle-t-on la mère du phoque ?",
+    "answer": "Mother phoquer"
+  },
+  {
+    "id": 207,
+    "type": "global",
+    "joke": "Quelle est la devise des chats diaboliques ?",
+    "answer": "Satan est par minou"
+  },
+  {
+    "id": 208,
+    "type": "global",
+    "joke": "Quel sont les deux animaux les plus intelligents ?",
+    "answer": "Le Cerf et le Veau"
+  },
+  {
+    "id": 209,
+    "type": "global",
+    "joke": "Pourquoi on met une selle sur un cheval ?",
+    "answer": "Parce qu’en dessous elle tomberait."
+  },
+  {
+    "id": 210,
+    "type": "global",
+    "joke": "De quel pays viennent les cochons ?",
+    "answer": "Des quatre groins du monde"
+  },
+  {
+    "id": 211,
+    "type": "global",
+    "joke": "Quel est le comble pour une taupe ?",
+    "answer": "D’amuser la galerie !"
+  },
+  {
+    "id": 212,
+    "type": "global",
+    "joke": "Que prend un éléphant quand il va au restaurant ?",
+    "answer": "Il prend de la place !"
+  },
+  {
+    "id": 213,
+    "type": "global",
+    "joke": "Qu’est ce qui a 3 bosses?",
+    "answer": "Un chameau qui s’est cogné."
+  },
+  {
+    "id": 214,
+    "type": "global",
+    "joke": "Quel est le comble pour un cycliste ?",
+    "answer": "De faire un régime sans sel."
+  },
+  {
+    "id": 215,
+    "type": "global",
+    "joke": "Quelle est la ville la plus rapide de Suisse ?",
+    "answer": "Nyon"
+  },
+  {
+    "id": 216,
+    "type": "global",
+    "joke": "Tu connais la blague du papier?",
+    "answer": "Elle déchire."
+  },
+  {
+    "id": 217,
+    "type": "global",
+    "joke": "Pourquoi une brioche ne va jamais aux sports d’hiver ?",
+    "answer": "Parce qu'elle sait Pasquier"
+  },
+  {
+    "id": 218,
+    "type": "global",
+    "joke": "Pourquoi les mamies sont-elles très efficaces pour faire le ménage ?",
+    "answer": "Parce qu'elles ont 80 balais."
+  },
+  {
+    "id": 219,
+    "type": "global",
+    "joke": "Tu connais la blague de la gomme ?",
+    "answer": "Elle dégomme."
+  },
+  {
+    "id": 220,
+    "type": "global",
+    "joke": "Quelle est la différence entre une machine et du ketchup ?",
+    "answer": "Aucune, ils sont tous les deux au-tomate"
+  },
+  {
+    "id": 221,
+    "type": "dev",
+    "joke": "Que se passe-t-il quand on secoue une clef USB ?",
+    "answer": "Les fichiers se mélangent."
+  },
+  {
+    "id": 222,
+    "type": "global",
+    "joke": "Oh, Léon ! Ton prénom à l'envers donne Noël !",
+    "answer": "Et oui, tout le monde n'a pas cette chance mon cher Luc..."
+  },
+  {
+    "id": 223,
+    "type": "global",
+    "joke": "On m'a dit que pour faire ses courses pendant le confinement il suffisait de porter un masque et des gants...",
+    "answer": "C'était un mensonge, tous les autres étaient habillés !"
+  },
+  {
+    "id": 224,
+    "type": "global",
+    "joke": "Chérie, pendant que tu dormais tu m'as traité de connard",
+    "answer": "Je ne dormais pas..."
+  },
+  {
+    "id": 225,
+    "type": "global",
+    "joke": "Ce matin en voulant m'habiller, le bouton de ma chemise m'est resté dans les mains. En voulant mettre mes chaussures, mon lacet m'est resté dans les mains.",
+    "answer": "Je me suis dit \"Vaut mieux pas que j'aille pisser\""
+  },
+  {
+    "id": 226,
+    "type": "global",
+    "joke": "On ne dit pas « l’électronique » mais...",
+    "answer": "L’électricien fait l’amour."
+  },
+  {
+    "id": 227,
+    "type": "global",
+    "joke": "Qui se débrouille le mieux au karaté ?",
+    "answer": "L’électricité, car elle connaît beaucoup de prises."
+  },
+  {
+    "id": 228,
+    "type": "global",
+    "joke": "La vitamine C…",
+    "answer": "Mais ne dira rien."
+  },
+  {
+    "id": 229,
+    "type": "global",
+    "joke": "Que dit un pistolet à une mitraillette ?",
+    "answer": "Ça fait longtemps que tu bégayes ?"
+  },
+  {
+    "id": 230,
+    "type": "global",
+    "joke": "Un clown arrive chez le docteur",
+    "answer": "Docteur, vite, je me sens tout drôle..."
+  },
+  {
+    "id": 231,
+    "type": "global",
+    "joke": "Qu’est-ce qui est rouge et qui attend ?",
+    "answer": "Mon compte en banque."
+  },
+  {
+    "id": 232,
+    "type": "global",
+    "joke": "Il y a quoi au milieu de l’océan ?",
+    "answer": "Un é"
+  },
+  {
+    "id": 233,
+    "type": "global",
+    "joke": "Comment appelle-t-on une personne agréable à Paris ?",
+    "answer": "Un touriste."
+  },
+  {
+    "id": 234,
+    "type": "global",
+    "joke": "Quel est l’ami du feu ?",
+    "answer": "Le pot-au-feu"
+  },
+  {
+    "id": 235,
+    "type": "global",
+    "joke": "Pour ne plus puer de la gueule…",
+    "answer": "Faut-il arrêter de dire de la merde ?"
+  },
+  {
+    "id": 236,
+    "type": "global",
+    "joke": "Qu’est-ce qui est noir et blanc et qui rebondit ?",
+    "answer": "Un pingouin sur un trampoline."
+  },
+  {
+    "id": 237,
+    "type": "global",
+    "joke": "Comment reconnaître un ministre qui ment ?",
+    "answer": "Ses lèvres bougent"
+  },
+  {
+    "id": 238,
+    "type": "global",
+    "joke": "Comment appelle-t-on une fleur très occupée ?",
+    "answer": "Une fleur over-bookée"
+  },
+  {
+    "id": 239,
+    "type": "global",
+    "joke": "Soupçonné de vol dans une boulangerie",
+    "answer": "Florent Pagny nie."
+  },
+  {
+    "id": 240,
+    "type": "global",
+    "joke": "Quel est le contraire d’un chat ?",
+    "answer": "Un pacha."
+  },
+  {
+    "id": 241,
+    "type": "blondes",
+    "joke": "Pourquoi une blonde a-t-elle les cheveux mouillés quand elle va se coucher ?",
+    "answer": "Parce qu’elle a dit bonne nuit à son poisson rouge."
+  },
+  {
+    "id": 242,
+    "type": "blondes",
+    "joke": "Pourquoi les blondes portent-elles des ceintures D&G ?",
+    "answer": "Pour reconnaître leur droite et leur gauche"
+  },
+  {
+    "id": 243,
+    "type": "blondes",
+    "joke": "Qu’est-ce qu’une brune entre 2 blondes ?",
+    "answer": "Une interprète."
+  },
+  {
+    "id": 244,
+    "type": "blondes",
+    "joke": "Comment occuper une blonde toute la journée ?",
+    "answer": "Lui donner un papier où l’on écrit « voir au verso » de chaque côté."
+  },
+  {
+    "id": 245,
+    "type": "limit",
+    "joke": "Pourquoi les poules n’ont-elles pas de seins ?",
+    "answer": "Parce que les coqs n’ont pas de mains !"
+  },
+  {
+    "id": 246,
+    "type": "limit",
+    "joke": "Pendant l’acte, ma femme me dit : Dis-moi des choses sales !",
+    "answer": "La cuisine, la salle de bain..."
+  },
+  {
+    "id": 247,
+    "type": "dark",
+    "joke": "Pourquoi Jésus ne mange jamais de cacahuètes ?",
+    "answer": "Parce qu’il a des trous dans les mains."
+  },
+  {
+    "id": 248,
+    "type": "dark",
+    "joke": "Chéri, je me sens grosse et laide… S’il te plait, fais-moi un compliment…",
+    "answer": "Tu as une bonne vue !"
+  },
+  {
+    "id": 249,
+    "type": "dark",
+    "joke": "Thomas, penses-tu que je suis une mauvaise mère?",
+    "answer": "Mon nom est Paul…"
+  },
+  {
+    "id": 250,
+    "type": "dark",
+    "joke": "Qu’est-ce qu’un lépreux dans un bain ?",
+    "answer": "Un Efferalgan"
+  },
+  {
+    "id": 251,
+    "type": "dark",
+    "joke": "Comment appelle-t-on une femme qui a perdu son intelligence ?",
+    "answer": "Une veuve."
+  },
+  {
+    "id": 252,
+    "type": "dark",
+    "joke": "Quelle est la différence entre la sodomie et les choux-fleurs ?",
+    "answer": "Même avec du beurre, les enfants n’aiment pas."
+  },
+  {
+    "id": 253,
+    "type": "dev",
+    "joke": "Quel est le shell préféré des adolescents ?",
+    "answer": "Le WESH"
+  },
+  {
+    "id": 254,
+    "type": "dark",
+    "joke": "Je suis bipolaire et je vous aime tous.",
+    "answer": "Bande d’enculés."
+  },
+  {
+    "id": 255,
+    "type": "dark",
+    "joke": "Quel est le point commun entre des chaussures et des juifs ?",
+    "answer": "Il y en a plus en 39 qu’en 45"
+  },
+  {
+    "id": 256,
+    "type": "dark",
+    "joke": "Comment appelle-t-on deux noirs dans un sac de couchage ?",
+    "answer": "Un Twix"
+  },
+  {
+    "id": 257,
+    "type": "dark",
+    "joke": "Quel est le plus gros dilemme pour un juif ?",
+    "answer": "Du jambon gratuit"
+  },
+  {
+    "id": 258,
+    "type": "dark",
+    "joke": "Qu’est-ce qu’un juif en forêt ?",
+    "answer": "Rabbin des bois"
+  },
+  {
+    "id": 259,
+    "type": "limit",
+    "joke": "Comment appelle-t-on une lesbienne qui n’a pas de sein ?",
+    "answer": "Une omoplate"
+  },
+  {
+    "id": 260,
+    "type": "global",
+    "joke": "Pourquoi tu vends ton perroquet ?",
+    "answer": "Parce qu’hier, ce bâtard a essayé de me vendre !"
+  },
+  {
+    "id": 261,
+    "type": "global",
+    "joke": "Un jour, Dieu demanda à David de guetter",
+    "answer": "Et David guetta."
+  },
+  {
+    "id": 262,
+    "type": "global",
+    "joke": "Que font 2 brosses à dents le 14 Juillet ?",
+    "answer": "Un feu dentifrice !"
+  },
+  {
+    "id": 263,
+    "type": "global",
+    "joke": "Que ce qui est plus fort qu’un lion ?",
+    "answer": "Deux lions."
+  },
+  {
+    "id": 264,
+    "type": "global",
+    "joke": "Qu’est-ce qu’un petit cheval dans une piscine ?",
+    "answer": "Un poney de bain."
+  },
+  {
+    "id": 265,
+    "type": "global",
+    "joke": "Pourquoi le ciel est si haut ?",
+    "answer": "Pour que les oiseaux ne se cognent pas la tête."
+  },
+  {
+    "id": 266,
+    "type": "global",
+    "joke": "Qui s’occupe de la décoration à l’Elysée ?",
+    "answer": "Le ministère de l’intérieur"
+  },
+  {
+    "id": 267,
+    "type": "global",
+    "joke": "Pourquoi les indiens mettent-ils leur argent en bourse ?",
+    "answer": "Car ça rapporte des sioux."
+  },
+  {
+    "id": 268,
+    "type": "global",
+    "joke": "Quel est le comble pour un dentiste ?",
+    "answer": "C’est d’habiter dans un palais."
+  },
+  {
+    "id": 269,
+    "type": "global",
+    "joke": "Qu’est-ce qu’un euro dans un avion qui décolle ?",
+    "answer": "Une pièce montée..."
+  },
+  {
+    "id": 270,
+    "type": "global",
+    "joke": "Quel est le comble de Buzz ?",
+    "answer": "D'aller plus vite que l'éclair. "
+  },
+  {
+    "id": 271,
+    "type": "global",
+    "joke": "Que fait un gros poussin ?",
+    "answer": "PIOU-PIOU"
+  },
+  {
+    "id": 272,
+    "type": "beauf",
+    "joke": "Pourquoi les bots ne parlent pas avec les humains ?",
+    "answer": "Pour ne pas leur ressembler."
+  },
+  {
+    "id": 273,
+    "type": "global",
+    "joke": "Pourquoi les coquilles ne font pas de régime ?",
+    "answer": "Parce qu'elles sont palourdes !"
+  },
+  {
+    "id": 274,
+    "type": "dark",
+    "joke": "Qu'est-ce qu'un pruneau ?",
+    "answer": "Un synonyme de personne âgée : qui est ridée et qui fait chier"
+  },
+  {
+    "id": 275,
+    "type": "beauf",
+    "joke": "Qu'est ce qu'oune péniche ?",
+    "answer": "C'est oune zizi portouguaiche"
+  },
+  {
+    "id": 276,
+    "type": "limit",
+    "joke": "Les parents sont deux êtres qui t'apprennent à marcher et à parler",
+    "answer": "Pour ensuite te dire de t'asseoir et de fermer ta gueule "
+  },
+  {
+    "id": 277,
+    "type": "global",
+    "joke": "L'autobus est une invention géniale !",
+    "answer": "Il roule deux fois plus vite quand tu cours après que quand t'es assis dedans"
+  },
+  {
+    "id": 278,
+    "type": "global",
+    "joke": "Les ciseaux à bois...",
+    "answer": "Les chiens aussi"
+  },
+  {
+    "id": 279,
+    "type": "global",
+    "joke": "Qu'est-ce que le Gospel ?",
+    "answer": "C'est quand ton gamin a pris un coup de soleil"
+  },
+  {
+    "id": 280,
+    "type": "dark",
+    "joke": "Qu'est-ce que la beauté intérieure ?",
+    "answer": "Un concept inventé par les moches pour pouvoir se reproduire"
+  },
+  {
+    "id": 281,
+    "type": "global",
+    "joke": "Moi j'ai un Archipel",
+    "answer": "ça creuse des archi trous "
+  },
+  {
+    "id": 282,
+    "type": "limit",
+    "joke": "Avez-vous déjà eu des sentiments partagés ? ",
+    "answer": "Genre quand ta belle mère recule vers le ravin avec ta voiture toute neuve"
+  },
+  {
+    "id": 283,
+    "type": "limit",
+    "joke": "Une définition simple de l'amour :",
+    "answer": "C'est comme un jeu de cartes, si t'as pas de partenaire(s) il vaut mieux avoir une bonne main "
+  },
+  {
+    "id": 284,
+    "type": "global",
+    "joke": "Maman, où est mon perroquet?",
+    "answer": "Au quai."
+  },
+  {
+    "id": 285,
+    "type": "blondes",
+    "joke": "Pourquoi mon ordinateur ne marche plus? Qu'as-tu fais?",
+    "answer": "Vu qu'il était sale je l'ai nettoyé avec de l'eau. "
+  },
+  {
+    "id": 286,
+    "type": "global",
+    "joke": "Quand est-ce que les chiens aboient ?",
+    "answer": "Lorsqu’ils ont un chat dans la gorge."
+  },
+  {
+    "id": 287,
+    "type": "dev",
+    "joke": "Comment un développeur tente-t-il de réparer sa voiture lorsqu'elle a un problème ?",
+    "answer": "Il sort de la voiture, ferme toutes les fenêtres, retourne dans la voiture, et essaie de redémarrer."
+  },
+  {
+    "id": 288,
+    "type": "global",
+    "joke": "Que dit un égoïste qui veut partager?",
+    "answer": "On fait moi-moi."
+  },
+  {
+    "id": 289,
+    "type": "global",
+    "joke": "Qu'est-ce que deux fous avec des mitraillettes ?",
+    "answer": "Une fousillade."
+  },
+  {
+    "id": 290,
+    "type": "global",
+    "joke": "Que dit le juge au manchot ?",
+    "answer": "Allez allez, témoignons !"
+  },
+  {
+    "id": 291,
+    "type": "global",
+    "joke": "Tu connais la blague du con qui dit non ?",
+    "answer": "Non…"
+  },
+  {
+    "id": 292,
+    "type": "global",
+    "joke": "Quel est le comble pour un plombier ?",
+    "answer": "Que ses clients prennent la fuite !"
+  },
+  {
+    "id": 293,
+    "type": "limit",
+    "joke": "2 fesses se croisent",
+    "answer": "Alors, ça gaze ?"
+  },
+  {
+    "id": 294,
+    "type": "limit",
+    "joke": "Où est fabriqué le viagra ?",
+    "answer": "Au Boukistan"
+  },
+  {
+    "id": 295,
+    "type": "limit",
+    "joke": "Qu’est-ce qu’une gifle ?",
+    "answer": "C’est comme une bifle, mais avec la main !"
+  },
+  {
+    "id": 296,
+    "type": "limit",
+    "joke": "Pourquoi j’ai appelé mon pénis Bidou ?",
+    "answer": "Parce que quand je vais pisser, je s’coue Bidou."
+  },
+  {
+    "id": 297,
+    "type": "limit",
+    "joke": "Quel est le seul instrument à vent avec une corde ?",
+    "answer": "Le string"
+  },
+  {
+    "id": 298,
+    "type": "global",
+    "joke": "Quand 2 poissons s’énervent..",
+    "answer": "Est-ce qu’on peut dire que le thon monte ?"
+  },
+  {
+    "id": 299,
+    "type": "beauf",
+    "joke": "Pourquoi les hommes amènent-ils leur femme en vacances ?",
+    "answer": "Pour que les vacances paraissent plus longues..."
+  },
+  {
+    "id": 300,
+    "type": "beauf",
+    "joke": "Que fait Jean quand il voit une femme crocodile ?",
+    "answer": "Il lacoste !"
+  },
+  {
+    "id": 301,
+    "type": "global",
+    "joke": "Qu'est-ce qui commence par un E, finit par un E et qui ne contient qu'une lettre ?",
+    "answer": "Une enveloppe !"
+  },
+  {
+    "id": 302,
+    "type": "limit",
+    "joke": "Qu’est-ce qui se lève quand tu t’en sers, qui s’abaisse quand tu as fini de t’en servir et qui goutte après usage ?",
+    "answer": "Un parapluie"
+  },
+  {
+    "id": 303,
+    "type": "global",
+    "joke": "Babi et Baba sont sur un bateau Baba tombe à l’eau. Que se passe-t-il ?",
+    "answer": "Babi bêle et Baba coule"
+  },
+  {
+    "id": 304,
+    "type": "global",
+    "joke": "Que s'est il passé en 1769 ? Napoléon est né ! Et que s'est il passé en 1789 ?",
+    "answer": "Il a eu 20 ans !"
+  },
+  {
+    "id": 305,
+    "type": "global",
+    "joke": "Rien ne sert de courir...",
+    "answer": "... Je suis déjà en retard"
+  },
+  {
+    "id": 306,
+    "type": "beauf",
+    "joke": "Quand mon verre est plein, je le vide",
+    "answer": "Quand mon verre est vide, je me plains !"
+  },
+  {
+    "id": 307,
+    "type": "global",
+    "joke": "Attention au chien ! ",
+    "answer": "Il est si petit que vous pourriez marcher dessus "
+  },
+  {
+    "id": 308,
+    "type": "global",
+    "joke": "Ne pas déranger svp ",
+    "answer": "Je n'ai pas rangé pour rien... "
+  },
+  {
+    "id": 309,
+    "type": "global",
+    "joke": "Merci de ne pas frapper",
+    "answer": "Et soyez gentil, de ne pas sonner non plus"
+  },
+  {
+    "id": 310,
+    "type": "global",
+    "joke": "N'hésitez pas à demander si la maison fait crédit",
+    "answer": "Nous avons une façon absolument délicieuse de refuser "
+  },
+  {
+    "id": 311,
+    "type": "global",
+    "joke": "Sur ce serveur le 12 mai 2020",
+    "answer": "Il ne se passa strictement rien "
+  },
+  {
+    "id": 312,
+    "type": "global",
+    "joke": "Pourquoi la girafe se fait arrêter par la police ? ",
+    "answer": "Parce que c’est un cou-monté !"
+  },
+  {
+    "id": 313,
+    "type": "global",
+    "joke": "Pourquoi les coccinelles n’aiment-elles pas courir ?",
+    "answer": "Parce qu’elles ont toujours des points de cotés !"
+  },
+  {
+    "id": 314,
+    "type": "global",
+    "joke": "On ne dit pas démanger",
+    "answer": "On dit vomir"
+  },
+  {
+    "id": 315,
+    "type": "dark",
+    "joke": "Que disait Eve pour faire avancer le bâteau",
+    "answer": "Ramadan"
+  },
+  {
+    "id": 316,
+    "type": "limit",
+    "joke": "Que signifie expatriées ?",
+    "answer": "Anciennes petites amies non rangées"
+  },
+  {
+    "id": 317,
+    "type": "global",
+    "joke": "Qui est l'idiot qui a créé la cédille ?",
+    "answer": "Monsieur Duçon"
+  },
+  {
+    "id": 318,
+    "type": "global",
+    "joke": "Que signifie Mercato ?",
+    "answer": "C'est une maman pratiquante"
+  },
+  {
+    "id": 319,
+    "type": "limit",
+    "joke": "Tu sais ce que c'est un suppositoire ?",
+    "answer": "C'est une invention qui restera dans les annales"
+  },
+  {
+    "id": 320,
+    "type": "global",
+    "joke": "Les pharmacies...",
+    "answer": "... c'est les confiseries des vieux"
+  },
+  {
+    "id": 321,
+    "type": "beauf",
+    "joke": "Une jardinerie est un endroit merveilleux",
+    "answer": "Si tu te prends trois râteaux on t'offre une pelle"
+  },
+  {
+    "id": 322,
+    "type": "global",
+    "joke": "Pourquoi Toto veut se marier avec la mère de son père ?",
+    "answer": "Ben son père s'est bien marié avec la sienne..."
+  },
+  {
+    "id": 323,
+    "type": "global",
+    "joke": "Que demande un chat dans une pharmacie ?",
+    "answer": "Avez-vous du sirop pour ma toux ?"
+  },
+  {
+    "id": 324,
+    "type": "global",
+    "joke": "Que faisaient les dinosaures quand ils n'arrivaient pas à se décider ?",
+    "answer": "Des tirageosaures"
+  },
+  {
+    "id": 325,
+    "type": "global",
+    "joke": "Pourquoi est-ce c'est difficile de conduire dans le Nord ?",
+    "answer": "Parce que les voitures arrêtent PAS DE CALER."
+  },
+  {
+    "id": 326,
+    "type": "global",
+    "joke": "Pourquoi est-ce qu'on met tous les crocos en prison ?",
+    "answer": "Parce que les crocos dealent."
+  },
+  {
+    "id": 327,
+    "type": "global",
+    "joke": "Quel est le jambon que tout le monde déteste ?",
+    "answer": "Le sale ami."
+  },
+  {
+    "id": 328,
+    "type": "global",
+    "joke": "Qu'est ce qu'un cadeau qui s'en va ?",
+    "answer": "Une surprise party"
+  },
+  {
+    "id": 329,
+    "type": "global",
+    "joke": "Quelle est la différence entre toi et un sapin ?",
+    "answer": "Un sapin c'est un conifère et toi t'es con et on peut rien y faire"
+  },
+  {
+    "id": 330,
+    "type": "dark",
+    "joke": "Ta mère est tellement grosse",
+    "answer": "Que quand elle sort y a une éclipse"
+  },
+  {
+    "id": 331,
+    "type": "dark",
+    "joke": "Tout est bon dans le cochon",
+    "answer": "Je ne mangerai pas ta mère pour autant"
+  },
+  {
+    "id": 332,
+    "type": "dark",
+    "joke": "Vous saviez que la famille Le Pen a du sang arabe ?",
+    "answer": "Sur le capot de leur voiture..."
+  },
+  {
+    "id": 333,
+    "type": "global",
+    "joke": "Quelle est l'émission TV préférée des jardiniers constipés ?",
+    "answer": "Silence ça pousse"
+  },
+  {
+    "id": 334,
+    "type": "global",
+    "joke": "Qu'est ce qu'une frite enceinte ?",
+    "answer": "Une patate sautée"
+  },
+  {
+    "id": 335,
+    "type": "global",
+    "joke": "Que dit un coronavirus quand il braque une banque ?",
+    "answer": "Donner moi l'argent, sinon je fais toussoter !"
+  },
+  {
+    "id": 336,
+    "type": "dark",
+    "joke": "Qu’est-ce qu’un homme avec une mitraillette dans un champ de blé ?",
+    "answer": "Un céréales killer."
+  },
+  {
+    "id": 337,
+    "type": "global",
+    "joke": "Peux-tu me dire si le clignotant fonctionne ?",
+    "answer": "Oui, non, oui, non, oui, non."
+  },
+  {
+    "id": 338,
+    "type": "beauf",
+    "joke": "Quel est le meilleur site pour un homme qui cherche un lave-vaisselle ?",
+    "answer": "Un site de rencontres."
+  },
+  {
+    "id": 339,
+    "type": "beauf",
+    "joke": "Quel est le point commun entre la poitrine d'une femme et un train électrique ?",
+    "answer": "C’est fait pour les enfants mais c’est papa qui joue avec."
+  },
+  {
+    "id": 340,
+    "type": "beauf",
+    "joke": "Que dit une bière quand elle tombe dans l'eau ?",
+    "answer": "Je sais panaché"
+  },
+  {
+    "id": 341,
+    "type": "global",
+    "joke": "Deux pommes de terre traversent la route, l'une d'elles se fait écraser",
+    "answer": "Oh purée !"
+  },
+  {
+    "id": 342,
+    "type": "global",
+    "joke": "C’est en forgeant qu’on devient forgeron.",
+    "answer": "Et c’est en sciant que Léonard devint scie !"
+  },
+  {
+    "id": 343,
+    "type": "global",
+    "joke": "Jésus a marché sur l'eau. Une courgette est composé a 98% d'eau. J.ai marché sur une courgette.",
+    "answer": "je suis à 98% Jésus"
+  },
+  {
+    "id": 344,
+    "type": "dark",
+    "joke": "Quel est la différence entre Jésus et un tableau de Picasso ?",
+    "answer": "Le tableau s'accroche avec un seul clou"
+  },
+  {
+    "id": 345,
+    "type": "global",
+    "joke": "Comment est-ce que la chouette sait que son mari fait la gueule ?",
+    "answer": "Parce qu’HIBOUDE."
+  },
+  {
+    "id": 346,
+    "type": "global",
+    "joke": "Qu'est-ce qu'un tennisman adore faire ?",
+    "answer": "Rendre des services !"
+  },
+  {
+    "id": 347,
+    "type": "limit",
+    "joke": "Comment appelle-t-on six prostituées Allemandes ?",
+    "answer": "Une scie sauteuse Bosch"
+  },
+  {
+    "id": 348,
+    "type": "blondes",
+    "joke": "Qu'est-ce qu'une blonde avec de l'eau dans la bouche ?",
+    "answer": "Une cruche"
+  },
+  {
+    "id": 349,
+    "type": "global",
+    "joke": "Pourquoi quand on vise on ferme un œil ?",
+    "answer": "Car si on fermait les deux on verrait plus rien."
+  },
+  {
+    "id": 350,
+    "type": "dark",
+    "joke": "Qu'est ce qu'un pruneau ?",
+    "answer": "Un synonyme de personne âgée : qui est ridée et qui fait chier"
+  },
+  {
+    "id": 351,
+    "type": "global",
+    "joke": "Quel est la différence entre un marin et un boucher?",
+    "answer": "Le boucher voit le porc avant les côtes "
+  },
+  {
+    "id": 352,
+    "type": "dark",
+    "joke": "Une jeune soupçonnée de sorcellerie demande à sa mère : \"Pourquoi est-ce qu'on flotte?\"",
+    "answer": "\"Pour la même raison qu'on brûle.\""
+  },
+  {
+    "id": 353,
+    "type": "global",
+    "joke": "Comment appelle t-on un chat dans l'espace ?",
+    "answer": "Un chatellite "
+  },
+  {
+    "id": 354,
+    "type": "global",
+    "joke": "Qu’est-ce qu’un cochon volant ?",
+    "answer": "Un aéroport."
+  },
+  {
+    "id": 355,
+    "type": "global",
+    "joke": "Quel est le comble pour un porte-charge?",
+    "answer": "C'est de mal se porter."
+  },
+  {
+    "id": 356,
+    "type": "global",
+    "joke": "Pourquoi méprise-tu les canard ?",
+    "answer": "Parce qu'à chaque fois que je vais au coin il se moque de moi."
+  },
+  {
+    "id": 357,
+    "type": "beauf",
+    "joke": "Quel est le point commun entre un mauvais musicien et un cancre? ",
+    "answer": "Les deux ont de mauvaises notes."
+  },
+  {
+    "id": 358,
+    "type": "beauf",
+    "joke": "Les peintres utilisent, de l'imagination, de la créativité et...",
+    "answer": "De la peinture."
+  },
+  {
+    "id": 359,
+    "type": "beauf",
+    "joke": "Une mère demande à son fils : quel est ton animal préféré?",
+    "answer": "Le zébu parce qu'on a un point commun."
+  },
+  {
+    "id": 360,
+    "type": "limit",
+    "joke": "Que fait un oiseau au dessus d’un camp de concentration ?",
+    "answer": "cuit cuit !"
+  },
+  {
+    "id": 361,
+    "type": "global",
+    "joke": "Mr et madame Sop ont un fils comment s'appelle-t-il ?",
+    "answer": "Alain"
+  },
+  {
+    "id": 362,
+    "type": "dark",
+    "joke": "Deux belges se déplacent dans le désert en tenant une portière",
+    "answer": "J'ai trop chaud ouvre la fenêtre s'il te plaît"
+  },
+  {
+    "id": 363,
+    "type": "global",
+    "joke": "Dieu créa la France, un trop beau pays, de belles formes, la mer, l'océan, les montagnes...",
+    "answer": "Alors pour compenser il a créé le français"
+  },
+  {
+    "id": 364,
+    "type": "dark",
+    "joke": "Ma b*te, je l’ai appelée la vie.",
+    "answer": "Parce que la vie est dure..."
+  },
+  {
+    "id": 365,
+    "type": "beauf",
+    "joke": "Qu'est-ce qui est pire qu'un meurtrier ?",
+    "answer": "Un policier fanatique."
+  },
+  {
+    "id": 366,
+    "type": "global",
+    "joke": "Je suis Tintin, mais je ne suis pas Tintin. Qui suis-je ?",
+    "answer": "Milou"
+  },
+  {
+    "id": 367,
+    "type": "global",
+    "joke": "Qu'est-ce qu'un squelette dans une armoire.",
+    "answer": "Quelqu'un qui a gagné un cache-cache."
+  },
+  {
+    "id": 368,
+    "type": "global",
+    "joke": "Que disent deux mouettes lorsqu’elles veulent partager quelque chose ?",
+    "answer": "« On fait mouette-mouette ? »"
+  },
+  {
+    "id": 369,
+    "type": "dark",
+    "joke": "Que font 1+2-1x2?",
+    "answer": "Le nombre de jambe d'un manchot."
+  },
+  {
+    "id": 370,
+    "type": "dark",
+    "joke": "Quel est la différence entre des pizzas et des juifs ?",
+    "answer": "Le temps de cuisson."
+  },
+  {
+    "id": 371,
+    "type": "limit",
+    "joke": "Quelle est la pire musique pour les juifs ?",
+    "answer": "En feu, Soprano"
+  },
+  {
+    "id": 372,
+    "type": "limit",
+    "joke": "Quelle est la vitesse maximale autorisée lors d'un rapport ?",
+    "answer": "68km/h car à 69..... Ça fait une tête à queue."
+  },
+  {
+    "id": 373,
+    "type": "global",
+    "joke": "Quel est le comble d'un comble ? ",
+    "answer": "C'est qu'un muet dit à un sourd qu'un aveugle les espionne. "
+  },
+  {
+    "id": 374,
+    "type": "global",
+    "joke": "Quel est le meilleur ami d'un grand-père ?",
+    "answer": "Le potager"
+  },
+  {
+    "id": 375,
+    "type": "dark",
+    "joke": "Que dit-on en Afrique quand un lieu est bondé ?",
+    "answer": "Il est noir de monde..."
+  },
+  {
+    "id": 376,
+    "type": "global",
+    "joke": "Qu'elle est l'insulte la plus utilisée en 1940 après le traité de Vichy ?",
+    "answer": "Pétain"
+  },
+  {
+    "id": 377,
+    "type": "global",
+    "joke": "Tu as aucune référence....",
+    "answer": "Peut-être car je suis pas à vendre !"
+  },
+  {
+    "id": 378,
+    "type": "limit",
+    "joke": "Quelle est la tarte préférée des putes ?",
+    "answer": "La tarte catin"
+  },
+  {
+    "id": 379,
+    "type": "dark",
+    "joke": "Un français et un arabe sont sur un immeuble. Le quel saute en premier ? ",
+    "answer": "L’immeuble"
+  },
+  {
+    "id": 380,
+    "type": "global",
+    "joke": "Monsieur et madame Cale ont un fils, comment s'appelle t-il?",
+    "answer": "Medhi"
+  },
+  {
+    "id": 381,
+    "type": "dark",
+    "joke": "– Maman, maman, je ne veux plus dormir avec mon petit frère.",
+    "answer": "– Tais-toi ! Je t’ai déjà dit qu’on avait pas assez d’argent pour l’enterrer."
+  },
+  {
+    "id": 382,
+    "type": "global",
+    "joke": "Lors de tes piques-niques",
+    "answer": "Tu manges avec ou sandwich ?"
+  },
+  {
+    "id": 383,
+    "type": "beauf",
+    "joke": "Connaissez-vous le slogan \"ça fait du bien par où ça passe\" ?",
+    "answer": "C'est une pub de suppositoires je crois..."
+  },
+  {
+    "id": 384,
+    "type": "global",
+    "joke": "Qu’est ce qui sépare l’espèce humaine du singe ?",
+    "answer": "La mer Méditerranée."
+  },
+  {
+    "id": 385,
+    "type": "limit",
+    "joke": "Que disent deux fesses sur un bateau ?",
+    "answer": "Dis donc ça commence à ramer du cul"
+  },
+  {
+    "id": 386,
+    "type": "beauf",
+    "joke": "Un médecin félicite le mari d'un couple pour le nouveau né. La femme demande au médecin pourquoi elle n'est pas félicitée.",
+    "answer": "Quand un plat est réussi, on félicite le cuisinier pas le four !"
+  },
+  {
+    "id": 387,
+    "type": "global",
+    "joke": "Mon plus grand défaut est l'honnêteté... Vous pensez le contraire ?",
+    "answer": "J'en ai rien à foutre de ce que vous pensez"
+  },
+  {
+    "id": 388,
+    "type": "dark",
+    "joke": "Que chante un juif devant un feu de camp ?",
+    "answer": "\"Vous les copains je ne vous oublierai jamais !\""
+  },
+  {
+    "id": 389,
+    "type": "global",
+    "joke": "De quelle couleur est le cheval blanc d'Henri IV ?",
+    "answer": "Jaune, car il s'est pissé dessus"
+  },
+  {
+    "id": 390,
+    "type": "global",
+    "joke": "J'ai lu un livre de Victor Hugo.",
+    "answer": "Il ne devait pas boire que du Fanta à l'apéro celui là..."
+  },
+  {
+    "id": 391,
+    "type": "limit",
+    "joke": "Ce n'est pas bien de regarder sous les jupes des filles",
+    "answer": "Il faut regarder sous la culotte"
+  },
+  {
+    "id": 392,
+    "type": "global",
+    "joke": "Quel est la différence entre un marin et un boucher ?",
+    "answer": "Le marin voit les côtes avant le port et le boucher voit le porc avant les côtes."
+  },
+  {
+    "id": 393,
+    "type": "dark",
+    "joke": "Un homme à l'hôpital dit à son infirmière : Vous êtes mon infirmière préférée, voudriez-vous passer me voir quand je serai sorti de l'hôpital ?",
+    "answer": "Je suis désolée, mais j'ai horreur, des cimetières."
+  },
+  {
+    "id": 394,
+    "type": "global",
+    "joke": "Je me présente, je suis Tamayo",
+    "answer": "Et lui c'est Monketchup ?"
+  },
+  {
+    "id": 395,
+    "type": "dark",
+    "joke": "Un juif est dans un ascenseur. Soudain, l'homme à côté de lui lâche un gros pet. Le juif le regarde l'air choqué.",
+    "answer": "Oh, ça va ! C'est du gaz, ça n'a jamais tué personne !"
+  },
+  {
+    "id": 396,
+    "type": "limit",
+    "joke": "Comment appelle t'on le penis d'un pretre ?",
+    "answer": "La verite car la verite sors toujours de la bouche des enfants"
+  },
+  {
+    "id": 397,
+    "type": "dev",
+    "joke": "Que fait un développeur quand il a peur ?",
+    "answer": "Il csharpe"
+  },
+  {
+    "id": 398,
+    "type": "dark",
+    "joke": "Ou doit-on prendre le bus pour aller au cimetière ?",
+    "answer": "En pleine gueule"
+  },
+  {
+    "id": 399,
+    "type": "dark",
+    "joke": "Qu'est ce qui permet d'enlever le chewing gum des ses cheveux ?",
+    "answer": "Le cancer"
+  },
+  {
+    "id": 400,
+    "type": "global",
+    "joke": "Quel est la marque de biscuit préférée de Brigitte Macron ?",
+    "answer": "Les petits écoliers"
+  },
+  {
+    "id": 401,
+    "type": "dark",
+    "joke": "Quel est le point commun entre l'humour noir et la nourriture ? ",
+    "answer": "Certains en ont, mais d'autres non "
+  },
+  {
+    "id": 402,
+    "type": "dark",
+    "joke": "Pourquoi personne ne sait nager au Maroc ?",
+    "answer": "Par ce que tous ceux qui savent, sont déjà en France."
+  },
+  {
+    "id": 403,
+    "type": "dark",
+    "joke": "Un noir va aux toilettes et en ressort blanc, qu'a t'il fait ??",
+    "answer": "il a chié sa race "
+  },
+  {
+    "id": 404,
+    "type": "global",
+    "joke": "Qu'est ce que deux sourds qui se battent ?",
+    "answer": "Un malentendu "
+  },
+  {
+    "id": 405,
+    "type": "global",
+    "joke": "On m’a toujours dit que Mozart était mort. ",
+    "answer": "Pourtant, à chaque fois que j’ouvre mon frigo, Mozart est là... "
+  },
+  {
+    "id": 406,
+    "type": "global",
+    "joke": "J'ai 36 têtes, 28 bras et 12 jambes, qui suis-je ?",
+    "answer": "Un mythomane"
+  },
+  {
+    "id": 407,
+    "type": "limit",
+    "joke": "Que fait un zoophile qui veut sauter ? ",
+    "answer": "Il prend son élan"
+  },
+  {
+    "id": 408,
+    "type": "beauf",
+    "joke": "Comment reconnait-on un aveugle sur une plage naturiste ?",
+    "answer": "C'est pas dur !"
+  },
+  {
+    "id": 409,
+    "type": "global",
+    "joke": "Pourquoi les tirelires sont en forme de cochon ?",
+    "answer": "Pour que les arabes n'y touchent pas"
+  },
+  {
+    "id": 410,
+    "type": "dark",
+    "joke": "J'ai vu un enfant sur un vélo, j'ai cru que c'était le mien donc je suis allé vérifier dans le garage... ",
+    "answer": "Mais je me suis trompé, il était toujours là, enchaîné, à réclamer à boire et à manger "
+  },
+  {
+    "id": 411,
+    "type": "dark",
+    "joke": "Que fait on après avoir serré la main d'un lépreux ? ",
+    "answer": "On la lui rend "
+  },
+  {
+    "id": 412,
+    "type": "dark",
+    "joke": "Pourquoi New-York ne peut pas jouer aux échecs ?",
+    "answer": "Parce qu'il lui manque deux tours"
+  },
+  {
+    "id": 413,
+    "type": "dark",
+    "joke": "Pourquoi Paris ne peut pas jouer aux échecs ?",
+    "answer": "Parce qu'il lui manque la Dame"
+  },
+  {
+    "id": 414,
+    "type": "dark",
+    "joke": "Que fait un prêtre après avoir sodomiser un chauve ?",
+    "answer": "Il le repose dans son berceau"
+  },
+  {
+    "id": 415,
+    "type": "blondes",
+    "joke": "Pourquoi c'est plus long de faire un bonhomme de neige blonde ?",
+    "answer": "Parce qu'il faut vider la tête"
+  },
+  {
+    "id": 416,
+    "type": "blondes",
+    "joke": "Combien faut il de blonde pour visser une ampoule ? ",
+    "answer": "Une qui tien l'ampoule, et quatre qui font tourner la blonde"
+  },
+  {
+    "id": 417,
+    "type": "beauf",
+    "joke": "Bon on joue au poker ou on s'encule ?",
+    "answer": "Perso j'aime pas trop le poker alors..."
+  },
+  {
+    "id": 418,
+    "type": "blondes",
+    "joke": "Mon Chat est mort... Je voudrais tellement en avoir un autre pareil",
+    "answer": "Mais qu’est ce que tu ferais de deux chats morts ?"
+  },
+  {
+    "id": 419,
+    "type": "global",
+    "joke": "Comment apelle t'on un cochon qui vole?",
+    "answer": "Un aéro-porc !"
+  },
+  {
+    "id": 420,
+    "type": "dark",
+    "joke": "Que faisait les parents de Gilbert Montagne pour le punir ?",
+    "answer": "Il déplaçaient les meubles"
+  },
+  {
+    "id": 421,
+    "type": "global",
+    "joke": "Comment s'appelle la femelle du hamster ? ",
+    "answer": "Amsterdam"
+  },
+  {
+    "id": 422,
+    "type": "global",
+    "joke": "Comment est mort capitaine Crochet ? ",
+    "answer": "En se grattant les couilles ! "
+  },
+  {
+    "id": 423,
+    "type": "global",
+    "joke": "Comment nintendo ont fais leurs consoles ?",
+    "answer": "ils ont demandé à une déesse, puis à deux, puis à trois..."
+  },
+  {
+    "id": 424,
+    "type": "global",
+    "joke": "Que fait un cendrier devant un ascenseur ?",
+    "answer": "Il veut des cendres"
+  },
+  {
+    "id": 425,
+    "type": "global",
+    "joke": "Que dit une noisette quand elle tombe à l'eau ?",
+    "answer": "je me noix "
+  },
+  {
+    "id": 426,
+    "type": "dark",
+    "joke": "Que faire lorsqu’on trouve un épileptique en crise dans une baignoire ?",
+    "answer": "Ajouter de la lessive et y jeter son linge sale."
+  },
+  {
+    "id": 427,
+    "type": "dark",
+    "joke": "Papa, papa, j’aime pas grand mère…",
+    "answer": "Bein tu n’as qu’à la laisser sur le bord de l’assiette."
+  },
+  {
+    "id": 428,
+    "type": "dark",
+    "joke": "Maman, maman papa c’est pendu dans le jardin !",
+    "answer": "Poisson d’avril ! il s’est pendu dans le grenier !"
+  },
+  {
+    "id": 429,
+    "type": "dark",
+    "joke": "Qu'est ce qui est vert et qui pue ?",
+    "answer": "Un scout mort au fond d’un bois"
+  },
+  {
+    "id": 430,
+    "type": "dev",
+    "joke": "De quelle couleur sont tes yeux ?",
+    "answer": "#1292f4 et toi ?"
+  },
+  {
+    "id": 431,
+    "type": "dev",
+    "joke": "Il y a 10 types de gens dans le monde.",
+    "answer": "Ceux qui parlent binaire, et les autres."
+  },
+  {
+    "id": 432,
+    "type": "dev",
+    "joke": "Que fait un développeur s'il veut se marier ?",
+    "answer": "Une fille en C"
+  },
+  {
+    "id": 433,
+    "type": "blondes",
+    "joke": "Une blonde et une brune se jettent en bas d'un immeuble de dix étages. Laquelle atteint le sol en premier ? ",
+    "answer": "La brune, parce que la blonde s'est perdue en chemin"
+  },
+  {
+    "id": 434,
+    "type": "global",
+    "joke": "Quel est le comble pour un plombier ?",
+    "answer": "Que ses clients prennent la fuite !"
+  },
+  {
+    "id": 435,
+    "type": "global",
+    "joke": "Quelle est la meilleure heure pour écouter de la musique ? ",
+    "answer": "Deezer"
+  },
+  {
+    "id": 436,
+    "type": "global",
+    "joke": "À quoi sert Internet Explorer ?",
+    "answer": "À télécharger Google Chrome."
+  },
+  {
+    "id": 437,
+    "type": "global",
+    "joke": "Tu sais pourquoi l'iPhone 6 se plie ? ",
+    "answer": "Parce que l'Apple Store."
+  },
+  {
+    "id": 438,
+    "type": "global",
+    "joke": "Comment on appelle un mec qui répare des tablettes Microsoft ?",
+    "answer": "Un technicien de surface."
+  },
+  {
+    "id": 439,
+    "type": "global",
+    "joke": "Pourquoi dit-on que les poissons travaillent illégalement ?",
+    "answer": "Parce qu’ils n’ont pas de FISH de paie."
+  },
+  {
+    "id": 440,
+    "type": "global",
+    "joke": "Quel est le bar préféré des espagnols ?",
+    "answer": "Le bar Celone"
+  },
+  {
+    "id": 441,
+    "type": "global",
+    "joke": "Pourquoi est-ce que les vêtements sont toujours fatigués quand ils sortent de la machine ?",
+    "answer": "Parce qu’ils sont lessivés."
+  },
+  {
+    "id": 442,
+    "type": "global",
+    "joke": "Pourquoi est-ce que les livres ont-ils toujours chaud ?",
+    "answer": "Parce qu’ils ont une couverture"
+  },
+  {
+    "id": 443,
+    "type": "limit",
+    "joke": "Qu’est-ce qui est pire que de doigter sa sœur ? ",
+    "answer": "Y trouver l’alliance de son père."
+  },
+  {
+    "id": 444,
+    "type": "global",
+    "joke": "Qui chante le mieux lors d'une tempête ?",
+    "answer": "Storm Maé"
+  },
+  {
+    "id": 445,
+    "type": "dark",
+    "joke": "Qu'est-ce qui est vert, rouge et qui va à 200 km/h ?",
+    "answer": "Une grenouille dans un mixeur"
+  },
+  {
+    "id": 446,
+    "type": "dev",
+    "joke": "Que met un développeur sur sa voiture en hiver?",
+    "answer": "Une bash."
+  },
+  {
+    "id": 447,
+    "type": "limit",
+    "joke": "Hier, j'ai espionné un pote pour savoir son MDP, après quelques coups d'oeil je le vois taper \"PÉNIS\"...",
+    "answer": "Le PC l'a jugé \"Trop court\"..."
+  },
+  {
+    "id": 448,
+    "type": "global",
+    "joke": "Comment appelle t'on un chat compressé ?",
+    "answer": "Un Kitkat"
+  },
+  {
+    "id": 449,
+    "type": "dark",
+    "joke": "Comment réparer un téléphone tombé à l'eau ?",
+    "answer": "Vous le recouvrez de riz dans une boîte hermétique puis laissez passer une nuit, pendant votre sommeil, de petits chinois, attirés par le riz, viendront réparer votre téléphone !"
+  },
+  {
+    "id": 450,
+    "type": "global",
+    "joke": "Quelle est la différence entre un cendrier et une théière ?",
+    "answer": "Le cendrier c'est pour des cendres (descendre), la théière, c'est pour mon thé (monter)."
+  },
+  {
+    "id": 451,
+    "type": "dark",
+    "joke": "Comment avoir 1 million de followers en Afrique ?",
+    "answer": "Suffit de courir avec une bouteille d'eau"
+  },
+  {
+    "id": 452,
+    "type": "global",
+    "joke": "Pourquoi les chinois de croient pas au père noël ?",
+    "answer": "Car c'est eux qui font les jouets"
+  },
+  {
+    "id": 453,
+    "type": "dark",
+    "joke": "Quelle est la différence entre un livre et un arabe",
+    "answer": "Le livre a ses papiers"
+  },
+  {
+    "id": 454,
+    "type": "dark",
+    "joke": "Pourquoi il n'y a pas de piscine en Algérie ?",
+    "answer": "Parce que tous ceux qui savent nager sont en France "
+  },
+  {
+    "id": 455,
+    "type": "dark",
+    "joke": "Quelle est la différence entre un bébé et un oignon ?",
+    "answer": "Pour l'oignon j'ai pleuré quand je l'ai découpé"
+  },
+  {
+    "id": 456,
+    "type": "dark",
+    "joke": "Un jour quelqu'un a dit a Inch d'aller a Marrakech ...",
+    "answer": "Et Inch alla !"
+  },
+  {
+    "id": 457,
+    "type": "limit",
+    "joke": "Quelle est le point commun entre les épinards et la sodomie ?",
+    "answer": "Même avec du beurre, les enfants n'aiment aucun des deux..."
+  },
+  {
+    "id": 458,
+    "type": "dark",
+    "joke": "Qu'est ce qui est mieux que de gagner une médaille d'or aux jeux paralympiques ?",
+    "answer": "Marcher."
+  },
+  {
+    "id": 459,
+    "type": "dark",
+    "joke": "Avec quoi fait-on sortir un bébé d'un mixeur ?",
+    "answer": "Une paille."
+  },
+  {
+    "id": 460,
+    "type": "global",
+    "joke": "Monsieur et madame China ont un fils, comment s'appelle t-il?",
+    "answer": "Medhi"
+  }
 ]

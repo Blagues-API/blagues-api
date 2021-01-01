@@ -1,8 +1,9 @@
 const Sequelize = require('sequelize')
 const sqlite3 = require('sqlite3')
+const path = require('path')
 
 const database = new Sequelize({
-  storage: './database.sqlite',
+  storage: path.resolve(__dirname, '../../database.sqlite'),
   dialectModule: sqlite3,
   dialect: 'sqlite',
   logging: false,
@@ -15,8 +16,12 @@ const database = new Sequelize({
   },
 })
 
+const models = {
+  Users: require('./User')(database, Sequelize.DataTypes),
+}
+
 module.exports = {
   Sequelize,
   database,
-  Users: database.import('./User'),
+  ...models,
 }

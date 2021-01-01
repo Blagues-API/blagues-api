@@ -1,19 +1,19 @@
-module.exports = (sequelize, Sequelize) => {
-  return sequelize.define(
+module.exports = (database, DataTypes) => {
+  return database.define(
     'users',
     {
       user_id: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         primaryKey: true,
         allowNull: false,
       },
-      user_name: Sequelize.STRING,
-      user_avatar: Sequelize.STRING,
-      user_token: Sequelize.TEXT,
-      user_token_refresh: Sequelize.TEXT,
-      token: Sequelize.TEXT,
-      token_key: Sequelize.STRING,
-      limit: Sequelize.INTEGER,
+      user_name: DataTypes.STRING,
+      user_avatar: DataTypes.STRING,
+      user_token: DataTypes.TEXT,
+      user_token_refresh: DataTypes.TEXT,
+      token: DataTypes.TEXT,
+      token_key: DataTypes.STRING,
+      limit: DataTypes.INTEGER,
     },
     {
       indexes: [
