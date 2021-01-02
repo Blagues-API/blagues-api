@@ -191,13 +191,12 @@ BlagueAPIBot.on('messageReactionAdd', async (messageReaction, user) => {
 
     try {
       await user.send(
-        stripIndents`
-          {
-              "id": ,
-              "type": "${types[rawType.toLowerCase()]}",
-              "joke": "${joke}",
-              "answer": "${answer.replace(/"/g, '\\"')}"
-          },`,
+        `{\n    "id": ,\n    "type": "${
+          types[rawType.toLowerCase()]
+        }",\n    "joke": "${joke}",\n    "answer": "${answer.replace(
+          /"/g,
+          '\\"',
+        )}"\n},`,
         { code: 'json' },
       )
     } catch (error) {
