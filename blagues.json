@@ -2764,5 +2764,365 @@
     "type": "global",
     "joke": "Monsieur et madame China ont un fils, comment s'appelle t-il?",
     "answer": "Medhi"
+  },
+  {
+    "id": 461,
+    "type": "global",
+    "joke": "Pourquoi Mickael ouvre la porte ?",
+    "answer": "Parce que Jack-sonne !"
+  },
+  {
+    "id": 462,
+    "type": "global",
+    "joke": "M et Mme Bombeurre ont un fils comment s'appelle t-il ?",
+    "answer": "Jean"
+  },
+  {
+    "id": 463,
+    "type": "global",
+    "joke": "Comment appelle-t-on un crime qui a été commis dans la neige?",
+    "answer": "Un ice cream !"
+  },
+  {
+    "id": 464,
+    "type": "dark",
+    "joke": "Spiderman grimpe au dessus de mur, Superman vole au dessus...",
+    "answer": "Et musulman les explose !"
+  },
+  {
+    "id": 465,
+    "type": "blondes",
+    "joke": "Une blonde appelle son copain: \"Je n'arrive pas à démarrer la voiture !\"",
+    "answer": "Je te l'ai déjà dis cent fois que lorsque ce n'est pas moi qui conduit, tu doit te mettre à gauche !"
+  },
+  {
+    "id": 466,
+    "type": "dark",
+    "joke": "Pourquoi tous les magiciens sont blanc ?",
+    "answer": "Parce que la magie noir est interdite !"
+  },
+  {
+    "id": 467,
+    "type": "limit",
+    "joke": "Ne faites pas l'amour dans votre jardin, l'amour est aveugle...",
+    "answer": "Mais pas votre voisin."
+  },
+  {
+    "id": 468,
+    "type": "dark",
+    "joke": "Un mec demande à son pote : \"Comment faire pour ne pas commettre les mêmes erreur que mes parents ?\"",
+    "answer": "Mets toujours un préservatif !"
+  },
+  {
+    "id": 469,
+    "type": "dark",
+    "joke": "Un femme dis à son mari : \"Je vais faire les courses, demain c'est l'anniversaire de ma mère, tu aurais une idée d'appareil électrique à lui offrir ?\"",
+    "answer": "Pourquoi pas une chaise ?"
+  },
+  {
+    "id": 470,
+    "type": "global",
+    "joke": "J'ai suivis deux régimes en même temps...",
+    "answer": "J'mangeais pas assez avec un seul !"
+  },
+  {
+    "id": 471,
+    "type": "limit",
+    "joke": "Le soir, un homme lis le journal et dit à sa femme : Dis c'est chaud quand même, une femme s'est faite baiser par 100 personnes, mais où va le monde ? Et sa femme répond : ",
+    "answer": "Bah dans son cul."
+  },
+  {
+    "id": 472,
+    "type": "global",
+    "joke": "Toto si je te donne 50 gâteaux et tu en manges 48 tu as donc ?",
+    "answer": "Mal au ventre ! "
+  },
+  {
+    "id": 473,
+    "type": "dark",
+    "joke": "Pourquoi les juifs sont-ils toujours propre ?",
+    "answer": "Parce qu'ils prennent des douches !"
+  },
+  {
+    "id": 474,
+    "type": "dev",
+    "joke": "Quel est la différence entre un catcheur et un développeur javascript ?",
+    "answer": "Le catcheur fait des techniques de catch et le développeur fait des .catch techniques"
+  },
+  {
+    "id": 475,
+    "type": "global",
+    "joke": "Un enfant cannibale reste toujours dans son coin. La maîtresse lui demande : \"Pourquoi ne joues-tu pas avec les autres enfants ?\"",
+    "answer": "Parce que mon père m'a dit de ne pas jouer avec la nourriture."
+  },
+  {
+    "id": 476,
+    "type": "global",
+    "joke": "Pourquoi Hulk a-t-il un beau jardin ?",
+    "answer": "Parce qu'il a la main verte."
+  },
+  {
+    "id": 477,
+    "type": "global",
+    "joke": "Un avaleur de sabres entre dans une mercerie : \"Bonjour, je voudrais des aiguilles.\", à cela elle répond: \"Ah, vous faites de la couture ?\"",
+    "answer": "Non, je fais un régime !"
+  },
+  {
+    "id": 478,
+    "type": "global",
+    "joke": "Pourquoi rejoindre le côté obscur de la force ?",
+    "answer": "Pasque ils ont des masques et des respirateus artificiels."
+  },
+  {
+    "id": 479,
+    "type": "global",
+    "joke": "Pourquoi est-ce que les fainéants n'ont pas de raison de ne rien faire ?",
+    "answer": "Ils ont la flemme d'en trouver."
+  },
+  {
+    "id": 480,
+    "type": "dark",
+    "joke": "Comment un parachutiste aveugle sait-il qu'il va bientôt atterrir ?",
+    "answer": "Lorsqu'il s'aperçoit y a du mou à la laisse de son chien"
+  },
+  {
+    "id": 491,
+    "type": "beauf",
+    "joke": "Chéri, préfères-tu les femmes intelligentes ou belles ?",
+    "answer": "Aucune, car je n'aime que toi."
+  },
+  {
+    "id": 492,
+    "type": "blondes",
+    "joke": "Comment appelle t-on une entreprise dirigée par une blonde ?",
+    "answer": "Une Tarte-Up"
+  },
+  {
+    "id": 493,
+    "type": "global",
+    "joke": "Pourquoi trouve on beaucoup de célibataires à Dijon ?",
+    "answer": "Parce que l'amour tarde."
+  },
+  {
+    "id": 494,
+    "type": "global",
+    "joke": "Quelle est la couleur de la grippe ?",
+    "answer": "Gris pâle."
+  },
+  {
+    "id": 495,
+    "type": "global",
+    "joke": "Que donne un mouton et un cochon qui s'accouplent?",
+    "answer": "De la Porcelaine."
+  },
+  {
+    "id": 496,
+    "type": "dark",
+    "joke": "Qu’est-ce qui est tout rouge et qui tape à la vitre en hurlant ?",
+    "answer": "Un bébé dans un micro-onde."
+  },
+  {
+    "id": 497,
+    "type": "dark",
+    "joke": "Quelle est la seule et unique différence entre un séducteur et un violeur ?",
+    "answer": "La Patience..."
+  },
+  {
+    "id": 498,
+    "type": "limit",
+    "joke": "Si un rapeur nique sa mère, que fait un campeur ?",
+    "answer": "Il monte sa tante !"
+  },
+  {
+    "id": 499,
+    "type": "blondes",
+    "joke": "Une blonde téléphone à son copain : \"Chéri pourquoi t'as mis le nouveau poisson dans un bocal d'eau ?!\"",
+    "answer": "Il va se noyer !"
+  },
+  {
+    "id": 500,
+    "type": "global",
+    "joke": "Quel est la saison préférée d'un grimpeur ?",
+    "answer": "L'hiver, car il pleut des cordes."
+  },
+  {
+    "id": 501,
+    "type": "global",
+    "joke": "Pourquoi le poisson ne s'intéresse pas au monde ?",
+    "answer": "Parce qu'il s'en fish."
+  },
+  {
+    "id": 502,
+    "type": "global",
+    "joke": "Pourquoi les poissons travaillent tous au black ?",
+    "answer": "Car ils n'ont pas de fish de paye !"
+  },
+  {
+    "id": 503,
+    "type": "global",
+    "joke": "Pourquoi certain pigeons ne savent pas nager.",
+    "answer": "Parce que les pigeons roucoules."
+  },
+  {
+    "id": 504,
+    "type": "beauf",
+    "joke": "Une personne appelle la police pour leur dire que deux filles se battaient pour lui. La police lui demande donc quel est le problème.",
+    "answer": "Le garçon répond : \"C'est moche gagne !\""
+  },
+  {
+    "id": 505,
+    "type": "dev",
+    "joke": "Comment un dev se met-il à jour ?",
+    "answer": "Il se met à l'apache."
+  },
+  {
+    "id": 506,
+    "type": "dev",
+    "joke": "Une requête NoSQL entre dans un bar, qu'est ce qu'elle fait ?",
+    "answer": "Elle repart, car il n'y a pas de table."
+  },
+  {
+    "id": 507,
+    "type": "global",
+    "joke": "Pourquoi des poissons n'arrivent pas à tenir leur entreprise ?",
+    "answer": "Parce qu'ils coulent."
+  },
+  {
+    "id": 508,
+    "type": "dark",
+    "joke": "Qu'est ce qu'un noir dans une salle noir",
+    "answer": "Deux sales noir."
+  },
+  {
+    "id": 509,
+    "type": "dark",
+    "joke": "4 arabes sont dans une voiture, la voiture sautes dans l'eau que regrette tu ?",
+    "answer": "Qu'il y en est pas plus dans la voiture."
+  },
+  {
+    "id": 510,
+    "type": "dark",
+    "joke": "comment faire rentrer 60 juifs dans une voiture ? ",
+    "answer": "2 à l'avant 3 à l'arrière et le reste dans le cendrier."
+  },
+  {
+    "id": 511,
+    "type": "global",
+    "joke": "Que fait une biscotte tous les soir ?",
+    "answer": "Il vont a une biscotheque."
+  },
+  {
+    "id": 512,
+    "type": "global",
+    "joke": "Que mettent les souris pour aller danser ? ",
+    "answer": "Elles mettent du masque à rat."
+  },
+  {
+    "id": 513,
+    "type": "global",
+    "joke": "\"J’apprends mes devoirs\", c’est à quel temps, Toto ?",
+    "answer": "Du temps perdu Madame."
+  },
+  {
+    "id": 514,
+    "type": "dark",
+    "joke": "Tout les signe astrologique on des cheveux !",
+    "answer": "Sauf les cancer..."
+  },
+  {
+    "id": 515,
+    "type": "dark",
+    "joke": "Prof des biologie : \"Que trouve-t-on dans une cellule ?\"",
+    "answer": "Des arabes et des noirs !"
+  },
+  {
+    "id": 516,
+    "type": "dark",
+    "joke": "L'avantage d'être Chinois...",
+    "answer": "C'est que tu peux acheter local n'importe où."
+  },
+  {
+    "id": 517,
+    "type": "dark",
+    "joke": "Quel est le point commun entre un camp de concentration et une maison de retraite ?",
+    "answer": "Dans les deux cas, les pensionnaires n'en ressortent pas vivants."
+  },
+  {
+    "id": 518,
+    "type": "global",
+    "joke": "Que dit un éléphant sans corne ?",
+    "answer": "Je suis sans défense."
+  },
+  {
+    "id": 519,
+    "type": "beauf",
+    "joke": "Comment appelle-t-on une vache qui joue de la musique ?",
+    "answer": "Une meeuhsiciene."
+  },
+  {
+    "id": 520,
+    "type": "dark",
+    "joke": "Quel est le rapport entre l'humour noir et l'eau ?",
+    "answer": "Tout le monde n'en a pas !"
+  },
+  {
+    "id": 521,
+    "type": "dark",
+    "joke": "En cours de sport le prof il cris \"Faites 10 pompes !\"",
+    "answer": "Le chinois se retourne brusquement et demande \"Nike ou Adidas ?\""
+  },
+  {
+    "id": 522,
+    "type": "beauf",
+    "joke": "D'ou viennent les Cochons ? ",
+    "answer": "Des 4 Groins du monde ! "
+  },
+  {
+    "id": 523,
+    "type": "global",
+    "joke": "Quel oiseau est attiré par le miel ?",
+    "answer": "L'autruche car à coter il y a une aut'ruche."
+  },
+  {
+    "id": 524,
+    "type": "beauf",
+    "joke": "Connaissez-vous l'histoire du lit escamotable ?",
+    "answer": "C'est une histoire à faire dormir debout !"
+  },
+  {
+    "id": 525,
+    "type": "global",
+    "joke": "Que fait un hibou dans une bibliotheque ?",
+    "answer": "Hibouqine !"
+  },
+  {
+    "id": 526,
+    "type": "limit",
+    "joke": "Si un noir veut me prendre par les sentiments.",
+    "answer": "Je peux dire qu'il mamadou ?"
+  },
+  {
+    "id": 527,
+    "type": "beauf",
+    "joke": "quel est la différence entre une femme et une voiture de sport ?",
+    "answer": "Aucune ! Les deux font du bruit quand ont accélère."
+  },
+  {
+    "id": 528,
+    "type": "global",
+    "joke": "Robinson Crusoé habitait t'il une île déserte ?",
+    "answer": "Non puisqu'il y habitait."
+  },
+  {
+    "id": 529,
+    "type": "global",
+    "joke": "Pourquoi Robinson Crusoé ? ",
+    "answer": "Parce que Zoé avait raison"
+  },
+  {
+    "id": 530,
+    "type": "limit",
+    "joke": "Quelles sont vos matières préférées ?",
+    "answer": "Maths et Dessin !"
   }
 ]
