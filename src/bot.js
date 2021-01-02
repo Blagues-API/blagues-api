@@ -190,9 +190,10 @@ BlagueAPIBot.on('messageReactionAdd', async (messageReaction, user) => {
     const [, rawType, joke, answer] = regex.exec(message.content)
 
     try {
+      const type = types.find(t => t.aliases.includes(rawType.toLowerCase()))
       await user.send(
         `{\n    "id": ,\n    "type": "${
-          types[rawType.toLowerCase()]
+          type?.ref ?? 'Inconnu'
         }",\n    "joke": "${joke}",\n    "answer": "${answer.replace(
           /"/g,
           '\\"',
@@ -230,15 +231,31 @@ BlagueAPIBot.on('messageReactionAdd', async (messageReaction, user) => {
   }
 })
 
-const types = {
-  général: 'global',
-  noir: 'dark',
-  dark: 'dark',
-  développeur: 'dev',
-  'limite limite': 'limit',
-  limite: 'limit',
-  beauf: 'beauf',
-  blondes: 'blondes',
-}
+const types = [
+  {
+    ref: 'global',
+    aliases: ['global', 'général', 'general', 'normale'],
+  },
+  {
+    ref: 'dark',
+    aliases: ['dark', 'noir', 'noire'],
+  },
+  {
+    ref: 'dev',
+    aliases: ['dev', 'développeur', 'developpeur'],
+  },
+  {
+    ref: 'limit',
+    aliases: ['limit', 'limite limite', 'limit limit', 'limite'],
+  },
+  {
+    ref: 'beauf',
+    aliases: ['beauf'],
+  },
+  {
+    ref: 'blondes',
+    aliases: ['blondes', 'blonds', 'blondines'],
+  },
+]
 
 BlagueAPIBot.login(process.env.discord_bot_token)
