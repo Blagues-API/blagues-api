@@ -43,8 +43,8 @@ BlagueAPIBot.on('ready', () => {
         embed: {
           title: 'Bienvenue à toi ! 👋',
           description: stripIndents`
-            Si tu le souhaites, tu peux proposer tes blagues afin qu'elles soient ajoutés à l'api Blagues API qui est une api qui regroupe actuellement **${jokes.length}** blagues françaises.
-            Elles sont toutes issues de ce salon proposé par la communauté.
+            Si tu le souhaites, tu peux proposer tes blagues afin qu'elles soient ajoutées à l'api Blagues API qui regroupe actuellement **${jokes.length}** blagues françaises.
+            Elles sont toutes issues de ce salon proposées par la communauté.
 
             >>> Tous les types de blagues sont acceptés à condition qu'elles soient correctement catégorisées et qu'elles respectent le format demandé.`,
           fields: [
@@ -62,7 +62,7 @@ BlagueAPIBot.on('ready', () => {
               `,
             },
             {
-              name: 'Voici le schéma a copier coller !',
+              name: 'Voici le schéma à copier-coller !',
               value: stripIndents`
                 \`\`\`
                 > **Type**:
