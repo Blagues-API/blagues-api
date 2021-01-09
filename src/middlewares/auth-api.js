@@ -4,15 +4,15 @@ module.exports = function () {
   return async function (req, res, next) {
     const bearerToken = req.header('Authorization')
     if (!bearerToken) {
-      return res.status(400).json({
-        status: 400,
-        error: 'Bad Request',
+      return res.status(401).json({
+        status: 401,
+        error: 'Unauthorized',
         message: 'Authorization header is required',
       })
     } else if (bearerToken.substring(0, 7) !== 'Bearer ') {
-      return res.status(400).json({
-        status: 400,
-        error: 'Bad Request',
+      return res.status(401).json({
+        status: 401,
+        error: 'Unauthorized',
         message:
           'Authorization header value must follow the Bearer <token> format',
       })
@@ -24,9 +24,9 @@ module.exports = function () {
       console.log(`API call: ${decoded.user_id}`)
       return next()
     } catch (error) {
-      return res.status(400).json({
-        status: 400,
-        error: 'Bad Request',
+      return res.status(401).json({
+        status: 401,
+        error: 'Unauthorized',
         message: 'Invalid Token submitted',
       })
     }
