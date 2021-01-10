@@ -969,7 +969,7 @@
     "id": 161,
     "type": "beauf",
     "joke": "Qu'est-ce qu'un comptable ?",
-    "answer": "Un con derrière une table."
+    "answer": "C'est un con derrière une table."
   },
   {
     "id": 162,
@@ -1165,9 +1165,9 @@
   },
   {
     "id": 194,
-    "type": "global",
-    "joke": "Qu’est-ce qu’un comptable ?",
-    "answer": "C’est un con avec une table."
+    "type": "limit",
+    "joke": "Quelles sont vos matières préférées ?",
+    "answer": "Maths et Dessin !"
   },
   {
     "id": 195,
@@ -3118,11 +3118,5 @@
     "type": "global",
     "joke": "Pourquoi Robinson Crusoé ? ",
     "answer": "Parce que Zoé avait raison"
-  },
-  {
-    "id": 530,
-    "type": "limit",
-    "joke": "Quelles sont vos matières préférées ?",
-    "answer": "Maths et Dessin !"
   }
 ]
