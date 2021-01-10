@@ -9,7 +9,7 @@
     "id": 2,
     "type": "global",
     "joke": "Quelle est la meilleure heure pour écouter de la musique ?",
-    "answer": "Deezer..."
+    "answer": "Deezer"
   },
   {
     "id": 3,
@@ -128,7 +128,7 @@
   {
     "id": 22,
     "type": "limit",
-    "joke": "Quel est la différence entre un ascenseur et un vagin ?",
+    "joke": "Quelle est la différence entre un ascenseur et un vagin ?",
     "answer": "Aucune, dans les deux cas tu mets ton doigt où t'habite"
   },
   {
@@ -404,7 +404,7 @@
   {
     "id": 68,
     "type": "global",
-    "joke": "Pourquoi Harry Potter chuchotte ?",
+    "joke": "Pourquoi Harry Potter chuchote ?",
     "answer": "Parce que Dumbledore…"
   },
   {
@@ -422,8 +422,8 @@
   {
     "id": 71,
     "type": "global",
-    "joke": "Comment appelle-t-on un squelette qui parle ?",
-    "answer": "Un os parleur"
+    "joke": "Pourquoi Robinson Crusoé ? ",
+    "answer": "Parce que Zoé avait raison"
   },
   {
     "id": 72,
@@ -463,9 +463,9 @@
   },
   {
     "id": 78,
-    "type": "dark",
-    "joke": "Combien y-a-t-il de somaliens en Somalie ?",
-    "answer": "Environ 500 grammes"
+    "type": "beauf",
+    "joke": "Connaissez-vous l'histoire du lit escamotable ?",
+    "answer": "C'est une histoire à faire dormir debout !"
   },
   {
     "id": 79,
@@ -543,7 +543,7 @@
     "id": 91,
     "type": "dark",
     "joke": "Quel est le point commun entre un surdoué et un pédophile ?",
-    "answer": "Ils ont tout les deux sauté la classe de CE1"
+    "answer": "Il ont tous les deux sauté la classe de CE1"
   },
   {
     "id": 92,
@@ -728,7 +728,7 @@
   {
     "id": 122,
     "type": "limit",
-    "joke": "Quel est la dernière chose que Lady Dianna ai mangée ?",
+    "joke": "Quelle est la dernière chose que Lady Dianna ai mangée ?",
     "answer": "Le volant"
   },
   {
@@ -746,8 +746,8 @@
   {
     "id": 125,
     "type": "dark",
-    "joke": "Grâce à quoi peut-on enlever le chewing-gum dans les cheveux ?",
-    "answer": "Le cancer."
+    "joke": "Qu'est ce qui permet d'enlever le chewing gum des ses cheveux ?",
+    "answer": "Le cancer"
   },
   {
     "id": 126,
@@ -811,9 +811,9 @@
   },
   {
     "id": 136,
-    "type": "beauf",
-    "joke": "Que dit un oeuf qui attend son pote depuis 1 heure ?",
-    "answer": "S'il arrive pas dans 10 minutes, j'me casse !"
+    "type": "global",
+    "joke": "Robinson Crusoé habitait t'il une île déserte ?",
+    "answer": "Non puisqu'il y habitait."
   },
   {
     "id": 137,
@@ -836,7 +836,7 @@
   {
     "id": 140,
     "type": "beauf",
-    "joke": "Pourquoi les petits poissons ne partent pas à l'école ?",
+    "joke": "Pourquoi les petits poissons ne vont pas à l'école ?",
     "answer": "Parce qu'ils s'en fish !"
   },
   {
@@ -872,14 +872,14 @@
   {
     "id": 146,
     "type": "beauf",
-    "joke": "Pourquoi Harry Potter chuchote ?",
-    "answer": "Parce que Dumbledore ..."
+    "joke": "quel est la différence entre une femme et une voiture de sport ?",
+    "answer": "Aucune ! Les deux font du bruit quand ont accélère."
   },
   {
     "id": 147,
     "type": "blondes",
-    "joke": "Pourquoi les blondes portent des ceintures D&G ?",
-    "answer": "Pour ne pas confondre la droite et la gauche !"
+    "joke": "Pourquoi les blondes portent-elles des ceintures D&G ?",
+    "answer": "Pour reconnaître leur droite et leur gauche"
   },
   {
     "id": 148,
@@ -896,7 +896,7 @@
   {
     "id": 150,
     "type": "global",
-    "joke": "Que dis-t-on a quelqu'un de triste qui joue aux jeux vidéos ?",
+    "joke": "Que dit-on a quelqu'un de triste qui joue aux jeux vidéos ?",
     "answer": "On dit qu'il se console !"
   },
   {
@@ -908,7 +908,7 @@
   {
     "id": 152,
     "type": "dev",
-    "joke": "Que dis un informaticien quand il s'ennuie?",
+    "joke": "Que dit un informaticien quand il s'ennuie?",
     "answer": "Je me fichier"
   },
   {
@@ -951,7 +951,7 @@
     "id": 158,
     "type": "global",
     "joke": "Pourquoi est-ce difficile de conduire dans le Nord ?",
-    "answer": "Parce que les voitures arrêtent pas de caler."
+    "answer": "Parce que les voitures n'arrêtent pas de caler."
   },
   {
     "id": 159,
@@ -963,7 +963,7 @@
     "id": 160,
     "type": "dev",
     "joke": "Pourquoi les développeurs ne portent ils pas de chaussures à lacets ?",
-    "answer": "Car il préfèrent les scratch."
+    "answer": "Car ils préfèrent les scratch."
   },
   {
     "id": 161,
@@ -1003,9 +1003,9 @@
   },
   {
     "id": 167,
-    "type": "limit",
-    "joke": "Quelle est la différence entre un rappeur et un campeur ?",
-    "answer": "Le rappeur niq** ta mère et le campeur monte ta tente"
+    "type": "dark",
+    "joke": "En cours de sport le prof il cris \"Faites 10 pompes !\"",
+    "answer": "Le chinois se retourne brusquement et demande \"Nike ou Adidas ?\""
   },
   {
     "id": 168,
@@ -1040,7 +1040,7 @@
   {
     "id": 173,
     "type": "dev",
-    "joke": "Quel est la maladie la plus répandue chez les développeurs Rust ?",
+    "joke": "Quelle est la maladie la plus répandue chez les développeurs Rust ?",
     "answer": "Le tétanos"
   },
   {
@@ -1250,7 +1250,7 @@
   {
     "id": 208,
     "type": "global",
-    "joke": "Quel sont les deux animaux les plus intelligents ?",
+    "joke": "Quels sont les deux animaux les plus intelligents ?",
     "answer": "Le Cerf et le Veau"
   },
   {
@@ -1453,9 +1453,9 @@
   },
   {
     "id": 242,
-    "type": "blondes",
-    "joke": "Pourquoi les blondes portent-elles des ceintures D&G ?",
-    "answer": "Pour reconnaître leur droite et leur gauche"
+    "type": "limit",
+    "joke": "Si un noir veut me prendre par les sentiments.",
+    "answer": "Je peux dire qu'il mamadou ?"
   },
   {
     "id": 243,
@@ -1580,7 +1580,7 @@
   {
     "id": 263,
     "type": "global",
-    "joke": "Que ce qui est plus fort qu’un lion ?",
+    "joke": "Qu'est-ce qui est plus fort qu’un lion ?",
     "answer": "Deux lions."
   },
   {
@@ -1688,8 +1688,8 @@
   {
     "id": 281,
     "type": "global",
-    "joke": "Moi j'ai un Archipel",
-    "answer": "ça creuse des archi trous "
+    "joke": "Que fait un hibou dans une bibliotheque ?",
+    "answer": "Hibouqine !"
   },
   {
     "id": 282,
@@ -1952,8 +1952,8 @@
   {
     "id": 325,
     "type": "global",
-    "joke": "Pourquoi est-ce c'est difficile de conduire dans le Nord ?",
-    "answer": "Parce que les voitures arrêtent PAS DE CALER."
+    "joke": "Que fait un hibou dans une bibliotheque ?",
+    "answer": "Hibouqine !"
   },
   {
     "id": 326,
@@ -1970,8 +1970,8 @@
   {
     "id": 328,
     "type": "global",
-    "joke": "Qu'est ce qu'un cadeau qui s'en va ?",
-    "answer": "Une surprise party"
+    "joke": "Que dit un éléphant sans corne ?",
+    "answer": "Je suis sans défense."
   },
   {
     "id": 329,
@@ -2060,20 +2060,20 @@
   {
     "id": 343,
     "type": "global",
-    "joke": "Jésus a marché sur l'eau. Une courgette est composé a 98% d'eau. J.ai marché sur une courgette.",
+    "joke": "Jésus a marché sur l'eau. Une courgette est composé a 98% d'eau. J'ai marché sur une courgette.",
     "answer": "je suis à 98% Jésus"
   },
   {
     "id": 344,
     "type": "dark",
-    "joke": "Quel est la différence entre Jésus et un tableau de Picasso ?",
+    "joke": "Quelle est la différence entre Jésus et un tableau de Picasso ?",
     "answer": "Le tableau s'accroche avec un seul clou"
   },
   {
     "id": 345,
     "type": "global",
-    "joke": "Comment est-ce que la chouette sait que son mari fait la gueule ?",
-    "answer": "Parce qu’HIBOUDE."
+    "joke": "Quel oiseau est attiré par le miel ?",
+    "answer": "L'autruche car à coter il y a une aut'ruche."
   },
   {
     "id": 346,
@@ -2089,9 +2089,9 @@
   },
   {
     "id": 348,
-    "type": "blondes",
-    "joke": "Qu'est-ce qu'une blonde avec de l'eau dans la bouche ?",
-    "answer": "Une cruche"
+    "type": "dark",
+    "joke": "Quel est le point commun entre un camp de concentration et une maison de retraite ?",
+    "answer": "Dans les deux cas, les pensionnaires n'en ressortent pas vivants."
   },
   {
     "id": 349,
@@ -2239,9 +2239,9 @@
   },
   {
     "id": 373,
-    "type": "global",
-    "joke": "Quel est le comble d'un comble ? ",
-    "answer": "C'est qu'un muet dit à un sourd qu'un aveugle les espionne. "
+    "type": "dark",
+    "joke": "Prof des biologie : \"Que trouve-t-on dans une cellule ?\"",
+    "answer": "Des arabes et des noirs !"
   },
   {
     "id": 374,
@@ -2395,14 +2395,14 @@
   },
   {
     "id": 399,
-    "type": "dark",
-    "joke": "Qu'est ce qui permet d'enlever le chewing gum des ses cheveux ?",
-    "answer": "Le cancer"
+    "type": "beauf",
+    "joke": "Connaissez-vous l'histoire du lit escamotable ?",
+    "answer": "C'est une histoire à faire dormir debout !"
   },
   {
     "id": 400,
     "type": "global",
-    "joke": "Quel est la marque de biscuit préférée de Brigitte Macron ?",
+    "joke": "Quelle est la marque de biscuit préférée de Brigitte Macron ?",
     "answer": "Les petits écoliers"
   },
   {
@@ -2515,9 +2515,9 @@
   },
   {
     "id": 419,
-    "type": "global",
-    "joke": "Comment apelle t'on un cochon qui vole?",
-    "answer": "Un aéro-porc !"
+    "type": "dark",
+    "joke": "Quel est l'avantage d'être Chinois ?",
+    "answer": "De pouvoir acheter local n'importe où."
   },
   {
     "id": 420,
@@ -2612,8 +2612,8 @@
   {
     "id": 435,
     "type": "global",
-    "joke": "Quelle est la meilleure heure pour écouter de la musique ? ",
-    "answer": "Deezer"
+    "joke": "Que fait un hibou dans une bibliotheque ?",
+    "answer": "Hibouqine !"
   },
   {
     "id": 436,
@@ -2714,7 +2714,7 @@
   {
     "id": 452,
     "type": "global",
-    "joke": "Pourquoi les chinois de croient pas au père noël ?",
+    "joke": "Pourquoi les chinois ne croient pas au père noël ?",
     "answer": "Car c'est eux qui font les jouets"
   },
   {
@@ -2726,8 +2726,8 @@
   {
     "id": 454,
     "type": "dark",
-    "joke": "Pourquoi il n'y a pas de piscine en Algérie ?",
-    "answer": "Parce que tous ceux qui savent nager sont en France "
+    "joke": "Tout les signe astrologique on des cheveux !",
+    "answer": "Sauf cancer..."
   },
   {
     "id": 455,
@@ -2743,9 +2743,9 @@
   },
   {
     "id": 457,
-    "type": "limit",
-    "joke": "Quelle est le point commun entre les épinards et la sodomie ?",
-    "answer": "Même avec du beurre, les enfants n'aiment aucun des deux..."
+    "type": "beauf",
+    "joke": "Comment appelle-t-on une vache qui joue de la musique ?",
+    "answer": "Une meeuhsiciene."
   },
   {
     "id": 458,
@@ -2846,7 +2846,7 @@
   {
     "id": 474,
     "type": "dev",
-    "joke": "Quel est la différence entre un catcheur et un développeur javascript ?",
+    "joke": "Quelle est la différence entre un catcheur et un développeur javascript ?",
     "answer": "Le catcheur fait des techniques de catch et le développeur fait des .catch techniques"
   },
   {
@@ -2942,14 +2942,14 @@
   {
     "id": 500,
     "type": "global",
-    "joke": "Quel est la saison préférée d'un grimpeur ?",
+    "joke": "Quelle est la saison préférée d'un grimpeur ?",
     "answer": "L'hiver, car il pleut des cordes."
   },
   {
     "id": 501,
-    "type": "global",
-    "joke": "Pourquoi le poisson ne s'intéresse pas au monde ?",
-    "answer": "Parce qu'il s'en fish."
+    "type": "dark",
+    "joke": "Quel est le rapport entre l'humour noir et l'eau ?",
+    "answer": "Tout le monde n'en a pas !"
   },
   {
     "id": 502,
@@ -2967,7 +2967,7 @@
     "id": 504,
     "type": "beauf",
     "joke": "Une personne appelle la police pour leur dire que deux filles se battaient pour lui. La police lui demande donc quel est le problème.",
-    "answer": "Le garçon répond : \"C'est moche gagne !\""
+    "answer": "Le garçon répond : \"C'est la moche qui gagne !\""
   },
   {
     "id": 505,
@@ -3009,7 +3009,7 @@
     "id": 511,
     "type": "global",
     "joke": "Que fait une biscotte tous les soir ?",
-    "answer": "Il vont a une biscotheque."
+    "answer": "Elle va en biscotheque."
   },
   {
     "id": 512,
@@ -3022,101 +3022,5 @@
     "type": "global",
     "joke": "\"J’apprends mes devoirs\", c’est à quel temps, Toto ?",
     "answer": "Du temps perdu Madame."
-  },
-  {
-    "id": 514,
-    "type": "dark",
-    "joke": "Tout les signe astrologique on des cheveux !",
-    "answer": "Sauf les cancer..."
-  },
-  {
-    "id": 515,
-    "type": "dark",
-    "joke": "Prof des biologie : \"Que trouve-t-on dans une cellule ?\"",
-    "answer": "Des arabes et des noirs !"
-  },
-  {
-    "id": 516,
-    "type": "dark",
-    "joke": "L'avantage d'être Chinois...",
-    "answer": "C'est que tu peux acheter local n'importe où."
-  },
-  {
-    "id": 517,
-    "type": "dark",
-    "joke": "Quel est le point commun entre un camp de concentration et une maison de retraite ?",
-    "answer": "Dans les deux cas, les pensionnaires n'en ressortent pas vivants."
-  },
-  {
-    "id": 518,
-    "type": "global",
-    "joke": "Que dit un éléphant sans corne ?",
-    "answer": "Je suis sans défense."
-  },
-  {
-    "id": 519,
-    "type": "beauf",
-    "joke": "Comment appelle-t-on une vache qui joue de la musique ?",
-    "answer": "Une meeuhsiciene."
-  },
-  {
-    "id": 520,
-    "type": "dark",
-    "joke": "Quel est le rapport entre l'humour noir et l'eau ?",
-    "answer": "Tout le monde n'en a pas !"
-  },
-  {
-    "id": 521,
-    "type": "dark",
-    "joke": "En cours de sport le prof il cris \"Faites 10 pompes !\"",
-    "answer": "Le chinois se retourne brusquement et demande \"Nike ou Adidas ?\""
-  },
-  {
-    "id": 522,
-    "type": "beauf",
-    "joke": "D'ou viennent les Cochons ? ",
-    "answer": "Des 4 Groins du monde ! "
-  },
-  {
-    "id": 523,
-    "type": "global",
-    "joke": "Quel oiseau est attiré par le miel ?",
-    "answer": "L'autruche car à coter il y a une aut'ruche."
-  },
-  {
-    "id": 524,
-    "type": "beauf",
-    "joke": "Connaissez-vous l'histoire du lit escamotable ?",
-    "answer": "C'est une histoire à faire dormir debout !"
-  },
-  {
-    "id": 525,
-    "type": "global",
-    "joke": "Que fait un hibou dans une bibliotheque ?",
-    "answer": "Hibouqine !"
-  },
-  {
-    "id": 526,
-    "type": "limit",
-    "joke": "Si un noir veut me prendre par les sentiments.",
-    "answer": "Je peux dire qu'il mamadou ?"
-  },
-  {
-    "id": 527,
-    "type": "beauf",
-    "joke": "quel est la différence entre une femme et une voiture de sport ?",
-    "answer": "Aucune ! Les deux font du bruit quand ont accélère."
-  },
-  {
-    "id": 528,
-    "type": "global",
-    "joke": "Robinson Crusoé habitait t'il une île déserte ?",
-    "answer": "Non puisqu'il y habitait."
-  },
-  {
-    "id": 529,
-    "type": "global",
-    "joke": "Pourquoi Robinson Crusoé ? ",
-    "answer": "Parce que Zoé avait raison"
   }
 ]
