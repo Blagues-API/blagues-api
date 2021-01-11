@@ -3188,8 +3188,8 @@
   {
     "id": 541,
     "type": "beauf",
-    "joke": "Quel animal sent toujours bon ? Le mouton",
-    "answer": "Car il a la laine fraîche."
+    "joke": "Quel animal sent toujours bon ?",
+    "answer": "Le mouton, car il a la laine fraîche."
   },
   {
     "id": 542,
@@ -3233,4 +3233,40 @@
     "joke": "Quel est le comble pour un chauve ?",
     "answer": "C'est d'avoir un cheveu sur la langue !"
   },
+  {
+    "id": 549,
+    "type": "beauf",
+    "joke": "Quelle est la différence entre un Courtier de Wall Street et un Acteur Porno ?",
+    "answer": "Le courtier a des actions en bourse alors que l'acteur à les bourses en action"
+  },
+  {
+    "id": 550,
+    "type": "dark",
+    "joke": "Comment appelle t'on une innondation en Afrique ?",
+    "answer": "Un bol de Chocapic."
+  },
+  {
+    "id": 551,
+    "type": "dark",
+    "joke": "Comment dire boujour à un juif ?",
+    "answer": "Hey ! Ca gaz ?"
+  },
+  {
+    "id": 552,
+    "type": "beauf",
+    "joke": "Tu connais l'homme qui à 5 pénis ?",
+    "answer": "Apparemment son slip lui va comme un gant"
+  },
+  {
+    "id": 553,
+    "type": "dev",
+    "joke": "Quelle est la résolution d’un informaticien pour la nouvelle année ?",
+    "answer": "Un 19\" pouces"
+  },
+  {
+    "id": 554,
+    "type": "dark",
+    "joke": "J'ai eu un rencard avec une juive, elle m'a demandé mon numéro",
+    "answer": "J'lui ai répondu que nous on avait des noms"
+  }
 ]
