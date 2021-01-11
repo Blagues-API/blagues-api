@@ -3022,5 +3022,215 @@
     "type": "global",
     "joke": "\"J’apprends mes devoirs\", c’est à quel temps, Toto ?",
     "answer": "Du temps perdu Madame."
-  }
+  },
+  {
+    "id": 514,
+    "type": "dark",
+    "joke": "Des bombardements se succèdent. Où est allé le petit garçon qui se trouvait sur les lieux ?",
+    "answer": "Partout"
+  },
+  {
+    "id": 515,
+    "type": "beauf",
+    "joke": "Tu connais l’histoire du castré décapité ?",
+    "answer": "C’est une histoire sans queue ni tête !"
+  },
+  {
+    "id": 516,
+    "type": "global",
+    "joke": "Quel est le sport le plus silencieux ?",
+    "answer": "Le parachute"
+  },
+  {
+    "id": 517,
+    "type": "limit",
+    "joke": "Les maisons de retraite c'est comme Koh-Lanta",
+    "answer": "À la fin il en restera qu'un"
+  },
+  {
+    "id": 518,
+    "type": "beauf",
+    "joke": "Pourquoi le jeu Among US est-il autant joué par les filles ?",
+    "answer": "Parce qu'elles n'ont pas à se battre pour avoir le droit de vote."
+  },
+  {
+    "id": 519,
+    "type": "limit",
+    "joke": "Comment s'appelle le cul de la Schtroumpfette ?",
+    "answer": "Le blu-ray."
+  },
+  {
+    "id": 520,
+    "type": "beauf",
+    "joke": "Quel est le point commun entre un Gynécologue et un Pizzaiolo ?",
+    "answer": "Ils peuvent tous les deux sentir ce qu'ils font, mais pas la bouffer !"
+  },
+  {
+    "id": 521,
+    "type": "dark",
+    "joke": "Quelle est la difference entre une Geox et George Floyd ?",
+    "answer": "La Geox respire."
+  },
+  {
+    "id": 522,
+    "type": "dark",
+    "joke": "Pourquoi un Européen et un Asiatique ne peuvent pas cuisiner ensemble ?",
+    "answer": "Parce que il y a toujours écrit de séparer les blancs et les jaunes."
+  },
+  {
+    "id": 523,
+    "type": "dark",
+    "joke": "Que dit Marine LePen au Capitaine du Bateau sur lequel elle navigue ?",
+    "answer": "La meilleure méthoque c'est de naviguer à contre Coran !"
+  },
+  {
+    "id": 524,
+    "type": "dark",
+    "joke": "Un arabe s'embrouille avec un Francais. Ce dernier lui dit \"Occupe toi de tes affaires !\".",
+    "answer": "Le Français repond alors \"Bah rend les moi !\"."
+  },
+  {
+    "id": 525,
+    "type": "limit",
+    "joke": "Pourquoi un aveugle tutoie ?",
+    "answer": "Parce qu'il ne vous vois pas."
+  },
+  {
+    "id": 526,
+    "type": "dark",
+    "joke": "Pourquoi les pédophiles adorent Halloween ?",
+    "answer": "Parce que c'est livraison à domicile ce jour-là."
+  },
+  {
+    "id": 527,
+    "type": "dark",
+    "joke": "Devinez qu'elle est la différence entre ma femme et mon cancer.",
+    "answer": "Mon cancer, je ne l'ai toujours pas battu."
+  },
+  {
+    "id": 528,
+    "type": "dark",
+    "joke": "Les blagues sur Georges Floyd sont...",
+    "answer": "...à couper le souffle."
+  },
+  {
+    "id": 529,
+    "type": "global",
+    "joke": "Si 1000 vaches ont le covid",
+    "answer": "Peut-on dire qu'il y a Milka ?"
+  },
+  {
+    "id": 530,
+    "type": "beauf",
+    "joke": "Quel president bande 2 fois le matin ?",
+    "answer": "Charles de Gaulle"
+  },
+  {
+    "id": 531,
+    "type": "dark",
+    "joke": "Le ricard, c'est comme un tsunami",
+    "answer": "Plus y a d'eau, moins y a de jaune."
+  },
+  {
+    "id": 532,
+    "type": "beauf",
+    "joke": "Melon et Melèche mangent une glace",
+    "answer": "Melon prend le cornet et Melèche les boules"
+  },
+  {
+    "id": 533,
+    "type": "beauf",
+    "joke": "Pourquoi les suppositoires sont-ils toujours fatigués ?",
+    "answer": "Parce qu'ils ont la tête dans le cul"
+  },
+  {
+    "id": 534,
+    "type": "global",
+    "joke": "Avant j'étais schizophrène...",
+    "answer": "Maintenant, nous allons mieux !"
+  },
+  {
+    "id": 535,
+    "type": "limit",
+    "joke": "Qu'est-ce qui rentre dur et sec et qui ressort mou et mouillé ?",
+    "answer": "Un chewing-gum"
+  },
+  {
+    "id": 536,
+    "type": "dark",
+    "joke": "Pourquoi les poulets ont des ailes alors qu'ils ne volent pas ?",
+    "answer": "Et pourquoi les arabes n'ont pas d'ailes alors qu'ils volent ?"
+  },
+  {
+    "id": 537,
+    "type": "dark",
+    "joke": "J'aimerais mourir comme mon grand-père : dans son sommeil",
+    "answer": "Pas en hurlant comme tous les passagers du bus qu'il conduisait."
+  },
+  {
+    "id": 538,
+    "type": "limit",
+    "joke": "Le comcombre est conseillé pour améliorer sa mémoire",
+    "answer": "Car si on te le mets dans le cul, t'es pas prêt de l'oublier"
+  },
+  {
+    "id": 539,
+    "type": "global",
+    "joke": "Qu'est-ce que les abeilles aiment le plus dans le mariage ?",
+    "answer": "La lune de miel."
+  },
+  {
+    "id": 540,
+    "type": "global",
+    "joke": "Quel est le futur de \"je bâille\" ?",
+    "answer": "Je dors."
+  },
+  {
+    "id": 541,
+    "type": "beauf",
+    "joke": "Quel animal sent toujours bon ? Le mouton",
+    "answer": "Car il a la laine fraîche."
+  },
+  {
+    "id": 542,
+    "type": "global",
+    "joke": "Ce matin, je me suis levé avec l'envie de tout changer",
+    "answer": "Du coup j'ai changé d'avis et je me suis rendormi."
+  },
+  {
+    "id": 543,
+    "type": "global",
+    "joke": "Quelles sont les deux sœur qui ont la meilleure vue?",
+    "answer": "Les sœurs jumelles."
+  },
+  {
+    "id": 544,
+    "type": "limit",
+    "joke": "Quel est le comble pour un arabe ?",
+    "answer": "Se faire voler."
+  },
+  {
+    "id": 545,
+    "type": "dark",
+    "joke": "Pourquoi la vie s'est comme une boîte de chocolat ?",
+    "answer": "Parce que ça dure moins longtemps chez les gros !"
+  },
+  {
+    "id": 546,
+    "type": "beauf",
+    "joke": "Quelle est la partie de la voiture la plus dangereuse ?",
+    "answer": "La conductrice."
+  },
+  {
+    "id": 547,
+    "type": "limit",
+    "joke": "Pourquoi les pharaons ont ils 2 fesses?",
+    "answer": "Parce que AnuBis !"
+  },
+  {
+    "id": 548,
+    "type": "global",
+    "joke": "Quel est le comble pour un chauve ?",
+    "answer": "C'est d'avoir un cheveu sur la langue !"
+  },
 ]
