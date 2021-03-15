@@ -11,16 +11,17 @@ const {
   randomJoke,
   randomJokeByType,
   jokeById,
-  types,
+  typesRefs,
 } = require('../controllers/JokeController')
 
 router.use(auth())
 
 router.get('/types', (req, res) => {
+  const keys = Object.keys(typesRefs)
   return res.json({
-    count: types.length,
-    accepted_types: Object.keys(types),
-    types,
+    count: keys.length,
+    accepted_types: keys,
+    keys: typesRefs,
   })
 })
 
