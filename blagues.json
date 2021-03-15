@@ -2299,8 +2299,8 @@
   },
   {
     "id": 384,
-    "type": "global",
-    "joke": "Qu'est ce qui sépare l'espèce humaine du singe ?",
+    "type": "limit",
+    "joke": "Qu’est ce qui sépare l’espèce humaine du singe ?",
     "answer": "La mer Méditerranée."
   },
   {
