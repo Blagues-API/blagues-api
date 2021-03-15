@@ -122,7 +122,37 @@ BlagueAPIBot.on('message', async message => {
     })
   }
 
-  const [, , joke, answer] = regex.exec(message.content)
+  const [, rawType, joke, answer] = regex.exec(message.content)
+
+  if (!types.some(t => t.aliases.includes(rawType.toLowerCase().trim()))) {
+    return channel.send(message.author.toString(), {
+      embed: {
+        author: {
+          name: 'Le type de votre blague est invalide',
+          icon_url: message.author.displayAvatarURL({ format: 'png' }),
+        },
+        description:
+          'Il semblerait que le type de votre blague ne soit pas supporté',
+        fields: [
+          {
+            name: 'Votre blague',
+            value: `\`\`\`${message.content}\`\`\``,
+          },
+          {
+            name: 'Types acceptés',
+            value:
+              '`Général` • `Développeur` • `Noir` • `Limite limite` • `Beauf` • `Blondes`',
+          },
+        ],
+        color: 0xce0000,
+        footer: {
+          text: 'Blagues API',
+          icon_url: message.guild.iconURL({ format: 'png' }),
+        },
+        timestamp: new Date(),
+      },
+    })
+  }
 
   const { bestMatch, bestMatchIndex } = findBestMatch(
     joke,
@@ -191,7 +221,9 @@ BlagueAPIBot.on('messageReactionAdd', async (messageReaction, user) => {
     const [, rawType, joke, answer] = regex.exec(message.content)
 
     try {
-      const type = types.find(t => t.aliases.includes(rawType.toLowerCase()))
+      const type = types.find(t =>
+        t.aliases.includes(rawType.toLowerCase().trim()),
+      )
       await user.send(
         `{\n    "id": ,\n    "type": "${
           type?.ref ?? 'Inconnu'
