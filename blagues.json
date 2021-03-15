@@ -733,7 +733,7 @@
   },
   {
     "id": 123,
-    "type": "limit",
+    "type": "global",
     "joke": "Qu'est-ce que ça fait quand tu lances une gousse d'ail contre un mur ?",
     "answer": "Le retour du jet d'ail."
   },
@@ -2486,7 +2486,7 @@
   {
     "id": 414,
     "type": "dark",
-    "joke": "Que fait un prêtre après avoir sodomiser un chauve ?",
+    "joke": "Que fait un prêtre après avoir sodomisé un chauve ?",
     "answer": "Il le repose dans son berceau"
   },
   {
@@ -2570,7 +2570,7 @@
   {
     "id": 428,
     "type": "dark",
-    "joke": "Maman, maman papa c’est pendu dans le jardin !",
+    "joke": "Maman, maman papa s’est pendu dans le jardin !",
     "answer": "Poisson d’avril ! il s’est pendu dans le grenier !"
   },
   {
@@ -2726,7 +2726,7 @@
   {
     "id": 454,
     "type": "dark",
-    "joke": "Tout les signe astrologique on des cheveux !",
+    "joke": "Tous les signes astrologiques ont des cheveux !",
     "answer": "Sauf cancer..."
   },
   {
@@ -2786,7 +2786,7 @@
   {
     "id": 464,
     "type": "dark",
-    "joke": "Spiderman grimpe au dessus de mur, Superman vole au dessus...",
+    "joke": "Spiderman grimpe au dessus des murs, Superman vole au dessus...",
     "answer": "Et musulman les explose !"
   },
   {
@@ -3043,7 +3043,7 @@
   },
   {
     "id": 517,
-    "type": "limit",
+    "type": "dark",
     "joke": "Les maisons de retraite c'est comme Koh-Lanta",
     "answer": "À la fin il en restera qu'un"
   },
@@ -3212,8 +3212,8 @@
   {
     "id": 545,
     "type": "dark",
-    "joke": "Pourquoi la vie s'est comme une boîte de chocolat ?",
-    "answer": "Parce que ça dure moins longtemps chez les gros !"
+    "joke": "La vie s'est comme une boîte de chocolat !",
+    "answer": "Ça dure moins longtemps chez les gros !"
   },
   {
     "id": 546,
