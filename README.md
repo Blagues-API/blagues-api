@@ -1,14 +1,21 @@
-[![Blagues API](https://raw.githubusercontent.com/DraftProducts/blagues-api/master/src/public/Logo.200.png)](http://www.blagues-api.fr)
+<!-- markdownlint-disable -->
+[![Blagues API](https://raw.githubusercontent.com/draftproducts/blagues-api/master/src/public/Logo.200.png)](http://www.blagues-api.fr)
+
 # Blagues API
 
-API de blagues française par authentification Auth2.0 Bearer sous licence MIT
+API de Blagues française collaborative et Open Source 
+
+[![Contributors](https://img.shields.io/github/contributors/draftproducts/blagues-api.svg?style=for-the-badge)](https://github.com/draftproducts/blagues-api/graphs/contributors)
+[![Stars](https://img.shields.io/github/stars/draftproducts/blagues-api.svg?style=for-the-badge)](https://github.com/draftproducts/blagues-api/stargazers) 
+[![License](https://img.shields.io/github/license/DraftProducts/blagues-api?style=for-the-badge)](https://github.com/DraftProducts/blagues-api/blob/master/LICENCE)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg?style=for-the-badge)](https://www.paypal.me/draftproducts)
 
 ## Sommaire
 
 > Retrouvez ici les différentes catégories du README
 
 - [Sommaire](#sommaire)
-- [Usage](#usage)
+- [Utilisation](#utilisation)
 - [Contribuer](#contribuer)
 - [FAQ](#faq)
 - [Support](#support)
@@ -16,59 +23,71 @@ API de blagues française par authentification Auth2.0 Bearer sous licence MIT
 
 ---
 
-## Usage
+## Utilisation
 
-Avant toute utilisation de l'api veuillez générer votre token Bearer depuis la page **account** site [www.blagues-api.fr](https://www.blagues-api.fr) accessible depuis une authentification discord
+Avant toute utilisation de l'api veuillez générer votre token Bearer en vous authentifiant avec votre compte discord sur le site [blagues-api.fr](https://www.blagues-api.fr).
 
 Une fois le token généré voici quelques exemples vous permettant d'utiliser l'api
 
-```javascript
+> Attention ! Pensez à remplacer `<token>` par votre propre token
 
+```javascript
+// Javascript
 import fetch from "node-fetch" 
 
 fetch('https://www.blagues-api.fr/api/random', {
-    headers: {
-        'Authorization': 'Bearer <token>'
-    }
+  headers: {
+    'Authorization': 'Bearer <token>'
+  }
 })
 .then(response => {
-    console.log(response)
-    /* Expected output:
-    { 
-      id: 1, 
-      question: 'Question', 
-      anwser: 'Response' 
-    }
-    */
+  console.log(response)
+  /* Expected output:
+  { 
+    id: 1, 
+    joke: 'Question', 
+    anwser: 'Response' 
+  }
+  */
 })
 ```
 
+```py
+# Python
+import requests
+
+response = requests.get(
+  'https://www.blagues-api.fr/api/random', 
+  headers = { 
+    'Authorization': 'Bearer <token>'
+  }
+)
+data = response.json()
+print(response)
+# Expected output:
+# { 
+#   id: 1, 
+#   joke: 'Question', 
+#   anwser: 'Response' 
+# }
+```
+---
+
 ## Contribuer
 
-> Pour commencer...
-
-### Étape 1
-
-- **Option 1**
-    - 🍴 Fork le repo!
-
-- **Option 2**
-    - 👯 Clone le repo sur ta machine locale avec `https://github.com/DraftProducts/blagues-api.git`
-
-### Étape 2
-
-- **Fais tes modifications !** 🔨🔨🔨
-
-### Étape 3
-
-- 🔃 Crée une nouvelle pull request avec <a href="https://github.com/DraftProducts/blagues-api/compare/" target="_blank">`https://github.com/DraftProducts/blagues-api/compare/`</a>.
+1. 🍴 **Fork** le projet !
+1. 🔨 **Fais** tes modifications !
+1. ✨ **Commit** tes modifications !
+1. 🚀 **Push** tes commits 
+1. 🔃 Crée une **pull request** depuis <a href="https://github.com/DraftProducts/blagues-api/compare/" target="_blank">`https://github.com/DraftProducts/blagues-api/compare/`</a>.
 
 ---
 
 ## FAQ
 
-- **Pouvons nous ajouter des blagues ?**
-    - Oui bien sûr en éditant le fichier blagues.json et en le soumetant avec une pull request 
+- **Pouvons nous proposer des blagues ?**
+  - Oui bien sûr en rejoignant le serveur <a href="https://discord.gg/PPNpVaF" target="_blank">`Blagues API`</a> un salon y est dédié !
+
 ---
 
 ## Support
@@ -83,15 +102,14 @@ Voici quelques liens pour obtenir de l'aide
 
 ## Donations
 
-- Si vous souhaitez me soutenir, c'est possible grâce à paypal
+Si vous souhaitez me soutenir, c'est possible grâce à paypal
 
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/draftproducts)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg?style=for-the-badge)](https://www.paypal.me/draftproducts)
 
 ---
 
 ## License
 
-[![License](https://img.shields.io/github/license/DraftProducts/blagues-api)](https://github.com/DraftProducts/blagues-api/blob/master/LICENCE)
+[![License](https://img.shields.io/github/license/DraftProducts/blagues-api?style=for-the-badge)](https://github.com/DraftProducts/blagues-api/blob/master/LICENCE)
 
-- **[MIT license](https://github.com/DraftProducts/blagues-api/blob/master/LICENCE)**
-- Copyright 2020 © <a href="https://www.draftman.fr" target="_blank">DraftMan</a>.
+Copyright 2020 © <a href="https://www.draftman.fr" target="_blank">DraftMan</a>.
