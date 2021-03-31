@@ -902,13 +902,13 @@
   {
     "id": 151,
     "type": "dev",
-    "joke": "Pourquoi les développeurs vont en boîte de nuit",
+    "joke": "Pourquoi les développeurs vont en boîte de nuit ?",
     "answer": "Pour faire la java"
   },
   {
     "id": 152,
     "type": "dev",
-    "joke": "Que dit un informaticien quand il s'ennuie?",
+    "joke": "Que dit un informaticien quand il s'ennuie ?",
     "answer": "Je me fichier"
   },
   {
@@ -3880,5 +3880,245 @@
     "type": "global",
     "joke": "Je peux tourner sans bouger. Qui suis-je ?",
     "answer": "Le Lait."
+  },
+  {
+    "id": 648,
+    "type": "dark",
+    "joke": "Qu'est-ce qui est jaune et qui attend ?",
+    "answer": "Un juif sur un quai de gare."
+  },
+  {
+    "id": 649,
+    "type": "dark",
+    "joke": "Qu'est-ce qu'un noir entre deux poubelles ?",
+    "answer": "Une photo de famille."
+  },
+  {
+    "id": 650,
+    "type": "beauf",
+    "joke": "Peut-on prendre un bain quand on a la diarrhée ?",
+    "answer": "Oui, si on en a assez."
+  },
+  {
+    "id": 651,
+    "type": "dev",
+    "joke": "Quel est le chanteur préféré des développeurs ?",
+    "answer": "Michael Json"
+  },
+  {
+    "id": 652,
+    "type": "dark",
+    "joke": "Quel est le point commun entre une bouteille de champagne et un épileptique ",
+    "answer": "Quand tu secoues ça mousse."
+  },
+  {
+    "id": 653,
+    "type": "dev",
+    "joke": "Quel est l'endroit le moins vu de stackoverflow ?",
+    "answer": "La page d'accueil."
+  },
+  {
+    "id": 654,
+    "type": "limit",
+    "joke": "Comment s'appelle un agent secret qui regarde un porno ?",
+    "answer": "James Band"
+  },
+  {
+    "id": 655,
+    "type": "global",
+    "joke": "Pourquoi tu vas toujours aux toilettes avec du pain ?",
+    "answer": "C'est pour donner à manger à Canard W-C."
+  },
+  {
+    "id": 656,
+    "type": "global",
+    "joke": "C'est l'histoire d'un têtard. Il croyait qu'il était tôt.",
+    "answer": "Alors qu'il est têtard."
+  },
+  {
+    "id": 657,
+    "type": "global",
+    "joke": "Comment appelle-t-on un lapin sourd ?",
+    "answer": "LAAAAAAPIIIIIIIINNNNNNN!!!!!!"
+  },
+  {
+    "id": 658,
+    "type": "beauf",
+    "joke": "Pourquoi faut-il enlever ses lunettes avant un alcootest ?",
+    "answer": "Ca fait 2 verres en moins."
+  },
+  {
+    "id": 659,
+    "type": "beauf",
+    "joke": "Quand fête-t-on la journée des fumeurs ?",
+    "answer": "Le 1er Juin"
+  },
+  {
+    "id": 660,
+    "type": "dev",
+    "joke": "Quel est le point commun entre les voitures et les ordinateurs ?",
+    "answer": "Les mauvais pilotes sont problématiques."
+  },
+  {
+    "id": 661,
+    "type": "dev",
+    "joke": "J'ai essayé d'apprendre à coder à mon neveu de 8 ans...",
+    "answer": "Il a compris le truc, 2 minutes plus tard il était déjà en train de crier et de frapper le clavier !"
+  },
+  {
+    "id": 662,
+    "type": "dev",
+    "joke": "Ma copine m'a larguée après avoir donné son nom à une classe.",
+    "answer": "Elle avait l'impression que je la traitais comme un objet."
+  },
+  {
+    "id": 663,
+    "type": "dev",
+    "joke": "Comment les développeur se débarrassent des fantômes ?",
+    "answer": "En effectuant un XOR-cisme."
+  },
+  {
+    "id": 664,
+    "type": "dev",
+    "joke": "Si Javascript avais un fils, comment s'appellerait-il ?",
+    "answer": "Json"
+  },
+  {
+    "id": 665,
+    "type": "dev",
+    "joke": "Quel est l'animal totem du scrum-master ?",
+    "answer": "La Jiraffe"
+  },
+  {
+    "id": 666,
+    "type": "global",
+    "joke": "Un gars tente de draguer une fille, en boîte : On échange nos numéros ?",
+    "answer": "Non, j'aime beaucoup le miens, merci!"
+  },
+  {
+    "id": 667,
+    "type": "beauf",
+    "joke": "Quelle est la différence entre une sorcière, une femme de ménage et une personne coincée ?",
+    "answer": "L'emplacement du balai !"
+  },
+  {
+    "id": 668,
+    "type": "dev",
+    "joke": "Quelle est la déesse d'internet ?",
+    "answer": "La déesse L"
+  },
+  {
+    "id": 669,
+    "type": "global",
+    "joke": " Purée fait chi#r, j'ai un problème avec mon téléphone .",
+    "answer": "Il manque juste ton numéro."
+  },
+  {
+    "id": 670,
+    "type": "global",
+    "joke": "Qu’est-ce qu’un homme intelligent, beau et sensible ?",
+    "answer": "Une rumeur"
+  },
+  {
+    "id": 671,
+    "type": "beauf",
+    "joke": "Quelle est la différence entre un homme et un bébé ?",
+    "answer": "Le bébé au moins on peut le laisser seul avec la baby-sitter."
+  },
+  {
+    "id": 672,
+    "type": "global",
+    "joke": "Comment appelle t’on un lion qui se rebelle ?",
+    "answer": "Une rébellion"
+  },
+  {
+    "id": 673,
+    "type": "global",
+    "joke": "Comment appelle-t-on un squelette qui parle ?",
+    "answer": "Un os parleur"
+  },
+  {
+    "id": 674,
+    "type": "blondes",
+    "joke": "Quel est la différence entre une blonde et un miroir ?",
+    "answer": "Le miroir réfléchit."
+  },
+  {
+    "id": 675,
+    "type": "global",
+    "joke": "Que dit un Japonais qui a loupé son car ?",
+    "answer": "Karaté !!"
+  },
+  {
+    "id": 676,
+    "type": "global",
+    "joke": "Que disent des arbres quand ils vont en boite de nuit ?",
+    "answer": "Laquelle je vais brancher ce soir ?"
+  },
+  {
+    "id": 677,
+    "type": "global",
+    "joke": "L’autre jour, j'ai raconté une blague à mes vêtements.",
+    "answer": "Ils étaient pliés."
+  },
+  {
+    "id": 678,
+    "type": "global",
+    "joke": "Quels sont les animaux qu’on retrouve en grand nombre dans la montagne ?",
+    "answer": "Les chats laids."
+  },
+  {
+    "id": 679,
+    "type": "beauf",
+    "joke": "Vous savez pourquoi Valbuena rigole quand il joue au foot ?",
+    "answer": "Parce que l'herbe lui chatouille les couilles !"
+  },
+  {
+    "id": 680,
+    "type": "beauf",
+    "joke": "Comment appelle-t-on le fait de se retrouver coincé entre Marine et Jean-Marie ?",
+    "answer": "Une double Pen."
+  },
+  {
+    "id": 681,
+    "type": "limit",
+    "joke": "Dit moi des chose sales !",
+    "answer": "La cuisine, la salle de bain..."
+  },
+  {
+    "id": 682,
+    "type": "global",
+    "joke": "Qui a inventé le sous-marin ?",
+    "answer": "Les Français en essayant de construire un bateaux !"
+  },
+  {
+    "id": 683,
+    "type": "beauf",
+    "joke": "Quel est le légume les plus alcoolique ?",
+    "answer": "L’épinard"
+  },
+  {
+    "id": 684,
+    "type": "global",
+    "joke": "Quelle est la différence entre une échelle et un pistolet ?",
+    "answer": "L’échelle sert à monter et le pistolet sert à descendre."
+  },
+  {
+    "id": 685,
+    "type": "dark",
+    "joke": "Comment surprendre un aveugle?",
+    "answer": "Vous laissez la ventouse dans les toilettes."
+  },
+  {
+    "id": 687,
+    "type": "global",
+    "joke": "Quel est l’animal le plus chanceux ?",
+    "answer": "Le hibou puisque sa femme et chouette."
+  },
+  {
+    "id": 688,
+    "type": "global",
+    "joke": "Pourquoi Hulk ne peut pas avoir d’enfant ?",
+    "answer": "Parce qu’il deviendrait un père vert"
   }
 ]
