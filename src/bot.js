@@ -1,10 +1,10 @@
 const { Client } = require('discord.js')
-const { stripIndents } = require('common-tags')
+
+const embeds = require('./bot/embeds')
 
 const { findBestMatch } = require('string-similarity')
 
 const jokes = require('../blagues.json')
-const regex = /(?:> \*\*Type\*\*: (.+)\s+)(?:> \*\*Blague\*\*: (.+)\s+)(?:> \*\*Réponse\*\*: (.+)\s+)(?:> ▬+)/im
 
 const adminUsers = [
   '555068713343254533',
@@ -15,7 +15,19 @@ const adminUsers = [
 const jokeRole = '699244416849674310'
 
 const suggestsChannel = '698826767221391390'
+const correctionsChannel = '826856142793736213'
 const logsChannel = '763778635857133599'
+
+const channels = {
+  [suggestsChannel]: {
+    key: 'suggests',
+    regex: /(?:> \*\*Type\*\*: (.+)\s+)(?:> \*\*Blague\*\*: (.+)\s+)(?:> \*\*Réponse\*\*: (.+)\s+)(?:> ▬+)/im,
+  },
+  [correctionsChannel]: {
+    key: 'corrections',
+    regex: /(?:> \*\*Type\*\*: (.+)\s+)(?:> \*\*Type corrigé\*\*: (.+)\s+)(?:> \*\*Blague\*\*: (.+)\s+)(?:> \*\*Blague corrigée\*\*: (.+)\s+)(?:> \*\*Réponse\*\*: (.+)\s+)(?:> \*\*Réponse corrigée\*\*: (.+)\s+)(?:> ▬+)/im,
+  },
+}
 
 const BlagueAPIBot = new Client({
   partials: ['MESSAGE', 'REACTION'],
@@ -40,157 +52,68 @@ BlagueAPIBot.on('ready', () => {
     if (!message || message.id !== messages.first().id) {
       if (message) await message.delete()
 
-      return channel.send({
-        embed: {
-          title: 'Bienvenue à toi ! 👋',
-          description: stripIndents`
-            Si tu le souhaites, tu peux proposer tes blagues afin qu'elles soient ajoutées à l'api Blagues API qui regroupe actuellement **${jokes.length}** blagues françaises.
-            Elles sont toutes issues de ce salon proposées par la communauté.
+      return channel.send(embeds.suggestsStickyMessage(jokes))
+    }
+  }, 10000)
 
-            >>> Tous les types de blagues sont acceptés à condition qu'elles soient correctement catégorisées et qu'elles respectent le format demandé.`,
-          fields: [
-            {
-              name: 'Voici les différents types:',
-              value:
-                '> `Général`, `Développeur`, `Noir`, `Limite Limite`, `Beauf`, `Blondes`',
-            },
-            {
-              name: 'Exemple:',
-              value: stripIndents`
-                > **Type**: Développeur
-                > **Blague**: Quand est ce qu'un Windows ne bug pas ?
-                > **Réponse**: Lorsque l'ordinateur est éteint.
-              `,
-            },
-            {
-              name: 'Voici le schéma à copier-coller !',
-              value: stripIndents`
-                \`\`\`
-                > **Type**:
-                > **Blague**:
-                > **Réponse**:
-                > ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
-                \`\`\`
-              `,
-            },
-          ],
-          color: 0x0067ad,
-        },
-      })
+  setInterval(async () => {
+    const channel = BlagueAPIBot.channels.cache.get(correctionsChannel)
+    const messages = await channel.messages.fetch({ limit: 10 })
+    const message = messages.find(m => m.author.id === BlagueAPIBot.user.id)
+    if (!message || message.id !== messages.first().id) {
+      if (message) await message.delete()
+
+      return channel.send(embeds.correctionsStickyMessage(jokes))
     }
   }, 10000)
 })
 
 BlagueAPIBot.on('message', async message => {
-  if (message.channel.id !== suggestsChannel || message.author.bot) return
+  if (
+    message.author.bot ||
+    !Object.keys(channels).includes(message.channelID)
+  ) {
+    return
+  }
 
   const channel = message.guild.channels.cache.get(logsChannel)
 
+  const { key, regex } = channels[message.channelID]
   if (!regex.test(message.content)) {
-    message.delete()
-    return channel.send(message.author.toString(), {
-      embed: {
-        author: {
-          name: 'Votre blague est invalide',
-          icon_url: message.author.displayAvatarURL({ format: 'png' }),
-        },
-        description:
-          'Il semblerait que votre blague ne respecte pas le format demandé',
-        fields: [
-          {
-            name: 'Format demandé',
-            value:
-              '```json\n> **Type**: \n> **Blague**: \n> **Réponse**: \n> ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬```',
-          },
-          {
-            name: 'Votre blague',
-            value: `\`\`\`${message.content}\`\`\``,
-          },
-          {
-            name: 'Types acceptés',
-            value:
-              '`Général` • `Développeur` • `Noir` • `Limite limite` • `Beauf` • `Blondes`',
-          },
-        ],
-        color: 0xce0000,
-        footer: {
-          text: 'Blagues API',
-          icon_url: message.guild.iconURL({ format: 'png' }),
-        },
-        timestamp: new Date(),
-      },
-    })
+    await message.delete()
+    return channel.send(
+      message.author.toString(),
+      embeds[key + 'BadFormat'](message),
+    )
   }
 
-  const [, rawType, joke, answer] = regex.exec(message.content)
+  if (message.channelID === suggestsChannel) {
+    const [, rawType, joke, answer] = regex.exec(message.content)
 
-  if (!types.some(t => t.aliases.includes(rawType.toLowerCase().trim()))) {
-    return channel.send(message.author.toString(), {
-      embed: {
-        author: {
-          name: 'Le type de votre blague est invalide',
-          icon_url: message.author.displayAvatarURL({ format: 'png' }),
-        },
-        description:
-          'Il semblerait que le type de votre blague ne soit pas supporté',
-        fields: [
-          {
-            name: 'Votre blague',
-            value: `\`\`\`${message.content}\`\`\``,
-          },
-          {
-            name: 'Types acceptés',
-            value:
-              '`Général` • `Développeur` • `Noir` • `Limite limite` • `Beauf` • `Blondes`',
-          },
-        ],
-        color: 0xce0000,
-        footer: {
-          text: 'Blagues API',
-          icon_url: message.guild.iconURL({ format: 'png' }),
-        },
-        timestamp: new Date(),
-      },
-    })
-  }
+    if (!types.some(t => t.aliases.includes(rawType.toLowerCase().trim()))) {
+      return channel.send(
+        message.author.toString(),
+        embeds.suggestsBadType(message),
+      )
+    }
 
-  const { bestMatch, bestMatchIndex } = findBestMatch(
-    joke,
-    jokes.map(e => e.joke),
-  )
+    const { bestMatch, bestMatchIndex } = findBestMatch(
+      `${joke} ${answer}`,
+      jokes.map(e => `${e.joke} ${e.answer}`),
+    )
 
-  if (bestMatch.rating > 0.7) {
-    const duplicatedJoke = jokes[bestMatchIndex]
-    await channel.send(message.author.toString(), {
-      embed: {
-        author: {
-          name: "Êtes vous sûr que cette blague n'existe pas déjà ?",
-          icon_url: message.author.displayAvatarURL({ format: 'png' }),
-        },
-        description:
-          "Il semblerait qu'une blague ressemble beaucoup à la votre, êtes vous sûr que ce n'est pas la même ?",
-        fields: [
-          {
-            name: 'Votre blague',
-            value: `>>> **Blague**: ${joke}\n**Réponse**: ${answer}`,
-          },
-          {
-            name: 'Blague ressemblante',
-            value: `>>> **Blague**: ${duplicatedJoke.joke}\n**Réponse**: ${duplicatedJoke.answer}`,
-          },
-        ],
-        color: 0xcd6e57,
-        footer: {
-          text: 'Blagues API',
-          icon_url: message.guild.iconURL({ format: 'png' }),
-        },
-        timestamp: new Date(),
-      },
-    })
-  }
+    if (bestMatch.rating > 0.7) {
+      const currentJoke = { joke, answer }
+      const duplicatedJoke = jokes[bestMatchIndex]
+      await channel.send(
+        message.author.toString(),
+        embeds.suggestsDupplicate(message, currentJoke, duplicatedJoke),
+      )
+    }
 
-  if (!message.member.roles.cache.has(jokeRole)) {
-    message.member.roles.add(jokeRole)
+    if (!message.member.roles.cache.has(jokeRole)) {
+      await message.member.roles.add(jokeRole)
+    }
   }
 
   // up
@@ -198,7 +121,9 @@ BlagueAPIBot.on('message', async message => {
   // down
   await message.react('705115406976680117')
   // yes
-  await message.react('705115434969595966')
+  if (message.channelID === suggestsChannel) {
+    await message.react('705115434969595966')
+  }
 })
 
 BlagueAPIBot.on('messageReactionAdd', async (messageReaction, user) => {
@@ -213,6 +138,7 @@ BlagueAPIBot.on('messageReactionAdd', async (messageReaction, user) => {
     return
   }
 
+  const { regex } = channels[message.channelID]
   if (messageReaction.emoji.id === '705115434969595966') {
     messageReaction.users.remove(user)
 
@@ -225,9 +151,9 @@ BlagueAPIBot.on('messageReactionAdd', async (messageReaction, user) => {
         t.aliases.includes(rawType.toLowerCase().trim()),
       )
       await user.send(
-        `{\n    "id": ,\n    "type": "${
+        `{\n  "id": ,\n  "type": "${
           type?.ref ?? 'Inconnu'
-        }",\n    "joke": "${joke}",\n    "answer": "${answer.replace(
+        }",\n  "joke": "${joke}",\n  "answer": "${answer.replace(
           /"/g,
           '\\"',
         )}"\n},`,
@@ -235,22 +161,10 @@ BlagueAPIBot.on('messageReactionAdd', async (messageReaction, user) => {
       )
     } catch (error) {
       const channel = message.guild.channels.cache.get(logsChannel)
-      await channel.send(user.toString(), {
-        embed: {
-          author: {
-            name: 'Vos messages privés sont fermés !',
-            icon_url: user.displayAvatarURL({ format: 'png' }),
-          },
-          description:
-            'Je ne peux pas vous envoyer la blague en messages privés.',
-          color: 0xcd6e57,
-          footer: {
-            text: 'Blagues API',
-            icon_url: message.guild.iconURL({ format: 'png' }),
-          },
-          timestamp: new Date(),
-        },
-      })
+      await channel.send(
+        user.toString(),
+        embeds.suggestsClosedMP(message, user),
+      )
     }
 
     message.react('🎉')
@@ -279,7 +193,7 @@ const types = [
   },
   {
     ref: 'limit',
-    aliases: ['limit', 'limite limite', 'limit limit', 'limite'],
+    aliases: ['limit', 'limite limite', 'limit limit', 'limite', '+18', '18+'],
   },
   {
     ref: 'beauf',
