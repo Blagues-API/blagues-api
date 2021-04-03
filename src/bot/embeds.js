@@ -23,21 +23,21 @@ const suggestsStickyMessage = jokes => ({
       {
         name: 'Exemple:',
         value: stripIndents`
-            > **Type**: Développeur
-            > **Blague**: Quand est ce qu'un Windows ne bug pas ?
-            > **Réponse**: Lorsque l'ordinateur est éteint.
-          `,
+          > **Type**: Développeur
+          > **Blague**: Quand est ce qu'un Windows ne bug pas ?
+          > **Réponse**: Lorsque l'ordinateur est éteint.
+        `,
       },
       {
         name: 'Voici le schéma à copier-coller !',
         value: stripIndents`
-            \`\`\`
-            > **Type**:
-            > **Blague**:
-            > **Réponse**:
-            > ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
-            \`\`\`
-          `,
+          \`\`\`
+          > **Type**:
+          > **Blague**:
+          > **Réponse**:
+          > ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+          \`\`\`
+        `,
       },
     ],
     color: 0x0067ad,
@@ -168,28 +168,27 @@ const correctionsStickyMessage = jokes => ({
       {
         name: 'Exemple:',
         value: stripIndents`
-            > **Type**: Développeur
-            > **Type corrigé**: Développeur
-            > **Blague**: Quand est ce qu'un Window ne bugue pas.
-            > **Blague corrigée**: Quand est-ce qu'un Windows ne bug pas ?
-            > **Réponse**: Lorsque l'ordinateur et étint
-            > **Réponse corrigée**: Lorsque l'ordinateur est éteint.
-            > ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
-          `,
+          > **Type**: Développeur
+          > **Type corrigé**: Développeur
+          > **Blague**: Quand est ce qu'un Window ne bugue pas.
+          > **Blague corrigée**: Quand est-ce qu'un Windows ne bug pas ?
+          > **Réponse**: Lorsque l'ordinateur et étint
+          > **Réponse corrigée**: Lorsque l'ordinateur est éteint.
+        `,
       },
       {
         name: 'Voici le schéma à copier-coller !',
         value: stripIndents`
-            \`\`\`
-            > **Type**:
-            > **Type corrigé**:
-            > **Blague**:
-            > **Blague corrigée**:
-            > **Réponse**:
-            > **Réponse corrigée**:
-            > ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
-            \`\`\`
-          `,
+          \`\`\`
+          > **Type**:
+          > **Type corrigé**:
+          > **Blague**:
+          > **Blague corrigée**:
+          > **Réponse**:
+          > **Réponse corrigée**:
+          > ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+          \`\`\`
+        `,
       },
     ],
     color: 0x0067ad,
