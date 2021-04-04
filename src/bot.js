@@ -71,14 +71,14 @@ BlagueAPIBot.on('ready', () => {
 BlagueAPIBot.on('message', async message => {
   if (
     message.author.bot ||
-    !Object.keys(channels).includes(message.channelID)
+    !Object.keys(channels).includes(message.channel.id)
   ) {
     return
   }
 
   const channel = message.guild.channels.cache.get(logsChannel)
 
-  const { key, regex } = channels[message.channelID]
+  const { key, regex } = channels[message.channel.id]
   if (!regex.test(message.content)) {
     await message.delete()
     return channel.send(
@@ -87,7 +87,7 @@ BlagueAPIBot.on('message', async message => {
     )
   }
 
-  if (message.channelID === suggestsChannel) {
+  if (message.channel.id === suggestsChannel) {
     const [, rawType, joke, answer] = regex.exec(message.content)
 
     if (!types.some(t => t.aliases.includes(rawType.toLowerCase().trim()))) {
@@ -116,12 +116,16 @@ BlagueAPIBot.on('message', async message => {
     }
   }
 
+  /**
+   * TODO: Add a Emoji to the dupplicated jokes
+   */
+
   // up
   await message.react('705115420495183979')
   // down
   await message.react('705115406976680117')
   // yes
-  if (message.channelID === suggestsChannel) {
+  if (message.channel.id === suggestsChannel) {
     await message.react('705115434969595966')
   }
 })
@@ -138,7 +142,7 @@ BlagueAPIBot.on('messageReactionAdd', async (messageReaction, user) => {
     return
   }
 
-  const { regex } = channels[message.channelID]
+  const { regex } = channels[message.channel.id]
   if (messageReaction.emoji.id === '705115434969595966') {
     messageReaction.users.remove(user)
 
