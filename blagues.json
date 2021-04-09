@@ -1753,7 +1753,7 @@
   },
   {
     "id": 293,
-    "type": "limit",
+    "type": "beauf",
     "joke": "2 fesses se croisent",
     "answer": "Alors, ça gaze ?"
   },
@@ -2198,8 +2198,8 @@
   {
     "id": 367,
     "type": "limit",
-    "joke": "Le comcombre est conseillé pour améliorer sa mémoire.",
-    "answer": "Car si on te le mets dans le cul, t'es pas prêt de l'oublier."
+    "joke": "Le concombre est conseillé pour améliorer sa mémoire.",
+    "answer": "Car si on te le met dans le cul, t'es pas prêt de l'oublier."
   },
   {
     "id": 368,
@@ -3248,7 +3248,7 @@
   {
     "id": 542,
     "type": "dark",
-    "joke": "Que dit Jean d'Arc sur le bucher ?",
+    "joke": "Que dit Jeanne d'Arc sur le bucher ?",
     "answer": "Vous ne m'avez pas crut vous m'avez cuite !"
   },
   {
