@@ -4120,5 +4120,251 @@
     "type": "global",
     "joke": "Pourquoi Hulk ne peut pas avoir d'enfant ?",
     "answer": "Parce qu'il deviendrait un père vert"
+  },
+  {
+    "id": 689,
+    "type": "beauf",
+    "joke": "Quel est le point commun entre la science et les femmes ?",
+    "answer": "Je leur ai fait don de mon corps."
+  },
+  {
+    "id": 690,
+    "type": "beauf",
+    "joke": "Comment faire pour oublier une ex ?",
+    "answer": "On prend un tipp-ex."
+  },
+  {
+    "id": 691,
+    "type": "global",
+    "joke": "Qu'est ce qui est vert et qui se déplace sous l'eau ?",
+    "answer": "Un choux marin."
+  },
+  {
+    "id": 692,
+    "type": "dark",
+    "joke": "Quelle est la différence entre l'intelligence et un parachute ?",
+    "answer": "Aucune. Quand on n'en a pas, on s'écrase."
+  },
+  {
+    "id": 693,
+    "type": "global",
+    "joke": "Qu'est-ce qui est rose, fait 5 cm, 15 cm déplié et qui fait rêver toutes les filles de 18 ans ?",
+    "answer": "Le permis de conduire."
+  },
+  {
+    "id": 694,
+    "type": "global",
+    "joke": "Qu'est-ce qui est long et dur et que les femmes n'ont pas ?",
+    "answer": "Le service militaire."
+  },
+  {
+    "id": 695,
+    "type": "global",
+    "joke": "Comment appelle-t-on un mouton sans jambes ?",
+    "answer": "Un nuage."
+  },
+  {
+    "id": 696,
+    "type": "beauf",
+    "joke": "Quelles sont les hommes qui n'ont pas peur des pickpockets?",
+    "answer": "Les nudistes."
+  },
+  {
+    "id": 697,
+    "type": "global",
+    "joke": "Pourquoi met-on une selle sur un cheval ?",
+    "answer": "Parce qu'il si on la met dessous, elle tombe."
+  },
+  {
+    "id": 698,
+    "type": "global",
+    "joke": "Vous savez pourquoi les pets puent ?",
+    "answer": "Pour que les sourds en profitent !"
+  },
+  {
+    "id": 699,
+    "type": "beauf",
+    "joke": "Pour un chasseur, qu'elle est la différence entre son chien et sa femme ?",
+    "answer": "Le prix du collier."
+  },
+  {
+    "id": 700,
+    "type": "global",
+    "joke": "D'où viennent les gens les plus dangereux ?",
+    "answer": "D'Angers"
+  },
+  {
+    "id": 701,
+    "type": "global",
+    "joke": "Deux chèvres Babi et Baba sont dans une barque. Baba tombe à l'eau. Que se passe t'il ?",
+    "answer": "Babybel"
+  },
+  {
+    "id": 702,
+    "type": "global",
+    "joke": "Que demande un footballeur à son coiffeur ?",
+    "answer": "La coupe du monde."
+  },
+  {
+    "id": 703,
+    "type": "global",
+    "joke": "Où part un homme invisible en vacances ?",
+    "answer": "Chez ses transparents."
+  },
+  {
+    "id": 704,
+    "type": "global",
+    "joke": "Pourquoi certains poissons vivent dans l'eau salée ?",
+    "answer": "Parce l'eau poivrée les fait éternuer."
+  },
+  {
+    "id": 705,
+    "type": "global",
+    "joke": "Un sous-marin se heurte à un poisson rouge qui venait de sa gauche. Qui est en tort ?",
+    "answer": "Le sous-marin, parce qu'il n'avait rien à faire dans un bocal de poisson rouge !"
+  },
+  {
+    "id": 706,
+    "type": "beauf",
+    "joke": "Qu'est-ce qu'une luciole qui a pris du viagra ?",
+    "answer": "Un néon !"
+  },
+  {
+    "id": 707,
+    "type": "global",
+    "joke": "Tu veux que je te raconte une blague à l'envers ?",
+    "answer": "Alors commence par rire."
+  },
+  {
+    "id": 708,
+    "type": "global",
+    "joke": "Deux œufs discutent : Pourquoi t'es tout vert et aussi poilu ?",
+    "answer": "Parce que j'suis un kiwi connard."
+  },
+  {
+    "id": 709,
+    "type": "global",
+    "joke": "C'est 2 grains de sable qui arrivent à la plage.",
+    "answer": "Putain, c'est blindé aujourd'hui..."
+  },
+  {
+    "id": 710,
+    "type": "global",
+    "joke": "2 cacas vont à la guerre et rencontrent une diarrhée: Je peux venir?",
+    "answer": "Non. La guerre, c'est pour les durs !"
+  },
+  {
+    "id": 711,
+    "type": "global",
+    "joke": "2 mouches discutent sur un caca de chien: J'ai une de ces envies de péter moi.",
+    "answer": "Grosse dégueulasse, on est à table !"
+  },
+  {
+    "id": 712,
+    "type": "beauf",
+    "joke": "Un éléphant croise un homme sur une plage nudiste. Qu'est ce que l'éléphant dit ?",
+    "answer": "Et ! C'est avec ça que tu manges ?"
+  },
+  {
+    "id": 713,
+    "type": "global",
+    "joke": "Que dit un hérisson qui se cogne à un cactus ?",
+    "answer": "Maman !"
+  },
+  {
+    "id": 714,
+    "type": "global",
+    "joke": "Deux lions discutent: Allez, avoue que tu es amoureux !",
+    "answer": "Arrête, tu vas me faire rugir !"
+  },
+  {
+    "id": 715,
+    "type": "global",
+    "joke": "Que dit une banane malade à ses camarades qui ont aussi chopé le virus ?",
+    "answer": "On va tous mûrir !"
+  },
+  {
+    "id": 716,
+    "type": "beauf",
+    "joke": "Comment appelle-t-on des gars dépourvus de testicules qui se battent ?",
+    "answer": "Un combat sanglant."
+  },
+  {
+    "id": 717,
+    "type": "dark",
+    "joke": "Un jeune homme demande à son boucher: Bonjour Monsieur, je voudrais la main de votre fille !",
+    "answer": "D'accord, avec ou sans os ?"
+  },
+  {
+    "id": 718,
+    "type": "limit",
+    "joke": "Au lit, un homme dit tendrement à sa femme : J'aimerais bien mettre mon zizi dans ton oreille.",
+    "answer": "D'accord, mais fais gaffe à ce que je ne devienne pas sourde. Y'a pas de danger : depuis 30 ans je te le mets dans la bouche, et jamais tu ne l'as fermée."
+  },
+  {
+    "id": 719,
+    "type": "limit",
+    "joke": "2 paysannes ramassent des patates. La première en saisit deux grosses pleines de terre et dit à l'autre :",
+    "answer": "Vindiou ! Elles sont comme les couilles de mon mari ! Aussi grosses ? Non, aussi sales !"
+  },
+  {
+    "id": 720,
+    "type": "limit",
+    "joke": "Quelle est la différence entre un vieux et un zizi ?",
+    "answer": "T'as pas besoin de secouer le vieux pour qu'il bave."
+  },
+  {
+    "id": 721,
+    "type": "global",
+    "joke": "Quel est le point commun entre un homme au réveil et un élastique ?",
+    "answer": "Eh bien il s'étire, il s'étire, il s'étire, et il pète !"
+  },
+  {
+    "id": 722,
+    "type": "dark",
+    "joke": "Comment appelle-t-on le nombril d'un obèse ?",
+    "answer": "Un trou noir."
+  },
+  {
+    "id": 723,
+    "type": "beauf",
+    "joke": "Quelle est la différence entre un macho et un pêcheur ?",
+    "answer": "Le macho ne se vantera jamais d'en avoir attrapé une grosse."
+  },
+  {
+    "id": 724,
+    "type": "dark",
+    "joke": "Quel est le moyen de contraception le plus sûr au monde ?",
+    "answer": "Etre grosse et moche."
+  },
+  {
+    "id": 725,
+    "type": "global",
+    "joke": "Quelle est la différence entre tomber du 1er ou du 10ème étage ?",
+    "answer": "Tomber du 1er : PAF ! Ahhhhh ! Tomber du 10ème : Ahhhhh ! PAF !"
+  },
+  {
+    "id": 726,
+    "type": "beauf",
+    "joke": "Pourquoi les hommes ont-ils toujours les jambes écartées lorsqu'ils sont assis ?",
+    "answer": "Pour aérer leur cerveau."
+  },
+  {
+    "id": 727,
+    "type": "limit",
+    "joke": "Quel est le point commun entre un prof et des hémorroïdes ?",
+    "answer": "Les deux sortent du corps enseignant."
+  },
+  {
+    "id": 728,
+    "type": "beauf",
+    "joke": "Quel est le comble du boulanger ?",
+    "answer": "Plus il a de la brioche, moins on voit sa baguette."
+  },
+  {
+    "id": 729,
+    "type": "limit",
+    "joke": "Quelle est la différence entre un 69 et le brouillard ?",
+    "answer": "Dans le brouillard, on ne voit pas le trou du cul qui est devant…"
   }
 ]
