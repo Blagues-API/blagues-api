@@ -4141,13 +4141,13 @@
   },
   {
     "id": 692,
-    "type": "dark",
+    "type": "global",
     "joke": "Quelle est la différence entre l'intelligence et un parachute ?",
     "answer": "Aucune. Quand on n'en a pas, on s'écrase."
   },
   {
     "id": 693,
-    "type": "global",
+    "type": "limit",
     "joke": "Qu'est-ce qui est rose, fait 5 cm, 15 cm déplié et qui fait rêver toutes les filles de 18 ans ?",
     "answer": "Le permis de conduire."
   },
@@ -4166,7 +4166,7 @@
   {
     "id": 696,
     "type": "beauf",
-    "joke": "Quelles sont les hommes qui n'ont pas peur des pickpockets?",
+    "joke": "Quelles sont les hommes qui n'ont pas peur des pickpockets ?",
     "answer": "Les nudistes."
   },
   {
@@ -4250,7 +4250,7 @@
   {
     "id": 710,
     "type": "global",
-    "joke": "2 cacas vont à la guerre et rencontrent une diarrhée: Je peux venir?",
+    "joke": "2 cacas vont à la guerre et rencontrent une diarrhée: Je peux venir ?",
     "answer": "Non. La guerre, c'est pour les durs !"
   },
   {
