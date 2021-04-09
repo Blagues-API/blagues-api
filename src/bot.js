@@ -12,8 +12,6 @@ const adminUsers = [
   '164738865649811457',
   '655032713941614632',
 ]
-const jokeRole = '699244416849674310'
-
 const suggestsChannel = '698826767221391390'
 const correctionsChannel = '826856142793736213'
 const logsChannel = '763778635857133599'
@@ -22,10 +20,12 @@ const channels = {
   [suggestsChannel]: {
     key: 'suggests',
     regex: /(?:> \*\*Type\*\*: (.+)\s+)(?:> \*\*Blague\*\*: (.+)\s+)(?:> \*\*Réponse\*\*: (.+)\s+)(?:> ▬+)/im,
+    role: '699244416849674310',
   },
   [correctionsChannel]: {
     key: 'corrections',
     regex: /(?:> \*\*Type\*\*: (.+)\s+)(?:> \*\*Type corrigé\*\*: (.+)\s+)(?:> \*\*Blague\*\*: (.+)\s+)(?:> \*\*Blague corrigée\*\*: (.+)\s+)(?:> \*\*Réponse\*\*: (.+)\s+)(?:> \*\*Réponse corrigée\*\*: (.+)\s+)(?:> ▬+)/im,
+    role: '829996106808426516',
   },
 }
 
@@ -78,7 +78,7 @@ BlagueAPIBot.on('message', async message => {
 
   const channel = message.guild.channels.cache.get(logsChannel)
 
-  const { key, regex } = channels[message.channel.id]
+  const { key, regex, role } = channels[message.channel.id]
   if (!regex.test(message.content)) {
     await message.delete()
     return channel.send(
@@ -111,8 +111,8 @@ BlagueAPIBot.on('message', async message => {
       )
     }
 
-    if (!message.member.roles.cache.has(jokeRole)) {
-      await message.member.roles.add(jokeRole)
+    if (!message.member.roles.cache.has(role)) {
+      await message.member.roles.add(role)
     }
   }
 
