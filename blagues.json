@@ -2300,7 +2300,7 @@
   {
     "id": 384,
     "type": "limit",
-    "joke": "Qu’est ce qui sépare l’espèce humaine du singe ?",
+    "joke": "Qu'est ce qui sépare l'espèce humaine du singe ?",
     "answer": "La mer Méditerranée."
   },
   {
@@ -4016,7 +4016,7 @@
   {
     "id": 670,
     "type": "global",
-    "joke": "Qu’est-ce qu’un homme intelligent, beau et sensible ?",
+    "joke": "Qu'est-ce qu'un homme intelligent, beau et sensible ?",
     "answer": "Une rumeur"
   },
   {
@@ -4028,7 +4028,7 @@
   {
     "id": 672,
     "type": "global",
-    "joke": "Comment appelle t’on un lion qui se rebelle ?",
+    "joke": "Comment appelle t'on un lion qui se rebelle ?",
     "answer": "Une rébellion"
   },
   {
@@ -4058,13 +4058,13 @@
   {
     "id": 677,
     "type": "global",
-    "joke": "L’autre jour, j'ai raconté une blague à mes vêtements.",
+    "joke": "L'autre jour, j'ai raconté une blague à mes vêtements.",
     "answer": "Ils étaient pliés."
   },
   {
     "id": 678,
     "type": "global",
-    "joke": "Quels sont les animaux qu’on retrouve en grand nombre dans la montagne ?",
+    "joke": "Quels sont les animaux qu'on retrouve en grand nombre dans la montagne ?",
     "answer": "Les chats laids."
   },
   {
@@ -4095,13 +4095,13 @@
     "id": 683,
     "type": "beauf",
     "joke": "Quel est le légume les plus alcoolique ?",
-    "answer": "L’épinard"
+    "answer": "L'épinard"
   },
   {
     "id": 684,
     "type": "global",
     "joke": "Quelle est la différence entre une échelle et un pistolet ?",
-    "answer": "L’échelle sert à monter et le pistolet sert à descendre."
+    "answer": "L'échelle sert à monter et le pistolet sert à descendre."
   },
   {
     "id": 685,
@@ -4112,13 +4112,13 @@
   {
     "id": 687,
     "type": "global",
-    "joke": "Quel est l’animal le plus chanceux ?",
+    "joke": "Quel est l'animal le plus chanceux ?",
     "answer": "Le hibou puisque sa femme et chouette."
   },
   {
     "id": 688,
     "type": "global",
-    "joke": "Pourquoi Hulk ne peut pas avoir d’enfant ?",
-    "answer": "Parce qu’il deviendrait un père vert"
+    "joke": "Pourquoi Hulk ne peut pas avoir d'enfant ?",
+    "answer": "Parce qu'il deviendrait un père vert"
   }
 ]
