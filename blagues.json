@@ -4366,5 +4366,11 @@
     "type": "limit",
     "joke": "Quelle est la différence entre un 69 et le brouillard ?",
     "answer": "Dans le brouillard, on ne voit pas le trou du cul qui est devant…"
-  }
+  },
+  {
+  "id": 730,
+  "type": "dark",
+  "joke": "Qu’est-ce qui a deux pattes et qui saigne ?",
+  "answer": "Un demi-chien..."
+}
 ]
