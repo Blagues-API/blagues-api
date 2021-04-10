@@ -14,7 +14,8 @@
     "shell": "docker exec -it blagues-api bash",
     "dev:build": "docker-compose -p blagues-api -f ./docker-compose.dev.yml build",
     "dev:down": "docker-compose -p blagues-api -f ./docker-compose.dev.yml down",
-    "lint": "eslint --ext .js --ignore-path .gitignore ."
+    "lint": "eslint --ext .js --ignore-path .gitignore .",
+    "format-jokes": "prettier --write blagues.json"
   },
   "lint-staged": {
     "*.{js}": "eslint",

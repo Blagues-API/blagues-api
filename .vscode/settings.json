@@ -1,10 +1,10 @@
 {
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "[javascript]": {
     "editor.formatOnSave": false
   },
   "editor.codeActionsOnSave": {
-    "source.fixAll": true
+    "source.fixAll": false
   },
   "editor.tabSize": 2,
   "prettier.tabWidth": 2,
