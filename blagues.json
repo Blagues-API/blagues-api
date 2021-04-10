@@ -543,7 +543,7 @@
     "id": 91,
     "type": "dark",
     "joke": "Quel est le point commun entre un surdoué et un pédophile ?",
-    "answer": "Ils ont tous les deux sautés la classe de CE1"
+    "answer": "Ils ont tous les deux sautés la classe de CE1."
   },
   {
     "id": 92,
@@ -4366,5 +4366,191 @@
     "type": "limit",
     "joke": "Quelle est la différence entre un 69 et le brouillard ?",
     "answer": "Dans le brouillard, on ne voit pas le trou du cul qui est devant…"
+  },
+  {
+    "id": 730,
+    "type": "dark",
+    "joke": "Qu’est-ce qui a deux pattes et qui saigne ?",
+    "answer": "Un demi-chien..."
+  },
+  {
+    "id": 731,
+    "type": "global",
+    "joke": "Quelle est la liste la plus douce ?",
+    "answer": "La to do list"
+  },
+  {
+    "id": 732,
+    "type": "global",
+    "joke": "Que fait un hibou après une piqûre de guêpe ?",
+    "answer": "Hiboursoufle"
+  },
+  {
+    "id": 733,
+    "type": "global",
+    "joke": "Qu’est-ce qu’un nordiste sans frères et soeurs ?",
+    "answer": "Un malheureux"
+  },
+  {
+    "id": 734,
+    "type": "global",
+    "joke": "Un sanglier croise un cochon et lui dit :",
+    "answer": "Alors, ça va mieux ta chimio ?"
+  },
+  {
+    "id": 735,
+    "type": "global",
+    "joke": "Qu’est-ce qu’une jambe sur un trottoir ?",
+    "answer": "Un lépreux qui a marché sur un chewing-gum."
+  },
+  {
+    "id": 736,
+    "type": "beauf",
+    "joke": "Pourquoi la Saint-Valentin est-elle davantage fêtée dans le Nord ?",
+    "answer": "Parce que ça se fête en famille."
+  },
+  {
+    "id": 737,
+    "type": "global",
+    "joke": "Que provoque la chute de neige ?",
+    "answer": "La chute des vieux."
+  },
+  {
+    "id": 738,
+    "type": "limit",
+    "joke": "Combien de bébés faut-il pour peindre un mur ?",
+    "answer": "Tout dépend de la force du jet."
+  },
+  {
+    "id": 739,
+    "type": "blondes",
+    "joke": "Pourquoi les blondes frappent-elles le pain contre le mur ?",
+    "answer": "Pour casser la croûte !"
+  },
+  {
+    "id": 740,
+    "type": "blondes",
+    "joke": "Pourquoi une blonde court-elle après un cochon avec une hache ?",
+    "answer": "Pour se faire une tirelire !"
+  },
+  {
+    "id": 741,
+    "type": "blondes",
+    "joke": "Comment un blonde fait-elle pour mettre du texte en italique dans Word ?",
+    "answer": "Elle penche l’écran."
+  },
+  {
+    "id": 742,
+    "type": "blondes",
+    "joke": "Pourquoi les blondes mettent-elles de l’eau sur leur clavier ?",
+    "answer": "Pour surfer sur Internet."
+  },
+  {
+    "id": 743,
+    "type": "blondes",
+    "joke": "Comment meurt le neurone d’une blonde ?",
+    "answer": "Seul…."
+  },
+  {
+    "id": 744,
+    "type": "blondes",
+    "joke": "Pourquoi une blonde saute-t-elle dans une flaque à pieds joints ?",
+    "answer": "Pour avoir de l’eau plate."
+  },
+  {
+    "id": 745,
+    "type": "blondes",
+    "joke": "Quelle est l’activité préférée d’une blonde ?",
+    "answer": "Le cerveau lent !"
+  },
+  {
+    "id": 746,
+    "type": "blondes",
+    "joke": "Comment une blonde fait-elle pour faire un double de ses clefs ?",
+    "answer": "Elle les photocopie."
+  },
+  {
+    "id": 747,
+    "type": "blondes",
+    "joke": "Comment une blonde éteint la lumière le soir ?",
+    "answer": "En fermant les yeux."
+  },
+  {
+    "id": 748,
+    "type": "blondes",
+    "joke": "Pourquoi une blonde danse-t-elle devant un feu tricolore ?",
+    "answer": "Parce qu elle se croit en boîte de nuit."
+  },
+  {
+    "id": 749,
+    "type": "blondes",
+    "joke": "Qu’est-ce qu’une blonde avec un cerveau ?",
+    "answer": "Une espèce en voie de disparition."
+  },
+  {
+    "id": 750,
+    "type": "blondes",
+    "joke": "Pourquoi les blondes n’aiment-elles pas les ordinateurs ?",
+    "answer": "Il n’y a pas de télécommande pour changer de chaîne."
+  },
+  {
+    "id": 751,
+    "type": "blondes",
+    "joke": "Que fait une blonde pour se connecter à internet par CPL ?",
+    "answer": "Elle met ses doigts dans la prise de téléphone."
+  },
+  {
+    "id": 752,
+    "type": "blondes",
+    "joke": "Quelle est la différence entre un ordinateur et une blonde ?",
+    "answer": "L’ordinateur a de la mémoire, lui."
+  },
+  {
+    "id": 753,
+    "type": "blondes",
+    "joke": "Comment fait une blonde pour éviter que son ordinateur n’attrape un virus ?",
+    "answer": "Elle l’entoure d’un préservatif !"
+  },
+  {
+    "id": 754,
+    "type": "blondes",
+    "joke": "Comment fait une blonde pour savoir si on lui a envoyé un e-mail ?",
+    "answer": "Elle va voir dans sa boîte aux lettres !"
+  },
+  {
+    "id": 755,
+    "type": "global",
+    "joke": "Qu'est ce que la chevalerie ? ",
+    "answer": "C’est pas là où on range les chevaux ?"
+  },
+  {
+    "id": 756,
+    "type": "dark",
+    "joke": " Comment appelle-t-on un enfant qui tue son père et ça mère ?",
+    "answer": "Un orphelin."
+  },
+  {
+    "id": 757,
+    "type": "global",
+    "joke": "Quand je fais du judo avec mes gosses, c'est comme à la maison : ",
+    "answer": "Je les bats avec ma ceinture noire."
+  },
+  {
+    "id": 758,
+    "type": "dark",
+    "joke": "Qu'est-ce qui est pire que de doigter sa propre soeur ?",
+    "answer": "C'est d'y retrouver l'alliance de son père."
+  },
+  {
+    "id": 759,
+    "type": "dark",
+    "joke": "Pourquoi les décapités deviennent t'ils toujours fous ?",
+    "answer": "Parce qu'ils perdent la tête !"
+  },
+  {
+    "id": 760,
+    "type": "dark",
+    "joke": "Quesqu'il ne faut jamais faire dans un orphelinat ?",
+    "answer": "Chanter Papaoutai."
   }
 ]
