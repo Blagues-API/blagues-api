@@ -4,7 +4,7 @@ const helmet = require('helmet')
 const cookieParser = require('cookie-parser')
 const cookies = require('cookies')
 
-const cors = require('./middlewares/cors')
+const cors = require('cors')
 const routes = require('./router')
 const path = require('path')
 

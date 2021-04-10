@@ -56,6 +56,7 @@
     "common-tags": "^1.8.0",
     "cookie-parser": "^1.4.5",
     "cookies": "^0.8.0",
+    "cors": "^2.8.5",
     "discord.js": "^12.5.1",
     "ejs": "^3.0.2",
     "express": "^4.17.1",
