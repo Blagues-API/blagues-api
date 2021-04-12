@@ -92,7 +92,7 @@ print(response)
 
 ## Support
 
-Voici quelques liens pour obtenir de l'aide
+Voici quelques liens pour obtenir de l'aide :
 
 - Site web: <a href="https://www.blagues-api.fr" target="_blank">`www.blagues-api.fr`</a>
 - Discord: <a href="https://discord.gg/PPNpVaF" target="_blank">`Blagues API`</a>
