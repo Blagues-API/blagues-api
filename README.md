@@ -3,7 +3,7 @@
 
 # Blagues API
 
-API de Blagues française collaborative et Open Source 
+API de Blagues françaises collaborative et Open Source 
 
 [![Contributors](https://img.shields.io/github/contributors/draftproducts/blagues-api.svg?style=for-the-badge)](https://github.com/draftproducts/blagues-api/graphs/contributors)
 [![Stars](https://img.shields.io/github/stars/draftproducts/blagues-api.svg?style=for-the-badge)](https://github.com/draftproducts/blagues-api/stargazers) 
@@ -25,9 +25,9 @@ API de Blagues française collaborative et Open Source
 
 ## Utilisation
 
-Avant toute utilisation de l'api veuillez générer votre token Bearer en vous authentifiant avec votre compte discord sur le site [blagues-api.fr](https://www.blagues-api.fr).
+Avant toute utilisation de l'API veuillez générer votre token Bearer en vous authentifiant avec votre compte Discord sur le site [blagues-api.fr](https://www.blagues-api.fr).
 
-Une fois le token généré voici quelques exemples vous permettant d'utiliser l'api
+Une fois le token généré voici quelques exemples vous permettant d'utiliser l'API
 
 > Attention ! Pensez à remplacer `<token>` par votre propre token
 
@@ -92,7 +92,7 @@ print(response)
 
 ## Support
 
-Voici quelques liens pour obtenir de l'aide
+Voici quelques liens pour obtenir de l'aide :
 
 - Site web: <a href="https://www.blagues-api.fr" target="_blank">`www.blagues-api.fr`</a>
 - Discord: <a href="https://discord.gg/PPNpVaF" target="_blank">`Blagues API`</a>
@@ -102,7 +102,7 @@ Voici quelques liens pour obtenir de l'aide
 
 ## Donations
 
-Si vous souhaitez me soutenir, c'est possible grâce à paypal
+Si vous souhaitez me soutenir, c'est possible grâce à PayPal
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg?style=for-the-badge)](https://www.paypal.me/draftproducts)
 
@@ -112,4 +112,4 @@ Si vous souhaitez me soutenir, c'est possible grâce à paypal
 
 [![License](https://img.shields.io/github/license/DraftProducts/blagues-api?style=for-the-badge)](https://github.com/DraftProducts/blagues-api/blob/master/LICENCE)
 
-Copyright 2020 © <a href="https://www.draftman.fr" target="_blank">DraftMan</a>.
+Copyright 2020-2021 © <a href="https://www.draftman.fr" target="_blank">DraftMan</a>.
