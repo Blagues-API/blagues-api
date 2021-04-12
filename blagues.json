@@ -2697,7 +2697,7 @@
     "id": 450,
     "type": "global",
     "joke": "Quelle est la différence entre un cendrier et une théière ?",
-    "answer": "Le cendrier c'est pour des cendres (descendre), la théière, c'est pour mon thé (monter)."
+    "answer": "Le cendrier c'est pour des cendres, la théière, c'est pour mon thé."
   },
   {
     "id": 451,
@@ -4536,10 +4536,10 @@
     "answer": "Je les bats avec ma ceinture noire."
   },
   {
-    "id": 758,
+    "id": 778,
     "type": "dark",
-    "joke": "Qu'est-ce qui est pire que de doigter sa propre soeur ?",
-    "answer": "C'est d'y retrouver l'alliance de son père."
+    "joke": "Si mon futur oncle devient le 4ème Reich comment je l’appelerai ?",
+    "answer": "Le für-oncle."
   },
   {
     "id": 759,
@@ -4552,5 +4552,125 @@
     "type": "dark",
     "joke": "Quesqu'il ne faut jamais faire dans un orphelinat ?",
     "answer": "Chanter Papaoutai."
+  },
+  {
+    "id": 761,
+    "type": "dark",
+    "joke": "Un jour mon père m'a dit qu'il m'exploserai la tête contre mon clavier si je disait qu'il était raciste.",
+    "answer": "hjnfgkskzsa"
+  },
+  {
+    "id": 762,
+    "type": "limit",
+    "joke": "Comment on appelle les femmes des terroristes ?",
+    "answer": "Des bombes sexuelles."
+  },
+  {
+    "id": 763,
+    "type": "dark",
+    "joke": "C'est quoi le point commun entre un cheval qui tire un carrosse et des esclaves ?",
+    "answer": "On met un bon coup de fouet et ça repart."
+  },
+  {
+    "id": 764,
+    "type": "dark",
+    "joke": "Pourquoi les juifs ne peuvent pas être meunier ?",
+    "answer": "Car ils ne peuvent pas être au four et au moulin."
+  },
+  {
+    "id": 765,
+    "type": "dark",
+    "joke": "Pourquoi Marine Le Pen ne s'épile que les poils blancs de son cul ?",
+    "answer": "Pour mettre les noirs dans la merde."
+  },
+  {
+    "id": 766,
+    "type": "dark",
+    "joke": "A quoi à servit Hitler ?",
+    "answer": "Aryen."
+  },
+  {
+    "id": 767,
+    "type": "dark",
+    "joke": "Quelle fût la profession de Kennedy après son mandat de président ?",
+    "answer": "Ramasseur de balles."
+  },
+  {
+    "id": 768,
+    "type": "limit",
+    "joke": "Quelle est la différence entre un enfant de chœur catholique et un enfant djihadiste ?",
+    "answer": "L'enfant djihadiste se fait sauter qu'une seule fois."
+  },
+  {
+    "id": 769,
+    "type": "dark",
+    "joke": "Pourquoi un groupe de juifs rentrent déçu chez eux ? ",
+    "answer": "Parce qu'ils ont raté leur train."
+  },
+  {
+    "id": 770,
+    "type": "dark",
+    "joke": "Qu'est ce que Mickael Jackson vend encore ?",
+    "answer": "Bah des CD !"
+  },
+  {
+    "id": 771,
+    "type": "dark",
+    "joke": "Vous savez comment on convertit de l'argent africain en argent européen ?",
+    "answer": "Non ? Eh bien on fait du blanchiment d'argent !"
+  },
+  {
+    "id": 772,
+    "type": "limit",
+    "joke": "Monsieur le Curé, je peux rejoindre mes parents ?",
+    "answer": "D'accord mais remonte ton slip avant."
+  },
+  {
+    "id": 773,
+    "type": "global",
+    "joke": "Que dit un chihuahua japonais pour dire bonjour ?",
+    "answer": "Konichihuahua."
+  },
+  {
+    "id": 774,
+    "type": "dark",
+    "joke": "Papa, c’est quoi l’humour noir ? Le père répond : \"Demandes à ta mère !\"",
+    "answer": "Mais... Maman est morte !"
+  },
+  {
+    "id": 775,
+    "type": "beauf",
+    "joke": "A quelle fête vend-on le plus de rasoirs au Portugal ?",
+    "answer": "A la fête des mères."
+  },
+  {
+    "id": 776,
+    "type": "limit",
+    "joke": "Qu'est ce qu'un tétraplégique en train de nager ?",
+    "answer": "Une planche de surf."
+  },
+  {
+    "id": 777,
+    "type": "limit",
+    "joke": "Quelle est la différence entre le Pape et ton père ?",
+    "answer": "Tu n'iras jamais au paradis si tu suces ton père."
+  },
+  {
+    "id": 778,
+    "type": "global",
+    "joke": "Comment appelle t-on une fleur qui prend sa graine à moitié ?",
+    "answer": "Une migraine."
+  },
+  {
+    "id": 779,
+    "type": "global",
+    "joke": "Pourquoi ne faut-il jamais raconter d’histoires drôles à un ballon ?",
+    "answer": "Parce qu’il pourrait éclater de rire !"
+  },
+  {
+    "id": 780,
+    "type": "global",
+    "joke": "A combien rouliez-vous ?, demande le gendarme.",
+    "answer": "A deux seulement, mais si vous voulez monter, il reste de la place !"
   }
 ]
