@@ -212,8 +212,8 @@
   {
     "id": 36,
     "type": "dark",
-    "joke": "Pourquoi le petit garçon a fait tombé sa glace ?",
-    "answer": "Parce qu'il s'est fait renverser par un bus ! "
+    "joke": "Pourquoi le petit garçon a fait tomber sa glace ?",
+    "answer": "Parce qu'il s'est fait renverser par un bus !"
   },
   {
     "id": 37,
@@ -794,13 +794,13 @@
   {
     "id": 133,
     "type": "dark",
-    "joke": "Qu'est-ce qui est bleu blancs et rouge ?",
-    "answer": "Un schtroumf à qui on a couper la tête"
+    "joke": "Qu'est-ce qui est bleu, blanc et rouge ?",
+    "answer": "Un Schtroumpf à qui on a coupé la tête."
   },
   {
     "id": 134,
     "type": "global",
-    "joke": "Qu'est-ce qui est bleu blancs et rouge ?",
+    "joke": "Qu'est-ce qui est bleu, blanc et rouge ?",
     "answer": "Un schtroumf qui saigne du nez"
   },
   {
