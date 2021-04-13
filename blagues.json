@@ -393,7 +393,7 @@
     "id": 66,
     "type": "global",
     "joke": "Que fait un homme qui rentre dans un café ?",
-    "answer": "Plouf"
+    "answer": "Plouf !"
   },
   {
     "id": 67,
@@ -2685,7 +2685,7 @@
     "id": 448,
     "type": "global",
     "joke": "Comment appelle t'on un chat compressé ?",
-    "answer": "Un Kitkat"
+    "answer": "Un Kitkat."
   },
   {
     "id": 449,
@@ -2990,7 +2990,7 @@
   {
     "id": 499,
     "type": "dark",
-    "joke": "4 arabes sont dans une voiture, la voiture sautes dans l'eau que regrettes tu ?",
+    "joke": "4 arabes sont dans une voiture, la voiture saute dans l'eau que regrettes-tu ?",
     "answer": "Qu'il y en est pas plus."
   },
   {
@@ -3074,7 +3074,7 @@
   {
     "id": 513,
     "type": "dark",
-    "joke": "Que dit Marine LePen au Capitaine du Bateau sur lequel elle navigue ?",
+    "joke": "Que dit Marine Le Pen au Capitaine du Bateau sur lequel elle navigue ?",
     "answer": "La meilleure méthoque c'est de naviguer à contre Coran !"
   },
   {
@@ -3644,7 +3644,7 @@
   {
     "id": 608,
     "type": "global",
-    "joke": "Quel aliment n'est pas un steack ?",
+    "joke": "Quel aliment n'est pas un steak ?",
     "answer": "Une pastèque..."
   },
   {
@@ -3763,9 +3763,9 @@
   },
   {
     "id": 628,
-    "type": "dark",
-    "joke": "Que dit un oiseau lorsqu'il se met à survoler Auschwitz ?",
-    "answer": "Cuit, cuit, cuit..."
+    "type": "global",
+    "joke": "Méfiez vous de l’oiseau sur le lac :",
+    "answer": "C’est peut-être un mauvais cygne !"
   },
   {
     "id": 629,
@@ -4792,5 +4792,185 @@
     "type": "global",
     "joke": "Quelle était la déesse qui énervait le plus Jupiter ?",
     "answer": "C'est Minerve parce qu'elle Minerve, celle-là !"
+  },
+  {
+    "id": 801,
+    "type": "global",
+    "joke": "Quel est le point commun entre un pâtissier et un ciel orageux ?",
+    "answer": "Tous les deux font des éclairs."
+  },
+  {
+    "id": 802,
+    "type": "global",
+    "joke": "Quel est le plat préféré des opticiens ?",
+    "answer": "Les lentilles !"
+  },
+  {
+    "id": 803,
+    "type": "global",
+    "joke": "Quel est l'animal le plus malheureux ?",
+    "answer": "Le taureau, parce que sa femme est vache."
+  },
+  {
+    "id": 804,
+    "type": "global",
+    "joke": "Quel avis peut-on donner à un marin ?",
+    "answer": "Un avis rond."
+  },
+  {
+    "id": 805,
+    "type": "global",
+    "joke": "Où trouve-t-on des chats marrants ?",
+    "answer": "Dans les livres. Parce qu'on y trouve des chats pitres."
+  },
+  {
+    "id": 806,
+    "type": "global",
+    "joke": "Pourquoi les Anglais n'aiment-ils pas les grenouilles ?",
+    "answer": "Parce qu'elles font le thé tard !"
+  },
+  {
+    "id": 807,
+    "type": "global",
+    "joke": "Quel chars d'assaut permet de construire et non de détruire ?",
+    "answer": "Le chars Pentier !"
+  },
+  {
+    "id": 808,
+    "type": "beauf",
+    "joke": "As-tu déjà fais la guerre ? Non ?",
+    "answer": "Ben alors pourquoi as-tu un trou de balle ?"
+  },
+  {
+    "id": 809,
+    "type": "global",
+    "joke": "Dans un hôpital, deux fous jouent aux cartes. Soudain, une infirmière arrive avec une seringue. L'un des deux fous s'écrie :",
+    "answer": "Tiens, voilà la dame de pique !"
+  },
+  {
+    "id": 810,
+    "type": "global",
+    "joke": "Deux ouvriers vont travailler sur la Tour Eiffel. Soudin ils s'aperçoivent qu'ils ont oublié leur mètre. A quelle hauteur sont-ils ?",
+    "answer": "Ils sont à deux sans mètre !"
+  },
+  {
+    "id": 811,
+    "type": "global",
+    "joke": "Quel est le point commun entre un professeur et un thermomètre ?",
+    "answer": "On tremble quand ils marquent zéro !"
+  },
+  {
+    "id": 812,
+    "type": "global",
+    "joke": "Docteur j'ai mal à l'œil gauche quand je bois mon café. Pourquoi ?",
+    "answer": "Normal, essayez d'enlever la cuillère de la tasse."
+  },
+  {
+    "id": 813,
+    "type": "global",
+    "joke": "Un homme est arrêté pour vol de voiture. Des années plus tard, il est libéré ...",
+    "answer": "Pour bonne conduite !"
+  },
+  {
+    "id": 814,
+    "type": "global",
+    "joke": "Deux ballons discutent : Si on allait s'éclater ? dit l'un.",
+    "answer": "T'es pas un peu gonflé ? lui répond l'autre."
+  },
+  {
+    "id": 815,
+    "type": "global",
+    "joke": "Quelle est la capitale de l'île de Tamalou ?",
+    "answer": "Gébobola !"
+  },
+  {
+    "id": 816,
+    "type": "global",
+    "joke": "Comment appelle-t-on un chat tombé dans un pot de peinture le jour de Noël ?",
+    "answer": "Un chat-peint de Noël !"
+  },
+  {
+    "id": 817,
+    "type": "limit",
+    "joke": "Maman, c'est quoi de la lingerie coquine ?",
+    "answer": "De la hot couture !"
+  },
+  {
+    "id": 818,
+    "type": "global",
+    "joke": "Que trouve t-on à l'intérieur d'un nez bien propre ?",
+    "answer": "Des empreintes digitales..."
+  },
+  {
+    "id": 819,
+    "type": "global",
+    "joke": "Quel est l'animal qui a le plus de dents ?",
+    "answer": "La petite souris !"
+  },
+  {
+    "id": 820,
+    "type": "global",
+    "joke": "Que dit un sapin de Noël qui arrive en retard le soir du réveillon ?",
+    "answer": "Je vais encore me faire enguirlander !"
+  },
+  {
+    "id": 821,
+    "type": "global",
+    "joke": "Que dit la sorcière à son mari quand elle trouve une chose très facile à faire ?",
+    "answer": "Ce n’est pas sorcier !"
+  },
+  {
+    "id": 822,
+    "type": "global",
+    "joke": "C'est deux savons qui se rencontre. Tiens ta maigri depuis la dernière fois, comment t'a fait?",
+    "answer": "J'ai pris un bain."
+  },
+  {
+    "id": 823,
+    "type": "global",
+    "joke": "Un iceberg vient d'être papa. Comment l'annonce-t-il à ses amis ?",
+    "answer": "C'est un petit glaçon."
+  },
+  {
+    "id": 824,
+    "type": "global",
+    "joke": "Ces deux gars au camping. Il fait nuit , l'un deux dit :",
+    "answer": "On va dormir ça te tente ?"
+  },
+  {
+    "id": 825,
+    "type": "global",
+    "joke": "Bonjour, je m'appelle Teuse",
+    "answer": "En chantier !"
+  },
+  {
+    "id": 826,
+    "type": "global",
+    "joke": "C'est l'histoire d'un cannibale qui veut manger son meilleur ami. Il ne sait pas comment s'y prendre alors sa femme lui dit :",
+    "answer": "Tu n'as qu'à mettre ton pote au feu."
+  },
+  {
+    "id": 827,
+    "type": "global",
+    "joke": "Quel est le coquillage le moins lourd ?",
+    "answer": "La palourde."
+  },
+  {
+    "id": 828,
+    "type": "global",
+    "joke": "Quelle est la ville la plus vieille du monde ?",
+    "answer": "La ville de Milan."
+  },
+  {
+    "id": 829,
+    "type": "global",
+    "joke": "Quel est le fruit préféré des militaires ?",
+    "answer": "La grenade."
+  },
+  {
+    "id": 830,
+    "type": "dark",
+    "joke": "Connais-tu l’histoire de l’homme qui habitait juste en face du cimetière? ",
+    "answer": "Eh bien, maintenant, il habite en face de chez-lui !"
   }
 ]
