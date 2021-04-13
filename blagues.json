@@ -4940,7 +4940,7 @@
   {
     "id": 825,
     "type": "global",
-    "joke": "Bonjour, je m'appelle Teuse",
+    "joke": "Bonjour, je m'appelle Teuse.",
     "answer": "En chantier !"
   },
   {
@@ -4970,7 +4970,7 @@
   {
     "id": 830,
     "type": "dark",
-    "joke": "Connais-tu l’histoire de l’homme qui habitait juste en face du cimetière? ",
+    "joke": "Connais-tu l’histoire de l'homme qui habitait juste en face du cimetière ?",
     "answer": "Eh bien, maintenant, il habite en face de chez-lui !"
   }
 ]
