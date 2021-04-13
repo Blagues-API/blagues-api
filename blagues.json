@@ -1250,7 +1250,7 @@
   {
     "id": 209,
     "type": "global",
-    "joke": "Pourquoi on met une selle sur un cheval ?",
+    "joke": "Pourquoi met-on une selle sur un cheval ?",
     "answer": "Parce qu'en dessous elle tomberait."
   },
   {
@@ -1287,7 +1287,7 @@
     "id": 215,
     "type": "global",
     "joke": "Quelle est la ville la plus rapide de Suisse ?",
-    "answer": "Nyon"
+    "answer": "Nyon."
   },
   {
     "id": 216,
@@ -1299,7 +1299,7 @@
     "id": 217,
     "type": "global",
     "joke": "Pourquoi une brioche ne va jamais aux sports d'hiver ?",
-    "answer": "Parce qu'elle sait Pasquier"
+    "answer": "Parce qu'elle sait Pasquier."
   },
   {
     "id": 218,
@@ -1329,7 +1329,7 @@
     "id": 222,
     "type": "global",
     "joke": "Oh, Léon ! Ton prénom à l'envers donne Noël !",
-    "answer": "Et oui, tout le monde n'a pas cette chance mon cher Luc..."
+    "answer": "Eh oui, tout le monde n'a pas cette chance mon cher Luc..."
   },
   {
     "id": 223,
@@ -1364,7 +1364,7 @@
   {
     "id": 228,
     "type": "global",
-    "joke": "La vitamine C…",
+    "joke": "La vitamine C...",
     "answer": "Mais ne dira rien."
   },
   {
@@ -1389,7 +1389,7 @@
     "id": 232,
     "type": "global",
     "joke": "Il y a quoi au milieu de l'océan ?",
-    "answer": "Un é"
+    "answer": "Un \"é\"."
   },
   {
     "id": 233,
@@ -1419,13 +1419,13 @@
     "id": 237,
     "type": "global",
     "joke": "Comment reconnaître un ministre qui ment ?",
-    "answer": "Ses lèvres bougent"
+    "answer": "Ses lèvres bougent."
   },
   {
     "id": 238,
     "type": "global",
     "joke": "Comment appelle-t-on une fleur très occupée ?",
-    "answer": "Une fleur over-bookée"
+    "answer": "Une fleur over-bookée."
   },
   {
     "id": 239,
@@ -1491,13 +1491,13 @@
     "id": 249,
     "type": "dark",
     "joke": "Thomas, penses-tu que je suis une mauvaise mère ?",
-    "answer": "Mon nom est Paul…"
+    "answer": "Maman, mon nom est Paul..."
   },
   {
     "id": 250,
     "type": "dark",
     "joke": "Qu'est-ce qu'un lépreux dans un bain ?",
-    "answer": "Un Efferalgan"
+    "answer": "Un Efferalgan."
   },
   {
     "id": 251,
@@ -1515,7 +1515,7 @@
     "id": 253,
     "type": "dev",
     "joke": "Quel est le shell préféré des adolescents ?",
-    "answer": "Le WESH"
+    "answer": "Le WESH."
   },
   {
     "id": 254,
@@ -1533,25 +1533,25 @@
     "id": 256,
     "type": "dark",
     "joke": "Comment appelle-t-on deux noirs dans un sac de couchage ?",
-    "answer": "Un Twix"
+    "answer": "Un Twix."
   },
   {
     "id": 257,
     "type": "dark",
     "joke": "Quel est le plus gros dilemme pour un juif ?",
-    "answer": "Du jambon gratuit"
+    "answer": "Du jambon gratuit."
   },
   {
     "id": 258,
     "type": "dark",
     "joke": "Qu'est-ce qu'un juif en forêt ?",
-    "answer": "Rabbin des bois"
+    "answer": "Rabbin des bois."
   },
   {
     "id": 259,
     "type": "limit",
     "joke": "Comment appelle-t-on une lesbienne qui n'a pas de sein ?",
-    "answer": "Une omoplate"
+    "answer": "Une omoplate."
   },
   {
     "id": 260,
@@ -1593,7 +1593,7 @@
     "id": 266,
     "type": "global",
     "joke": "Qui s'occupe de la décoration à l'Elysée ?",
-    "answer": "Le ministère de l'intérieur"
+    "answer": "Le ministère de l'intérieur."
   },
   {
     "id": 267,
@@ -1623,7 +1623,7 @@
     "id": 271,
     "type": "global",
     "joke": "Que fait un gros poussin ?",
-    "answer": "PIOU-PIOU"
+    "answer": "PIOU-PIOU."
   },
   {
     "id": 272,
@@ -1671,7 +1671,7 @@
     "id": 279,
     "type": "global",
     "joke": "Qu'est-ce que le Gospel ?",
-    "answer": "C'est quand ton gamin a pris un coup de soleil."
+    "answer": "C'est quand ton gamin a prit un coup de soleil."
   },
   {
     "id": 280,
@@ -1743,7 +1743,7 @@
     "id": 291,
     "type": "global",
     "joke": "Tu connais la blague du con qui dit non ?",
-    "answer": "Non…"
+    "answer": "Non..."
   },
   {
     "id": 292,
@@ -1772,7 +1772,7 @@
   {
     "id": 296,
     "type": "limit",
-    "joke": "Pourquoi j'ai appelé mon pénis Bidou ?",
+    "joke": "Pourquoi ai-je appelé mon pénis Bidou ?",
     "answer": "Parce que quand je vais pisser, je s'coue Bidou."
   },
   {
@@ -1802,25 +1802,25 @@
   {
     "id": 301,
     "type": "global",
-    "joke": "Qu'est-ce qui commence par un E, finit par un E et qui ne contient qu'une lettre ?",
+    "joke": "Qu'est-ce qui commence par un \"E\", finit par un \"E\" et qui ne contient qu'une lettre ?",
     "answer": "Une enveloppe !"
   },
   {
     "id": 302,
     "type": "limit",
     "joke": "Qu'est-ce qui se lève quand tu t'en sers, qui s'abaisse quand tu as fini de t'en servir et qui goutte après usage ?",
-    "answer": "Un parapluie"
+    "answer": "Un parapluie."
   },
   {
     "id": 303,
     "type": "global",
     "joke": "Babi et Baba sont sur un bateau Baba tombe à l'eau. Que se passe-t-il ?",
-    "answer": "Babi bêle et Baba coule"
+    "answer": "Babi bêle et Baba coule."
   },
   {
     "id": 304,
     "type": "global",
-    "joke": "Que s'est il passé en 1769 ? Napoléon est né ! Et que s'est il passé en 1789 ?",
+    "joke": "Que s'est-il passé en 1769 ? Napoléon est né ! Et que s'est-il passé en 1789 ?",
     "answer": "Il a eu 20 ans !"
   },
   {
@@ -1832,7 +1832,7 @@
   {
     "id": 306,
     "type": "beauf",
-    "joke": "Quand mon verre est plein, je le vide",
+    "joke": "Quand mon verre est plein, je le vide.",
     "answer": "Quand mon verre est vide, je me plains !"
   },
   {
@@ -1844,14 +1844,14 @@
   {
     "id": 308,
     "type": "global",
-    "joke": "Ne pas déranger svp",
+    "joke": "Ne pas déranger s'il vous plaît.",
     "answer": "Je n'ai pas rangé pour rien... "
   },
   {
     "id": 309,
     "type": "global",
-    "joke": "Merci de ne pas frapper",
-    "answer": "Et soyez gentil, de ne pas sonner non plus"
+    "joke": "Merci de ne pas frapper.",
+    "answer": "Et soyez gentil, de ne pas sonner non plus."
   },
   {
     "id": 310,
@@ -1868,7 +1868,7 @@
   {
     "id": 312,
     "type": "global",
-    "joke": "Pourquoi la girafe se fait arrêter par la police ?",
+    "joke": "Pourquoi les girafes se font arrêter par la police ?",
     "answer": "Parce que c'est un cou-monté !"
   },
   {
@@ -1880,14 +1880,14 @@
   {
     "id": 314,
     "type": "global",
-    "joke": "On ne dit pas démanger",
+    "joke": "On ne dit pas démanger.",
     "answer": "On dit vomir."
   },
   {
     "id": 315,
     "type": "dark",
     "joke": "Que disait Eve pour faire avancer le bâteau ?",
-    "answer": "Ramadan"
+    "answer": "Ramadan."
   },
   {
     "id": 316,
@@ -1899,7 +1899,7 @@
     "id": 317,
     "type": "global",
     "joke": "Qui est l'idiot qui a créé la cédille ?",
-    "answer": "Monsieur Duçon"
+    "answer": "Monsieur Duçon."
   },
   {
     "id": 318,
@@ -1977,7 +1977,7 @@
     "id": 330,
     "type": "dark",
     "joke": "Ta mère est tellement grosse",
-    "answer": "Que quand elle sort y a une éclipse."
+    "answer": "Que quand elle sort il y a une éclipse."
   },
   {
     "id": 331,
@@ -2079,7 +2079,7 @@
     "id": 347,
     "type": "limit",
     "joke": "Comment appelle-t-on six prostituées Allemandes ?",
-    "answer": "Une scie sauteuse Bosch"
+    "answer": "Une scie sauteuse Bosch."
   },
   {
     "id": 348,
@@ -2096,7 +2096,7 @@
   {
     "id": 350,
     "type": "limit",
-    "joke": "Pourquoi les pharaons ont ils 2 fesses?",
+    "joke": "Pourquoi les pharaons ont-ils 2 fesses?",
     "answer": "Parce que AnuBis !"
   },
   {
@@ -2144,7 +2144,7 @@
   {
     "id": 358,
     "type": "beauf",
-    "joke": "Les peintres utilisent, de l'imagination, de la créativité et...",
+    "joke": "Les peintres utilisent de l'imagination, de la créativité et...",
     "answer": "De la peinture."
   },
   {
@@ -2162,8 +2162,8 @@
   {
     "id": 361,
     "type": "global",
-    "joke": "Mr et madame Sop ont un fils comment s'appelle-t-il ?",
-    "answer": "Alain"
+    "joke": "Monsieur et madame Sop ont un fils, comment s'appelle-t-il ?",
+    "answer": "Alain."
   },
   {
     "id": 362,
@@ -2180,7 +2180,7 @@
   {
     "id": 364,
     "type": "dark",
-    "joke": "Ma b*te, je l'ai appelée la vie.",
+    "joke": "J'ai appelée ma bite \"la vie\".",
     "answer": "Parce que la vie est dure..."
   },
   {
@@ -2205,7 +2205,7 @@
     "id": 368,
     "type": "global",
     "joke": "Que disent deux mouettes lorsqu'elles veulent partager quelque chose ?",
-    "answer": "\"On fait mouette-mouette ?\""
+    "answer": "On fait mouette-mouette ?"
   },
   {
     "id": 369,
@@ -2234,7 +2234,7 @@
   {
     "id": 373,
     "type": "dark",
-    "joke": "Prof des biologie : \"Que trouve-t-on dans une cellule ?\"",
+    "joke": "Prof des biologie: \"Que trouve-t-on dans une cellule ?\"",
     "answer": "Des arabes et des noirs !"
   },
   {
@@ -2253,7 +2253,7 @@
     "id": 376,
     "type": "global",
     "joke": "Quelle est l'insulte la plus utilisée en 1940 après le traité de Vichy ?",
-    "answer": "Pétain"
+    "answer": "Pétain."
   },
   {
     "id": 377,
@@ -2282,7 +2282,7 @@
   {
     "id": 381,
     "type": "dark",
-    "joke": "– Maman, maman, je ne veux plus dormir avec mon petit frère.",
+    "joke": "- Maman, maman, je ne veux plus dormir avec mon petit frère.",
     "answer": "– Tais-toi ! Je t'ai déjà dit qu'on avait pas assez d'argent pour l'enterrer."
   },
   {
@@ -2307,7 +2307,7 @@
     "id": 385,
     "type": "limit",
     "joke": "Que disent deux fesses sur un bateau ?",
-    "answer": "Dis donc ça commence à ramer du cul."
+    "answer": "Dit donc, ça commence à ramer du cul."
   },
   {
     "id": 386,
@@ -2319,7 +2319,7 @@
     "id": 387,
     "type": "global",
     "joke": "Mon plus grand défaut est l'honnêteté... Vous pensez le contraire ?",
-    "answer": "J'en ai rien à foutre de ce que vous pensez"
+    "answer": "J'en ai rien à foutre de ce que vous pensez."
   },
   {
     "id": 388,
@@ -2355,7 +2355,7 @@
     "id": 393,
     "type": "dark",
     "joke": "Un homme à l'hôpital dit à son infirmière : Vous êtes mon infirmière préférée, voudriez-vous passer me voir quand je serai sorti de l'hôpital ?",
-    "answer": "Je suis désolée, mais j'ai horreur des cimetières !"
+    "answer": "Je suis désolée, mais j'ai horreur des cimetières ."
   },
   {
     "id": 394,
@@ -2403,7 +2403,7 @@
     "id": 401,
     "type": "dark",
     "joke": "Comment dire boujour à un juif ?",
-    "answer": "Hey ! Ca gaz ?"
+    "answer": "Hey ! Ça gaz ?"
   },
   {
     "id": 402,
@@ -2426,7 +2426,7 @@
   {
     "id": 405,
     "type": "global",
-    "joke": "On m'a toujours dit que Mozart était mort. ",
+    "joke": "On m'a toujours dit que Mozart était mort.",
     "answer": "Pourtant, à chaque fois que j'ouvre mon frigo, Mozart est là... "
   },
   {
@@ -2463,7 +2463,7 @@
     "id": 411,
     "type": "dark",
     "joke": "Que fait on après avoir serré la main d'un lépreux ?",
-    "answer": "On la lui rend."
+    "answer": "On lui rend."
   },
   {
     "id": 412,
@@ -2493,12 +2493,12 @@
     "id": 416,
     "type": "blondes",
     "joke": "Combien faut il de blonde pour visser une ampoule ?",
-    "answer": "Une qui tien l'ampoule, et quatre qui font tourner la blonde."
+    "answer": "Une qui tient l'ampoule, et quatre qui font tourner la blonde."
   },
   {
     "id": 417,
     "type": "beauf",
-    "joke": "Bon on joue au poker ou on s'encule ?",
+    "joke": "Bon, on joue au poker ou on s'encule ?",
     "answer": "Perso j'aime pas trop le poker alors..."
   },
   {
@@ -2541,7 +2541,7 @@
     "id": 424,
     "type": "global",
     "joke": "Que fait un cendrier devant un ascenseur ?",
-    "answer": "Il veut des cendres"
+    "answer": "Il veut des cendres."
   },
   {
     "id": 425,
@@ -2559,7 +2559,7 @@
     "id": 427,
     "type": "dark",
     "joke": "Papa, papa, j'aime pas grand mère…",
-    "answer": "Bein tu n'as qu'à la laisser sur le bord de l'assiette."
+    "answer": "Ben tu n'as qu'à la laisser sur le bord de l'assiette."
   },
   {
     "id": 428,
@@ -2589,7 +2589,7 @@
     "id": 432,
     "type": "dev",
     "joke": "Que fait un développeur s'il veut se marier ?",
-    "answer": "Une fille en C"
+    "answer": "Une fille en C."
   },
   {
     "id": 433,
@@ -2649,7 +2649,7 @@
     "id": 442,
     "type": "global",
     "joke": "Pourquoi est-ce que les livres ont-ils toujours chaud ?",
-    "answer": "Parce qu'ils ont une couverture"
+    "answer": "Parce qu'ils ont une couverture."
   },
   {
     "id": 443,
@@ -2661,7 +2661,7 @@
     "id": 444,
     "type": "global",
     "joke": "Qui chante le mieux lors d'une tempête ?",
-    "answer": "Storm Maé"
+    "answer": "Storm Maé."
   },
   {
     "id": 445,
@@ -2678,7 +2678,7 @@
   {
     "id": 447,
     "type": "limit",
-    "joke": "Hier, j'ai espionné un pote pour savoir son MDP, après quelques coups d'oeil je le vois taper \"PÉNIS\"...",
+    "joke": "Hier, j'ai espionné un pote pour savoir son mot de passe, après quelques coups d'oeil je le vois taper \"PÉNIS\"...",
     "answer": "Le PC l'a jugé \"Trop court\"..."
   },
   {
@@ -2727,7 +2727,7 @@
     "id": 455,
     "type": "dark",
     "joke": "Quelle est la différence entre un bébé et un oignon ?",
-    "answer": "Pour l'oignon j'ai pleuré quand je l'ai découpé"
+    "answer": "Pour l'oignon j'ai pleuré quand je l'ai découpé."
   },
   {
     "id": 456,
@@ -2757,7 +2757,7 @@
     "id": 460,
     "type": "global",
     "joke": "Monsieur et madame China ont un fils, comment s'appelle t-il ?",
-    "answer": "Medhi"
+    "answer": "Medhi."
   },
   {
     "id": 461,
@@ -2768,8 +2768,8 @@
   {
     "id": 462,
     "type": "global",
-    "joke": "M et Mme Bombeurre ont un fils comment s'appelle t-il ?",
-    "answer": "Jean"
+    "joke": "Monsieur et madame Bombeurre ont un fils comment s'appelle t-il ?",
+    "answer": "Jean."
   },
   {
     "id": 463,
@@ -2787,7 +2787,7 @@
     "id": 465,
     "type": "blondes",
     "joke": "Une blonde appelle son copain: \"Je n'arrive pas à démarrer la voiture !\"",
-    "answer": "Je te l'ai déjà dis cent fois que, lorsque ce n'est pas moi qui conduit, tu dois te mettre à gauche !"
+    "answer": "Je te l'ai déjà dis cent fois que lorsque ce n'est pas moi qui conduit tu dois te mettre à gauche !"
   },
   {
     "id": 466,
@@ -2810,7 +2810,7 @@
   {
     "id": 469,
     "type": "dark",
-    "joke": "Un femme dis à son mari : \"Je vais faire les courses, demain c'est l'anniversaire de ma mère, tu aurais une idée d'appareil électrique à lui offrir ?\"",
+    "joke": "Un femme dit à son mari : \"Je vais faire les courses, demain c'est l'anniversaire de ma mère, tu aurais une idée d'appareil électrique à lui offrir ?\"",
     "answer": "Pourquoi pas une chaise ?"
   },
   {
@@ -2889,7 +2889,7 @@
     "id": 482,
     "type": "blondes",
     "joke": "Comment appelle t-on une entreprise dirigée par une blonde ?",
-    "answer": "Une Tarte-Up"
+    "answer": "Une Tarte-Up."
   },
   {
     "id": 483,
