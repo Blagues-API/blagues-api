@@ -4672,5 +4672,125 @@
     "type": "global",
     "joke": "A combien rouliez-vous ?, demande le gendarme.",
     "answer": "A deux seulement, mais si vous voulez monter, il reste de la place !"
+  },
+  {
+    "id": 781,
+    "type": "global",
+    "joke": "Qui faudrait-il appeler pour déblayer les trottoirs ?",
+    "answer": "La reine déneige."
+  },
+  {
+    "id": 782,
+    "type": "global",
+    "joke": "Comment appelle-t-on le vent le plus apprécié en été ?",
+    "answer": "Le vent Tilo."
+  },
+  {
+    "id": 783,
+    "type": "global",
+    "joke": "Quel est le comble pour un marin ?",
+    "answer": "Avoir le nez qui coule !"
+  },
+  {
+    "id": 784,
+    "type": "global",
+    "joke": "Que dit un oignon quand il se cogne ?",
+    "answer": "Aïe..."
+  },
+  {
+    "id": 785,
+    "type": "global",
+    "joke": "Pourquoi le football c'est rigolo ?",
+    "answer": "Parce que Thierry en rit."
+  },
+  {
+    "id": 786,
+    "type": "global",
+    "joke": "Quel est le sport le plus fruité ?",
+    "answer": "La boxe, parce que tu te prends des pêches dans la poire et tu tombes dans les pommes."
+  },
+  {
+    "id": 787,
+    "type": "global",
+    "joke": "Qu'est ce que les enfants usent le plus à l'école ?",
+    "answer": "Le professeur !"
+  },
+  {
+    "id": 788,
+    "type": "global",
+    "joke": "Sur quel métier les chiens peuvent-ils exercer ?",
+    "answer": "Electrichien !"
+  },
+  {
+    "id": 789,
+    "type": "global",
+    "joke": "Quel est le point commun entre un pêcheur et un mannequin ?",
+    "answer": "Ils surveillent leur ligne !"
+  },
+  {
+    "id": 790,
+    "type": "global",
+    "joke": "Quels sont les animaux qui sont souvent fatigués ?",
+    "answer": "Le dodo et le paresseux !"
+  },
+  {
+    "id": 791,
+    "type": "global",
+    "joke": "Quel est l'animal le plus à la mode ?",
+    "answer": "La taupe modèle !"
+  },
+  {
+    "id": 792,
+    "type": "global",
+    "joke": "Qu'est ce qu'une carotte au milieu d'une flaque d'eau ?",
+    "answer": "Un bonhomme de neige… Au printemps !"
+  },
+  {
+    "id": 793,
+    "type": "global",
+    "joke": "Pourquoi faut-il se méfier des sirènes au volant ?",
+    "answer": "Parce qu'elles font des queues de poisson !"
+  },
+  {
+    "id": 794,
+    "type": "global",
+    "joke": "Monsieur et Madame Toutlemonde ont deux jumeaux. Comment s'appellent-ils ?",
+    "answer": "Côme et Pacôme Toutlemonde."
+  },
+  {
+    "id": 795,
+    "type": "global",
+    "joke": "Quel animal est sourd ?",
+    "answer": "Le crapaud, car il fait coâ, coâ !"
+  },
+  {
+    "id": 796,
+    "type": "global",
+    "joke": "Quelle est la ressemblance entre un facteur et un jongleur ?",
+    "answer": "Tous deux ont besoin de beaucoup d'adresse."
+  },
+  {
+    "id": 797,
+    "type": "global",
+    "joke": "Que dit un vitrier à son fils pour qu'il soit sage ?",
+    "answer": "Tiens-toi à carreaux si tu veux une glace !"
+  },
+  {
+    "id": 798,
+    "type": "global",
+    "joke": "Que disent les plongeurs au nouvel an ?",
+    "answer": "Bonne Apnée."
+  },
+  {
+    "id": 799,
+    "type": "global",
+    "joke": "Comment reconnaît-on un idiot dans un magasin de chaussures ?",
+    "answer": "C'est celui qui essaie les boites."
+  },
+  {
+    "id": 800,
+    "type": "global",
+    "joke": "Quelle était la déesse qui énervait le plus Jupiter ?",
+    "answer": "C'est Minerve..."
   }
 ]
