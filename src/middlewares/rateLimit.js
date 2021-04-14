@@ -21,7 +21,7 @@ module.exports = (req, res, next) => {
     res.status(429).send({
       status: 429,
       error: 'Too Many Requests',
-      message: `Your ip has exceeded your limit of ${limit} requests per 10 seconds. Please try again.`,
+      message: `Your IP has exceeded your limit of ${limit} requests per 10 seconds. Please try again.`,
     })
   }
 

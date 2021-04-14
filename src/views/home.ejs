@@ -24,13 +24,13 @@
                 <h2 class="title">Qu’est ce que Blagues API ?</h2>
                 <p><strong>Blagues API</strong> est une API de blagues, rassemblant les meilleures blagues avec un total de <strong><%= count %> blagues</strong> françaises.</p>
                 <p>Des blagues proposées par la communauté et catégorisées.</p>
-                <p>L’API est accessible <strong>gratuitement</strong> et rassemble sur le <a href="https://discord.gg/PPNpVaF" title="Discord de Blagues API">discord</a>  une communauté francophone.</p>
+                <p>L’API est accessible <strong>gratuitement</strong> et rassemble sur le <a href="https://discord.gg/PPNpVaF" title="Discord de Blagues API">Discord</a>  une communauté francophone.</p>
             </div>
             <div class="usecases" id="use">
                 <a href="#use" class="title-container">
                     <h3 class="title">Utilisation</h3>
                 </a>
-                <p>Différentes routes vous sont rendues disponibles afin d'adapter l'api a votre projet. Les différents mots clés vous permettront de récupérer une blague aléatoirement dans un thème ou type de blague spécifique.</p>
+                <p>Différentes routes vous sont rendues disponibles afin d'adapter l'API à votre projet. Les différents mots clés vous permettront de récupérer une blague aléatoirement dans un thème ou type de blague spécifique.</p>
                 <div class="example">
                     <h4 class="language">BLAGUE ALÉATOIRE</h4>
                     <pre><code class="language-javascript">GET /api/random</code></pre>
@@ -48,7 +48,7 @@
                 <a href="#advanced-use" class="title-container">
                     <h3 class="title">Utilisation avancé</h3>
                 </a>
-                <p>Parfois certains types d'humour dérangent certaines personnes, hors blagues-api est une api publique qui s'est donné comme mission de convenir aux tous types d'humour. C'est pour cela que nous vous offrons la possibilité de filtrer les blagues et donc d'en retirer celles qui font partie d'une catégorie qui ne vous convient pas.</p>
+                <p>Parfois certains types d'humour dérangent certaines personnes, hors Blagues API est une API publique qui s'est donné comme mission de convenir aux tous types d'humour. C'est pour cela que nous vous offrons la possibilité de filtrer les blagues et donc d'en retirer celles qui font partie d'une catégorie qui ne vous convient pas.</p>
                 <div class="example">
                     <h4 class="language">UTILISATION D'UN SEUL FILTRE</h4>
                     <pre><code class="language-javascript">GET /api/random?disallow=dark</code></pre>
@@ -63,7 +63,7 @@
                     <h3 class="title">Authentification</h3>
                 </a>
                 <p>
-                    L'api de blagues utilise un token d'authentification Bearer pour les requêtes. Vous pouvez le gérer depuis votre profil.<br>
+                    L'API de blagues utilise un token d'authentification Bearer pour les requêtes. Vous pouvez le gérer depuis votre profil.<br>
                     Les requêtes doivent toutes être effectuées via <a href="http://en.wikipedia.org/wiki/HTTP_Secure">HTTPS</a>. Tous les appels effectuées sans authentification ou en HTTP échoueront.<br>
                     Si vous avez des difficultées à obtenir un certificat HTTPS, voici <a href="https://certbot.eff.org/">Certbot</a>, un outil qui permet d'en obtenir un gratuitement !
                 </p>
@@ -77,7 +77,7 @@
                     <h3 class="title">Exemple</h3>
                 </a>
                 <p>
-                    Voici un exemple sous forme de cas d'utilisation de l'api dans le cas où l'on souhaite récupérer une blague aléatoirement dans le répertoire toute catégorie confondue
+                    Voici un exemple sous forme de cas d'utilisation de l'API dans le cas où l'on souhaite récupérer une blague aléatoirement dans le répertoire toute catégorie confondue :
                 </p>
                 <div class="example">
                     <span class="language">JAVASCRIPT</span>
@@ -105,7 +105,7 @@
                     <h3 class="title">Remerciements</h3>
                 </a>
                 <p>
-                    Un grand merci à toute la communauté qui a contribué au projet que ça soit sur le discord ou sur le github en apportant leurs ajouts et modifications au code de l'api, mais également à tous ceux qui ont proposé leurs blagues afin d'agrandir le répertoire de l'api. Le nombre de blagues françaises continuent de grandir de jours en jours. Merci à vous !
+                    Un grand merci à toute la communauté qui a contribué au projet que ça soit sur le Discord ou sur le GitHub en apportant leurs ajouts et modifications au code de l'API, mais également à tous ceux qui ont proposé leurs blagues afin d'agrandir le répertoire de l'API. Le nombre de blagues françaises continuent de grandir de jours en jours. Merci à vous !
                 </p>
             </div>
         </section>
@@ -126,21 +126,21 @@
               "name": "Qui peut contribuer ajouter des blagues ?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Absolument tout le monde, cette api est communautaire et tout le monde peut ajouter des blagues a condition qu'elles soient correctement catégorisées."
+                "text": "Absolument tout le monde, cette API est communautaire et tout le monde peut ajouter des blagues a condition qu'elles soient correctement catégorisées."
               }
             }, {
               "@type": "Question",
-              "name": "Comment contribuer à l'api ?",
+              "name": "Comment contribuer à l'API ?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Vous pouvez contribuer depuis notre <a href='https://discord.gg/PPNpVaF'>serveur discord</a> ou sur le <a href='https://github.com/DraftProducts/blagues-api/blob/master/blagues.json'>github</a> en faisant une pull-request."
+                "text": "Vous pouvez contribuer depuis notre <a href='https://discord.gg/PPNpVaF'>serveur Discord</a> ou sur le <a href='https://github.com/DraftProducts/blagues-api/blob/master/blagues.json'>github</a> en faisant une pull-request."
               }
             }, {
               "@type": "Question",
               "name": "Quelles sont les restictions au niveau des requêtes ?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "L'api limite chaque token d'authentification a 100 requêtes par 10 secondes, ce cota peut être modifié sur demande"
+                "text": "L'API limite chaque token d'authentification à 100 requêtes par 10 secondes, ce quota peut être modifié sur demande."
               }
             }, {
               "@type": "Question",
@@ -151,7 +151,7 @@
               }
             }, {
               "@type": "Question",
-              "name": "Quelles sont les catégories de blagues disponibles",
+              "name": "Quelles sont les catégories de blagues disponibles ?",
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text":"Les différents types sont: Tout publique, Développeurs, Humour Noir, Limite Limite, Beauf, Blondes"}
