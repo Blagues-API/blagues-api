@@ -4,7 +4,7 @@ const suggestsStickyMessage = jokes => ({
   embed: {
     title: 'Bienvenue à toi ! 👋',
     description: stripIndents`
-        Si tu le souhaites, tu peux proposer tes blagues afin qu'elles soient ajoutées à l'api Blagues API qui regroupe actuellement **${jokes.length}** blagues françaises.
+        Si tu le souhaites, tu peux proposer tes blagues afin qu'elles soient ajoutées à l'API Blagues API qui regroupe actuellement **${jokes.length}** blagues françaises.
         Elles sont toutes issues de ce salon proposées par la communauté.
 
         >>> Tous les types de blagues sont acceptés à condition qu'elles soient correctement catégorisées et qu'elles respectent le format demandé.`,
@@ -29,7 +29,7 @@ const suggestsStickyMessage = jokes => ({
         `,
       },
       {
-        name: 'Voici le schéma à copier-coller !',
+        name: 'Voici le schéma à copier-coller :',
         value: stripIndents`
           \`\`\`
           > **Type**:
@@ -47,11 +47,11 @@ const suggestsStickyMessage = jokes => ({
 const suggestsBadFormat = message => ({
   embed: {
     author: {
-      name: 'Votre blague est invalide',
+      name: 'Votre blague est invalide !',
       icon_url: message.author.displayAvatarURL({ format: 'png' }),
     },
     description:
-      'Il semblerait que votre blague ne respecte pas le format demandé',
+      'Il semblerait que votre blague ne respecte pas le format demandé.',
     fields: [
       {
         name: 'Format demandé',
@@ -80,11 +80,11 @@ const suggestsBadFormat = message => ({
 const suggestsBadType = message => ({
   embed: {
     author: {
-      name: 'Le type de votre blague est invalide',
+      name: 'Le type de votre blague est invalide !',
       icon_url: message.author.displayAvatarURL({ format: 'png' }),
     },
     description:
-      'Il semblerait que le type de votre blague ne soit pas supporté',
+      'Il semblerait que le type de votre blague ne soit pas supporté.',
     fields: [
       {
         name: 'Votre blague',
@@ -152,10 +152,10 @@ const correctionsStickyMessage = jokes => ({
   embed: {
     title: 'Bienvenue à toi ! 👋',
     description: `
-        Si tu le souhaites, tu peux proposer des corrections aux blagues déjà existantes à l'api Blagues API qui regroupe actuellement **${jokes.length}** blagues françaises.`,
+        Si tu le souhaites, tu peux proposer des corrections aux blagues déjà existantes à l'API Blagues API qui regroupe actuellement **${jokes.length}** blagues françaises.`,
     fields: [
       {
-        name: 'Voici les différents types:',
+        name: 'Voici les différents types :',
         value: stripIndents`
           > \`Général\`: Blagues tout public, accessibles pour tous.
           > \`Développeur\`: Blagues orientées pour les développeurs & geeks.
@@ -166,7 +166,7 @@ const correctionsStickyMessage = jokes => ({
         `,
       },
       {
-        name: 'Exemple:',
+        name: 'Exemple :',
         value: stripIndents`
           > **Type**: Développeur
           > **Type corrigé**: Développeur
@@ -177,7 +177,7 @@ const correctionsStickyMessage = jokes => ({
         `,
       },
       {
-        name: 'Voici le schéma à copier-coller !',
+        name: 'Voici le schéma à copier-coller :',
         value: stripIndents`
           \`\`\`
           > **Type**:
@@ -198,11 +198,11 @@ const correctionsStickyMessage = jokes => ({
 const correctionsBadFormat = message => ({
   embed: {
     author: {
-      name: 'Votre correction est invalide',
+      name: 'Votre correction est invalide !',
       icon_url: message.author.displayAvatarURL({ format: 'png' }),
     },
     description:
-      'Il semblerait que votre correction ne respecte pas le format demandé',
+      'Il semblerait que votre correction ne respecte pas le format demandé.',
     fields: [
       {
         name: 'Format demandé',
