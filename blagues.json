@@ -38,7 +38,7 @@
   {
     "id": 7,
     "type": "dark",
-    "joke": "Ma fille vient de perdre sa première dent…",
+    "joke": "Ma fille vient de perdre sa première dent...",
     "answer": "Ça lui apprendra à me répondre !"
   },
   {
@@ -363,7 +363,7 @@
     "id": 61,
     "type": "global",
     "joke": "C'est l'histoire d'un schtroumpf qui tombe",
-    "answer": "Et qui se fait un bleu…"
+    "answer": "Et qui se fait un bleu..."
   },
   {
     "id": 62,
@@ -405,7 +405,7 @@
     "id": 68,
     "type": "global",
     "joke": "Pourquoi Harry Potter chuchote ?",
-    "answer": "Parce que Dumbledore…"
+    "answer": "Parce que Dumbledore..."
   },
   {
     "id": 69,
@@ -435,7 +435,7 @@
     "id": 73,
     "type": "global",
     "joke": "Comment appelle-t-on un nain qui travaille à la Poste ?",
-    "answer": "Un nain posteur…"
+    "answer": "Un nain posteur..."
   },
   {
     "id": 74,
@@ -471,7 +471,7 @@
     "id": 79,
     "type": "dark",
     "joke": "Quand Hitler s'est-il suicidé ?",
-    "answer": "Après avoir reçu sa facture de gaz…"
+    "answer": "Après avoir reçu sa facture de gaz..."
   },
   {
     "id": 80,
@@ -968,7 +968,7 @@
   {
     "id": 162,
     "type": "global",
-    "joke": "C'est un bœuf, qui court…",
+    "joke": "C'est un bœuf, qui court...",
     "answer": "Puis qui se viande."
   },
   {
@@ -1125,7 +1125,7 @@
     "id": 188,
     "type": "global",
     "joke": "Comment appelle-t-on un ascenseur en Amérique ?",
-    "answer": "En appuyant sur le bouton…"
+    "answer": "En appuyant sur le bouton..."
   },
   {
     "id": 189,
@@ -1190,8 +1190,8 @@
   {
     "id": 199,
     "type": "global",
-    "joke": "Un jour, Dieu demanda au coca de coller…",
-    "answer": "et le Coca Cola…"
+    "joke": "Un jour, Dieu demanda au coca de coller...",
+    "answer": "et le Coca Cola..."
   },
   {
     "id": 200,
@@ -1364,7 +1364,7 @@
   {
     "id": 228,
     "type": "global",
-    "joke": "La vitamine C…",
+    "joke": "La vitamine C...",
     "answer": "Mais ne dira rien."
   },
   {
@@ -1406,7 +1406,7 @@
   {
     "id": 235,
     "type": "global",
-    "joke": "Pour ne plus puer de la gueule…",
+    "joke": "Pour ne plus puer de la gueule...",
     "answer": "Faut-il arrêter de dire de la merde ?"
   },
   {
@@ -1484,14 +1484,14 @@
   {
     "id": 248,
     "type": "dark",
-    "joke": "Chéri, je me sens grosse et laide… S'il te plait, fais-moi un compliment…",
+    "joke": "Chéri, je me sens grosse et laide... S'il te plait, fais-moi un compliment...",
     "answer": "Tu as une bonne vue !"
   },
   {
     "id": 249,
     "type": "dark",
     "joke": "Thomas, penses-tu que je suis une mauvaise mère ?",
-    "answer": "Mon nom est Paul…"
+    "answer": "Mon nom est Paul..."
   },
   {
     "id": 250,
@@ -1743,7 +1743,7 @@
     "id": 291,
     "type": "global",
     "joke": "Tu connais la blague du con qui dit non ?",
-    "answer": "Non…"
+    "answer": "Non..."
   },
   {
     "id": 292,
@@ -2282,8 +2282,8 @@
   {
     "id": 381,
     "type": "dark",
-    "joke": "– Maman, maman, je ne veux plus dormir avec mon petit frère.",
-    "answer": "– Tais-toi ! Je t'ai déjà dit qu'on avait pas assez d'argent pour l'enterrer."
+    "joke": "Maman, maman, je ne veux plus dormir avec mon petit frère.",
+    "answer": "Tais-toi ! Je t'ai déjà dit qu'on avait pas assez d'argent pour l'enterrer."
   },
   {
     "id": 382,
@@ -2558,7 +2558,7 @@
   {
     "id": 427,
     "type": "dark",
-    "joke": "Papa, papa, j'aime pas grand mère…",
+    "joke": "Papa, papa, j'aime pas grand mère...",
     "answer": "Bein tu n'as qu'à la laisser sur le bord de l'assiette."
   },
   {
@@ -3764,8 +3764,8 @@
   {
     "id": 628,
     "type": "global",
-    "joke": "Méfiez vous de l’oiseau sur le lac :",
-    "answer": "C’est peut-être un mauvais cygne !"
+    "joke": "Méfiez vous de l'oiseau sur le lac :",
+    "answer": "C'est peut-être un mauvais cygne !"
   },
   {
     "id": 629,
@@ -4371,12 +4371,12 @@
     "id": 729,
     "type": "limit",
     "joke": "Quelle est la différence entre un 69 et le brouillard ?",
-    "answer": "Dans le brouillard, on ne voit pas le trou du cul qui est devant…"
+    "answer": "Dans le brouillard, on ne voit pas le trou du cul qui est devant..."
   },
   {
     "id": 730,
     "type": "dark",
-    "joke": "Qu’est-ce qui a deux pattes et qui saigne ?",
+    "joke": "Qu'est-ce qui a deux pattes et qui saigne ?",
     "answer": "Un demi-chien..."
   },
   {
@@ -4394,7 +4394,7 @@
   {
     "id": 733,
     "type": "global",
-    "joke": "Qu’est-ce qu’un nordiste sans frères et soeurs ?",
+    "joke": "Qu'est-ce qu'un nordiste sans frères et soeurs ?",
     "answer": "Un malheureux"
   },
   {
@@ -4923,7 +4923,7 @@
     "id": 821,
     "type": "global",
     "joke": "Que dit la sorcière à son mari quand elle trouve une chose très facile à faire ?",
-    "answer": "Ce n’est pas sorcier !"
+    "answer": "Ce n'est pas sorcier !"
   },
   {
     "id": 822,
@@ -4976,7 +4976,385 @@
   {
     "id": 830,
     "type": "dark",
-    "joke": "Connais-tu l’histoire de l'homme qui habitait juste en face du cimetière ?",
+    "joke": "Connais-tu l'histoire de l'homme qui habitait juste en face du cimetière ?",
     "answer": "Eh bien, maintenant, il habite en face de chez-lui !"
+  },
+  {
+    "id": 831,
+    "type": "global",
+    "joke": "Deux chiens dans la rue: Regarde, un nouveau lampadaire !",
+    "answer": "Génial, on va arroser ça !"
+  },
+  {
+    "id": 832,
+    "type": "global",
+    "joke": "Que ne faut-il jamais dire à un antiquaire ?",
+    "answer": "Alors, quoi de neuf ?"
+  },
+  {
+    "id": 833,
+    "type": "global",
+    "joke": "Vous connaissez l'histoire du Neutron qui est passé en jugement au tribunal ?",
+    "answer": "Aucune charge n'a pu être retenue contre lui !"
+  },
+  {
+    "id": 834,
+    "type": "global",
+    "joke": "Quelle est la ville la plus proche de l'eau ?",
+    "answer": "Bordeaux"
+  },
+  {
+    "id": 835,
+    "type": "global",
+    "joke": "Quelle est la blague à deux balles ?",
+    "answer": "Pan Pan !"
+  },
+  {
+    "id": 836,
+    "type": "global",
+    "joke": "Une patate dit à l'autre : Ouais on va se faire griller à la plage !",
+    "answer": "L'autre : Chips alors !"
+  },
+  {
+    "id": 837,
+    "type": "beauf",
+    "joke": "Pourquoi les sorcières ne portent-elles jamais de culottes ?",
+    "answer": "Pour avoir une meilleure adhérence avec le balai..."
+  },
+  {
+    "id": 838,
+    "type": "global",
+    "joke": "Quel est le repas préféré de Dracula ?",
+    "answer": "Le croc monsieur !"
+  },
+  {
+    "id": 839,
+    "type": "dark",
+    "joke": "Pour un cannibale, une femme enceinte c'est quoi ?",
+    "answer": "Un Kinder Surprise."
+  },
+  {
+    "id": 840,
+    "type": "global",
+    "joke": "Vous saviez que les girafes n'existent pas ?",
+    "answer": "C'est un cou monté !"
+  },
+  {
+    "id": 841,
+    "type": "global",
+    "joke": "T'as vu Monte-Carlo ?",
+    "answer": "Nan j'ai vu personne monter."
+  },
+  {
+    "id": 842,
+    "type": "global",
+    "joke": "L'examinateur demande à un étudiant en médecine : Quels sont les os du crâne ?",
+    "answer": "Je ne les ai pas tous en tête... !"
+  },
+  {
+    "id": 843,
+    "type": "global",
+    "joke": "Que dit un hibou à sa femme le jour de l'an ?",
+    "answer": "Je te chouette une bonne année !"
+  },
+  {
+    "id": 844,
+    "type": "global",
+    "joke": "Quel est le pays où les habitants sont les plus riches ?",
+    "answer": "La République Chèque."
+  },
+  {
+    "id": 845,
+    "type": "global",
+    "joke": "Que fait un DJ sur une patinoire ?",
+    "answer": "Il platine."
+  },
+  {
+    "id": 846,
+    "type": "limit",
+    "joke": "Comment appelle-on un parking pour les musulmans ?",
+    "answer": "Un parking halal."
+  },
+  {
+    "id": 847,
+    "type": "dark",
+    "joke": "Où se retrouvent les musulmans pour danser ?",
+    "answer": "Au bal mosquée."
+  },
+  {
+    "id": 848,
+    "type": "dark",
+    "joke": "Une fillette est retrouvée égorgée dans la rue… L'enquêteur questionne le légiste : Elle a été violée ?",
+    "answer": "Non pas encore, j'attendais votre autorisation."
+  },
+  {
+    "id": 849,
+    "type": "dark",
+    "joke": "Une fille à son frère : Tu sais que tu fais l'amour beaucoup mieux que papa ?",
+    "answer": "Je sais, maman me l'a déjà dit..."
+  },
+  {
+    "id": 850,
+    "type": "dark",
+    "joke": "C'est une femme qui rentre à la maison et dit à son mari : Il faut renvoyer le chauffeur, ça fait deux fois qu'il essaye de me tuer !",
+    "answer": "Laisse lui encore une chance. Répond le mari."
+  },
+  {
+    "id": 851,
+    "type": "dark",
+    "joke": "Comment les enfants de Tchernobyl compte-t-ils jusqu'à 33 ?",
+    "answer": "Sur leurs doigts..."
+  },
+  {
+    "id": 852,
+    "type": "blondes",
+    "joke": "Comment fait-on pour tuer une blonde ?",
+    "answer": "On jette son rouge à lèvre sur l'autoroute !"
+  },
+  {
+    "id": 853,
+    "type": "blondes",
+    "joke": "Un homme annonce à sa collègue de bureau, blonde : Je pars pour Milan !",
+    "answer": "Quoi ! Si longtemps que ça ?"
+  },
+  {
+    "id": 854,
+    "type": "blondes",
+    "joke": "Comment reconnaître une blonde dans un aéroport ?",
+    "answer": "C'est la seule qui lance du pain aux avions."
+  },
+  {
+    "id": 855,
+    "type": "blondes",
+    "joke": "Une brune dit à une blonde : \"Ho, un oiseau mort !!\".",
+    "answer": "Et puis la blonde, regardant vers le ciel : \"Ou ça ?\"."
+  },
+  {
+    "id": 856,
+    "type": "blondes",
+    "joke": "Comment une blonde tue-t-elle un ver de terre ?",
+    "answer": "Elle l'enterre."
+  },
+  {
+    "id": 857,
+    "type": "blondes",
+    "joke": "Deux blondes discutent : Dis, tu as revu Nathalie depuis tout ce temps ? Oh... Tu ne savais pas ? Elle est morte...",
+    "answer": "Ah bien tant mieux... J'ai cru qu'elle était fâchée avec moi !"
+  },
+  {
+    "id": 858,
+    "type": "blondes",
+    "joke": "Deux blondes jouent aux échecs, l'une dit à l'autre : tu as les règles en tête ?",
+    "answer": "Pourquoi !? Je saigne du nez ?"
+  },
+  {
+    "id": 859,
+    "type": "blondes",
+    "joke": "Pourquoi les blondes se mettent devant la fenêtre lors d'un orage ?",
+    "answer": "Pour être sur la photo."
+  },
+  {
+    "id": 860,
+    "type": "blondes",
+    "joke": "Qu'est-ce qu'une blonde avec une mèche brune ?",
+    "answer": "Un brin d'intelligence."
+  },
+  {
+    "id": 861,
+    "type": "blondes",
+    "joke": "C'est une blonde qui envoie un SMS à son chéri :",
+    "answer": "Mon chouchou, tu as oublié ton portable à la maison..."
+  },
+  {
+    "id": 862,
+    "type": "blondes",
+    "joke": "C'est une blonde qui passe un entretien d'embauche : •Prénom ? >Jeanne. •Nom ?",
+    "answer": "Mais si je vous jure c'est Jeanne !"
+  },
+  {
+    "id": 863,
+    "type": "blondes",
+    "joke": "Pourquoi les blondes tondent leur gazon avec une tondeuse électrique ?",
+    "answer": "C'est pour qu'elles se servent du fil pour retrouver la maison."
+  },
+  {
+    "id": 864,
+    "type": "beauf",
+    "joke": "Qu'est-ce qu'un nem avec des écouteurs ?",
+    "answer": "Un NemP3."
+  },
+  {
+    "id": 865,
+    "type": "beauf",
+    "joke": "2 hommes discutent : On a beaucoup écrit sur moi. Ah, vous êtes connu ?",
+    "answer": "Non, tatoué."
+  },
+  {
+    "id": 866,
+    "type": "beauf",
+    "joke": "Monsieur, savez-vous que votre chien aboie toute la nuit ?",
+    "answer": "Oh, c'est pas grave, il dort toute la journée !"
+  },
+  {
+    "id": 867,
+    "type": "beauf",
+    "joke": "Qu'est-ce qu'un gendarme sur un tracteur ?",
+    "answer": "Un poulet fermier."
+  },
+  {
+    "id": 868,
+    "type": "beauf",
+    "joke": "2 militaires discutent : \"Pourquoi tu t'es engagé ?\". Je suis célibataire et j'aime la guerre, et toi ?",
+    "answer": "Je suis marié et je voulais avoir la paix."
+  },
+  {
+    "id": 869,
+    "type": "global",
+    "joke": "Docteur, j'ai besoin de lunettes.",
+    "answer": "Oui certainement. Ici c'est une banque."
+  },
+  {
+    "id": 870,
+    "type": "beauf",
+    "joke": "Pourquoi les oiseaux volent-ils vers le sud ?",
+    "answer": "Car à pied, c'est beaucoup trop long."
+  },
+  {
+    "id": 871,
+    "type": "dark",
+    "joke": "Pourquoi un cul-de-jatte cherche-t-il à acheter une maison ?",
+    "answer": "Pour avoir un pied-à-terre."
+  },
+  {
+    "id": 872,
+    "type": "beauf",
+    "joke": "C'est 2 nombrils qui se rencontrent.",
+    "answer": "L'un dit à l'autre : \"J'pense qu'il y a une soirée en bas\"."
+  },
+  {
+    "id": 873,
+    "type": "beauf",
+    "joke": "Pourquoi les portefeuilles sont-ils imperméables ?",
+    "answer": "Parce qu'on y met du liquide."
+  },
+  {
+    "id": 874,
+    "type": "beauf",
+    "joke": "Une fille m'a appelé pour me dire \"Viens chez moi, y a personne\".",
+    "answer": "J'ai foncé chez elle, puis j'ai sonné, mais il n'y avait personne."
+  },
+  {
+    "id": 875,
+    "type": "global",
+    "joke": "Que dit un médecin à une crevette avant de l'ausculter ?",
+    "answer": "Décortiquez-vous !"
+  },
+  {
+    "id": 876,
+    "type": "dark",
+    "joke": "C'est un panda qui en avait marre de la vie et un jour...",
+    "answer": "Il se panda..."
+  },
+  {
+    "id": 877,
+    "type": "beauf",
+    "joke": "Quand il était petit, quel était le nom de papy Roro ?",
+    "answer": "Roro..."
+  },
+  {
+    "id": 878,
+    "type": "beauf",
+    "joke": "C'est quoi un morceau de patate qui tombe sur la planète ?",
+    "answer": "Une météofrite."
+  },
+  {
+    "id": 879,
+    "type": "beauf",
+    "joke": "Comment appelle-t-on un roux dans un four ?",
+    "answer": "Un roux-ti."
+  },
+  {
+    "id": 880,
+    "type": "global",
+    "joke": "Pourquoi les électriciens sont-ils les meilleurs au judo ?",
+    "answer": "Parce qu'ils connaissent toutes les prises."
+  },
+  {
+    "id": 881,
+    "type": "global",
+    "joke": "Qui fait 40 heures par semaine au bureau de poste ?",
+    "answer": "La machine à café."
+  },
+  {
+    "id": 882,
+    "type": "global",
+    "joke": "Que crie un donut sur la plage ?",
+    "answer": "Hey, je vais me beignet !"
+  },
+  {
+    "id": 883,
+    "type": "dev",
+    "joke": "Quel erreur peux-on pas abandonner ?",
+    "answer": "L'erreur 403."
+  },
+  {
+    "id": 884,
+    "type": "beauf",
+    "joke": "Quel est le style préféré d'un roux ?",
+    "answer": "Le roustique."
+  },
+  {
+    "id": 885,
+    "type": "global",
+    "joke": "Si un humain dit qu'il a un chat dans la gorge, que dit un chat ?",
+    "answer": "Rahhh, j'ai mémé dans la trachée !"
+  },
+  {
+    "id": 886,
+    "type": "dev",
+    "joke": "Jusqu'à combien peut-on compter avec nos doigts ?",
+    "answer": "1024"
+  },
+  {
+    "id": 887,
+    "type": "dark",
+    "joke": "Stop au racisme ! Soyez tous comme Mario :",
+    "answer": "Un Italien, créé par des Japonais, qui parle Anglais, qui ressemble à un Mexicain, qui court comme un Congolais, saute comme un Jamaïcain et qui attrape des pieces comme un juif."
+  },
+  {
+    "id": 888,
+    "type": "dark",
+    "joke": "Je ne suis pas raciste,",
+    "answer": "Pour preuve mon jardinier qui ramasse mon coton est noir."
+  },
+  {
+    "id": 889,
+    "type": "dark",
+    "joke": "Je ne suis pas raciste, le racisme est un crime...",
+    "answer": "et c'est les étrangers qui font des crimes."
+  },
+  {
+    "id": 890,
+    "type": "dev",
+    "joke": "Que dit un ordinateur pour draguer ?",
+    "answer": "Coucou, tu veux voir mes 64 bits ?"
+  },
+  {
+    "id": 891,
+    "type": "dark",
+    "joke": "Quel est le parc où les gens tremblent ?",
+    "answer": "Le Parkinson"
+  },
+  {
+    "id": 892,
+    "type": "global",
+    "joke": "Quelle est la différence entre un Thermos et un portefeuille ?",
+    "answer": "Aucune, dans les deux cas on y met du liquide dedans."
+  },
+  {
+    "id": 893,
+    "type": "global",
+    "joke": "Comment appelle-t-on une petite infirmière rousse ?",
+    "answer": "Une p'tite rousse de soin. "
   }
 ]
