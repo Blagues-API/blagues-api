@@ -32,13 +32,13 @@
   {
     "id": 6,
     "type": "dark",
-    "joke": "Qu'est ce qui a 4 pattes et un bras ?",
+    "joke": "Qu'est-ce qui a 4 pattes et un bras ?",
     "answer": "Un pitbull dans un jardin d'enfant !"
   },
   {
     "id": 7,
     "type": "dark",
-    "joke": "Ma fille vient de perdre sa première dent…",
+    "joke": "Ma fille vient de perdre sa première dent...",
     "answer": "Ça lui apprendra à me répondre !"
   },
   {
@@ -116,13 +116,13 @@
   {
     "id": 20,
     "type": "global",
-    "joke": "Qu'est ce qu'un chou au milieu de l'océan ?",
+    "joke": "Qu'est-ce qu'un chou au milieu de l'océan ?",
     "answer": "Un chou marin."
   },
   {
     "id": 21,
     "type": "global",
-    "joke": "Qu'est ce qu'un légume rigolo ?",
+    "joke": "Qu'est-ce qu'un légume rigolo ?",
     "answer": "Un chou marreur."
   },
   {
@@ -158,7 +158,7 @@
   {
     "id": 27,
     "type": "global",
-    "joke": "Qu'est ce qu'un squelette dans une armoire ?",
+    "joke": "Qu'est-ce qu'un squelette dans une armoire ?",
     "answer": "Une personne qui a gagné à cache-cache."
   },
   {
@@ -290,7 +290,7 @@
   {
     "id": 49,
     "type": "global",
-    "joke": "Qu'est ce qui est transparent et qui cours dans les champs ?",
+    "joke": "Qu'est-ce qui est transparent et qui cours dans les champs ?",
     "answer": "Un troupeau de vitre"
   },
   {
@@ -362,8 +362,8 @@
   {
     "id": 61,
     "type": "global",
-    "joke": "C'est l'histoire d'un schtroumpf qui tombe",
-    "answer": "Et qui se fait un bleu…"
+    "joke": "C'est l'histoire d'un Schtroumpf qui tombe",
+    "answer": "Et qui se fait un bleu..."
   },
   {
     "id": 62,
@@ -405,7 +405,7 @@
     "id": 68,
     "type": "global",
     "joke": "Pourquoi Harry Potter chuchote ?",
-    "answer": "Parce que Dumbledore…"
+    "answer": "Parce que Dumbledore..."
   },
   {
     "id": 69,
@@ -427,15 +427,15 @@
   },
   {
     "id": 72,
-    "type": "global",
-    "joke": "Qu'est-ce qui est jaune, orange, rouge et qui tourne très vite !",
+    "type": "dark",
+    "joke": "Qu'est-ce qui est jaune, orange, rouge et qui tourne très vite ?",
     "answer": "Un poussin dans un mixeur."
   },
   {
     "id": 73,
     "type": "global",
     "joke": "Comment appelle-t-on un nain qui travaille à la Poste ?",
-    "answer": "Un nain posteur…"
+    "answer": "Un nain posteur..."
   },
   {
     "id": 74,
@@ -471,12 +471,12 @@
     "id": 79,
     "type": "dark",
     "joke": "Quand Hitler s'est-il suicidé ?",
-    "answer": "Après avoir reçu sa facture de gaz…"
+    "answer": "Après avoir reçu sa facture de gaz..."
   },
   {
     "id": 80,
     "type": "global",
-    "joke": "Qu'est ce qu'un lampadaire ?",
+    "joke": "Qu'est-ce qu'un lampadaire ?",
     "answer": "Une lampe avec une seule bosse."
   },
   {
@@ -494,7 +494,7 @@
   {
     "id": 83,
     "type": "dark",
-    "joke": "Qu'est ce qu'un bossu sans bras et sans jambe ?",
+    "joke": "Qu'est-ce qu'un bossu sans bras et sans jambe ?",
     "answer": "Une madeleine"
   },
   {
@@ -512,7 +512,7 @@
   {
     "id": 86,
     "type": "global",
-    "joke": "Donald Duck et Daffy Duck se bagarrent. Qu'est ce que ça fait ?",
+    "joke": "Donald Duck et Daffy Duck se bagarrent. Qu'est-ce que ça fait ?",
     "answer": "Un conflit de canard."
   },
   {
@@ -740,13 +740,13 @@
   {
     "id": 124,
     "type": "dark",
-    "joke": "Qu'est ce qui est pire qu'un bébé dans une poubelle ?",
+    "joke": "Qu'est-ce qui est pire qu'un bébé dans une poubelle ?",
     "answer": "Un bébé dans deux poubelles."
   },
   {
     "id": 125,
     "type": "dark",
-    "joke": "Qu'est ce qui permet d'enlever le chewing gum de ses cheveux ?",
+    "joke": "Qu'est-ce qui permet d'enlever le chewing gum de ses cheveux ?",
     "answer": "Le cancer"
   },
   {
@@ -866,7 +866,7 @@
   {
     "id": 145,
     "type": "global",
-    "joke": "Qu'est ce qu'une diarrhée mentale ?",
+    "joke": "Qu'est-ce qu'une diarrhée mentale ?",
     "answer": "C'est quand à chaque fois que t'as une idée, c'est de la merde !"
   },
   {
@@ -968,7 +968,7 @@
   {
     "id": 162,
     "type": "global",
-    "joke": "C'est un bœuf, qui court…",
+    "joke": "C'est un bœuf, qui court...",
     "answer": "Puis qui se viande."
   },
   {
@@ -1076,7 +1076,7 @@
   {
     "id": 180,
     "type": "global",
-    "joke": "Qu'est ce qu'une baguette avec une boussole ?",
+    "joke": "Qu'est-ce qu'une baguette avec une boussole ?",
     "answer": "Du pain perdu."
   },
   {
@@ -1125,7 +1125,7 @@
     "id": 188,
     "type": "global",
     "joke": "Comment appelle-t-on un ascenseur en Amérique ?",
-    "answer": "En appuyant sur le bouton…"
+    "answer": "En appuyant sur le bouton..."
   },
   {
     "id": 189,
@@ -1190,8 +1190,8 @@
   {
     "id": 199,
     "type": "global",
-    "joke": "Un jour, Dieu demanda au coca de coller…",
-    "answer": "et le Coca Cola…"
+    "joke": "Un jour, Dieu demanda au coca de coller...",
+    "answer": "et le Coca Cola..."
   },
   {
     "id": 200,
@@ -1274,7 +1274,7 @@
   {
     "id": 213,
     "type": "global",
-    "joke": "Qu'est ce qui a 3 bosses ?",
+    "joke": "Qu'est-ce qui a 3 bosses ?",
     "answer": "Un chameau qui s'est cogné."
   },
   {
@@ -1364,7 +1364,7 @@
   {
     "id": 228,
     "type": "global",
-    "joke": "La vitamine C…",
+    "joke": "La vitamine C...",
     "answer": "Mais ne dira rien."
   },
   {
@@ -1406,7 +1406,7 @@
   {
     "id": 235,
     "type": "global",
-    "joke": "Pour ne plus puer de la gueule…",
+    "joke": "Pour ne plus puer de la gueule...",
     "answer": "Faut-il arrêter de dire de la merde ?"
   },
   {
@@ -1484,14 +1484,14 @@
   {
     "id": 248,
     "type": "dark",
-    "joke": "Chéri, je me sens grosse et laide… S'il te plait, fais-moi un compliment…",
+    "joke": "Chéri, je me sens grosse et laide... S'il te plaît, fais-moi un compliment...",
     "answer": "Tu as une bonne vue !"
   },
   {
     "id": 249,
     "type": "dark",
     "joke": "Thomas, penses-tu que je suis une mauvaise mère ?",
-    "answer": "Mon nom est Paul…"
+    "answer": "Mon nom est Paul..."
   },
   {
     "id": 250,
@@ -1646,7 +1646,7 @@
   {
     "id": 275,
     "type": "beauf",
-    "joke": "Qu'est ce qu'oune péniche ?",
+    "joke": "Qu'est-ce qu'oune péniche ?",
     "answer": "C'est oune zizi portouguaiche."
   },
   {
@@ -1743,7 +1743,7 @@
     "id": 291,
     "type": "global",
     "joke": "Tu connais la blague du con qui dit non ?",
-    "answer": "Non…"
+    "answer": "Non..."
   },
   {
     "id": 292,
@@ -2000,7 +2000,7 @@
   {
     "id": 334,
     "type": "global",
-    "joke": "Qu'est ce qu'une frite enceinte ?",
+    "joke": "Qu'est-ce qu'une frite enceinte ?",
     "answer": "Une patate sautée."
   },
   {
@@ -2300,7 +2300,7 @@
   {
     "id": 384,
     "type": "limit",
-    "joke": "Qu'est ce qui sépare l'espèce humaine du singe ?",
+    "joke": "Qu'est-ce qui sépare l'espèce humaine du singe ?",
     "answer": "La mer Méditerranée."
   },
   {
@@ -2420,7 +2420,7 @@
   {
     "id": 404,
     "type": "global",
-    "joke": "Qu'est ce que deux sourds qui se battent ?",
+    "joke": "Qu'est-ce que deux sourds qui se battent ?",
     "answer": "Un malentendu."
   },
   {
@@ -2505,7 +2505,7 @@
     "id": 418,
     "type": "blondes",
     "joke": "Mon Chat est mort... Je voudrais tellement en avoir un autre pareil !",
-    "answer": "Mais qu'est ce que tu ferais de deux chats morts ?"
+    "answer": "Mais qu'est-ce que tu ferais de deux chats morts ?"
   },
   {
     "id": 419,
@@ -2558,7 +2558,7 @@
   {
     "id": 427,
     "type": "dark",
-    "joke": "Papa, papa, j'aime pas grand mère…",
+    "joke": "Papa, papa, j'aime pas grand mère...",
     "answer": "Bein tu n'as qu'à la laisser sur le bord de l'assiette."
   },
   {
@@ -2744,7 +2744,7 @@
   {
     "id": 458,
     "type": "dark",
-    "joke": "Qu'est ce qui est mieux que de gagner une médaille d'or aux jeux paralympiques ?",
+    "joke": "Qu'est-ce qui est mieux que de gagner une médaille d'or aux jeux paralympiques ?",
     "answer": "Marcher."
   },
   {
@@ -2972,7 +2972,7 @@
   {
     "id": 496,
     "type": "dev",
-    "joke": "Une requête NoSQL entre dans un bar, qu'est ce qu'elle fait ?",
+    "joke": "Une requête NoSQL entre dans un bar, qu'est-ce qu'elle fait ?",
     "answer": "Elle repart, car il n'y a pas de table."
   },
   {
@@ -2984,7 +2984,7 @@
   {
     "id": 498,
     "type": "dark",
-    "joke": "Qu'est ce qu'un noir dans une salle noir ?",
+    "joke": "Qu'est-ce qu'un noir dans une salle noir ?",
     "answer": "Deux sales noir."
   },
   {
@@ -3063,7 +3063,7 @@
     "id": 511,
     "type": "dark",
     "joke": "Quelle est la difference entre une Geox et George Floyd ?",
-    "answer": "La Geox respire."
+    "answer": "La Geox, elle respire."
   },
   {
     "id": 512,
@@ -3075,7 +3075,7 @@
     "id": 513,
     "type": "dark",
     "joke": "Que dit Marine Le Pen au Capitaine du Bateau sur lequel elle navigue ?",
-    "answer": "La meilleure méthoque c'est de naviguer à contre Coran !"
+    "answer": "La meilleure méthode c'est de naviguer à contre Coran !"
   },
   {
     "id": 514,
@@ -3164,7 +3164,7 @@
   {
     "id": 528,
     "type": "global",
-    "joke": "Qu'est ce qu'un oiseau migrateur ?",
+    "joke": "Qu'est-ce qu'un oiseau migrateur ?",
     "answer": "Un oiseau qui se gratte que d'un côté."
   },
   {
@@ -3230,7 +3230,7 @@
   {
     "id": 539,
     "type": "global",
-    "joke": "Qu'est ce qui est vert et qui pousse au fond du jardin ?",
+    "joke": "Qu'est-ce qui est vert et qui pousse au fond du jardin ?",
     "answer": "Un extraterrestre qui fait caca !"
   },
   {
@@ -3482,7 +3482,7 @@
   {
     "id": 581,
     "type": "global",
-    "joke": "Qu'est-ce qui à 2 branches mais pas de feuilles ?",
+    "joke": "Qu'est-ce qui a 2 branches mais pas de feuilles ?",
     "answer": "Des lunettes."
   },
   {
@@ -3680,7 +3680,7 @@
   {
     "id": 614,
     "type": "blondes",
-    "joke": "Qu'est ce qu'une rousse pas très intelligente ?",
+    "joke": "Qu'est-ce qu'une rousse pas très intelligente ?",
     "answer": "Une blonde teinté en rousse."
   },
   {
@@ -3831,7 +3831,7 @@
     "id": 639,
     "type": "limit",
     "joke": "Pourquoi la moustache de Hitler était si populaire pendant la Seconde Guerre mondiale ?",
-    "answer": "Car elle a fait Führer."
+    "answer": "Car elle faisait Führer."
   },
   {
     "id": 640,
@@ -4142,7 +4142,7 @@
   {
     "id": 691,
     "type": "global",
-    "joke": "Qu'est ce qui est vert et qui se déplace sous l'eau ?",
+    "joke": "Qu'est-ce qui est vert et qui se déplace sous l'eau ?",
     "answer": "Un choux marin."
   },
   {
@@ -4268,7 +4268,7 @@
   {
     "id": 712,
     "type": "beauf",
-    "joke": "Un éléphant croise un homme sur une plage nudiste. Qu'est ce que l'éléphant dit ?",
+    "joke": "Un éléphant croise un homme sur une plage nudiste. Qu'est-ce que l'éléphant dit ?",
     "answer": "Et ! C'est avec ça que tu manges ?"
   },
   {
@@ -4371,7 +4371,7 @@
     "id": 729,
     "type": "limit",
     "joke": "Quelle est la différence entre un 69 et le brouillard ?",
-    "answer": "Dans le brouillard, on ne voit pas le trou du cul qui est devant…"
+    "answer": "Dans le brouillard, on ne voit pas le trou du cul qui est devant..."
   },
   {
     "id": 730,
@@ -4526,7 +4526,7 @@
   {
     "id": 755,
     "type": "global",
-    "joke": "Qu'est ce que la chevalerie ?",
+    "joke": "Qu'est-ce que la chevalerie ?",
     "answer": "C'est pas là où on range les chevaux ?"
   },
   {
@@ -4616,7 +4616,7 @@
   {
     "id": 770,
     "type": "dark",
-    "joke": "Qu'est ce que Mickael Jackson vend encore ?",
+    "joke": "Qu'est-ce que Mickael Jackson vend encore ?",
     "answer": "Bah des CD !"
   },
   {
@@ -4652,7 +4652,7 @@
   {
     "id": 776,
     "type": "limit",
-    "joke": "Qu'est ce qu'un tétraplégique en train de nager ?",
+    "joke": "Qu'est-ce qu'un tétraplégique en train de nager ?",
     "answer": "Une planche de surf."
   },
   {
@@ -4718,7 +4718,7 @@
   {
     "id": 787,
     "type": "global",
-    "joke": "Qu'est ce que les enfants usent le plus à l'école ?",
+    "joke": "Qu'est-ce que les enfants usent le plus à l'école ?",
     "answer": "Le professeur !"
   },
   {
@@ -4748,7 +4748,7 @@
   {
     "id": 792,
     "type": "global",
-    "joke": "Qu'est ce qu'une carotte au milieu d'une flaque d'eau ?",
+    "joke": "Qu'est-ce qu'une carotte au milieu d'une flaque d'eau ?",
     "answer": "Un bonhomme de neige... Au printemps !"
   },
   {
@@ -4760,7 +4760,7 @@
   {
     "id": 794,
     "type": "global",
-    "joke": "Comment les abeilles font-elles l'amour ?",
+    "joke": "Quand les abeilles font-elles l'amour ?",
     "answer": "Dare dare !"
   },
   {
