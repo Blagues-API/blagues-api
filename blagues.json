@@ -5356,5 +5356,47 @@
     "type": "global",
     "joke": "Comment appelle-t-on une petite infirmière rousse ?",
     "answer": "Une p'tite rousse de soin. "
+  },
+  {
+    "id": 894,
+    "type": "global",
+    "joke": "J'avais une blague sur les piscines,",
+    "answer": "mais elle est tombée à l'eau..."
+  },
+  {
+    "id": 895,
+    "type": "dark",
+    "joke": "Un prof de physique interroge sa classe d’élèves : Quels sont les meilleurs matériaux combustibles ?",
+    "answer": "Un élève juif lève la main avec excitation : \"Je sais ! Je sais ! Moi Monsieur ! Moi !\" Le professeur lui répond : \"Excellente réponse, et quoi d’autres ?\""
+  },
+  {
+    "id": 896,
+    "type": "dark",
+    "joke": "Un prêtre entre dans un McDo et demande un menu enfant. On lui demande : Frites et coca ?",
+    "answer": "Juste l’enfant, s’il vous plaît !"
+  },
+  {
+    "id": 897,
+    "type": "dark",
+    "joke": "Un prêtre entre dans un McDo et demande un menu enfant. On lui demande : Frites et coca ?",
+    "answer": "Juste l’enfant, s’il vous plaît !"
+  },
+  {
+    "id": 898,
+    "type": "dark",
+    "joke": "Un garçon sans bras ni jambes est envoyé dans un camp de vacances par ses parents. Ce dernier saute dans la piscine et nage comme un dauphin. L’animateur devant cette scène lui demandes comment il a appris à nager ?",
+    "answer": "C’est papa qui m’a appris depuis tout petit. Le plus dur, c’est d’enlever le sac poubelle."
+  },
+  {
+    "id": 899,
+    "type": "dark",
+    "joke": "Un trisomique se rend chez un ami. Il sonne à la porte, son ami ouvre et lui dit :",
+    "answer": "Ben dis donc, tu t’es mis sur ton 21 aujourd’hui !"
+  },
+  {
+    "id": 900,
+    "type": "dark",
+    "joke": "Quel est le point commun entre un nécrophile et un homme qui se baigne en Bretagne ?",
+    "answer": "Tous les deux disent : Elle est froide mais une fois dedans, elle est bonne."
   }
 ]
