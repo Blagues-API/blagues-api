@@ -1,13 +1,13 @@
 <!-- markdownlint-disable -->
-[![Blagues API](https://raw.githubusercontent.com/draftproducts/blagues-api/master/src/public/Logo.200.png)](http://www.blagues-api.fr)
+[![Blagues API](https://raw.githubusercontent.com/Blagues-API/api/master/src/public/Logo.200.png)](http://www.blagues-api.fr)
 
 # Blagues API
 
 API de Blagues françaises collaborative et Open Source 
 
-[![Contributors](https://img.shields.io/github/contributors/draftproducts/blagues-api.svg?style=for-the-badge)](https://github.com/draftproducts/blagues-api/graphs/contributors)
-[![Stars](https://img.shields.io/github/stars/draftproducts/blagues-api.svg?style=for-the-badge)](https://github.com/draftproducts/blagues-api/stargazers) 
-[![License](https://img.shields.io/github/license/DraftProducts/blagues-api?style=for-the-badge)](https://github.com/DraftProducts/blagues-api/blob/master/LICENCE)
+[![Contributors](https://img.shields.io/github/contributors/Blagues-API/api.svg?style=for-the-badge)](https://github.com/Blagues-API/api/graphs/contributors)
+[![Stars](https://img.shields.io/github/stars/Blagues-API/api.svg?style=for-the-badge)](https://github.com/Blagues-API/api/stargazers) 
+[![License](https://img.shields.io/github/license/Blagues-API/api?style=for-the-badge)](https://github.com/Blagues-API/api/blob/master/LICENCE)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg?style=for-the-badge)](https://www.paypal.me/draftproducts)
 
 ## Sommaire
@@ -79,7 +79,7 @@ print(response)
 1. 🔨 **Fais** tes modifications !
 1. ✨ **Commit** tes modifications !
 1. 🚀 **Push** tes commits 
-1. 🔃 Crée une **pull request** depuis <a href="https://github.com/DraftProducts/blagues-api/compare/" target="_blank">`https://github.com/DraftProducts/blagues-api/compare/`</a>.
+1. 🔃 Crée une **pull request** depuis <a href="https://github.com/Blagues-API/api/compare" target="_blank">`https://github.com/Blagues-API/api/compare`</a>.
 
 ---
 
@@ -110,6 +110,6 @@ Si vous souhaitez me soutenir, c'est possible grâce à PayPal
 
 ## License
 
-[![License](https://img.shields.io/github/license/DraftProducts/blagues-api?style=for-the-badge)](https://github.com/DraftProducts/blagues-api/blob/master/LICENCE)
+[![License](https://img.shields.io/github/license/Blagues-API/api?style=for-the-badge)](https://github.com/Blagues-API/api/blob/master/LICENCE)
 
 Copyright 2020-2021 © <a href="https://www.draftman.fr" target="_blank">DraftMan</a>.
