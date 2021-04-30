@@ -1,5 +1,5 @@
 <!-- markdownlint-disable -->
-[![Blagues API](https://raw.githubusercontent.com/Blagues-API/api/master/src/public/Logo.200.png)](http://www.blagues-api.fr)
+[![Blagues API](https://raw.githubusercontent.com/Blagues-API/api/master/src/public/logo.png)](http://www.blagues-api.fr)
 
 # Blagues API
 
