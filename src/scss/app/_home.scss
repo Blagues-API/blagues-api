@@ -1,5 +1,5 @@
 .hero {
-  background-color: $bluewood;
+  background-color: $matisse;
   padding: 40px;
   @media (max-width: 420px) {
     padding: 40px 20px;
@@ -17,7 +17,7 @@
     .content {
       font-size: 22px;
       line-height: 30px;
-      color: #0067ad;
+      color: $matisse;
       margin-bottom: 16px;
       @media (max-width: 420px) {
         font-size: 18px;
@@ -68,7 +68,7 @@
     .title {
       font-weight: bold;
       font-size: 26px;
-      color: #0067ad;
+      color: $matisse;
       margin-bottom: 20px;
       text-align: center;
       @media (max-width: 420px) {
