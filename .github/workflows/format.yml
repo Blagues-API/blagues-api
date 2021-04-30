@@ -4,21 +4,24 @@ on:
     branches: [master]
 jobs:
   format:
+    name: Jokes Validation Check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout Project
+        uses: actions/checkout@v2
+      - name: Use Node.js 14
+        uses: actions/setup-node@v2.1.5
         with:
-          ref: ${{ github.head_ref }}
-        env:
-          GIT_TRACE: 1
-          GIT_CURL_VERBOSE: 1
-      - uses: actions/setup-node@v1
+          node-version: 14
+      - name: Restore CI Cache
+        uses: actions/cache@v2.1.5
         with:
-          node-version: '14.x'
+          path: node_modules
+          key: ${{ runner.os }}-14-${{ hashFiles('**/yarn.lock') }}
       - name: Format
         run: |
-          npm ci
-          npm run format-jokes
+          yarn
+          yarn format-jokes
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4.1.2
         with:
