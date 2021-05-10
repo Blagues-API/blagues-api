@@ -679,13 +679,13 @@
   },
   {
     "id": 114,
-    "type": "global",
+    "type": "limit",
     "joke": "Quel est le point commun entre un sourd et un gynécologue ?",
     "answer": "Les deux savent lire sur les lèvres."
   },
   {
     "id": 115,
-    "type": "global",
+    "type": "limit",
     "joke": "À quel moment la poule a-t-elle le plus mal au cul ?",
     "answer": "Quand elle passe du coq à l'âne."
   },
