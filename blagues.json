@@ -571,7 +571,7 @@
   },
   {
     "id": 96,
-    "type": "global",
+    "type": "limit",
     "joke": "Quel est le point commun entre un motard célibataire et sa moto ?",
     "answer": "Ils dorment tous les deux sur la béquille."
   },
