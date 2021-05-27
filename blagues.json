@@ -217,7 +217,7 @@
   },
   {
     "id": 37,
-    "type": "global",
+    "type": "dark",
     "joke": "Que fait un DJ djihadiste ?",
     "answer": "Il fait péter le son !"
   },
@@ -451,7 +451,7 @@
   },
   {
     "id": 76,
-    "type": "beauf",
+    "type": "global",
     "joke": "Quel animal sent toujours bon ?",
     "answer": "Le mouton, car il a l'haleine fraîche."
   },
@@ -679,7 +679,7 @@
   },
   {
     "id": 114,
-    "type": "global",
+    "type": "limit",
     "joke": "Quel est le point commun entre un sourd et un gynécologue ?",
     "answer": "Les deux savent lire sur les lèvres."
   },
@@ -727,7 +727,7 @@
   },
   {
     "id": 122,
-    "type": "limit",
+    "type": "dark",
     "joke": "Quelle est la dernière chose que Lady Dianna ai mangée ?",
     "answer": "Le volant."
   },
@@ -1627,9 +1627,9 @@
   },
   {
     "id": 272,
-    "type": "beauf",
+    "type": "dev",
     "joke": "Pourquoi les bots ne parlent pas avec les humains ?",
-    "answer": "Pour ne pas leur ressembler."
+    "answer": "Par peur de leur ressembler."
   },
   {
     "id": 273,
@@ -3829,7 +3829,7 @@
   },
   {
     "id": 639,
-    "type": "limit",
+    "type": "dark",
     "joke": "Pourquoi la moustache de Hitler était si populaire pendant la Seconde Guerre mondiale ?",
     "answer": "Car elle faisait Führer."
   },
@@ -4321,7 +4321,7 @@
   },
   {
     "id": 721,
-    "type": "global",
+    "type": "beauf",
     "joke": "Quel est le point commun entre un homme au réveil et un élastique ?",
     "answer": "Eh bien il s'étire, il s'étire, il s'étire, et il pète !"
   },
@@ -4651,7 +4651,7 @@
   },
   {
     "id": 776,
-    "type": "limit",
+    "type": "dark",
     "joke": "Qu'est-ce qu'un tétraplégique en train de nager ?",
     "answer": "Une planche de surf."
   },
@@ -4940,7 +4940,7 @@
   {
     "id": 824,
     "type": "global",
-    "joke": "Ces deux gars au camping. Il fait nuit, l'un deux dit :",
+    "joke": "Deux gars sont au camping, l'un dit:",
     "answer": "On va dormir ça te tente ?"
   },
   {
@@ -5233,7 +5233,7 @@
   },
   {
     "id": 873,
-    "type": "beauf",
+    "type": "global",
     "joke": "Pourquoi les portefeuilles sont-ils imperméables ?",
     "answer": "Parce qu'on y met du liquide."
   },
@@ -5294,7 +5294,7 @@
   {
     "id": 883,
     "type": "dev",
-    "joke": "Quel erreur peux-on pas abandonner ?",
+    "joke": "Quelle erreur ne peut-on pas abandonner ?",
     "answer": "L'erreur 403."
   },
   {
