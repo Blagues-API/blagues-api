@@ -155,7 +155,7 @@ const correctionsStickyMessage = jokes => ({
     description: stripIndents`
         Si tu le souhaites, tu peux proposer des corrections aux blagues déjà existantes à l'API Blagues API qui regroupe actuellement **${jokes.length}** blagues françaises.
 
-        > ⚠️ **Veuillez ne proposer que des corrections pour les blagues ayant la réaction** 🎉
+        > ⚠️ **Veuillez ne proposer que des corrections pour les blagues ayant la réaction** "🎉" (si elles proviennent du salon <#698826767221391390>).
     `,
     fields: [
       {
@@ -174,10 +174,8 @@ const correctionsStickyMessage = jokes => ({
         value: stripIndents`
           > **Type**: Développeur
           > **Type corrigé**: Développeur
-
           > **Blague**: Quand est ce qu'un Window ne bugue pas.
           > **Blague corrigée**: Quand est-ce qu'un Windows ne bug pas ?
-
           > **Réponse**: Lorsque l'ordinateur et étint
           > **Réponse corrigée**: Lorsque l'ordinateur est éteint.
         `,
@@ -188,10 +186,8 @@ const correctionsStickyMessage = jokes => ({
           \`\`\`
           > **Type**:
           > **Type corrigé**:
-
           > **Blague**:
           > **Blague corrigée**:
-
           > **Réponse**:
           > **Réponse corrigée**:
           > ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
@@ -218,10 +214,8 @@ const correctionsBadFormat = message => ({
           \`\`\`
           > **Type**:
           > **Type corrigé**:
-
           > **Blague**:
           > **Blague corrigée**:
-
           > **Réponse**:
           > **Réponse corrigée**:
           > ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
