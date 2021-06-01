@@ -58,7 +58,7 @@ router.get('/id/:id', (req, res) => {
       message: 'Joke not found',
     })
   }
-  return res.status(200).json(joke.response)
+  return res.status(200).json(joke)
 })
 
 router.post('/regenerate', async (req, res) => {
