@@ -4,7 +4,7 @@
     "editor.formatOnSave": false
   },
   "editor.codeActionsOnSave": {
-    "source.fixAll": false
+    "source.fixAll": true
   },
   "editor.tabSize": 2,
   "prettier.tabWidth": 2,

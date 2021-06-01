@@ -14,9 +14,7 @@ module.exports = {
     'plugin:prettier/recommended',
   ],
   plugins: ['prettier'],
-  // add your custom rules here
   rules: {
-    'vue/no-v-html': 'off',
     curly: [2, 'multi-line'],
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
