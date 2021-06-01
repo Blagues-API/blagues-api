@@ -7,7 +7,7 @@ const suggestsStickyMessage = jokes => ({
         Si tu le souhaites, tu peux proposer tes blagues afin qu'elles soient ajoutées à l'API Blagues API qui regroupe actuellement **${jokes.length}** blagues françaises.
         Elles sont toutes issues de ce salon proposées par la communauté.
 
-        >>> Tous les types de blagues sont acceptés à condition qu'elles soient correctement catégorisées et qu'elles respectent le format demandé.`,
+        > **Si vous êtes sur mobile:** Copiez le contenu de [ce message](https://discord.com/channels/698822532467523605/698826767221391390/698920441917603850) pour avoir le format.`,
     fields: [
       {
         name: 'Voici les différents types:',
@@ -21,15 +21,16 @@ const suggestsStickyMessage = jokes => ({
         `,
       },
       {
-        name: 'Exemple:',
+        name: 'Règles:',
         value: stripIndents`
-          > **Type**: Développeur
-          > **Blague**: Quand est ce qu'un Windows ne bug pas ?
-          > **Réponse**: Lorsque l'ordinateur est éteint.
+          > - Espace avant les caractères: \`?\` et \`!\`.
+          > - Ponctuation de fin de phrase si elle contient un verbe.
+          > - 130 caractères maximum par partie d'une blague.
+          > - Majuscule en début de phrase à moins quelle ne soit précédée de \`...\`.
         `,
       },
       {
-        name: 'Voici le schéma à copier-coller :',
+        name: 'Voici le schéma à copier-coller : (sur ordinateur)',
         value: stripIndents`
           \`\`\`
           > **Type**:
@@ -151,8 +152,11 @@ const suggestsClosedMP = (message, user) => ({
 const correctionsStickyMessage = jokes => ({
   embed: {
     title: 'Bienvenue à toi ! 👋',
-    description: `
-        Si tu le souhaites, tu peux proposer des corrections aux blagues déjà existantes à l'API Blagues API qui regroupe actuellement **${jokes.length}** blagues françaises.`,
+    description: stripIndents`
+        Si tu le souhaites, tu peux proposer des corrections aux blagues déjà existantes à l'API Blagues API qui regroupe actuellement **${jokes.length}** blagues françaises.
+
+        > ⚠️ **Veuillez ne proposer que des corrections pour les blagues ayant la réaction** 🎉
+    `,
     fields: [
       {
         name: 'Voici les différents types :',
@@ -170,8 +174,10 @@ const correctionsStickyMessage = jokes => ({
         value: stripIndents`
           > **Type**: Développeur
           > **Type corrigé**: Développeur
+
           > **Blague**: Quand est ce qu'un Window ne bugue pas.
           > **Blague corrigée**: Quand est-ce qu'un Windows ne bug pas ?
+
           > **Réponse**: Lorsque l'ordinateur et étint
           > **Réponse corrigée**: Lorsque l'ordinateur est éteint.
         `,
@@ -182,8 +188,10 @@ const correctionsStickyMessage = jokes => ({
           \`\`\`
           > **Type**:
           > **Type corrigé**:
+
           > **Blague**:
           > **Blague corrigée**:
+
           > **Réponse**:
           > **Réponse corrigée**:
           > ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
@@ -210,8 +218,10 @@ const correctionsBadFormat = message => ({
           \`\`\`
           > **Type**:
           > **Type corrigé**:
+
           > **Blague**:
           > **Blague corrigée**:
+
           > **Réponse**:
           > **Réponse corrigée**:
           > ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
