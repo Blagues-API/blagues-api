@@ -571,7 +571,7 @@
   },
   {
     "id": 96,
-    "type": "global",
+    "type": "limit",
     "joke": "Quel est le point commun entre un motard célibataire et sa moto ?",
     "answer": "Ils dorment tous les deux sur la béquille."
   },
@@ -685,7 +685,7 @@
   },
   {
     "id": 115,
-    "type": "global",
+    "type": "limit",
     "joke": "À quel moment la poule a-t-elle le plus mal au cul ?",
     "answer": "Quand elle passe du coq à l'âne."
   },
