@@ -20,12 +20,14 @@ const logsChannel = '763778635857133599'
 const channels = {
   [suggestsChannel]: {
     key: 'suggests',
-    regex: /(?:> \*\*Type\*\*: (.+)\s+)(?:> \*\*Blague\*\*: (.+)\s+)(?:> \*\*Réponse\*\*: (.+)\s+)(?:> ▬+)/im,
+    regex:
+      /(?:> \*\*Type\*\*: (.+)\s+)(?:> \*\*Blague\*\*: (.+)\s+)(?:> \*\*Réponse\*\*: (.+)\s+)(?:> ▬+)/im,
     role: '699244416849674310',
   },
   [correctionsChannel]: {
     key: 'corrections',
-    regex: /(?:> \*\*Type\*\*: (.+)\s+)(?:> \*\*Type corrigé\*\*: (.+)\s+)(?:> \*\*Blague\*\*: (.+)\s+)(?:> \*\*Blague corrigée\*\*: (.+)\s+)(?:> \*\*Réponse\*\*: (.+)\s+)(?:> \*\*Réponse corrigée\*\*: (.+)\s+)(?:> ▬+)/im,
+    regex:
+      /(?:> \*\*Type\*\*: (.+)\s+)(?:> \*\*Type corrigé\*\*: (.+)\s+)(?:> \*\*Blague\*\*: (.+)\s+)(?:> \*\*Blague corrigée\*\*: (.+)\s+)(?:> \*\*Réponse\*\*: (.+)\s+)(?:> \*\*Réponse corrigée\*\*: (.+)\s+)(?:> ▬+)/im,
     role: '829996106808426516',
   },
 }
