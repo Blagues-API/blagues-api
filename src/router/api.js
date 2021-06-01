@@ -50,12 +50,12 @@ router.get('/type/:type/random', (req, res) => {
 })
 
 router.get('/id/:id', (req, res) => {
-  const joke = jokeById(req.params.id)
-  if (joke.error) {
-    return res.status(400).json({
-      status: 400,
-      error: 'Bad Request',
-      message: joke.message,
+  const joke = jokeById(Number(req.params.id))
+  if (!joke) {
+    return res.status(404).json({
+      status: 404,
+      error: 'Not found',
+      message: 'Joke not found',
     })
   }
   return res.status(200).json(joke.response)

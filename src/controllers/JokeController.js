@@ -32,11 +32,7 @@ const randomJoke = disallow => {
 }
 
 const jokeById = id => {
-  const searchedJoke = jokes.find(joke => joke.id === id)
-  return {
-    error: searchedJoke === undefined,
-    response: searchedJoke,
-  }
+  return jokes.find(joke => joke.id === id)
 }
 
 const randomJokeByType = type => {
