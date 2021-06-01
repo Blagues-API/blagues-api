@@ -543,7 +543,7 @@
     "id": 91,
     "type": "dark",
     "joke": "Quel est le point commun entre un surdoué et un pédophile ?",
-    "answer": "Ils ont tous les deux sautés la classe de CE1."
+    "answer": "Ils ont tous les deux sauté la classe de CE1."
   },
   {
     "id": 92,
@@ -3320,7 +3320,7 @@
   {
     "id": 554,
     "type": "dark",
-    "joke": "Pourquoi les douches ont t'elles 11 petits trous ?",
+    "joke": "Pourquoi les douches ont-elles 11 petits trous ?",
     "answer": "Car les juifs n'ont que 10 doigts."
   },
   {
@@ -3710,7 +3710,7 @@
   {
     "id": 619,
     "type": "dark",
-    "joke": "Le juge demande à un homme la raison pour laquelle il a plongé toute sa famille dans du métal en fusion.",
+    "joke": "J'ai plongé mon voisin, sa femme et ses enfants dans du métal en fusion...",
     "answer": "Ma mère m'a toujours dit qu'il fallait que je fonde une famille."
   },
   {
@@ -5398,5 +5398,647 @@
     "type": "dark",
     "joke": "Quel est le point commun entre un nécrophile et un homme qui se baigne en Bretagne ?",
     "answer": "Tous les deux disent : Elle est froide mais une fois dedans, elle est bonne."
+  },
+  {
+    "id": 901,
+    "type": "dark",
+    "joke": "Quel est le point commun entre les cheveux et les avions ?",
+    "answer": "Il y en a toujours qui tombent."
+  },
+  {
+    "id": 902,
+    "type": "dark",
+    "joke": "Je dis pas que tu es une salope.",
+    "answer": "Mais tu es plus facile à pénétrer que la Pologne."
+  },
+  {
+    "id": 903,
+    "type": "dev",
+    "joke": "Que dit un programmeur SQL pour exprimer son mépris ?",
+    "answer": "SELECT finger FROM hand WHERE id=3;"
+  },
+  {
+    "id": 904,
+    "type": "limit",
+    "joke": "Que'est-ce que deux trous dans un trou ?",
+    "answer": "Mon nez dans ton cul..."
+  },
+  {
+    "id": 905,
+    "type": "global",
+    "joke": "Le petit Poucet...",
+    "answer": "...mais rien ne sortait "
+  },
+  {
+    "id": 906,
+    "type": "dark",
+    "joke": "Quelle est la différence entre un bébé blanc et un bébé noir ?",
+    "answer": "20 minutes, thermostat 8"
+  },
+  {
+    "id": 907,
+    "type": "dark",
+    "joke": "Qu'est-ce qu'un noir et deux blancs dans un plan à trois ?",
+    "answer": "Un pain au chocolat"
+  },
+  {
+    "id": 908,
+    "type": "beauf",
+    "joke": "Quelle est la collation que les enfants canibale ne mangent pas quand leur parents sont absents ?",
+    "answer": "Leurs parents !"
+  },
+  {
+    "id": 909,
+    "type": "dark",
+    "joke": "Comment appelle-t'on une bonne mère espagnole d'origine Africaine ?",
+    "answer": "Mamadouoé"
+  },
+  {
+    "id": 910,
+    "type": "beauf",
+    "joke": "Quel est l'inverse du divorce ?",
+    "answer": "Le partage"
+  },
+  {
+    "id": 911,
+    "type": "global",
+    "joke": "Pourquoi les paroles de Jésus ont elles été entendues par les chrétiens ?",
+    "answer": "Parce que Jésus crit très fort."
+  },
+  {
+    "id": 912,
+    "type": "dev",
+    "joke": "Vous conaissez l'histoire de l'erreur 403",
+    "answer": "J'ai interdiction de vous la dire."
+  },
+  {
+    "id": 913,
+    "type": "global",
+    "joke": "Pourquoi les ascenseurs sont-ils des meurtriers ?",
+    "answer": "Parce qu'ils descendent des gens."
+  },
+  {
+    "id": 914,
+    "type": "global",
+    "joke": "Un âne dit a un autre: Comment tu t'appelles ?",
+    "answer": "Bob, dit l'âne."
+  },
+  {
+    "id": 915,
+    "type": "dark",
+    "joke": "Pourquoi les noirs adorent la patisserie ?",
+    "answer": "C'est le seul moyen qu'ils ont de pouvoir battre les blancs."
+  },
+  {
+    "id": 916,
+    "type": "dark",
+    "joke": "Qu'est ce qu'un juif qui court ?",
+    "answer": "Une étoile filante."
+  },
+  {
+    "id": 917,
+    "type": "dark",
+    "joke": "Si un juifs devient cuisinier...",
+    "answer": "Est-ce qu'on peut dire que c'est un chef étoilé ?"
+  },
+  {
+    "id": 918,
+    "type": "global",
+    "joke": "Quel est le légume le plus bête ?",
+    "answer": "Le chicon, car il est ar-chi con."
+  },
+  {
+    "id": 919,
+    "type": "global",
+    "joke": "Quel est le comble pour un cuisto ?",
+    "answer": "Ne pas être dans son assiette."
+  },
+  {
+    "id": 920,
+    "type": "dev",
+    "joke": "Quel est le comble pour un serveur ?",
+    "answer": "C'est de ne pas répondre."
+  },
+  {
+    "id": 921,
+    "type": "dark",
+    "joke": "Hitler se rend à Auschwitz et va voir une petite fille : Bonjour ma petite, quel âge as-tu ? J'aurai 8 ans demain !",
+    "answer": "C'est bien d'être optimiste."
+  },
+  {
+    "id": 922,
+    "type": "dark",
+    "joke": "Qu'est-ce que des handicapés au hammam ?",
+    "answer": "Des légumes vapeurs."
+  },
+  {
+    "id": 923,
+    "type": "dark",
+    "joke": "Pourquoi les companies aériennes arabes sont-elles aussi réputées ?",
+    "answer": "Parce que ce sont celles qui volent le mieux."
+  },
+  {
+    "id": 924,
+    "type": "dark",
+    "joke": "Comment calcule-ton le temps d'évasion d'un juif ?",
+    "answer": "Hauteur de la cheminée multiplié par la force du vent."
+  },
+  {
+    "id": 925,
+    "type": "dark",
+    "joke": "Quelle est la seule personne à avoir dit \"Je vais te nicker ta race\" et à l'avoir vraiment fait ?",
+    "answer": "Adolf Hitler"
+  },
+  {
+    "id": 926,
+    "type": "dark",
+    "joke": "Quel est le comble pour un juif ?",
+    "answer": "Ne pas finir brûlé dans une blague."
+  },
+  {
+    "id": 927,
+    "type": "beauf",
+    "joke": "Hier, j'ai croisé 2 roux. Vous savez ce que je leurs ai demandé ?",
+    "answer": "Bah alors, il est où le guidon ?"
+  },
+  {
+    "id": 928,
+    "type": "dark",
+    "joke": "Quelle est la différence entre un Juif et un scoute ?",
+    "answer": "Le scoute il revient du camp."
+  },
+  {
+    "id": 929,
+    "type": "dark",
+    "joke": "Qu'est ce que deux anorexiques avec des menottes ?",
+    "answer": "Un nunchaku"
+  },
+  {
+    "id": 930,
+    "type": "dark",
+    "joke": "Un farceur condamné avale deux kilos de maïs juste avant sa sentence...",
+    "answer": "...dans le but de mettre l'ambiance au crématorium."
+  },
+  {
+    "id": 931,
+    "type": "dark",
+    "joke": "Qu'est ce qu'un somalien à poil ?",
+    "answer": "Un Mikado"
+  },
+  {
+    "id": 932,
+    "type": "dark",
+    "joke": "Quelle est la différence entre un juif et une pizza ?",
+    "answer": "Vous avez déjà vu une pizza taper à la porte du four ?"
+  },
+  {
+    "id": 933,
+    "type": "dark",
+    "joke": "Quelle est la différence entre une mine d'or et une mousse au chocolat ?",
+    "answer": "Aucune, dans les 2 cas, c'est le noir qui se fait fouetter."
+  },
+  {
+    "id": 934,
+    "type": "dark",
+    "joke": "Quels sont les risques pour un pittbull de bouffer un bébé diabétique ?",
+    "answer": "Attraper des caries."
+  },
+  {
+    "id": 935,
+    "type": "dark",
+    "joke": "La femme ayant été décapitée",
+    "answer": "Il nous a été impossible jusqu’à présent de mettre un nom sur son visage."
+  },
+  {
+    "id": 936,
+    "type": "dark",
+    "joke": "Comment appelle-t'on un enfant qui tue son père et sa mère ?",
+    "answer": "Un Orphelin"
+  },
+  {
+    "id": 937,
+    "type": "dark",
+    "joke": "Pourquoi Ray Charles et Stevie Wonder chantent toujours en se balançant de gauche à droite ?",
+    "answer": "Parce qu'ils cherchent leur micro"
+  },
+  {
+    "id": 938,
+    "type": "dark",
+    "joke": "Pourquoi Jésus a été crucifié et non pas noyé ?",
+    "answer": "Tu te vois avec un aquarium au-dessus de ta porte ?"
+  },
+  {
+    "id": 939,
+    "type": "dark",
+    "joke": "Quelle différence entre un cornichon et un corbillard ?",
+    "answer": "Aucune, ils accompagnent tous les deux de la viande froide !"
+  },
+  {
+    "id": 940,
+    "type": "dark",
+    "joke": "Tu as vu la femme de Ray Charles ?",
+    "answer": "Lui non plus"
+  },
+  {
+    "id": 941,
+    "type": "dark",
+    "joke": "Savez-vous où l'on trouve le meilleur jardin d'enfants à New-York ?",
+    "answer": "À Manhattan, il y a deux tours niquées"
+  },
+  {
+    "id": 942,
+    "type": "beauf",
+    "joke": "Savez-vous pourquoi Dieu à créé la femme ?",
+    "answer": "Car il ne savait pas comment créer un lave-vaisselle qui suce."
+  },
+  {
+    "id": 943,
+    "type": "dev",
+    "joke": "Quel est le biscuit préfèré d'Internet ?",
+    "answer": "Le cookie"
+  },
+  {
+    "id": 944,
+    "type": "global",
+    "joke": "Quelle est la fée la plus méchante ?",
+    "answer": "La fée C"
+  },
+  {
+    "id": 945,
+    "type": "global",
+    "joke": "Quelle est la fée la plus paresseuse ?",
+    "answer": "La fée Néante"
+  },
+  {
+    "id": 946,
+    "type": "limit",
+    "joke": "Quelle est la fée préférée des hommes ?",
+    "answer": "La fée Lation"
+  },
+  {
+    "id": 947,
+    "type": "dev",
+    "joke": "Quel est la différence entre un jeu et un logiciel ?",
+    "answer": "Le prix de la license !"
+  },
+  {
+    "id": 948,
+    "type": "limit",
+    "joke": "Quelle est la différence entre les blagues et les pénis ?",
+    "answer": "Les blagues les plus courtes sont les meilleures !"
+  },
+  {
+    "id": 949,
+    "type": "dark",
+    "joke": "Que fait un chinois qui tombe de la tour Eiffel ?",
+    "answer": "CHIIIIIIIIIN... toc"
+  },
+  {
+    "id": 950,
+    "type": "global",
+    "joke": "Pourquoi c'est un danger de ne pas avoir raison ?",
+    "answer": "Parce que le tort tue."
+  },
+  {
+    "id": 951,
+    "type": "global",
+    "joke": "Mon premier est un singe, mon deuxième est une souris, et mon troisième est un cochon. Qui suis-je ?",
+    "answer": "Un mutant"
+  },
+  {
+    "id": 952,
+    "type": "global",
+    "joke": "Quel est le point commun entre un robot et une pizza ?",
+    "answer": "Ils sont tous les deux automates."
+  },
+  {
+    "id": 953,
+    "type": "global",
+    "joke": "Chuck Norris ne suit pas le mode d'emploi...",
+    "answer": "C'est le mode d'emploi qui le suit."
+  },
+  {
+    "id": 954,
+    "type": "global",
+    "joke": "Chuck Norris n'a pas de père.",
+    "answer": "On ne nique pas la mère de Chuck Norris."
+  },
+  {
+    "id": 955,
+    "type": "global",
+    "joke": "Chuck Norris a franchi l'Everest...",
+    "answer": "À la nage."
+  },
+  {
+    "id": 956,
+    "type": "global",
+    "joke": "Quand Chuck Norris se cogne le petit orteil sur un coin de table...",
+    "answer": "C'est la table qui a mal."
+  },
+  {
+    "id": 957,
+    "type": "global",
+    "joke": "Chuck Norris ne sait pas à quoi ressemble Nicolas Sarkozy.",
+    "answer": "Parce que Chuck Norris ne baisse jamais les yeux."
+  },
+  {
+    "id": 958,
+    "type": "global",
+    "joke": "Un jour Chuck Norris a eu un zero en latin...",
+    "answer": "Depuis c'est une langue morte."
+  },
+  {
+    "id": 959,
+    "type": "global",
+    "joke": "Un jour Chuck Norris a lancé une grenade et a tué 50 personnes !",
+    "answer": "Ensuite, la grenade a explosé..."
+  },
+  {
+    "id": 960,
+    "type": "global",
+    "joke": "Une seule Tortue Ninja à osé défié Chuck Norris.",
+    "answer": "Maintenant on l'appelle Franklin."
+  },
+  {
+    "id": 961,
+    "type": "global",
+    "joke": "Chuck Norris ne se masturbe jamais.",
+    "answer": "Chuck Norris est inébranlable."
+  },
+  {
+    "id": 962,
+    "type": "global",
+    "joke": "Cherchez l'intrus : Un rouge-gorge, un pigeon, un moineau et Chuck Norris.",
+    "answer": "Un rouge-gorge, un pigeon et un moineau."
+  },
+  {
+    "id": 963,
+    "type": "global",
+    "joke": "Chuck Norris ne ment pas.",
+    "answer": "C'est la vérité qui se trompe."
+  },
+  {
+    "id": 964,
+    "type": "global",
+    "joke": "Chuck Norris peut ressusciter...",
+    "answer": "Un angle mort."
+  },
+  {
+    "id": 965,
+    "type": "global",
+    "joke": "Un jour un mec a refuser de filer une clope à Chuck Norris.",
+    "answer": "Depuis, on prévient sur tous les paquets que \"Fumer tue\"."
+  },
+  {
+    "id": 966,
+    "type": "global",
+    "joke": "Un jour, les Powers Rangers ont rencontré Chuck Norris.",
+    "answer": "Maintenant on les appelle les Télétubbies."
+  },
+  {
+    "id": 967,
+    "type": "global",
+    "joke": "Hercule est un demi-dieu.",
+    "answer": "Dieu est un demi-Chuck Norris."
+  },
+  {
+    "id": 968,
+    "type": "global",
+    "joke": "Chuck Norris est le seul homme...",
+    "answer": "à posséder une bible dédicacée."
+  },
+  {
+    "id": 969,
+    "type": "global",
+    "joke": "Quand Chuck Norris lance une pièce, elle fait toujours pile.",
+    "answer": "Personne ne fait face à Chuck Norris !"
+  },
+  {
+    "id": 970,
+    "type": "global",
+    "joke": "Quand Chuck Norris fait une baston de regard avec le soleil...",
+    "answer": "il y a une éclipse."
+  },
+  {
+    "id": 971,
+    "type": "global",
+    "joke": "Chuck Norris peut se souvenir...",
+    "answer": "du futur."
+  },
+  {
+    "id": 972,
+    "type": "global",
+    "joke": "Chuck Norris peut faire rentrer 3 litres d'eau...",
+    "answer": "dans une bouteille d'un litre."
+  },
+  {
+    "id": 973,
+    "type": "global",
+    "joke": "Chuck Norris a gagné un tournoi de poker...",
+    "answer": "avec des cartes Pokémon."
+  },
+  {
+    "id": 974,
+    "type": "global",
+    "joke": "Si Chuck Norris avait joué dans \"Il faut sauver le soldat Ryan\"...",
+    "answer": "le film se serait appelé \"Il faut sauver l'armée allemande\"."
+  },
+  {
+    "id": 975,
+    "type": "global",
+    "joke": "Un jour, un gaulois a cru qu'il pouvait attaquer Chuck Norris après avoir bu de la potion magique.",
+    "answer": "Il s'appelait Paraplégix."
+  },
+  {
+    "id": 976,
+    "type": "global",
+    "joke": "Quand Chuck Norris joue à Resident Evil...",
+    "answer": "c'est les zombies qui doivent survivre."
+  },
+  {
+    "id": 977,
+    "type": "global",
+    "joke": "Moïse a coupé la mer en deux.",
+    "answer": "Chuck Norris l'a recollé en disant \"Tu refais ça, je te pète la gueule\"."
+  },
+  {
+    "id": 978,
+    "type": "global",
+    "joke": "Lorsque Chuck Norris va au cinema et que son portable sonne...",
+    "answer": "On met sur pause."
+  },
+  {
+    "id": 979,
+    "type": "global",
+    "joke": "Quand Chuck Norris fait une erreur lors de l'examen d'histoire...",
+    "answer": "l'histoire change."
+  },
+  {
+    "id": 980,
+    "type": "global",
+    "joke": "Si Mickey a quatre doigts...",
+    "answer": "c'est parce qu'il a fait un doigt d'honneur à Chuck Norris."
+  },
+  {
+    "id": 981,
+    "type": "global",
+    "joke": "Chuck Norris traverse le terrain d'Olive et Tom...",
+    "answer": "en moins d'un épisode."
+  },
+  {
+    "id": 982,
+    "type": "global",
+    "joke": "Chuck Norris a déjà compté jusqu'à l'infini.",
+    "answer": "Deux fois."
+  },
+  {
+    "id": 983,
+    "type": "global",
+    "joke": "A l'école Chuck Norris ne faisait pas une sarbacane avec ses vieux stylos.",
+    "answer": "Il faisait un 357 magnum."
+  },
+  {
+    "id": 984,
+    "type": "global",
+    "joke": "Chuck Norris x 0 = Chuck Norris.",
+    "answer": "On élimine pas Chuck Norris aussi facilement."
+  },
+  {
+    "id": 985,
+    "type": "global",
+    "joke": "Chuck Norris a invité Albert Einstein...",
+    "answer": "à son dîner de cons."
+  },
+  {
+    "id": 986,
+    "type": "global",
+    "joke": "Un jour, un canard et un castor se sont foutu de la gueule de Chuck Norris.",
+    "answer": "Depuis, l'ornithorynque a vraiment l'air d'un con."
+  },
+  {
+    "id": 987,
+    "type": "global",
+    "joke": "Il y a bien longtemps Chuck Norris et Dieu se sont battus.",
+    "answer": "Vous avez vu Dieu récemment ?"
+  },
+  {
+    "id": 988,
+    "type": "global",
+    "joke": "Chuck Norris joue au cerf-volant...",
+    "answer": "avec de vrais cerfs."
+  },
+  {
+    "id": 989,
+    "type": "global",
+    "joke": "Chuck Norris a battu le record de saut à la perche...",
+    "answer": "sans prendre d'élan, sans perche et sans sauter."
+  },
+  {
+    "id": 990,
+    "type": "global",
+    "joke": "Si la douleur n'est qu'une information pour le Terminator...",
+    "answer": "Elle n'est qu'une rumeur sans fondement pour Chuck Norris."
+  },
+  {
+    "id": 991,
+    "type": "global",
+    "joke": "Pi est égale a 3,14...",
+    "answer": "Pas par coïncidence, seulement parce que la 3eme lettre de l'alphabet est C et la 14eme est N... Pi=CN=Chuck Norris."
+  },
+  {
+    "id": 992,
+    "type": "global",
+    "joke": "Si le Titanic a coulé...",
+    "answer": "c'est parce que Chuck Norris avait entendu un blondinet crier \"Je suis le maître du monde !\"."
+  },
+  {
+    "id": 993,
+    "type": "global",
+    "joke": "Un jour, Chuck Norris a pété un câble.",
+    "answer": "Ainsi est né le Wi-Fi."
+  },
+  {
+    "id": 994,
+    "type": "global",
+    "joke": "Chuck Norris a déjà eu Alzheimer.",
+    "answer": "Il s'en souvient très bien."
+  },
+  {
+    "id": 995,
+    "type": "global",
+    "joke": "Indiana Jones a survécu à l'explosion d'une bombe nucléaire en se cachant dans un frigo ",
+    "answer": "Chuck Norris a survécu à la chute de l'astéroïde qui pulvérisa les dinosaures en mettant un K-Way."
+  },
+  {
+    "id": 996,
+    "type": "global",
+    "joke": "Chuck Norris peut...",
+    "answer": "Y aller par 4 chemins."
+  },
+  {
+    "id": 997,
+    "type": "global",
+    "joke": "Quand Chuck Norris lui dit qu'il est gros...",
+    "answer": "Obélix ferme sa gueule."
+  },
+  {
+    "id": 998,
+    "type": "global",
+    "joke": "Archimède a dit: \"Donnez moi un point d'appui, un levier, et je vous soulèverai le monde !\".",
+    "answer": "Chuck Norris a dit: \"Donnez moi 30 secondes !\"."
+  },
+  {
+    "id": 999,
+    "type": "global",
+    "joke": "Comme la foudre...",
+    "answer": "Chuck Norris ne frappe jamais deux fois au même endroit. Pas besoin."
+  },
+  {
+    "id": 1000,
+    "type": "global",
+    "joke": "Chuck Norris a déjà bu.",
+    "answer": "Toute l'eau du robinet."
+  },
+  {
+    "id": 1001,
+    "type": "global",
+    "joke": "Le fusil à pompe de Chuck Norris est en prison...",
+    "answer": "Pour port d'arme illégalle."
+  },
+  {
+    "id": 1002,
+    "type": "global",
+    "joke": "Quand Chuck Norris va aux toilettes, il y a toujours du papier.",
+    "answer": "Chuck Norris n'est jamais au bout du rouleau."
+  },
+  {
+    "id": 1003,
+    "type": "global",
+    "joke": "Wall Street n'est que la 3ème bourse au monde.",
+    "answer": "Il y a d'abord les deux de Chuck Norris."
+  },
+  {
+    "id": 1004,
+    "type": "global",
+    "joke": "Certains arrivent à faire des O en expirant la fumée d'un cigare.",
+    "answer": "Chuck Norris, lui, sait reproduire l'intégralité de l'alphabet chinois."
+  },
+  {
+    "id": 1005,
+    "type": "global",
+    "joke": "Chuck Norris a fini \"Zelda Ocarina of Time\" plusieurs fois. Un jour, un mec lui a demandé de l'aide pour trouver l'épée au début.",
+    "answer": "Chuck Norris a répondu: \"Quelle épée ?\"."
+  },
+  {
+    "id": 1006,
+    "type": "global",
+    "joke": "Chuck Norris peut te prouver que...",
+    "answer": "La condamnation à mort n'est pas la peine maximale."
+  },
+  {
+    "id": 1007,
+    "type": "global",
+    "joke": "Chuck Norris peut mettre un headshot ",
+    "answer": "Au cavalier sans tête."
   }
 ]
