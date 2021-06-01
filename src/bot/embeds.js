@@ -7,7 +7,7 @@ const suggestsStickyMessage = jokes => ({
         Si tu le souhaites, tu peux proposer tes blagues afin qu'elles soient ajoutées à l'API Blagues API qui regroupe actuellement **${jokes.length}** blagues françaises.
         Elles sont toutes issues de ce salon proposées par la communauté.
 
-        > **Si vous êtes sur mobile:** Copiez le contenu de [ce message](https://discord.com/channels/698822532467523605/698826767221391390/698920441917603850) pour avoir le format.`,
+        > **Sur mobile:** Copiez le contenu de [ce message](https://discord.com/channels/698822532467523605/698826767221391390/698920441917603850) pour avoir le format.`,
     fields: [
       {
         name: 'Voici les différents types:',
@@ -26,7 +26,7 @@ const suggestsStickyMessage = jokes => ({
           > - Espace avant les caractères: \`?\` et \`!\`.
           > - Ponctuation de fin de phrase si elle contient un verbe.
           > - 130 caractères maximum par partie d'une blague.
-          > - Majuscule en début de phrase à moins quelle ne soit précédée de \`...\`.
+          > - Majuscule en début de phrase à moins quelle ne soit précédée de \`...\`
         `,
       },
       {
