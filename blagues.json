@@ -519,7 +519,7 @@
     "id": 87,
     "type": "global",
     "joke": "Quel est le comble du comble ?",
-    "answer": "Qu'un muet dise à un sourd qu'un aveugle les regardent."
+    "answer": "Qu'un muet dise à un sourd qu'un aveugle les regarde."
   },
   {
     "id": 88,
@@ -2067,7 +2067,7 @@
     "id": 345,
     "type": "global",
     "joke": "Quel oiseau est attiré par le miel ?",
-    "answer": "L'autruche car à coter il y a une aut'ruche."
+    "answer": "L'autruche car à côté il y a une aut'ruche."
   },
   {
     "id": 346,
@@ -2954,7 +2954,7 @@
   {
     "id": 493,
     "type": "global",
-    "joke": "Pourquoi certain pigeons ne savent pas nager.",
+    "joke": "Pourquoi certain pigeons ne savent pas nager ?",
     "answer": "Parce que les pigeons roucoules."
   },
   {
@@ -3314,7 +3314,7 @@
   {
     "id": 553,
     "type": "global",
-    "joke": " C'est l'histoire d'une carotte qui veut se suicider. Elle n'y arrive pas et dit :",
+    "joke": "C'est l'histoire d'une carotte qui veut se suicider. Elle n'y arrive pas et dit :",
     "answer": "Oh, zut ! C'est rappé !"
   },
   {
@@ -4089,7 +4089,7 @@
     "id": 682,
     "type": "global",
     "joke": "Qui a inventé le sous-marin ?",
-    "answer": "Les Français en essayant de construire un bateaux !"
+    "answer": "Les Français en essayant de construire un bateau !"
   },
   {
     "id": 683,
@@ -4119,7 +4119,7 @@
     "id": 687,
     "type": "global",
     "joke": "Quel est l'animal le plus chanceux ?",
-    "answer": "Le hibou puisque sa femme et chouette."
+    "answer": "Le hibou puisque sa femme est chouette."
   },
   {
     "id": 688,
@@ -4838,8 +4838,8 @@
   {
     "id": 807,
     "type": "global",
-    "joke": "Quel chars d'assaut permet de construire et non de détruire ?",
-    "answer": "Le chars Pentier !"
+    "joke": "Quel char d'assaut permet de construire et non de détruire ?",
+    "answer": "Le char pentier !"
   },
   {
     "id": 808,
