@@ -1,7 +1,7 @@
 const app = require('./src/app');
 const models = require('./src/models');
 
-require('./src/bot');
+const BlaguesAPIBot = require('./src/bot/blagues-api');
 
 models.database
   .sync()
@@ -11,3 +11,7 @@ models.database
     });
   })
   .catch(console.error);
+
+const bot = new BlaguesAPIBot();
+
+bot.login(process.env.discord_bot_token);
