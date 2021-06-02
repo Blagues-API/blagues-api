@@ -23,5 +23,5 @@ module.exports = (database, DataTypes) => {
       ],
       timestamps: false,
     },
-  )
-}
+  );
+};

@@ -1,13 +1,18 @@
 {
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
   "[javascript]": {
     "editor.formatOnSave": false
   },
+  "editor.formatOnSaveMode": "file",
   "editor.codeActionsOnSave": {
-    "source.fixAll": true
+    "source.organizeImports": true,
+    "source.fixAll.eslint": true,
+    "source.fixAll.prettier": true,
   },
   "editor.tabSize": 2,
   "prettier.tabWidth": 2,
   "files.eol": "\n",
-  "editor.detectIndentation": false
+  "editor.detectIndentation": false,
+  "conventionalCommits.emojiFormat": "emoji",
+  "jest.enableInlineErrorMessages": true,
 }

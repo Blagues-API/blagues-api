@@ -1,4 +1,4 @@
-const { stripIndents } = require('common-tags')
+const { stripIndents } = require('common-tags');
 
 const suggestsStickyMessage = jokes => ({
   embed: {
@@ -43,7 +43,7 @@ const suggestsStickyMessage = jokes => ({
     ],
     color: 0x0067ad,
   },
-})
+});
 
 const suggestsBadFormat = message => ({
   embed: {
@@ -76,7 +76,7 @@ const suggestsBadFormat = message => ({
     },
     timestamp: new Date(),
   },
-})
+});
 
 const suggestsBadType = message => ({
   embed: {
@@ -104,16 +104,16 @@ const suggestsBadType = message => ({
     },
     timestamp: new Date(),
   },
-})
+});
 
 const suggestsDupplicated = (message, currentJoke, duplicatedJoke) => ({
   embed: {
     author: {
-      name: "Êtes vous sûr que cette blague n'existe pas déjà ?",
+      name: 'Êtes vous sûr que cette blague n\'existe pas déjà ?',
       icon_url: message.author.displayAvatarURL({ format: 'png' }),
     },
     description:
-      "Il semblerait qu'une blague ressemble beaucoup à la votre, êtes vous sûr que ce n'est pas la même ?",
+      'Il semblerait qu\'une blague ressemble beaucoup à la votre, êtes vous sûr que ce n\'est pas la même ?',
     fields: [
       {
         name: 'Votre blague',
@@ -131,7 +131,7 @@ const suggestsDupplicated = (message, currentJoke, duplicatedJoke) => ({
     },
     timestamp: new Date(),
   },
-})
+});
 
 const suggestsClosedMP = (message, user) => ({
   embed: {
@@ -147,7 +147,7 @@ const suggestsClosedMP = (message, user) => ({
     },
     timestamp: new Date(),
   },
-})
+});
 
 const correctionsStickyMessage = jokes => ({
   embed: {
@@ -197,7 +197,7 @@ const correctionsStickyMessage = jokes => ({
     ],
     color: 0x0067ad,
   },
-})
+});
 
 const correctionsBadFormat = message => ({
   embed: {
@@ -239,7 +239,7 @@ const correctionsBadFormat = message => ({
     },
     timestamp: new Date(),
   },
-})
+});
 
 module.exports = {
   suggestsStickyMessage,
@@ -249,4 +249,4 @@ module.exports = {
   suggestsClosedMP,
   correctionsStickyMessage,
   correctionsBadFormat,
-}
+};

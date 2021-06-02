@@ -1,9 +1,9 @@
-const moment = require('moment')
-const jwt = require('jsonwebtoken')
+const moment = require('moment');
+const jwt = require('jsonwebtoken');
 
 const random = items => {
-  return items[Math.floor(Math.random() * items.length)]
-}
+  return items[Math.floor(Math.random() * items.length)];
+};
 
 const generateAPIToken = (userId, key, limit) => {
   return jwt.sign(
@@ -14,22 +14,22 @@ const generateAPIToken = (userId, key, limit) => {
       created_at: moment().format(),
     },
     process.env.jwt_encryption_api,
-  )
-}
+  );
+};
 
 const generateKey = () => {
-  let result = ''
+  let result = '';
   const characters =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-  const charactersLength = characters.length
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const charactersLength = characters.length;
   for (let i = 0; i < 50; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength))
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
-  return result
-}
+  return result;
+};
 
 module.exports = {
   generateAPIToken,
   random,
   generateKey,
-}
+};
