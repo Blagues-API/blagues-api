@@ -19,7 +19,7 @@ module.exports = function() {
     }
     const token = bearerToken.split(' ')[1] || null;
     try {
-      const decoded = await jwt.verify(token, process.env.jwt_encryption_api);
+      const decoded = jwt.verify(token, process.env.jwt_encryption_api);
       req.auth = decoded;
       if(process.env.NODE_ENV === 'production') {
         console.log(`API call: ${decoded.user_name} (${decoded.user_id})`);
