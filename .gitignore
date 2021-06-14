@@ -2,3 +2,6 @@ node_modules
 .env
 database.sqlite
 build
+
+# en réflexion
+examples
