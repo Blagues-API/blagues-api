@@ -1,8 +1,7 @@
 FROM node:14
 WORKDIR /app
 
-COPY package.json ./
-COPY yarn.lock ./
+COPY package.json yarn.lock ./
 
 RUN yarn
 RUN yarn global add nodemon

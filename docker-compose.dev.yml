@@ -6,10 +6,7 @@ services:
       context: ./
       dockerfile: ./Dockerfile.dev
     volumes:
-      - ./src:/app/src:cached
-      - ./blagues.json:/usr/src/app/blagues.json:cached
-      - ./build:/usr/src/app/build:cached
-      - ./database.sqlite:/database.sqlite:cached
+      - .:/app
     env_file:
       - ./.env
     ports:
@@ -20,9 +17,7 @@ services:
       context: ./
       dockerfile: ./Dockerfile.dev
     volumes:
-      - ./src:/app/src:cached
-      - ./build:/app/build:cached
-      - ./blagues.json:/usr/src/app/blagues.json:cached
+      - .:/app
     env_file:
       - ./.env
     command: npx webpack --mode development --watch
