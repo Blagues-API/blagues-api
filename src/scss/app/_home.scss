@@ -140,5 +140,21 @@
         font-weight: bold;
       }
     }
+    .modules-list {
+      font-size: 14px;
+      color: #404040;
+      font-weight: 600;
+      line-height: 20px;
+      li {
+        display: flex;
+        align-items: center;
+        white-space: pre;
+        .icon{
+          width: 16px;
+          height: 16px;
+          margin-right: 4px;
+        }
+      }
+    }
   }
 }

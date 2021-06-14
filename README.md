@@ -1,5 +1,3 @@
-<!-- markdownlint-disable -->
-
 [![Blagues API](https://raw.githubusercontent.com/Blagues-API/api/master/src/public/logo.png)](http://www.blagues-api.fr)
 
 # Blagues API
@@ -11,18 +9,18 @@ API de Blagues françaises collaborative et Open Source
 [![License](https://img.shields.io/github/license/Blagues-API/api?style=for-the-badge)](https://github.com/Blagues-API/api/blob/master/LICENCE)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg?style=for-the-badge)](https://www.paypal.me/draftproducts)
 
-## Sommaire
-
-> Retrouvez ici les différentes catégories du README
-
-- [Sommaire](#sommaire)
-- [Utilisation](#utilisation)
-- [Contribuer](#contribuer)
-- [FAQ](#faq)
-- [Support](#support)
-- [License](#license)
-
 ---
+
+## Modules
+
+Afin de simplifier l'utilisation de Blagues API, des modules ont été créés:
+
+- Module npm [`blagues-api`](https://www.npmjs.com/package/blagues-api) (ES6,
+  CommonJS, Browser)
+- Module pypi [`blagues-api`](https://pypi.org/project/blagues-api) (python >=
+  3.8)
+
+> Dans le cas où aucun module n'a été créé vous pouvez utiliser l'api standard.
 
 ## Utilisation
 
@@ -33,26 +31,60 @@ authentifiant avec votre compte Discord sur le site
 Une fois le token généré voici quelques exemples vous permettant d'utiliser
 l'API
 
-> Attention ! Pensez à remplacer `<token>` par votre propre token
+### Blague aléatoire
+
+```
+GET /api/random
+```
+
+À cette url, vous pouvez spécifier certains types que vous ne souhaitez pas
+recevoir.
+
+```js
+GET /api/random?disallow=dark&disallow=limit
+```
+
+### Blague aléatoire d'une catégorie
+
+```js
+GET /api/type/:type:/random
+// type: global, dev, dark, limit, beauf, blondes
+```
+
+### Blague à partir de son ID
+
+Les blagues sont identifiées par un ID que vous recevez en même tant que chaque
+blague.
+
+Spécifiez cet identifiant en paramètre et vous l'obtiendez à nouveau.
+
+```js
+GET /api/id/:id:
+```
+
+## Exemples
 
 ```javascript
-// Javascript
-import fetch from 'node-fetch';
+// NodeJS
+const fetch = require('node-fetch');
 
 fetch('https://www.blagues-api.fr/api/random', {
   headers: {
-    Authorization: 'Bearer <token>'
+    Authorization: 'Bearer VOTRE_TOKEN_ICI'
   }
-}).then((response) => {
-  console.log(response);
-  /* Expected output:
-  { 
-    id: 1, 
-    joke: 'Question', 
-    answer: 'Response' 
-  }
-  */
-});
+})
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+    /* Expected output:
+    { 
+      id: 1, 
+      type: 'type', 
+      joke: 'Question', 
+      answer: 'Response' 
+    }
+    */
+  });
 ```
 
 ```py
@@ -62,7 +94,7 @@ import requests
 response = requests.get(
   'https://www.blagues-api.fr/api/random',
   headers = {
-    'Authorization': 'Bearer <token>'
+    'Authorization': 'Bearer VOTRE_TOKEN_ICI'
   }
 )
 data = response.json()
@@ -70,6 +102,7 @@ print(response)
 # Expected output:
 # {
 #   id: 1,
+#   type: 'type',
 #   joke: 'Question',
 #   answer: 'Response'
 # }
@@ -84,7 +117,7 @@ print(response)
 1. ✨ **Commit** tes modifications !
 1. 🚀 **Push** tes commits
 1. 🔃 Crée une **pull request** depuis
-   <a href="https://github.com/Blagues-API/api/compare" target="_blank">`https://github.com/Blagues-API/api/compare`</a>.
+   <a href="https://github.com/Blagues-API/blagues-api/compare" target="_blank">`https://github.com/Blagues-API/blagues-api/compare`</a>.
 
 ---
 
