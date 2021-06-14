@@ -49,10 +49,10 @@
     "nodemon": "^2.0.4",
     "prettier": "^2.2.1",
     "sass-loader": "^8.0.2",
-    "supertest": "^6.1.3",
     "stylelint": "^13.13.1",
     "stylelint-config-prettier": "^8.0.1",
     "stylelint-config-standard": "^20.0.0",
+    "supertest": "^6.1.3",
     "webpack": "^4.46.0",
     "webpack-cli": "^4.6.0"
   },
@@ -75,10 +75,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DraftProducts/blagues-api.git"
+    "url": "git+https://github.com/Blagues-API/blagues-api.git"
   },
   "homepage": "https://www.blagues-api.fr",
   "bugs": {
-    "url": "https://github.com/DraftProducts/blagues-api/issues"
+    "url": "https://github.com/Blagues-API/blagues-api/issues"
   }
 }
