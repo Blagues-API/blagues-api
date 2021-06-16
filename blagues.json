@@ -4532,7 +4532,7 @@
   {
     "id": 756,
     "type": "dark",
-    "joke": " Comment appelle-t-on un enfant qui tue son père et ça mère ?",
+    "joke": " Comment appelle-t-on un enfant qui tue son père et sa mère ?",
     "answer": "Un orphelin."
   },
   {
@@ -5378,8 +5378,8 @@
   {
     "id": 897,
     "type": "dark",
-    "joke": "Un prêtre entre dans un McDo et demande un menu enfant. On lui demande : Frites et coca ?",
-    "answer": "Juste l’enfant, s’il vous plaît !"
+    "joke": "La vie, c'est comme un 100 mètres.",
+    "answer": "Les asmathiques n'arrivent pas jusqu'au bout."
   },
   {
     "id": 898,
@@ -5611,9 +5611,9 @@
   },
   {
     "id": 936,
-    "type": "dark",
-    "joke": "Comment appelle-t'on un enfant qui tue son père et sa mère ?",
-    "answer": "Un Orphelin"
+    "type": "global",
+    "joke": "Pourquoi les sportifs sont-ils ennuyeux ?",
+    "answer": "Parce qu'il sont pompeux."
   },
   {
     "id": 937,
