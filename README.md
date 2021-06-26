@@ -11,6 +11,19 @@ API de Blagues françaises collaborative et Open Source
 
 ---
 
+## Roadmap
+
+Dans la volontée de faire évoluer ce projet, nous voudrillons faire une
+réécriture complête du projet avec des technologies plus maintenues, plus stable
+et plus poussées.
+
+Cette branche `dev` permettra notament cette réécriture.
+
+Retrouvez plus d'informations depuis l'issue
+[#49](https://github.com/Blagues-API/blagues-api/issues/49).
+
+---
+
 ## Modules
 
 Afin de simplifier l'utilisation de Blagues API, des modules ont été créés:
