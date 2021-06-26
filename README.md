@@ -7,7 +7,7 @@ API de Blagues françaises collaborative et Open Source
 [![Contributors](https://img.shields.io/github/contributors/Blagues-API/api.svg?style=for-the-badge)](https://github.com/Blagues-API/api/graphs/contributors)
 [![Stars](https://img.shields.io/github/stars/Blagues-API/api.svg?style=for-the-badge)](https://github.com/Blagues-API/api/stargazers)
 [![License](https://img.shields.io/github/license/Blagues-API/api?style=for-the-badge)](https://github.com/Blagues-API/api/blob/master/LICENCE)
-[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg?style=for-the-badge)](https://www.paypal.me/draftproducts)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg?style=for-the-badge)](https://www.paypal.me/nicolasvanaarsen)
 
 ---
 
@@ -79,12 +79,12 @@ GET /api/id/:id:
 
 ```javascript
 // NodeJS
-const fetch = require('node-fetch');
+const fetch = require("node-fetch");
 
-fetch('https://www.blagues-api.fr/api/random', {
+fetch("https://www.blagues-api.fr/api/random", {
   headers: {
-    Authorization: 'Bearer VOTRE_TOKEN_ICI'
-  }
+    Authorization: "Bearer VOTRE_TOKEN_ICI",
+  },
 })
   .then((response) => response.json())
   .then((data) => {
