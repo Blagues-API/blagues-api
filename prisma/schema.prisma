@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:../database.sqlite"
+}
+
+model users {
+  user_id            String  @id
+  user_name          String?
+  user_avatar        String?
+  user_token         String?
+  user_token_refresh String?
+  token              String?
+  token_key          String?
+  limit              Int?
+
+  @@index([user_id], name: "users_user_id")
+}
