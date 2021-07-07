@@ -6446,25 +6446,13 @@
   {
     "id": 1075,
     "type": "dark",
-    "joke": "Pourquoi les pédophiles aiment-ils Halloween ?",
-    "answer": "Car y'a la livraison à domicile."
-  },
-  {
-    "id": 1076,
-    "type": "dark",
     "joke": "quelle est la différence entre un couple Gay et un couple Hétéro ?",
     "answer": "Le couple Hétéro se démontent et Le couple Gay s’emboîtent."
   },
   {
-    "id": 1077,
+    "id": 1076,
     "type": "dark",
     "joke": "Quelle est la différence entre un camp d'entrainement terroriste et un orphelinat ?",
     "answer": " Je ne sais pas, je conduis juste le drone."
-  },
-  {
-    "id": 1078,
-    "type": "dark",
-    "joke": "Quelle est la différence entre un footballeur, un handballeur et un pédophile ?",
-    "answer": "Le footballeur marque du pied, le handballeur marque de la main, et le pédophile Marc Dutroux."
   }
 ]
