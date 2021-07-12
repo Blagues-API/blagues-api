@@ -6,7 +6,7 @@ export default async () => {
   const app: FastifyInstance = fastify();
 
   try {
-    await app.register(api);
+    await app.register(api, { prefix: 'api' });
     await app.register(nuxt);
 
     await app.listen(3000);
