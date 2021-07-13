@@ -2449,7 +2449,7 @@
   },
   {
     "id": 409,
-    "type": "global",
+    "type": "dark",
     "joke": "Pourquoi les tirelires sont en forme de cochon ?",
     "answer": "Pour que les arabes n'y touchent pas."
   },
@@ -3704,8 +3704,8 @@
   {
     "id": 618,
     "type": "global",
-    "joke": "Quel est le furur de ronfler ?",
-    "answer": "Dormir."
+    "joke": "Quel est le futur de ronfler ?",
+    "answer": "Dormir"
   },
   {
     "id": 619,
@@ -4341,7 +4341,7 @@
     "id": 724,
     "type": "dark",
     "joke": "Quel est le moyen de contraception le plus sûr au monde ?",
-    "answer": "Etre grosse et moche."
+    "answer": "Être grosse et moche."
   },
   {
     "id": 725,
@@ -4856,7 +4856,7 @@
   {
     "id": 810,
     "type": "global",
-    "joke": "Deux ouvriers vont travailler sur la Tour Eiffel. Soudin ils s'aperçoivent qu'ils ont oublié leur mètre. A quelle hauteur sont-ils ?",
+    "joke": "Deux ouvriers vont travailler sur la Tour Eiffel. Soudain, ils s'aperçoivent qu'ils ont oublié leur mètre. A quelle hauteur sont-ils ?",
     "answer": "Ils sont à deux sans mètre !"
   },
   {
@@ -6339,88 +6339,88 @@
     "id": 1059,
     "type": "beauf",
     "joke": "Pourquoi les tornades ont-elles des noms féminins ?",
-    "answer": "pour deux raisons, la première parce qu’elles arrivent chaudes et humides 1060a deuxième parce qu’elles repartent avec tes affaires."
+    "answer": "Pour deux raisons : la première, parce qu’elles arrivent chaudes et humides. La deuxième, parce qu’elles repartent avec tes affaires."
   },
   {
-    "id": 1061,
+    "id": 1060,
     "type": "beauf",
     "joke": "Quel est la différence entre un stressé et un puceau ?",
     "answer": "Ils ont tout les deux pa-niqué."
   },
   {
-    "id": 1062,
+    "id": 1061,
     "type": "limit",
     "joke": "Qu'est-ce qui est rose, fait 5 cm, 15 cm déplié et qui fait rêver toutes les filles de 18 ans ?",
     "answer": "Le permis de conduire"
   },
   {
-    "id": 1063,
+    "id": 1062,
     "type": "limit",
     "joke": "Un gars et une fille en sont à leur première date... Le gars amène la fille en voiture au Mont-Royal, les deux commencent à s'embrasser. Lorsqu'ils sont sur le point de faire l'amour, la fille s'arrête brusquement et dit: ''Je suis désolé de ne pas te l'avoir dit avant, mais je suis une prostituée... Ça va faire 20$ si tu veux qu'on continue.'' Le gars lui refile l'argent puis ils font leur truc...",
     "answer": "20 minutes après le sexe, le gars reste assis au volant et regarde par la fenêtre... La fille lui demande: ''Bon, qu'est-ce qu'on fait? Me ramènerais-tu chez moi svp?Le gars lui répond: ''Je suis désolé de ne pas te l'avoir dit avant, mais je suis un chauffeur de taxi... Ça va faire 30$ pour une course jusqu'à chez toi!"
   },
   {
-    "id": 1064,
+    "id": 1063,
     "type": "dark",
     "joke": "Qu'est-ce qu'un un selfie pour un orphelin ",
     "answer": "Une photo de famille"
   },
   {
-    "id": 1065,
+    "id": 1064,
     "type": "dark",
     "joke": "Quelle est la différence en LGBTQ et LGBTQ+ ?",
     "answer": "L'un est la version premium de l'autre."
   },
   {
-    "id": 1066,
+    "id": 1065,
     "type": "dark",
     "joke": "C'est un vol avec des gens mort ?",
     "answer": "Un Voldemort"
   },
   {
-    "id": 1067,
+    "id": 1066,
     "type": "dark",
     "joke": "Comment Mimie Mathy est-elle décédée ?",
     "answer": "Elle s'est pendue sur un bonsaï."
   },
   {
-    "id": 1068,
+    "id": 1067,
     "type": "global",
     "joke": "Une momies fâchée quitte ses amies :",
     "answer": "Puisque c'est comme ça, je ne fait plus partie de la bande"
   },
   {
-    "id": 1069,
+    "id": 1068,
     "type": "global",
     "joke": "Que dit un squelette quand il a peur ?",
     "answer": "Os court"
   },
   {
-    "id": 1070,
+    "id": 1069,
     "type": "dark",
     "joke": "Le coronavirus c'est...",
     "answer": "le seul truc chinois qui a tenu plus de deux semaines."
   },
   {
-    "id": 1071,
+    "id": 1070,
     "type": "dark",
     "joke": "Quels sont les publics visés par kinders ?",
     "answer": "Les enfants et les pédophiles"
   },
   {
-    "id": 1072,
+    "id": 1071,
     "type": "dark",
     "joke": "Quel est le point commun entre du vin et un enfant ?",
     "answer": "J'ai les deux dans ma cave."
   },
   {
-    "id": 1073,
+    "id": 1072,
     "type": "dark",
     "joke": "quelle est la différence entre un couple Gay et un couple Hétéro ?",
     "answer": "Le couple Hétéro se démontent et Le couple Gay s’emboîtent."
   },
   {
-    "id": 1074,
+    "id": 1073,
     "type": "dark",
     "joke": "Quelle est la différence entre un camp d'entrainement terroriste et un orphelinat ?",
     "answer": " Je ne sais pas, je conduis juste le drone."
