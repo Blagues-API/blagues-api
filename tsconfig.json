@@ -3,10 +3,12 @@
     "sourceMap": true,
     "outDir": "dist",
     "strict": true,
+    "moduleResolution": "Node",
     "module": "commonjs",
     "lib": ["es2020", "esnext"],
     "target": "es2020",
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "types": ["@types/node", "@nuxt/types"]
   }
 }
