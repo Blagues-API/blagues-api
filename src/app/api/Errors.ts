@@ -4,6 +4,16 @@ interface Error {
   message: string;
 }
 
+export const NoContent: Error = {
+  status: 404,
+  error: 'Bad Request',
+  message: 'All types have been disabled'
+}
+export const BadRequest: Error = {
+  status: 400,
+  error: 'Bad Request',
+  message: 'Bad type provided'
+}
 export const AuthHeaderMissing: Error = {
   status: 401,
   error: 'Unauthorized',
@@ -21,3 +31,9 @@ export const AuthHeaderInvalidToken: Error = {
   error: 'Unauthorized',
   message: 'Invalid Token submitted'
 };
+
+export const JokeNotFound: Error = {
+  status: 404,
+  error: 'Not found',
+  message: 'Joke not found'
+}
