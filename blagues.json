@@ -6355,9 +6355,9 @@
   },
   {
     "id": 1060,
-    "type": "limit",
-    "joke": "Un gars et une fille en sont à leur première date... Le gars amène la fille en voiture au Mont-Royal, les deux commencent à s'embrasser. Lorsqu'ils sont sur le point de faire l'amour, la fille s'arrête brusquement et dit: ''Je suis désolé de ne pas te l'avoir dit avant, mais je suis une prostituée... Ça va faire 20$ si tu veux qu'on continue.'' Le gars lui refile l'argent puis ils font leur truc...",
-    "answer": "20 minutes après le sexe, le gars reste assis au volant et regarde par la fenêtre... La fille lui demande: ''Bon, qu'est-ce qu'on fait? Me ramènerais-tu chez moi svp?Le gars lui répond: ''Je suis désolé de ne pas te l'avoir dit avant, mais je suis un chauffeur de taxi... Ça va faire 30$ pour une course jusqu'à chez toi!"
+    "type": "dark",
+    "joke": "Quelle est la différence entre un camp d'entrainement terroriste et un orphelinat ?",
+    "answer": " Je ne sais pas, je conduis juste le drone."
   },
   {
     "id": 1061,
@@ -6418,11 +6418,5 @@
     "type": "dark",
     "joke": "Quelle est la différence entre un couple Gay et un couple Hétéro ?",
     "answer": "Le couple Hétéro se démontent et le couple Gay s’emboîtent."
-  },
-  {
-    "id": 1071,
-    "type": "dark",
-    "joke": "Quelle est la différence entre un camp d'entrainement terroriste et un orphelinat ?",
-    "answer": " Je ne sais pas, je conduis juste le drone."
   }
 ]
