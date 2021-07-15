@@ -7,7 +7,11 @@
   "license": "MIT",
   "scripts": {
     "dev": "docker-compose -p blagues-api -f ./docker-compose.dev.yml up",
-    "dev:build": "docker-compose -p blagues-api -f ./docker-compose.dev.yml build"
+    "dev:build": "docker-compose -p blagues-api -f ./docker-compose.dev.yml build",
+    "lint:nuxt": "eslint --ext .ts,.js,.vue ./src/app/nuxt",
+    "lint:bot": "eslint --ext .ts,.js ./src/bot",
+    "lint:fastify": "eslint --ext .ts,.js ./src/app/api",
+    "lint": "npm run lint:nuxt && npm run lint:fastify && npm run lint:bot"
   },
   "husky": {
     "hooks": {
