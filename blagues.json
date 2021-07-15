@@ -2449,7 +2449,7 @@
   },
   {
     "id": 409,
-    "type": "global",
+    "type": "dark",
     "joke": "Pourquoi les tirelires sont en forme de cochon ?",
     "answer": "Pour que les arabes n'y touchent pas."
   },
@@ -3704,8 +3704,8 @@
   {
     "id": 618,
     "type": "global",
-    "joke": "Quel est le furur de ronfler ?",
-    "answer": "Dormir."
+    "joke": "Quel est le futur de ronfler ?",
+    "answer": "Dormir"
   },
   {
     "id": 619,
@@ -4341,7 +4341,7 @@
     "id": 724,
     "type": "dark",
     "joke": "Quel est le moyen de contraception le plus sûr au monde ?",
-    "answer": "Etre grosse et moche."
+    "answer": "Être grosse et moche."
   },
   {
     "id": 725,
@@ -4856,7 +4856,7 @@
   {
     "id": 810,
     "type": "global",
-    "joke": "Deux ouvriers vont travailler sur la Tour Eiffel. Soudin ils s'aperçoivent qu'ils ont oublié leur mètre. A quelle hauteur sont-ils ?",
+    "joke": "Deux ouvriers vont travailler sur la Tour Eiffel. Soudain, ils s'aperçoivent qu'ils ont oublié leur mètre. À quelle hauteur sont-ils ?",
     "answer": "Ils sont à deux sans mètre !"
   },
   {
@@ -6038,7 +6038,385 @@
   {
     "id": 1007,
     "type": "global",
-    "joke": "Chuck Norris peut mettre un headshot ",
+    "joke": "Chuck Norris peut mettre un headshot.",
     "answer": "Au cavalier sans tête."
+  },
+  {
+    "id": 1008,
+    "type": "dev",
+    "joke": "Quel est le comble pour la mémoire vive ?",
+    "answer": "C'est qu'elle RAM."
+  },
+  {
+    "id": 1009,
+    "type": "dark",
+    "joke": "Savez-vous pourquoi le petit Grégory n'était jamais en retard ?",
+    "answer": "Parce qu'il était dans l'étang !"
+  },
+  {
+    "id": 1010,
+    "type": "global",
+    "joke": "Quel est le berger le plus connu ?",
+    "answer": "Le seigneur des agneaux."
+  },
+  {
+    "id": 1011,
+    "type": "global",
+    "joke": "Qu'est-ce qui fait rire un cuisinier ?",
+    "answer": "Une farce"
+  },
+  {
+    "id": 1012,
+    "type": "beauf",
+    "joke": "Quel est l'application musique à l'heure ?",
+    "answer": "Deezer !"
+  },
+  {
+    "id": 1013,
+    "type": "dark",
+    "joke": "Le métier de croque-mort n'a aucun avenir.",
+    "answer": "Les clients ne sont pas fidèles."
+  },
+  {
+    "id": 1014,
+    "type": "global",
+    "joke": "Pourquoi les marins ne peuvent t'ils pas écrire ?",
+    "answer": "Parce qu'ils ont jeté l'ancre."
+  },
+  {
+    "id": 1015,
+    "type": "dark",
+    "joke": "Les humains c'est comme le chocolat.",
+    "answer": "Ceux qui préfèrent le noir ont mauvais goût."
+  },
+  {
+    "id": 1016,
+    "type": "dark",
+    "joke": "Les humains c'est comme les pensées.",
+    "answer": "On les aimes pas en noir."
+  },
+  {
+    "id": 1017,
+    "type": "global",
+    "joke": "Quelles sont les lettres les moins visibles ?",
+    "answer": "F.A.C"
+  },
+  {
+    "id": 1018,
+    "type": "dark",
+    "joke": "Pourquoi la femme d'Hitler l'a-t'elle quitté ?",
+    "answer": "Elle a vu la facture de gaz."
+  },
+  {
+    "id": 1019,
+    "type": "dark",
+    "joke": "Les blagues noires c'est comme les enfants qui ont le cancer,",
+    "answer": "ça ne vieillit jamais..."
+  },
+  {
+    "id": 1020,
+    "type": "dark",
+    "joke": "Pourquoi une imprimante arabe ne peux pas fonctionner ?",
+    "answer": "Car elle n'a pas de papiers."
+  },
+  {
+    "id": 1021,
+    "type": "dark",
+    "joke": "La vie, c'est comme un 100 mètres.",
+    "answer": "Les obèses arrivent pas jusqu'au bout."
+  },
+  {
+    "id": 1022,
+    "type": "global",
+    "joke": "Comment appelle-t-on un avion qui rebondit ?",
+    "answer": "Un boing !"
+  },
+  {
+    "id": 1023,
+    "type": "global",
+    "joke": "Pourquoi certaines personnes jettent-elles leur ordinateur à la mer ?",
+    "answer": "Pour surfer sur le net."
+  },
+  {
+    "id": 1024,
+    "type": "global",
+    "joke": "Un combat oppose Rocky et un serpent. Qui gagne ?",
+    "answer": "Rocky, car Rocky Balboa."
+  },
+  {
+    "id": 1025,
+    "type": "global",
+    "joke": "Un citron rentre dans une banque pour l’attaquer, il sort son pistolet. Que dit-il ?",
+    "answer": "Pas zun zeste ze suis pressé."
+  },
+  {
+    "id": 1026,
+    "type": "global",
+    "joke": "Que dit 0 à 8 ?",
+    "answer": "Belle ceinture"
+  },
+  {
+    "id": 1027,
+    "type": "global",
+    "joke": "Qu'est-ce qui est bleu et qui sent comme de la peinture rouge ?",
+    "answer": "De la peinture bleue"
+  },
+  {
+    "id": 1028,
+    "type": "beauf",
+    "joke": "Quelle est la différence entre un bonhomme de neige et une bonne femme de neige ?",
+    "answer": "Les boules de neige."
+  },
+  {
+    "id": 1029,
+    "type": "dev",
+    "joke": "Tu ne serais pas un câble Ethernet ?",
+    "answer": "Car je sens qu'il y a une connexion entre nous deux."
+  },
+  {
+    "id": 1030,
+    "type": "blondes",
+    "joke": "Une blonde dit à son amie qu'elle a raté son permis car elle a vu un panneau 50 avant un rond point, \"J'ai fait 50 fois le tour du rond point\", dit-elle",
+    "answer": "Son amie lui répond : \"Et tu t'es trompée de combien de tours ?\""
+  },
+  {
+    "id": 1031,
+    "type": "limit",
+    "joke": "La vie c'est comme un toboggan.",
+    "answer": "Pour aller plus vite faut coucher, même si parfois ça fait mal au cul."
+  },
+  {
+    "id": 1032,
+    "type": "dark",
+    "joke": "Je vais appeler mon enfant Plainte.",
+    "answer": "Au moins je pourrais porter Plainte."
+  },
+  {
+    "id": 1033,
+    "type": "dev",
+    "joke": "Vous voulez une blague sur la documentation ?",
+    "answer": "Elle n'a pas encore été faite."
+  },
+  {
+    "id": 1034,
+    "type": "global",
+    "joke": "Dans quel endroit peut-on trouver le plus de pigeons ?",
+    "answer": "Dans un Apple Store"
+  },
+  {
+    "id": 1035,
+    "type": "dark",
+    "joke": "Quel est le meilleur antivol ?",
+    "answer": "Un jambon"
+  },
+  {
+    "id": 1036,
+    "type": "global",
+    "joke": "Mon fils m'a demandé ce que sont les taxes.",
+    "answer": "Je lui ai pris 20% de son goûter, il a tout compris."
+  },
+  {
+    "id": 1037,
+    "type": "global",
+    "joke": "Un père dit à son fils : \"Ton professeur a-t'il remarqué que je t'avais aidé pour ton devoir ?\"",
+    "answer": "\"Je ne sais pas, il a juste dit que c'était impossible que je fasse autant de fautes\"."
+  },
+  {
+    "id": 1038,
+    "type": "global",
+    "joke": "L'œil droit dit à l'œil gauche :",
+    "answer": "\"Je sens quelque chose entre nous.\""
+  },
+  {
+    "id": 1039,
+    "type": "dark",
+    "joke": "Qu'est-ce qu'un groupe de somaliens sur un fond blanc ?",
+    "answer": "Un code-barre"
+  },
+  {
+    "id": 1040,
+    "type": "dark",
+    "joke": "Pourquoi Harry Potter est-il une fiction ?",
+    "answer": "Le héro a un ami roux."
+  },
+  {
+    "id": 1041,
+    "type": "global",
+    "joke": "Un patient appelle son médecin : \"Docteur je ne pourrais pas venir aujourd'hui...\"",
+    "answer": "... je suis malade.\""
+  },
+  {
+    "id": 1042,
+    "type": "dark",
+    "joke": "Pourquoi Jésus n'a pas joué le match Bethléem-Jérusalem ?",
+    "answer": "Car il était suspendu."
+  },
+  {
+    "id": 1043,
+    "type": "dark",
+    "joke": "Quelle est la différence entre un lycéen et un cancéreux ?",
+    "answer": "Il n'y en a pas, l'année prochaine ils passent tous les deux en phase terminale."
+  },
+  {
+    "id": 1044,
+    "type": "dark",
+    "joke": "Quel est le point commun entre un ami et un arbre ?",
+    "answer": "Ils tombent tous les deux au sol quand on abat à la hache !"
+  },
+  {
+    "id": 1045,
+    "type": "limit",
+    "joke": "Que dit un éléphant à un nudiste ?",
+    "answer": "\"Alors c'est avec ça que tu bois ?\""
+  },
+  {
+    "id": 1046,
+    "type": "dark",
+    "joke": "Pourquoi faut-il toujours poursuivre un arabe sur un scooter ?",
+    "answer": "Car c'est probablement le tien."
+  },
+  {
+    "id": 1047,
+    "type": "dark",
+    "joke": "Il fait arrêter les blagues sur les homosexuels.",
+    "answer": "Ils en ont plein le cul."
+  },
+  {
+    "id": 1048,
+    "type": "dark",
+    "joke": "Comment faire rentrer 20 juifs dans la voiture ?",
+    "answer": "Deux à l'avant, trois à l'arrière, deux dans le coffre et tous les autres dans le cendrier !"
+  },
+  {
+    "id": 1049,
+    "type": "global",
+    "joke": "Quel est le comble pour un breton ?",
+    "answer": "Perdre son parapluie."
+  },
+  {
+    "id": 1050,
+    "type": "global",
+    "joke": "Pourquoi les vaches ferment-elles les yeux ?",
+    "answer": "Pour faire du lait concentré."
+  },
+  {
+    "id": 1051,
+    "type": "limit",
+    "joke": "Quelle est la différence entre un vieux et un renard ?",
+    "answer": "Le renard a la queue touffue et le vieux a la queue foutue."
+  },
+  {
+    "id": 1052,
+    "type": "global",
+    "joke": "J'avais une blague sur le confinement.",
+    "answer": "Elle n'est jamais sortie."
+  },
+  {
+    "id": 1053,
+    "type": "limit",
+    "joke": "Comment appelle t-on une actrice porno qui tombe enceinte ?",
+    "answer": "Un accident de travail."
+  },
+  {
+    "id": 1054,
+    "type": "limit",
+    "joke": "Pourquoi les femmes parlent-elle autant et les hommes réfléchissent-ils autant ?",
+    "answer": "Parce que les femmes ont quatre lèvres et les hommes deux cerveaux."
+  },
+  {
+    "id": 1055,
+    "type": "dark",
+    "joke": "La vie c'est comme une boite de chocolat !",
+    "answer": "Personne ne veut des noirs !"
+  },
+  {
+    "id": 1056,
+    "type": "beauf",
+    "joke": "Quelle est la différence entre des haricots et un pet ?",
+    "answer": "Environ 1 heure."
+  },
+  {
+    "id": 1057,
+    "type": "beauf",
+    "joke": "Pourquoi les tornades ont-elles des noms féminins ?",
+    "answer": "Pour deux raisons, la première parce qu’elles arrivent chaudes et humides et la deuxième parce qu’elles repartent avec tes affaires."
+  },
+  {
+    "id": 1058,
+    "type": "beauf",
+    "joke": "Quel est la différence entre un stressé et un puceau ?",
+    "answer": "Ils ont tout les deux pa-niqué."
+  },
+  {
+    "id": 1059,
+    "type": "limit",
+    "joke": "Qu'est-ce qui est rose, fait 5 cm, 15 cm déplié et qui fait rêver toutes les filles de 18 ans ?",
+    "answer": "Le permis de conduire"
+  },
+  {
+    "id": 1060,
+    "type": "dark",
+    "joke": "Quelle est la différence entre un camp d'entrainement terroriste et un orphelinat ?",
+    "answer": " Je ne sais pas, je conduis juste le drone."
+  },
+  {
+    "id": 1061,
+    "type": "dark",
+    "joke": "Qu'est-ce qu'un un selfie pour un orphelin ?",
+    "answer": "Une photo de famille"
+  },
+  {
+    "id": 1062,
+    "type": "dark",
+    "joke": "Quelle est la différence en LGBTQ et LGBTQ+ ?",
+    "answer": "L'un est la version premium de l'autre."
+  },
+  {
+    "id": 1063,
+    "type": "dark",
+    "joke": "C'est un vol avec des gens mort ?",
+    "answer": "Un Voldemort"
+  },
+  {
+    "id": 1064,
+    "type": "dark",
+    "joke": "Comment Mimie Mathy est-elle décédée ?",
+    "answer": "Elle s'est pendue sur un bonsaï."
+  },
+  {
+    "id": 1065,
+    "type": "global",
+    "joke": "Une momie fâchée quitte ses amies :",
+    "answer": "Puisque c'est comme ça, je ne fait plus partie de la bande."
+  },
+  {
+    "id": 1066,
+    "type": "global",
+    "joke": "Que dit un squelette quand il a peur ?",
+    "answer": "Os court"
+  },
+  {
+    "id": 1067,
+    "type": "dark",
+    "joke": "Le coronavirus c'est...",
+    "answer": "le seul truc chinois qui a tenu plus de deux semaines."
+  },
+  {
+    "id": 1068,
+    "type": "dark",
+    "joke": "Quels sont les publics visés par Kinders ?",
+    "answer": "Les enfants et les pédophiles"
+  },
+  {
+    "id": 1069,
+    "type": "dark",
+    "joke": "Quel est le point commun entre du vin et un enfant ?",
+    "answer": "J'ai les deux dans ma cave."
+  },
+  {
+    "id": 1070,
+    "type": "dark",
+    "joke": "Quelle est la différence entre un couple Gay et un couple Hétéro ?",
+    "answer": "Le couple Hétéro se démontent et le couple Gay s’emboîtent."
   }
 ]
