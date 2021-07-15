@@ -6,8 +6,8 @@
   "author": "DraftMan",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --watch 'src/**' --ext 'ts,json' --exec 'ts-node src/index.ts'",
-    "lint:nuxt": "eslint --ext .ts,.js,.vue ./src/app/nuxt"
+    "dev": "docker-compose -p blagues-api -f ./docker-compose.dev.yml up",
+    "dev:build": "docker-compose -p blagues-api -f ./docker-compose.dev.yml build"
   },
   "husky": {
     "hooks": {

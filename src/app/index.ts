@@ -9,7 +9,7 @@ export default async () => {
     await app.register(api, { prefix: 'api' });
     await app.register(nuxt);
 
-    await app.listen(3000);
+    await app.listen(3000, '0.0.0.0');
 
     console.log(`
       🚀 Blagues API lancé: http://localhost:3000

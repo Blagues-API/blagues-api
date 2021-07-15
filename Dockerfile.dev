@@ -1,0 +1,13 @@
+FROM node:14
+WORKDIR /app
+
+COPY package.json yarn.lock ./
+
+RUN yarn
+RUN yarn global add nodemon
+
+COPY . .
+
+EXPOSE 3000
+
+CMD nodemon --watch 'src/**' --ext 'ts,json' --exec 'ts-node src/index.ts'
