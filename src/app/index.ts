@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 import fastify, { FastifyInstance } from 'fastify';
 import api from './api';
 import nuxt from './nuxt';
@@ -12,7 +14,7 @@ export default async () => {
     await app.listen(3000, '0.0.0.0');
 
     console.log(`
-      🚀 Blagues API lancé: http://localhost:3000
+    🚀 Blagues API lancé: http://localhost:3000
     `);
   } catch (err) {
     app.log.error(err);
