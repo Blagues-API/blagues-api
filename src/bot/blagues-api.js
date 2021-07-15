@@ -2,7 +2,13 @@ const { Client } = require('discord.js');
 
 const StickyMessages = require('./sticky-messages');
 
-const { suggestsChannel, logsChannel, adminUsers, channels, types } = require('./constants');
+const {
+  suggestsChannel,
+  logsChannel,
+  adminUsers,
+  channels,
+  types
+} = require('./constants');
 
 const embeds = require('./embeds');
 
@@ -13,7 +19,7 @@ const { findBestMatch } = require('string-similarity');
 module.exports = class BlaguesAPI extends Client {
   constructor() {
     super({
-      partials: ['MESSAGE', 'REACTION'],
+      partials: ['MESSAGE', 'REACTION']
     });
     this.stickyMessages = new StickyMessages();
 
@@ -25,6 +31,8 @@ module.exports = class BlaguesAPI extends Client {
 
     this.initEvents();
     this.setStatus();
+
+    this.stickyMessages.run();
   }
 
   initEvents() {
@@ -33,7 +41,6 @@ module.exports = class BlaguesAPI extends Client {
   }
 
   static async onMessage(message) {
-
     if (
       message.author.bot ||
       !Object.keys(channels).includes(message.channel.id)
@@ -48,29 +55,35 @@ module.exports = class BlaguesAPI extends Client {
       await message.delete();
       return channel.send(
         message.author.toString(),
-        embeds[key + 'BadFormat'](message),
+        embeds[key + 'BadFormat'](message)
       );
     }
 
     if (message.channel.id === suggestsChannel) {
       const [, rawType, joke, answer] = regex.exec(message.content);
 
-      if (!types.some(t => t.aliases.includes(rawType.toLowerCase().trim()))) {
+      if (
+        !types.some((t) => t.aliases.includes(rawType.toLowerCase().trim()))
+      ) {
         return channel.send(
           message.author.toString(),
-          embeds.suggestsBadType(message),
+          embeds.suggestsBadType(message)
         );
       }
 
       const { bestMatch, bestMatchIndex } = findBestMatch(
         `${joke} ${answer}`,
-        jokes.map(e => `${e.joke} ${e.answer}`),
+        jokes.map((e) => `${e.joke} ${e.answer}`)
       );
 
       if (bestMatch.rating > 0.7) {
         await channel.send(
           message.author.toString(),
-          embeds.suggestsDupplicated(message, { joke, answer }, jokes[bestMatchIndex]),
+          embeds.suggestsDupplicated(
+            message,
+            { joke, answer },
+            jokes[bestMatchIndex]
+          )
         );
       }
 
@@ -99,8 +112,8 @@ module.exports = class BlaguesAPI extends Client {
 
     if (
       message.channel.id !== suggestsChannel ||
-    user.bot ||
-    !adminUsers.includes(user.id)
+      user.bot ||
+      !adminUsers.includes(user.id)
     ) {
       return;
     }
@@ -114,23 +127,23 @@ module.exports = class BlaguesAPI extends Client {
       const [, rawType, joke, answer] = regex.exec(message.content);
 
       try {
-        const type = types.find(t =>
-          t.aliases.includes(rawType.toLowerCase().trim()),
+        const type = types.find((t) =>
+          t.aliases.includes(rawType.toLowerCase().trim())
         );
         await user.send(
           `{\n  "id": ,\n  "type": "${
             type?.ref ?? 'Inconnu'
           }",\n  "joke": "${joke}",\n  "answer": "${answer.replace(
             /"/g,
-            '\\"',
+            '\\"'
           )}"\n},`,
-          { code: 'json' },
+          { code: 'json' }
         );
       } catch (error) {
         const channel = message.guild.channels.cache.get(logsChannel);
         await channel.send(
           user.toString(),
-          embeds.suggestsClosedMP(message, user),
+          embeds.suggestsClosedMP(message, user)
         );
       }
 
@@ -147,11 +160,11 @@ module.exports = class BlaguesAPI extends Client {
 
   setStatus() {
     this.user.setActivity(`les ${jokes.length} blagues`, {
-      type: 'WATCHING',
+      type: 'WATCHING'
     });
     setInterval(() => {
       this.user.setActivity(`les ${jokes.length} blagues`, {
-        type: 'WATCHING',
+        type: 'WATCHING'
       });
     }, 24 * 60 * 60 * 1000);
   }
