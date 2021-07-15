@@ -1,10 +1,10 @@
 FROM node:14
 WORKDIR /app
 
-COPY package.json yarn.lock ./
+COPY package*.json ./
 
-RUN yarn
-RUN yarn global add nodemon typescript ts-node
+RUN npm i
+RUN npm i -g nodemon typescript ts-node
 
 COPY . .
 
