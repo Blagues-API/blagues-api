@@ -21,7 +21,7 @@ module.exports = class BlaguesAPI extends Client {
     super({
       partials: ['MESSAGE', 'REACTION']
     });
-    this.stickyMessages = new StickyMessages();
+    this.stickyMessages = new StickyMessages(this);
 
     this.once('ready', this.onReady);
   }
