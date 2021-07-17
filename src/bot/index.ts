@@ -34,4 +34,4 @@ BlaguesAPIBot.on('interactionCreate', async (interaction: Interaction) => {
   }
 });
 
-BlaguesAPIBot.login(process.env.discord_bot_token);
+BlaguesAPIBot.login(process.env.BOT_TOKEN);
