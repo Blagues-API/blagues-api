@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 3000
 
-CMD nodemon --watch 'src/**' --ext 'ts,json' --exec 'ts-node src/index.ts'
+CMD nodemon --watch '*' --ext 'ts,json' --exec 'ts-node src/index.ts'
