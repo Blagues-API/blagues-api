@@ -1,14 +1,22 @@
 {
   "compilerOptions": {
-    "sourceMap": true,
-    "outDir": "dist",
-    "strict": true,
-    "moduleResolution": "Node",
+    "target": "es2018",
     "module": "commonjs",
-    "lib": ["es2020", "esnext"],
-    "target": "es2020",
-    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "declaration": true,
+    "pretty": true,
+    "noEmitOnError": true,
+    "strict": true,
     "resolveJsonModule": true,
-    "types": ["@types/node", "@nuxt/types"]
+    "esModuleInterop": true,
+    "removeComments": true,
+    "newLine": "lf",
+    "noUnusedLocals": true,
+    "noFallthroughCasesInSwitch": true,
+    "useDefineForClassFields": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "outDir": "./dist",
+    "lib": ["esnext"]
   }
 }
