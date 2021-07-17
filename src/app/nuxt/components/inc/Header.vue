@@ -2,7 +2,11 @@
   <header>
     <div class="wrapper">
       <a class="brand" href="/" title="Accueil">
-        <img class="logo" src="/logo.svg" alt="Logo Blagues API" />
+        <img
+          class="logo"
+          src="~/../../assets/logo.svg"
+          alt="Logo Blagues API"
+        />
         <h1 class="name">BLAGUES API</h1>
       </a>
       <div class="navigation">
@@ -18,21 +22,21 @@
           title="Discord de Blagues API"
           >DISCORD</a
         >
-        <a class="user-place" v-if="auth" href="/account">
+        <nuxt-link class="user-place" v-if="$auth.loggedIn" to="/account">
           <div
             class="avatar"
             :style="{
-              'background-image': `url('https://cdn.discordapp.com/avatars/${auth.user.id}/${auth.user.avatar}.png?size=64')`
+              'background-image': `url('https://cdn.discordapp.com/avatars/${$auth.user.id}/${$auth.user.avatar}.png?size=64')`
             }"
           ></div>
-          <span class="username">{{ auth.user.username }}</span>
-        </a>
-        <nuxt-link
+          <span class="username">{{ $auth.user.username }}</span>
+        </nuxt-link>
+        <span
           class="item rounded"
           v-else
-          to="/login"
+          @click="$auth.loginWith('discord')"
           title="Connexion Discord"
-          >CONNEXION</nuxt-link
+          >CONNEXION</span
         >
       </div>
     </div>
@@ -98,6 +102,7 @@ header {
         margin: 10px;
         text-decoration: none;
         color: white;
+        cursor: pointer;
         &.rounded {
           display: flex;
           padding: 10px 14px;

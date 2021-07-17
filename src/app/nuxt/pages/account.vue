@@ -27,6 +27,7 @@ import { ref, useContext, wrapProperty } from '@nuxtjs/composition-api';
 const useAuth = wrapProperty('$auth', false);
 
 export default {
+  middleware: ['auth'],
   setup() {
     const target = ref(null);
 
@@ -47,9 +48,9 @@ export default {
     };
 
     const regenerateToken = async () => {
-      const { $http } = useContext();
+      const { $axios } = useContext();
       const { user } = useAuth();
-      const newToken = await $http.$post(
+      const newToken = await $axios.$post(
         '/api/regenerate',
         {
           key: user.token_key
