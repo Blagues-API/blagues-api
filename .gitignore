@@ -2,10 +2,10 @@ node_modules
 .env
 database.sqlite
 build
+archive
+dist
+.nuxt
 
 # en réflexion
 examples
 
-archive
-
-.nuxt
