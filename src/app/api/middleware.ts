@@ -1,5 +1,6 @@
-import jwt from 'jsonwebtoken';
 import { FastifyInstance, FastifyPluginAsync } from 'fastify';
+import fp from 'fastify-plugin';
+import jwt from 'jsonwebtoken';
 import {
   AuthHeaderBadFormat,
   AuthHeaderInvalidToken,
@@ -8,17 +9,13 @@ import {
 
 declare module 'fastify' {
   interface FastifyRequest {
-    auth: string;
+    auth: string | null;
   }
 }
 
-export interface MiddlewareRequestOptions {
-  auth: null;
-}
-
-const middleware: FastifyPluginAsync<MiddlewareRequestOptions> = async (
+const middleware: FastifyPluginAsync = async (
   fastify: FastifyInstance
-) => {
+): Promise<void> => {
   fastify.decorateRequest('auth', null);
 
   fastify.addHook('onRequest', async (request, reply) => {
@@ -40,4 +37,4 @@ const middleware: FastifyPluginAsync<MiddlewareRequestOptions> = async (
   });
 };
 
-export default middleware;
+export default fp(middleware);
