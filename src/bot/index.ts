@@ -3,35 +3,50 @@ import jokes from '../../blagues.json';
 // import { AdminUsers, jokeRole, suggestsChannel, logsChannel} from './constents'
 import suggestCommand from './commands/suggest';
 
-const BlaguesAPIBot = new Client({
-  partials: ['REACTION'],
-  intents: Intents.FLAGS.GUILDS
-});
+export default class Bot {
+  public client: Client;
 
-BlaguesAPIBot.on('ready', () => {
-  console.log(`${BlaguesAPIBot.user!.tag} connecté !`);
+  constructor() {
+    this.client = new Client({
+      partials: ['REACTION'],
+      intents: Intents.FLAGS.GUILDS
+    });
 
-  BlaguesAPIBot.user!.setActivity(`les ${jokes.length} blagues`, {
-    type: 'WATCHING'
-  });
-  setInterval(() => {
-    BlaguesAPIBot.user!.setActivity(`les ${jokes.length} blagues`, {
+    this.client.on('ready', this.onReady);
+    this.client.on('interactionCreate', this.onInteractionCreate);
+  }
+
+  get available(): boolean {
+    return !!this.client.readyAt
+  }
+
+  onReady(): void {
+    console.log(`${this.client.user!.tag} connecté !`);
+
+    this.client.user!.setActivity(`les ${jokes.length} blagues`, {
       type: 'WATCHING'
     });
-  }, 24 * 60 * 60 * 1000);
-});
-
-BlaguesAPIBot.on('interactionCreate', async (interaction: Interaction) => {
-  if (!interaction.isCommand()) return;
-
-  const command: CommandInteraction = interaction as CommandInteraction;
-
-  switch (command.commandName) {
-    case 'suggest':
-      return suggestCommand(command);
-    default:
-      break;
+    setInterval(() => {
+      this.client.user!.setActivity(`les ${jokes.length} blagues`, {
+        type: 'WATCHING'
+      });
+    }, 24 * 60 * 60 * 1000);
   }
-});
 
-BlaguesAPIBot.login(process.env.BOT_TOKEN);
+  async onInteractionCreate(interaction: Interaction): Promise<void> {
+    if (!interaction.isCommand()) return;
+
+    const command: CommandInteraction = interaction as CommandInteraction;
+
+    switch (command.commandName) {
+      case 'suggest':
+        return suggestCommand(command);
+      default:
+        break;
+    }
+  }
+
+  async start(): Promise<void> {
+    await this.client.login(process.env.BOT_TOKEN);
+  }
+}

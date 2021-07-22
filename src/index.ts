@@ -1,3 +1,3 @@
-import app from "./app";
+import Tesseract from "./tesseract";
 
-app();
+new Tesseract();
