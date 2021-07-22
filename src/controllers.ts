@@ -4,21 +4,25 @@ import { random } from './utils';
 
 const jokes = data as Joke[];
 
-export const randomJoke = (disallow: string[]) => {
-  const typesForbidden = Array.isArray(disallow)
+export const randomJoke = (disallow?: string[]) => {
+  let typesForbidden: string[] = [];
+
+  if (disallow) {
+    typesForbidden = Array.isArray(disallow)
     ? disallow
     : Array.of(disallow);
 
-  if (disallow && typesForbidden.some((type) => !JokeTypes.includes(type))) {
-    return {
-      error: true
-    };
+    if(typesForbidden.some((type) => !JokeTypes.includes(type))) {
+      return {
+        error: true
+      };
+    }
   }
 
   return {
     error: false,
     response: random(
-      disallow
+      typesForbidden.length
         ? jokes.filter((joke: Joke) => !typesForbidden.includes(joke.type))
         : jokes
     )
