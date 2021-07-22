@@ -15,4 +15,5 @@
   "editor.detectIndentation": false,
   "conventionalCommits.emojiFormat": "emoji",
   "jest.enableInlineErrorMessages": true,
+  "deepscan.enable": true,
 }
