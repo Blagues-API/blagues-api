@@ -17,7 +17,7 @@ export enum Categories {
 }
 
 export const JokeTypes = ['global', 'dev', 'dark', 'limit', 'beauf', 'blondes'];
-export const JokeTypesRefs: object = {
+export const JokeTypesRefs = {
   global: 'Général',
   dark: 'Noir',
   dev: 'Développeur',
@@ -33,3 +33,18 @@ export type Category =
   | 'limit'
   | 'beauf'
   | 'blondes';
+
+/*
+See api src/app/api/index.ts file for more informations
+
+export interface JokePayload {
+  type: Category;
+  joke: string;
+  answer: string;
+}
+
+export type JokePayloadKey =
+  | 'type'
+  | 'joke'
+  | 'answer'
+*/
