@@ -2,7 +2,7 @@ import { FastifyInstance, FastifyRequest } from 'fastify';
 import { jokeById, randomJoke, randomJokeByType } from '../../controllers';
 import { JokeTypes, JokeTypesRefs } from '../../typings';
 import { BadRequest, JokeNotFound, NoContent } from './Errors';
-import middleware from './index.js';
+import middleware from './middleware';
 
 interface controllersReturn {
   error: boolean;
