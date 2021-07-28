@@ -47,6 +47,9 @@ export default class Bot {
   }
 
   async start(): Promise<void> {
+    if (!process.env.BOT_TOKEN) {
+      return console.log("Bot non lancé car aucun token n'a été défini");
+    }
     await this.client.login(process.env.BOT_TOKEN);
   }
 }
