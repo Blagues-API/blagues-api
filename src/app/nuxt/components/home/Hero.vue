@@ -1,0 +1,279 @@
+<template>
+  <section class="hero">
+    <div class="wrapper">
+      <div class="content">
+        <h2>Besoin d’une <b>API</b> de <b>blagues</b> françaises ?</h2>
+        <div class="tags">
+          <div class="line">
+            <span class="tag">#collaborative</span
+            ><span class="tag">#open-source</span>
+          </div>
+          <div class="line">
+            <span class="tag">#communautaire</span
+            ><span class="tag">#français</span>
+          </div>
+        </div>
+        <div class="buttons">
+          <div class="button npm">
+            <NpmIcon class="icon" />
+            <span class="name">NPM</span>
+          </div>
+          <div class="button pypi">
+            <PyPiIcon class="icon" />
+            <span class="name">PY<span>PI</span></span>
+          </div>
+          <div class="button api">
+            <ApiIcon class="icon" />
+          </div>
+        </div>
+      </div>
+      <div class="example" v-if="joke">
+        <p class="type">{{ jokesTypes[joke.type] }}</p>
+        <p class="joke">{{ joke.joke }}</p>
+        <p class="spoiler" tabindex="0">
+          <span class="answer">{{ joke.answer }}</span>
+        </p>
+        <button class="next" @click="refreshJoke()">UNE AUTRE !</button>
+      </div>
+    </div>
+    <div class="sroller" @click="scrollToDocs()">
+      <div class="name">Documentation</div>
+      <DownIcon />
+    </div>
+    <div ref="docs" class="bottom"></div>
+  </section>
+</template>
+
+<script>
+import { defineComponent, ref, onMounted } from '@nuxtjs/composition-api';
+
+import jokes from '../../../../../blagues.json';
+
+import NpmIcon from '@/assets/icons/npm.svg?inline';
+import PyPiIcon from '@/assets/icons/pypi.svg?inline';
+import ApiIcon from '@/assets/icons/api.svg?inline';
+import DownIcon from '@/assets/icons/down.svg?inline';
+
+const jokesTypes = {
+  limit: 'Blague limite limite',
+  global: 'Blague normale',
+  dark: 'Blague humour noir',
+  dev: 'Blague de développeurs',
+  beauf: 'Humour de beaufs',
+  blondes: 'Blagues blondes'
+};
+
+export default defineComponent({
+  setup() {
+    const joke = ref(null);
+    const docs = ref(null);
+
+    const refreshJoke = () => {
+      joke.value = jokes[Math.floor(Math.random() * jokes.length)];
+    };
+
+    const scrollToDocs = () => {
+      docs.value.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    onMounted(() => {
+      refreshJoke();
+    });
+
+    return {
+      joke,
+      refreshJoke,
+      jokesTypes,
+      scrollToDocs,
+      docs
+    };
+  },
+  components: {
+    NpmIcon,
+    PyPiIcon,
+    ApiIcon,
+    DownIcon
+  }
+});
+</script>
+
+<style lang="scss">
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: var(--secondary);
+  min-height: 60vh;
+  padding: 40px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 900px;
+    width: 100%;
+    .content {
+      max-width: 350px;
+      h2 {
+        font-family: Roboto;
+        font-weight: 900;
+        font-size: 48px;
+        line-height: 52px;
+        letter-spacing: 0.02em;
+        color: var(--white);
+        b {
+          color: var(--primary);
+        }
+      }
+      .tags {
+        max-width: 250px;
+        margin: 16px 0;
+        .line {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 8px;
+          &:last-child {
+            margin: 0;
+          }
+          .tag {
+            color: #ffffffa3;
+            letter-spacing: 0.02em;
+          }
+        }
+      }
+      .buttons {
+        margin-top: 24px;
+        display: flex;
+        .button {
+          display: flex;
+          align-items: center;
+          padding: 12px;
+          margin-right: 16px;
+          border-radius: 7px;
+          min-width: 100px;
+          cursor: pointer;
+          .icon {
+            height: 22px;
+          }
+          .name {
+            margin-left: 8px;
+            font-weight: bold;
+            user-select: none;
+          }
+          &.npm {
+            background-color: #cb3837;
+            .name {
+              color: var(--white);
+            }
+          }
+          &.pypi {
+            background-color: var(--white);
+            .name {
+              color: #3775a9;
+            }
+          }
+          &.api {
+            min-width: 0;
+            background-color: #3f3f3f;
+          }
+        }
+      }
+    }
+    .example {
+      display: flex;
+      flex-direction: column;
+      background: var(--white);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      border-radius: 12px;
+      padding: 24px;
+      max-width: 450px;
+      .type {
+        font-weight: bold;
+        font-size: 18px;
+        color: #2e465799;
+      }
+      .joke {
+        font-weight: bold;
+        font-size: 24px;
+        color: #414141;
+      }
+      .spoiler {
+        background-color: #202225;
+        border-radius: 3px;
+        transition: background-color 0.3s ease;
+        outline: 0;
+        cursor: pointer;
+        padding: 8px;
+        .answer {
+          font-weight: 600;
+          color: #414141;
+          opacity: 0;
+          pointer-events: none;
+          white-space: pre-wrap;
+          transition: opacity 0.3s ease;
+        }
+        &:focus {
+          background-color: #24242452;
+          cursor: text;
+          .answer {
+            opacity: 1;
+          }
+        }
+      }
+      p {
+        font-size: 22px;
+        line-height: 30px;
+        color: #0067ad;
+        margin-bottom: 16px;
+        &.joke_type {
+          color: #888888;
+          font-size: 16px;
+          @media (max-width: 420px) {
+            font-size: 14px;
+          }
+        }
+      }
+
+      .next {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-self: flex-end;
+        height: 40px;
+        background-color: var(--primary);
+        padding: 10px 16px;
+        border-radius: 6px;
+        font-size: 15px;
+        color: var(--white);
+        font-weight: bold;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: background-color 0.3s;
+        &:hover {
+          background-color: var(--primary-dark);
+        }
+      }
+    }
+  }
+  .sroller {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 32px;
+    margin-right: 32px;
+    cursor: pointer;
+    .name {
+      color: rgba(255, 255, 255, 0.8);
+      margin-right: 8px;
+      user-select: none;
+    }
+  }
+  .bottom {
+    position: absolute;
+    bottom: 0;
+  }
+}
+</style>
