@@ -12,12 +12,12 @@ export default class Bot {
       intents: Intents.FLAGS.GUILDS
     });
 
-    this.client.on('ready', this.onReady);
-    this.client.on('interactionCreate', this.onInteractionCreate);
+    this.client.on('ready', this.onReady.bind(this));
+    this.client.on('interactionCreate', this.onInteractionCreate.bind(this));
   }
 
   get available(): boolean {
-    return !!this.client.readyAt
+    return !!this.client.readyAt;
   }
 
   onReady(): void {
