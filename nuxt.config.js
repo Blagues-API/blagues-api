@@ -1,9 +1,14 @@
 export default {
   components: false,
   srcDir: './src/app/nuxt',
-  buildModules: ['@nuxtjs/composition-api/module'],
+  buildModules: [
+    // Doc: https://composition-api.nuxtjs.org
+    '@nuxtjs/composition-api/module',
+    // Doc: https://github.com/nuxt-community/svg-module
+    '@nuxtjs/svg'
+  ],
   modules: ['@nuxtjs/axios', '@nuxtjs/auth'],
-  css: ['./assets/reset.css'],
+  css: ['./assets/css/reset.css'],
 
   /*
    ** Axios module configuration
@@ -45,6 +50,28 @@ export default {
       login: '/',
       logout: '/',
       home: '/'
+    }
+  },
+
+  build: {
+    babel: {
+      babelrc: false,
+      cacheDirectory: undefined,
+      presets: ['@nuxt/babel-preset-app'],
+      plugins: [
+        [
+          'prismjs',
+          {
+            languages: ['javascript', 'bash'],
+            plugins: [
+              // 'copy-to-clipboard',
+              'normalize-whitespace',
+              'keep-markup'
+            ],
+            css: false
+          }
+        ]
+      ]
     }
   }
 };
