@@ -16,7 +16,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--bluewood);
+  background-color: var(--secondary);
   color: var(--white);
   height: 40px;
   .copyright {
@@ -24,6 +24,9 @@ footer {
     font-weight: bold;
     font-size: 14px;
     line-height: 22px;
+    a {
+      text-decoration: none;
+    }
   }
 }
 </style>
