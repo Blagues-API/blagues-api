@@ -1,18 +1,18 @@
 <template>
   <div class="container">
-    <JokeDisplay />
+    <Hero />
     <Informations />
   </div>
 </template>
 
 <script>
 import Informations from '../components/home/Informations';
-import JokeDisplay from '../components/home/JokeDisplay';
+import Hero from '../components/home/Hero';
 
 export default {
   components: {
     Informations,
-    JokeDisplay
+    Hero
   }
 };
 </script>

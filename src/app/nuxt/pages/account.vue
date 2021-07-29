@@ -2,9 +2,7 @@
   <div class="container token-page">
     <div class="card">
       <div class="token">
-        <div class="language">
-          VOTRE TOKEN
-        </div>
+        <div class="language">VOTRE TOKEN</div>
         <div class="code" ref="target">
           {{ $auth.user.token }}
         </div>
@@ -142,7 +140,7 @@ export default {
           justify-content: center;
           align-items: center;
           height: 40px;
-          background-color: var(--matisse);
+          background-color: var(--primary);
           padding: 10px 16px;
           font-size: 15px;
           color: var(--white);
@@ -153,7 +151,7 @@ export default {
             margin-right: 10px;
           }
           &:hover {
-            background-color: var(--matisse)-dark;
+            background-color: var(--primary-dark);
           }
         }
       }
