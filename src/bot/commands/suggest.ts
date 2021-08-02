@@ -13,7 +13,6 @@ import Command from '../lib/command';
 import { suggestsChannel } from '../constants';
 import { interactionError } from '../utils';
 import { JokeTypesRefs } from '../../typings';
-import { MessageButtonStyles } from 'discord.js/typings/enums';
 
 export default class SuggestCommand extends Command {
   constructor() {
@@ -90,12 +89,12 @@ export default class SuggestCommand extends Command {
         new MessageButton({
           label: 'Envoyer',
           customId: 'true',
-          style: MessageButtonStyles.SUCCESS
+          style: 'SUCCESS'
         }),
         new MessageButton({
           label: 'Annuler',
           customId: 'false',
-          style: MessageButtonStyles.DANGER
+          style: 'DANGER'
         })
       ]
     });
