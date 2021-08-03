@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { defineComponent, ref, onMounted } from '@nuxtjs/composition-api';
+import { defineComponent, ref } from '@nuxtjs/composition-api';
 
 import jokes from '../../../../../blagues.json';
 
@@ -65,7 +65,7 @@ const jokesTypes = {
 
 export default defineComponent({
   setup() {
-    const joke = ref(null);
+    const joke = ref(jokes[Math.floor(Math.random() * jokes.length)]);
     const docs = ref(null);
 
     const refreshJoke = () => {
@@ -75,10 +75,6 @@ export default defineComponent({
     const scrollToDocs = () => {
       docs.value.scrollIntoView({ behavior: 'smooth' });
     };
-
-    onMounted(() => {
-      refreshJoke();
-    });
 
     return {
       joke,
