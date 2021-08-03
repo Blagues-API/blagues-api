@@ -22,6 +22,7 @@
           une communauté francophone.
         </p>
       </div>
+      <Selector :value="status" v-model="status" />
       <template v-if="status === 'api'">
         <div class="block" id="use">
           <a href="#use" class="title-container">
@@ -303,9 +304,14 @@ import jokes from '../../../../../blagues.json';
 
 import prismjs from 'prismjs';
 
-import { ref, reactive, onMounted } from '@nuxtjs/composition-api';
+import { ref, reactive, onMounted, watch } from '@nuxtjs/composition-api';
+
+import Selector from '@/components/home/Selector.vue';
 
 export default {
+  components: {
+    Selector
+  },
   setup() {
     const count = jokes.length;
     const status = ref('npm');
@@ -314,11 +320,12 @@ export default {
       js_setup: 'cjs'
     });
 
-    const setStatus = async (name) => {
-      status.value = name;
-      await new Promise((resolve) => setTimeout(resolve(), 1000));
+    const sleep = () => new Promise((resolve) => setTimeout(resolve(), 1000));
+
+    watch(status, async (status, oldStatus) => {
+      await sleep();
       prismjs.highlightAll();
-    };
+    });
 
     const updateVersion = (key, value) => {
       versions[key] = value;
@@ -331,7 +338,6 @@ export default {
     return {
       count,
       status,
-      setStatus,
       versions,
       updateVersion
     };
