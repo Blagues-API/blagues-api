@@ -40,6 +40,7 @@ pre[class*='language-'] {
   margin: 0 0 1em;
   overflow: auto;
   border-radius: 0.3em;
+  padding-right: 45px;
 }
 
 pre[class*='language-']:last-child {
