@@ -1,5 +1,7 @@
 import { stripIndents } from 'common-tags';
 import {
+  ColorResolvable,
+  MessageEmbedOptions,
   CommandInteraction,
   Guild,
   MessageActionRow,
@@ -9,10 +11,24 @@ import {
   User
 } from 'discord.js';
 import Command from '../lib/command';
+import { findBestMatch } from 'string-similarity';
+
+import jokes from '../../../blagues.json';
 
 import { suggestsChannel } from '../constants';
 import { interactionError } from '../utils';
 import { JokeTypesRefs } from '../../typings';
+
+enum Similarity {
+  Different,
+  Like,
+  Same
+}
+enum Colors {
+  YELLOW,
+  BLUE,
+  RED
+}
 
 export default class SuggestCommand extends Command {
   constructor() {
@@ -57,7 +73,37 @@ export default class SuggestCommand extends Command {
       );
     }
 
-    const embed = {
+    const { bestMatch, bestMatchIndex } = findBestMatch(
+      `${interaction.options.get('joke')!.value} ${
+        interaction.options.get('response')!.value
+      }`,
+      jokes.map((e) => `${e.joke} ${e.answer}`)
+    );
+
+    let similarity: Similarity = Similarity.Different;
+    if (bestMatch.rating > 0.6)
+      similarity = bestMatch.rating > 0.8 ? Similarity.Same : Similarity.Like;
+
+    let description = stripIndents`
+      > **Type**: ${interaction.options.get('type')!.value}
+      > **Blague**: ${interaction.options.get('joke')!.value}
+      > **Réponse**: ${interaction.options.get('response')!.value}
+    `;
+
+    if (similarity !== Similarity.Different) {
+      description = stripIndents`
+        **Votre blague**
+        ${description}
+        **[Blague similaire](https://github.com/Blagues-API/blagues-api/blob/master/blagues.json#L${
+          6 * jokes[bestMatchIndex].id - 4
+        }-L${6 * jokes[bestMatchIndex].id + 1})**
+        >>> **Type**: ${jokes[bestMatchIndex].type}
+        **Blague**: ${jokes[bestMatchIndex].joke}
+        **Réponse**: ${jokes[bestMatchIndex].answer}
+      `;
+    }
+
+    const embed: MessageEmbedOptions = {
       author: {
         icon_url: (interaction.member!.user as User).displayAvatarURL({
           format: 'png',
@@ -66,11 +112,7 @@ export default class SuggestCommand extends Command {
         }),
         name: (interaction.member!.user as User).tag
       },
-      description: stripIndents`
-        >>> **Type**: ${interaction.options.get('type')!.value}
-        **Blague**: ${interaction.options.get('joke')!.value}
-        **Réponse**: ${interaction.options.get('response')!.value}
-      `,
+      description,
       footer: {
         text: (interaction.guild as Guild).name,
         icon_url:
@@ -80,7 +122,7 @@ export default class SuggestCommand extends Command {
             dynamic: true
           }) ?? undefined
       },
-      color: 0x0067ad,
+      color: Colors[similarity] as ColorResolvable,
       timestamp: new Date()
     };
 
@@ -101,9 +143,17 @@ export default class SuggestCommand extends Command {
 
     await interaction.reply({
       content:
-        "Merci de nous avoir suggeré cette blague. Veuillez confirmer son envoi si vous êtes sûr qu'elle ne contient pas de faute.",
+        similarity === Similarity.Same
+          ? 'Cette blague existe déjà.'
+          : `Merci de nous avoir suggeré cette blague. Veuillez confirmer son envoi si vous êtes sûr qu'elle ne contient pas de fautes.\n\n
+          ${
+            similarity === Similarity.Like
+              ? "⚠️ Attention, une blague similaire existe déjà, êtes vous sûr qu'elle est différente ?"
+              : ''
+          }
+        `,
       embeds: [embed],
-      components: [row],
+      components: similarity !== Similarity.Same ? [row] : [],
       ephemeral: true
     });
 
