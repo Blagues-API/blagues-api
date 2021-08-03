@@ -64,7 +64,7 @@ export default {
           {
             languages: ['javascript', 'bash'],
             plugins: [
-              // 'copy-to-clipboard',
+              'copy-to-clipboard',
               'normalize-whitespace',
               'keep-markup'
             ],
