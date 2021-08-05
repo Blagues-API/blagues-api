@@ -38,6 +38,9 @@ body {
       left: 0;
       right: 0;
       z-index: 1;
+      @media screen and (max-width: 720px) {
+        position: sticky;
+      }
     }
   }
   .container {

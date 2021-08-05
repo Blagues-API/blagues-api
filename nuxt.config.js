@@ -1,6 +1,12 @@
 export default {
   components: false,
   srcDir: './src/app/nuxt',
+  plugins: [
+    {
+      src: '~/plugins/vue-body-scroll-lock',
+      mode: 'client'
+    }
+  ],
   buildModules: [
     // Doc: https://composition-api.nuxtjs.org
     '@nuxtjs/composition-api/module',

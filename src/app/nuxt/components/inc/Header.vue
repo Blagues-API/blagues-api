@@ -1,10 +1,11 @@
 <template>
-  <header>
+  <header v-body-scroll-lock="open">
     <a class="brand" href="/" title="Accueil">
       <Logo class="logo" />
       <h1 class="name">BLAGUES API</h1>
     </a>
-    <div class="navigation">
+    <div class="overlay" :class="{ open }" @click="open = false" />
+    <div class="navigation" :class="{ open }">
       <a
         class="item"
         href="https://github.com/DraftProducts/blagues-api"
@@ -34,6 +35,9 @@
         >CONNEXION</span
       >
     </div>
+    <div class="burger" :class="{ open }" @click="open = !open">
+      <div class="burger-lines" />
+    </div>
   </header>
 </template>
 
@@ -43,6 +47,11 @@ import Logo from '@/assets/logo.svg?inline';
 export default {
   components: {
     Logo
+  },
+  data() {
+    return {
+      open: false
+    };
   }
 };
 </script>
@@ -57,16 +66,10 @@ header {
   .brand {
     display: flex;
     align-items: center;
-    width: 60%;
     margin-right: 8%;
     user-select: none;
     cursor: pointer;
     text-decoration: none;
-    @media (max-width: 720px) {
-      width: 100%;
-      justify-content: center;
-      margin-right: 0;
-    }
 
     .logo {
       width: 70px;
@@ -79,18 +82,77 @@ header {
       font-size: 26px;
       font-weight: 800;
       text-shadow: 1px 1px 3px #000000cc;
+      white-space: nowrap;
+    }
+  }
+  .burger {
+    display: none;
+    height: 40px;
+    width: 40px;
+    position: relative;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.2s all;
+    margin-right: 8px;
+    z-index: 3;
+    -webkit-tap-highlight-color: transparent;
+    .burger-lines {
+      top: 50%;
+      margin-top: -2.5px;
+      width: 28px;
+      &,
+      &:after,
+      &:before {
+        pointer-events: none;
+        display: block;
+        content: '';
+        border-radius: 2.5px;
+        background-color: var(--primary);
+        height: 5px;
+        position: absolute;
+        right: 0;
+        transform: rotate(0);
+        transition: 0.2s top 0.2s, 0.1s left, 0.2s transform,
+          0.4s background-color 0.2s, 0s width 0.15s;
+      }
+      &:after {
+        width: 38px;
+        top: -14px;
+      }
+      &:before {
+        width: 18px;
+        top: 14px;
+      }
+    }
+
+    &.open {
+      .burger-lines {
+        &,
+        &:after,
+        &:before {
+          transition: 0.2s background-color, 0.2s top, 0.2s left,
+            0.2s transform 0.15s, 0s width 0.15s;
+        }
+        & {
+          background-color: transparent;
+        }
+        &:before,
+        &:after {
+          width: 38px;
+          top: 0px;
+        }
+        &:before {
+          transform: rotate(-45deg);
+        }
+        &:after {
+          transform: rotate(45deg);
+        }
+      }
     }
   }
   .navigation {
     display: flex;
     align-items: center;
-
-    @media (max-width: 720px) {
-      width: 100%;
-      justify-content: center;
-      padding: 12px;
-    }
-
     .item {
       font-weight: 600;
       margin: 16px;
@@ -104,26 +166,17 @@ header {
         color: var(--white);
         border-radius: 18px;
       }
-      @media (max-width: 420px) {
-        margin: 10px 5px;
-      }
     }
     .user-place {
       display: flex;
       align-items: center;
       margin: 0 10px;
-      @media (max-width: 420px) {
-        margin: 0 5px;
-      }
       .avatar {
         background-size: 32px;
         height: 36px;
         width: 36px;
         border-radius: 18px;
         border: 2px solid var(--white);
-        @media (max-width: 420px) {
-          display: none;
-        }
       }
       .username {
         margin-left: 8px;
@@ -131,11 +184,15 @@ header {
         font-weight: 600;
         font-size: 18px;
         color: white;
-        @media (max-width: 420px) {
-          font-size: 16px;
-          margin-left: 0;
-        }
       }
+    }
+  }
+  @media screen and (max-width: 720px) {
+    .burger {
+      display: flex;
+    }
+    .navigation {
+      display: none;
     }
   }
 }
