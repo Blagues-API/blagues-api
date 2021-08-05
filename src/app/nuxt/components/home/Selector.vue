@@ -152,7 +152,7 @@ export default {
   position: relative;
   display: flex;
   align-items: center;
-  width: 100%;
+  min-width: 160px;
   min-height: 46px;
   background-color: #ffffff;
   border: 1px solid #d7d7d7;

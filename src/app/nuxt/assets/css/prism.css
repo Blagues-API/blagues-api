@@ -20,6 +20,21 @@ pre[class*='language-'] {
   hyphens: none;
 }
 
+pre[class*='language-']::-webkit-scrollbar {
+  -webkit-appearance: none;
+  background-color: var(--secondary);
+  height: 8px;
+}
+
+pre[class*='language-']::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  transition: background-color 0.2s ease;
+}
+
+pre[class*='language-']::-webkit-scrollbar-thumb:hover {
+  background-color: var(--primary-dark);
+}
+
 pre[class*='language-']::-moz-selection,
 pre[class*='language-'] ::-moz-selection,
 code[class*='language-']::-moz-selection,

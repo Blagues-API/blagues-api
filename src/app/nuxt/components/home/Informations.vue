@@ -23,8 +23,10 @@
         </p>
       </div>
       <div class="block" id="npm">
-        <h2 class="title">{{ docsData.title }}</h2>
-        <Selector :value="status" v-model="status" />
+        <div class="flex-space top">
+          <h2 class="title">{{ docsData.title }}</h2>
+          <Selector :value="status" v-model="status" />
+        </div>
         <p>{{ docsData.description }}</p>
       </div>
 
@@ -372,7 +374,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 48px 32px;
+  padding: 32px;
   .content {
     width: 100%;
     max-width: 900px;
@@ -382,12 +384,22 @@ export default {
       margin: 16px 0;
       .flex-space {
         display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        &.top {
+          align-items: center;
+          @media screen and (max-width: 430px) {
+            flex-direction: column-reverse;
+            align-items: flex-start;
+            .selector {
+              width: 100%;
+            }
+          }
+        }
         .buttons {
           display: flex;
-          justify-content: flex-end;
           align-self: flex-end;
           margin-bottom: 16px;
-          flex: 1;
           .button {
             margin-left: 16px;
             padding: 6px 16px;
@@ -404,6 +416,9 @@ export default {
             &.active {
               border-color: #0098ff;
               color: #0098ff;
+            }
+            &:first-child {
+              margin-left: 0;
             }
           }
         }
