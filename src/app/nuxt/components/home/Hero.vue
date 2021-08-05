@@ -266,6 +266,9 @@ export default defineComponent({
       margin-right: 8px;
       user-select: none;
     }
+    svg {
+      color: white;
+    }
   }
   .bottom {
     position: absolute;

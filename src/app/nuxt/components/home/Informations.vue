@@ -22,7 +22,12 @@
           une communauté francophone.
         </p>
       </div>
-      <Selector :value="status" v-model="status" />
+      <div class="block" id="npm">
+        <h2 class="title">{{ docsData.title }}</h2>
+        <Selector :value="status" v-model="status" />
+        <p>{{ docsData.description }}</p>
+      </div>
+
       <template v-if="status === 'api'">
         <div class="block" id="use">
           <a href="#use" class="title-container">
@@ -119,15 +124,6 @@
         </div>
       </template>
       <template v-if="status === 'npm'">
-        <div class="block" id="npm">
-          <a href="#npm" class="title-container">
-            <h2 class="title">Module npm</h2>
-          </a>
-          <p>
-            Les différentes catégories vous permettront de récupérer une blague
-            aléatoirement dans un thème ou type de blague spécifique.
-          </p>
-        </div>
         <div class="block" id="install">
           <div class="flex-space">
             <a href="#install" class="title-container">
@@ -304,7 +300,13 @@ import jokes from '../../../../../blagues.json';
 
 import prismjs from 'prismjs';
 
-import { ref, reactive, onMounted, watch } from '@nuxtjs/composition-api';
+import {
+  ref,
+  reactive,
+  onMounted,
+  watch,
+  computed
+} from '@nuxtjs/composition-api';
 
 import Selector from '@/components/home/Selector.vue';
 
@@ -320,12 +322,29 @@ export default {
       js_setup: 'cjs'
     });
 
+    const data = {
+      npm: {
+        title: 'Module npm',
+        description: 'coucou'
+      },
+      api: {
+        title: 'API publique',
+        description: 'coucou'
+      },
+      pypi: {
+        title: 'Module PyPi',
+        description: 'coucou'
+      }
+    };
+
     const sleep = () => new Promise((resolve) => setTimeout(resolve(), 1000));
 
-    watch(status, async (status, oldStatus) => {
+    watch(status, async () => {
       await sleep();
       prismjs.highlightAll();
     });
+
+    const docsData = computed(() => data[status.value]);
 
     const updateVersion = (key, value) => {
       versions[key] = value;
@@ -339,7 +358,8 @@ export default {
       count,
       status,
       versions,
-      updateVersion
+      updateVersion,
+      docsData
     };
   }
 };
