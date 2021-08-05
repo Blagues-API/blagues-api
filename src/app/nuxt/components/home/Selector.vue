@@ -5,11 +5,11 @@
     :class="{ active }"
     role="combobox"
     @focus="activate()"
-    @blur="desactivate()"
+    @blur="deactivate()"
     @keydown.self.down.prevent="pointerForward()"
     @keydown.self.up.prevent="pointerBackward()"
     @keypress.enter.self="addPointerElement()"
-    @keyup.esc="desactivate()"
+    @keyup.esc="deactivate()"
   >
     <div class="select_element">
       <div class="element">
@@ -21,7 +21,7 @@
     <div
       v-show="active"
       ref="list"
-      :class="['select_elements', { 'top-pos': isTop }]"
+      class="select_elements"
       tabindex="-1"
       role="listbox"
       @focus="activate"
@@ -44,6 +44,9 @@
 
 <script>
 import DownIcon from '@/assets/icons/down.svg?inline';
+import NpmIcon from '@/assets/icons/npm_full.svg';
+import PypiIcon from '@/assets/icons/pypi_full.svg';
+import ApiIcon from '@/assets/icons/api_full.svg';
 
 export default {
   name: 'Selector',
@@ -59,26 +62,25 @@ export default {
   data() {
     return {
       active: false,
-      isTop: false,
       pointer: 0,
       elements: [
         {
           id: 'npm',
           name: 'NPM',
           color: '#cb3837',
-          icon: 'npm.svg'
+          icon: NpmIcon
         },
         {
           id: 'pypi',
           name: 'PYPI',
           color: '#3775a9',
-          icon: 'pypi.svg'
+          icon: PypiIcon
         },
         {
           id: 'api',
           name: 'API',
           color: '#3f3f3f',
-          icon: 'api.svg'
+          icon: ApiIcon
         }
       ]
     };
@@ -93,18 +95,16 @@ export default {
   },
   methods: {
     toggle() {
-      this.active ? this.desactivate() : this.activate();
+      this.active ? this.deactivate() : this.activate();
     },
     activate() {
       if (this.active || this.disabled) return;
-
-      this.checkPosition();
 
       this.active = true;
 
       this.$el.focus();
     },
-    desactivate() {
+    deactivate() {
       if (!this.active) return;
 
       this.active = false;
@@ -112,7 +112,7 @@ export default {
       this.$el.blur();
     },
     pointerForward() {
-      if (this.pointer < this.rolesElements.length - 1) {
+      if (this.pointer < this.elements.length - 1) {
         this.pointer++;
 
         if (
@@ -134,17 +134,13 @@ export default {
       }
     },
     addPointerElement() {
-      if (this.rolesElements.length > 0) {
-        this.add(this.rolesElements[this.pointer]);
+      if (this.elements.length > 0) {
+        this.select(this.elements[this.pointer].id);
       }
       this.pointer = 0;
     },
-    checkPosition() {
-      this.isTop =
-        this.$refs.list.getBoundingClientRect().bottom > window.innerHeight;
-    },
     select(element_id) {
-      this.desactivate();
+      this.deactivate();
       this.$emit('input', element_id);
     }
   }
@@ -163,29 +159,17 @@ export default {
   border-radius: 3px;
   font-size: 15px;
   font-weight: 400;
-  padding: 11px 12px 3px;
+  padding: 0 12px;
   outline: none;
   box-sizing: border-box;
   transition: border-color 0.3s ease-out;
   user-select: none;
-  .chip {
+  .element {
     display: flex;
     align-items: center;
-    justify-content: center;
-    border: 1px solid;
-    border-radius: 22px;
-    height: 22px;
-    text-overflow: ellipsis;
-    font-size: 12px;
-    font-weight: 600;
-    margin: 0 8px 8px 0;
-    padding: 4px;
+    font-weight: 700;
     span {
-      color: rgba(255, 255, 255, 0.8);
-      font-weight: 200;
-      margin-right: 5px;
-      margin-left: 5px;
-      line-height: 1;
+      margin-left: 8px;
     }
   }
   .select_element {
@@ -195,6 +179,9 @@ export default {
     .down {
       position: absolute;
       right: 16px;
+      color: #c4c4c4;
+      width: 18px;
+      height: 18px;
     }
   }
   &.active .select_element .down {
@@ -206,21 +193,16 @@ export default {
   }
   .select_elements {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 1px);
     left: 0;
     z-index: 500;
     width: 100%;
     background-color: #ffffff;
     border-radius: 0 0 3px 3px;
-    border: 1px solid #1a1a1a;
     box-sizing: border-box;
     max-height: 330px;
     overflow-y: auto;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
-    &.top-pos {
-      top: unset;
-      bottom: 100%;
-    }
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
 
     &::-webkit-scrollbar {
       -webkit-appearance: none;
@@ -242,7 +224,7 @@ export default {
       padding-left: 15px;
       cursor: pointer;
       min-height: 46px;
-      font-weight: 500;
+      font-weight: 700;
       display: flex;
       align-items: center;
       position: relative;
@@ -250,7 +232,7 @@ export default {
         display: none;
       }
       &.selected {
-        background-color: #c4c4c4;
+        background-color: #e6e6e6;
       }
     }
   }
