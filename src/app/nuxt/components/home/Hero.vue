@@ -170,8 +170,9 @@ export default defineComponent({
             }
           }
           &.api {
-            min-width: 0;
+            min-width: 0 !important;
             background-color: #3f3f3f;
+            margin: 0;
           }
         }
       }
@@ -273,6 +274,44 @@ export default defineComponent({
   .bottom {
     position: absolute;
     bottom: 0;
+  }
+  @media (max-width: 680px) {
+    padding: 64px 48px;
+    min-height: 0;
+    .wrapper {
+      flex-direction: column;
+      .content {
+        margin-bottom: 48px;
+        max-width: 280px;
+        h2 {
+          font-size: 38px;
+          line-height: 44px;
+        }
+        .buttons {
+          .button {
+            min-width: 80px;
+          }
+        }
+      }
+      .example {
+        p {
+          line-height: 24px;
+          &.type {
+            margin-bottom: 8px;
+            font-size: 16px;
+          }
+          &.joke {
+            font-size: 20px;
+          }
+          &.spoiler {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+    .sroller {
+      display: none;
+    }
   }
 }
 </style>
