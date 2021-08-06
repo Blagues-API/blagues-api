@@ -7,6 +7,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "docker-compose -p blagues-api -f ./docker-compose.dev.yml up",
+    "dev:legacy": "nodemon -r dotenv/config --watch '*' --ext 'ts,json' --exec ts-node src/index.ts",
     "dev:build": "docker-compose -p blagues-api -f ./docker-compose.dev.yml build",
     "lint:nuxt": "eslint --ext .ts,.js,.vue ./src/app/nuxt",
     "lint:bot": "eslint --ext .ts,.js ./src/bot",
