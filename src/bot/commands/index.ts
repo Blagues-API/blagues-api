@@ -1,6 +1,6 @@
 import { Client, CommandInteraction } from 'discord.js';
 import Command from '../lib/command';
-
+import CorrectCommand from './correction';
 import SuggestCommand from './suggest';
 
 export default class Commands {
@@ -11,7 +11,7 @@ export default class Commands {
   }
 
   public get commands(): Command[] {
-    return [new SuggestCommand()];
+    return [new SuggestCommand(), new CorrectCommand()];
   }
 
   public get(name: string) {
