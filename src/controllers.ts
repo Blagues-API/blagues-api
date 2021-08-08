@@ -4,7 +4,12 @@ import { random } from './utils';
 
 const jokes = data as Joke[];
 
-export const randomJoke = (disallow?: string[]) => {
+interface JokeResponse {
+  error: boolean;
+  response?: Joke
+}
+
+export function randomJoke(disallow?: string[]): JokeResponse {
   let typesForbidden: string[] = [];
 
   if (disallow) {
@@ -29,7 +34,7 @@ export const randomJoke = (disallow?: string[]) => {
   };
 };
 
-export const randomJokeByType = (type: string) => {
+export function randomJokeByType(type: string): JokeResponse {
   if (!JokeTypes.includes(type)) {
     return {
       error: true
@@ -42,10 +47,12 @@ export const randomJokeByType = (type: string) => {
   };
 };
 
-export const jokeById = (id: number) => {
-  return jokes.find((joke: Joke) => joke.id === id);
+export function jokeById(id: number): Joke | null {
+  return jokes.find((joke: Joke) => joke.id === id) ?? null;
 };
 
-export const jokesCount = () => {
-  return jokes.length;
-};
+export const jokesCount = jokes.length;
+
+export function jokeByQuestion(question: string): Joke | null {
+  return jokes.find((entry: Joke) => entry.joke === question) ?? null
+}
