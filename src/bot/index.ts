@@ -1,7 +1,6 @@
 import { Client, CommandInteraction, Intents, Interaction } from 'discord.js';
 import jokes from '../../blagues.json';
 // import { AdminUsers, jokeRole, suggestsChannel, logsChannel} from './constents'
-
 import Commands from './commands';
 
 export default class Bot {
@@ -11,7 +10,9 @@ export default class Bot {
   constructor() {
     this.client = new Client({
       partials: ['REACTION'],
-      intents: Intents.FLAGS.GUILDS
+      intents:
+        Intents.FLAGS.GUILDS |
+        Intents.FLAGS.GUILD_MESSAGES
     });
 
     this.commands = new Commands(this.client);
