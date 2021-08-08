@@ -21,9 +21,17 @@ export const JokeTypesRefs = {
   global: 'Général',
   dark: 'Noir',
   dev: 'Développeur',
-  limit: 'Limite limite',
+  limit: '18+',
   beauf: 'Beauf',
   blondes: 'Blondes'
+};
+export const JokeTypesDescriptions = {
+  global: 'Blagues tout public, accessibles pour tous.',
+  dark: 'Blagues qui souligne avec cruauté certains faits.',
+  dev: 'Blagues orientées pour les développeurs & geeks.',
+  limit: 'Blagues portées sur la sexualité.',
+  beauf: 'Blagues vulgaires et généralement stéréotypées.',
+  blondes: 'Blagues ciblées sur les femmes blondes.'
 };
 
 export type Category =
