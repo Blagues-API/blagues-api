@@ -1,5 +1,5 @@
 import { stripIndents } from 'common-tags'
-import { ButtonInteraction, CommandInteraction, Interaction, Message, MessageActionRow, MessageButton, MessageSelectMenu, MessageSelectOptionData, SelectMenuInteraction, TextChannel } from 'discord.js'
+import { ButtonInteraction, ColorResolvable, CommandInteraction, Interaction, Message, MessageActionRow, MessageButton, MessageSelectMenu, MessageSelectOptionData, SelectMenuInteraction, TextChannel } from 'discord.js'
 import { jokeById, jokeByQuestion } from '../../controllers'
 import { Category, Joke, JokeTypesDescriptions, JokeTypesRefs } from '../../typings'
 import { suggestsChannel } from '../constants'
@@ -42,7 +42,18 @@ export default class CorrectionCommand extends Command {
 
     const newJoke = await this.requestChanges(interaction, joke);
 
-    console.log(newJoke);
+    await interaction.editReply({
+      embeds: [{
+        title: 'Requête de changement envoyée',
+        description: stripIndents`
+        > **Type:** ${joke.type}
+        > **Question:** ${joke.joke}
+        > **Réponse:** ${joke.answer}
+      `,
+      color: 'GREEN' as ColorResolvable
+      }],
+      components: []
+    })
 
     return;
   }
@@ -147,13 +158,34 @@ export default class CorrectionCommand extends Command {
         const response: SelectMenuInteraction = await typeMessage.awaitMessageComponent({
           filter: (i: Interaction) => i.user.id === interaction.user.id,
           time: 30000,
-        }) as SelectMenuInteraction;
+        }).catch(() => {
+          typeMessage.edit({
+            content: 'Par quel type de blague voulez-vous changer le type actuel ?',
+            embeds: [{
+              title: '💡 Commande annulée',
+              color: 0xFFDA83
+            }],
+            components: []
+          })
+        })as SelectMenuInteraction;
 
+        if(!response) return null
         joke.type = response.values[0] as Category
 
         if(typeMessage.deletable) await button.deleteReply();
 
         return this.requestChanges(interaction, joke as Joke, true);
+      }
+
+      case "question": {
+        const response = await this.requestChangesResponse(button, interaction, joke as Joke, 'question')
+        if(response) return this.requestChanges(interaction, response as Joke, true);
+        return null
+      }
+      case "answer": {
+        const response = await this.requestChangesResponse(button, interaction, joke as Joke, 'réponse')
+        if(response) return this.requestChanges(interaction, response as Joke, true);
+        return null
       }
       default: return joke;
     }
@@ -198,6 +230,30 @@ export default class CorrectionCommand extends Command {
     return IdType.JOKE_ID
   }
 
-
-
+  async requestChangesResponse(button: ButtonInteraction, interaction: CommandInteraction, joke: Joke, textReplyContent: string): Promise<Joke | null>{
+    const questionMessage = await button.reply({
+      content: `Par quelle ${textReplyContent} voulez-vous changer la ${textReplyContent} actuelle ?`,
+      fetchReply: true
+    }) as Message;
+    const messages = await interaction.channel!.awaitMessages({
+      filter: (m: Message) => m.author.id === interaction.user.id,
+      time: 30000,
+      max: 1
+    })
+    const message = messages.first()
+    if(!message){
+      questionMessage.edit({
+        content: questionMessage.content,
+        embeds: [{
+          title: '💡 Commande annulée',
+          color: 0xFFDA83
+        }],
+      })
+      return null
+    }
+    joke.joke = message.content
+    if(questionMessage.deletable) await button.deleteReply()
+    if(message.deletable) await message.delete()
+    return joke
+  }
 }
