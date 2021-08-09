@@ -1,7 +1,8 @@
 import { stripIndents } from 'common-tags'
-import { ButtonInteraction, CommandInteraction, Interaction, Message, MessageActionRow, MessageButton, MessageSelectMenu, MessageSelectOptionData, SelectMenuInteraction } from 'discord.js'
+import { ButtonInteraction, CommandInteraction, Interaction, Message, MessageActionRow, MessageButton, MessageSelectMenu, MessageSelectOptionData, SelectMenuInteraction, TextChannel } from 'discord.js'
 import { jokeById, jokeByQuestion } from '../../controllers'
 import { Category, Joke, JokeTypesDescriptions, JokeTypesRefs } from '../../typings'
+import { suggestsChannel } from '../constants'
 import Command from '../lib/command'
 
 enum IdType {
@@ -162,20 +163,23 @@ export default class CorrectionCommand extends Command {
     const type: IdType = this.getIdType(id);
     switch (type) {
       case IdType.MESSAGE_ID: {
-        // Récupérer le message et le contenu
-
-        /*const message: Message = (interaction.client.channels.cache.get(suggestsChannel) as TextChannel)?.messages.cache.get(id) as Message
-        const description: string = message.embeds[0].description as string*/
-
+        const message: Message = await (interaction.client.channels.cache.get(suggestsChannel) as TextChannel)?.messages.fetch(id) as Message
+        if(!message) return null
+        const description: string = message.embeds[0].description as string
+        const regex = /:\s(.+)/g
+        let array= []
+        let m
+        while ((m = regex.exec(description)) !== null) {
+          array.push(m[1])
+        }
         return {
-          id: Number(id),
-          type: 'dark',
-          joke: 'test',
-          answer: 'test'
+          id: Number(message.id),
+          type: array[0] as Category,
+          joke: array[1],
+          answer: array[2]
         };
       }
       case IdType.MESSAGE_QUESTION: {
-        // Récupérer la blague à partir de la question
        return jokeByQuestion(id)
       }
       case IdType.JOKE_ID: {
