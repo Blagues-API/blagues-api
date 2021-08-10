@@ -1,5 +1,5 @@
 import { stripIndents } from 'common-tags'
-import { ButtonInteraction, ColorResolvable, CommandInteraction, Interaction, Message, MessageActionRow, MessageButton, MessageSelectMenu, MessageSelectOptionData, SelectMenuInteraction, TextChannel } from 'discord.js'
+import { ButtonInteraction, ColorResolvable, CommandInteraction, EmbedField, Interaction, Message, MessageActionRow, MessageButton, MessageEditOptions, MessageSelectMenu, MessageSelectOptionData, SelectMenuInteraction, TextChannel } from 'discord.js'
 import { jokeById, jokeByQuestion } from '../../controllers'
 import { Category, Joke, JokeTypesDescriptions, JokeTypesRefs } from '../../typings'
 import { suggestsChannel } from '../constants'
@@ -55,7 +55,7 @@ export default class CorrectionCommand extends Command {
       components: []
     })
 
-    return;
+    if(newJoke) await this.EditJoke(interaction, newJoke)
   }
 
   async requestJoke(interaction: CommandInteraction, question: Message): Promise<Joke | null> {
@@ -251,9 +251,28 @@ export default class CorrectionCommand extends Command {
       })
       return null
     }
-    joke.joke = message.content
+    joke[textReplyContent == 'question' ? 'joke' : 'answer'] = message.content
     if(questionMessage.deletable) await button.deleteReply()
     if(message.deletable) await message.delete()
     return joke
   }
+
+  async EditJoke(interaction: CommandInteraction, newJoke: Joke){
+    if(newJoke.id > 6){
+      const message: Message = await (interaction.client.channels.cache.get(suggestsChannel) as TextChannel)?.messages.fetch(String(newJoke.id)) as Message
+      const field: EmbedField = {
+        name: interaction.user.username,
+        value: stripIndents`
+     \`\`\`**Type:** ${newJoke.type}
+        **Question:** ${newJoke.joke}
+        **Réponse:** ${newJoke.answer}\`\`\`
+      `,
+      inline: false
+      }
+
+      message.embeds[0].fields = [field]
+      await message.edit(message as MessageEditOptions)
+    }
+  }
+
 }
