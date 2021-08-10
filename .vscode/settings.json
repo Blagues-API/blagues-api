@@ -5,15 +5,14 @@
   },
   "editor.formatOnSaveMode": "file",
   "editor.codeActionsOnSave": {
-    "source.organizeImports": true,
-    "source.fixAll.eslint": true,
-    "source.fixAll.prettier": true,
+    "source.fixAll": true
   },
+  "vetur.validation.template": false,
   "editor.tabSize": 2,
   "prettier.tabWidth": 2,
   "files.eol": "\n",
   "editor.detectIndentation": false,
   "conventionalCommits.emojiFormat": "emoji",
   "jest.enableInlineErrorMessages": true,
-  "deepscan.enable": true,
+  "deepscan.enable": true
 }

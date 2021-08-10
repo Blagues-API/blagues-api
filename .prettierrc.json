@@ -3,6 +3,6 @@
   "tabWidth": 2,
   "useTabs": false,
   "endOfLine": "lf",
-  "proseWrap": "always",
+  "quoteProps": "as-needed",
   "singleQuote": true
 }

@@ -1,4 +1,5 @@
 {
   "root": true,
-  "extends": ["@nuxtjs"]
+  "extends": ["@nuxtjs"],
+  "ignorePatterns": ["index.ts"]
 }
