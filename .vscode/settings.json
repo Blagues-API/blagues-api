@@ -14,5 +14,6 @@
   "editor.detectIndentation": false,
   "conventionalCommits.emojiFormat": "emoji",
   "jest.enableInlineErrorMessages": true,
-  "deepscan.enable": true
+  "deepscan.enable": true,
+  "conventionalCommits.scopes": ["bot", "api", "nuxt", "ts"]
 }
