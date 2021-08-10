@@ -4,9 +4,10 @@
       Blagues API © 2019-2021
       <a href="https://www.draftman.fr" title="DraftMan Developer">DraftMan</a>
       | Powered by
-      <a href="https://www.draftbot.fr" title="DraftBot Discord Bot"
-        >DraftBot</a
-      >
+      <a
+        href="https://www.draftbot.fr"
+        title="DraftBot Discord Bot"
+      >DraftBot</a>
     </div>
   </footer>
 </template>

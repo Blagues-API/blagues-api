@@ -1,17 +1,13 @@
-import { CommandInteraction } from "discord.js";
+import { InteractionReplyOptions } from 'discord.js';
 
-export const interactionError: Function = (
-  interaction: CommandInteraction,
-  descriptionText: string,
-  ephemeralChoice: boolean = true
-) => {
-  return interaction.reply({
+export function interactionError(message: string): InteractionReplyOptions {
+  return {
     embeds: [
       {
-        description: `❌ ${descriptionText}`,
+        description: `❌ ${message}`,
         color: 0xff0000
       }
     ],
-    ephemeral: ephemeralChoice
-  });
-};
+    ephemeral: true
+  };
+}

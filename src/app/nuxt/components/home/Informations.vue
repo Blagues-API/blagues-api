@@ -7,7 +7,9 @@
       data-prismjs-copy-timeout="2000"
     >
       <div class="block">
-        <h2 class="title">Qu’est ce que Blagues API ?</h2>
+        <h2 class="title">
+          Qu’est ce que Blagues API ?
+        </h2>
         <p>
           <strong>Blagues API</strong> est une API de blagues, rassemblant les
           meilleures blagues avec un total de
@@ -16,22 +18,25 @@
         <p>Des blagues proposées par la communauté et catégorisées.</p>
         <p>
           L’API est accessible <strong>gratuitement</strong> et rassemble sur le
-          <a href="https://discord.gg/PPNpVaF" title="Discord de Blagues API"
-            >discord</a
-          >
+          <a
+            href="https://discord.gg/PPNpVaF"
+            title="Discord de Blagues API"
+          >discord</a>
           une communauté francophone.
         </p>
       </div>
-      <div class="block" id="npm">
+      <div id="npm" class="block">
         <div class="flex-space top">
-          <h2 class="title">{{ docsData.title }}</h2>
-          <Selector :value="status" v-model="status" />
+          <h2 class="title">
+            {{ docsData.title }}
+          </h2>
+          <Selector v-model="status" :value="status" />
         </div>
         <p>{{ docsData.description }}</p>
       </div>
 
       <template v-if="status === 'api'">
-        <div class="block" id="use">
+        <div id="use" class="block">
           <a href="#use" class="title-container">
             <h3 class="title">Utilisation</h3>
           </a>
@@ -42,19 +47,25 @@
             spécifique.
           </p>
           <div class="example">
-            <h5 class="language">BLAGUE ALÉATOIRE</h5>
+            <h5 class="language">
+              BLAGUE ALÉATOIRE
+            </h5>
             <pre><code class="language-javascript">GET /api/random</code></pre>
           </div>
           <div class="example">
-            <h5 class="language">BLAGUE ALÉATOIRE CATÉGORISÉ</h5>
+            <h5 class="language">
+              BLAGUE ALÉATOIRE CATÉGORISÉ
+            </h5>
             <pre><code class="language-javascript">GET /api/type/:type:/random // type: global, dev, dark, limit, beauf, blondes</code></pre>
           </div>
           <div class="example">
-            <h5 class="language">BLAGUE PAR ID</h5>
+            <h5 class="language">
+              BLAGUE PAR ID
+            </h5>
             <pre><code class="language-javascript">GET/api/id/:id:</code></pre>
           </div>
         </div>
-        <div class="block" id="advanced-use">
+        <div id="advanced-use" class="block">
           <a href="#advanced-use" class="title-container">
             <h3 class="title">Utilisation avancé</h3>
           </a>
@@ -66,25 +77,29 @@
             celles qui font partie d'une catégorie qui ne vous convient pas.
           </p>
           <div class="example">
-            <h5 class="language">UTILISATION D'UN SEUL FILTRE</h5>
+            <h5 class="language">
+              UTILISATION D'UN SEUL FILTRE
+            </h5>
             <pre><code class="language-javascript">GET /api/random?disallow=dark</code></pre>
           </div>
           <div class="example">
-            <h5 class="language">UTILISATION DE PLUSIEURS FILTRES</h5>
+            <h5 class="language">
+              UTILISATION DE PLUSIEURS FILTRES
+            </h5>
             <pre><code class="language-javascript">GET /api/random?disallow=dark&disallow=limit&disallow=dev</code></pre>
           </div>
         </div>
-        <div class="block" id="auth">
+        <div id="auth" class="block">
           <a href="#auth" class="title-container">
             <h3 class="title">Authentification</h3>
           </a>
           <p class="text">
             L'api de blagues utilise un token d'authentification Bearer pour les
-            requêtes. Vous pouvez le gérer depuis votre profil.<br />
+            requêtes. Vous pouvez le gérer depuis votre profil.<br>
             Les requêtes doivent toutes être effectuées via
             <a href="http://en.wikipedia.org/wiki/HTTP_Secure">HTTPS</a>. Tous
             les appels effectuées sans authentification ou en HTTP
-            échoueront.<br />
+            échoueront.<br>
             Si vous avez des difficultées à obtenir un certificat HTTPS, voici
             <a href="https://certbot.eff.org/">Certbot</a>, un outil qui permet
             d'en obtenir un gratuitement !
@@ -94,7 +109,7 @@
 -H "Authorization: Bearer [TOKEN]" \</code></pre>
           </div>
         </div>
-        <div class="block" id="example">
+        <div id="example" class="block">
           <a href="#example" class="title-container">
             <h3 class="title">Exemple</h3>
           </a>
@@ -126,7 +141,7 @@
         </div>
       </template>
       <template v-if="status === 'npm'">
-        <div class="block" id="install">
+        <div id="install" class="block">
           <div class="flex-space">
             <a href="#install" class="title-container">
               <h3 class="title">Installation</h3>
@@ -163,7 +178,7 @@
             </pre>
           </div>
         </div>
-        <div class="block" id="setup">
+        <div id="setup" class="block">
           <div class="flex-space">
             <a href="#setup" class="title-container">
               <h3 class="title">Mise en place</h3>
@@ -219,7 +234,7 @@
             </code>
           </pre>
         </div>
-        <div class="block" id="use">
+        <div id="use" class="block">
           <a href="#use" class="title-container">
             <h3 class="title">Utilisation</h3>
           </a>
@@ -227,7 +242,7 @@
             Différentes méthodes vous sont rendues disponibles afin d'intéragir
             plus facilement avec l'API depuis votre projet.
           </p>
-          <div class="block" id="random-joke">
+          <div id="random-joke" class="block">
             <a href="#random-joke" class="title-container">
               <h4 class="title">Blague aléatoire</h4>
             </a>
@@ -251,7 +266,7 @@
               </code>
             </pre>
           </div>
-          <div class="block" id="random-categorized-joke">
+          <div id="random-categorized-joke" class="block">
             <a href="#random-categorized-joke" class="title-container">
               <h4 class="title">Blague aléatoire d'une catégorie</h4>
             </a>
@@ -263,7 +278,7 @@
               </code>
             </pre>
           </div>
-          <div class="block" id="joke-by-id">
+          <div id="joke-by-id" class="block">
             <a href="#joke-by-id" class="title-container">
               <h4 class="title">Blague à partir de son ID</h4>
             </a>
@@ -280,7 +295,7 @@
           </div>
         </div>
       </template>
-      <div class="block" id="thanks">
+      <div id="thanks" class="block">
         <a href="#thanks" class="title-container">
           <h3 class="title">Remerciements</h3>
         </a>
@@ -298,9 +313,8 @@
 </template>
 
 <script>
-import jokes from '../../../../../blagues.json';
 
-import prismjs from 'prismjs';
+import prismjs from 'prismjs'
 
 import {
   ref,
@@ -308,21 +322,22 @@ import {
   onMounted,
   watch,
   computed
-} from '@nuxtjs/composition-api';
+} from '@nuxtjs/composition-api'
 
-import Selector from '@/components/home/Selector.vue';
+import Selector from '@/components/home/Selector.vue'
+import jokes from '../../../../../blagues.json'
 
 export default {
   components: {
     Selector
   },
-  setup() {
-    const count = jokes.length;
-    const status = ref('npm');
+  setup () {
+    const count = jokes.length
+    const status = ref('npm')
     const versions = reactive({
       js_install: 'yarn',
       js_setup: 'cjs'
-    });
+    })
 
     const data = {
       npm: {
@@ -337,24 +352,24 @@ export default {
         title: 'Module PyPi',
         description: 'coucou'
       }
-    };
+    }
 
-    const sleep = () => new Promise((resolve) => setTimeout(resolve(), 1000));
+    const sleep = () => new Promise(resolve => setTimeout(resolve(), 1000))
 
     watch(status, async () => {
-      await sleep();
-      prismjs.highlightAll();
-    });
+      await sleep()
+      prismjs.highlightAll()
+    })
 
-    const docsData = computed(() => data[status.value]);
+    const docsData = computed(() => data[status.value])
 
     const updateVersion = (key, value) => {
-      versions[key] = value;
-    };
+      versions[key] = value
+    }
 
     onMounted(() => {
-      prismjs.highlightAll();
-    });
+      prismjs.highlightAll()
+    })
 
     return {
       count,
@@ -362,9 +377,9 @@ export default {
       versions,
       updateVersion,
       docsData
-    };
+    }
   }
-};
+}
 </script>
 
 <style lang="scss">

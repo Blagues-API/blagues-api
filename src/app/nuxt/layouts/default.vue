@@ -7,15 +7,15 @@
 </template>
 
 <script>
-import Header from '../components/inc/Header';
-import Footer from '../components/inc/Footer';
+import Header from '../components/inc/Header'
+import Footer from '../components/inc/Footer'
 
 export default {
   components: {
     Header,
     Footer
   }
-};
+}
 </script>
 
 <style lang="scss">

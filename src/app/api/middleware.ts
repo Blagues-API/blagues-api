@@ -7,9 +7,16 @@ import {
   AuthHeaderMissing
 } from './Errors';
 
+interface AuthPayload {
+  user_id: string;
+  limit: 100;
+  key: string;
+  created_at: string;
+}
+
 declare module 'fastify' {
   interface FastifyRequest {
-    auth: string | null;
+    auth: AuthPayload | null;
   }
 }
 
@@ -29,7 +36,10 @@ const middleware: FastifyPluginAsync = async (
 
     const token: string = bearerToken.split(' ')[1];
     try {
-      const decoded: any = jwt.verify(token, process.env.jwt_encryption_api!);
+      const decoded: AuthPayload = jwt.verify(
+        token,
+        process.env.jwt_encryption_api!
+      ) as AuthPayload;
       request.auth = decoded;
     } catch (error) {
       return reply.code(401).send(AuthHeaderInvalidToken);

@@ -8,40 +8,40 @@ export const BadRequest: Error = {
   status: 400,
   error: 'Bad Request',
   message: 'Bad type provided'
-}
+};
 export const BadEmptyPayloadRequest = (key: string): Error => {
- return {
-  status: 400,
-  error: 'Bad Request',
-  message: `Missing "${key}" element in request body`
- }
-}
+  return {
+    status: 400,
+    error: 'Bad Request',
+    message: `Missing "${key}" element in request body`
+  };
+};
 export const BadKeyPayloadRequest = (key: string): Error => {
-  return {
+  return {
     status: 400,
     error: 'Bad Request',
     message: `The element "${key}" is not a valid key`
-  }
-}
+  };
+};
 export const BadlengthPayloadRequest = (key: string): Error => {
   return {
     status: 400,
     error: 'Bad Request',
     message: `The length of "${key}" cannot exceed 180 characters`
-  }
-}
+  };
+};
 export const BadTypePayloadRequest = (key: string): Error => {
-  return {
+  return {
     status: 400,
     error: 'Bad Request',
     message: `The Joke type "${key}" is not valid type`
-  }
-}
+  };
+};
 export const NoContent: Error = {
   status: 404,
   error: 'Bad Request',
   message: 'All types have been disabled'
-}
+};
 export const AuthHeaderMissing: Error = {
   status: 401,
   error: 'Unauthorized',
@@ -64,4 +64,4 @@ export const JokeNotFound: Error = {
   status: 404,
   error: 'Not found',
   message: 'Joke not found'
-}
+};

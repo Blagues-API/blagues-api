@@ -1,13 +1,13 @@
 import { FastifyInstance, FastifyRequest } from 'fastify';
-import { jokeById, randomJoke, randomJokeByType } from '../../controllers';
+import {
+  jokeById,
+  randomJoke,
+  randomJokeByType,
+  JokeResponse
+} from '../../controllers';
 import { JokeTypes, JokeTypesRefs } from '../../typings';
 import { BadRequest, JokeNotFound, NoContent } from './Errors';
 import middleware from './middleware';
-
-interface controllersReturn {
-  error: boolean;
-  response?: undefined;
-}
 
 export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.register(middleware);
@@ -21,11 +21,11 @@ export default async (fastify: FastifyInstance): Promise<void> => {
   });
 
   type OptionalDisallowRequest = FastifyRequest<{
-    Querystring: { disallow?: string[] }
-  }>
+    Querystring: { disallow?: string[] };
+  }>;
 
   fastify.get('/random', async (req: OptionalDisallowRequest, res) => {
-    const joke: controllersReturn = randomJoke(req.query.disallow);
+    const joke: JokeResponse = randomJoke(req.query.disallow);
     if (joke.error) {
       return res.status(400).send(BadRequest);
     }
@@ -36,11 +36,11 @@ export default async (fastify: FastifyInstance): Promise<void> => {
   });
 
   type JokeTypeRequest = FastifyRequest<{
-    Params: { type: string }
-  }>
+    Params: { type: string };
+  }>;
 
   fastify.get('/type/:type/random', async (req: JokeTypeRequest, res) => {
-    const joke: controllersReturn = randomJokeByType(req.params.type);
+    const joke: JokeResponse = randomJokeByType(req.params.type);
     if (joke.error) {
       return res.status(400).send(BadRequest);
     }
@@ -48,8 +48,8 @@ export default async (fastify: FastifyInstance): Promise<void> => {
   });
 
   type JokeIdRequest = FastifyRequest<{
-    Params: { id: number }
-  }>
+    Params: { id: number };
+  }>;
 
   fastify.get('/id/:id', async (req: JokeIdRequest, res) => {
     const joke = jokeById(Number(req.params.id));

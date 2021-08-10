@@ -10,9 +10,7 @@ export default class Bot {
   constructor() {
     this.client = new Client({
       partials: ['REACTION'],
-      intents:
-        Intents.FLAGS.GUILDS |
-        Intents.FLAGS.GUILD_MESSAGES
+      intents: Intents.FLAGS.GUILDS | Intents.FLAGS.GUILD_MESSAGES
     });
 
     this.commands = new Commands(this.client);
@@ -47,7 +45,7 @@ export default class Bot {
     return this.commands.execute(interaction as CommandInteraction);
   }
 
-  registerEvents() {
+  registerEvents(): void {
     this.client.on('interactionCreate', this.onInteractionCreate.bind(this));
   }
 
@@ -55,6 +53,5 @@ export default class Bot {
     if (!process.env.BOT_TOKEN) {
       return console.log("Bot non lancé car aucun token n'a été défini");
     }
-    await this.client.login(process.env.BOT_TOKEN);
   }
 }

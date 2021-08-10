@@ -1,9 +1,26 @@
-import { stripIndents } from 'common-tags'
-import { ButtonInteraction, ColorResolvable, CommandInteraction, EmbedField, Interaction, Message, MessageActionRow, MessageButton, MessageEditOptions, MessageSelectMenu, MessageSelectOptionData, SelectMenuInteraction, TextChannel } from 'discord.js'
-import { jokeById, jokeByQuestion } from '../../controllers'
-import { Category, Joke, JokeTypesDescriptions, JokeTypesRefs } from '../../typings'
-import { suggestsChannel } from '../constants'
-import Command from '../lib/command'
+import { stripIndents } from 'common-tags';
+import {
+  ButtonInteraction,
+  ColorResolvable,
+  CommandInteraction,
+  Interaction,
+  Message,
+  MessageActionRow,
+  MessageButton,
+  MessageSelectMenu,
+  MessageSelectOptionData,
+  SelectMenuInteraction,
+  TextChannel
+} from 'discord.js';
+import { jokeById, jokeByQuestion } from '../../controllers';
+import {
+  Category,
+  Joke,
+  JokeTypesDescriptions,
+  JokeTypesRefs
+} from '../../typings';
+import { suggestsChannel } from '../constants';
+import Command from '../lib/command';
 
 enum IdType {
   MESSAGE_ID,
@@ -12,82 +29,98 @@ enum IdType {
 }
 
 export default class CorrectionCommand extends Command {
-  constructor(){
+  constructor() {
     super({
       name: 'correct',
       description: 'Proposer une modification de blague',
-      options: [{
-        type: 'STRING',
-        name: 'identifiant',
-        description: 'ID ou question de la blague ou ID du message',
-        required: true
-      }]
-    })
+      options: [
+        {
+          type: 'STRING',
+          name: 'identifiant',
+          description: 'ID ou question de la blague ou ID du message',
+          required: true
+        }
+      ]
+    });
   }
-  async run(interaction: CommandInteraction){
-    const raw_id = interaction.options.get('identifiant')?.value as string
+  async run(interaction: CommandInteraction): Promise<void> {
+    const raw_id = interaction.options.get('identifiant')?.value as string;
 
     let joke: Joke | null = await this.getJoke(raw_id, interaction);
     if (!joke) {
-      const question = await interaction.reply({
-        embeds: [{
-          title: 'Correction de blague',
-          description: "Il faut tout d'abbord identifier la blague. Pour cela, il faut l'identifiant de la blague, l'identifiant du message la proposant ou la question de celle-ci."
-        }],
+      const question = (await interaction.reply({
+        embeds: [
+          {
+            title: 'Correction de blague',
+            description:
+              "Il faut tout d'abbord identifier la blague. Pour cela, il faut l'identifiant de la blague, l'identifiant du message la proposant ou la question de celle-ci."
+          }
+        ],
         fetchReply: true
-      }) as Message;
+      })) as Message;
       joke = await this.requestJoke(interaction, question);
     }
-    if(!joke) return;
+    if (!joke) return;
 
     const newJoke = await this.requestChanges(interaction, joke);
 
     await interaction.editReply({
-      embeds: [{
-        title: 'Requête de changement envoyée',
-        description: stripIndents`
+      embeds: [
+        {
+          title: 'Requête de changement envoyée',
+          description: stripIndents`
         > **Type:** ${joke.type}
         > **Question:** ${joke.joke}
         > **Réponse:** ${joke.answer}
       `,
-      color: 'GREEN' as ColorResolvable
-      }],
+          color: 'GREEN' as ColorResolvable
+        }
+      ],
       components: []
-    })
+    });
 
-    if(newJoke) await this.EditJoke(interaction, newJoke)
+    if (newJoke) await this.EditJoke(interaction, newJoke);
   }
 
-  async requestJoke(interaction: CommandInteraction, question: Message): Promise<Joke | null> {
+  async requestJoke(
+    interaction: CommandInteraction,
+    question: Message
+  ): Promise<Joke | null> {
     const messages = await question.channel.awaitMessages({
       filter: (m: Message) => m.author.id === interaction.user.id,
       time: 10000,
       max: 1
-    })
+    });
     const message = messages.first();
-    if(!message) {
+    if (!message) {
       await interaction.editReply({
         embeds: [
           question.embeds[0],
           {
             title: '💡 Commande annulée',
-            color: 0xFFDA83
+            color: 0xffda83
           }
         ]
-      })
+      });
       return null;
     }
 
     const joke: Joke | null = await this.getJoke(message.content, interaction);
-    if(message.deletable) await message.delete();
-    if(!joke) {
-      question.channel.send('pas bon fréro').then(m => setTimeout(() => m.deletable && m.delete(), 5000));
+    if (message.deletable) await message.delete();
+    if (!joke) {
+      question.channel
+        .send('pas bon fréro')
+        .then((m) => setTimeout(() => m.deletable && m.delete(), 5000));
       return this.requestJoke(interaction, question);
     }
     return joke;
   }
 
-  async requestChanges(interaction: CommandInteraction, joke: Joke, changes: boolean = false): Promise<Joke | null> {
+  async requestChanges(
+    interaction: CommandInteraction,
+    joke: Joke,
+    changes = false
+  ): Promise<Joke | null> {
     const embed = {
       title: `Quels${changes ? ' autres' : ''} changements voulez-vous faire ?`,
       description: stripIndents`
@@ -95,8 +128,10 @@ export default class CorrectionCommand extends Command {
         > **Question:** ${joke.joke}
         > **Réponse:** ${joke.answer}
       `
-    }
-    const question = await interaction[interaction.replied ? 'editReply' : 'reply']({
+    };
+    const question = (await interaction[
+      interaction.replied ? 'editReply' : 'reply'
+    ]({
       embeds: [embed],
       components: [
         new MessageActionRow({
@@ -125,84 +160,111 @@ export default class CorrectionCommand extends Command {
         })
       ],
       fetchReply: true
-    }) as Message;
+    })) as Message;
 
-    const button: ButtonInteraction = await question.awaitMessageComponent({
-      filter: (i: Interaction) => i.user.id === interaction.user.id,
-    }) as ButtonInteraction;
+    const button: ButtonInteraction = (await question.awaitMessageComponent({
+      filter: (i: Interaction) => i.user.id === interaction.user.id
+    })) as ButtonInteraction;
 
-    switch(button.customId) {
-      case "type": {
-        const typeMessage = await button.reply({
-          content: 'Par quel type de blague voulez-vous changer le type actuel ?',
+    switch (button.customId) {
+      case 'type': {
+        const typeMessage = (await button.reply({
+          content:
+            'Par quel type de blague voulez-vous changer le type actuel ?',
           components: [
             new MessageActionRow({
               components: [
                 new MessageSelectMenu({
                   customId: 'type',
                   placeholder: 'Nouveau type de blague',
-                  options: Object.entries(JokeTypesRefs).map(([key, name]) => ({
-                    label: name,
-                    value: key,
-                    description: JokeTypesDescriptions[key as Category],
-                  }) as MessageSelectOptionData),
+                  options: Object.entries(JokeTypesRefs).map(
+                    ([key, name]) =>
+                      ({
+                        label: name,
+                        value: key,
+                        description: JokeTypesDescriptions[key as Category]
+                      } as MessageSelectOptionData)
+                  ),
                   maxValues: 1,
-                  minValues: 1,
-                }),
+                  minValues: 1
+                })
               ]
             })
           ],
           fetchReply: true
-        }) as Message;
+        })) as Message;
 
-        const response: SelectMenuInteraction = await typeMessage.awaitMessageComponent({
-          filter: (i: Interaction) => i.user.id === interaction.user.id,
-          time: 30000,
-        }).catch(() => {
-          typeMessage.edit({
-            content: 'Par quel type de blague voulez-vous changer le type actuel ?',
-            embeds: [{
-              title: '💡 Commande annulée',
-              color: 0xFFDA83
-            }],
-            components: []
+        const response: SelectMenuInteraction = (await typeMessage
+          .awaitMessageComponent({
+            filter: (i: Interaction) => i.user.id === interaction.user.id,
+            time: 30000
           })
-        })as SelectMenuInteraction;
+          .catch(() => {
+            typeMessage.edit({
+              content:
+                'Par quel type de blague voulez-vous changer le type actuel ?',
+              embeds: [
+                {
+                  title: '💡 Commande annulée',
+                  color: 0xffda83
+                }
+              ],
+              components: []
+            });
+          })) as SelectMenuInteraction;
 
-        if(!response) return null
-        joke.type = response.values[0] as Category
+        if (!response) return null;
+        joke.type = response.values[0] as Category;
 
-        if(typeMessage.deletable) await button.deleteReply();
+        if (typeMessage.deletable) await button.deleteReply();
 
         return this.requestChanges(interaction, joke as Joke, true);
       }
 
-      case "question": {
-        const response = await this.requestChangesResponse(button, interaction, joke as Joke, 'question')
-        if(response) return this.requestChanges(interaction, response as Joke, true);
-        return null
+      case 'question': {
+        const response = await this.requestChangesResponse(
+          button,
+          interaction,
+          joke as Joke,
+          'question'
+        );
+        if (response)
+          return this.requestChanges(interaction, response as Joke, true);
+        return null;
       }
-      case "answer": {
-        const response = await this.requestChangesResponse(button, interaction, joke as Joke, 'réponse')
-        if(response) return this.requestChanges(interaction, response as Joke, true);
-        return null
+      case 'answer': {
+        const response = await this.requestChangesResponse(
+          button,
+          interaction,
+          joke as Joke,
+          'réponse'
+        );
+        if (response)
+          return this.requestChanges(interaction, response as Joke, true);
+        return null;
       }
-      default: return joke;
+      default:
+        return joke;
     }
   }
 
- async getJoke(id: string, interaction: CommandInteraction): Promise<Joke | null> {
+  async getJoke(
+    id: string,
+    interaction: CommandInteraction
+  ): Promise<Joke | null> {
     const type: IdType = this.getIdType(id);
     switch (type) {
       case IdType.MESSAGE_ID: {
-        const message: Message = await (interaction.client.channels.cache.get(suggestsChannel) as TextChannel)?.messages.fetch(id) as Message
-        if(!message) return null
-        const description: string = message.embeds[0].description as string
-        const regex = /:\s(.+)/g
-        let array= []
-        let m
+        const message: Message = (await (
+          interaction.client.channels.cache.get(suggestsChannel) as TextChannel
+        )?.messages.fetch(id)) as Message;
+        if (!message) return null;
+        const description: string = message.embeds[0].description as string;
+        const regex = /:\s(.+)/g;
+        const array = [];
+        let m;
         while ((m = regex.exec(description)) !== null) {
-          array.push(m[1])
+          array.push(m[1]);
         }
         return {
           id: Number(message.id),
@@ -212,67 +274,85 @@ export default class CorrectionCommand extends Command {
         };
       }
       case IdType.MESSAGE_QUESTION: {
-       return jokeByQuestion(id)
+        return jokeByQuestion(id);
       }
       case IdType.JOKE_ID: {
-        return jokeById(Number(id))
+        return jokeById(Number(id));
       }
     }
   }
 
   getIdType(id: string): IdType {
-    if(isNaN(Number(id))) {
-      return IdType.MESSAGE_QUESTION
+    if (isNaN(Number(id))) {
+      return IdType.MESSAGE_QUESTION;
     }
-    if(id.length > 6) {
-      return IdType.MESSAGE_ID
+    if (id.length > 6) {
+      return IdType.MESSAGE_ID;
     }
-    return IdType.JOKE_ID
+    return IdType.JOKE_ID;
   }
 
-  async requestChangesResponse(button: ButtonInteraction, interaction: CommandInteraction, joke: Joke, textReplyContent: string): Promise<Joke | null>{
-    const questionMessage = await button.reply({
+  async requestChangesResponse(
+    button: ButtonInteraction,
+    interaction: CommandInteraction,
+    joke: Joke,
+    textReplyContent: string
+  ): Promise<Joke | null> {
+    const questionMessage = (await button.reply({
       content: `Par quelle ${textReplyContent} voulez-vous changer la ${textReplyContent} actuelle ?`,
       fetchReply: true
-    }) as Message;
-    const messages = await interaction.channel!.awaitMessages({
+    })) as Message;
+    const messages = await interaction.channel?.awaitMessages({
       filter: (m: Message) => m.author.id === interaction.user.id,
       time: 30000,
       max: 1
-    })
-    const message = messages.first()
-    if(!message){
+    });
+    const message = messages?.first();
+    if (!message) {
       questionMessage.edit({
         content: questionMessage.content,
-        embeds: [{
-          title: '💡 Commande annulée',
-          color: 0xFFDA83
-        }],
-      })
-      return null
+        embeds: [
+          {
+            title: '💡 Commande annulée',
+            color: 0xffda83
+          }
+        ]
+      });
+      return null;
     }
-    joke[textReplyContent == 'question' ? 'joke' : 'answer'] = message.content
-    if(questionMessage.deletable) await button.deleteReply()
-    if(message.deletable) await message.delete()
-    return joke
+    joke[textReplyContent == 'question' ? 'joke' : 'answer'] = message.content;
+    if (questionMessage.deletable) await button.deleteReply();
+    if (message.deletable) await message.delete();
+    return joke;
   }
 
-  async EditJoke(interaction: CommandInteraction, newJoke: Joke){
-    if(newJoke.id > 6){
-      const message: Message = await (interaction.client.channels.cache.get(suggestsChannel) as TextChannel)?.messages.fetch(String(newJoke.id)) as Message
-      const field: EmbedField = {
-        name: interaction.user.username,
-        value: stripIndents`
-     \`\`\`**Type:** ${newJoke.type}
-        **Question:** ${newJoke.joke}
-        **Réponse:** ${newJoke.answer}\`\`\`
-      `,
-      inline: false
-      }
+  async EditJoke(
+    interaction: CommandInteraction,
+    newJoke: Joke
+  ): Promise<void> {
+    if (newJoke.id > 6) {
+      const channel: TextChannel = interaction.client.channels.cache.get(
+        suggestsChannel
+      ) as TextChannel;
+      const message: Message = (await channel.messages.fetch(
+        String(newJoke.id)
+      )) as Message;
+      const embed = message.embeds[0];
+      embed.fields = [
+        {
+          name: interaction.user.username,
+          value: stripIndents`
+          \`\`\`
+          **Type:** ${newJoke.type}
+          **Question:** ${newJoke.joke}
+          **Réponse:** ${newJoke.answer}
+          \`\`\`
+        `,
+          inline: false
+        }
+      ];
 
-      message.embeds[0].fields = [field]
-      await message.edit(message as MessageEditOptions)
+      await message.edit({ embeds: [embed] });
     }
   }
-
 }

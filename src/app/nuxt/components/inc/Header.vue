@@ -10,30 +10,27 @@
         class="item"
         href="https://github.com/DraftProducts/blagues-api"
         title="Github de Blagues API"
-        >GITHUB</a
-      >
+      >GITHUB</a>
       <a
         class="item"
         href="https://discord.gg/PPNpVaF"
         title="Discord de Blagues API"
-        >DISCORD</a
-      >
-      <nuxt-link class="user-place" v-if="$auth.loggedIn" to="/account">
+      >DISCORD</a>
+      <nuxt-link v-if="$auth.loggedIn" class="user-place" to="/account">
         <div
           class="avatar"
           :style="{
             'background-image': `url('https://cdn.discordapp.com/avatars/${$auth.user.id}/${$auth.user.avatar}.png?size=64')`
           }"
-        ></div>
+        />
         <span class="username">{{ $auth.user.username }}</span>
       </nuxt-link>
       <span
-        class="item rounded"
         v-else
-        @click="$auth.loginWith('discord')"
+        class="item rounded"
         title="Connexion Discord"
-        >CONNEXION</span
-      >
+        @click="$auth.loginWith('discord')"
+      >CONNEXION</span>
     </div>
     <div class="burger" :class="{ open }" @click="open = !open">
       <div class="burger-lines" />
@@ -42,18 +39,18 @@
 </template>
 
 <script>
-import Logo from '@/assets/logo.svg?inline';
+import Logo from '@/assets/logo.svg?inline'
 
 export default {
   components: {
     Logo
   },
-  data() {
+  data () {
     return {
       open: false
-    };
+    }
   }
-};
+}
 </script>
 
 <style lang="scss">

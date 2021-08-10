@@ -6,13 +6,13 @@
 </template>
 
 <script>
-import Informations from '../components/home/Informations';
-import Hero from '../components/home/Hero';
+import Informations from '../components/home/Informations'
+import Hero from '../components/home/Hero'
 
 export default {
   components: {
     Informations,
     Hero
   }
-};
+}
 </script>

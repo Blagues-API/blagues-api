@@ -1,5 +1,3 @@
-
-
 export interface Joke {
   id: number;
   type: Category;

@@ -2,8 +2,10 @@
   <div class="container token-page">
     <div class="card">
       <div class="token">
-        <div class="language">VOTRE TOKEN</div>
-        <div class="code" ref="target">
+        <div class="language">
+          VOTRE TOKEN
+        </div>
+        <div ref="target" class="code">
           {{ $auth.user.token }}
         </div>
         <div class="buttons">
@@ -20,34 +22,34 @@
 </template>
 
 <script>
-import { ref, useContext, wrapProperty } from '@nuxtjs/composition-api';
+import { ref, useContext, wrapProperty } from '@nuxtjs/composition-api'
 
-const useAuth = wrapProperty('$auth', false);
+const useAuth = wrapProperty('$auth', false)
 
 export default {
   middleware: ['auth'],
-  setup() {
-    const target = ref(null);
+  setup () {
+    const target = ref(null)
 
-    const copied = ref(false);
-    const regenerated = ref(false);
+    const copied = ref(false)
+    const regenerated = ref(false)
 
     const copyToClipboard = () => {
-      window.getSelection().removeAllRanges();
-      const range = document.createRange();
-      range.selectNode(target.value);
-      window.getSelection().addRange(range);
-      document.execCommand('copy');
-      copied.value = true;
+      window.getSelection().removeAllRanges()
+      const range = document.createRange()
+      range.selectNode(target.value)
+      window.getSelection().addRange(range)
+      document.execCommand('copy')
+      copied.value = true
       setTimeout(() => {
-        copied.value = false;
-        window.getSelection().removeAllRanges();
-      }, 2000);
-    };
+        copied.value = false
+        window.getSelection().removeAllRanges()
+      }, 2000)
+    }
 
     const regenerateToken = async () => {
-      const { $axios } = useContext();
-      const { user } = useAuth();
+      const { $axios } = useContext()
+      const { user } = useAuth()
       const newToken = await $axios.$post(
         '/api/regenerate',
         {
@@ -58,18 +60,18 @@ export default {
             Authorization: `Bearer ${user.token}`
           }
         }
-      );
-      if (newToken.error) return;
-      regenerated.value = true;
+      )
+      if (newToken.error) { return }
+      regenerated.value = true
       setTimeout(() => {
-        regenerated.value = false;
-        window.getSelection().removeAllRanges();
-      }, 2000);
-    };
+        regenerated.value = false
+        window.getSelection().removeAllRanges()
+      }, 2000)
+    }
 
-    return { copied, regenerated, copyToClipboard, regenerateToken };
+    return { copied, regenerated, copyToClipboard, regenerateToken }
   }
-};
+}
 </script>
 
 <style lang="scss">

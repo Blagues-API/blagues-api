@@ -1,23 +1,21 @@
 import { stripIndents } from 'common-tags';
 import {
   ColorResolvable,
-  MessageEmbedOptions,
   CommandInteraction,
   Guild,
   MessageActionRow,
   MessageButton,
   MessageComponentInteraction,
+  MessageEmbedOptions,
   TextChannel,
   User
 } from 'discord.js';
-import Command from '../lib/command';
 import { findBestMatch } from 'string-similarity';
-
 import jokes from '../../../blagues.json';
-
-import { suggestsChannel } from '../constants';
-import { interactionError } from '../utils';
 import { JokeTypesRefs } from '../../typings';
+import { suggestsChannel } from '../constants';
+import Command from '../lib/command';
+import { interactionError } from '../utils';
 
 enum Similarity {
   Different,
@@ -62,15 +60,17 @@ export default class SuggestCommand extends Command {
     });
   }
 
-  async run(interaction: CommandInteraction) {
+  async run(interaction: CommandInteraction): Promise<void> {
     if (
       (interaction.options.get('joke')!.value as string).length > 130 ||
       (interaction.options.get('response')!.value as string).length > 130
     ) {
-      return interactionError(
-        interaction,
-        "Chaque partie d'une blague ne peut pas dépasser les 130 caractères !"
+      interaction.reply(
+        interactionError(
+          "Chaque partie d'une blague ne peut pas dépasser les 130 caractères !"
+        )
       );
+      return;
     }
 
     const { bestMatch, bestMatchIndex } = findBestMatch(

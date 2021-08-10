@@ -14,5 +14,8 @@ export default class Command {
     return this.raw;
   }
 
-  public async run(interaction: CommandInteraction) {}
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  public async run(interaction: CommandInteraction): Promise<void> {
+    throw new Error('No method run defined');
+  }
 }

@@ -4,7 +4,7 @@ import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 
 const RESERVE_SCROLL_BAR_GAP = 'reserve-scroll-bar-gap'
 const options = {
-  reserveScrollBarGap: true,
+  reserveScrollBarGap: true
 }
 
 Vue.directive('body-scroll-lock', {
@@ -38,5 +38,5 @@ Vue.directive('body-scroll-lock', {
   },
   unbind: (el) => {
     enableBodyScroll(el)
-  },
+  }
 })

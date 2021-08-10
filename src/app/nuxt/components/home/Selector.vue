@@ -13,7 +13,7 @@
   >
     <div class="select_element">
       <div class="element">
-        <img class="icon" :src="selected.icon" :alt="selected.name" />
+        <img class="icon" :src="selected.icon" :alt="selected.name">
         <span :style="{ color: selected.color }">{{ selected.name }}</span>
       </div>
       <DownIcon class="down" />
@@ -35,7 +35,7 @@
         @click="select(element.id)"
         @mouseenter.self="pointer = index"
       >
-        <img :src="element.icon" :alt="element.name" />
+        <img :src="element.icon" :alt="element.name">
         <span :style="{ color: element.color }">{{ element.name }}</span>
       </div>
     </div>
@@ -43,10 +43,10 @@
 </template>
 
 <script>
-import DownIcon from '@/assets/icons/down.svg?inline';
-import NpmIcon from '@/assets/icons/npm_full.svg';
-import PypiIcon from '@/assets/icons/pypi_full.svg';
-import ApiIcon from '@/assets/icons/api_full.svg';
+import DownIcon from '@/assets/icons/down.svg?inline'
+import NpmIcon from '@/assets/icons/npm_full.svg'
+import PypiIcon from '@/assets/icons/pypi_full.svg'
+import ApiIcon from '@/assets/icons/api_full.svg'
 
 export default {
   name: 'Selector',
@@ -59,7 +59,7 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
       active: false,
       pointer: 0,
@@ -83,68 +83,68 @@ export default {
           icon: ApiIcon
         }
       ]
-    };
+    }
   },
   computed: {
-    selected() {
-      return this.elements.find((element) => element.id === this.value);
+    selected () {
+      return this.elements.find(element => element.id === this.value)
     },
-    pointerPosition() {
-      return this.pointer * 46;
+    pointerPosition () {
+      return this.pointer * 46
     }
   },
   methods: {
-    toggle() {
-      this.active ? this.deactivate() : this.activate();
+    toggle () {
+      this.active ? this.deactivate() : this.activate()
     },
-    activate() {
-      if (this.active || this.disabled) return;
+    activate () {
+      if (this.active || this.disabled) { return }
 
-      this.active = true;
+      this.active = true
 
-      this.$el.focus();
+      this.$el.focus()
     },
-    deactivate() {
-      if (!this.active) return;
+    deactivate () {
+      if (!this.active) { return }
 
-      this.active = false;
+      this.active = false
 
-      this.$el.blur();
+      this.$el.blur()
     },
-    pointerForward() {
+    pointerForward () {
       if (this.pointer < this.elements.length - 1) {
-        this.pointer++;
+        this.pointer++
 
         if (
           this.$refs.list.scrollTop <=
           this.pointerPosition - (330 / 46 - 1) * 46
         ) {
           this.$refs.list.scrollTop =
-            this.pointerPosition - (330 / 46 - 1) * 46;
+            this.pointerPosition - (330 / 46 - 1) * 46
         }
       }
     },
-    pointerBackward() {
+    pointerBackward () {
       if (this.pointer > 0) {
-        this.pointer--;
+        this.pointer--
 
         if (this.$refs.list.scrollTop >= this.pointerPosition) {
-          this.$refs.list.scrollTop = this.pointerPosition;
+          this.$refs.list.scrollTop = this.pointerPosition
         }
       }
     },
-    addPointerElement() {
+    addPointerElement () {
       if (this.elements.length > 0) {
-        this.select(this.elements[this.pointer].id);
+        this.select(this.elements[this.pointer].id)
       }
-      this.pointer = 0;
+      this.pointer = 0
     },
-    select(element_id) {
-      this.deactivate();
-      this.$emit('input', element_id);
+    select (elementId) {
+      this.deactivate()
+      this.$emit('input', elementId)
     }
   }
-};
+}
 </script>
 
 <style lang="scss">

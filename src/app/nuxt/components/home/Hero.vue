@@ -5,12 +5,10 @@
         <h2>Besoin d’une <b>API</b> de <b>blagues</b> françaises ?</h2>
         <div class="tags">
           <div class="line">
-            <span class="tag">#collaborative</span
-            ><span class="tag">#open-source</span>
+            <span class="tag">#collaborative</span><span class="tag">#open-source</span>
           </div>
           <div class="line">
-            <span class="tag">#communautaire</span
-            ><span class="tag">#français</span>
+            <span class="tag">#communautaire</span><span class="tag">#français</span>
           </div>
         </div>
         <div class="buttons">
@@ -27,32 +25,39 @@
           </div>
         </div>
       </div>
-      <div class="example" v-if="joke">
-        <p class="type">{{ jokesTypes[joke.type] }}</p>
-        <p class="joke">{{ joke.joke }}</p>
+      <div v-if="joke" class="example">
+        <p class="type">
+          {{ jokesTypes[joke.type] }}
+        </p>
+        <p class="joke">
+          {{ joke.joke }}
+        </p>
         <p class="spoiler" tabindex="0">
           <span class="answer">{{ joke.answer }}</span>
         </p>
-        <button class="next" @click="refreshJoke()">UNE AUTRE !</button>
+        <button class="next" @click="refreshJoke()">
+          UNE AUTRE !
+        </button>
       </div>
     </div>
     <div class="sroller" @click="scrollToDocs()">
-      <div class="name">Documentation</div>
+      <div class="name">
+        Documentation
+      </div>
       <DownIcon />
     </div>
-    <div ref="docs" class="bottom"></div>
+    <div ref="docs" class="bottom" />
   </section>
 </template>
 
 <script>
-import { defineComponent, ref } from '@nuxtjs/composition-api';
+import { defineComponent, ref } from '@nuxtjs/composition-api'
 
-import jokes from '../../../../../blagues.json';
-
-import NpmIcon from '@/assets/icons/npm.svg?inline';
-import PyPiIcon from '@/assets/icons/pypi.svg?inline';
-import ApiIcon from '@/assets/icons/api.svg?inline';
-import DownIcon from '@/assets/icons/down.svg?inline';
+import NpmIcon from '@/assets/icons/npm.svg?inline'
+import PyPiIcon from '@/assets/icons/pypi.svg?inline'
+import ApiIcon from '@/assets/icons/api.svg?inline'
+import DownIcon from '@/assets/icons/down.svg?inline'
+import jokes from '../../../../../blagues.json'
 
 const jokesTypes = {
   limit: 'Blague limite limite',
@@ -61,20 +66,26 @@ const jokesTypes = {
   dev: 'Blague de développeurs',
   beauf: 'Humour de beaufs',
   blondes: 'Blagues blondes'
-};
+}
 
 export default defineComponent({
-  setup() {
-    const joke = ref(jokes[Math.floor(Math.random() * jokes.length)]);
-    const docs = ref(null);
+  components: {
+    NpmIcon,
+    PyPiIcon,
+    ApiIcon,
+    DownIcon
+  },
+  setup () {
+    const joke = ref(jokes[Math.floor(Math.random() * jokes.length)])
+    const docs = ref(null)
 
     const refreshJoke = () => {
-      joke.value = jokes[Math.floor(Math.random() * jokes.length)];
-    };
+      joke.value = jokes[Math.floor(Math.random() * jokes.length)]
+    }
 
     const scrollToDocs = () => {
-      docs.value.scrollIntoView({ behavior: 'smooth' });
-    };
+      docs.value.scrollIntoView({ behavior: 'smooth' })
+    }
 
     return {
       joke,
@@ -82,15 +93,9 @@ export default defineComponent({
       jokesTypes,
       scrollToDocs,
       docs
-    };
-  },
-  components: {
-    NpmIcon,
-    PyPiIcon,
-    ApiIcon,
-    DownIcon
+    }
   }
-});
+})
 </script>
 
 <style lang="scss">

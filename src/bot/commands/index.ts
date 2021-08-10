@@ -1,4 +1,4 @@
-import { Client, CommandInteraction } from 'discord.js';
+import { ApplicationCommandData, Client, CommandInteraction } from 'discord.js';
 import Command from '../lib/command';
 import CorrectCommand from './correction';
 import SuggestCommand from './suggest';
@@ -14,27 +14,27 @@ export default class Commands {
     return [new SuggestCommand(), new CorrectCommand()];
   }
 
-  public get(name: string) {
-    return;
-  }
-
-  public get commandsData() {
+  public get commandsData(): ApplicationCommandData[] {
     return this.commands.map((command: Command) => command.data);
   }
 
-  public async execute(interaction: CommandInteraction) {
-    const cmd: Command = this.commands.find(
-      (command: Command) => command.name === interaction.commandName
-    )!;
+  public async execute(interaction: CommandInteraction): Promise<void> {
+    const command = this.commands.find(
+      (cmd: Command) => cmd.name === interaction.commandName
+    );
+    if (!command) {
+      await interaction.reply('Commande innexistante !');
+      return;
+    }
 
     try {
-      await cmd.run(interaction);
+      await command.run(interaction);
     } catch (error) {
       console.error('[Bot error]', error);
     }
   }
 
-  public async register() {
+  public async register(): Promise<void> {
     await this.client.application?.commands.set(this.commandsData);
   }
 }
