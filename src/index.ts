@@ -1,3 +1,3 @@
-import Tesseract from "./tesseract";
+import Tesseract from './tesseract';
 
 new Tesseract();

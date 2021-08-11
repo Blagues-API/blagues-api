@@ -12,7 +12,7 @@ export default class Tesseract {
     this.init();
   }
 
-  async init() {
+  async init(): Promise<void> {
     await this.app.start();
     await this.bot.start();
   }
