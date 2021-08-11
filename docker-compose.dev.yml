@@ -6,7 +6,11 @@ services:
       context: ./
       dockerfile: ./Dockerfile.dev
     volumes:
-      - .:/app
+      - ./src:/app/src
+      - ./blagues.json:/app/blagues.json
+      - ./database.sqlite:/app/database.sqlite
+      - ./prisma:/app/prisma
+      - ./nuxt.config.js:/app/nuxt.config.js
     env_file:
       - ./.env
     ports:
