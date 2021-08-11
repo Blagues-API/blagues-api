@@ -11,6 +11,9 @@ export default class App {
   }
 
   async start(): Promise<void> {
+    if (process.env.web_service !== 'true') {
+      return console.log('Service web désactivé');
+    }
     try {
       await this.fastify.register(api, { prefix: 'api' });
       await this.fastify.register(nuxt);
