@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "docker-compose -p blagues-api -f ./docker-compose.dev.yml up",
-    "dev:legacy": "nodemon -r dotenv/config --watch '*' --ext 'ts,json' --exec ts-node src/index.ts",
+    "dev:legacy": "nodemon -r dotenv/config --watch '*' --ext 'ts,js,json' --exec ts-node src/index.ts",
     "dev:build": "docker-compose -p blagues-api -f ./docker-compose.dev.yml build",
     "lint:nuxt": "eslint --ext .ts,.js,.vue ./src/app/nuxt",
     "lint:bot": "eslint --ext .ts,.js ./src/bot",
@@ -33,7 +33,6 @@
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "fibers": "^5.0.0",
     "husky": "^4.3.6",
     "nodemon": "^2.0.4",
     "prettier": "^2.3.2",
@@ -44,7 +43,7 @@
     "typescript": "^4.3.4"
   },
   "dependencies": {
-    "@nuxtjs/auth": "github:DraftProducts/auth-module#12f4398fa796c354aae0a99e637afd3cdd0ee092",
+    "@nuxtjs/auth": "github:DraftProducts/auth-module#c915b9e8c41b9773a7ae22246c37690772eadc1c",
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/svg": "^0.1.12",
     "@prisma/client": "^2.25.0",
