@@ -16,6 +16,7 @@ import { jokeById, jokeByQuestion } from '../../controllers';
 import {
   Category,
   Joke,
+  JokeNotPublished,
   JokeTypesDescriptions,
   JokeTypesRefs
 } from '../../typings';
@@ -46,7 +47,10 @@ export default class CorrectionCommand extends Command {
   async run(interaction: CommandInteraction): Promise<void> {
     const raw_id = interaction.options.get('identifiant')?.value as string;
 
-    let joke: Joke | null = await this.getJoke(raw_id, interaction);
+    let joke: Joke | JokeNotPublished | null = await this.getJoke(
+      raw_id,
+      interaction
+    );
     if (!joke) {
       const question = (await interaction.reply({
         embeds: [
@@ -62,7 +66,10 @@ export default class CorrectionCommand extends Command {
     }
     if (!joke) return;
 
-    const newJoke = await this.requestChanges(interaction, joke);
+    const newJoke: Joke | JokeNotPublished | null = await this.requestChanges(
+      interaction,
+      joke
+    );
 
     await interaction.editReply({
       embeds: [
@@ -85,7 +92,7 @@ export default class CorrectionCommand extends Command {
   async requestJoke(
     interaction: CommandInteraction,
     question: Message
-  ): Promise<Joke | null> {
+  ): Promise<Joke | JokeNotPublished | null> {
     const messages = await question.channel.awaitMessages({
       filter: (m: Message) => m.author.id === interaction.user.id,
       time: 10000,
@@ -105,7 +112,10 @@ export default class CorrectionCommand extends Command {
       return null;
     }
 
-    const joke: Joke | null = await this.getJoke(message.content, interaction);
+    const joke: Joke | JokeNotPublished | null = await this.getJoke(
+      message.content,
+      interaction
+    );
     if (message.deletable) await message.delete();
     if (!joke) {
       question.channel
@@ -118,9 +128,9 @@ export default class CorrectionCommand extends Command {
 
   async requestChanges(
     interaction: CommandInteraction,
-    joke: Joke,
+    joke: Joke | JokeNotPublished,
     changes = false
-  ): Promise<Joke | null> {
+  ): Promise<Joke | JokeNotPublished | null> {
     const embed = {
       title: `Quels${changes ? ' autres' : ''} changements voulez-vous faire ?`,
       description: stripIndents`
@@ -218,7 +228,7 @@ export default class CorrectionCommand extends Command {
 
         if (typeMessage.deletable) await button.deleteReply();
 
-        return this.requestChanges(interaction, joke as Joke, true);
+        return this.requestChanges(interaction, joke, true);
       }
 
       case 'question': {
@@ -228,8 +238,7 @@ export default class CorrectionCommand extends Command {
           joke as Joke,
           'question'
         );
-        if (response)
-          return this.requestChanges(interaction, response as Joke, true);
+        if (response) return this.requestChanges(interaction, response, true);
         return null;
       }
       case 'answer': {
@@ -239,8 +248,7 @@ export default class CorrectionCommand extends Command {
           joke as Joke,
           'réponse'
         );
-        if (response)
-          return this.requestChanges(interaction, response as Joke, true);
+        if (response) return this.requestChanges(interaction, response, true);
         return null;
       }
       default:
@@ -251,7 +259,7 @@ export default class CorrectionCommand extends Command {
   async getJoke(
     id: string,
     interaction: CommandInteraction
-  ): Promise<Joke | null> {
+  ): Promise<Joke | JokeNotPublished | null> {
     const type: IdType = this.getIdType(id);
     switch (type) {
       case IdType.MESSAGE_ID: {
@@ -267,17 +275,17 @@ export default class CorrectionCommand extends Command {
           array.push(m[1]);
         }
         return {
-          id: Number(message.id),
+          id: message.id,
           type: array[0] as Category,
           joke: array[1],
           answer: array[2]
-        };
+        } as JokeNotPublished;
       }
       case IdType.MESSAGE_QUESTION: {
-        return jokeByQuestion(id);
+        return jokeByQuestion(id) as Joke;
       }
       case IdType.JOKE_ID: {
-        return jokeById(Number(id));
+        return jokeById(Number(id)) as Joke;
       }
     }
   }
@@ -297,7 +305,7 @@ export default class CorrectionCommand extends Command {
     interaction: CommandInteraction,
     joke: Joke,
     textReplyContent: string
-  ): Promise<Joke | null> {
+  ): Promise<Joke | JokeNotPublished | null> {
     const questionMessage = (await button.reply({
       content: `Par quelle ${textReplyContent} voulez-vous changer la ${textReplyContent} actuelle ?`,
       fetchReply: true
@@ -328,7 +336,7 @@ export default class CorrectionCommand extends Command {
 
   async EditJoke(
     interaction: CommandInteraction,
-    newJoke: Joke
+    newJoke: Joke | JokeNotPublished
   ): Promise<void> {
     if (newJoke.id > 6) {
       const channel: TextChannel = interaction.client.channels.cache.get(
