@@ -23,8 +23,8 @@ enum Similarity {
   Same
 }
 enum Colors {
-  YELLOW,
   BLUE,
+  YELLOW,
   RED
 }
 
