@@ -346,19 +346,17 @@ export default class CorrectionCommand extends Command {
         String(newJoke.id)
       )) as Message;
       const embed = message.embeds[0];
-      embed.fields = [
-        {
-          name: interaction.user.username,
-          value: stripIndents`
+      embed.fields.push({
+        name: interaction.user.username,
+        value: stripIndents`
           \`\`\`
           **Type:** ${newJoke.type}
           **Question:** ${newJoke.joke}
           **Réponse:** ${newJoke.answer}
           \`\`\`
         `,
-          inline: false
-        }
-      ];
+        inline: false
+      });
 
       await message.edit({ embeds: [embed] });
     }
