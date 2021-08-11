@@ -5,6 +5,13 @@ export interface Joke {
   answer: string;
 }
 
+export interface JokeNotPublished {
+  id: string;
+  type: Category;
+  joke: string;
+  answer: string;
+}
+
 export enum Categories {
   GLOBAL = 'global',
   DEV = 'dev',
