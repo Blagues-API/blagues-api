@@ -65,20 +65,15 @@ export default class CorrectionCommand extends Command {
       joke = await this.requestJoke(interaction, question);
     }
     if (!joke) return;
-
-    const newJoke: Joke | JokeNotPublished | null = await this.requestChanges(
-      interaction,
-      joke
-    );
-
+    joke = await this.requestChanges(interaction, joke);
     await interaction.editReply({
       embeds: [
         {
           title: 'Requête de changement envoyée',
           description: stripIndents`
-        > **Type:** ${joke.type}
-        > **Question:** ${joke.joke}
-        > **Réponse:** ${joke.answer}
+        > **Type:** ${joke!.type}
+        > **Question:** ${joke!.joke}
+        > **Réponse:** ${joke!.answer}
       `,
           color: 'GREEN' as ColorResolvable
         }
@@ -86,7 +81,7 @@ export default class CorrectionCommand extends Command {
       components: []
     });
 
-    if (newJoke) await this.EditJoke(interaction, newJoke);
+    if (joke) await this.EditJoke(interaction, joke);
   }
 
   async requestJoke(
@@ -203,7 +198,6 @@ export default class CorrectionCommand extends Command {
           ],
           fetchReply: true
         })) as Message;
-
         const response: SelectMenuInteraction = (await typeMessage
           .awaitMessageComponent({
             filter: (i: Interaction) => i.user.id === interaction.user.id,
@@ -336,25 +330,49 @@ export default class CorrectionCommand extends Command {
 
   async EditJoke(
     interaction: CommandInteraction,
-    newJoke: Joke | JokeNotPublished
+    joke: Joke | JokeNotPublished
   ): Promise<void> {
-    if (newJoke.id > 6) {
+    if (joke.id > 6) {
       const channel: TextChannel = interaction.client.channels.cache.get(
         suggestsChannel
       ) as TextChannel;
       const message: Message = (await channel.messages.fetch(
-        String(newJoke.id)
+        String(joke.id)
       )) as Message;
+
+      const correction = stripIndents`
+        \`\`\`
+        **Type:** ${joke.type}
+        **Question:** ${joke.joke}
+        **Réponse:** ${joke.answer}
+        \`\`\`
+      `;
+
+      if (message.embeds[0].fields.length > 0) {
+        message.embeds[0].fields.forEach(async (field) => {
+          if (field.value == correction) {
+            await interaction.editReply({
+              content: 'Cette correction à déjà été proposée',
+              embeds: []
+            });
+            return;
+          }
+        });
+      }
+      const newJoke = (await this.getJoke(String(joke.id), interaction)) as
+        | Joke
+        | JokeNotPublished;
+      if (newJoke!.joke === joke.joke) {
+        await interaction.editReply({
+          content: "Aucune élement n'a été modifié",
+          embeds: []
+        });
+        return;
+      }
       const embed = message.embeds[0];
       embed.fields.push({
         name: interaction.user.username,
-        value: stripIndents`
-          \`\`\`
-          **Type:** ${newJoke.type}
-          **Question:** ${newJoke.joke}
-          **Réponse:** ${newJoke.answer}
-          \`\`\`
-        `,
+        value: correction,
         inline: false
       });
 
