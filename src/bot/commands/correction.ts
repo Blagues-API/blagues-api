@@ -20,7 +20,7 @@ import {
   JokeTypesDescriptions,
   JokeTypesRefs
 } from '../../typings';
-import { suggestsChannel } from '../constants';
+import { correctionChannel, suggestsChannel } from '../constants';
 import Command from '../lib/command';
 
 enum IdType {
@@ -369,6 +369,7 @@ export default class CorrectionCommand extends Command {
         });
         return;
       }
+
       const embed = message.embeds[0];
       embed.fields.push({
         name: interaction.user.username,
@@ -377,6 +378,38 @@ export default class CorrectionCommand extends Command {
       });
 
       await message.edit({ embeds: [embed] });
+    } else {
+      const initJoke = jokeById(joke.id as number);
+      console.log(initJoke);
+      console.log(joke);
+      if ((jokeById(joke.id as number) as Joke) === (joke as Joke)) {
+        await interaction.editReply({
+          content: "Aucune élement n'a été modifié",
+          embeds: []
+        });
+        return;
+      }
+      const channel: TextChannel = interaction.client.channels.cache.get(
+        correctionChannel
+      ) as TextChannel;
+      channel.send({
+        embeds: [
+          {
+            title: interaction.user.username,
+            description: stripIndents`**[Blague initial](https://github.com/Blagues-API/blagues-api/blob/master/blagues.json#L${
+              6 * (joke.id as number) - 4
+            }-L${6 * (joke.id as number) + 1})**
+            > **Type**: ${initJoke!.type}
+            > **Blague**: ${initJoke!.joke}
+            > **Réponse**: ${initJoke!.answer}
+            **Blague corrigé:**
+            > **Type**: ${joke.type}
+            > **Blague**: ${joke.joke}
+            > **Réponse**: ${joke.answer}
+            `
+          }
+        ]
+      });
     }
   }
 }
