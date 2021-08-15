@@ -81,7 +81,7 @@ export default class CorrectionCommand extends Command {
       components: []
     });
 
-    if (joke) await this.EditJoke(interaction, joke);
+    if (joke) await this.editJoke(interaction, joke);
   }
 
   async requestJoke(
@@ -257,22 +257,21 @@ export default class CorrectionCommand extends Command {
     const type: IdType = this.getIdType(id);
     switch (type) {
       case IdType.MESSAGE_ID: {
-        const message: Message = (await (
-          interaction.client.channels.cache.get(suggestsChannel) as TextChannel
-        )?.messages.fetch(id)) as Message;
+        const channel: TextChannel = interaction.client.channels.cache.get(
+          suggestsChannel
+        ) as TextChannel;
+        const message: Message = (await channel.messages.fetch(id)) as Message;
         if (!message) return null;
         const description: string = message.embeds[0].description as string;
-        const regex = /:\s(.+)/g;
-        const array = [];
-        let m;
-        while ((m = regex.exec(description)) !== null) {
-          array.push(m[1]);
-        }
+        const elements = [...description.matchAll(/:\s(.+)/g)].map(
+          ([, value]) => value
+        );
         return {
-          id: message.id,
-          type: array[0] as Category,
-          joke: array[1],
-          answer: array[2]
+          message_id: message.id,
+          // TODO: Ajouter un resolver, la valeur est pas forcément un type.
+          type: elements[0] as Category,
+          joke: elements[1],
+          answer: elements[2]
         } as JokeNotPublished;
       }
       case IdType.MESSAGE_QUESTION: {
@@ -322,22 +321,22 @@ export default class CorrectionCommand extends Command {
       });
       return null;
     }
-    joke[textReplyContent == 'question' ? 'joke' : 'answer'] = message.content;
+    joke[textReplyContent === 'question' ? 'joke' : 'answer'] = message.content;
     if (questionMessage.deletable) await button.deleteReply();
     if (message.deletable) await message.delete();
     return joke;
   }
 
-  async EditJoke(
+  async editJoke(
     interaction: CommandInteraction,
     joke: Joke | JokeNotPublished
   ): Promise<void> {
-    if (joke.id > 6) {
+    if ('message_id' in joke) {
       const channel: TextChannel = interaction.client.channels.cache.get(
         suggestsChannel
       ) as TextChannel;
       const message: Message = (await channel.messages.fetch(
-        String(joke.id)
+        joke.message_id
       )) as Message;
 
       const correction = stripIndents`
@@ -350,7 +349,7 @@ export default class CorrectionCommand extends Command {
 
       if (message.embeds[0].fields.length > 0) {
         message.embeds[0].fields.forEach(async (field) => {
-          if (field.value == correction) {
+          if (field.value === correction) {
             await interaction.editReply({
               content: 'Cette correction à déjà été proposée',
               embeds: []
@@ -359,12 +358,13 @@ export default class CorrectionCommand extends Command {
           }
         });
       }
-      const newJoke = (await this.getJoke(String(joke.id), interaction)) as
-        | Joke
-        | JokeNotPublished;
-      if (newJoke!.joke === joke.joke) {
+      const newJoke = (await this.getJoke(
+        joke.message_id,
+        interaction
+      )) as JokeNotPublished;
+      if (newJoke.joke === joke.joke) {
         await interaction.editReply({
-          content: "Aucune élement n'a été modifié",
+          content: "Aucune élément n'a été modifié",
           embeds: []
         });
         return;
@@ -379,10 +379,13 @@ export default class CorrectionCommand extends Command {
 
       await message.edit({ embeds: [embed] });
     } else {
-      const initJoke = jokeById(joke.id as number);
+      const initJoke = jokeById(joke.id);
+      // TODO: Que se passe-t-il si la blague a été supprimé de l'api ?
       console.log(initJoke);
       console.log(joke);
-      if ((jokeById(joke.id as number) as Joke) === (joke as Joke)) {
+      // TODO: Va faloir faire une fonction de comparaison de contenu.
+      // On peut pas comparer deux instances comme ça.
+      if ((jokeById(joke.id) as Joke) === (joke as Joke)) {
         await interaction.editReply({
           content: "Aucune élement n'a été modifié",
           embeds: []
@@ -396,12 +399,14 @@ export default class CorrectionCommand extends Command {
         embeds: [
           {
             title: interaction.user.username,
-            description: stripIndents`**[Blague initial](https://github.com/Blagues-API/blagues-api/blob/master/blagues.json#L${
+            description: stripIndents`
+            **[Blague initiale](https://github.com/Blagues-API/blagues-api/blob/master/blagues.json#L${
               6 * (joke.id as number) - 4
             }-L${6 * (joke.id as number) + 1})**
             > **Type**: ${initJoke!.type}
             > **Blague**: ${initJoke!.joke}
             > **Réponse**: ${initJoke!.answer}
+
             **Blague corrigé:**
             > **Type**: ${joke.type}
             > **Blague**: ${joke.joke}
