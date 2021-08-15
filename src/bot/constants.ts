@@ -8,4 +8,4 @@ export enum AdminUsers {
 
 export const jokeRole: `${bigint}` = '699244416849674310';
 export const suggestsChannel: `${bigint}` = '698826767221391390';
-export const logsChannel: `${bigint}` = '763778635857133599';
+export const correctionChannel: `${bigint}` = '826856142793736213';
