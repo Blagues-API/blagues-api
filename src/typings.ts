@@ -6,7 +6,7 @@ export interface Joke {
 }
 
 export interface JokeNotPublished {
-  id: string;
+  message_id: string;
   type: Category;
   joke: string;
   answer: string;
