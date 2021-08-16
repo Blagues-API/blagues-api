@@ -5,12 +5,24 @@ export interface Joke {
   answer: string;
 }
 
+export type JokeKey =
+  | 'id'
+  | 'type'
+  | 'joke'
+  | 'answer'
+
 export interface JokeNotPublished {
   message_id: string;
   type: Category;
   joke: string;
   answer: string;
 }
+
+export type JokeNotPublishedKey =
+  | 'message_id'
+  | 'type'
+  | 'joke'
+  | 'answer'
 
 export enum Categories {
   GLOBAL = 'global',

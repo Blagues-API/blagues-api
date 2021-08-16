@@ -18,7 +18,9 @@ import {
   Joke,
   JokeNotPublished,
   JokeTypesDescriptions,
-  JokeTypesRefs
+  JokeTypesRefs,
+  JokeNotPublishedKey,
+  JokeKey
 } from '../../typings';
 import { correctionChannel, suggestsChannel } from '../constants';
 import Command from '../lib/command';
@@ -65,7 +67,10 @@ export default class CorrectionCommand extends Command {
       joke = await this.requestJoke(interaction, question);
     }
     if (!joke) return;
-    joke = await this.requestChanges(interaction, joke);
+
+    const newJoke = await this.requestChanges(interaction, { ...joke });
+    if(!newJoke) return;
+
     await interaction.editReply({
       embeds: [
         {
@@ -81,7 +86,7 @@ export default class CorrectionCommand extends Command {
       components: []
     });
 
-    if (joke) await this.editJoke(interaction, joke);
+    if (joke) await this.editJoke(interaction, joke, newJoke);
   }
 
   async requestJoke(
@@ -329,40 +334,26 @@ export default class CorrectionCommand extends Command {
 
   async editJoke(
     interaction: CommandInteraction,
-    joke: Joke | JokeNotPublished
+    oldJoke: Joke | JokeNotPublished,
+    newJoke: Joke | JokeNotPublished
   ): Promise<void> {
-    if ('message_id' in joke) {
+    if ('message_id' in newJoke) {
       const channel: TextChannel = interaction.client.channels.cache.get(
         suggestsChannel
       ) as TextChannel;
-      const message: Message = (await channel.messages.fetch(
-        joke.message_id
-      )) as Message;
+      const message: Message = await channel.messages.fetch(
+        newJoke.message_id
+      ) as Message;
 
       const correction = stripIndents`
         \`\`\`
-        **Type:** ${joke.type}
-        **Question:** ${joke.joke}
-        **Réponse:** ${joke.answer}
+        **Type:** ${newJoke.type}
+        **Question:** ${newJoke.joke}
+        **Réponse:** ${newJoke.answer}
         \`\`\`
       `;
 
-      if (message.embeds[0].fields.length > 0) {
-        message.embeds[0].fields.forEach(async (field) => {
-          if (field.value === correction) {
-            await interaction.editReply({
-              content: 'Cette correction à déjà été proposée',
-              embeds: []
-            });
-            return;
-          }
-        });
-      }
-      const newJoke = (await this.getJoke(
-        joke.message_id,
-        interaction
-      )) as JokeNotPublished;
-      if (newJoke.joke === joke.joke) {
+      if (!(Object.keys(newJoke) as JokeNotPublishedKey[]).some(key => (newJoke as JokeNotPublished)[key] !== (oldJoke as JokeNotPublished)[key])) {
         await interaction.editReply({
           content: "Aucune élément n'a été modifié",
           embeds: []
@@ -371,6 +362,14 @@ export default class CorrectionCommand extends Command {
       }
 
       const embed = message.embeds[0];
+      if (embed.fields.some(({ value }) => value === correction)) {
+        await interaction.editReply({
+          content: 'Cette correction à déjà été proposée',
+          embeds: []
+        });
+        return;
+      }
+
       embed.fields.push({
         name: interaction.user.username,
         value: correction,
@@ -379,41 +378,35 @@ export default class CorrectionCommand extends Command {
 
       await message.edit({ embeds: [embed] });
     } else {
-      const initJoke = jokeById(joke.id);
-      // TODO: Que se passe-t-il si la blague a été supprimé de l'api ?
-      console.log(initJoke);
-      console.log(joke);
-      // TODO: Va faloir faire une fonction de comparaison de contenu.
-      // On peut pas comparer deux instances comme ça.
-      if ((jokeById(joke.id) as Joke) === (joke as Joke)) {
+      const channel: TextChannel = interaction.client.channels.cache.get(
+        correctionChannel
+      ) as TextChannel;
+
+      if (!(Object.keys(newJoke) as JokeKey[]).some(key => (newJoke as Joke)[key] !== (oldJoke as Joke)[key])) {
         await interaction.editReply({
-          content: "Aucune élement n'a été modifié",
+          content: "Aucune élément n'a été modifié",
           embeds: []
         });
         return;
       }
-      const channel: TextChannel = interaction.client.channels.cache.get(
-        correctionChannel
-      ) as TextChannel;
-      channel.send({
-        embeds: [
-          {
-            title: interaction.user.username,
-            description: stripIndents`
+
+      await channel.send({
+        embeds: [{
+          title: interaction.user.username,
+          description: stripIndents`
             **[Blague initiale](https://github.com/Blagues-API/blagues-api/blob/master/blagues.json#L${
-              6 * (joke.id as number) - 4
-            }-L${6 * (joke.id as number) + 1})**
-            > **Type**: ${initJoke!.type}
-            > **Blague**: ${initJoke!.joke}
-            > **Réponse**: ${initJoke!.answer}
+              6 * (newJoke.id as number) - 4
+            }-L${6 * (newJoke.id as number) + 1})**
+            > **Type**: ${oldJoke.type}
+            > **Blague**: ${oldJoke.joke}
+            > **Réponse**: ${oldJoke.answer}
 
             **Blague corrigé:**
-            > **Type**: ${joke.type}
-            > **Blague**: ${joke.joke}
-            > **Réponse**: ${joke.answer}
-            `
-          }
-        ]
+            > **Type**: ${newJoke.type}
+            > **Blague**: ${newJoke.joke}
+            > **Réponse**: ${newJoke.answer}
+          `
+        }]
       });
     }
   }
