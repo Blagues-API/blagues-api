@@ -76,9 +76,9 @@ export default class CorrectionCommand extends Command {
         {
           title: 'Requête de changement envoyée',
           description: stripIndents`
-        > **Type:** ${joke!.type}
-        > **Question:** ${joke!.joke}
-        > **Réponse:** ${joke!.answer}
+        > **Type:** ${newJoke.type}
+        > **Question:** ${newJoke.joke}
+        > **Réponse:** ${newJoke.answer}
       `,
           color: 'GREEN' as ColorResolvable
         }
@@ -86,7 +86,7 @@ export default class CorrectionCommand extends Command {
       components: []
     });
 
-    if (joke) await this.editJoke(interaction, joke, newJoke);
+    await this.editJoke(interaction, joke, newJoke);
   }
 
   async requestJoke(
