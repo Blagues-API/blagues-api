@@ -46,7 +46,7 @@ export default class Bot {
   async onInteractionCreate(interaction: Interaction): Promise<void> {
 
     if(interaction.isContextMenu()){
-      //return this.validation.execute(interaction as CommandInteraction)
+      return this.validation.execute(interaction as CommandInteraction)
     }
 
     if (interaction.isCommand()){

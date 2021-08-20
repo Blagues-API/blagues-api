@@ -54,3 +54,5 @@ export const jokesCount = jokes.length;
 export function jokeByQuestion(question: string): Joke | null {
   return jokes.find((entry: Joke) => entry.joke === question) ?? null;
 }
+
+export const jokesFile = jokes
