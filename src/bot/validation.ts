@@ -3,6 +3,7 @@ import { jokesCount, jokesFile } from '../controllers';
 import { writeFile } from 'fs'
 import { Category, Joke } from '../typings';
 import { everyoneRole, parrainRole } from './constants';
+import path from 'path';
 
 export default class Validation {
   private client: Client;
@@ -43,8 +44,7 @@ export default class Validation {
       answer: args[2][1]
     }
     jokesFile.push(joke)
-    writeFile('../../blagues.json', jokesFile.toString(), err => {
-      console.error(err)
+    writeFile(path.join(__dirname, '..', '..', 'blagues.json'), JSON.stringify(jokesFile, null, 2), err => {
       message.embeds[0].color = 0x00FF00
       message.edit({embeds: message.embeds})
     })
