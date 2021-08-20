@@ -266,14 +266,13 @@ export default class CorrectionCommand extends Command {
           suggestsChannel
         ) as TextChannel;
         const message: Message = (await channel.messages.fetch(id)) as Message;
-        if (!message) return null;
+        if (!message.embeds[0]) return null;
         const description: string = message.embeds[0].description as string;
         const elements = [...description.matchAll(/:\s(.+)/g)].map(
           ([, value]) => value
         );
         return {
           message_id: message.id,
-          // TODO: Ajouter un resolver, la valeur est pas forcément un type.
           type: elements[0] as Category,
           joke: elements[1],
           answer: elements[2]
