@@ -44,10 +44,9 @@ export default class Validation {
       answer: args[2][1]
     }
     jokesFile.push(joke)
-    writeFile(path.join(__dirname, '..', '..', 'blagues.json'), JSON.stringify(jokesFile, null, 2), err => {
+    writeFile(path.join(__dirname, '..', '..', 'blagues.json'), JSON.stringify(jokesFile, null, 2), () => {
       message.embeds[0].color = 0x00FF00
       message.edit({embeds: message.embeds})
     })
-    interaction.reply('Ajouté')
   }
 }
