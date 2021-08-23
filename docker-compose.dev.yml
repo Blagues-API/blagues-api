@@ -8,7 +8,7 @@ services:
     volumes:
       - ./src:/app/src
       - ./blagues.json:/app/blagues.json
-      - ./database.sqlite:/app/database.sqlite
+      - ./database.db:/app/database.db
       - ./prisma:/app/prisma
       - ./nuxt.config.js:/app/nuxt.config.js
     env_file:

@@ -6,6 +6,10 @@ COPY package*.json ./
 RUN npm i
 RUN npm i -g nodemon typescript ts-node
 
+COPY prisma ./
+
+RUN npx prisma generate
+
 COPY . .
 
 EXPOSE 3000

@@ -4,6 +4,7 @@ import { writeFile } from 'fs'
 import { Category, Joke } from '../typings';
 import { everyoneRole, parrainRole } from './constants';
 import path from 'path';
+import prisma from '../prisma'
 
 export default class Validation {
   private client: Client;
@@ -35,6 +36,14 @@ export default class Validation {
   public async execute(interaction: CommandInteraction): Promise<void> {
     const message = await (interaction.channel as TextChannel)?.messages.fetch((interaction as ContextMenuInteraction).targetId)
     if(message.embeds.length === 0) return
+
+    await prisma.validation.create({
+      data: {
+        message_id: 'CC toi',
+        user_id: 'Ça roule ?'
+      }
+    })
+
     const description = message.embeds[0].description as string
     const args = [...description.matchAll(/:\s(.+)/g)]
     const joke: Joke = {
@@ -43,6 +52,7 @@ export default class Validation {
       joke: args[1][1],
       answer: args[2][1]
     }
+
     jokesFile.push(joke)
     writeFile(path.join(__dirname, '..', '..', 'blagues.json'), JSON.stringify(jokesFile, null, 2), () => {
       message.embeds[0].color = 0x00FF00

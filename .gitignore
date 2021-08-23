@@ -1,6 +1,6 @@
 node_modules
 .env
-database.sqlite
+database.db*
 build
 archive
 dist
