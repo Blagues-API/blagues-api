@@ -3,17 +3,29 @@ import fastify, { FastifyInstance } from 'fastify';
 import api from './api';
 import nuxt from './nuxt';
 
+import { parse } from 'querystring';
+
 export default class App {
   public fastify: FastifyInstance;
 
   constructor() {
-    this.fastify = fastify();
+    this.fastify = fastify({ logger: false });
   }
 
   async start(): Promise<void> {
     if (process.env.web_service !== 'true') {
       return console.log('Service web désactivé');
     }
+
+    // TODO: Clean up, it's for tests
+    this.fastify.addContentTypeParser(
+      'application/x-www-form-urlencoded',
+      { parseAs: 'string' },
+      async function (_: any, payload: any) {
+        return parse(payload.toString());
+      }
+    );
+
     try {
       await this.fastify.register(api, { prefix: 'api' });
       await this.fastify.register(nuxt);
