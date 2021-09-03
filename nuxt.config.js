@@ -13,7 +13,14 @@ export default {
     // Doc: https://github.com/nuxt-community/svg-module
     '@nuxtjs/svg'
   ],
-  modules: ['@nuxtjs/axios', '@nuxtjs/auth'],
+  modules: [
+    // Doc: https://axios.nuxtjs.org/usage
+    '@nuxtjs/axios',
+
+    // Doc: https://dev.auth.nuxtjs.org/
+
+    '@nuxtjs/auth',
+  ],
   css: ['./assets/css/reset.css'],
 
   /*
@@ -56,7 +63,8 @@ export default {
       login: '/',
       logout: '/',
       home: '/'
-    }
+    },
+    loginIfNeeded: true,
   },
 
   build: {
