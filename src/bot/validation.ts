@@ -4,10 +4,7 @@ import {
   ContextMenuInteraction,
   TextChannel
 } from 'discord.js';
-import {
-  ApplicationCommandPermissionTypes,
-  ApplicationCommandTypes
-} from 'discord.js/typings/enums';
+import { Constants } from 'discord.js';
 import { jokesCount, jokesFile } from '../controllers';
 import { writeFile } from 'fs';
 import { Category, Joke } from '../typings';
@@ -25,7 +22,7 @@ export default class Validation {
   public async register(): Promise<void> {
     const cmd = await this.client.application?.commands.create({
       name: 'Validation',
-      type: ApplicationCommandTypes.MESSAGE
+      type: Constants.ApplicationCommandTypes.MESSAGE
     });
 
     await cmd!.permissions.add({
@@ -33,12 +30,12 @@ export default class Validation {
       permissions: [
         {
           id: everyoneRole,
-          type: ApplicationCommandPermissionTypes.ROLE,
+          type: Constants.ApplicationCommandPermissionTypes.ROLE,
           permission: false
         },
         {
           id: parrainRole,
-          type: ApplicationCommandPermissionTypes.ROLE,
+          type: Constants.ApplicationCommandPermissionTypes.ROLE,
           permission: true
         }
       ]
