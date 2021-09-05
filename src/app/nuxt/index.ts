@@ -6,8 +6,7 @@ export default async function (fastify: FastifyInstance) {
   // Register Nuxt Plugin
   await fastify.register(nuxtPlugin);
 
-  // @ts-ignore asking schema
-  fastify.nuxt('/_auth/*', { method: 'POST' });
+  fastify.nuxt('/_auth/oauth/discord/authorize', { method: 'POST', schema: {} });
 
   fastify.nuxt('*');
 };
