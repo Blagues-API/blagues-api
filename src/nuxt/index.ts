@@ -6,6 +6,10 @@ export default class Nuxt {
   constructor() {}
 
   async start(): Promise<void> {
+    if (process.env.web_service !== 'true') {
+      return console.log('Service web désactivé');
+    }
+
     try {
       await CLI.run([isDev ? 'dev' : 'start']);
     } catch (error) {
