@@ -19,7 +19,7 @@ export default class App {
 
       await this.fastify.listen(4000, '0.0.0.0');
 
-      console.log(`🚀 Blagues API lancé: http://localhost:3000`);
+      console.log(`🚀 Blagues API lancé: http://localhost:4000`);
     } catch (err) {
       this.fastify.log.error(err);
       process.exit(1);
