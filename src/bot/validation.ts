@@ -8,9 +8,15 @@ import { Constants } from 'discord.js';
 import { jokesCount, jokesFile } from '../controllers';
 import { writeFile } from 'fs';
 import { Category, Joke } from '../typings';
-import { everyoneRole, parrainRole, guildId } from './constants';
+import {
+  everyoneRole,
+  parrainRole,
+  guildId,
+  suggestsChannel
+} from './constants';
 import path from 'path';
 import prisma from '../prisma';
+import { interactionError } from './utils';
 
 export default class Validation {
   private client: Client;
@@ -48,12 +54,32 @@ export default class Validation {
     const message = await (interaction.channel as TextChannel)?.messages.fetch(
       (interaction as ContextMenuInteraction).targetId
     );
-    if (message.embeds.length === 0) return;
+    if (suggestsChannel !== interaction.channel?.id) {
+      return interaction.reply(
+        interactionError(
+          `Vous ne pouvez pas valider une blague en dehors du salon <#${suggestsChannel}>.`
+        )
+      );
+    }
+    if (message.author.id !== this.client.user!.id) {
+      return interaction.reply(
+        interactionError(
+          `Vous ne pouvez valider une blague qui n'est pas gérée par ${this.client.user}.`
+        )
+      );
+    }
+    if (message.author.id !== this.client.user!.id) {
+      return interaction.reply(
+        interactionError(
+          `Vous ne pouvez valider une blague qui n'est pas gérée par ${this.client.user}.`
+        )
+      );
+    }
 
     await prisma.validation.create({
       data: {
-        message_id: 'CC toi',
-        user_id: 'Ça roule ?'
+        message_id: message.id,
+        user_id: interaction.user.id
       }
     });
 
