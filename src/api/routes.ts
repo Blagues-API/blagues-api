@@ -4,8 +4,8 @@ import {
   randomJoke,
   randomJokeByType,
   JokeResponse
-} from '../../controllers';
-import { JokeTypes, JokeTypesRefs } from '../../typings';
+} from '../controllers';
+import { JokeTypes, JokeTypesRefs } from '../typings';
 import { BadRequest, JokeNotFound, NoContent } from './Errors';
 import middleware from './middleware';
 
