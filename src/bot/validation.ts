@@ -8,7 +8,7 @@ import { Constants } from 'discord.js';
 import { jokesCount, jokesFile } from '../controllers';
 import { writeFile } from 'fs';
 import { Category, Joke } from '../typings';
-import { everyoneRole, parrainRole } from './constants';
+import { everyoneRole, parrainRole, guildId } from './constants';
 import path from 'path';
 import prisma from '../prisma';
 
@@ -20,13 +20,15 @@ export default class Validation {
   }
 
   public async register(): Promise<void> {
-    const cmd = await this.client.application?.commands.create({
+    const guild = this.client.guilds.cache.get(guildId);
+    if (!guild) return;
+
+    const cmd = await guild.commands.create({
       name: 'Validation',
       type: Constants.ApplicationCommandTypes.MESSAGE
     });
 
     await cmd!.permissions.add({
-      guild: '642681003642716160',
       permissions: [
         {
           id: everyoneRole,
