@@ -16,8 +16,11 @@ export default class Tesseract {
   }
 
   async init(): Promise<void> {
-    await this.api.start();
-    await this.nuxt.start();
-    await this.bot.start();
+    await Promise.all([
+      // eslint-disable-next-line
+      this.api.start(),
+      this.nuxt.start(),
+      this.bot.start()
+    ]);
   }
 }
