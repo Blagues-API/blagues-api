@@ -8,10 +8,11 @@ RUN npm i -g nodemon typescript ts-node
 
 COPY prisma ./
 
-RUN npx prisma generate
+RUN npx prisma deploy
 
 COPY . .
 
 EXPOSE 3000
+EXPOSE 4000
 
 CMD nodemon --watch '**/*' --ext 'ts,js,json' --exec 'ts-node src/index.ts'
