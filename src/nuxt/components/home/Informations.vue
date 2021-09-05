@@ -324,8 +324,8 @@ import {
   computed
 } from '@nuxtjs/composition-api'
 
+import jokes from '../../../../blagues.json'
 import Selector from '@/components/home/Selector.vue'
-import jokes from '../../../../../blagues.json'
 
 export default {
   components: {

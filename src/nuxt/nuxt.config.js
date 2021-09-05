@@ -1,6 +1,11 @@
 export default {
+  server: {
+    port: 3000, // default: 3000
+    host: '0.0.0.0', // default: localhost,
+    timing: false
+  },
   components: false,
-  srcDir: './src/app/nuxt',
+  srcDir: './src/nuxt',
   plugins: [
     {
       src: '~/plugins/vue-body-scroll-lock',
@@ -19,7 +24,7 @@ export default {
 
     // Doc: https://dev.auth.nuxtjs.org/
 
-    '@nuxtjs/auth',
+    '@nuxtjs/auth'
   ],
   css: ['./assets/css/reset.css'],
 
@@ -64,7 +69,7 @@ export default {
       logout: '/',
       home: '/'
     },
-    loginIfNeeded: true,
+    loginIfNeeded: true
   },
 
   build: {
@@ -89,4 +94,4 @@ export default {
       ]
     }
   }
-};
+}

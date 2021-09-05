@@ -53,11 +53,11 @@
 <script>
 import { defineComponent, ref } from '@nuxtjs/composition-api'
 
+import jokes from '../../../../blagues.json'
 import NpmIcon from '@/assets/icons/npm.svg?inline'
 import PyPiIcon from '@/assets/icons/pypi.svg?inline'
 import ApiIcon from '@/assets/icons/api.svg?inline'
 import DownIcon from '@/assets/icons/down.svg?inline'
-import jokes from '../../../../../blagues.json'
 
 const jokesTypes = {
   limit: 'Blague limite limite',
