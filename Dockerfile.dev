@@ -4,11 +4,12 @@ WORKDIR /app
 COPY package*.json ./
 
 RUN npm i
-RUN npm i -g nodemon typescript ts-node
+RUN npm i -g nodemon typescript ts-node prisma
 
 COPY prisma ./
 
-RUN npx prisma deploy
+RUN prisma generate
+RUN prisma migrate deploy
 
 COPY . .
 

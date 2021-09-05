@@ -10,7 +10,6 @@ services:
       - ./blagues.json:/app/blagues.json
       - ./database.db:/app/database.db
       - ./prisma:/app/prisma
-      - ./nuxt.config.js:/app/nuxt.config.js
     env_file:
       - ./.env
     ports:
