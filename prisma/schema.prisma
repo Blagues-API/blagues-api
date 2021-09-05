@@ -7,7 +7,7 @@ datasource db {
   url      = "file:../database.db"
 }
 
-model users {
+model User {
   user_id            String @id
   user_name          String
   user_avatar        String
@@ -18,9 +18,15 @@ model users {
   limit              Int    @default(100)
 
   @@index([user_id], name: "users_user_id")
+
+  @@map("users")
 }
 
-model validation {
+model Validation {
   message_id String @id
   user_id    String
+
+  @@index([message_id], name: "validations_message_id")
+
+  @@map("validations")
 }
