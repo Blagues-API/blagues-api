@@ -2,17 +2,15 @@ import { stripIndents } from 'common-tags';
 import {
   ColorResolvable,
   CommandInteraction,
-  Guild,
   MessageActionRow,
   MessageButton,
   MessageComponentInteraction,
   MessageEmbedOptions,
-  TextChannel,
-  User
+  TextChannel
 } from 'discord.js';
 import { findBestMatch } from 'string-similarity';
 import jokes from '../../../blagues.json';
-import { JokeTypesRefs } from '../../typings';
+import { Category, JokeTypesRefs } from '../../typings';
 import { suggestsChannel } from '../constants';
 import Command from '../lib/command';
 import { interactionError } from '../utils';
@@ -85,7 +83,9 @@ export default class SuggestCommand extends Command {
       similarity = bestMatch.rating > 0.8 ? Similarity.Same : Similarity.Like;
 
     let description = stripIndents`
-      > **Type**: ${interaction.options.get('type')!.value}
+      > **Type**: ${
+        JokeTypesRefs[interaction.options.get('type')!.value as Category]
+      }
       > **Blague**: ${interaction.options.get('joke')!.value}
       > **Réponse**: ${interaction.options.get('response')!.value}
     `;
@@ -97,7 +97,7 @@ export default class SuggestCommand extends Command {
         **[Blague similaire](https://github.com/Blagues-API/blagues-api/blob/master/blagues.json#L${
           6 * jokes[bestMatchIndex].id - 4
         }-L${6 * jokes[bestMatchIndex].id + 1})**
-        >>> **Type**: ${jokes[bestMatchIndex].type}
+        >>> **Type**: ${JokeTypesRefs[jokes[bestMatchIndex].type as Category]}
         **Blague**: ${jokes[bestMatchIndex].joke}
         **Réponse**: ${jokes[bestMatchIndex].answer}
       `;
@@ -105,22 +105,24 @@ export default class SuggestCommand extends Command {
 
     const embed: MessageEmbedOptions = {
       author: {
-        icon_url: (interaction.member!.user as User).displayAvatarURL({
+        icon_url: interaction.user.displayAvatarURL({
           format: 'png',
           size: 32,
           dynamic: true
         }),
-        name: (interaction.member!.user as User).tag
+        name: interaction.user.tag
       },
       description,
       footer: {
-        text: (interaction.guild as Guild).name,
-        icon_url:
-          (interaction.guild as Guild).iconURL({
-            format: 'png',
-            size: 32,
-            dynamic: true
-          }) ?? undefined
+        text:
+          similarity === Similarity.Different
+            ? '3 approbations nécessaire'
+            : interaction.guild!.name,
+        icon_url: interaction.guild!.iconURL({
+          format: 'png',
+          size: 32,
+          dynamic: true
+        })!
       },
       color: Colors[similarity] as ColorResolvable,
       timestamp: new Date()
@@ -145,7 +147,7 @@ export default class SuggestCommand extends Command {
       content:
         similarity === Similarity.Same
           ? 'Cette blague existe déjà.'
-          : `Merci de nous avoir suggeré cette blague. Veuillez confirmer son envoi si vous êtes sûr qu'elle ne contient pas de fautes.\n\n
+          : `Votre blague est sur le point d'être ajouté aux suggestions de blagues, veuillez confirmer la suggestion si vous êtes sûr qu'elle ne contient pas de fautes.\n\n
           ${
             similarity === Similarity.Like
               ? "⚠️ Attention, une blague similaire existe déjà, êtes vous sûr qu'elle est différente ?"
