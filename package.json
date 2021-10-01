@@ -53,7 +53,7 @@
     "common-tags": "^1.8.0",
     "discord.js": "^13.1.0",
     "dotenv": "^10.0.0",
-    "fastify": "^3.20.2",
+    "fastify": "^3.22.0",
     "fastify-plugin": "^3.0.0",
     "jsonwebtoken": "^8.5.1",
     "nuxt": "^2.15.8",
