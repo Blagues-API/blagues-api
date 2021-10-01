@@ -9,10 +9,15 @@
     "dev": "docker-compose -p blagues-api -f ./docker-compose.dev.yml up",
     "dev:legacy": "nodemon -r dotenv/config --watch '*' --ext 'ts,js,json' --exec ts-node src/index.ts",
     "dev:build": "docker-compose -p blagues-api -f ./docker-compose.dev.yml build",
+    "dev:down": "docker-compose -p blagues-api -f ./docker-compose.dev.yml down",
+    "prepare": "husky install",
     "lint:nuxt": "eslint --ext .ts,.js,.vue ./src/app/nuxt",
     "lint:bot": "eslint --ext .ts,.js ./src/bot",
     "lint:fastify": "eslint --ext .ts,.js ./src/app/api",
     "lint": "npm run lint:nuxt && npm run lint:fastify && npm run lint:bot"
+  },
+  "lint-staged": {
+    "*.{js}": "eslint"
   },
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
