@@ -11,6 +11,6 @@ export enum AdminUsers {
 export const jokeRole: Snowflake = '699244416849674310';
 export const parrainRole: Snowflake = '877511831525154837';
 export const everyoneRole: Snowflake = '877545109426683904';
-export const suggestsChannel: Snowflake = '875680955627630652';
+export const suggestsChannel: Snowflake = '884077276210290789';
 export const correctionChannel: Snowflake = '875680971683414026';
 export const guildId: Snowflake = '698822532467523605';
