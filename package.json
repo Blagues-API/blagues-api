@@ -36,7 +36,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.2",
     "nodemon": "^2.0.13",
-    "prettier": "^2.3.2",
+    "prettier": "^2.4.1",
     "prisma": "2.30.3",
     "sass": "^1.42.1",
     "sass-loader": "^12.1.0",
