@@ -23,7 +23,7 @@ jobs:
           yarn
           yarn format-jokes
       - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4.1.2
+        uses: stefanzweifel/git-auto-commit-action@v4.12.0
         with:
           commit_message: Apply formatting jokes
           branch: ${{ github.head_ref }}
