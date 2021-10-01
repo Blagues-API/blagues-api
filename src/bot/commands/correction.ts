@@ -69,7 +69,7 @@ export default class CorrectionCommand extends Command {
     if (!joke) return;
 
     const newJoke = await this.requestChanges(interaction, { ...joke });
-    if(!newJoke) return;
+    if (!newJoke) return;
 
     await interaction.editReply({
       embeds: [
@@ -340,9 +340,9 @@ export default class CorrectionCommand extends Command {
       const channel: TextChannel = interaction.client.channels.cache.get(
         suggestsChannel
       ) as TextChannel;
-      const message: Message = await channel.messages.fetch(
+      const message: Message = (await channel.messages.fetch(
         newJoke.message_id
-      ) as Message;
+      )) as Message;
 
       const correction = stripIndents`
         \`\`\`
@@ -352,7 +352,13 @@ export default class CorrectionCommand extends Command {
         \`\`\`
       `;
 
-      if (!(Object.keys(newJoke) as JokeNotPublishedKey[]).some(key => (newJoke as JokeNotPublished)[key] !== (oldJoke as JokeNotPublished)[key])) {
+      if (
+        !(Object.keys(newJoke) as JokeNotPublishedKey[]).some(
+          (key) =>
+            (newJoke as JokeNotPublished)[key] !==
+            (oldJoke as JokeNotPublished)[key]
+        )
+      ) {
         await interaction.editReply({
           content: "Aucune élément n'a été modifié",
           embeds: []
@@ -381,7 +387,11 @@ export default class CorrectionCommand extends Command {
         correctionChannel
       ) as TextChannel;
 
-      if (!(Object.keys(newJoke) as JokeKey[]).some(key => (newJoke as Joke)[key] !== (oldJoke as Joke)[key])) {
+      if (
+        !(Object.keys(newJoke) as JokeKey[]).some(
+          (key) => (newJoke as Joke)[key] !== (oldJoke as Joke)[key]
+        )
+      ) {
         await interaction.editReply({
           content: "Aucune élément n'a été modifié",
           embeds: []
@@ -390,9 +400,10 @@ export default class CorrectionCommand extends Command {
       }
 
       await channel.send({
-        embeds: [{
-          title: interaction.user.username,
-          description: stripIndents`
+        embeds: [
+          {
+            title: interaction.user.username,
+            description: stripIndents`
             **[Blague initiale](https://github.com/Blagues-API/blagues-api/blob/master/blagues.json#L${
               6 * (newJoke.id as number) - 4
             }-L${6 * (newJoke.id as number) + 1})**
@@ -405,7 +416,8 @@ export default class CorrectionCommand extends Command {
             > **Blague**: ${newJoke.joke}
             > **Réponse**: ${newJoke.answer}
           `
-        }]
+          }
+        ]
       });
     }
   }
