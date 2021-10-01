@@ -2,7 +2,7 @@ import { Client, CommandInteraction, Intents, Interaction } from 'discord.js';
 import jokes from '../../blagues.json';
 // import { AdminUsers, jokeRole, suggestsChannel, logsChannel} from './constents'
 import Commands from './commands';
-import Validation from './validation'
+import Validation from './validation';
 
 export default class Bot {
   public client: Client;
@@ -44,15 +44,13 @@ export default class Bot {
   }
 
   async onInteractionCreate(interaction: Interaction): Promise<void> {
-
-    if(interaction.isContextMenu()){
-      return this.validation.execute(interaction as CommandInteraction)
+    if (interaction.isContextMenu()) {
+      return this.validation.execute(interaction as CommandInteraction);
     }
 
-    if (interaction.isCommand()){
+    if (interaction.isCommand()) {
       return this.commands.execute(interaction as CommandInteraction);
     }
-
   }
 
   registerEvents(): void {
