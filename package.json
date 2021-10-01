@@ -20,7 +20,7 @@
     "*.{js}": "eslint"
   },
   "devDependencies": {
-    "@commitlint/cli": "^13.1.0",
+    "@commitlint/cli": "^13.2.0",
     "@commitlint/config-conventional": "^13.2.0",
     "@nuxt/types": "^2.15.8",
     "@nuxtjs/composition-api": "^0.29.2",
