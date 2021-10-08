@@ -28,7 +28,7 @@
     "@types/common-tags": "^1.8.1",
     "@types/dotenv": "^8.2.0",
     "@types/jsonwebtoken": "^8.5.5",
-    "@types/node": "^16.10.2",
+    "@types/node": "^16.10.3",
     "@types/string-similarity": "^4.0.0",
     "@typescript-eslint/eslint-plugin": "^4.32.0",
     "eslint": "^7.32.0",
