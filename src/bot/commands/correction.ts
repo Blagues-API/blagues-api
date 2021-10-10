@@ -16,11 +16,11 @@ import { jokeById, jokeByQuestion } from '../../controllers';
 import {
   Category,
   Joke,
+  JokeKey,
   JokeNotPublished,
-  JokeTypesDescriptions,
-  JokeTypesRefs,
   JokeNotPublishedKey,
-  JokeKey
+  JokeTypesDescriptions,
+  JokeTypesRefs
 } from '../../typings';
 import { correctionChannel, suggestsChannel } from '../constants';
 import Command from '../lib/command';
@@ -36,6 +36,7 @@ export default class CorrectionCommand extends Command {
     super({
       name: 'correct',
       description: 'Proposer une modification de blague',
+      type: 'CHAT_INPUT',
       options: [
         {
           type: 'STRING',
@@ -262,11 +263,13 @@ export default class CorrectionCommand extends Command {
     const type: IdType = this.getIdType(id);
     switch (type) {
       case IdType.MESSAGE_ID: {
-        const channel: TextChannel = interaction.client.channels.cache.get(
+        const channel = interaction.client.channels.cache.get(
           suggestsChannel
         ) as TextChannel;
-        const message: Message = (await channel.messages.fetch(id)) as Message;
-        if (!message.embeds[0]) return null;
+        const message = (await channel.messages
+          .fetch(id)
+          .catch(() => null)) as Message | null;
+        if (!message?.embeds[0]) return null;
         const description: string = message.embeds[0].description as string;
         const elements = [...description.matchAll(/:\s(.+)/g)].map(
           ([, value]) => value

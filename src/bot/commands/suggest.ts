@@ -31,6 +31,7 @@ export default class SuggestCommand extends Command {
     super({
       name: 'suggest',
       description: 'Proposer une blague',
+      type: 'CHAT_INPUT',
       options: [
         {
           type: 'STRING',
