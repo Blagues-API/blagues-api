@@ -1,27 +1,42 @@
 name: Format
 on:
+  push:
+    branches:
+      - [master, dev]
   pull_request:
-    branches: [master]
+    branches:
+      - [master, dev]
 jobs:
   format:
     name: Jokes Validation Check
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Project
-        uses: actions/checkout@v2
-      - name: Use Node.js 14
-        uses: actions/setup-node@v2.4.1
+      - name: Checkout 🛎
+        uses: actions/checkout@master
+
+      - name: Setup node env 🏗
+        uses: actions/setup-node@v2.1.5
         with:
-          node-version: 14
-      - name: Restore CI Cache
-        uses: actions/cache@v2.1.6
+          node-version: ${{ matrix.node }}
+          check-latest: true
+
+      - name: Cache node_modules 📦
+        uses: actions/cache@v2.1.4
         with:
-          path: node_modules
-          key: ${{ runner.os }}-14-${{ hashFiles('**/yarn.lock') }}
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies 👨🏻‍💻
+        run: npm ci --prefer-offline --no-audit
+
+      - name: Run linter 👀
+        run: npm run lint
+
       - name: Format
-        run: |
-          yarn
-          yarn format-jokes
+        run: npm run format-jokes
+
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4.12.0
         with:
