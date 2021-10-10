@@ -18,7 +18,6 @@ model User {
   limit              Int    @default(100)
 
   @@index([user_id], name: "users_user_id")
-
   @@map("users")
 }
 
@@ -27,6 +26,22 @@ model Validation {
   user_id    String
 
   @@index([message_id], name: "validations_message_id")
-
   @@map("validations")
+}
+
+// TODO: Passer à PQSL pour ajouter une enum pour le type d'ajout
+// Suggestion, Correction d'un suggestion, Correction d'une blague,
+
+model Update {
+  id            Int      @id @default(autoincrement())
+  user_id       String
+  message_id    String
+  type          String
+  joke_id       Int
+  joke_type     String
+  joke_question String
+  joke_answer   String
+  created_at    DateTime @default(now())
+
+  @@map("updates")
 }
