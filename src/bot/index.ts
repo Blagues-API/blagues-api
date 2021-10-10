@@ -1,13 +1,11 @@
 import { Client, CommandInteraction, Intents, Interaction } from 'discord.js';
 import jokes from '../../blagues.json';
 // import { AdminUsers, jokeRole, suggestsChannel, logsChannel} from './constents'
-import Commands from './commands';
-import Validation from './validation';
+import Dispatcher from './lib/dispatcher';
 
 export default class Bot {
   public client: Client;
-  public commands: Commands;
-  public validation: Validation;
+  public dispatcher: Dispatcher;
 
   constructor() {
     this.client = new Client({
@@ -15,8 +13,7 @@ export default class Bot {
       intents: Intents.FLAGS.GUILDS | Intents.FLAGS.GUILD_MESSAGES
     });
 
-    this.commands = new Commands(this.client);
-    this.validation = new Validation(this.client);
+    this.dispatcher = new Dispatcher(this.client);
 
     this.client.once('ready', this.onReady.bind(this));
   }
@@ -37,19 +34,15 @@ export default class Bot {
       });
     }, 24 * 60 * 60 * 1000);
 
-    await this.commands.register();
-    await this.validation.register();
+    // TODO: Setup deploy command
+    await this.dispatcher.register();
 
     this.registerEvents();
   }
 
   async onInteractionCreate(interaction: Interaction): Promise<void> {
-    if (interaction.isContextMenu()) {
-      return this.validation.execute(interaction as CommandInteraction);
-    }
-
     if (interaction.isCommand()) {
-      return this.commands.execute(interaction as CommandInteraction);
+      return this.dispatcher.execute(interaction as CommandInteraction);
     }
   }
 
