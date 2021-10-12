@@ -14,7 +14,11 @@
     "lint:nuxt": "eslint --ext .ts,.js,.vue ./src/nuxt",
     "lint:bot": "eslint --ext .ts,.js ./src/bot",
     "lint:fastify": "eslint --ext .ts,.js ./src/api",
-    "lint": "npm run lint:nuxt && npm run lint:fastify && npm run lint:bot"
+    "lint": "npm run lint:nuxt && npm run lint:fastify && npm run lint:bot",
+    "dev:migrate": "docker exec -it blagues_api_dev npx prisma migrate dev",
+    "dev:generate": "docker exec -it blagues_api_dev npx prisma generate",
+    "db:migrate": "docker exec -it blagues_api npx prisma migrate deploy",
+    "db:generate": "docker exec -it blagues_api npx prisma generate"
   },
   "lint-staged": {
     "*.{js}": "eslint"
@@ -28,6 +32,7 @@
     "@types/common-tags": "^1.8.1",
     "@types/dotenv": "^8.2.0",
     "@types/jsonwebtoken": "^8.5.5",
+    "@types/lodash": "^4.14.175",
     "@types/node": "^16.10.3",
     "@types/string-similarity": "^4.0.0",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
@@ -56,6 +61,7 @@
     "fastify": "^3.22.0",
     "fastify-plugin": "^3.0.0",
     "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
     "nuxt": "^2.15.8",
     "prismjs": "^1.25.0",
     "string-similarity": "^4.0.4"
