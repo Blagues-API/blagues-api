@@ -1,6 +1,5 @@
 import { Client, CommandInteraction, Intents, Interaction } from 'discord.js';
 import jokes from '../../blagues.json';
-// import { AdminUsers, jokeRole, suggestsChannel, logsChannel} from './constents'
 import Dispatcher from './lib/dispatcher';
 
 export default class Bot {
@@ -34,14 +33,13 @@ export default class Bot {
       });
     }, 24 * 60 * 60 * 1000);
 
-    // TODO: Setup deploy command
     await this.dispatcher.register();
 
     this.registerEvents();
   }
 
   async onInteractionCreate(interaction: Interaction): Promise<void> {
-    if (interaction.isCommand()) {
+    if (interaction.type === 'APPLICATION_COMMAND') {
       return this.dispatcher.execute(interaction as CommandInteraction);
     }
   }
