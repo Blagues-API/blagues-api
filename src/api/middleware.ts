@@ -38,7 +38,7 @@ const middleware: FastifyPluginAsync = async (
     try {
       const decoded: AuthPayload = jwt.verify(
         token,
-        process.env.jwt_encryption_api!
+        process.env.JWT_TOKEN!
       ) as AuthPayload;
       request.auth = decoded;
     } catch (error) {
