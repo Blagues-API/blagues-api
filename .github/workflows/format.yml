@@ -2,10 +2,12 @@ name: Format
 on:
   push:
     branches:
-      - [master, dev]
+      - master
+      - dev
   pull_request:
     branches:
-      - [master, dev]
+      - master
+      - dev
 jobs:
   format:
     name: Jokes Validation Check
