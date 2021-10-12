@@ -1,9 +1,9 @@
 node_modules
 .env
 database.db*
+database
 build
 archive
-dist
 .nuxt
 
 # en réflexion
