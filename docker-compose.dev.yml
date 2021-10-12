@@ -1,17 +1,37 @@
 version: '3'
 services:
   app:
-    container_name: blagues-api
+    container_name: blagues_api_dev
     build:
       context: ./
       dockerfile: ./Dockerfile.dev
     volumes:
       - ./src:/app/src
       - ./blagues.json:/app/blagues.json
-      - ./database.db:/app/database.db
       - ./prisma:/app/prisma
+      - /app/.nuxt
     env_file:
       - ./.env
     ports:
       - '3000:3000'
       - '4000:4000'
+    networks:
+      - global_dev
+
+  postgres:
+    container_name: blagues_api_postgres_dev
+    image: 'postgres:13'
+    volumes:
+      - data:/var/lib/postgresql/data
+    env_file:
+      - ./.env
+    ports:
+      - '5440:5432'
+    networks:
+      - global_dev
+
+volumes:
+  data:
+
+networks:
+  global_dev:
