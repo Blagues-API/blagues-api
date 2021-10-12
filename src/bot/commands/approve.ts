@@ -1,20 +1,17 @@
+import { Proposal, ProposalType } from '@prisma/client';
+import { stripIndents } from 'common-tags';
 import {
   CommandInteraction,
   ContextMenuInteraction,
   Message,
   MessageEmbed,
+  MessageEmbedOptions,
   TextChannel
 } from 'discord.js';
 import { constants as fsConstants, promises as fs } from 'fs';
 import path from 'path';
 import prisma from '../../prisma';
-import {
-  Category,
-  CategoryName,
-  Joke,
-  JokeTypesRefsReverse,
-  UnsignedJoke
-} from '../../typings';
+import { CategoriesRefs, Category, Joke } from '../../typings';
 import { correctionChannel, suggestsChannel } from '../constants';
 import Command from '../lib/command';
 import {
@@ -22,6 +19,10 @@ import {
   interactionInfo,
   interactionValidate
 } from '../utils';
+
+type Correction = Proposal & {
+  suggestion: Proposal;
+};
 
 export default class ApproveCommand extends Command {
   constructor() {
@@ -54,20 +55,53 @@ export default class ApproveCommand extends Command {
         )
       );
     }
-    const embed = message.embeds[0];
-    if (!embed?.description) {
-      return interaction.reply(interactionError(`Le message est invalide.`));
-    }
 
-    // TODO: Vérifier lorsque c'est une correction si une suggestion est en cours
-
-    const validations = await prisma.validation.findMany({
+    const proposal = await prisma.proposal.findUnique({
       where: {
         message_id: message.id
+      },
+      include: {
+        corrections: isSuggestion && {
+          take: 1,
+          orderBy: {
+            created_at: 'desc'
+          },
+          where: {
+            merged: false
+          }
+        },
+        suggestion: {
+          include: {
+            corrections: {
+              take: 1,
+              orderBy: {
+                created_at: 'desc'
+              },
+              where: {
+                merged: false
+              }
+            }
+          }
+        },
+        approvals: true
       }
     });
 
-    if (embed.color === 0x00ff00) {
+    if (!proposal) {
+      return interaction.reply(interactionError(`Le message est invalide.`));
+    }
+
+    const embed = message.embeds[0];
+    if (!embed?.description) {
+      await prisma.proposal.delete({
+        where: {
+          id: proposal.id
+        }
+      });
+      return interaction.reply(interactionError(`Le message est invalide.`));
+    }
+
+    if (proposal.merged) {
       return interaction.reply(
         interactionError(
           `Cette ${isSuggestion ? 'blague' : 'correction'} a déjà été ajoutée.`
@@ -75,9 +109,36 @@ export default class ApproveCommand extends Command {
       );
     }
 
+    const correction =
+      proposal.type === ProposalType.SUGGESTION && proposal.corrections[0];
+    if (correction && !correction.merged) {
+      return interaction.reply(
+        interactionInfo(stripIndents`
+          Il semblerait qu'une correction ai été proposée, veuillez l'approuver avant l'approbation de cette suggestion.
+          > [Correction à approuver](https://discord.com/channels/${
+            interaction.guild!.id
+          }/${correctionChannel}/${correction.message_id})
+        `)
+      );
+    }
+
+    const lastCorrection =
+      proposal.type !== ProposalType.SUGGESTION &&
+      proposal.suggestion!.corrections[0];
+    if (lastCorrection && lastCorrection.id !== proposal.id) {
+      return interaction.reply(
+        interactionInfo(stripIndents`
+          Il semblerait qu'une correction ai été ajoutée par dessus rendant celle ci obselette, veuillez approuver la dernière version de la correction.
+          > [Dernière correction de la suggestion](https://discord.com/channels/${
+            interaction.guild!.id
+          }/${correctionChannel}/${lastCorrection.message_id})
+        `)
+      );
+    }
+
     if (
-      validations.some(
-        (validation) => validation.user_id === interaction.user.id
+      proposal.approvals.some(
+        (approval) => approval.user_id === interaction.user.id
       )
     ) {
       return interaction.reply(
@@ -89,17 +150,17 @@ export default class ApproveCommand extends Command {
       );
     }
 
-    await prisma.validation.create({
+    await prisma.approval.create({
       data: {
-        message_id: message.id,
+        proposal_id: proposal.id,
         user_id: interaction.user.id
       }
     });
 
-    if (validations.length < 2) {
-      const missingValidations = 2 - validations.length;
-      embed.footer!.text = `${missingValidations} approbation${
-        missingValidations > 1 ? 's' : ''
+    if (proposal.approvals.length < 2) {
+      const missingApprovals = 2 - proposal.approvals.length;
+      embed.footer!.text = `${missingApprovals} approbation${
+        missingApprovals > 1 ? 's' : ''
       } manquantes avant l'ajout`;
 
       await message.edit({ embeds: [embed] });
@@ -109,41 +170,104 @@ export default class ApproveCommand extends Command {
       );
     }
 
-    // TODO: Vérifier lorsque c'est une correction si une suggestion dépend de cette dernière
-
-    return isSuggestion
-      ? this.addSuggestion(interaction, message, embed)
-      : this.correctJoke();
+    return proposal.type === ProposalType.SUGGESTION
+      ? this.approveSuggestion(interaction, proposal, message, embed)
+      : this.approveCorrection(
+          interaction,
+          proposal as Correction,
+          message,
+          embed
+        );
   }
 
-  async addSuggestion(
+  async approveSuggestion(
     interaction: CommandInteraction,
+    proposal: Proposal,
     message: Message,
     embed: MessageEmbed
   ): Promise<void> {
-    const args = [...embed.description!.matchAll(/:\s(.+)/g)];
-    const joke: UnsignedJoke = {
-      type: JokeTypesRefsReverse[args[0][1] as CategoryName] as Category,
-      joke: args[1][1],
-      answer: args[2][1]
-    };
+    const { success, joke_id } = await this.mergeJoke(interaction, proposal);
+    if (!success) return;
 
-    await this.addJoke(interaction, joke);
+    await prisma.proposal.update({
+      data: {
+        merged: true,
+        joke_id
+      },
+      where: { id: proposal.id }
+    });
 
     embed.color = 0x00ff00;
     embed.footer!.text = 'Blague ajoutée';
 
     await message.edit({ embeds: [embed] });
+
+    return interaction.reply(
+      interactionValidate(`La suggestion a bien été ajoutée à l'API !`)
+    );
   }
 
-  async correctJoke(): Promise<void> {
-    // TODO: Correction
-  }
-
-  async addJoke(
+  async approveCorrection(
     interaction: CommandInteraction,
-    partialJoke: Partial<Joke>
-  ): Promise<boolean> {
+    proposal: Correction,
+    message: Message,
+    embed: MessageEmbed
+  ): Promise<void> {
+    const channel = interaction.client.channels.cache.get(
+      suggestsChannel
+    ) as TextChannel;
+    const suggestionMessage =
+      proposal.suggestion.message_id &&
+      (await channel.messages
+        .fetch(proposal.suggestion.message_id)
+        .catch(() => null));
+
+    if (proposal.type === ProposalType.CORRECTION) {
+      const { success } = await this.mergeJoke(interaction, proposal);
+      if (!success) return;
+    }
+
+    await prisma.proposal.update({
+      data: {
+        merged: true,
+        suggestion: {
+          update: {
+            joke_type: proposal.joke_type,
+            joke_question: proposal.joke_question,
+            joke_answer: proposal.joke_answer
+          }
+        }
+      },
+      where: { id: proposal.id }
+    });
+
+    embed.color = 0x00ff00;
+    embed.footer!.text = 'Correction migrée vers la suggestion';
+
+    await message.edit({ embeds: [embed] });
+    if (suggestionMessage) {
+      await suggestionMessage.edit({
+        embeds: [
+          {
+            ...suggestionMessage.embeds[0],
+            description: stripIndents`
+              > **Type**: ${CategoriesRefs[proposal.joke_type as Category]}
+              > **Blague**: ${proposal.joke_question}
+              > **Réponse**: ${proposal.joke_answer}
+            `
+          } as MessageEmbedOptions
+        ]
+      });
+    }
+    return interaction.reply(
+      interactionValidate(`La correction a bien été migrée vers la blague !`)
+    );
+  }
+
+  async mergeJoke(
+    interaction: CommandInteraction,
+    proposal: Proposal
+  ): Promise<{ success: boolean; joke_id?: number }> {
     const jokesPath = path.join(__dirname, '../../../blagues.json');
     try {
       await fs.access(jokesPath, fsConstants.R_OK | fsConstants.W_OK);
@@ -154,7 +278,7 @@ export default class ApproveCommand extends Command {
           `Il semblerait que le fichier de blagues soit inaccessible ou innexistant.`
         )
       );
-      return false;
+      return { success: false };
     }
 
     try {
@@ -162,18 +286,24 @@ export default class ApproveCommand extends Command {
       const data = (rawData.length ? JSON.parse(rawData) : []) as Joke[];
 
       const index =
-        'id' in partialJoke
-          ? data.findIndex((joke) => joke.id === partialJoke.id)
-          : data.length - 1;
+        proposal.type === 'CORRECTION'
+          ? data.findIndex((joke) => joke.id === proposal.joke_id!)
+          : data.length;
+      const joke_id =
+        proposal.type === 'CORRECTION'
+          ? proposal.joke_id!
+          : data[data.length - 1].id + 1;
       const joke = {
-        ...partialJoke,
-        id: partialJoke.id ?? data[data.length - 1].id + 1
+        id: joke_id,
+        type: proposal.joke_type,
+        joke: proposal.joke_question,
+        answer: proposal.joke_answer
       } as Joke;
-      data.splice(index, partialJoke.id ? 1 : 0, joke);
+      data.splice(index, proposal.type === 'CORRECTION' ? 1 : 0, joke);
 
       await fs.writeFile(jokesPath, JSON.stringify(data, null, 2));
 
-      return true;
+      return { success: true, joke_id };
     } catch (error) {
       console.log('Error:', error);
 
@@ -182,7 +312,7 @@ export default class ApproveCommand extends Command {
           `Une erreur s'est produite lors de l'ajout de la blague.`
         )
       );
-      return false;
+      return { success: false };
     }
   }
 }
