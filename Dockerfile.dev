@@ -3,17 +3,13 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm i
-RUN npm i -g nodemon typescript ts-node prisma
-
-COPY prisma ./
-
-RUN prisma generate
-RUN prisma migrate deploy
+RUN npm install
 
 COPY . .
+
+RUN npx prisma generate
 
 EXPOSE 3000
 EXPOSE 4000
 
-CMD nodemon --watch '**/*' --ext 'ts,js,json' --exec 'ts-node src/index.ts'
+CMD npx nodemon --watch '**/*' --ext 'ts,js' --exec 'npx ts-node src/index.ts'
