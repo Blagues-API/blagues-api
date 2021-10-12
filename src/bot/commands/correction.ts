@@ -8,27 +8,34 @@ import {
   MessageActionRow,
   MessageButton,
   MessageSelectMenu,
-  MessageSelectOptionData,
-  SelectMenuInteraction,
   TextChannel
 } from 'discord.js';
 import { jokeById, jokeByQuestion } from '../../controllers';
+import prisma from '../../prisma';
 import {
   Category,
-  Joke,
-  JokeKey,
-  JokeNotPublished,
-  JokeNotPublishedKey,
   JokeTypesDescriptions,
-  JokeTypesRefs
+  CategoriesRefs,
+  UnsignedJoke,
+  UnsignedJokeKey
 } from '../../typings';
-import { correctionChannel, suggestsChannel } from '../constants';
+import { correctionChannel } from '../constants';
 import Command from '../lib/command';
+import clone from 'lodash/clone';
+import { ProposalType } from '.prisma/client';
 
 enum IdType {
   MESSAGE_ID,
   JOKE_ID,
   MESSAGE_QUESTION
+}
+
+interface JokeCorrectionPayload extends UnsignedJoke {
+  id?: number;
+  correction_type: ProposalType;
+  suggestion: UnsignedJoke & {
+    proposal_id: number;
+  };
 }
 
 export default class CorrectionCommand extends Command {
@@ -40,7 +47,7 @@ export default class CorrectionCommand extends Command {
       options: [
         {
           type: 'STRING',
-          name: 'identifiant',
+          name: 'recherche',
           description: 'ID ou question de la blague ou ID du message',
           required: true
         }
@@ -48,100 +55,85 @@ export default class CorrectionCommand extends Command {
     });
   }
   async run(interaction: CommandInteraction): Promise<void> {
-    const raw_id = interaction.options.get('identifiant')?.value as string;
+    const query = interaction.options.get('recherche')?.value as string;
 
-    let joke: Joke | JokeNotPublished | null = await this.getJoke(
-      raw_id,
-      interaction
-    );
-    if (!joke) {
-      const question = (await interaction.reply({
-        embeds: [
-          {
-            title: 'Correction de blague',
-            description:
-              "Il faut tout d'abbord identifier la blague. Pour cela, il faut l'identifiant de la blague, l'identifiant du message la proposant ou la question de celle-ci."
-          }
-        ],
-        fetchReply: true
-      })) as Message;
-      joke = await this.requestJoke(interaction, question);
-    }
+    const joke = await this.resolveJoke(interaction, query);
     if (!joke) return;
 
-    const newJoke = await this.requestChanges(interaction, { ...joke });
+    const newJoke = await this.requestChanges(interaction, clone(joke));
     if (!newJoke) return;
-
-    await interaction.editReply({
-      embeds: [
-        {
-          title: 'Requête de changement envoyée',
-          description: stripIndents`
-        > **Type:** ${newJoke.type}
-        > **Question:** ${newJoke.joke}
-        > **Réponse:** ${newJoke.answer}
-      `,
-          color: 'GREEN' as ColorResolvable
-        }
-      ],
-      components: []
-    });
 
     await this.editJoke(interaction, joke, newJoke);
   }
 
-  async requestJoke(
+  async resolveJoke(
     interaction: CommandInteraction,
-    question: Message
-  ): Promise<Joke | JokeNotPublished | null> {
-    const messages = await question.channel.awaitMessages({
-      filter: (m: Message) => m.author.id === interaction.user.id,
-      time: 10000,
-      max: 1
-    });
-    const message = messages.first();
-    if (!message) {
-      await interaction.editReply({
-        embeds: [
-          question.embeds[0],
-          {
-            title: '💡 Commande annulée',
-            color: 0xffda83
-          }
-        ]
-      });
-      return null;
-    }
+    query: string
+  ): Promise<JokeCorrectionPayload | null> {
+    const joke = await this.findJoke(query);
+    if (joke) return joke;
 
-    const joke: Joke | JokeNotPublished | null = await this.getJoke(
-      message.content,
-      interaction
-    );
-    if (message.deletable) await message.delete();
-    if (!joke) {
-      question.channel
-        .send('pas bon fréro')
-        .then((m) => setTimeout(() => m.deletable && m.delete(), 5000));
-      return this.requestJoke(interaction, question);
-    }
-    return joke;
+    const question = (await interaction.reply({
+      embeds: [
+        {
+          title: 'Correction de blague',
+          description:
+            "Il faut tout d'abord identifier la blague. Pour cela, il faut l'identifiant de la blague, l'identifiant du message la proposant ou la question de celle-ci."
+        }
+      ],
+      fetchReply: true
+    })) as Message;
+
+    return new Promise((resolve) => {
+      const collector = question.channel.createMessageCollector({
+        filter: (m: Message) => m.author.id === interaction.user.id,
+        idle: 60_000
+      });
+      collector.on('collect', async (msg: Message) => {
+        if (msg.deletable) await msg.delete();
+        const joke = await this.findJoke(msg.content);
+
+        if (joke) {
+          collector.stop();
+          return resolve(joke);
+        }
+
+        question.channel
+          .send('pas bon fréro, réessaye')
+          .then((m) => setTimeout(() => m.deletable && m.delete(), 5000));
+      });
+      collector.once('end', async (collected, reason: string) => {
+        if (reason === 'time') {
+          await interaction.editReply({
+            embeds: [
+              question.embeds[0],
+              {
+                title: '💡 Commande annulée',
+                color: 0xffda83
+              }
+            ]
+          });
+          return resolve(null);
+        }
+      });
+    });
   }
 
   async requestChanges(
-    interaction: CommandInteraction,
-    joke: Joke | JokeNotPublished,
+    commandInteraction: CommandInteraction,
+    joke: JokeCorrectionPayload,
     changes = false
-  ): Promise<Joke | JokeNotPublished | null> {
+  ): Promise<JokeCorrectionPayload | null> {
     const embed = {
       title: `Quels${changes ? ' autres' : ''} changements voulez-vous faire ?`,
       description: stripIndents`
-        > **Type:** ${joke.type}
+        > **Type:** ${CategoriesRefs[joke.type]}
         > **Question:** ${joke.joke}
         > **Réponse:** ${joke.answer}
       `
     };
-    const question = (await interaction[
-      interaction.replied ? 'editReply' : 'reply'
+    const question = (await commandInteraction[
+      commandInteraction.replied ? 'editReply' : 'reply'
     ]({
       embeds: [embed],
       components: [
@@ -161,11 +153,20 @@ export default class CorrectionCommand extends Command {
               label: 'Réponse',
               customId: 'answer',
               style: 'PRIMARY'
-            }),
+            })
+          ]
+        }),
+        new MessageActionRow({
+          components: [
             new MessageButton({
               label: 'Valider',
-              customId: 'valid',
+              customId: 'confirm',
               style: 'SUCCESS'
+            }),
+            new MessageButton({
+              label: 'Annuler',
+              customId: 'cancel',
+              style: 'SECONDARY'
             })
           ]
         })
@@ -173,255 +174,348 @@ export default class CorrectionCommand extends Command {
       fetchReply: true
     })) as Message;
 
-    const button: ButtonInteraction = (await question.awaitMessageComponent({
-      filter: (i: Interaction) => i.user.id === interaction.user.id
+    const buttonInteraction = (await question.awaitMessageComponent({
+      filter: (i: Interaction) => i.user.id === commandInteraction.user.id
     })) as ButtonInteraction;
 
-    switch (button.customId) {
+    switch (buttonInteraction.customId) {
       case 'type': {
-        const typeMessage = (await button.reply({
-          content:
-            'Par quel type de blague voulez-vous changer le type actuel ?',
-          components: [
-            new MessageActionRow({
-              components: [
-                new MessageSelectMenu({
-                  customId: 'type',
-                  placeholder: 'Nouveau type de blague',
-                  options: Object.entries(JokeTypesRefs).map(
-                    ([key, name]) =>
-                      ({
-                        label: name,
-                        value: key,
-                        description: JokeTypesDescriptions[key as Category]
-                      } as MessageSelectOptionData)
-                  ),
-                  maxValues: 1,
-                  minValues: 1
-                })
-              ]
-            })
-          ],
-          fetchReply: true
-        })) as Message;
-        const response: SelectMenuInteraction = (await typeMessage
-          .awaitMessageComponent({
-            filter: (i: Interaction) => i.user.id === interaction.user.id,
-            time: 30000
-          })
-          .catch(() => {
-            typeMessage.edit({
-              content:
-                'Par quel type de blague voulez-vous changer le type actuel ?',
-              embeds: [
-                {
-                  title: '💡 Commande annulée',
-                  color: 0xffda83
-                }
-              ],
-              components: []
-            });
-          })) as SelectMenuInteraction;
-
+        const response = await this.requestTypeChange(
+          buttonInteraction,
+          commandInteraction,
+          joke
+        );
         if (!response) return null;
-        joke.type = response.values[0] as Category;
 
-        if (typeMessage.deletable) await button.deleteReply();
-
-        return this.requestChanges(interaction, joke, true);
+        return this.requestChanges(commandInteraction, joke, true);
       }
 
       case 'question': {
-        const response = await this.requestChangesResponse(
-          button,
-          interaction,
-          joke as Joke,
+        const response = await this.requestTextChange(
+          buttonInteraction,
+          commandInteraction,
+          joke,
           'question'
         );
-        if (response) return this.requestChanges(interaction, response, true);
-        return null;
+        if (!response) return null;
+
+        return this.requestChanges(commandInteraction, response, true);
       }
       case 'answer': {
-        const response = await this.requestChangesResponse(
-          button,
-          interaction,
-          joke as Joke,
+        const response = await this.requestTextChange(
+          buttonInteraction,
+          commandInteraction,
+          joke,
           'réponse'
         );
-        if (response) return this.requestChanges(interaction, response, true);
-        return null;
+        if (!response) return null;
+
+        return this.requestChanges(commandInteraction, response, true);
       }
-      default:
+      case 'confirm':
         return joke;
+      default:
+        return null;
     }
   }
 
-  async getJoke(
-    id: string,
-    interaction: CommandInteraction
-  ): Promise<Joke | JokeNotPublished | null> {
-    const type: IdType = this.getIdType(id);
-    switch (type) {
-      case IdType.MESSAGE_ID: {
-        const channel = interaction.client.channels.cache.get(
-          suggestsChannel
-        ) as TextChannel;
-        const message = (await channel.messages
-          .fetch(id)
-          .catch(() => null)) as Message | null;
-        if (!message?.embeds[0]) return null;
-        const description: string = message.embeds[0].description as string;
-        const elements = [...description.matchAll(/:\s(.+)/g)].map(
-          ([, value]) => value
-        );
-        return {
-          message_id: message.id,
-          type: elements[0] as Category,
-          joke: elements[1],
-          answer: elements[2]
-        } as JokeNotPublished;
-      }
-      case IdType.MESSAGE_QUESTION: {
-        return jokeByQuestion(id) as Joke;
-      }
-      case IdType.JOKE_ID: {
-        return jokeById(Number(id)) as Joke;
-      }
-    }
-  }
-
-  getIdType(id: string): IdType {
-    if (isNaN(Number(id))) {
+  getIdType(query: string): IdType {
+    if (isNaN(Number(query))) {
       return IdType.MESSAGE_QUESTION;
     }
-    if (id.length > 6) {
+    if (query.length > 6) {
       return IdType.MESSAGE_ID;
     }
     return IdType.JOKE_ID;
   }
 
-  async requestChangesResponse(
-    button: ButtonInteraction,
-    interaction: CommandInteraction,
-    joke: Joke,
+  async findJoke(query: string): Promise<JokeCorrectionPayload | null> {
+    const idType = this.getIdType(query);
+
+    if (idType === IdType.MESSAGE_ID) {
+      const proposal = await prisma.proposal.findUnique({
+        where: {
+          message_id: query
+        },
+        include: {
+          corrections: {
+            take: 1,
+            orderBy: {
+              created_at: 'desc'
+            },
+            where: {
+              merged: false
+            }
+          },
+          suggestion: {
+            include: {
+              corrections: {
+                take: 1,
+                orderBy: {
+                  created_at: 'desc'
+                },
+                where: {
+                  merged: false
+                }
+              }
+            }
+          }
+        }
+      });
+      if (!proposal) return null;
+
+      const origin =
+        proposal.type === ProposalType.SUGGESTION
+          ? proposal
+          : proposal.suggestion!;
+
+      return {
+        id: proposal.joke_id ?? undefined,
+        type: (origin.corrections[0]?.joke_type ??
+          origin.joke_type) as Category,
+        joke: (origin.corrections[0]?.joke_question ?? origin.joke_question)!,
+        answer: (origin.corrections[0]?.joke_answer ?? origin.joke_answer)!,
+        correction_type: origin.merged
+          ? ProposalType.CORRECTION
+          : ProposalType.SUGGESTION_CORRECTION,
+        suggestion: {
+          proposal_id: proposal.id,
+          type: proposal.joke_type as Category,
+          joke: proposal.joke_question!,
+          answer: proposal.joke_answer!
+        }
+      };
+    }
+
+    const joke =
+      idType === IdType.JOKE_ID
+        ? jokeById(Number(query))
+        : jokeByQuestion(query);
+    if (!joke) return null;
+
+    const proposal = await prisma.proposal.upsert({
+      create: {
+        joke_id: joke.id,
+        joke_type: joke.type,
+        joke_question: joke.joke,
+        joke_answer: joke.answer,
+        type: ProposalType.SUGGESTION,
+        merged: true
+      },
+      include: {
+        corrections: {
+          take: 1,
+          orderBy: {
+            created_at: 'desc'
+          },
+          where: {
+            merged: false
+          }
+        }
+      },
+      update: {},
+      where: {
+        joke_id: joke.id
+      }
+    });
+
+    const correction = proposal.corrections[0];
+    return {
+      id: proposal.joke_id!,
+      type: (correction?.joke_type ?? proposal.joke_type) as Category,
+      joke: (correction?.joke_question ?? proposal.joke_question)!,
+      answer: (correction?.joke_answer ?? proposal.joke_answer)!,
+      correction_type: ProposalType.CORRECTION,
+      suggestion: {
+        proposal_id: proposal.id,
+        type: proposal.joke_type as Category,
+        joke: proposal.joke_question!,
+        answer: proposal.joke_answer!
+      }
+    };
+  }
+
+  async requestTextChange(
+    buttonInteraction: ButtonInteraction,
+    commandInteraction: CommandInteraction,
+    joke: JokeCorrectionPayload,
     textReplyContent: string
-  ): Promise<Joke | JokeNotPublished | null> {
-    const questionMessage = (await button.reply({
+  ): Promise<JokeCorrectionPayload | null> {
+    const questionMessage = (await buttonInteraction.reply({
       content: `Par quelle ${textReplyContent} voulez-vous changer la ${textReplyContent} actuelle ?`,
       fetchReply: true
     })) as Message;
-    const messages = await interaction.channel?.awaitMessages({
-      filter: (m: Message) => m.author.id === interaction.user.id,
-      time: 30000,
-      max: 1
-    });
-    const message = messages?.first();
-    if (!message) {
+
+    const messages = await commandInteraction
+      .channel!.awaitMessages({
+        filter: (m: Message) => m.author.id === commandInteraction.user.id,
+        time: 30000,
+        max: 1
+      })
+      .catch(() => null);
+
+    if (!messages) {
       questionMessage.edit({
-        content: questionMessage.content,
         embeds: [
           {
-            title: '💡 Commande annulée',
+            title: '💡 Les 60 secondes se sont écoulées',
             color: 0xffda83
           }
         ]
       });
       return null;
     }
-    joke[textReplyContent === 'question' ? 'joke' : 'answer'] = message.content;
-    if (questionMessage.deletable) await button.deleteReply();
-    if (message.deletable) await message.delete();
+
+    const msg = messages.first()!;
+    if (msg.deletable) await msg.delete();
+
+    joke[textReplyContent === 'question' ? 'joke' : 'answer'] = msg.content;
+    if (questionMessage.deletable) await questionMessage.delete();
+
+    return joke;
+  }
+
+  async requestTypeChange(
+    buttonInteraction: ButtonInteraction,
+    commandInteraction: CommandInteraction,
+    joke: JokeCorrectionPayload
+  ): Promise<JokeCorrectionPayload | null> {
+    const questionMessage = (await buttonInteraction.reply({
+      content: 'Par quel type de blague voulez-vous changer le type actuel ?',
+      components: [
+        new MessageActionRow({
+          components: [
+            new MessageSelectMenu({
+              customId: 'type',
+              placeholder: 'Nouveau type de blague',
+              options: Object.entries(CategoriesRefs).map(([key, name]) => ({
+                label: name,
+                value: key,
+                description: JokeTypesDescriptions[key as Category]
+              })),
+              maxValues: 1,
+              minValues: 1
+            })
+          ]
+        })
+      ],
+      fetchReply: true
+    })) as Message;
+
+    const response = await questionMessage
+      .awaitMessageComponent({
+        filter: (i: Interaction) => i.user.id === commandInteraction.user.id,
+        componentType: 'SELECT_MENU',
+        time: 60000
+      })
+      .catch(() => null);
+
+    if (!response) {
+      questionMessage.edit({
+        embeds: [
+          {
+            title: '💡 Les 60 secondes se sont écoulées',
+            color: 0xffda83
+          }
+        ],
+        components: []
+      });
+      return null;
+    }
+
+    joke.type = response.values[0] as Category;
+
+    if (questionMessage.deletable) await questionMessage.delete();
+
     return joke;
   }
 
   async editJoke(
-    interaction: CommandInteraction,
-    oldJoke: Joke | JokeNotPublished,
-    newJoke: Joke | JokeNotPublished
+    commandInteraction: CommandInteraction,
+    oldJoke: JokeCorrectionPayload,
+    newJoke: JokeCorrectionPayload
   ): Promise<void> {
-    if ('message_id' in newJoke) {
-      const channel: TextChannel = interaction.client.channels.cache.get(
-        suggestsChannel
-      ) as TextChannel;
-      const message: Message = (await channel.messages.fetch(
-        newJoke.message_id
-      )) as Message;
-
-      const correction = stripIndents`
-        \`\`\`
-        **Type:** ${newJoke.type}
-        **Question:** ${newJoke.joke}
-        **Réponse:** ${newJoke.answer}
-        \`\`\`
-      `;
-
-      if (
-        !(Object.keys(newJoke) as JokeNotPublishedKey[]).some(
-          (key) =>
-            (newJoke as JokeNotPublished)[key] !==
-            (oldJoke as JokeNotPublished)[key]
-        )
-      ) {
-        await interaction.editReply({
-          content: "Aucune élément n'a été modifié",
-          embeds: []
-        });
-        return;
-      }
-
-      const embed = message.embeds[0];
-      if (embed.fields.some(({ value }) => value === correction)) {
-        await interaction.editReply({
-          content: 'Cette correction à déjà été proposée',
-          embeds: []
-        });
-        return;
-      }
-
-      embed.fields.push({
-        name: interaction.user.username,
-        value: correction,
-        inline: false
+    if (
+      !(['type', 'joke', 'answer'] as UnsignedJokeKey[]).some(
+        (key) => newJoke[key] !== oldJoke[key]
+      )
+    ) {
+      await commandInteraction.editReply({
+        content: "Aucun élément n'a été modifié",
+        embeds: []
       });
-
-      await message.edit({ embeds: [embed] });
-    } else {
-      const channel: TextChannel = interaction.client.channels.cache.get(
-        correctionChannel
-      ) as TextChannel;
-
-      if (
-        !(Object.keys(newJoke) as JokeKey[]).some(
-          (key) => (newJoke as Joke)[key] !== (oldJoke as Joke)[key]
-        )
-      ) {
-        await interaction.editReply({
-          content: "Aucune élément n'a été modifié",
-          embeds: []
-        });
-        return;
-      }
-
-      await channel.send({
-        embeds: [
-          {
-            title: interaction.user.username,
-            description: stripIndents`
-            **[Blague initiale](https://github.com/Blagues-API/blagues-api/blob/master/blagues.json#L${
-              6 * (newJoke.id as number) - 4
-            }-L${6 * (newJoke.id as number) + 1})**
-            > **Type**: ${oldJoke.type}
-            > **Blague**: ${oldJoke.joke}
-            > **Réponse**: ${oldJoke.answer}
-
-            **Blague corrigé:**
-            > **Type**: ${newJoke.type}
-            > **Blague**: ${newJoke.joke}
-            > **Réponse**: ${newJoke.answer}
-          `
-          }
-        ]
-      });
+      return;
     }
+
+    const channel: TextChannel = commandInteraction.client.channels.cache.get(
+      correctionChannel
+    ) as TextChannel;
+
+    const message = await channel.send({
+      embeds: [
+        {
+          author: {
+            name: commandInteraction.user.username,
+            icon_url: commandInteraction.user.displayAvatarURL({
+              dynamic: true,
+              size: 32
+            })
+          },
+          fields: [
+            {
+              name: 'Blague initiale',
+              value: stripIndents`
+                > **Type**: ${newJoke.suggestion.type}
+                > **Blague**: ${newJoke.suggestion.joke}
+                > **Réponse**: ${newJoke.suggestion.answer}
+              `
+            },
+            {
+              name: 'Blague corrigée',
+              value: stripIndents`
+                > **Type**: ${newJoke.type}
+                > **Blague**: ${newJoke.joke}
+                > **Réponse**: ${newJoke.answer}
+              `
+            }
+          ]
+        }
+      ]
+    });
+
+    await prisma.proposal.create({
+      data: {
+        user_id: commandInteraction.user.id,
+        message_id: message.id,
+        type: ProposalType[newJoke.correction_type],
+        joke_id: newJoke.id,
+        joke_question: newJoke.joke,
+        joke_answer: newJoke.answer,
+        joke_type: newJoke.type,
+        suggestion: {
+          connect: {
+            id: newJoke.suggestion.proposal_id
+          }
+        }
+      }
+    });
+
+    await commandInteraction.editReply({
+      embeds: [
+        {
+          title: 'Requête de changement envoyée',
+          url: `https://discord.com/channels/${
+            commandInteraction.guild!.id
+          }/${correctionChannel}/${message.id}`,
+          description: stripIndents`
+            > **Type:** ${CategoriesRefs[newJoke.type]}
+            > **Question:** ${newJoke.joke}
+            > **Réponse:** ${newJoke.answer}
+          `,
+          color: 'GREEN' as ColorResolvable
+        }
+      ],
+      components: []
+    });
   }
 }
