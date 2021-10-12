@@ -3,13 +3,13 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:../database.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-  user_id            String @id
-  user_name          String
+  user_id            String @id @db.VarChar(255)
+  user_name          String @db.VarChar(255)
   user_avatar        String
   user_token         String
   user_token_refresh String
@@ -21,27 +21,38 @@ model User {
   @@map("users")
 }
 
-model Validation {
-  message_id String @id
-  user_id    String
+model Proposal {
+  id            Int          @id @default(autoincrement())
+  user_id       String?      @db.VarChar(255)
+  message_id    String?      @unique @db.VarChar(255)
+  type          ProposalType
+  joke_id       Int?         @unique
+  joke_type     String?      @db.VarChar(255)
+  joke_question String?      @db.VarChar(255)
+  joke_answer   String?      @db.VarChar(255)
+  merged        Boolean      @default(false)
+  created_at    DateTime     @default(now())
+  approvals     Approval[]
 
-  @@index([message_id], name: "validations_message_id")
-  @@map("validations")
+  suggestion_id Int?
+  suggestion    Proposal?  @relation("ProposalToCorrections", fields: [suggestion_id], references: [id], onDelete: Cascade)
+  corrections   Proposal[] @relation("ProposalToCorrections")
+
+  @@map("proposals")
 }
 
-// TODO: Passer à PQSL pour ajouter une enum pour le type d'ajout
-// Suggestion, Correction d'un suggestion, Correction d'une blague,
+model Approval {
+  proposal_id Int
+  user_id     String   @db.VarChar(255)
+  proposal    Proposal @relation(fields: [proposal_id], references: [id])
 
-model Update {
-  id            Int      @id @default(autoincrement())
-  user_id       String
-  message_id    String
-  type          String
-  joke_id       Int
-  joke_type     String
-  joke_question String
-  joke_answer   String
-  created_at    DateTime @default(now())
+  @@id([proposal_id, user_id])
+  @@index([proposal_id], name: "approvals_proposal_id")
+  @@map("approvals")
+}
 
-  @@map("updates")
+enum ProposalType {
+  SUGGESTION
+  CORRECTION
+  SUGGESTION_CORRECTION
 }
