@@ -24,7 +24,7 @@ export default {
 
     // Doc: https://dev.auth.nuxtjs.org/
 
-    '@nuxtjs/auth'
+    '@draftbot/nuxtjs-auth'
   ],
   css: ['./assets/css/reset.css'],
 
