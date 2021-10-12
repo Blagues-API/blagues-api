@@ -1,3 +1,7 @@
+/**
+ * Standard joke interface
+ */
+
 export interface Joke {
   id: number;
   type: Category;
@@ -5,31 +9,44 @@ export interface Joke {
   answer: string;
 }
 
+export type JokeKey = keyof Joke;
+
 export type UnsignedJoke = Omit<Joke, 'id'>;
 
-export type JokeKey = 'id' | 'type' | 'joke' | 'answer';
+export type UnsignedJokeKey = keyof UnsignedJoke;
 
-export interface JokeNotPublished {
+/**
+ * Unpublished joke interface
+ */
+
+export interface UnpublishedJoke {
   message_id: string;
   type: Category;
   joke: string;
   answer: string;
 }
+export type UnpublishedJokeKey = keyof UnpublishedJoke;
 
-export type JokeNotPublishedKey = 'message_id' | 'type' | 'joke' | 'answer';
+/**
+ * Joke categories
+ */
 
-export enum Categories {
-  GLOBAL = 'global',
-  DEV = 'dev',
-  DARK = 'dark',
-  LIMIT = 'limit',
-  BEAUF = 'beauf',
-  BLONDES = 'blondes'
-}
+export const Categories = [
+  'global',
+  'dev',
+  'dark',
+  'limit',
+  'beauf',
+  'blondes'
+] as const;
 
-export const JokeTypes = ['global', 'dev', 'dark', 'limit', 'beauf', 'blondes'];
+export type Category = typeof Categories[number];
 
-export const JokeTypesRefs: Record<Category, CategoryName> = {
+/**
+ * Joke references
+ */
+
+export const CategoriesRefs: Record<Category, string> = {
   global: 'Général',
   dark: 'Noir',
   dev: 'Développeur',
@@ -38,16 +55,7 @@ export const JokeTypesRefs: Record<Category, CategoryName> = {
   blondes: 'Blondes'
 };
 
-export const JokeTypesRefsReverse: Record<CategoryName, Category> = {
-  Général: 'global',
-  Noir: 'dark',
-  Développeur: 'dev',
-  '18+': 'limit',
-  Beauf: 'beauf',
-  Blondes: 'blondes'
-};
-
-export const JokeTypesDescriptions = {
+export const JokeTypesDescriptions: Record<Category, string> = {
   global: 'Blagues tout public, accessibles pour tous.',
   dark: 'Blagues qui souligne avec cruauté certains faits.',
   dev: 'Blagues orientées pour les développeurs & geeks.',
@@ -55,34 +63,3 @@ export const JokeTypesDescriptions = {
   beauf: 'Blagues vulgaires et généralement stéréotypées.',
   blondes: 'Blagues ciblées sur les femmes blondes.'
 };
-
-export type Category =
-  | 'global'
-  | 'dev'
-  | 'dark'
-  | 'limit'
-  | 'beauf'
-  | 'blondes';
-
-export type CategoryName =
-  | 'Général'
-  | 'Noir'
-  | 'Développeur'
-  | '18+'
-  | 'Beauf'
-  | 'Blondes';
-
-/*
-See api src/app/api/index.ts file for more informations
-
-export interface JokePayload {
-  type: Category;
-  joke: string;
-  answer: string;
-}
-
-export type JokePayloadKey =
-  | 'type'
-  | 'joke'
-  | 'answer'
-*/

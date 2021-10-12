@@ -1,5 +1,5 @@
 import data from '../blagues.json';
-import { Joke, JokeTypes } from './typings';
+import { Joke, Categories, Category } from './typings';
 import { random } from './utils';
 
 const jokes = data as Joke[];
@@ -15,7 +15,7 @@ export function randomJoke(disallow?: string[]): JokeResponse {
   if (disallow) {
     typesForbidden = Array.isArray(disallow) ? disallow : Array.of(disallow);
 
-    if (typesForbidden.some((type) => !JokeTypes.includes(type))) {
+    if (typesForbidden.some((type) => !Categories.includes(type as Category))) {
       return {
         error: true
       };
@@ -33,7 +33,7 @@ export function randomJoke(disallow?: string[]): JokeResponse {
 }
 
 export function randomJokeByType(type: string): JokeResponse {
-  if (!JokeTypes.includes(type)) {
+  if (!Categories.includes(type as Category)) {
     return {
       error: true
     };
@@ -55,4 +55,4 @@ export function jokeByQuestion(question: string): Joke | null {
   return jokes.find((entry: Joke) => entry.joke === question) ?? null;
 }
 
-export const jokesFile = jokes
+export const jokesFile = jokes;

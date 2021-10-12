@@ -5,7 +5,7 @@ import {
   randomJokeByType,
   JokeResponse
 } from '../controllers';
-import { JokeTypes, JokeTypesRefs } from '../typings';
+import { Categories, CategoriesRefs } from '../typings';
 import { BadRequest, JokeNotFound, NoContent } from './Errors';
 import middleware from './middleware';
 
@@ -14,9 +14,9 @@ export default async (fastify: FastifyInstance): Promise<void> => {
 
   fastify.get('/types', async (req: FastifyRequest, res) => {
     return res.code(200).send({
-      count: JokeTypes.length,
-      accepted_types: JokeTypes,
-      keys: JokeTypesRefs
+      count: Categories.length,
+      accepted_types: Categories,
+      keys: CategoriesRefs
     });
   });
 
@@ -92,12 +92,12 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     }
 
     const formatedType: string = jokePayload.type.toLowerCase();
-    if(!JokeTypes.includes(formatedType)) {
+    if(!Categories.includes(formatedType)) {
       res.code(400).send(BadTypePayloadRequest(formatedType))
     }
 
     const joke = stripIndents`
-      > **Type**: ${JokeTypesRefs[formatedType as Category]}
+      > **Type**: ${CategoriesRefs[formatedType as Category]}
       > **Blague**: ${jokePayload.joke}
       > **Réponse**: ${jokePayload.answer}
       > ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
