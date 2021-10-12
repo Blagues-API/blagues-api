@@ -1,0 +1,31 @@
+version: '3'
+services:
+  app:
+    container_name: blagues_api
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./blagues.json:/app/blagues.json
+    env_file:
+      - ./.env
+    ports:
+      - '3000:3000'
+      - '4000:4000'
+    networks:
+      - global
+
+  postgres:
+    container_name: blagues_api_postgres
+    image: 'postgres:13'
+    volumes:
+      - ./database:/var/lib/postgresql/data
+    env_file:
+      - ./.env
+    ports:
+      - '5440:5432'
+    networks:
+      - global
+
+networks:
+  global:
