@@ -5,45 +5,54 @@
         <h2>Besoin d’une <b>API</b> de <b>blagues</b> françaises ?</h2>
         <div class="tags">
           <div class="line">
-            <span class="tag">#collaborative</span><span class="tag">#open-source</span>
+            <span class="tag">#collaborative</span
+            ><span class="tag">#open-source</span>
           </div>
           <div class="line">
-            <span class="tag">#communautaire</span><span class="tag">#français</span>
+            <span class="tag">#communautaire</span
+            ><span class="tag">#français</span>
           </div>
         </div>
         <div class="buttons">
-          <div class="button npm">
+          <button class="button npm">
             <NpmIcon class="icon" />
             <span class="name">NPM</span>
-          </div>
-          <div class="button pypi">
+          </button>
+          <button class="button pypi">
             <PyPiIcon class="icon" />
             <span class="name">PY<span>PI</span></span>
-          </div>
-          <div class="button api">
+          </button>
+          <button class="button api">
             <ApiIcon class="icon" />
-          </div>
+          </button>
         </div>
       </div>
-      <div v-if="joke" class="example">
-        <p class="type">
-          {{ jokesTypes[joke.type] }}
-        </p>
-        <p class="joke">
-          {{ joke.joke }}
-        </p>
-        <p class="spoiler" tabindex="0">
-          <span class="answer">{{ joke.answer }}</span>
-        </p>
-        <button class="next" @click="refreshJoke()">
-          UNE AUTRE !
-        </button>
-      </div>
+      <!-- <LazyHydrate on-interaction> -->
+      <!-- SSR only -->
+      <transition name="fade" mode="out-in">
+        <client-only>
+          <div class="example">
+            <transition name="fade" mode="out-in">
+              <div v-if="joke" :key="joke.id" class="example-content">
+                <p class="type">
+                  {{ jokesTypes[joke.type] }}
+                </p>
+                <p class="joke">
+                  {{ joke.joke }}
+                </p>
+                <p class="spoiler" tabindex="0">
+                  <span class="answer">{{ joke.answer }}</span>
+                </p>
+              </div>
+            </transition>
+            <button class="next" @click="refreshJoke()">UNE AUTRE !</button>
+          </div>
+        </client-only>
+      </transition>
+      <!-- </LazyHydrate> -->
     </div>
     <div class="sroller" @click="scrollToDocs()">
-      <div class="name">
-        Documentation
-      </div>
+      <div class="name">Documentation</div>
       <DownIcon />
     </div>
     <div ref="docs" class="bottom" />
@@ -52,6 +61,8 @@
 
 <script>
 import { defineComponent, ref } from '@nuxtjs/composition-api'
+
+// import LazyHydrate from 'vue-lazy-hydration'
 
 import jokes from '../../../../blagues.json'
 import NpmIcon from '@/assets/icons/npm.svg?inline'
@@ -65,7 +76,7 @@ const jokesTypes = {
   dark: 'Blague humour noir',
   dev: 'Blague de développeurs',
   beauf: 'Humour de beaufs',
-  blondes: 'Blagues blondes'
+  blondes: 'Blagues blondes',
 }
 
 export default defineComponent({
@@ -73,9 +84,10 @@ export default defineComponent({
     NpmIcon,
     PyPiIcon,
     ApiIcon,
-    DownIcon
+    DownIcon,
+    // LazyHydrate
   },
-  setup () {
+  setup() {
     const joke = ref(jokes[Math.floor(Math.random() * jokes.length)])
     const docs = ref(null)
 
@@ -92,13 +104,21 @@ export default defineComponent({
       refreshJoke,
       jokesTypes,
       scrollToDocs,
-      docs
+      docs,
     }
-  }
+  },
 })
 </script>
 
 <style lang="scss">
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
 .hero {
   display: flex;
   justify-content: center;
@@ -106,8 +126,8 @@ export default defineComponent({
   position: relative;
   background-color: var(--secondary);
   min-height: 60vh;
-  padding: 40px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 110px 32px 96px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   .wrapper {
     display: flex;
     justify-content: space-between;
@@ -117,7 +137,7 @@ export default defineComponent({
     .content {
       max-width: 350px;
       h2 {
-        font-family: Roboto;
+        font-family: 'Roboto', sans-serif;
         font-weight: 900;
         font-size: 48px;
         line-height: 52px;
@@ -149,11 +169,13 @@ export default defineComponent({
         .button {
           display: flex;
           align-items: center;
+          height: 100%;
           padding: 12px;
           margin-right: 16px;
           border-radius: 7px;
           min-width: 100px;
           cursor: pointer;
+          outline: revert;
           .icon {
             height: 22px;
           }
@@ -190,49 +212,51 @@ export default defineComponent({
       border-radius: 12px;
       padding: 24px;
       max-width: 450px;
-      .type {
-        font-weight: bold;
-        font-size: 18px;
-        color: #2e465799;
-      }
-      .joke {
-        font-weight: bold;
-        font-size: 24px;
-        color: #414141;
-      }
-      .spoiler {
-        background-color: #202225;
-        border-radius: 3px;
-        transition: background-color 0.3s ease;
-        outline: 0;
-        cursor: pointer;
-        padding: 8px;
-        .answer {
-          font-weight: 600;
-          color: #414141;
-          opacity: 0;
-          pointer-events: none;
-          white-space: pre-wrap;
-          transition: opacity 0.3s ease;
+      .example-content {
+        .type {
+          font-weight: bold;
+          font-size: 18px;
+          color: #2e465799;
         }
-        &:focus {
-          background-color: #24242452;
-          cursor: text;
+        .joke {
+          font-weight: bold;
+          font-size: 24px;
+          color: #414141;
+        }
+        .spoiler {
+          background-color: #202225;
+          border-radius: 3px;
+          transition: background-color 0.3s ease;
+          outline: 0;
+          cursor: pointer;
+          padding: 8px;
           .answer {
-            opacity: 1;
+            font-weight: 600;
+            color: #414141;
+            opacity: 0;
+            pointer-events: none;
+            white-space: pre-wrap;
+            transition: opacity 0.3s ease;
+          }
+          &:focus {
+            background-color: #24242452;
+            cursor: text;
+            .answer {
+              opacity: 1;
+            }
           }
         }
-      }
-      p {
-        font-size: 22px;
-        line-height: 30px;
-        color: #0067ad;
-        margin-bottom: 16px;
-        &.joke_type {
-          color: #888888;
-          font-size: 16px;
-          @media (max-width: 420px) {
-            font-size: 14px;
+        p {
+          font-size: 22px;
+          line-height: 30px;
+          color: #0067ad;
+          margin-bottom: 16px;
+          &.joke_type {
+            color: #888888;
+            font-size: 16px;
+            @media (max-width: 420px) {
+              font-size: 14px;
+            }
           }
         }
       }
@@ -252,6 +276,7 @@ export default defineComponent({
         cursor: pointer;
         white-space: nowrap;
         transition: background-color 0.3s;
+        outline: revert;
         &:hover {
           background-color: var(--primary-dark);
         }
@@ -267,6 +292,9 @@ export default defineComponent({
     margin-bottom: 32px;
     margin-right: 32px;
     cursor: pointer;
+    outline: revert;
+    height: auto;
+    padding: 8px;
     .name {
       color: rgba(255, 255, 255, 0.8);
       margin-right: 8px;

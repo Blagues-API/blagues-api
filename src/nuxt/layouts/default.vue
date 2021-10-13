@@ -13,8 +13,8 @@ import Footer from '../components/inc/Footer'
 export default {
   components: {
     Header,
-    Footer
-  }
+    Footer,
+  },
 }
 </script>
 
@@ -38,8 +38,15 @@ body {
       left: 0;
       right: 0;
       z-index: 1;
-      @media screen and (max-width: 720px) {
+    }
+
+    @media screen and (max-width: 720px) {
+      header {
         position: sticky;
+      }
+      .hero {
+        padding-top: 14px;
+        min-height: calc(60vh - 96px);
       }
     }
   }

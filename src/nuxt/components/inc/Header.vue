@@ -1,9 +1,11 @@
 <template>
   <header v-body-scroll-lock="open">
-    <a class="brand" href="/" title="Accueil">
+    <nuxt-link class="brand" to="/" title="Accueil">
       <Logo class="logo" />
-      <h1 class="name">BLAGUES API</h1>
-    </a>
+      <h1 class="name">
+        BLAGUES API
+      </h1>
+    </nuxt-link>
     <div class="overlay" :class="{ open }" @click="open = false" />
     <div class="navigation" :class="{ open }">
       <a
@@ -69,8 +71,8 @@ header {
     text-decoration: none;
 
     .logo {
-      width: 70px;
-      height: 70px;
+      width: 64px;
+      height: 64px;
     }
 
     .name {
@@ -98,8 +100,8 @@ header {
       margin-top: -2.5px;
       width: 28px;
       &,
-      &:after,
-      &:before {
+      &::after,
+      &::before {
         pointer-events: none;
         display: block;
         content: '';
@@ -112,11 +114,11 @@ header {
         transition: 0.2s top 0.2s, 0.1s left, 0.2s transform,
           0.4s background-color 0.2s, 0s width 0.15s;
       }
-      &:after {
+      &::after {
         width: 38px;
         top: -14px;
       }
-      &:before {
+      &::before {
         width: 18px;
         top: 14px;
       }
@@ -124,24 +126,22 @@ header {
 
     &.open {
       .burger-lines {
+        background-color: transparent;
         &,
-        &:after,
-        &:before {
+        &::after,
+        &::before {
           transition: 0.2s background-color, 0.2s top, 0.2s left,
             0.2s transform 0.15s, 0s width 0.15s;
         }
-        & {
-          background-color: transparent;
-        }
-        &:before,
-        &:after {
+        &::before,
+        &::after {
           width: 38px;
-          top: 0px;
+          top: 0;
         }
-        &:before {
+        &::before {
           transform: rotate(-45deg);
         }
-        &:after {
+        &::after {
           transform: rotate(45deg);
         }
       }
