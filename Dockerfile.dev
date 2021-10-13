@@ -12,4 +12,4 @@ RUN npx prisma generate
 EXPOSE 3000
 EXPOSE 4000
 
-CMD npx nodemon --watch '**/*' --ext 'ts,js' --exec 'npx ts-node src/index.ts'
+CMD npx nodemon --watch '**/*' --ext 'ts,js' --ignore 'sw.js' --exec 'npx ts-node src/index.ts'

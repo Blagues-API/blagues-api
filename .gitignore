@@ -9,3 +9,6 @@ archive
 # en réflexion
 examples
 
+# Service worker
+sw.*
+
