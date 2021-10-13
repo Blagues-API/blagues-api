@@ -1,5 +1,26 @@
 {
   "root": true,
-  "extends": ["@nuxtjs"],
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parserOptions": {
+    "parser": "@babel/eslint-parser",
+    "requireConfigFile": false
+  },
+  "extends": [
+    "@nuxtjs",
+    "plugin:nuxt/recommended",
+    "prettier"
+  ],
+  "plugins": ["prettier"],
+  "rules": {
+    "vue/no-v-html": "off",
+    "curly": [2, "multi-line"],
+    "vue/attribute-hyphenation": ["error", "never"],
+    "unicorn/number-literal-case": "off",
+    "no-console": "warn",
+    "no-debugger": "warn"
+  },
   "ignorePatterns": ["index.ts"]
 }
