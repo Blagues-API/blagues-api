@@ -5,7 +5,6 @@ export default {
     timing: false
   },
   components: false,
-  srcDir: './src/nuxt',
   plugins: [
     {
       src: '~/plugins/vue-body-scroll-lock',
@@ -15,6 +14,12 @@ export default {
   buildModules: [
     // Doc: https://composition-api.nuxtjs.org
     '@nuxtjs/composition-api/module',
+    // Doc: https://pwa.nuxtjs.org/
+    '@nuxtjs/pwa',
+    // Doc: https://github.com/nuxt-community/stylelint-module
+    '@nuxtjs/stylelint-module',
+    // Doc: https://github.com/nuxt-community/eslint-module
+    '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/svg-module
     '@nuxtjs/svg'
   ],
@@ -70,6 +75,45 @@ export default {
       home: '/'
     },
     loginIfNeeded: true
+  },
+
+  /*
+   ** PWA module configuration
+   ** See https://pwa.nuxtjs.org
+   */
+  pwa: {
+    icon: {
+      // source: './static/images/logo.png',
+      fileName: 'logo.png'
+    },
+    manifest: {
+      name: 'Blagues API',
+      short_name: 'Blagues API',
+      description:
+        'Blagues API est une API de blagues françaises gratuite et communautaire gérée par sa communauté Discord.',
+      background_color: '#002b36',
+      theme_color: '#0098ff',
+      lang: 'fr'
+    },
+    meta: {
+      name: 'Blagues API',
+      author: 'DraftMan',
+      description:
+      'Blagues API est une API de blagues françaises gratuite et communautaire gérée par sa communauté Discord.',
+      mobileApp: true,
+      mobileAppIOS: true,
+      appleStatusBarStyle: 'black-translucent',
+      favicon: true,
+      theme_color: '#002b36',
+      lang: 'fr',
+      ogSiteName: 'Blagues-API.fr',
+      ogHost: 'https://www.blagues-api.fr',
+      ogImage: true,
+      twitterCard: 'summary',
+      twitterSite: '@Blagues-API',
+      twitterCreator: '@DraftMan_Dev',
+      nativeUI: true
+    }
   },
 
   build: {
