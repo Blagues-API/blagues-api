@@ -11,7 +11,7 @@ export default class Nuxt {
     }
 
     try {
-      await CLI.run([isDev ? 'dev' : 'start']);
+      await CLI.run([isDev ? 'dev' : 'start', __dirname]);
     } catch (error) {
       console.error(error)
       process.exit(2)
