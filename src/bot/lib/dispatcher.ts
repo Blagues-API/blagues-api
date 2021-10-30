@@ -50,7 +50,7 @@ export default class Dispatcher {
   }
 
   public async register(): Promise<void> {
-    const guild = this.client.guilds.cache.get(process.env.server_id!);
+    const guild = this.client.guilds.cache.get(process.env.SERVER_ID!);
     if (!guild) return;
 
     const registredCommands = await guild.commands.set(this.commandsData);
