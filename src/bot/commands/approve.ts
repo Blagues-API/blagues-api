@@ -42,14 +42,14 @@ export default class ApproveCommand extends Command {
     if (![suggestsChannel, correctionChannel].includes(channel.id)) {
       return interaction.reply(
         interactionError(
-          `Vous ne pouvez pas valider une blague ou une correction en dehors des salons <#${suggestsChannel}> et <#${correctionChannel}>.`
+          `Vous ne pouvez pas approuver une blague ou une correction en dehors des salons <#${suggestsChannel}> et <#${correctionChannel}>.`
         )
       );
     }
     if (message.author.id !== interaction.client.user!.id) {
       return interaction.reply(
         interactionError(
-          `Vous ne pouvez valider une ${
+          `Vous ne pouvez pas approuver une ${
             isSuggestion ? 'blague' : 'correction'
           } qui n'est pas gérée par ${interaction.client.user}.`
         )
@@ -101,6 +101,12 @@ export default class ApproveCommand extends Command {
       return interaction.reply(interactionError(`Le message est invalide.`));
     }
 
+    if (proposal.user_id === interaction.user.id) {
+      return interaction.reply(
+        interactionError(`Vous ne pouvez pas approuver votre propre blague.`)
+      );
+    }
+
     if (proposal.merged) {
       return interaction.reply(
         interactionError(
@@ -113,12 +119,13 @@ export default class ApproveCommand extends Command {
       proposal.type === ProposalType.SUGGESTION && proposal.corrections[0];
     if (correction && !correction.merged) {
       return interaction.reply(
-        interactionInfo(stripIndents`
-          Il semblerait qu'une correction ai été proposée, veuillez l'approuver avant l'approbation de cette suggestion.
-          > [Correction à approuver](https://discord.com/channels/${
+        interactionInfo(
+          `Il semblerait qu'une [correction ai été proposée](https://discord.com/channels/${
             interaction.guild!.id
-          }/${correctionChannel}/${correction.message_id})
-        `)
+          }/${correctionChannel}/${
+            correction.message_id
+          }), veuillez l'approuver avant l'approbation de cette suggestion.`
+        )
       );
     }
 
@@ -127,12 +134,12 @@ export default class ApproveCommand extends Command {
       proposal.suggestion!.corrections[0];
     if (lastCorrection && lastCorrection.id !== proposal.id) {
       return interaction.reply(
-        interactionInfo(stripIndents`
-          Il semblerait qu'une correction ai été ajoutée par dessus rendant celle ci obselette, veuillez approuver la dernière version de la correction.
-          > [Dernière correction de la suggestion](https://discord.com/channels/${
+        interactionInfo(`
+          Il semblerait qu'une [correction ai été ajoutée](https://discord.com/channels/${
             interaction.guild!.id
-          }/${correctionChannel}/${lastCorrection.message_id})
-        `)
+          }/${correctionChannel}/${
+          lastCorrection.message_id
+        }) par dessus rendant celle ci obselette, veuillez approuver la dernière version de la correction.`)
       );
     }
 
@@ -189,7 +196,7 @@ export default class ApproveCommand extends Command {
     const { success, joke_id } = await this.mergeJoke(interaction, proposal);
     if (!success) return;
 
-    await prisma.proposal.update({
+    await prisma.proposal.updateMany({
       data: {
         merged: true,
         joke_id
