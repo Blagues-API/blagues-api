@@ -1,7 +1,9 @@
 import { Snowflake } from 'discord-api-types';
 
-export const jokeRole: Snowflake = '699244416849674310';
-export const parrainRole: Snowflake = '877511831525154837';
+export const jokeRole: Snowflake =
+  process.env.JOKE_ROLE ?? '699244416849674310';
+export const parrainRole: Snowflake =
+  process.env.PARRAIN_ROLE ?? '877511831525154837';
 
 export const suggestsChannel: Snowflake =
   process.env.SUGGESTION_CHANNEL ?? '698826767221391390';
