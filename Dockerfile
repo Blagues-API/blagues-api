@@ -2,28 +2,29 @@ FROM node:16.6.1 as builder
 WORKDIR /app
 
 COPY package*.json ./
-
-RUN npm ci --ignore-scripts
-
 COPY tsconfig.json ./
+
+RUN npm install
 
 COPY ./src ./src
 COPY ./prisma ./prisma
-COPY .env tsconfig.json ./
+COPY .env .
+
 COPY blagues.json ./
 
-RUN npx tsc
 RUN npx prisma generate
-RUN prisma migrate deploy
+RUN npx tsc
 
 FROM node:16.6.1
 WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm ci --production --ignore-scripts
+RUN npm set-script prepare ""
+RUN npm ci --production
 
-COPY --from=builder /app/build ./
+COPY --from=builder /app/build .
+COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/node_modules/@prisma/client/ ./node_modules/@prisma/client/
 COPY --from=builder /app/node_modules/.prisma/client/ ./node_modules/.prisma/client/
 
