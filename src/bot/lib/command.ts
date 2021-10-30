@@ -35,6 +35,7 @@ export default class Command {
       return {
         name: this.name,
         description: this.raw.description,
+        type: this.raw.type,
         options: this.raw.options,
         defaultPermission: !this.raw.parrainOnly
       } as ChatInputApplicationCommandData;
@@ -42,8 +43,9 @@ export default class Command {
 
     return {
       name: this.name,
+      type: this.raw.type,
       defaultPermission: !this.raw.parrainOnly
-    } as MessageApplicationCommandData;
+    } as CommandMessageInfos;
   }
 
   public get permissions(): ApplicationCommandPermissions[] | null {
