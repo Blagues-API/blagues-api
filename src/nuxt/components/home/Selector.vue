@@ -13,7 +13,7 @@
   >
     <div class="select_element">
       <div class="element">
-        <img class="icon" :src="selected.icon" :alt="selected.name">
+        <img class="icon" :src="selected.icon" :alt="selected.name" />
         <span :style="{ color: selected.color }">{{ selected.name }}</span>
       </div>
       <DownIcon class="down" />
@@ -35,7 +35,7 @@
         @click="select(element.id)"
         @mouseenter.self="pointer = index"
       >
-        <img :src="element.icon" :alt="element.name">
+        <img :src="element.icon" :alt="element.name" />
         <span :style="{ color: element.color }">{{ element.name }}</span>
       </div>
     </div>
@@ -51,15 +51,15 @@ import ApiIcon from '@/assets/icons/api_full.svg'
 export default {
   name: 'Selector',
   components: {
-    DownIcon
+    DownIcon,
   },
   props: {
     value: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
-  data () {
+  data() {
     return {
       active: false,
       pointer: 0,
@@ -68,50 +68,54 @@ export default {
           id: 'npm',
           name: 'NPM',
           color: '#cb3837',
-          icon: NpmIcon
+          icon: NpmIcon,
         },
         {
           id: 'pypi',
           name: 'PYPI',
           color: '#3775a9',
-          icon: PypiIcon
+          icon: PypiIcon,
         },
         {
           id: 'api',
           name: 'API',
           color: '#3f3f3f',
-          icon: ApiIcon
-        }
-      ]
+          icon: ApiIcon,
+        },
+      ],
     }
   },
   computed: {
-    selected () {
-      return this.elements.find(element => element.id === this.value)
+    selected() {
+      return this.elements.find((element) => element.id === this.value)
     },
-    pointerPosition () {
+    pointerPosition() {
       return this.pointer * 46
-    }
+    },
   },
   methods: {
-    toggle () {
+    toggle() {
       this.active ? this.deactivate() : this.activate()
     },
-    activate () {
-      if (this.active || this.disabled) { return }
+    activate() {
+      if (this.active || this.disabled) {
+        return
+      }
 
       this.active = true
 
       this.$el.focus()
     },
-    deactivate () {
-      if (!this.active) { return }
+    deactivate() {
+      if (!this.active) {
+        return
+      }
 
       this.active = false
 
       this.$el.blur()
     },
-    pointerForward () {
+    pointerForward() {
       if (this.pointer < this.elements.length - 1) {
         this.pointer++
 
@@ -119,12 +123,11 @@ export default {
           this.$refs.list.scrollTop <=
           this.pointerPosition - (330 / 46 - 1) * 46
         ) {
-          this.$refs.list.scrollTop =
-            this.pointerPosition - (330 / 46 - 1) * 46
+          this.$refs.list.scrollTop = this.pointerPosition - (330 / 46 - 1) * 46
         }
       }
     },
-    pointerBackward () {
+    pointerBackward() {
       if (this.pointer > 0) {
         this.pointer--
 
@@ -133,17 +136,17 @@ export default {
         }
       }
     },
-    addPointerElement () {
+    addPointerElement() {
       if (this.elements.length > 0) {
         this.select(this.elements[this.pointer].id)
       }
       this.pointer = 0
     },
-    select (elementId) {
+    select(elementId) {
       this.deactivate()
       this.$emit('input', elementId)
-    }
-  }
+    },
+  },
 }
 </script>
 
