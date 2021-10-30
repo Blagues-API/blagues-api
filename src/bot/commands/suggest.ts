@@ -18,7 +18,7 @@ import Command from '../lib/command';
 import { interactionError } from '../utils';
 import Collection from '@discordjs/collection';
 import prisma from '../../prisma';
-import { ProposalType } from '.prisma/client';
+import { ProposalType } from '@prisma/client';
 
 enum Similarity {
   Different,
@@ -34,7 +34,7 @@ enum Colors {
 export default class SuggestCommand extends Command {
   constructor() {
     super({
-      name: 'suggest',
+      name: 'suggestion',
       description: 'Proposer une blague',
       type: 'CHAT_INPUT',
       options: [
