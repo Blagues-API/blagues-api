@@ -22,7 +22,7 @@ import {
 import { correctionChannel } from '../constants';
 import Command from '../lib/command';
 import clone from 'lodash/clone';
-import { ProposalType } from '.prisma/client';
+import { ProposalType } from '@prisma/client';
 
 enum IdType {
   MESSAGE_ID,
@@ -41,7 +41,7 @@ interface JokeCorrectionPayload extends UnsignedJoke {
 export default class CorrectionCommand extends Command {
   constructor() {
     super({
-      name: 'correct',
+      name: 'correction',
       description: 'Proposer une modification de blague',
       type: 'CHAT_INPUT',
       options: [
@@ -55,7 +55,7 @@ export default class CorrectionCommand extends Command {
     });
   }
   async run(interaction: CommandInteraction): Promise<void> {
-    const query = interaction.options.get('recherche')?.value as string;
+    const query = interaction.options.getString('recherche', true) as string;
 
     const joke = await this.resolveJoke(interaction, query);
     if (!joke) return;
@@ -76,9 +76,10 @@ export default class CorrectionCommand extends Command {
     const question = (await interaction.reply({
       embeds: [
         {
-          title: 'Correction de blague',
+          title: 'Quelle blague voulez-vous corriger ?',
           description:
-            "Il faut tout d'abord identifier la blague. Pour cela, il faut l'identifiant de la blague, l'identifiant du message la proposant ou la question de celle-ci."
+            "Il faut tout d'abord identifier la blague. Pour cela, il faut l'identifiant de la blague, l'identifiant du message la proposant ou la question de celle-ci.",
+          color: 'BLUE'
         }
       ],
       fetchReply: true
@@ -130,7 +131,8 @@ export default class CorrectionCommand extends Command {
         > **Type:** ${CategoriesRefs[joke.type]}
         > **Question:** ${joke.joke}
         > **Réponse:** ${joke.answer}
-      `
+      `,
+      color: 'BLUE' as ColorResolvable
     };
     const question = (await commandInteraction[
       commandInteraction.replied ? 'editReply' : 'reply'
@@ -153,11 +155,7 @@ export default class CorrectionCommand extends Command {
               label: 'Réponse',
               customId: 'answer',
               style: 'PRIMARY'
-            })
-          ]
-        }),
-        new MessageActionRow({
-          components: [
+            }),
             new MessageButton({
               label: 'Valider',
               customId: 'confirm',
@@ -231,7 +229,6 @@ export default class CorrectionCommand extends Command {
 
   async findJoke(query: string): Promise<JokeCorrectionPayload | null> {
     const idType = this.getIdType(query);
-
     if (idType === IdType.MESSAGE_ID) {
       const proposal = await prisma.proposal.findUnique({
         where: {
@@ -503,16 +500,10 @@ export default class CorrectionCommand extends Command {
     await commandInteraction.editReply({
       embeds: [
         {
-          title: 'Requête de changement envoyée',
-          url: `https://discord.com/channels/${
+          description: `Votre [proposition de correction](https://discord.com/channels/${
             commandInteraction.guild!.id
-          }/${correctionChannel}/${message.id}`,
-          description: stripIndents`
-            > **Type:** ${CategoriesRefs[newJoke.type]}
-            > **Question:** ${newJoke.joke}
-            > **Réponse:** ${newJoke.answer}
-          `,
-          color: 'GREEN' as ColorResolvable
+          }/${correctionChannel}/${message.id}) a bien été envoyée !`,
+          color: 'GREEN'
         }
       ],
       components: []
