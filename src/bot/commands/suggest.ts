@@ -13,7 +13,12 @@ import {
 import { findBestMatch } from 'string-similarity';
 import jokes from '../../../blagues.json';
 import { Category, CategoriesRefs, UnsignedJoke } from '../../typings';
-import { downReaction, suggestsChannel, upReaction } from '../constants';
+import {
+  downReaction,
+  neededApprovals,
+  suggestsChannel,
+  upReaction
+} from '../constants';
 import Command from '../lib/command';
 import { interactionError } from '../utils';
 import Collection from '@discordjs/collection';
@@ -131,7 +136,7 @@ export default class SuggestCommand extends Command {
       footer: {
         text:
           similarity === Similarity.Different
-            ? '3 approbations nécessaire'
+            ? `${neededApprovals} approbations nécessaire`
             : interaction.guild!.name,
         icon_url: interaction.guild!.iconURL({
           format: 'png',

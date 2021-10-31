@@ -12,7 +12,11 @@ import { constants as fsConstants, promises as fs } from 'fs';
 import path from 'path';
 import prisma from '../../prisma';
 import { CategoriesRefs, Category, Joke } from '../../typings';
-import { correctionChannel, suggestsChannel } from '../constants';
+import {
+  correctionChannel,
+  neededApprovals,
+  suggestsChannel
+} from '../constants';
 import Command from '../lib/command';
 import {
   interactionError,
@@ -92,7 +96,7 @@ export default class ApproveCommand extends Command {
     }
 
     const embed = message.embeds[0];
-    if (!embed?.description) {
+    if (!embed) {
       await prisma.proposal.delete({
         where: {
           id: proposal.id
@@ -103,7 +107,11 @@ export default class ApproveCommand extends Command {
 
     if (proposal.user_id === interaction.user.id) {
       return interaction.reply(
-        interactionError(`Vous ne pouvez pas approuver votre propre blague.`)
+        interactionError(
+          `Vous ne pouvez pas approuver votre propre ${
+            isSuggestion ? 'blague' : 'correction'
+          }.`
+        )
       );
     }
 
@@ -164,8 +172,8 @@ export default class ApproveCommand extends Command {
       }
     });
 
-    if (proposal.approvals.length < 2) {
-      const missingApprovals = 2 - proposal.approvals.length;
+    if (proposal.approvals.length < neededApprovals - 1) {
+      const missingApprovals = neededApprovals - 1 - proposal.approvals.length;
       embed.footer!.text = `${missingApprovals} approbation${
         missingApprovals > 1 ? 's' : ''
       } manquantes avant l'ajout`;

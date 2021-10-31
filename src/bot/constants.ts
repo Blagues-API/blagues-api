@@ -10,6 +10,8 @@ export const suggestsChannel: Snowflake =
 export const correctionChannel: Snowflake =
   process.env.CORRECTION_CHANNEL ?? '826856142793736213';
 
+export const neededApprovals: number = Number(process.env.APPROVALS_COUNT) || 3;
+
 export const upReaction: Snowflake = '705115420495183979';
 export const downReaction: Snowflake = '705115406976680117';
 
