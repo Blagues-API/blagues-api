@@ -19,7 +19,7 @@ import {
   UnsignedJoke,
   UnsignedJokeKey
 } from '../../typings';
-import { correctionChannel } from '../constants';
+import { correctionChannel, neededApprovals } from '../constants';
 import Command from '../lib/command';
 import clone from 'lodash/clone';
 import { ProposalType } from '@prisma/client';
@@ -100,7 +100,7 @@ export default class CorrectionCommand extends Command {
         }
 
         question.channel
-          .send('pas bon fréro, réessaye')
+          .send("Aucune blague n'a été trouvée, veuillez réessayer !")
           .then((m) => setTimeout(() => m.deletable && m.delete(), 5000));
       });
       collector.once('end', async (collected, reason: string) => {
@@ -462,7 +462,7 @@ export default class CorrectionCommand extends Command {
             {
               name: 'Blague initiale',
               value: stripIndents`
-                > **Type**: ${newJoke.suggestion.type}
+                > **Type**: ${CategoriesRefs[newJoke.suggestion.type]}
                 > **Blague**: ${newJoke.suggestion.joke}
                 > **Réponse**: ${newJoke.suggestion.answer}
               `
@@ -470,12 +470,21 @@ export default class CorrectionCommand extends Command {
             {
               name: 'Blague corrigée',
               value: stripIndents`
-                > **Type**: ${newJoke.type}
+                > **Type**: ${CategoriesRefs[newJoke.type]}
                 > **Blague**: ${newJoke.joke}
                 > **Réponse**: ${newJoke.answer}
               `
             }
-          ]
+          ],
+          color: 'BLUE',
+          footer: {
+            text: `${neededApprovals} approbations nécessaire`,
+            icon_url: commandInteraction.guild!.iconURL({
+              format: 'png',
+              size: 32,
+              dynamic: true
+            })!
+          }
         }
       ]
     });
