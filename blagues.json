@@ -2372,8 +2372,8 @@
   {
     "id": 396,
     "type": "limit",
-    "joke": "Comment appelle t'on le penis d'un prètre ?",
-    "answer": "La vérite car la vérite sort toujours de la bouche des enfants."
+    "joke": "Pourquoi les pédophiles appellent-ils leur quéquette \"La vérité\" ?",
+    "answer": "Parce que la vérité sort toujours de la bouche des enfants !"
   },
   {
     "id": 397,
@@ -3668,8 +3668,8 @@
   {
     "id": 612,
     "type": "dark",
-    "joke": "Quelle est l'eau la plus gazeuse ?",
-    "answer": "L'eau chvitz."
+    "joke": "Quelle est l'eau gazeuse préférée des Juifs ?",
+    "answer": "L'eau Schwitz"
   },
   {
     "id": 613,
@@ -6418,5 +6418,221 @@
     "type": "dark",
     "joke": "Quelle est la différence entre un couple Gay et un couple Hétéro ?",
     "answer": "Le couple Hétéro se démontent et le couple Gay s’emboîtent."
+  },
+  {
+    "id": 1071,
+    "type": "global",
+    "joke": "En contrôle d'histoire : Citez une lumière.",
+    "answer": "L'élève : EDF."
+  },
+  {
+    "id": 1072,
+    "type": "global",
+    "joke": "Pourquoi les fleurs sont-elles maladroites ?",
+    "answer": "Parce qu'elles sont empotées."
+  },
+  {
+    "id": 1073,
+    "type": "dev",
+    "joke": "Que fait un dev quand il a soif ?",
+    "answer": "this.drink('water')"
+  },
+  {
+    "id": 1074,
+    "type": "global",
+    "joke": "Quand le sage montre la lune...",
+    "answer": "... l'imbécile regarde le doigt."
+  },
+  {
+    "id": 1075,
+    "type": "global",
+    "joke": " Que fait un pigeon portugais qui vole en arrière ?",
+    "answer": "Il roucoule !"
+  },
+  {
+    "id": 1076,
+    "type": "beauf",
+    "joke": "Qu’est-ce qu’un Gaspacho ?",
+    "answer": "Un pet froid."
+  },
+  {
+    "id": 1077,
+    "type": "global",
+    "joke": "Pourquoi Tom Jedusor est-il condamné ?",
+    "answer": "Pour vol de mort."
+  },
+  {
+    "id": 1078,
+    "type": "dark",
+    "joke": "Quelle est la différence entre un enfant et une prostituée ?",
+    "answer": "Si tu ne la vois pas, pose toi des questions..."
+  },
+  {
+    "id": 1079,
+    "type": "limit",
+    "joke": "Quel est le point commun entre les hommes et les crevettes ?",
+    "answer": "Rien dans la tête tout dans la queue."
+  },
+  {
+    "id": 1080,
+    "type": "limit",
+    "joke": "Comment pinocchio a découvert qu'il était en bois ?",
+    "answer": "Il s'est branlé et il a prit feu."
+  },
+  {
+    "id": 1081,
+    "type": "global",
+    "joke": "Pourquoi les moutons ne vont pas à l'école ?",
+    "answer": "Car les professeurs s'endorment en les comptant."
+  },
+  {
+    "id": 1082,
+    "type": "dark",
+    "joke": "Qu'est-ce qu’un nain qui fait une crise d’épilepsie ?",
+    "answer": "Un vibromasseur"
+  },
+  {
+    "id": 1083,
+    "type": "dark",
+    "joke": "Tu as déja mangé en Ethiopie ? Non ?",
+    "answer": "Bah eux non plus."
+  },
+  {
+    "id": 1084,
+    "type": "global",
+    "joke": "Quel est le comble pour un dragon ?",
+    "answer": "De déclarer sa flamme."
+  },
+  {
+    "id": 1085,
+    "type": "dark",
+    "joke": "Quel est le point commun entre un noir et de la crème ?",
+    "answer": "C'est meilleur lorsqu'il est fouetté."
+  },
+  {
+    "id": 1086,
+    "type": "dev",
+    "joke": "Jusqu'à combien savent compter les geeks ?",
+    "answer": "404... car après, ils ne s'y retrouvent plus !"
+  },
+  {
+    "id": 1087,
+    "type": "dev",
+    "joke": "Pourquoi les développeurs ont-ils toujours le même style ?",
+    "answer": "Car CSS'style !"
+  },
+  {
+    "id": 1088,
+    "type": "dark",
+    "joke": "Vous savez ce qu'était Klaus Barbie ?",
+    "answer": "C'était un bon aryen."
+  },
+  {
+    "id": 1089,
+    "type": "global",
+    "joke": "On en a beaucoup entendu parler en 2020, mais en fait...",
+    "answer": "C'est qui Gilles et John ?"
+  },
+  {
+    "id": 1090,
+    "type": "dark",
+    "joke": "Pourquoi les Ch'tis aiment les fins de vacances au camping ?",
+    "answer": "Car c'est le moment où ils peuvent démonter leurs tentes."
+  },
+  {
+    "id": 1091,
+    "type": "limit",
+    "joke": "Qu'est-ce que les hommes apprécient plus que le sexe ?",
+    "answer": "Que leurs amis les croient quand ils en parlent."
+  },
+  {
+    "id": 1092,
+    "type": "beauf",
+    "joke": "Savez-vous pourquoi il n’y a pas de femmes au paradis ?",
+    "answer": "Parce que ça serait l'enfer !"
+  },
+  {
+    "id": 1093,
+    "type": "global",
+    "joke": "Comment reconnait-on une moto anglaise ?",
+    "answer": "Le guidon est à droite."
+  },
+  {
+    "id": 1094,
+    "type": "beauf",
+    "joke": "Quelle est la différence entre un Ricard et un 69 ?",
+    "answer": "Le Ricard, c’est le nez dans l’anis, le 69, c’est le nez dans l’anus."
+  },
+  {
+    "id": 1095,
+    "type": "global",
+    "joke": "C'est l'histoire d'un donut qui va à la plage...",
+    "answer": "...pour se beignet."
+  },
+  {
+    "id": 1096,
+    "type": "dark",
+    "joke": "Le saviez-vous ?",
+    "answer": "5 médecins sur 6 approuvent la sécurité de la roulette russe."
+  },
+  {
+    "id": 1097,
+    "type": "dark",
+    "joke": "Tout à l'heure un policier m'a arrêté et m'a dit \"Papier\".",
+    "answer": "J'ai répondu \"Ciseaux\", j'ai gagné et j'ai accéléré. Depuis 35 minutes il me poursuit... Je pense qu'il veut une revanche."
+  },
+  {
+    "id": 1098,
+    "type": "limit",
+    "joke": "J'ai dit non ! Mon gynécologue m'a dit pas de sexe pendant 3 semaines.",
+    "answer": "Et que t'as dit ton dentiste ?"
+  },
+  {
+    "id": 1099,
+    "type": "dark",
+    "joke": "Un jour, Hitler a dit...",
+    "answer": "Toi le petit juif, tu as intérêt à choisir ton camp."
+  },
+  {
+    "id": 1100,
+    "type": "global",
+    "joke": "Les blagues racistes...",
+    "answer": "...ne servent aryen."
+  },
+  {
+    "id": 1101,
+    "type": "dev",
+    "joke": "Quelle est la différence entre une programmeuse en jupe et en pantalon ?",
+    "answer": "Le temps d’accès !"
+  },
+  {
+    "id": 1102,
+    "type": "dev",
+    "joke": "Quel est l'animal préféré des développeurs ?",
+    "answer": "Le python"
+  },
+  {
+    "id": 1103,
+    "type": "dark",
+    "joke": "Pourquoi le vélo d'Hitler était bleu ?",
+    "answer": "Parce qu'il était sponsorisé Butagaz !"
+  },
+  {
+    "id": 1104,
+    "type": "blondes",
+    "joke": "Que fait une blonde contrebandière ?",
+    "answer": "Elle lave son argent sale à la machine à laver."
+  },
+  {
+    "id": 1105,
+    "type": "global",
+    "joke": "Pourquoi les astronautes aiment l’alcool ?",
+    "answer": "Car lorsqu'ils en boivent, ça tourne !"
+  },
+  {
+    "id": 1106,
+    "type": "dev",
+    "joke": "Quel composant a un classement correct dans la société ?",
+    "answer": "La carte maire"
   }
 ]
