@@ -123,6 +123,14 @@ export default class ApproveCommand extends Command {
       );
     }
 
+    if (proposal.refused) {
+      return interaction.reply(
+        interactionError(
+          `Cette ${isSuggestion ? 'blague' : 'correction'} a déjà été refusée.`
+        )
+      );
+    }
+
     const correction =
       proposal.type === ProposalType.SUGGESTION && proposal.corrections[0];
     if (correction && !correction.merged) {
