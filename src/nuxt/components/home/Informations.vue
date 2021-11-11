@@ -7,9 +7,7 @@
       data-prismjs-copy-timeout="2000"
     >
       <div class="block">
-        <h2 class="title">
-          Qu’est ce que Blagues API ?
-        </h2>
+        <h2 class="title">Qu’est ce que Blagues API ?</h2>
         <p>
           <strong>Blagues API</strong> est une API de blagues, rassemblant les
           meilleures blagues avec un total de
@@ -18,10 +16,9 @@
         <p>Des blagues proposées par la communauté et catégorisées.</p>
         <p>
           L’API est accessible <strong>gratuitement</strong> et rassemble sur le
-          <a
-            href="https://discord.gg/PPNpVaF"
-            title="Discord de Blagues API"
-          >discord</a>
+          <a href="https://discord.gg/PPNpVaF" title="Discord de Blagues API"
+            >discord</a
+          >
           une communauté francophone.
         </p>
       </div>
@@ -30,271 +27,15 @@
           <h2 class="title">
             {{ docsData.title }}
           </h2>
-          <Selector v-model="status" :value="status" />
+          <Selector v-model="doc" :value="doc" />
         </div>
         <p>{{ docsData.description }}</p>
       </div>
 
-      <template v-if="status === 'api'">
-        <div id="use" class="block">
-          <a href="#use" class="title-container">
-            <h3 class="title">Utilisation</h3>
-          </a>
-          <p class="text">
-            Différentes routes vous sont rendues disponibles afin d'adapter
-            l'api a votre projet. Les différents mots clés vous permettront de
-            récupérer une blague aléatoirement dans un thème ou type de blague
-            spécifique.
-          </p>
-          <div class="example">
-            <h5 class="language">
-              BLAGUE ALÉATOIRE
-            </h5>
-            <pre><code class="language-javascript">GET /api/random</code></pre>
-          </div>
-          <div class="example">
-            <h5 class="language">
-              BLAGUE ALÉATOIRE CATÉGORISÉ
-            </h5>
-            <pre><code class="language-javascript">GET /api/type/:type:/random // type: global, dev, dark, limit, beauf, blondes</code></pre>
-          </div>
-          <div class="example">
-            <h5 class="language">
-              BLAGUE PAR ID
-            </h5>
-            <pre><code class="language-javascript">GET/api/id/:id:</code></pre>
-          </div>
-        </div>
-        <div id="advanced-use" class="block">
-          <a href="#advanced-use" class="title-container">
-            <h3 class="title">Utilisation avancé</h3>
-          </a>
-          <p class="text">
-            Parfois certains types d'humour dérangent certaines personnes, hors
-            blagues-api est une api publique qui s'est donné comme mission de
-            convenir aux tous types d'humour. C'est pour cela que nous vous
-            offrons la possibilité de filtrer les blagues et donc d'en retirer
-            celles qui font partie d'une catégorie qui ne vous convient pas.
-          </p>
-          <div class="example">
-            <h5 class="language">
-              UTILISATION D'UN SEUL FILTRE
-            </h5>
-            <pre><code class="language-javascript">GET /api/random?disallow=dark</code></pre>
-          </div>
-          <div class="example">
-            <h5 class="language">
-              UTILISATION DE PLUSIEURS FILTRES
-            </h5>
-            <pre><code class="language-javascript">GET /api/random?disallow=dark&disallow=limit&disallow=dev</code></pre>
-          </div>
-        </div>
-        <div id="auth" class="block">
-          <a href="#auth" class="title-container">
-            <h3 class="title">Authentification</h3>
-          </a>
-          <p class="text">
-            L'api de blagues utilise un token d'authentification Bearer pour les
-            requêtes. Vous pouvez le gérer depuis votre profil.<br>
-            Les requêtes doivent toutes être effectuées via
-            <a href="http://en.wikipedia.org/wiki/HTTP_Secure">HTTPS</a>. Tous
-            les appels effectuées sans authentification ou en HTTP
-            échoueront.<br>
-            Si vous avez des difficultées à obtenir un certificat HTTPS, voici
-            <a href="https://certbot.eff.org/">Certbot</a>, un outil qui permet
-            d'en obtenir un gratuitement !
-          </p>
-          <div class="example">
-            <pre><code class="language-bash">curl https://www.blagues-api.fr/api/random \
--H "Authorization: Bearer [TOKEN]" \</code></pre>
-          </div>
-        </div>
-        <div id="example" class="block">
-          <a href="#example" class="title-container">
-            <h3 class="title">Exemple</h3>
-          </a>
-          <p class="text">
-            Voici un exemple sous forme de cas d'utilisation de l'api dans le
-            cas où l'on souhaite récupérer une blague aléatoirement dans le
-            répertoire toute catégorie confondue
-          </p>
-          <div class="example">
-            <span class="language">JAVASCRIPT</span>
-            <pre><code class="language-javascript">fetch('https://www.blagues-api.fr/api/random', {
-    headers: {
-        'Authorization': `Bearer [TOKEN]`
-    }
-})
-.then(response => response.json())
-.then(data => {
-    console.log(data)
-    /* Expected output:
-    {
-        "id": 1,
-        "type": "dev",
-        "joke": "Un développeur ne descend pas du métro.",
-        "answer": "Il libère la RAM..."
-    }
-    */
-})</code></pre>
-          </div>
-        </div>
-      </template>
-      <template v-if="status === 'npm'">
-        <div id="install" class="block">
-          <div class="flex-space">
-            <a href="#install" class="title-container">
-              <h3 class="title">Installation</h3>
-            </a>
-            <div class="buttons">
-              <button
-                class="button"
-                :class="{ active: versions.js_install === 'yarn' }"
-                @click="updateVersion('js_install', 'yarn')"
-              >
-                YARN
-              </button>
-              <button
-                class="button"
-                :class="{ active: versions.js_install === 'npm' }"
-                @click="updateVersion('js_install', 'npm')"
-              >
-                NPM
-              </button>
-            </div>
-          </div>
-          <div v-show="versions.js_install === 'yarn'">
-            <pre>
-              <code class="language-bash">
-                yarn add blagues-api
-              </code>
-            </pre>
-          </div>
-          <div v-show="versions.js_install === 'npm'">
-            <pre>
-              <code class="language-bash">
-                npm i blagues-api
-              </code>
-            </pre>
-          </div>
-        </div>
-        <div id="setup" class="block">
-          <div class="flex-space">
-            <a href="#setup" class="title-container">
-              <h3 class="title">Mise en place</h3>
-            </a>
-            <div class="buttons">
-              <button
-                class="button"
-                :class="{ active: versions.js_setup === 'browser' }"
-                @click="updateVersion('js_setup', 'browser')"
-              >
-                Browser
-              </button>
-              <button
-                class="button"
-                :class="{ active: versions.js_setup === 'cjs' }"
-                @click="updateVersion('js_setup', 'cjs')"
-              >
-                CJS
-              </button>
-              <button
-                class="button"
-                :class="{ active: versions.js_setup === 'es6' }"
-                @click="updateVersion('js_setup', 'es6')"
-              >
-                ES6
-              </button>
-            </div>
-          </div>
-          <div v-show="versions.js_setup === 'browser'">
-            <pre>
-              <code class="language-javascript">
-                &lt;script src="https://unpkg.com/blagues-api@2.1.0/dist/blagues-api.umd.js">&lt;/script>
-              </code>
-            </pre>
-          </div>
-          <div v-show="versions.js_setup === 'es6'">
-            <pre>
-              <code class="language-javascript">
-                import BlaguesAPI from 'blagues-api';
-              </code>
-            </pre>
-          </div>
-          <div v-show="versions.js_setup === 'cjs'">
-            <pre>
-              <code class="language-javascript">
-                const BlaguesAPI = require('blagues-api');
-              </code>
-            </pre>
-          </div>
-          <pre>
-            <code class="language-javascript">
-              const blagues = new BlaguesAPI('<mark>VOTRE_TOKEN_ICI</mark>');
-            </code>
-          </pre>
-        </div>
-        <div id="use" class="block">
-          <a href="#use" class="title-container">
-            <h3 class="title">Utilisation</h3>
-          </a>
-          <p class="text">
-            Différentes méthodes vous sont rendues disponibles afin d'intéragir
-            plus facilement avec l'API depuis votre projet.
-          </p>
-          <div id="random-joke" class="block">
-            <a href="#random-joke" class="title-container">
-              <h4 class="title">Blague aléatoire</h4>
-            </a>
-            <pre>
-              <code class="language-javascript">
-                const blague = await blagues.random();
-              </code>
-            </pre>
-            <p class="text">
-              A cette méthode, vous pouvez spécifier certains types que vous ne
-              souhaitez pas recevoir.
-            </p>
-            <pre>
-              <code class="language-javascript">
-                const blague = await blagues.random({
-                  disallow: [
-                    blagues.categories.DARK,
-                    blagues.categories.LIMIT
-                  ]
-                });
-              </code>
-            </pre>
-          </div>
-          <div id="random-categorized-joke" class="block">
-            <a href="#random-categorized-joke" class="title-container">
-              <h4 class="title">Blague aléatoire d'une catégorie</h4>
-            </a>
-            <pre>
-              <code class="language-javascript">
-                const blague = await blagues.randomCategorized(
-                  blagues.categories.DARK
-                );
-              </code>
-            </pre>
-          </div>
-          <div id="joke-by-id" class="block">
-            <a href="#joke-by-id" class="title-container">
-              <h4 class="title">Blague à partir de son ID</h4>
-            </a>
-            <p class="text">
-              Les blagues sont identifiées par un ID que vous recevez en même
-              tant que chaque blague. Spécifiez cet identifiant en paramètre et
-              vous l'obtiendez à nouveau.
-            </p>
-            <pre>
-              <code class="language-javascript">
-                const blague = await blagues.fromId(50);
-              </code>
-            </pre>
-          </div>
-        </div>
-      </template>
+      <DocNode v-show="doc === 'npm'" />
+      <DocPyPi v-show="doc === 'pypi'" />
+      <DocAPI v-show="doc === 'api'" />
+
       <div id="thanks" class="block">
         <a href="#thanks" class="title-container">
           <h3 class="title">Remerciements</h3>
@@ -313,59 +54,55 @@
 </template>
 
 <script>
-
 import prismjs from 'prismjs'
 
-import {
-  ref,
-  reactive,
-  onMounted,
-  watch,
-  computed
-} from '@nuxtjs/composition-api'
+import { ref, onMounted, watch, computed } from '@nuxtjs/composition-api'
 
-import jokes from '../../../../blagues.json'
+import jokes from '@/../../blagues.json'
+
+import DocNode from '@/components/docs/DocNode.vue'
+import DocPyPi from '@/components/docs/DocPyPi.vue'
+import DocAPI from '@/components/docs/DocAPI.vue'
+
 import Selector from '@/components/home/Selector.vue'
 
 export default {
   components: {
-    Selector
+    Selector,
+    DocNode,
+    DocPyPi,
+    DocAPI,
   },
-  setup () {
+  setup() {
     const count = jokes.length
-    const status = ref('npm')
-    const versions = reactive({
-      js_install: 'yarn',
-      js_setup: 'cjs'
-    })
+    const doc = ref('npm')
 
     const data = {
       npm: {
         title: 'Module npm',
-        description: 'coucou'
-      },
-      api: {
-        title: 'API publique',
-        description: 'coucou'
+        description:
+          "Le module npm de Blagues-API développé en Typescript supporte l'intégralité des options présente sur l'API, il permettra d'intéragir simplement avec l'API depuis le langage NodeJs.",
       },
       pypi: {
         title: 'Module PyPi',
-        description: 'coucou'
-      }
+        description:
+          "Le module PyPi de Blagues-API supporte l'intégralité des options présente sur l'API, il permettra d'intéragir simplement avec l'API depuis le langage Python de manière asynchrone.",
+      },
+      api: {
+        title: 'API publique',
+        description:
+          "L'API Rest est le meilleur moyen d'utiliser Blagues-API sans dépendances, en requièrera nénanmoins plus de connaissances et de prérequis.",
+      },
     }
 
-    const sleep = () => new Promise(resolve => setTimeout(resolve(), 1000))
+    const sleep = () => new Promise((resolve) => setTimeout(resolve(), 1000))
 
-    watch(status, async () => {
+    watch(doc, async () => {
       await sleep()
       prismjs.highlightAll()
     })
 
-    const docsData = computed(() => data[status.value])
-
-    const updateVersion = (key, value) => {
-      versions[key] = value
-    }
+    const docsData = computed(() => data[doc.value])
 
     onMounted(() => {
       prismjs.highlightAll()
@@ -373,12 +110,10 @@ export default {
 
     return {
       count,
-      status,
-      versions,
-      updateVersion,
-      docsData
+      doc,
+      docsData,
     }
-  }
+  },
 }
 </script>
 
@@ -524,13 +259,6 @@ export default {
       }
     }
   }
-  // p {
-  //   font-size: 14px;
-  //   margin: 8px 0 16px;
-  //   color: #404040;
-  //   font-weight: 600;
-  //   line-height: 20px;
-  // }
   .example {
     display: flex;
     flex-direction: column;
