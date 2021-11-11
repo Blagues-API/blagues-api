@@ -19,7 +19,7 @@ import {
   UnsignedJoke,
   UnsignedJokeKey
 } from '../../typings';
-import { correctionChannel, neededApprovals } from '../constants';
+import { correctionChannel } from '../constants';
 import Command from '../lib/command';
 import clone from 'lodash/clone';
 import { ProposalType } from '@prisma/client';
@@ -476,15 +476,7 @@ export default class CorrectionCommand extends Command {
               `
             }
           ],
-          color: 'BLUE',
-          footer: {
-            text: `${neededApprovals} approbations nécessaire`,
-            icon_url: commandInteraction.guild!.iconURL({
-              format: 'png',
-              size: 32,
-              dynamic: true
-            })!
-          }
+          color: 'BLUE'
         }
       ]
     });
