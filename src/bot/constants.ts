@@ -17,4 +17,5 @@ export const neededApprovals: number = Number(process.env.APPROVALS_COUNT) || 3;
 export const upReaction: Snowflake = '705115420495183979';
 export const downReaction: Snowflake = '705115406976680117';
 
-export const guildId: Snowflake = '698822532467523605';
+export const emojisGuildId: Snowflake =
+  process.env.EMOJIS_SERVER_ID ?? '698822532467523605';
