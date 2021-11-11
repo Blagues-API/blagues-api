@@ -9,6 +9,8 @@ export const suggestsChannel: Snowflake =
   process.env.SUGGESTION_CHANNEL ?? '698826767221391390';
 export const correctionChannel: Snowflake =
   process.env.CORRECTION_CHANNEL ?? '826856142793736213';
+export const logsChannel: Snowflake =
+  process.env.LOGS_CHANNEL ?? '908302746665500682';
 
 export const neededApprovals: number = Number(process.env.APPROVALS_COUNT) || 3;
 
