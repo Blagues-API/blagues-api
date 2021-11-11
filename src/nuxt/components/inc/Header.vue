@@ -2,9 +2,7 @@
   <header v-body-scroll-lock="open">
     <nuxt-link class="brand" to="/" title="Accueil">
       <Logo class="logo" />
-      <h1 class="name">
-        BLAGUES API
-      </h1>
+      <h1 class="name">BLAGUES API</h1>
     </nuxt-link>
     <div class="overlay" :class="{ open }" @click="open = false" />
     <div class="navigation" :class="{ open }">
@@ -12,17 +10,21 @@
         class="item"
         href="https://github.com/DraftProducts/blagues-api"
         title="Github de Blagues API"
-      >GITHUB</a>
+      >
+        GITHUB
+      </a>
       <a
         class="item"
         href="https://discord.gg/PPNpVaF"
         title="Discord de Blagues API"
-      >DISCORD</a>
+      >
+        DISCORD
+      </a>
       <nuxt-link v-if="$auth.loggedIn" class="user-place" to="/account">
         <div
           class="avatar"
           :style="{
-            'background-image': `url('https://cdn.discordapp.com/avatars/${$auth.user.id}/${$auth.user.avatar}.png?size=64')`
+            'background-image': `url('https://cdn.discordapp.com/avatars/${$auth.user.id}/${$auth.user.avatar}.png?size=64')`,
           }"
         />
         <span class="username">{{ $auth.user.username }}</span>
@@ -32,7 +34,9 @@
         class="item rounded"
         title="Connexion Discord"
         @click="$auth.loginWith('discord')"
-      >CONNEXION</span>
+      >
+        CONNEXION
+      </span>
     </div>
     <div class="burger" :class="{ open }" @click="open = !open">
       <div class="burger-lines" />
@@ -45,13 +49,13 @@ import Logo from '@/assets/logo.svg?inline'
 
 export default {
   components: {
-    Logo
+    Logo,
   },
-  data () {
+  data() {
     return {
-      open: false
+      open: false,
     }
-  }
+  },
 }
 </script>
 
@@ -168,6 +172,7 @@ header {
       display: flex;
       align-items: center;
       margin: 0 10px;
+      text-decoration: none;
       .avatar {
         background-size: 32px;
         height: 36px;

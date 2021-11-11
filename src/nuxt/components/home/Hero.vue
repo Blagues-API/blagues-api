@@ -27,8 +27,6 @@
           </button>
         </div>
       </div>
-      <!-- <LazyHydrate on-interaction> -->
-      <!-- SSR only -->
       <transition name="fade" mode="out-in">
         <client-only>
           <div class="example">
@@ -45,11 +43,10 @@
                 </p>
               </div>
             </transition>
-            <button class="next" @click="refreshJoke()">UNE AUTRE !</button>
+            <button class="next" @click="rerollJoke()">UNE AUTRE !</button>
           </div>
         </client-only>
       </transition>
-      <!-- </LazyHydrate> -->
     </div>
     <div class="sroller" @click="scrollToDocs()">
       <div class="name">Documentation</div>
@@ -61,8 +58,6 @@
 
 <script>
 import { defineComponent, ref } from '@nuxtjs/composition-api'
-
-// import LazyHydrate from 'vue-lazy-hydration'
 
 import jokes from '../../../../blagues.json'
 import NpmIcon from '@/assets/icons/npm.svg?inline'
@@ -85,13 +80,12 @@ export default defineComponent({
     PyPiIcon,
     ApiIcon,
     DownIcon,
-    // LazyHydrate
   },
   setup() {
     const joke = ref(jokes[Math.floor(Math.random() * jokes.length)])
     const docs = ref(null)
 
-    const refreshJoke = () => {
+    const rerollJoke = () => {
       joke.value = jokes[Math.floor(Math.random() * jokes.length)]
     }
 
@@ -101,7 +95,7 @@ export default defineComponent({
 
     return {
       joke,
-      refreshJoke,
+      rerollJoke,
       jokesTypes,
       scrollToDocs,
       docs,
