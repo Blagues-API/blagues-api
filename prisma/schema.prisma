@@ -21,6 +21,15 @@ model User {
   @@map("users")
 }
 
+model Godfather {
+  id        Int    @id @default(autoincrement())
+  user_id   String @unique @db.VarChar(255)
+  emoji_id  String @db.VarChar(255)
+
+  @@index([user_id], name: "godfathers_user_id")
+  @@map("godfathers")
+}
+
 model Proposal {
   id            Int          @id @default(autoincrement())
   user_id       String?      @db.VarChar(255)
