@@ -13,13 +13,14 @@ import {
   suggestsChannel
 } from '../constants';
 import Command from '../lib/command';
+import { renderGodfatherLine } from '../lib/godfathers';
 import {
   interactionError,
   interactionInfo,
   interactionValidate
 } from '../utils';
 
-export default class ApproveCommand extends Command {
+export default class DisapproveCommand extends Command {
   constructor() {
     super({
       name: 'Désapprouver',
@@ -78,7 +79,8 @@ export default class ApproveCommand extends Command {
             }
           }
         },
-        disapprovals: true
+        disapprovals: true,
+        approvals: true
       }
     });
 
@@ -96,15 +98,15 @@ export default class ApproveCommand extends Command {
       return interaction.reply(interactionError(`Le message est invalide.`));
     }
 
-    if (proposal.user_id === interaction.user.id) {
-      return interaction.reply(
-        interactionError(
-          `Vous ne pouvez pas désapprouver votre propre ${
-            isSuggestion ? 'blague' : 'correction'
-          }.`
-        )
-      );
-    }
+    // if (proposal.user_id === interaction.user.id) {
+    //   return interaction.reply(
+    //     interactionError(
+    //       `Vous ne pouvez pas désapprouver votre propre ${
+    //         isSuggestion ? 'blague' : 'correction'
+    //       }.`
+    //     )
+    //   );
+    // }
 
     if (proposal.merged) {
       return interaction.reply(
@@ -157,27 +159,50 @@ export default class ApproveCommand extends Command {
     ) {
       return interaction.reply(
         interactionInfo(
-          `Vous avez déjà approuvé cette ${
+          `Vous avez déjà désapprouvé cette ${
             isSuggestion ? 'blague' : 'correction'
           }.`
         )
       );
     }
 
-    await prisma.disapproval.create({
-      data: {
-        proposal_id: proposal.id,
-        user_id: interaction.user.id
-      }
-    });
+    const approvalIndex = proposal.approvals.findIndex(
+      (approval) => approval.user_id === interaction.user.id
+    );
+    if (approvalIndex !== -1) {
+      proposal.approvals.splice(approvalIndex, 1);
+      await prisma.approval.delete({
+        where: {
+          proposal_id_user_id: {
+            proposal_id: proposal.id,
+            user_id: interaction.user.id
+          }
+        }
+      });
+    }
 
-    if (proposal.disapprovals.length < neededApprovals - 1) {
-      const missingDisapprovals =
-        neededApprovals - 1 - proposal.disapprovals.length;
-      embed.footer!.text = `${missingDisapprovals} désapprobation${
-        missingDisapprovals > 1 ? 's' : ''
-      } manquantes avant sa suppression`;
+    proposal.disapprovals.push(
+      await prisma.disapproval.create({
+        data: {
+          proposal_id: proposal.id,
+          user_id: interaction.user.id
+        }
+      })
+    );
 
+    const godfathers = await renderGodfatherLine(interaction, proposal);
+
+    if (proposal.type === ProposalType.SUGGESTION) {
+      embed.description = `${
+        embed.description!.split('\n\n')[0]
+      }\n\n${godfathers}`;
+    } else {
+      embed.fields[1].value = `${
+        embed.fields[1].value.split('\n\n')[0]
+      }\n\n${godfathers}`;
+    }
+
+    if (proposal.disapprovals.length < neededApprovals) {
       await message.edit({ embeds: [embed] });
 
       return interaction.reply(
@@ -202,9 +227,14 @@ export default class ApproveCommand extends Command {
     });
 
     embed.color = 0xff0000;
-    embed.footer!.text = `${
-      isSuggestion ? 'Suggestion' : 'Correction'
-    } refusée`;
+    if (isSuggestion) {
+      embed.description = embed.description!.split('\n\n')[0];
+    } else {
+      embed.fields[1].value = embed.fields[1].value!.split('\n\n')[0];
+    }
+    embed.footer = {
+      text: `${isSuggestion ? 'Suggestion' : 'Correction'} refusée`
+    };
 
     await message.edit({ embeds: [embed] });
 
