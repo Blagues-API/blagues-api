@@ -4,7 +4,6 @@ import {
   ColorResolvable,
   CommandInteraction,
   Message,
-  MessageOptions,
   MessageButton,
   MessageComponentInteraction,
   MessageEmbedOptions,
@@ -13,12 +12,7 @@ import {
 import { findBestMatch } from 'string-similarity';
 import jokes from '../../../blagues.json';
 import { Category, CategoriesRefs, UnsignedJoke } from '../../typings';
-import {
-  downReaction,
-  neededApprovals,
-  suggestsChannel,
-  upReaction
-} from '../constants';
+import { downReaction, suggestsChannel, upReaction } from '../constants';
 import Command from '../lib/command';
 import { interactionError } from '../utils';
 import Collection from '@discordjs/collection';
@@ -111,15 +105,29 @@ export default class SuggestCommand extends Command {
     `;
 
     if (similarity !== Similarity.Different) {
+      const jokeMessage = await prisma.proposal.findUnique({
+        where: {
+          joke_id: jokes[bestMatchIndex].id
+        }
+      });
       description = stripIndents`
-        **Votre blague**
         ${description}
-        **[Blague similaire](https://github.com/Blagues-API/blagues-api/blob/master/blagues.json#L${
-          6 * jokes[bestMatchIndex].id - 4
-        }-L${6 * jokes[bestMatchIndex].id + 1})**
-        >>> **Type**: ${CategoriesRefs[jokes[bestMatchIndex].type as Category]}
-        **Blague**: ${jokes[bestMatchIndex].joke}
-        **Réponse**: ${jokes[bestMatchIndex].answer}
+        ${
+          jokeMessage
+            ? `⚠️ Une [blague déjà existante](https://discord.com/channels/${
+                process.env.SERVER_ID
+              }/${suggestsChannel}/${jokeMessage.message_id}) y ressemble ${
+                similarity === Similarity.Same ? 'à plus de 80%' : 'fortement'
+              }`
+            : stripIndents`
+              **Blague y ressemblant**
+              > **Type**: ${
+                CategoriesRefs[jokes[bestMatchIndex].type as Category]
+              }
+              > **Blague**: ${jokes[bestMatchIndex].joke}
+              > **Réponse**: ${jokes[bestMatchIndex].answer}
+            `
+        }
       `;
     }
 
@@ -133,19 +141,7 @@ export default class SuggestCommand extends Command {
         name: interaction.user.tag
       },
       description,
-      footer: {
-        text:
-          similarity === Similarity.Different
-            ? `${neededApprovals} approbations nécessaire`
-            : interaction.guild!.name,
-        icon_url: interaction.guild!.iconURL({
-          format: 'png',
-          size: 32,
-          dynamic: true
-        })!
-      },
-      color: Colors[similarity] as ColorResolvable,
-      timestamp: new Date()
+      color: Colors[similarity] as ColorResolvable
     };
 
     if (similarity === Similarity.Same) {
@@ -156,18 +152,7 @@ export default class SuggestCommand extends Command {
       });
     }
 
-    const message = {
-      content: [
-        "Votre blague est sur le point d'être ajouté aux suggestions de blagues, veuillez confirmer la suggestion si vous êtes sûr qu'elle ne contient pas de fautes.",
-        similarity === Similarity.Like &&
-          "⚠️ Attention, une blague qui y ressemblant existe déjà, êtes vous sûr qu'elle est différente ?"
-      ]
-        .filter((l) => l)
-        .join('\n\n'),
-      embeds: [embed]
-    };
-
-    const confirmation = await this.waitForConfirmation(message, interaction);
+    const confirmation = await this.waitForConfirmation(interaction, embed);
     if (!confirmation) return;
 
     if (confirmation.customId === 'cancel') {
@@ -207,11 +192,13 @@ export default class SuggestCommand extends Command {
   }
 
   async waitForConfirmation(
-    messageData: Partial<MessageOptions>,
-    interaction: CommandInteraction
+    interaction: CommandInteraction,
+    embed: MessageEmbedOptions
   ): Promise<ButtonInteraction | null> {
     const message = (await interaction.reply({
-      ...messageData,
+      content:
+        'Êtes-vous sûr de vouloir confirmer la proposition de cette blague ?',
+      embeds: [embed],
       components: [
         {
           type: 'ACTION_ROW',
