@@ -1,4 +1,4 @@
-import { Proposal, ProposalType } from '@prisma/client';
+import { Proposal, ProposalType, Approval, Disapproval } from '@prisma/client';
 import { stripIndents } from 'common-tags';
 import {
   CommandInteraction,
@@ -14,10 +14,12 @@ import prisma from '../../prisma';
 import { CategoriesRefs, Category, Joke } from '../../typings';
 import {
   correctionChannel,
+  logsChannel,
   neededApprovals,
   suggestsChannel
 } from '../constants';
 import Command from '../lib/command';
+import { renderGodfatherLine } from '../lib/godfathers';
 import {
   interactionError,
   interactionInfo,
@@ -25,7 +27,12 @@ import {
 } from '../utils';
 
 type Correction = Proposal & {
-  suggestion: Proposal;
+  suggestion: Proposal & {
+    approvals: Approval[];
+    disapprovals: Disapproval[];
+  };
+  approvals: Approval[];
+  disapprovals: Disapproval[];
 };
 
 export default class ApproveCommand extends Command {
@@ -84,10 +91,13 @@ export default class ApproveCommand extends Command {
               where: {
                 merged: false
               }
-            }
+            },
+            approvals: true,
+            disapprovals: true
           }
         },
-        approvals: true
+        approvals: true,
+        disapprovals: true
       }
     });
 
@@ -105,15 +115,15 @@ export default class ApproveCommand extends Command {
       return interaction.reply(interactionError(`Le message est invalide.`));
     }
 
-    if (proposal.user_id === interaction.user.id) {
-      return interaction.reply(
-        interactionError(
-          `Vous ne pouvez pas approuver votre propre ${
-            isSuggestion ? 'blague' : 'correction'
-          }.`
-        )
-      );
-    }
+    // if (proposal.user_id === interaction.user.id) {
+    //   return interaction.reply(
+    //     interactionError(
+    //       `Vous ne pouvez pas approuver votre propre ${
+    //         isSuggestion ? 'blague' : 'correction'
+    //       }.`
+    //     )
+    //   );
+    // }
 
     if (proposal.merged) {
       return interaction.reply(
@@ -173,19 +183,43 @@ export default class ApproveCommand extends Command {
       );
     }
 
-    await prisma.approval.create({
-      data: {
-        proposal_id: proposal.id,
-        user_id: interaction.user.id
-      }
-    });
+    const disapprovalIndex = proposal.disapprovals.findIndex(
+      (disapproval) => disapproval.user_id === interaction.user.id
+    );
+    if (disapprovalIndex !== -1) {
+      proposal.disapprovals.splice(disapprovalIndex, 1);
+      await prisma.disapproval.delete({
+        where: {
+          proposal_id_user_id: {
+            proposal_id: proposal.id,
+            user_id: interaction.user.id
+          }
+        }
+      });
+    }
 
-    if (proposal.approvals.length < neededApprovals - 1) {
-      const missingApprovals = neededApprovals - 1 - proposal.approvals.length;
-      embed.footer!.text = `${missingApprovals} approbation${
-        missingApprovals > 1 ? 's' : ''
-      } manquantes avant l'ajout`;
+    proposal.approvals.push(
+      await prisma.approval.create({
+        data: {
+          proposal_id: proposal.id,
+          user_id: interaction.user.id
+        }
+      })
+    );
 
+    const godfathers = await renderGodfatherLine(interaction, proposal);
+
+    if (proposal.type === ProposalType.SUGGESTION) {
+      embed.description = `${
+        embed.description!.split('\n\n')[0]
+      }\n\n${godfathers}`;
+    } else {
+      embed.fields[1].value = `${
+        embed.fields[1].value.split('\n\n')[0]
+      }\n\n${godfathers}`;
+    }
+
+    if (proposal.approvals.length < neededApprovals) {
       await message.edit({ embeds: [embed] });
 
       return interaction.reply(
@@ -209,6 +243,10 @@ export default class ApproveCommand extends Command {
     message: Message,
     embed: MessageEmbed
   ): Promise<void> {
+    const logs = interaction.client.channels.cache.get(
+      logsChannel
+    ) as TextChannel;
+
     const { success, joke_id } = await this.mergeJoke(interaction, proposal);
     if (!success) return;
 
@@ -220,8 +258,14 @@ export default class ApproveCommand extends Command {
       where: { id: proposal.id }
     });
 
+    await logs.send({
+      content: "Blague ajoutée à l'API",
+      embeds: [embed.setColor(0x245f8d)]
+    });
+
     embed.color = 0x00ff00;
-    embed.footer!.text = 'Blague ajoutée';
+    embed.footer = { text: 'Blague ajoutée' };
+    embed.description = embed.description!.split('\n\n')[0];
 
     await message.edit({ embeds: [embed] });
 
@@ -236,16 +280,20 @@ export default class ApproveCommand extends Command {
     message: Message,
     embed: MessageEmbed
   ): Promise<void> {
+    const logs = interaction.client.channels.cache.get(
+      logsChannel
+    ) as TextChannel;
     const channel = interaction.client.channels.cache.get(
       suggestsChannel
     ) as TextChannel;
+    const isJokeCorrection = proposal.type === ProposalType.CORRECTION;
     const suggestionMessage =
       proposal.suggestion.message_id &&
       (await channel.messages
         .fetch(proposal.suggestion.message_id)
         .catch(() => null));
 
-    if (proposal.type === ProposalType.CORRECTION) {
+    if (isJokeCorrection) {
       const { success } = await this.mergeJoke(interaction, proposal);
       if (!success) return;
     }
@@ -264,11 +312,26 @@ export default class ApproveCommand extends Command {
       where: { id: proposal.id }
     });
 
+    await logs.send({
+      content: `${isJokeCorrection ? 'Blague' : 'Suggestion'} corrigée`,
+      embeds: [embed.setColor(0x245f8d)]
+    });
+
     embed.color = 0x00ff00;
-    embed.footer!.text = 'Correction migrée vers la suggestion';
+    embed.fields[1].value = embed.fields[1].value!.split('\n\n')[0];
+    embed.footer = {
+      text: `Correction migrée vers la ${
+        isJokeCorrection ? 'blague' : 'suggestion'
+      }`
+    };
 
     await message.edit({ embeds: [embed] });
     if (suggestionMessage) {
+      const godfathers = await renderGodfatherLine(
+        interaction,
+        proposal.suggestion
+      );
+
       await suggestionMessage.edit({
         embeds: [
           {
@@ -277,6 +340,8 @@ export default class ApproveCommand extends Command {
               > **Type**: ${CategoriesRefs[proposal.joke_type as Category]}
               > **Blague**: ${proposal.joke_question}
               > **Réponse**: ${proposal.joke_answer}
+
+              ${godfathers}
             `
           } as MessageEmbedOptions
         ]
