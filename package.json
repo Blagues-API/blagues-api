@@ -71,7 +71,7 @@
     "@prisma/client": "^3.3.0",
     "babel-plugin-prismjs": "^2.1.0",
     "body-scroll-lock": "^4.0.0-beta.0",
-    "common-tags": "^1.8.0",
+    "common-tags": "^1.8.1",
     "discord.js": "^13.3.0",
     "dotenv": "^10.0.0",
     "fastify": "^3.22.1",
