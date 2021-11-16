@@ -24,7 +24,7 @@
         <div
           class="avatar"
           :style="{
-            'background-image': `url('https://cdn.discordapp.com/avatars/${$auth.user.id}/${$auth.user.avatar}.png?size=64')`,
+            'background-image': `url('${$auth.user.avatar}')`,
           }"
         />
         <span class="username">{{ $auth.user.username }}</span>
