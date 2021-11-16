@@ -1,4 +1,4 @@
-FROM node:16.6.1 as builder
+FROM node:16.13.0 as builder
 WORKDIR /app
 
 COPY package*.json ./
@@ -15,7 +15,7 @@ COPY blagues.json ./
 RUN npx prisma generate
 RUN npx tsc
 
-FROM node:16.6.1
+FROM node:16.13.0
 WORKDIR /app
 
 COPY package*.json ./
