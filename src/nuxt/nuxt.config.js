@@ -49,8 +49,8 @@ export default {
         scheme: 'oauth2',
         endpoints: {
           authorization: 'https://discord.com/api/oauth2/authorize',
-          token: 'https://discord.com/api/oauth2/token',
-          userInfo: 'https://discord.com/api/v6/users/@me'
+          token: `${process.env.API_URL}/api/auth/token`,
+          userInfo: `${process.env.API_URL}/api/auth/user`
         },
         token: {
           global: false
