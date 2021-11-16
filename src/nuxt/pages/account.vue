@@ -2,9 +2,7 @@
   <div class="container token-page">
     <div class="card">
       <div class="token">
-        <div class="language">
-          VOTRE TOKEN
-        </div>
+        <div class="language">VOTRE TOKEN</div>
         <div ref="target" class="code">
           {{ $auth.user.token }}
         </div>
@@ -28,7 +26,7 @@ const useAuth = wrapProperty('$auth', false)
 
 export default {
   middleware: ['auth'],
-  setup () {
+  setup() {
     const target = ref(null)
 
     const copied = ref(false)
@@ -53,15 +51,17 @@ export default {
       const newToken = await $axios.$post(
         '/api/regenerate',
         {
-          key: user.token_key
+          key: user.token_key,
         },
         {
           headers: {
-            Authorization: `Bearer ${user.token}`
-          }
+            Authorization: `Bearer ${user.token}`,
+          },
         }
       )
-      if (newToken.error) { return }
+      if (newToken.error) {
+        return
+      }
       regenerated.value = true
       setTimeout(() => {
         regenerated.value = false
@@ -70,7 +70,7 @@ export default {
     }
 
     return { copied, regenerated, copyToClipboard, regenerateToken }
-  }
+  },
 }
 </script>
 
@@ -103,12 +103,8 @@ export default {
   .card {
     display: flex;
     flex-direction: column;
-    background: var(--white);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
     max-width: 500px;
     width: 100%;
-    padding: 16px;
-    margin: 0 auto;
     .token {
       display: flex;
       flex-direction: column;
