@@ -1,7 +1,9 @@
 <template>
   <div :class="$route.name">
     <Header />
-    <Nuxt />
+    <transition name="down">
+      <Nuxt />
+    </transition>
     <Footer />
   </div>
 </template>
@@ -27,6 +29,21 @@ export default {
   --title: #414141;
   --white: #ffffff;
   --background: #f2f2f2;
+}
+
+.down-enter-active,
+.down-leave-active {
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.down-enter {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.down-leave-to {
+  opacity: 0;
+  transform: translateX(20px);
 }
 
 body {
