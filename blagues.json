@@ -728,7 +728,7 @@
   {
     "id": 122,
     "type": "dark",
-    "joke": "Quelle est la dernière chose que Lady Dianna ai mangée ?",
+    "joke": "Quelle est la dernière chose que Lady Dianna ait mangé ?",
     "answer": "Le volant."
   },
   {
@@ -1471,7 +1471,7 @@
   },
   {
     "id": 246,
-    "type": "limit",
+    "type": "beauf",
     "joke": "Pendant l'acte, ma femme me dit : Dis-moi des choses sales !",
     "answer": "La cuisine, la salle de bain..."
   },
@@ -2606,7 +2606,7 @@
   {
     "id": 435,
     "type": "dark",
-    "joke": "Comment appelle t'on une innondation en Afrique ?",
+    "joke": "Comment appelle-t-on une innondation en Afrique ?",
     "answer": "Un bol de Chocapic."
   },
   {
@@ -3098,13 +3098,13 @@
   {
     "id": 517,
     "type": "dark",
-    "joke": "Quelle est la différence entre ma femme et mon cancer.",
+    "joke": "Quelle est la différence entre ma femme et mon cancer ?",
     "answer": "Mon cancer, je ne l'ai toujours pas battu."
   },
   {
     "id": 518,
     "type": "dark",
-    "joke": "Les blagues sur Georges Floyd sont...",
+    "joke": "Les blagues sur George Floyd sont...",
     "answer": "...à couper le souffle."
   },
   {
@@ -3355,7 +3355,7 @@
   },
   {
     "id": 560,
-    "type": "global",
+    "type": "dev",
     "joke": "Je pense qu'il faut désinstaller et réinstaller 2020.",
     "answer": "Je pense qu'il y a un virus."
   },
@@ -3693,7 +3693,7 @@
     "id": 616,
     "type": "dev",
     "joke": "Une notice me disait: Nécessite windows xp ou mieux.",
-    "answer": "J'ai donc installer linux."
+    "answer": "J'ai donc installé linux."
   },
   {
     "id": 617,
@@ -4081,9 +4081,9 @@
   },
   {
     "id": 681,
-    "type": "limit",
-    "joke": "Dit moi des chose sales !",
-    "answer": "La cuisine, la salle de bain..."
+    "type": "dev",
+    "joke": "Quel composant a un classement correct dans la société ?",
+    "answer": "La carte maire"
   },
   {
     "id": 682,
@@ -4345,7 +4345,7 @@
   },
   {
     "id": 725,
-    "type": "global",
+    "type": "dark",
     "joke": "Quelle est la différence entre tomber du 1er ou du 10ème étage ?",
     "answer": "Tomber du 1er : PAF ! Ahhhhh ! Tomber du 10ème : Ahhhhh ! PAF !"
   },
@@ -4537,20 +4537,20 @@
   },
   {
     "id": 757,
-    "type": "global",
+    "type": "dark",
     "joke": "Quand je fais du judo avec mes gosses, c'est comme à la maison :",
     "answer": "Je les bats avec ma ceinture noire."
   },
   {
     "id": 758,
     "type": "dark",
-    "joke": "Si mon futur oncle devient le 4ème Reich comment je l'appelerai ?",
+    "joke": "Si mon futur oncle crée le 4ème Reich comment je l'appelerai ?",
     "answer": "Le für-oncle."
   },
   {
     "id": 759,
     "type": "dark",
-    "joke": "Pourquoi les décapités deviennent t'ils toujours fous ?",
+    "joke": "Pourquoi les décapités deviennent-ils toujours fous ?",
     "answer": "Parce qu'ils perdent la tête !"
   },
   {
@@ -4592,7 +4592,7 @@
   {
     "id": 766,
     "type": "dark",
-    "joke": "A quoi à servit Hitler ?",
+    "joke": "A quoi a servi Hitler ?",
     "answer": "Aryen."
   },
   {
@@ -5384,7 +5384,7 @@
   {
     "id": 898,
     "type": "dark",
-    "joke": "Un garçon sans bras ni jambes est envoyé dans un camp de vacances par ses parents. Ce dernier saute dans la piscine et nage comme un dauphin. L’animateur devant cette scène lui demandes comment il a appris à nager ?",
+    "joke": "Un garçon sans bras ni jambes est envoyé dans un camp de vacances par ses parents. Ce dernier saute dans la piscine et nage comme un dauphin. L’animateur devant cette scène lui demande comment il a appris à nager ?",
     "answer": "C’est papa qui m’a appris depuis tout petit. Le plus dur, c’est d’enlever le sac poubelle."
   },
   {
@@ -6278,7 +6278,7 @@
   {
     "id": 1047,
     "type": "dark",
-    "joke": "Il fait arrêter les blagues sur les homosexuels.",
+    "joke": "Il faut arrêter les blagues sur les homosexuels.",
     "answer": "Ils en ont plein le cul."
   },
   {
@@ -6339,7 +6339,7 @@
     "id": 1057,
     "type": "beauf",
     "joke": "Pourquoi les tornades ont-elles des noms féminins ?",
-    "answer": "Pour deux raisons, la première parce qu’elles arrivent chaudes et humides et la deuxième parce qu’elles repartent avec tes affaires."
+    "answer": "Pour deux raisons : la première, parce qu’elles arrivent chaudes et humides. La deuxième parce qu’elles repartent avec tes affaires."
   },
   {
     "id": 1058,
@@ -6356,8 +6356,8 @@
   {
     "id": 1060,
     "type": "dark",
-    "joke": "Quelle est la différence entre un camp d'entrainement terroriste et un orphelinat ?",
-    "answer": " Je ne sais pas, je conduis juste le drone."
+    "joke": "Quelle est la différence entre un camp d'entraînement terroriste et un orphelinat ?",
+    "answer": " Je ne sais pas, je conduis juste le drône."
   },
   {
     "id": 1061,
@@ -6374,7 +6374,7 @@
   {
     "id": 1063,
     "type": "dark",
-    "joke": "C'est un vol avec des gens mort ?",
+    "joke": "Qu'est ce qu'un vol avec des gens morts...",
     "answer": "Un Voldemort"
   },
   {
@@ -6398,13 +6398,13 @@
   {
     "id": 1067,
     "type": "dark",
-    "joke": "Le coronavirus c'est...",
-    "answer": "le seul truc chinois qui a tenu plus de deux semaines."
+    "joke": "Qu'est-ce que le coronavirus ? ",
+    "answer": "C'est le seul truc chinois qui a tenu plus de deux semaines."
   },
   {
     "id": 1068,
     "type": "dark",
-    "joke": "Quels sont les publics visés par Kinders ?",
+    "joke": "Quels sont les publics visés par Kinder ?",
     "answer": "Les enfants et les pédophiles"
   },
   {
@@ -6416,8 +6416,8 @@
   {
     "id": 1070,
     "type": "dark",
-    "joke": "Quelle est la différence entre un couple Gay et un couple Hétéro ?",
-    "answer": "Le couple Hétéro se démontent et le couple Gay s’emboîtent."
+    "joke": "Quelle est la différence entre un couple gay et un couple hétéro ?",
+    "answer": "Le couple hétéro se démonte et le couple Gay s’emboîte."
   },
   {
     "id": 1071,
@@ -6628,11 +6628,5 @@
     "type": "global",
     "joke": "Pourquoi les astronautes aiment l’alcool ?",
     "answer": "Car lorsqu'ils en boivent, ça tourne !"
-  },
-  {
-    "id": 1106,
-    "type": "dev",
-    "joke": "Quel composant a un classement correct dans la société ?",
-    "answer": "La carte maire"
   }
 ]
