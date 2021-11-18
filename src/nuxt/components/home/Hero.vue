@@ -14,16 +14,16 @@
           </div>
         </div>
         <div class="buttons">
-          <button class="button npm">
+          <button class="button npm" @click="scrollToDocs('npm')">
             <NpmIcon class="icon" />
             <span class="name">NPM</span>
           </button>
-          <button class="button pypi">
+          <button class="button pypi" @click="scrollToDocs('pypi')">
             <PyPiIcon class="icon" />
             <span class="name">PY<span>PI</span></span>
           </button>
           <button class="button api">
-            <ApiIcon class="icon" />
+            <ApiIcon class="icon" @click="scrollToDocs('api')" />
           </button>
         </div>
       </div>
@@ -57,8 +57,6 @@
 </template>
 
 <script>
-import { defineComponent, ref } from '@nuxtjs/composition-api'
-
 import jokes from '../../../../blagues.json'
 import NpmIcon from '@/assets/icons/npm.svg?inline'
 import PyPiIcon from '@/assets/icons/pypi.svg?inline'
@@ -74,34 +72,38 @@ const jokesTypes = {
   blondes: 'Blagues blondes',
 }
 
-export default defineComponent({
+export default {
   components: {
     NpmIcon,
     PyPiIcon,
     ApiIcon,
     DownIcon,
   },
-  setup() {
-    const joke = ref(jokes[Math.floor(Math.random() * jokes.length)])
-    const docs = ref(null)
-
-    const rerollJoke = () => {
-      joke.value = jokes[Math.floor(Math.random() * jokes.length)]
-    }
-
-    const scrollToDocs = () => {
-      docs.value.scrollIntoView({ behavior: 'smooth' })
-    }
-
+  data() {
     return {
-      joke,
-      rerollJoke,
       jokesTypes,
-      scrollToDocs,
-      docs,
+      joke: jokes[Math.floor(Math.random() * jokes.length)],
     }
   },
-})
+  methods: {
+    rerollJoke() {
+      this.joke = jokes[Math.floor(Math.random() * jokes.length)]
+    },
+    scrollToDocs(doc) {
+      if (doc) this.$store.commit('SET_DOC', doc)
+      const rect = this.$refs.docs.getBoundingClientRect()
+      window.scroll({
+        top:
+          window.pageYOffset +
+          rect.top -
+          rect.height +
+          (this.$device.isMobile ? 96 : 0),
+        left: 0,
+        behavior: 'smooth',
+      })
+    },
+  },
+}
 </script>
 
 <style lang="scss">
@@ -166,7 +168,7 @@ export default defineComponent({
           height: 100%;
           padding: 12px;
           margin-right: 16px;
-          border-radius: 7px;
+          border-radius: 6px;
           min-width: 100px;
           cursor: pointer;
           outline: revert;
