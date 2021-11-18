@@ -1,5 +1,16 @@
 <template>
   <div>
+    <div id="npm" class="block">
+      <div class="flex-space top">
+        <h2 class="title">Module npm</h2>
+        <Selector />
+      </div>
+      <p>
+        Le module npm de Blagues-API développé en Typescript supporte
+        l'intégralité des options présente sur l'API, il permettra d'intéragir
+        simplement avec l'API depuis le langage NodeJs.
+      </p>
+    </div>
     <div id="install" class="block">
       <div class="flex-space">
         <a href="#install" class="title-container">
@@ -8,42 +19,42 @@
         <div class="buttons">
           <button
             class="button"
-            :class="{ active: versions.js_install === 'yarn' }"
-            @click="updateVersion('js_install', 'yarn')"
+            :class="{ active: js_install === 'yarn' }"
+            @click="js_install = 'yarn'"
           >
             Yarn
           </button>
           <button
             class="button"
-            :class="{ active: versions.js_install === 'pnpm' }"
-            @click="updateVersion('js_install', 'pnpm')"
+            :class="{ active: js_install === 'pnpm' }"
+            @click="js_install = 'pnpm'"
           >
             Pnpm
           </button>
           <button
             class="button"
-            :class="{ active: versions.js_install === 'npm' }"
-            @click="updateVersion('js_install', 'npm')"
+            :class="{ active: js_install === 'npm' }"
+            @click="js_install = 'npm'"
           >
             Npm
           </button>
         </div>
       </div>
-      <div v-show="versions.js_install === 'yarn'">
+      <div v-show="js_install === 'yarn'">
         <pre>
           <code class="language-bash">
             yarn add blagues-api
           </code>
         </pre>
       </div>
-      <div v-show="versions.js_install === 'pnpm'">
+      <div v-show="js_install === 'pnpm'">
         <pre>
           <code class="language-bash">
             pnpm add blagues-api
           </code>
         </pre>
       </div>
-      <div v-show="versions.js_install === 'npm'">
+      <div v-show="js_install === 'npm'">
         <pre>
           <code class="language-bash">
             npm i blagues-api
@@ -59,42 +70,42 @@
         <div class="buttons">
           <button
             class="button"
-            :class="{ active: versions.js_setup === 'browser' }"
-            @click="updateVersion('js_setup', 'browser')"
+            :class="{ active: js_setup === 'browser' }"
+            @click="js_setup = 'browser'"
           >
             Browser
           </button>
           <button
             class="button"
-            :class="{ active: versions.js_setup === 'cjs' }"
-            @click="updateVersion('js_setup', 'cjs')"
+            :class="{ active: js_setup === 'cjs' }"
+            @click="js_setup = 'cjs'"
           >
             CJS
           </button>
           <button
             class="button"
-            :class="{ active: versions.js_setup === 'es6' }"
-            @click="updateVersion('js_setup', 'es6')"
+            :class="{ active: js_setup === 'es6' }"
+            @click="js_setup = 'es6'"
           >
             ES6
           </button>
         </div>
       </div>
-      <div v-show="versions.js_setup === 'browser'">
+      <div v-show="js_setup === 'browser'">
         <pre>
           <code class="language-javascript">
             &lt;script src="https://unpkg.com/blagues-api@2.1.0/dist/blagues-api.umd.js">&lt;/script>
           </code>
         </pre>
       </div>
-      <div v-show="versions.js_setup === 'es6'">
+      <div v-show="js_setup === 'es6'">
         <pre>
           <code class="language-javascript">
             import BlaguesAPI from 'blagues-api';
           </code>
         </pre>
       </div>
-      <div v-show="versions.js_setup === 'cjs'">
+      <div v-show="js_setup === 'cjs'">
         <pre>
           <code class="language-javascript">
             const BlaguesAPI = require('blagues-api');
@@ -176,23 +187,22 @@
 </template>
 
 <script>
-import { reactive } from '@nuxtjs/composition-api'
+import Selector from '@/components/home/Selector.vue'
 
 export default {
-  setup() {
-    const versions = reactive({
+  components: {
+    Selector,
+  },
+  data() {
+    return {
       js_install: 'yarn',
       js_setup: 'cjs',
-    })
-
-    const updateVersion = (key, value) => {
-      versions[key] = value
     }
-
-    return {
-      versions,
-      updateVersion,
-    }
+  },
+  methods: {
+    updateVersion(key, value) {
+      this[key] = value
+    },
   },
 }
 </script>

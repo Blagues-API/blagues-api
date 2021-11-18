@@ -1,5 +1,16 @@
 <template>
   <div>
+    <div id="api" class="block">
+      <div class="flex-space top">
+        <h2 class="title">API publique</h2>
+        <Selector />
+      </div>
+      <p>
+        L'API Rest est le meilleur moyen d'utiliser Blagues-API sans
+        dépendances, en requièrera nénanmoins plus de connaissances et de
+        prérequis.
+      </p>
+    </div>
     <div id="use" class="block">
       <a href="#use" class="title-container">
         <h3 class="title">Utilisation</h3>
@@ -95,3 +106,13 @@
     </div>
   </div>
 </template>
+
+<script>
+import Selector from '@/components/home/Selector.vue'
+
+export default {
+  components: {
+    Selector,
+  },
+}
+</script>

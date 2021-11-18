@@ -22,15 +22,6 @@
           une communauté francophone.
         </p>
       </div>
-      <div id="npm" class="block">
-        <div class="flex-space top">
-          <h2 class="title">
-            {{ docsData.title }}
-          </h2>
-          <Selector v-model="doc" :value="doc" />
-        </div>
-        <p>{{ docsData.description }}</p>
-      </div>
 
       <DocNode v-show="doc === 'npm'" />
       <DocPyPi v-show="doc === 'pypi'" />
@@ -56,7 +47,7 @@
 <script>
 import prismjs from 'prismjs'
 
-import { ref, onMounted, watch, computed } from '@nuxtjs/composition-api'
+import { mapState } from 'vuex'
 
 import jokes from '@/../../blagues.json'
 
@@ -64,55 +55,28 @@ import DocNode from '@/components/docs/DocNode.vue'
 import DocPyPi from '@/components/docs/DocPyPi.vue'
 import DocAPI from '@/components/docs/DocAPI.vue'
 
-import Selector from '@/components/home/Selector.vue'
-
 export default {
   components: {
-    Selector,
     DocNode,
     DocPyPi,
     DocAPI,
   },
-  setup() {
-    const count = jokes.length
-    const doc = ref('npm')
-
-    const data = {
-      npm: {
-        title: 'Module npm',
-        description:
-          "Le module npm de Blagues-API développé en Typescript supporte l'intégralité des options présente sur l'API, il permettra d'intéragir simplement avec l'API depuis le langage NodeJs.",
-      },
-      pypi: {
-        title: 'Module PyPi',
-        description:
-          "Le module PyPi de Blagues-API supporte l'intégralité des options présente sur l'API, il permettra d'intéragir simplement avec l'API depuis le langage Python de manière asynchrone.",
-      },
-      api: {
-        title: 'API publique',
-        description:
-          "L'API Rest est le meilleur moyen d'utiliser Blagues-API sans dépendances, en requièrera nénanmoins plus de connaissances et de prérequis.",
-      },
-    }
-
-    const sleep = () => new Promise((resolve) => setTimeout(resolve(), 1000))
-
-    watch(doc, async () => {
-      await sleep()
-      prismjs.highlightAll()
-    })
-
-    const docsData = computed(() => data[doc.value])
-
-    onMounted(() => {
-      prismjs.highlightAll()
-    })
-
+  data() {
     return {
-      count,
-      doc,
-      docsData,
+      count: jokes.length,
     }
+  },
+  computed: {
+    ...mapState(['doc']),
+  },
+  watch: {
+    async doc() {
+      await new Promise((resolve) => setTimeout(resolve(), 1000))
+      prismjs.highlightAll()
+    },
+  },
+  mounted() {
+    prismjs.highlightAll()
   },
 }
 </script>
