@@ -1,3 +1,11 @@
+
+import path from 'path'
+import dotenv from 'dotenv';
+
+dotenv.config({
+  path: path.join(__dirname, '../../.env')
+})
+
 export default {
   server: {
     port: 3000, // default: 3000
@@ -14,21 +22,27 @@ export default {
   buildModules: [
     // Doc: https://composition-api.nuxtjs.org
     '@nuxtjs/composition-api/module',
+
     // Doc: https://pwa.nuxtjs.org/
     '@nuxtjs/pwa',
+
     // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module',
+
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
+
     // Doc: https://github.com/nuxt-community/svg-module
-    '@nuxtjs/svg'
+    '@nuxtjs/svg',
+
+    // Doc: https://github.com/nuxt-community/device-module
+    '@nuxtjs/device',
   ],
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
 
     // Doc: https://dev.auth.nuxtjs.org/
-
     '@draftbot/nuxtjs-auth'
   ],
   css: ['./assets/css/reset.css'],
@@ -37,7 +51,9 @@ export default {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    proxy: true
+  },
 
   /*
    ** Auth module configuration
@@ -75,6 +91,15 @@ export default {
       home: '/'
     },
     loginIfNeeded: true
+  },
+
+
+  /*
+  ** Proxy module configuration
+  ** See https://github.com/nuxt-community/proxy-module#options
+  */
+  proxy: {
+    '/api': process.env.API_URL,
   },
 
   /*
