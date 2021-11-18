@@ -4,13 +4,14 @@
       <div class="token">
         <div class="language">VOTRE TOKEN</div>
         <div ref="target" class="code">
+          <label class="overlay" for="copy"></label>
           {{ $auth.user.token }}
         </div>
         <div class="buttons">
           <button class="regerate" @click="regenerateToken()">
-            {{ regenerated ? 'REGÉNÉRER' : 'REGÉNÉRÉ !' }}
+            {{ regenerated ? 'REGÉNÉRÉ !' : 'REGÉNÉRER' }}
           </button>
-          <button class="copy" @click="copyToClipboard()">
+          <button id="copy" class="copy" @click="copyToClipboard()">
             {{ copied ? 'COPIÉ !' : 'COPIER' }}
           </button>
         </div>
@@ -27,6 +28,9 @@ const useAuth = wrapProperty('$auth', false)
 export default {
   middleware: ['auth'],
   setup() {
+    const { $axios } = useContext()
+    const $auth = useAuth()
+
     const target = ref(null)
 
     const copied = ref(false)
@@ -46,22 +50,20 @@ export default {
     }
 
     const regenerateToken = async () => {
-      const { $axios } = useContext()
-      const { user } = useAuth()
-      const newToken = await $axios.$post(
+      const { token, key } = await $axios.$post(
         '/api/regenerate',
         {
-          key: user.token_key,
+          key: $auth.user.token_key,
         },
         {
           headers: {
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${$auth.user.token}`,
           },
         }
       )
-      if (newToken.error) {
-        return
-      }
+
+      await $auth.setUser({ ...$auth.user, token, token_key: key })
+
       regenerated.value = true
       setTimeout(() => {
         regenerated.value = false
@@ -69,7 +71,7 @@ export default {
       }, 2000)
     }
 
-    return { copied, regenerated, copyToClipboard, regenerateToken }
+    return { target, copied, regenerated, copyToClipboard, regenerateToken }
   },
 }
 </script>
@@ -122,6 +124,16 @@ export default {
         line-height: 28px;
         font-size: 14px;
         letter-spacing: 0.5px;
+        position: relative;
+        .overlay {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          cursor: pointer;
+        }
         &::selection {
           background: transparent !important;
         }
@@ -140,11 +152,13 @@ export default {
           height: 40px;
           background-color: var(--primary);
           padding: 10px 16px;
+          border-radius: 6px;
           font-size: 15px;
           color: var(--white);
           font-weight: bold;
           cursor: pointer;
           transition: background-color 0.3s;
+          outline: revert;
           &:first-child {
             margin-right: 10px;
           }
