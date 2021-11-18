@@ -38,12 +38,12 @@ export default {
 
 .down-enter {
   opacity: 0;
-  transform: translateX(-20px);
+  transform: translateY(-20px);
 }
 
 .down-leave-to {
   opacity: 0;
-  transform: translateX(20px);
+  transform: translateY(20px);
 }
 
 body {
@@ -54,7 +54,6 @@ body {
       top: 0;
       left: 0;
       right: 0;
-      z-index: 1;
     }
 
     @media screen and (max-width: 720px) {
