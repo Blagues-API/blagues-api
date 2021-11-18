@@ -9,7 +9,7 @@ services:
       - ./src:/app/src
       - ./blagues.json:/app/blagues.json
       - ./prisma:/app/prisma
-      - /app/.nuxt
+      - /app/src/nuxt/.nuxt
     env_file:
       - ./.env
     ports:

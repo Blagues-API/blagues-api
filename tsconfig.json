@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es2018",
+    "rootDir": "./",
+    "target": "esnext",
+    "allowJs": true,
+    "checkJs": false,
     "module": "commonjs",
     "moduleResolution": "node",
     "declaration": true,
@@ -11,12 +14,13 @@
     "esModuleInterop": true,
     "removeComments": true,
     "newLine": "lf",
+    "sourceMap": true,
     "noUnusedLocals": true,
     "noFallthroughCasesInSwitch": true,
     "useDefineForClassFields": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "outDir": "./dist",
+    "outDir": "./build",
     "lib": ["esnext"]
   }
 }
