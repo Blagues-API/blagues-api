@@ -23,6 +23,7 @@ import { correctionChannel } from '../constants';
 import Command from '../lib/command';
 import clone from 'lodash/clone';
 import { ProposalType } from '@prisma/client';
+import { showDiffs } from '../utils';
 
 enum IdType {
   MESSAGE_ID,
@@ -471,8 +472,14 @@ export default class CorrectionCommand extends Command {
               name: 'Blague corrigée',
               value: stripIndents`
                 > **Type**: ${CategoriesRefs[newJoke.type]}
-                > **Blague**: ${newJoke.joke}
-                > **Réponse**: ${newJoke.answer}
+                > **Blague**: ${showDiffs(
+                  newJoke.suggestion.joke,
+                  newJoke.joke
+                )}
+                > **Réponse**: ${showDiffs(
+                  newJoke.suggestion.answer,
+                  newJoke.answer
+                )}
               `
             }
           ],

@@ -1,4 +1,5 @@
 import { InteractionReplyOptions } from 'discord.js';
+import { diffWords } from 'diff';
 
 export function interactionError(message: string): InteractionReplyOptions {
   return {
@@ -34,4 +35,13 @@ export function interactionValidate(message: string): InteractionReplyOptions {
     ],
     ephemeral: true
   };
+}
+
+export function showDiffs(oldValue: string, newValue: string): string {
+  return diffWords(oldValue, newValue)
+    .map((part) => {
+      const sep = part.added ? '__' : part.removed ? '~~' : '';
+      return `${sep}${part.value}${sep}`;
+    })
+    .join(' ');
 }
