@@ -53,12 +53,6 @@ export default {
   components: {
     DownIcon,
   },
-  props: {
-    value: {
-      type: String,
-      required: true,
-    },
-  },
   data() {
     return {
       active: false,
@@ -87,7 +81,8 @@ export default {
   },
   computed: {
     selected() {
-      return this.elements.find((element) => element.id === this.value)
+      const doc = this.$store.state.doc
+      return this.elements.find((element) => element.id === doc)
     },
     pointerPosition() {
       return this.pointer * 46
@@ -144,7 +139,7 @@ export default {
     },
     select(elementId) {
       this.deactivate()
-      this.$emit('input', elementId)
+      this.$store.commit('SET_DOC', elementId)
     },
   },
 }
