@@ -37,6 +37,11 @@ export const BadTypePayloadRequest = (key: string): Error => {
     message: `The Joke type "${key}" is not valid type`
   };
 };
+export const MissingKey: Error = {
+  status: 400,
+  error: 'Bad Request',
+  message: 'Key is missing'
+};
 export const NoContent: Error = {
   status: 404,
   error: 'Bad Request',

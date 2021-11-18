@@ -1,4 +1,4 @@
-import { FastifyInstance, FastifyRequest } from 'fastify';
+import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import {
   APIUser,
   OAuth2Routes,
@@ -12,11 +12,9 @@ import {
   JokeResponse
 } from '../controllers';
 import { Categories, CategoriesRefs } from '../typings';
-import { BadRequest, JokeNotFound, NoContent } from './Errors';
+import { BadRequest, JokeNotFound, MissingKey, NoContent } from './Errors';
 import prisma from '../prisma';
-// import { generateAPIToken, generateKey } from '../utils';
-
-const auth_uri = encodeURIComponent(`${process.env.BASE_URL}/login/callback`);
+import { generateAPIToken, generateKey } from '../utils';
 
 export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.get('/types', async (req: FastifyRequest, res) => {
@@ -84,13 +82,13 @@ export default async (fastify: FastifyInstance): Promise<void> => {
 
   fastify.get('/auth/user', async (req: DashboardAuthUser, res) => {
     try {
-      const discordUser = await got('http://discordapp.com/api/users/@me', {
+      const discordUser = await got('http://discord.com/api/v9/users/@me', {
         headers: {
-          Authorization: req.headers.Authorization
+          Authorization: req.headers.authorization
         }
       }).json<APIUser>();
       const user = await prisma.user.findUnique({
-        select: { token: true },
+        select: { token: true, token_key: true },
         where: { user_id: discordUser.id }
       });
       if (!user) {
@@ -100,7 +98,8 @@ export default async (fastify: FastifyInstance): Promise<void> => {
         id: discordUser.id,
         username: discordUser.username,
         avatar: discordUser.avatar,
-        token: user.token
+        token: user.token,
+        token_key: user.token_key
       });
     } catch (error) {
       console.error(error);
@@ -112,55 +111,73 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     Body: { code: string };
   }>;
 
-  fastify.post('/auth/token', async (req: DashboardAuthLogin) => {
-    console.log('ddd', req.body.code);
-    try {
-      const authData = await got(
-        `${OAuth2Routes.tokenURL}?grant_type=authorization_code&redirect_uri=${auth_uri}&code=${req.body.code}`,
-        {
-          method: 'POST',
-          username: process.env.CLIENT_ID,
-          password: process.env.CLIENT_SECRET,
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+  fastify.post(
+    '/auth/token',
+    async (req: DashboardAuthLogin, res: FastifyReply) => {
+      const authData = await got
+        .post(OAuth2Routes.tokenURL, {
+          form: req.body
+        })
+        .json<RESTPostOAuth2AccessTokenResult>();
+
+      const discordUser = await got('http://discord.com/api/v9/users/@me', {
+        headers: {
+          Authorization: `Bearer ${authData.access_token}`
         }
-      ).json<RESTPostOAuth2AccessTokenResult>();
-      console.log(authData);
-    } catch (error) {
-      console.error(error);
+      }).json<APIUser>();
+
+      const key = generateKey();
+      const token = generateAPIToken(discordUser.id, key, 100);
+
+      await prisma.user.upsert({
+        create: {
+          user_id: discordUser.id,
+          user_name: discordUser.username,
+          user_avatar: discordUser.avatar ?? '',
+          user_token: authData.access_token,
+          user_token_refresh: authData.refresh_token,
+          token_key: key,
+          token,
+          limit: 100
+        },
+        update: {
+          user_name: discordUser.username,
+          user_token: authData.access_token,
+          user_token_refresh: authData.refresh_token
+        },
+        where: { user_id: discordUser.id }
+      });
+
+      return res.code(200).send(authData);
     }
+  );
 
-    // console.log(authData);
+  type RegenerateRequest = FastifyRequest<{
+    Body: { key: string };
+  }>;
 
-    // const discordUser = await got('http://discordapp.com/api/users/@me', {
-    //   headers: {
-    //     Authorization: authData.access_token
-    //   }
-    // }).json<APIUser>();
+  fastify.post(
+    '/regenerate',
+    { onRequest: fastify.apiAuth },
+    async (req: RegenerateRequest, res: FastifyReply) => {
+      if (!req.body || req.body.key !== req.auth!.key) {
+        return res.code(400).send(MissingKey);
+      }
 
-    // const key = generateKey();
-    // const token = generateAPIToken(discordUser.id, key, 100);
+      const key = generateKey();
+      const token = generateAPIToken(req.auth!.user_id, key, 100);
 
-    // await prisma.user.upsert({
-    //   create: {
-    //     user_id: discordUser.id,
-    //     user_name: discordUser.username,
-    //     user_avatar: discordUser.avatar ?? '',
-    //     user_token: authData.access_token,
-    //     user_token_refresh: authData.refresh_token,
-    //     token_key: key,
-    //     token,
-    //     limit: 100
-    //   },
-    //   update: {
-    //     user_name: discordUser.username,
-    //     user_token: authData.access_token,
-    //     user_token_refresh: authData.refresh_token
-    //   },
-    //   where: { user_id: discordUser.id }
-    // });
+      await prisma.user.update({
+        data: {
+          token_key: key,
+          token: token
+        },
+        where: { user_id: req.auth!.user_id }
+      });
 
-    // return res.code(200).send(authData);
-  });
+      return res.code(200).send({ token, key });
+    }
+  );
 
   fastify.get('*', async () => {
     return 'Check documentation: https://www.blagues-api.fr/';
