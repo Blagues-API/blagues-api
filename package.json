@@ -22,7 +22,8 @@
     "dev:migrate": "docker exec -it blagues_api_dev npx prisma migrate dev",
     "dev:generate": "docker exec -it blagues_api_dev npx prisma generate",
     "db:migrate": "docker exec -it blagues_api npx prisma migrate deploy",
-    "db:generate": "docker exec -it blagues_api npx prisma generate"
+    "db:generate": "docker exec -it blagues_api npx prisma generate",
+    "nuxt:build": "nuxt build ./src/nuxt"
   },
   "lint-staged": {
     "*.{js}": "eslint"
@@ -33,11 +34,13 @@
     "@commitlint/config-conventional": "^14.1.0",
     "@nuxt/types": "^2.15.8",
     "@nuxtjs/composition-api": "^0.30.0",
+    "@nuxtjs/device": "^2.1.0",
     "@nuxtjs/eslint-config": "^6.0.1",
     "@nuxtjs/eslint-module": "^3.0.2",
     "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/stylelint-module": "^4.0.0",
     "@types/common-tags": "^1.8.1",
+    "@types/diff": "^5.0.1",
     "@types/dotenv": "^8.2.0",
     "@types/jsonwebtoken": "^8.5.5",
     "@types/lodash": "^4.14.176",
@@ -73,6 +76,7 @@
     "body-scroll-lock": "^4.0.0-beta.0",
     "common-tags": "^1.8.0",
     "dayjs": "^1.10.7",
+    "diff": "^5.0.0",
     "discord-api-types": "^0.24.0",
     "discord.js": "^13.3.1",
     "dotenv": "^10.0.0",
