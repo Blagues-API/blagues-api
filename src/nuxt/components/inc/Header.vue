@@ -8,7 +8,7 @@
     <div class="navigation" :class="{ open }">
       <a
         class="item"
-        href="https://github.com/DraftProducts/blagues-api"
+        href="https://github.com/Blagues-API/blagues-api"
         title="Github de Blagues API"
       >
         GITHUB
@@ -24,7 +24,7 @@
         <div
           class="avatar"
           :style="{
-            'background-image': `url('${$auth.user.avatar}')`,
+            'background-image': `url(https://cdn.discordapp.com/avatars/${$auth.user.id}/${$auth.user.avatar}?size=64)`,
           }"
         />
         <span class="username">{{ $auth.user.username }}</span>
@@ -33,7 +33,7 @@
         v-else
         class="item rounded"
         title="Connexion Discord"
-        @click="$auth.loginWith('discord')"
+        @click="$auth.loginWith('discord', { params: { prompt: 'none' } })"
       >
         CONNEXION
       </span>
@@ -64,8 +64,10 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
   background-color: var(--secondary);
   padding: 16px 20px;
+  z-index: 3;
   .brand {
     display: flex;
     align-items: center;
