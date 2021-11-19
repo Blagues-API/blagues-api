@@ -8,10 +8,6 @@
     "commitMessageTopic": "{{prettyDepType}} {{depName}}",
     "packageRules": [
       {
-        "matchDatasources": ["npm"],
-        "stabilityDays": 3
-      },
-      {
         "matchPackagePatterns": [
           "eslint",
           "prettier",
