@@ -43,7 +43,7 @@
     "@types/diff": "^5.0.1",
     "@types/dotenv": "^8.2.0",
     "@types/jsonwebtoken": "^8.5.5",
-    "@types/lodash": "^4.14.176",
+    "@types/lodash": "^4.14.177",
     "@types/node": "^16.11.7",
     "@types/sharp": "^0.29.4",
     "@types/string-similarity": "^4.0.0",
