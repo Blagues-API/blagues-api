@@ -17,7 +17,7 @@ services:
 
   postgres:
     container_name: blagues_api_postgres
-    image: 'postgres:13'
+    image: 'postgres:14'
     volumes:
       - ./database:/var/lib/postgresql/data
     env_file:
