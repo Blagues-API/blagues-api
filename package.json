@@ -45,7 +45,7 @@
     "@types/jsonwebtoken": "^8.5.5",
     "@types/lodash": "^4.14.176",
     "@types/node": "^16.11.7",
-    "@types/sharp": "^0.29.3",
+    "@types/sharp": "^0.29.4",
     "@types/string-similarity": "^4.0.0",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.3.1",
