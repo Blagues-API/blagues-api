@@ -83,7 +83,7 @@
     "fastify": "^3.23.1",
     "fastify-formbody": "^5.1.0",
     "fastify-plugin": "^3.0.0",
-    "got": "^11.8.2",
+    "got": "^11.8.3",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
     "nuxt": "^2.15.8",
