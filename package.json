@@ -42,7 +42,7 @@
     "@types/common-tags": "^1.8.1",
     "@types/diff": "^5.0.1",
     "@types/dotenv": "^8.2.0",
-    "@types/jsonwebtoken": "^8.5.5",
+    "@types/jsonwebtoken": "^8.5.6",
     "@types/lodash": "^4.14.177",
     "@types/node": "^16.11.7",
     "@types/sharp": "^0.29.4",
