@@ -8,23 +8,13 @@ import {
   MessageEmbedOptions,
   TextChannel
 } from 'discord.js';
-import { constants as fsConstants, promises as fs } from 'fs';
-import path from 'path';
 import prisma from '../../prisma';
-import { CategoriesRefs, Category, Joke } from '../../typings';
-import {
-  correctionChannel,
-  logsChannel,
-  neededApprovals,
-  suggestsChannel
-} from '../constants';
+import { CategoriesRefs, Category } from '../../typings';
+import { correctionsChannel, logsChannel, neededApprovals, suggestsChannel } from '../constants';
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../lib/godfathers';
-import {
-  interactionError,
-  interactionInfo,
-  interactionValidate
-} from '../utils';
+import { interactionError, interactionInfo, interactionValidate } from '../utils';
+import Jokes from '../../jokes';
 
 type Correction = Proposal & {
   suggestion: Proposal & {
@@ -47,22 +37,20 @@ export default class ApproveCommand extends Command {
   async run(interaction: CommandInteraction): Promise<void> {
     const channel = (interaction.channel as TextChannel)!;
     const isSuggestion = channel.id === suggestsChannel;
-    const message = await channel.messages.fetch(
-      (interaction as ContextMenuInteraction).targetId
-    );
-    if (![suggestsChannel, correctionChannel].includes(channel.id)) {
+    const message = await channel.messages.fetch((interaction as ContextMenuInteraction).targetId);
+    if (![suggestsChannel, correctionsChannel].includes(channel.id)) {
       return interaction.reply(
         interactionError(
-          `Vous ne pouvez pas approuver une blague ou une correction en dehors des salons <#${suggestsChannel}> et <#${correctionChannel}>.`
+          `Vous ne pouvez pas approuver une blague ou une correction en dehors des salons <#${suggestsChannel}> et <#${correctionsChannel}>.`
         )
       );
     }
     if (message.author.id !== interaction.client.user!.id) {
       return interaction.reply(
         interactionError(
-          `Vous ne pouvez pas approuver une ${
-            isSuggestion ? 'blague' : 'correction'
-          } qui n'est pas gérée par ${interaction.client.user}.`
+          `Vous ne pouvez pas approuver une ${isSuggestion ? 'blague' : 'correction'} qui n'est pas gérée par ${
+            interaction.client.user
+          }.`
         )
       );
     }
@@ -126,60 +114,41 @@ export default class ApproveCommand extends Command {
     // }
 
     if (proposal.merged) {
-      return interaction.reply(
-        interactionError(
-          `Cette ${isSuggestion ? 'blague' : 'correction'} a déjà été ajoutée.`
-        )
-      );
+      return interaction.reply(interactionError(`Cette ${isSuggestion ? 'blague' : 'correction'} a déjà été ajoutée.`));
     }
 
     if (proposal.refused) {
-      return interaction.reply(
-        interactionError(
-          `Cette ${isSuggestion ? 'blague' : 'correction'} a déjà été refusée.`
-        )
-      );
+      return interaction.reply(interactionError(`Cette ${isSuggestion ? 'blague' : 'correction'} a déjà été refusée.`));
     }
 
-    const correction =
-      proposal.type === ProposalType.SUGGESTION && proposal.corrections[0];
+    const correction = proposal.type === ProposalType.SUGGESTION && proposal.corrections[0];
     if (correction && !correction.merged) {
       return interaction.reply(
         interactionInfo(
           `Il semblerait qu'une [correction ai été proposée](https://discord.com/channels/${
             interaction.guild!.id
-          }/${correctionChannel}/${
+          }/${correctionsChannel}/${
             correction.message_id
           }), veuillez l'approuver avant l'approbation de cette suggestion.`
         )
       );
     }
 
-    const lastCorrection =
-      proposal.type !== ProposalType.SUGGESTION &&
-      proposal.suggestion!.corrections[0];
+    const lastCorrection = proposal.type !== ProposalType.SUGGESTION && proposal.suggestion!.corrections[0];
     if (lastCorrection && lastCorrection.id !== proposal.id) {
       return interaction.reply(
         interactionInfo(`
           Il semblerait qu'une [correction ai été ajoutée](https://discord.com/channels/${
             interaction.guild!.id
-          }/${correctionChannel}/${
+          }/${correctionsChannel}/${
           lastCorrection.message_id
         }) par dessus rendant celle ci obselette, veuillez approuver la dernière version de la correction.`)
       );
     }
 
-    if (
-      proposal.approvals.some(
-        (approval) => approval.user_id === interaction.user.id
-      )
-    ) {
+    if (proposal.approvals.some((approval) => approval.user_id === interaction.user.id)) {
       return interaction.reply(
-        interactionInfo(
-          `Vous avez déjà approuvé cette ${
-            isSuggestion ? 'blague' : 'correction'
-          }.`
-        )
+        interactionInfo(`Vous avez déjà approuvé cette ${isSuggestion ? 'blague' : 'correction'}.`)
       );
     }
 
@@ -210,31 +179,20 @@ export default class ApproveCommand extends Command {
     const godfathers = await renderGodfatherLine(interaction, proposal);
 
     if (proposal.type === ProposalType.SUGGESTION) {
-      embed.description = `${
-        embed.description!.split('\n\n')[0]
-      }\n\n${godfathers}`;
+      embed.description = `${embed.description!.split('\n\n')[0]}\n\n${godfathers}`;
     } else {
-      embed.fields[1].value = `${
-        embed.fields[1].value.split('\n\n')[0]
-      }\n\n${godfathers}`;
+      embed.fields[1].value = `${embed.fields[1].value.split('\n\n')[0]}\n\n${godfathers}`;
     }
 
     if (proposal.approvals.length < neededApprovals) {
       await message.edit({ embeds: [embed] });
 
-      return interaction.reply(
-        interactionValidate(`Votre approbation a été prise en compte !`)
-      );
+      return interaction.reply(interactionValidate(`Votre approbation a été prise en compte !`));
     }
 
     return proposal.type === ProposalType.SUGGESTION
       ? this.approveSuggestion(interaction, proposal, message, embed)
-      : this.approveCorrection(
-          interaction,
-          proposal as Correction,
-          message,
-          embed
-        );
+      : this.approveCorrection(interaction, proposal as Correction, message, embed);
   }
 
   async approveSuggestion(
@@ -243,11 +201,9 @@ export default class ApproveCommand extends Command {
     message: Message,
     embed: MessageEmbed
   ): Promise<void> {
-    const logs = interaction.client.channels.cache.get(
-      logsChannel
-    ) as TextChannel;
+    const logs = interaction.client.channels.cache.get(logsChannel) as TextChannel;
 
-    const { success, joke_id } = await this.mergeJoke(interaction, proposal);
+    const { success, joke_id } = await Jokes.mergeJoke(proposal);
     if (!success) return;
 
     await prisma.proposal.updateMany({
@@ -269,9 +225,7 @@ export default class ApproveCommand extends Command {
 
     await message.edit({ embeds: [embed] });
 
-    return interaction.reply(
-      interactionValidate(`La suggestion a bien été ajoutée à l'API !`)
-    );
+    return interaction.reply(interactionValidate(`La suggestion a bien été ajoutée à l'API !`));
   }
 
   async approveCorrection(
@@ -280,22 +234,18 @@ export default class ApproveCommand extends Command {
     message: Message,
     embed: MessageEmbed
   ): Promise<void> {
-    const logs = interaction.client.channels.cache.get(
-      logsChannel
-    ) as TextChannel;
-    const channel = interaction.client.channels.cache.get(
-      suggestsChannel
-    ) as TextChannel;
+    const logs = interaction.client.channels.cache.get(logsChannel) as TextChannel;
+    const channel = interaction.client.channels.cache.get(suggestsChannel) as TextChannel;
     const isJokeCorrection = proposal.type === ProposalType.CORRECTION;
     const suggestionMessage =
       proposal.suggestion.message_id &&
-      (await channel.messages
-        .fetch(proposal.suggestion.message_id)
-        .catch(() => null));
+      (await channel.messages.fetch(proposal.suggestion.message_id).catch(() => null));
 
     if (isJokeCorrection) {
-      const { success } = await this.mergeJoke(interaction, proposal);
+      const { success } = await Jokes.mergeJoke(proposal);
       if (!success) return;
+
+      interaction.client.refreshStatus();
     }
 
     await prisma.proposal.update({
@@ -320,17 +270,12 @@ export default class ApproveCommand extends Command {
     embed.color = 0x00ff00;
     embed.fields[1].value = embed.fields[1].value!.split('\n\n')[0];
     embed.footer = {
-      text: `Correction migrée vers la ${
-        isJokeCorrection ? 'blague' : 'suggestion'
-      }`
+      text: `Correction migrée vers la ${isJokeCorrection ? 'blague' : 'suggestion'}`
     };
 
     await message.edit({ embeds: [embed] });
     if (suggestionMessage) {
-      const godfathers = await renderGodfatherLine(
-        interaction,
-        proposal.suggestion
-      );
+      const godfathers = await renderGodfatherLine(interaction, proposal.suggestion);
 
       await suggestionMessage.edit({
         embeds: [
@@ -347,60 +292,6 @@ export default class ApproveCommand extends Command {
         ]
       });
     }
-    return interaction.reply(
-      interactionValidate(`La correction a bien été migrée vers la blague !`)
-    );
-  }
-
-  async mergeJoke(
-    interaction: CommandInteraction,
-    proposal: Proposal
-  ): Promise<{ success: boolean; joke_id?: number }> {
-    const jokesPath = path.join(__dirname, '../../../blagues.json');
-    try {
-      await fs.access(jokesPath, fsConstants.R_OK | fsConstants.W_OK);
-    } catch (error) {
-      console.log('Missing access', error);
-      await interaction.reply(
-        interactionError(
-          `Il semblerait que le fichier de blagues soit inaccessible ou innexistant.`
-        )
-      );
-      return { success: false };
-    }
-
-    try {
-      const rawData = await fs.readFile(jokesPath, 'utf-8');
-      const data = (rawData.length ? JSON.parse(rawData) : []) as Joke[];
-
-      const index =
-        proposal.type === 'CORRECTION'
-          ? data.findIndex((joke) => joke.id === proposal.joke_id!)
-          : data.length;
-      const joke_id =
-        proposal.type === 'CORRECTION'
-          ? proposal.joke_id!
-          : data[data.length - 1].id + 1;
-      const joke = {
-        id: joke_id,
-        type: proposal.joke_type,
-        joke: proposal.joke_question,
-        answer: proposal.joke_answer
-      } as Joke;
-      data.splice(index, proposal.type === 'CORRECTION' ? 1 : 0, joke);
-
-      await fs.writeFile(jokesPath, JSON.stringify(data, null, 2));
-
-      return { success: true, joke_id };
-    } catch (error) {
-      console.log('Error:', error);
-
-      await interaction.reply(
-        interactionError(
-          `Une erreur s'est produite lors de l'ajout de la blague.`
-        )
-      );
-      return { success: false };
-    }
+    return interaction.reply(interactionValidate(`La correction a bien été migrée vers la blague !`));
   }
 }
