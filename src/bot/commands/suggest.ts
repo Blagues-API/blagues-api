@@ -68,29 +68,19 @@ export default class SuggestCommand extends Command {
       (interaction.options.get('joke')!.value as string).length > 130 ||
       (interaction.options.get('response')!.value as string).length > 130
     ) {
-      interaction.reply(
-        interactionError(
-          "Chaque partie d'une blague ne peut pas dépasser les 130 caractères !"
-        )
-      );
+      interaction.reply(interactionError("Chaque partie d'une blague ne peut pas dépasser les 130 caractères !"));
       return;
     }
 
     const { bestMatch, bestMatchIndex } = findBestMatch(
-      `${interaction.options.get('joke')!.value} ${
-        interaction.options.get('response')!.value
-      }`,
+      `${interaction.options.get('joke')!.value} ${interaction.options.get('response')!.value}`,
       jokes.map((e) => `${e.joke} ${e.answer}`)
     );
 
     // TODO: Compare with saved updates
 
     const similarity =
-      bestMatch.rating > 0.6
-        ? bestMatch.rating > 0.8
-          ? Similarity.Same
-          : Similarity.Like
-        : Similarity.Different;
+      bestMatch.rating > 0.6 ? (bestMatch.rating > 0.8 ? Similarity.Same : Similarity.Like) : Similarity.Different;
 
     const payload = {
       type: interaction.options.get('type')!.value as Category,
@@ -121,9 +111,7 @@ export default class SuggestCommand extends Command {
               }`
             : stripIndents`
               **Blague y ressemblant**
-              > **Type**: ${
-                CategoriesRefs[jokes[bestMatchIndex].type as Category]
-              }
+              > **Type**: ${CategoriesRefs[jokes[bestMatchIndex].type as Category]}
               > **Blague**: ${jokes[bestMatchIndex].joke}
               > **Réponse**: ${jokes[bestMatchIndex].answer}
             `
@@ -163,9 +151,7 @@ export default class SuggestCommand extends Command {
       });
     }
 
-    const channel: TextChannel = interaction.guild!.channels.cache.get(
-      suggestsChannel
-    ) as TextChannel;
+    const channel: TextChannel = interaction.guild!.channels.cache.get(suggestsChannel) as TextChannel;
 
     const suggestion = await channel.send({ embeds: [embed] });
 
@@ -196,8 +182,7 @@ export default class SuggestCommand extends Command {
     embed: MessageEmbedOptions
   ): Promise<ButtonInteraction | null> {
     const message = (await interaction.reply({
-      content:
-        'Êtes-vous sûr de vouloir confirmer la proposition de cette blague ?',
+      content: 'Êtes-vous sûr de vouloir confirmer la proposition de cette blague ?',
       embeds: [embed],
       components: [
         {
@@ -223,29 +208,22 @@ export default class SuggestCommand extends Command {
     return new Promise((resolve) => {
       const collector = message.createMessageComponentCollector({
         max: 1,
-        filter: (i: MessageComponentInteraction) =>
-          i.user.id === interaction.user.id
+        filter: (i: MessageComponentInteraction) => i.user.id === interaction.user.id
       });
-      collector.once(
-        'end',
-        async (
-          interactions: Collection<string, ButtonInteraction>,
-          reason: string
-        ) => {
-          const buttonInteraction = interactions.first();
-          if (!buttonInteraction) {
-            if (reason !== 'time') resolve(null);
-            if (message.deletable) await message.delete();
-            await interaction.reply({
-              content: 'Les 60 secondes sont écoulées',
-              ephemeral: true
-            });
-            return resolve(null);
-          }
-
-          return resolve(buttonInteraction);
+      collector.once('end', async (interactions: Collection<string, ButtonInteraction>, reason: string) => {
+        const buttonInteraction = interactions.first();
+        if (!buttonInteraction) {
+          if (reason !== 'time') resolve(null);
+          if (message.deletable) await message.delete();
+          await interaction.reply({
+            content: 'Les 60 secondes sont écoulées',
+            ephemeral: true
+          });
+          return resolve(null);
         }
-      );
+
+        return resolve(buttonInteraction);
+      });
     });
   }
 }

@@ -12,14 +12,8 @@ import {
 } from 'discord.js';
 import { jokeById, jokeByQuestion } from '../../controllers';
 import prisma from '../../prisma';
-import {
-  Category,
-  JokeTypesDescriptions,
-  CategoriesRefs,
-  UnsignedJoke,
-  UnsignedJokeKey
-} from '../../typings';
-import { correctionChannel } from '../constants';
+import { Category, JokeTypesDescriptions, CategoriesRefs, UnsignedJoke, UnsignedJokeKey } from '../../typings';
+import { correctionsChannel } from '../constants';
 import Command from '../lib/command';
 import clone from 'lodash/clone';
 import { ProposalType } from '@prisma/client';
@@ -67,10 +61,7 @@ export default class CorrectionCommand extends Command {
     await this.editJoke(interaction, joke, newJoke);
   }
 
-  async resolveJoke(
-    interaction: CommandInteraction,
-    query: string
-  ): Promise<JokeCorrectionPayload | null> {
+  async resolveJoke(interaction: CommandInteraction, query: string): Promise<JokeCorrectionPayload | null> {
     const joke = await this.findJoke(query);
     if (joke) return joke;
 
@@ -135,9 +126,7 @@ export default class CorrectionCommand extends Command {
       `,
       color: 'BLUE' as ColorResolvable
     };
-    const question = (await commandInteraction[
-      commandInteraction.replied ? 'editReply' : 'reply'
-    ]({
+    const question = (await commandInteraction[commandInteraction.replied ? 'editReply' : 'reply']({
       embeds: [embed],
       components: [
         new MessageActionRow({
@@ -179,34 +168,20 @@ export default class CorrectionCommand extends Command {
 
     switch (buttonInteraction.customId) {
       case 'type': {
-        const response = await this.requestTypeChange(
-          buttonInteraction,
-          commandInteraction,
-          joke
-        );
+        const response = await this.requestTypeChange(buttonInteraction, commandInteraction, joke);
         if (!response) return null;
 
         return this.requestChanges(commandInteraction, joke, true);
       }
 
       case 'question': {
-        const response = await this.requestTextChange(
-          buttonInteraction,
-          commandInteraction,
-          joke,
-          'question'
-        );
+        const response = await this.requestTextChange(buttonInteraction, commandInteraction, joke, 'question');
         if (!response) return null;
 
         return this.requestChanges(commandInteraction, response, true);
       }
       case 'answer': {
-        const response = await this.requestTextChange(
-          buttonInteraction,
-          commandInteraction,
-          joke,
-          'réponse'
-        );
+        const response = await this.requestTextChange(buttonInteraction, commandInteraction, joke, 'réponse');
         if (!response) return null;
 
         return this.requestChanges(commandInteraction, response, true);
@@ -262,20 +237,14 @@ export default class CorrectionCommand extends Command {
       });
       if (!proposal) return null;
 
-      const origin =
-        proposal.type === ProposalType.SUGGESTION
-          ? proposal
-          : proposal.suggestion!;
+      const origin = proposal.type === ProposalType.SUGGESTION ? proposal : proposal.suggestion!;
 
       return {
         id: proposal.joke_id ?? undefined,
-        type: (origin.corrections[0]?.joke_type ??
-          origin.joke_type) as Category,
+        type: (origin.corrections[0]?.joke_type ?? origin.joke_type) as Category,
         joke: (origin.corrections[0]?.joke_question ?? origin.joke_question)!,
         answer: (origin.corrections[0]?.joke_answer ?? origin.joke_answer)!,
-        correction_type: origin.merged
-          ? ProposalType.CORRECTION
-          : ProposalType.SUGGESTION_CORRECTION,
+        correction_type: origin.merged ? ProposalType.CORRECTION : ProposalType.SUGGESTION_CORRECTION,
         suggestion: {
           proposal_id: proposal.id,
           type: proposal.joke_type as Category,
@@ -285,10 +254,7 @@ export default class CorrectionCommand extends Command {
       };
     }
 
-    const joke =
-      idType === IdType.JOKE_ID
-        ? jokeById(Number(query))
-        : jokeByQuestion(query);
+    const joke = idType === IdType.JOKE_ID ? jokeById(Number(query)) : jokeByQuestion(query);
     if (!joke) return null;
 
     const proposal = await prisma.proposal.upsert({
@@ -433,11 +399,7 @@ export default class CorrectionCommand extends Command {
     oldJoke: JokeCorrectionPayload,
     newJoke: JokeCorrectionPayload
   ): Promise<void> {
-    if (
-      !(['type', 'joke', 'answer'] as UnsignedJokeKey[]).some(
-        (key) => newJoke[key] !== oldJoke[key]
-      )
-    ) {
+    if (!(['type', 'joke', 'answer'] as UnsignedJokeKey[]).some((key) => newJoke[key] !== oldJoke[key])) {
       await commandInteraction.editReply({
         content: "Aucun élément n'a été modifié",
         embeds: []
@@ -445,9 +407,7 @@ export default class CorrectionCommand extends Command {
       return;
     }
 
-    const channel: TextChannel = commandInteraction.client.channels.cache.get(
-      correctionChannel
-    ) as TextChannel;
+    const channel: TextChannel = commandInteraction.client.channels.cache.get(correctionsChannel) as TextChannel;
 
     const message = await channel.send({
       embeds: [
@@ -472,14 +432,8 @@ export default class CorrectionCommand extends Command {
               name: 'Blague corrigée',
               value: stripIndents`
                 > **Type**: ${CategoriesRefs[newJoke.type]}
-                > **Blague**: ${showDiffs(
-                  newJoke.suggestion.joke,
-                  newJoke.joke
-                )}
-                > **Réponse**: ${showDiffs(
-                  newJoke.suggestion.answer,
-                  newJoke.answer
-                )}
+                > **Blague**: ${showDiffs(newJoke.suggestion.joke, newJoke.joke)}
+                > **Réponse**: ${showDiffs(newJoke.suggestion.answer, newJoke.answer)}
               `
             }
           ],
@@ -510,7 +464,7 @@ export default class CorrectionCommand extends Command {
         {
           description: `Votre [proposition de correction](https://discord.com/channels/${
             commandInteraction.guild!.id
-          }/${correctionChannel}/${message.id}) a bien été envoyée !`,
+          }/${correctionsChannel}/${message.id}) a bien été envoyée !`,
           color: 'GREEN'
         }
       ],

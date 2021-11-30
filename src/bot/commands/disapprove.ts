@@ -1,24 +1,10 @@
 import { Proposal, ProposalType } from '@prisma/client';
-import {
-  CommandInteraction,
-  ContextMenuInteraction,
-  Message,
-  MessageEmbed,
-  TextChannel
-} from 'discord.js';
+import { CommandInteraction, ContextMenuInteraction, Message, MessageEmbed, TextChannel } from 'discord.js';
 import prisma from '../../prisma';
-import {
-  correctionChannel,
-  neededApprovals,
-  suggestsChannel
-} from '../constants';
+import { correctionsChannel, neededApprovals, suggestsChannel } from '../constants';
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../lib/godfathers';
-import {
-  interactionError,
-  interactionInfo,
-  interactionValidate
-} from '../utils';
+import { interactionError, interactionInfo, interactionValidate } from '../utils';
 
 export default class DisapproveCommand extends Command {
   constructor() {
@@ -32,22 +18,20 @@ export default class DisapproveCommand extends Command {
   async run(interaction: CommandInteraction): Promise<void> {
     const channel = (interaction.channel as TextChannel)!;
     const isSuggestion = channel.id === suggestsChannel;
-    const message = await channel.messages.fetch(
-      (interaction as ContextMenuInteraction).targetId
-    );
-    if (![suggestsChannel, correctionChannel].includes(channel.id)) {
+    const message = await channel.messages.fetch((interaction as ContextMenuInteraction).targetId);
+    if (![suggestsChannel, correctionsChannel].includes(channel.id)) {
       return interaction.reply(
         interactionError(
-          `Vous ne pouvez pas désapprouver une blague ou une correction en dehors des salons <#${suggestsChannel}> et <#${correctionChannel}>.`
+          `Vous ne pouvez pas désapprouver une blague ou une correction en dehors des salons <#${suggestsChannel}> et <#${correctionsChannel}>.`
         )
       );
     }
     if (message.author.id !== interaction.client.user!.id) {
       return interaction.reply(
         interactionError(
-          `Vous ne pouvez pas désapprouver une ${
-            isSuggestion ? 'blague' : 'correction'
-          } qui n'est pas gérée par ${interaction.client.user}.`
+          `Vous ne pouvez pas désapprouver une ${isSuggestion ? 'blague' : 'correction'} qui n'est pas gérée par ${
+            interaction.client.user
+          }.`
         )
       );
     }
@@ -109,66 +93,45 @@ export default class DisapproveCommand extends Command {
     // }
 
     if (proposal.merged) {
-      return interaction.reply(
-        interactionError(
-          `Cette ${isSuggestion ? 'blague' : 'correction'} a déjà été ajoutée.`
-        )
-      );
+      return interaction.reply(interactionError(`Cette ${isSuggestion ? 'blague' : 'correction'} a déjà été ajoutée.`));
     }
 
     if (proposal.refused) {
-      return interaction.reply(
-        interactionError(
-          `Cette ${isSuggestion ? 'blague' : 'correction'} a déjà été refusée.`
-        )
-      );
+      return interaction.reply(interactionError(`Cette ${isSuggestion ? 'blague' : 'correction'} a déjà été refusée.`));
     }
 
-    const correction =
-      proposal.type === ProposalType.SUGGESTION && proposal.corrections[0];
+    const correction = proposal.type === ProposalType.SUGGESTION && proposal.corrections[0];
     if (correction && !correction.merged) {
       return interaction.reply(
         interactionInfo(
           `Il semblerait qu'une [correction ai été proposée](https://discord.com/channels/${
             interaction.guild!.id
-          }/${correctionChannel}/${
+          }/${correctionsChannel}/${
             correction.message_id
           }), veuillez la désapprouver avant l'approbation de cette suggestion.`
         )
       );
     }
 
-    const lastCorrection =
-      proposal.type !== ProposalType.SUGGESTION &&
-      proposal.suggestion!.corrections[0];
+    const lastCorrection = proposal.type !== ProposalType.SUGGESTION && proposal.suggestion!.corrections[0];
     if (lastCorrection && lastCorrection.id !== proposal.id) {
       return interaction.reply(
         interactionInfo(`
           Il semblerait qu'une [correction ai été ajoutée](https://discord.com/channels/${
             interaction.guild!.id
-          }/${correctionChannel}/${
+          }/${correctionsChannel}/${
           lastCorrection.message_id
         }) par dessus rendant celle ci obselette, veuillez désapprouver la dernière version de la correction.`)
       );
     }
 
-    if (
-      proposal.disapprovals.some(
-        (disapproval) => disapproval.user_id === interaction.user.id
-      )
-    ) {
+    if (proposal.disapprovals.some((disapproval) => disapproval.user_id === interaction.user.id)) {
       return interaction.reply(
-        interactionInfo(
-          `Vous avez déjà désapprouvé cette ${
-            isSuggestion ? 'blague' : 'correction'
-          }.`
-        )
+        interactionInfo(`Vous avez déjà désapprouvé cette ${isSuggestion ? 'blague' : 'correction'}.`)
       );
     }
 
-    const approvalIndex = proposal.approvals.findIndex(
-      (approval) => approval.user_id === interaction.user.id
-    );
+    const approvalIndex = proposal.approvals.findIndex((approval) => approval.user_id === interaction.user.id);
     if (approvalIndex !== -1) {
       proposal.approvals.splice(approvalIndex, 1);
       await prisma.approval.delete({
@@ -193,21 +156,15 @@ export default class DisapproveCommand extends Command {
     const godfathers = await renderGodfatherLine(interaction, proposal);
 
     if (proposal.type === ProposalType.SUGGESTION) {
-      embed.description = `${
-        embed.description!.split('\n\n')[0]
-      }\n\n${godfathers}`;
+      embed.description = `${embed.description!.split('\n\n')[0]}\n\n${godfathers}`;
     } else {
-      embed.fields[1].value = `${
-        embed.fields[1].value.split('\n\n')[0]
-      }\n\n${godfathers}`;
+      embed.fields[1].value = `${embed.fields[1].value.split('\n\n')[0]}\n\n${godfathers}`;
     }
 
     if (proposal.disapprovals.length < neededApprovals) {
       await message.edit({ embeds: [embed] });
 
-      return interaction.reply(
-        interactionValidate(`Votre désapprobation a été prise en compte !`)
-      );
+      return interaction.reply(interactionValidate(`Votre désapprobation a été prise en compte !`));
     }
 
     return this.disapprove(interaction, proposal, message, embed);
@@ -241,9 +198,7 @@ export default class DisapproveCommand extends Command {
     await message.reactions.removeAll();
 
     return interaction.reply(
-      interactionValidate(
-        `La ${isSuggestion ? 'suggestion' : 'correction'} a bien été refusée !`
-      )
+      interactionValidate(`La ${isSuggestion ? 'suggestion' : 'correction'} a bien été refusée !`)
     );
   }
 }

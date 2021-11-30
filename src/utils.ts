@@ -7,11 +7,7 @@ export const random = (items: any[]): any => {
   return items[Math.floor(Math.random() * items.length)];
 };
 
-export const generateAPIToken = (
-  userId: Snowflake,
-  key: string,
-  limit: number
-) => {
+export const generateAPIToken = (userId: Snowflake, key: string, limit: number) => {
   return jwt.sign(
     {
       user_id: userId,
@@ -25,8 +21,7 @@ export const generateAPIToken = (
 
 export const generateKey = () => {
   let result = '';
-  const characters =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   const charactersLength = characters.length;
   for (let i = 0; i < 50; i++) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));

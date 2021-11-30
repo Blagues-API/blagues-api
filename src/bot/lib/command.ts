@@ -28,9 +28,7 @@ export default class Command {
     this.parrainOnly = data.parrainOnly ?? false;
   }
 
-  public get data():
-    | ChatInputApplicationCommandData
-    | MessageApplicationCommandData {
+  public get data(): ChatInputApplicationCommandData | MessageApplicationCommandData {
     if (this.raw.type === 'CHAT_INPUT') {
       return {
         name: this.name,

@@ -20,12 +20,7 @@ export default class Dispatcher {
   }
 
   public get commands(): Command[] {
-    return [
-      new SuggestCommand(),
-      new CorrectCommand(),
-      new ApproveCommand(),
-      new DisapproveCommand()
-    ];
+    return [new SuggestCommand(), new CorrectCommand(), new ApproveCommand(), new DisapproveCommand()];
   }
 
   public get commandsData(): ApplicationCommandData[] {
@@ -37,9 +32,7 @@ export default class Dispatcher {
   }
 
   public async execute(interaction: CommandInteraction): Promise<void> {
-    const command = this.commands.find(
-      (cmd: Command) => cmd.name === interaction.commandName
-    );
+    const command = this.commands.find((cmd: Command) => cmd.name === interaction.commandName);
 
     if (!command) {
       await interaction.reply('Commande innexistante !');
@@ -62,9 +55,7 @@ export default class Dispatcher {
     const registredCommands = await guild.commands.set(this.commandsData);
     await guild.commands.permissions.set({
       fullPermissions: this.commandsPermissions.map((command: Command) => {
-        const registredCommand = registredCommands.find(
-          (c: ApplicationCommand) => c.name === command.name
-        );
+        const registredCommand = registredCommands.find((c: ApplicationCommand) => c.name === command.name);
         return {
           id: registredCommand!.id,
           permissions: command.permissions
