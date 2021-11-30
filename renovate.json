@@ -1,7 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "description": "Blagues API renovate config",
-  "extends": ["config:base", ":semanticCommitTypeAll(chore)"],
+  "extends": ["config:base"],
   "rangeStrategy": "bump",
   "assignees": ["draftproducts"],
   "npm": {
