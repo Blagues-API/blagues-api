@@ -1,8 +1,6 @@
-import data from '../blagues.json';
+import Jokes from './jokes';
 import { Joke, Categories, Category } from './typings';
 import { random } from './utils';
-
-const jokes = data as Joke[];
 
 export interface JokeResponse {
   error: boolean;
@@ -25,9 +23,7 @@ export function randomJoke(disallow?: string[]): JokeResponse {
   return {
     error: false,
     response: random(
-      typesForbidden.length
-        ? jokes.filter((joke: Joke) => !typesForbidden.includes(joke.type))
-        : jokes
+      typesForbidden.length ? Jokes.list.filter((joke: Joke) => !typesForbidden.includes(joke.type)) : Jokes.list
     )
   };
 }
@@ -41,18 +37,14 @@ export function randomJokeByType(type: string): JokeResponse {
 
   return {
     error: false,
-    response: random(jokes.filter((joke: Joke) => joke.type === type))
+    response: random(Jokes.list.filter((joke: Joke) => joke.type === type))
   };
 }
 
 export function jokeById(id: number): Joke | null {
-  return jokes.find((joke: Joke) => joke.id === id) ?? null;
+  return Jokes.list.find((joke: Joke) => joke.id === id) ?? null;
 }
-
-export const jokesCount = jokes.length;
 
 export function jokeByQuestion(question: string): Joke | null {
-  return jokes.find((entry: Joke) => entry.joke === question) ?? null;
+  return Jokes.list.find((entry: Joke) => entry.joke === question) ?? null;
 }
-
-export const jokesFile = jokes;
