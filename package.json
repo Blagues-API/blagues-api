@@ -15,7 +15,9 @@
     "dev:down": "docker-compose -p blagues_api_dev -f ./docker-compose.dev.yml down",
     "dev:shell": "docker exec -it blagues_api_dev bash",
     "prepare": "husky install",
-    "lint:nuxt": "eslint --ext .ts,.js,.vue ./src/nuxt",
+    "lint:nuxt": "npm run lint:nuxt:js && npm run lint:nuxt:style",
+    "lint:nuxt:js": "eslint --ext .ts,.js,.vue ./src/nuxt",
+    "lint:nuxt:style": "stylelint \"**/*.{vue,css}\" --ignore-path .gitignore",
     "lint:bot": "eslint --ext .ts,.js ./src/bot",
     "lint:fastify": "eslint --ext .ts,.js ./src/api",
     "lint": "npm run lint:nuxt && npm run lint:fastify && npm run lint:bot",
@@ -26,7 +28,8 @@
     "nuxt:build": "nuxt build ./src/nuxt"
   },
   "lint-staged": {
-    "*.{js}": "eslint"
+    "*.{js,vue}": "eslint",
+    "*.{css,vue}": "stylelint"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.16.3",
@@ -63,7 +66,9 @@
     "stylelint": "^14.1.0",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard": "^24.0.0",
-    "stylelint-scss": "^4.0.0",
+    "stylelint-config-property-sort-order-smacss": "^8.0.0",
+    "stylelint-config-recommended-vue": "^1.1.0",
+    "stylelint-config-standard-scss": "^3.0.0",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.2"
   },
@@ -72,6 +77,7 @@
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/svg": "^0.3.0",
     "@prisma/client": "^3.5.0",
+    "@sapphire/async-queue": "^1.1.9",
     "babel-plugin-prismjs": "^2.1.0",
     "body-scroll-lock": "^4.0.0-beta.0",
     "common-tags": "^1.8.2",
