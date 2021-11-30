@@ -6,8 +6,15 @@ import { Categories, CategoriesRefs } from '../typings';
 import { BadRequest, JokeNotFound, MissingKey, NoContent } from './Errors';
 import prisma from '../prisma';
 import { generateAPIToken, generateKey } from '../utils';
+import Jokes from '../jokes';
 
 export default async (fastify: FastifyInstance): Promise<void> => {
+  fastify.get('/count', async (req: FastifyRequest, res) => {
+    return res.code(200).send({
+      count: Jokes.count
+    });
+  });
+
   fastify.get('/types', async (req: FastifyRequest, res) => {
     return res.code(200).send({
       count: Categories.length,
