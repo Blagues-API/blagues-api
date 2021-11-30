@@ -2,44 +2,29 @@ code[class*='language-'],
 pre[class*='language-'] {
   color: #839496; /* base0 */
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  line-height: 1.5;
   text-align: left;
+  word-wrap: normal;
+  word-break: normal;
   white-space: pre;
   word-spacing: normal;
-  word-break: normal;
-  word-wrap: normal;
-
-  line-height: 1.5;
-
-  -moz-tab-size: 4;
-  -o-tab-size: 4;
-  tab-size: 4;
-
-  -webkit-hyphens: none;
-  -moz-hyphens: none;
-  -ms-hyphens: none;
   hyphens: none;
+  tab-size: 4;
 }
 
 pre[class*='language-']::-webkit-scrollbar {
-  -webkit-appearance: none;
-  background-color: var(--secondary);
   height: 8px;
+  background-color: var(--secondary);
+  appearance: none;
 }
 
 pre[class*='language-']::-webkit-scrollbar-thumb {
-  background-color: var(--primary);
   transition: background-color 0.2s ease;
+  background-color: var(--primary);
 }
 
 pre[class*='language-']::-webkit-scrollbar-thumb:hover {
   background-color: var(--primary-dark);
-}
-
-pre[class*='language-']::-moz-selection,
-pre[class*='language-'] ::-moz-selection,
-code[class*='language-']::-moz-selection,
-code[class*='language-'] ::-moz-selection {
-  background: #073642; /* base02 */
 }
 
 pre[class*='language-']::selection,
@@ -51,11 +36,11 @@ code[class*='language-'] ::selection {
 
 /* Code blocks */
 pre[class*='language-'] {
-  padding: 1em;
   margin: 0 0 1em;
+  padding: 1em;
+  padding-right: 45px;
   overflow: auto;
   border-radius: 0.3em;
-  padding-right: 45px;
 }
 
 pre[class*='language-']:last-child {
@@ -70,12 +55,12 @@ pre[class*='language-'] {
 code[class*='language-'] mark,
 pre[class*='language-'] mark {
   display: inline-block;
-  color: inherit;
-  background: none;
-  border: 1px solid #000;
-  box-shadow: 0 0 2px #fff;
   padding: 1px;
-  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid #000000;
+  background: none;
+  background: rgb(0 0 0 / 20%);
+  box-shadow: 0 0 2px #ffffff;
+  color: inherit;
 }
 
 /* Inline code */
@@ -121,6 +106,7 @@ pre[class*='language-'] mark {
 
 .token.entity {
   color: #2aa198; /* cyan */
+  cursor: help;
 }
 
 .token.atrule,
@@ -143,10 +129,7 @@ pre[class*='language-'] mark {
 .token.bold {
   font-weight: bold;
 }
+
 .token.italic {
   font-style: italic;
-}
-
-.token.entity {
-  cursor: help;
 }

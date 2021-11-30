@@ -103,17 +103,21 @@ nav,
 section {
   display: block;
 }
+
 body {
   line-height: 1;
 }
+
 ol,
 ul {
   list-style: none;
 }
+
 blockquote,
 q {
   quotes: none;
 }
+
 blockquote::before,
 blockquote::after,
 q::before,
@@ -121,9 +125,10 @@ q::after {
   content: '';
   content: none;
 }
+
 table {
-  border-collapse: collapse;
   border-spacing: 0;
+  border-collapse: collapse;
 }
 
 /* apply a natural box layout model to all elements */
@@ -132,8 +137,6 @@ table {
 *::after,
 *::before,
 *::after {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -142,22 +145,21 @@ input,
 button,
 textarea,
 select {
-  color: inherit;
-  font-size: inherit;
-  font-style: inherit;
-  font-family: inherit;
-  -webkit-border-radius: 0;
-  border-radius: 0;
-  -webkit-padding-start: 0;
   align-items: flex-start;
-  border: none;
-  outline: none;
-  background: none;
-  padding: 0;
-  margin: 0;
   width: auto;
   height: auto;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  background: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-style: inherit;
   line-height: 1em;
+  -webkit-padding-start: 0;
 }
 
 /* inputs appearance (not for every input)  */
@@ -183,8 +185,6 @@ button,
 textarea,
 select {
   height: 1em;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
 }
 
@@ -201,15 +201,11 @@ input::-ms-clear {
 /* details and summary */
 details,
 summary {
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
 }
 
 /* text size adjusting */
 body {
-  -webkit-text-size-adjust: 100%;
-  -moz-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
 
