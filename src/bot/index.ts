@@ -1,37 +1,38 @@
 import { Client, CommandInteraction, Intents, Interaction } from 'discord.js';
-import jokes from '../../blagues.json';
+import Jokes from '../jokes';
 import Dispatcher from './lib/dispatcher';
+import Stickys from './lib/stickys';
 
-export default class Bot {
-  public client: Client;
+export default class Bot extends Client {
   public dispatcher: Dispatcher;
+  public stickys: Stickys;
 
   constructor() {
-    this.client = new Client({
+    super({
       partials: ['REACTION'],
-      intents: Intents.FLAGS.GUILDS | Intents.FLAGS.GUILD_MESSAGES
+      intents: Intents.FLAGS.GUILDS | Intents.FLAGS.GUILD_MESSAGES,
+      presence: {
+        activities: [
+          {
+            name: `les ${Jokes.count} blagues`,
+            type: 'WATCHING'
+          }
+        ]
+      }
     });
 
-    this.dispatcher = new Dispatcher(this.client);
+    this.dispatcher = new Dispatcher(this);
+    this.stickys = new Stickys(this);
 
-    this.client.once('ready', this.onReady.bind(this));
+    this.once('ready', this.onReady.bind(this));
   }
 
   get available(): boolean {
-    return !!this.client.readyAt;
+    return !!this.readyAt;
   }
 
   async onReady(): Promise<void> {
-    console.log(`${this.client.user!.tag} connecté !`);
-
-    this.client.user!.setActivity(`les ${jokes.length} blagues`, {
-      type: 'WATCHING'
-    });
-    setInterval(() => {
-      this.client.user!.setActivity(`les ${jokes.length} blagues`, {
-        type: 'WATCHING'
-      });
-    }, 24 * 60 * 60 * 1000);
+    console.log(`${this.user!.tag} connecté !`);
 
     await this.dispatcher.register();
 
@@ -45,7 +46,13 @@ export default class Bot {
   }
 
   registerEvents(): void {
-    this.client.on('interactionCreate', this.onInteractionCreate.bind(this));
+    this.on('interactionCreate', this.onInteractionCreate.bind(this));
+  }
+
+  refreshStatus() {
+    this.user!.setActivity(`les ${Jokes.count} blagues`, {
+      type: 'WATCHING'
+    });
   }
 
   async start(): Promise<void> {
@@ -55,6 +62,14 @@ export default class Bot {
     if (!process.env.BOT_TOKEN) {
       return console.log("Bot non lancé car aucun token n'a été défini");
     }
-    await this.client.login(process.env.BOT_TOKEN);
+    await this.login(process.env.BOT_TOKEN);
+  }
+}
+
+declare module 'discord.js' {
+  interface Client {
+    dispatcher: Dispatcher;
+    stickys: Stickys;
+    refreshStatus(): void;
   }
 }
