@@ -1,4 +1,4 @@
-FROM node:17.1.0 as builder
+FROM node:17.2.0 as builder
 WORKDIR /app
 
 COPY package*.json ./
@@ -16,7 +16,7 @@ RUN npx prisma generate
 RUN npx tsc
 RUN npm run nuxt:build
 
-FROM node:17.1.0
+FROM node:17.2.0
 WORKDIR /app
 
 COPY package*.json ./
