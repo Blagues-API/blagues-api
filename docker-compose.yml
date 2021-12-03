@@ -10,7 +10,6 @@ services:
     env_file:
       - ./.env
     ports:
-      - '3000:3000'
       - '4000:4000'
     networks:
       - global
@@ -19,7 +18,7 @@ services:
     container_name: blagues_api_postgres
     image: 'postgres:13'
     volumes:
-      - ./database:/var/lib/postgresql/data
+      - ./databases/postgres:/var/lib/postgresql/data
     env_file:
       - ./.env
     ports:

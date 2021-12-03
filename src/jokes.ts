@@ -21,7 +21,7 @@ class JokesLoader {
   }
 
   private async init() {
-    const jokesPath = path.join(__dirname, '../../blagues.json');
+    const jokesPath = path.join(__dirname, '../blagues.json');
     try {
       await fs.access(jokesPath, fsConstants.R_OK | fsConstants.W_OK);
     } catch (error) {
@@ -36,7 +36,7 @@ class JokesLoader {
   }
 
   public async mergeJoke(proposal: Proposal): Promise<{ success: boolean; joke_id?: number; error?: string }> {
-    const jokesPath = path.join(__dirname, '../../blagues.json');
+    const jokesPath = path.join(__dirname, '../blagues.json');
     try {
       await fs.access(jokesPath, fsConstants.R_OK | fsConstants.W_OK);
     } catch (error) {

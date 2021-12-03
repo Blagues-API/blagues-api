@@ -3,19 +3,12 @@
   "description": "Blagues API renovate config",
   "extends": ["config:base"],
   "rangeStrategy": "bump",
-  "assignees": ["draftproducts"],
+  "assignees": ["DraftProducts"],
   "npm": {
     "commitMessageTopic": "{{prettyDepType}} {{depName}}",
     "packageRules": [
       {
-        "matchPackagePatterns": [
-          "eslint",
-          "prettier",
-          "stylelint",
-          "commitlint",
-          "lint-staged",
-          "husky"
-        ],
+        "matchPackagePatterns": ["eslint", "prettier", "commitlint", "lint-staged", "husky"],
         "groupName": "Devtools Dependencies"
       },
       {
@@ -30,7 +23,6 @@
     ]
   },
   "baseBranches": ["dev"],
-  "ignoreDeps": ["core-js", "sass", "sass-loader"],
   "lockFileMaintenance": {
     "enabled": true
   }

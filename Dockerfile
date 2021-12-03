@@ -1,22 +1,21 @@
-FROM node:17.1.0 as builder
+FROM node:17.2 as builder
 WORKDIR /app
 
-COPY package*.json ./
-COPY tsconfig.json ./
+COPY --chown=node:node package*.json ./
+COPY --chown=node:node tsconfig.json ./
 
 RUN npm install
 
-COPY ./src ./src
-COPY ./prisma ./prisma
-COPY .env .
+COPY --chown=node:node ./src ./src
+COPY --chown=node:node ./prisma ./prisma
+COPY --chown=node:node .env .
 
-COPY ./blagues.json ./
+COPY --chown=node:node ./blagues.json ./
 
 RUN npx prisma generate
 RUN npx tsc
-RUN npm run nuxt:build
 
-FROM node:17.1.0
+FROM node:17.2 as production
 WORKDIR /app
 
 COPY package*.json ./
@@ -24,18 +23,16 @@ COPY package*.json ./
 RUN npm set-script prepare ""
 RUN npm ci --production
 
-COPY ./blagues.json .
-COPY --from=builder /app/build .
-COPY --from=builder /app/prisma ./prisma
-COPY --from=builder /app/node_modules/@prisma/client/ ./node_modules/@prisma/client/
-COPY --from=builder /app/node_modules/.prisma/client/ ./node_modules/.prisma/client/
-COPY --from=builder /app/src/nuxt ./src/nuxt/
-
-RUN cp ./node_modules ./src/nuxt/node_modules
+COPY --chown=node:node ./blagues.json .
+COPY --from=builder --chown=node:node /app/build .
+COPY --from=builder --chown=node:node /app/prisma ./prisma
+COPY --from=builder --chown=node:node /app/node_modules/@prisma/client/ ./node_modules/@prisma/client/
+COPY --from=builder --chown=node:node /app/node_modules/.prisma/client/ ./node_modules/.prisma/client/
 
 ENV NODE_ENV=production
 
-EXPOSE 3000
 EXPOSE 4000
+
+USER node
 
 CMD node src/index.js

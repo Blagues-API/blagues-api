@@ -10,7 +10,7 @@ import {
   TextChannel
 } from 'discord.js';
 import { findBestMatch } from 'string-similarity';
-import jokes from '../../../blagues.json';
+import Jokes from '../../jokes';
 import { Category, CategoriesRefs, UnsignedJoke } from '../../typings';
 import { downReaction, suggestsChannel, upReaction } from '../constants';
 import Command from '../lib/command';
@@ -74,7 +74,7 @@ export default class SuggestCommand extends Command {
 
     const { bestMatch, bestMatchIndex } = findBestMatch(
       `${interaction.options.get('joke')!.value} ${interaction.options.get('response')!.value}`,
-      jokes.map((e) => `${e.joke} ${e.answer}`)
+      Jokes.list.map((entry) => `${entry.joke} ${entry.answer}`)
     );
 
     // TODO: Compare with saved updates
@@ -97,7 +97,7 @@ export default class SuggestCommand extends Command {
     if (similarity !== Similarity.Different) {
       const jokeMessage = await prisma.proposal.findUnique({
         where: {
-          joke_id: jokes[bestMatchIndex].id
+          joke_id: Jokes.list[bestMatchIndex].id
         }
       });
       description = stripIndents`
@@ -111,9 +111,9 @@ export default class SuggestCommand extends Command {
               }`
             : stripIndents`
               **Blague y ressemblant**
-              > **Type**: ${CategoriesRefs[jokes[bestMatchIndex].type as Category]}
-              > **Blague**: ${jokes[bestMatchIndex].joke}
-              > **Réponse**: ${jokes[bestMatchIndex].answer}
+              > **Type**: ${CategoriesRefs[Jokes.list[bestMatchIndex].type as Category]}
+              > **Blague**: ${Jokes.list[bestMatchIndex].joke}
+              > **Réponse**: ${Jokes.list[bestMatchIndex].answer}
             `
         }
       `;
