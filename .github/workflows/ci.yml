@@ -28,16 +28,21 @@ jobs:
           node-version: ${{ matrix.node }}
           check-latest: true
 
+      - name: Get yarn cache directory path 🛠
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
       - name: Cache node_modules 📦
-        uses: actions/cache@v2.1.7
+        uses: actions/cache@v2.1.4
+        id: yarn-cache
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-node-
+            ${{ runner.os }}-yarn-
 
       - name: Install dependencies 👨🏻‍💻
-        run: npm ci --prefer-offline --no-audit
+        run: yarn
 
       - name: Run linter 👀
-        run: npm run lint
+        run: yarn lint
