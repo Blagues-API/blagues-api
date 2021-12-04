@@ -53,7 +53,9 @@ export default class Stickys {
     const messages = await channel.messages.fetch({ limit: 10 }).catch(() => null);
     if (!messages) return;
 
-    const message = messages.find((m) => m.author.id === this.client.user!.id);
+    const message = messages.find(
+      (m) => m.author.id === this.client.user!.id && m.embeds?.[0]?.title === messagePayload.embeds?.[0]?.title
+    );
     const last_message = messages.first();
     if (!message || !last_message || message.id !== last_message.id) {
       if (message) await message.delete();
