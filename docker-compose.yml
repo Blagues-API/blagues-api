@@ -4,7 +4,7 @@ services:
     container_name: blagues_api
     build:
       context: ./
-      dockerfile: ./Dockerfile
+      dockerfile: ./docker/Dockerfile
     volumes:
       - ./blagues.json:/app/blagues.json
     env_file:
@@ -13,6 +13,17 @@ services:
       - '4000:4000'
     networks:
       - global
+
+  website:
+    container_name: blagues_api.fr
+    build:
+      context: ../blagues-api.fr/
+      dockerfile: ./docker/Dockerfile
+    tty: true
+    env_file:
+      - ../blagues-api.fr/.env
+    ports:
+      - '3000:3000'
 
   postgres:
     container_name: blagues_api_postgres
