@@ -1,10 +1,10 @@
 import { Proposal, ProposalType } from '@prisma/client';
 import { CommandInteraction, ContextMenuInteraction, Message, MessageEmbed, TextChannel } from 'discord.js';
 import prisma from '../../prisma';
-import { correctionsChannel, neededApprovals, suggestsChannel } from '../constants';
+import { correctionsChannel, logsChannel, neededApprovals, suggestsChannel } from '../constants';
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../lib/godfathers';
-import { interactionError, interactionInfo, interactionValidate } from '../utils';
+import { interactionError, interactionInfo, interactionValidate, isEmbedable } from '../utils';
 
 export default class DisapproveCommand extends Command {
   constructor() {
@@ -81,16 +81,6 @@ export default class DisapproveCommand extends Command {
       });
       return interaction.reply(interactionError(`Le message est invalide.`));
     }
-
-    // if (proposal.user_id === interaction.user.id) {
-    //   return interaction.reply(
-    //     interactionError(
-    //       `Vous ne pouvez pas désapprouver votre propre ${
-    //         isSuggestion ? 'blague' : 'correction'
-    //       }.`
-    //     )
-    //   );
-    // }
 
     if (proposal.merged) {
       return interaction.reply(interactionError(`Cette ${isSuggestion ? 'blague' : 'correction'} a déjà été ajoutée.`));
@@ -176,12 +166,20 @@ export default class DisapproveCommand extends Command {
     message: Message,
     embed: MessageEmbed
   ): Promise<void> {
+    const logs = interaction.client.channels.cache.get(logsChannel) as TextChannel;
     const isSuggestion = proposal.type === ProposalType.SUGGESTION;
 
     await prisma.proposal.update({
       data: { refused: true },
       where: { id: proposal.id }
     });
+
+    if (isEmbedable(logs)) {
+      await logs.send({
+        content: `${isSuggestion ? 'Blague' : 'Suggestion'} refusée`,
+        embeds: [embed.setColor(0x245f8d)]
+      });
+    }
 
     embed.color = 0xff0000;
     if (isSuggestion) {
