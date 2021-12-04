@@ -13,7 +13,7 @@ import { CategoriesRefs, Category } from '../../typings';
 import { correctionsChannel, logsChannel, neededApprovals, suggestsChannel } from '../constants';
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../lib/godfathers';
-import { interactionError, interactionInfo, interactionValidate } from '../utils';
+import { interactionError, interactionInfo, interactionValidate, isEmbedable } from '../utils';
 import Jokes from '../../jokes';
 
 type Correction = Proposal & {
@@ -206,6 +206,8 @@ export default class ApproveCommand extends Command {
     const { success, joke_id } = await Jokes.mergeJoke(proposal);
     if (!success) return;
 
+    interaction.client.refreshStatus();
+
     await prisma.proposal.updateMany({
       data: {
         merged: true,
@@ -262,10 +264,12 @@ export default class ApproveCommand extends Command {
       where: { id: proposal.id }
     });
 
-    await logs.send({
-      content: `${isJokeCorrection ? 'Blague' : 'Suggestion'} corrigée`,
-      embeds: [embed.setColor(0x245f8d)]
-    });
+    if (isEmbedable(logs)) {
+      await logs.send({
+        content: `${isJokeCorrection ? 'Blague' : 'Suggestion'} corrigée`,
+        embeds: [embed.setColor(0x245f8d)]
+      });
+    }
 
     embed.color = 0x00ff00;
     embed.fields[1].value = embed.fields[1].value!.split('\n\n')[0];
