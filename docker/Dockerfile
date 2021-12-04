@@ -1,10 +1,10 @@
-FROM node:17.2 as builder
+FROM node:16.13 as builder
 WORKDIR /app
 
-COPY --chown=node:node package*.json ./
+COPY --chown=node:node package.json yarn.lock ./
 COPY --chown=node:node tsconfig.json ./
 
-RUN npm install
+RUN yarn install
 
 COPY --chown=node:node ./src ./src
 COPY --chown=node:node ./prisma ./prisma
@@ -15,13 +15,13 @@ COPY --chown=node:node ./blagues.json ./
 RUN npx prisma generate
 RUN npx tsc
 
-FROM node:17.2 as production
+FROM node:16.13 as production
 WORKDIR /app
 
-COPY package*.json ./
+COPY --chown=node:node package.json yarn.lock ./
 
 RUN npm set-script prepare ""
-RUN npm ci --production
+RUN yarn install --frozen-lockfile
 
 COPY --chown=node:node ./blagues.json .
 COPY --from=builder --chown=node:node /app/build .

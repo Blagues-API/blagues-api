@@ -1,10 +1,10 @@
-FROM node:17.2
+FROM node:16.13
 WORKDIR /app
 
-COPY --chown=node:node package*.json ./
+COPY --chown=node:node package.json yarn.lock ./
 COPY --chown=node:node tsconfig.json ./
 
-RUN npm install
+RUN yarn install
 
 COPY --chown=node:node ./src ./src
 COPY --chown=node:node ./prisma ./prisma
