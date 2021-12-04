@@ -17,7 +17,7 @@ import { correctionsChannel } from '../constants';
 import Command from '../lib/command';
 import clone from 'lodash/clone';
 import { ProposalType } from '@prisma/client';
-import { showDiffs } from '../utils';
+import { interactionError, isEmbedable, showDiffs } from '../utils';
 
 enum IdType {
   MESSAGE_ID,
@@ -408,6 +408,11 @@ export default class CorrectionCommand extends Command {
     }
 
     const channel: TextChannel = commandInteraction.client.channels.cache.get(correctionsChannel) as TextChannel;
+    if (!isEmbedable(channel)) {
+      return commandInteraction.reply(
+        interactionError(`Je n'ai pas la permission d'envoyer la correction dans le salon ${channel}.`, false)
+      );
+    }
 
     const message = await channel.send({
       embeds: [

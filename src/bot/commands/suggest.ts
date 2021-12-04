@@ -14,7 +14,7 @@ import Jokes from '../../jokes';
 import { Category, CategoriesRefs, UnsignedJoke } from '../../typings';
 import { downReaction, suggestsChannel, upReaction } from '../constants';
 import Command from '../lib/command';
-import { interactionError } from '../utils';
+import { interactionError, isEmbedable } from '../utils';
 import Collection from '@discordjs/collection';
 import prisma from '../../prisma';
 import { ProposalType } from '@prisma/client';
@@ -152,6 +152,11 @@ export default class SuggestCommand extends Command {
     }
 
     const channel: TextChannel = interaction.guild!.channels.cache.get(suggestsChannel) as TextChannel;
+    if (!isEmbedable(channel)) {
+      return interaction.reply(
+        interactionError(`Je n'ai pas la permission d'envoyer la blague dans le salon ${channel}.`, false)
+      );
+    }
 
     const suggestion = await channel.send({ embeds: [embed] });
 
