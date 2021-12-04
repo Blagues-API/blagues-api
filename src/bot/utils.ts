@@ -39,8 +39,9 @@ export function interactionValidate(message: string): InteractionReplyOptions {
 
 export function showDiffs(oldValue: string, newValue: string): string {
   return diffWords(oldValue, newValue)
+    .filter((part) => !part.removed)
     .map((part) => {
-      const sep = part.added ? '__' : part.removed ? '~~' : '';
+      const sep = part.added ? '__' : '';
       return `${sep}${part.value}${sep}`;
     })
     .join(' ');
