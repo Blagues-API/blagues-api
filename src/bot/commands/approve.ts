@@ -10,11 +10,19 @@ import {
 } from 'discord.js';
 import prisma from '../../prisma';
 import { CategoriesRefs, Category } from '../../typings';
-import { correctionsChannel, logsChannel, neededApprovals, suggestsChannel } from '../constants';
+import {
+  correctionsChannel,
+  downReaction,
+  logsChannel,
+  neededApprovals,
+  suggestsChannel,
+  upReaction
+} from '../constants';
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../lib/godfathers';
 import { interactionError, interactionInfo, interactionValidate, isEmbedable } from '../utils';
 import Jokes from '../../jokes';
+import { compareTwoStrings } from 'string-similarity';
 
 type Correction = Proposal & {
   suggestion: Proposal & {
@@ -238,16 +246,29 @@ export default class ApproveCommand extends Command {
   ): Promise<void> {
     const logs = interaction.client.channels.cache.get(logsChannel) as TextChannel;
     const channel = interaction.client.channels.cache.get(suggestsChannel) as TextChannel;
-    const isJokeCorrection = proposal.type === ProposalType.CORRECTION;
+    const isPublishedJoke = proposal.type === ProposalType.CORRECTION;
     const suggestionMessage =
       proposal.suggestion.message_id &&
       (await channel.messages.fetch(proposal.suggestion.message_id).catch(() => null));
 
-    if (isJokeCorrection) {
+    if (isPublishedJoke) {
       const { success } = await Jokes.mergeJoke(proposal);
       if (!success) return;
 
       interaction.client.refreshStatus();
+    }
+
+    if (suggestionMessage) {
+      const diff = compareTwoStrings(
+        `${proposal.joke_question} ${proposal.joke_answer}`,
+        `${proposal.suggestion.joke_question} ${proposal.suggestion.joke_answer}`
+      );
+      if (diff > 0.5) {
+        await suggestionMessage.reactions.removeAll();
+        for (const reaction of [upReaction, downReaction]) {
+          await suggestionMessage.react(reaction).catch(() => null);
+        }
+      }
     }
 
     await prisma.proposal.update({
@@ -266,7 +287,7 @@ export default class ApproveCommand extends Command {
 
     if (isEmbedable(logs)) {
       await logs.send({
-        content: `${isJokeCorrection ? 'Blague' : 'Suggestion'} corrigée`,
+        content: `${isPublishedJoke ? 'Blague' : 'Suggestion'} corrigée`,
         embeds: [embed.setColor(0x245f8d)]
       });
     }
@@ -274,7 +295,7 @@ export default class ApproveCommand extends Command {
     embed.color = 0x00ff00;
     embed.fields[1].value = embed.fields[1].value!.split('\n\n')[0];
     embed.footer = {
-      text: `Correction migrée vers la ${isJokeCorrection ? 'blague' : 'suggestion'}`
+      text: `Correction migrée vers la ${isPublishedJoke ? 'blague' : 'suggestion'}`
     };
 
     await message.edit({ embeds: [embed] });
