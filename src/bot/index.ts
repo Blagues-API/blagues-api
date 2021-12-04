@@ -10,15 +10,7 @@ export default class Bot extends Client {
   constructor() {
     super({
       partials: ['REACTION'],
-      intents: Intents.FLAGS.GUILDS | Intents.FLAGS.GUILD_MESSAGES,
-      presence: {
-        activities: [
-          {
-            name: `les ${Jokes.count} blagues`,
-            type: 'WATCHING'
-          }
-        ]
-      }
+      intents: Intents.FLAGS.GUILDS | Intents.FLAGS.GUILD_MESSAGES
     });
 
     this.dispatcher = new Dispatcher(this);
@@ -37,6 +29,8 @@ export default class Bot extends Client {
     await this.dispatcher.register();
 
     this.registerEvents();
+
+    this.refreshStatus();
   }
 
   async onInteractionCreate(interaction: Interaction): Promise<void> {
