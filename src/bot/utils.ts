@@ -1,7 +1,7 @@
-import { InteractionReplyOptions } from 'discord.js';
+import { InteractionReplyOptions, TextChannel } from 'discord.js';
 import { diffWords } from 'diff';
 
-export function interactionError(message: string): InteractionReplyOptions {
+export function interactionError(message: string, ephemeral = true): InteractionReplyOptions {
   return {
     embeds: [
       {
@@ -9,7 +9,7 @@ export function interactionError(message: string): InteractionReplyOptions {
         color: 0xff0000
       }
     ],
-    ephemeral: true
+    ephemeral
   };
 }
 
@@ -44,4 +44,9 @@ export function showDiffs(oldValue: string, newValue: string): string {
       return `${sep}${part.value}${sep}`;
     })
     .join(' ');
+}
+
+export function isEmbedable(channel: TextChannel) {
+  const permissions = channel.permissionsFor(channel.guild.me!);
+  return permissions?.has(['VIEW_CHANNEL', 'SEND_MESSAGES', 'EMBED_LINKS']);
 }
