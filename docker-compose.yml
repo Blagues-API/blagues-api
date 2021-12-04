@@ -10,7 +10,7 @@ services:
     env_file:
       - ./.env
     ports:
-      - '4000:4000'
+      - '4002:4000'
     networks:
       - global
 
@@ -23,7 +23,7 @@ services:
     env_file:
       - ../blagues-api.fr/.env
     ports:
-      - '3000:3000'
+      - '3002:3000'
 
   postgres:
     container_name: blagues_api_postgres
