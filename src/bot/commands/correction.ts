@@ -17,7 +17,7 @@ import { correctionsChannel } from '../constants';
 import Command from '../lib/command';
 import clone from 'lodash/clone';
 import { ProposalType } from '@prisma/client';
-import { interactionError, isEmbedable, showDiffs } from '../utils';
+import { interactionProblem, isEmbedable, problem, showDiffs } from '../utils';
 
 enum IdType {
   MESSAGE_ID,
@@ -62,7 +62,7 @@ export default class CorrectionCommand extends Command {
   }
 
   async resolveJoke(interaction: CommandInteraction, query: string): Promise<JokeCorrectionPayload | null> {
-    const joke = await this.findJoke(query);
+    const joke = await this.findJoke(interaction, query);
     if (joke) return joke;
 
     const question = (await interaction.reply({
@@ -84,7 +84,7 @@ export default class CorrectionCommand extends Command {
       });
       collector.on('collect', async (msg: Message) => {
         if (msg.deletable) await msg.delete().catch(() => null);
-        const joke = await this.findJoke(msg.content);
+        const joke = await this.findJoke(interaction, msg.content);
 
         if (joke) {
           collector.stop();
@@ -203,7 +203,7 @@ export default class CorrectionCommand extends Command {
     return IdType.JOKE_ID;
   }
 
-  async findJoke(query: string): Promise<JokeCorrectionPayload | null> {
+  async findJoke(interaction: CommandInteraction, query: string): Promise<JokeCorrectionPayload | null> {
     const idType = this.getIdType(query);
     if (idType === IdType.MESSAGE_ID) {
       const proposal = await prisma.proposal.findUnique({
@@ -235,7 +235,14 @@ export default class CorrectionCommand extends Command {
           }
         }
       });
-      if (!proposal) return null;
+      if (!proposal) {
+        interaction.channel?.send(
+          problem(
+            `Impossible de trouver une blague ou correction liée à cet ID de blague, assurez vous que cet ID provient bien d\'un message envoyé par le bot ${interaction.client.user}`
+          )
+        );
+        return null;
+      }
 
       const origin = proposal.type === ProposalType.SUGGESTION ? proposal : proposal.suggestion!;
 
@@ -410,7 +417,7 @@ export default class CorrectionCommand extends Command {
     const channel: TextChannel = commandInteraction.client.channels.cache.get(correctionsChannel) as TextChannel;
     if (!isEmbedable(channel)) {
       return commandInteraction.reply(
-        interactionError(`Je n'ai pas la permission d'envoyer la correction dans le salon ${channel}.`, false)
+        interactionProblem(`Je n'ai pas la permission d'envoyer la correction dans le salon ${channel}.`, false)
       );
     }
 
