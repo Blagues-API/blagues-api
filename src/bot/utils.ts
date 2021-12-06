@@ -56,13 +56,13 @@ export function validate(message: string): MessageOptions {
 }
 
 export function showDiffs(oldValue: string, newValue: string): string {
-  return diffWords(oldValue, newValue, { ignoreWhitespace: true })
+  return diffWords(oldValue, newValue)
     .filter((part) => !part.removed)
     .map((part) => {
-      const sep = part.added ? '__' : '';
+      const sep = part.added ? '`' : '';
       return `${sep}${part.value}${sep}`;
     })
-    .join(' ');
+    .join('');
 }
 
 export function isEmbedable(channel: TextChannel) {
