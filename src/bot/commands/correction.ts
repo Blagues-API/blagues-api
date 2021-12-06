@@ -13,7 +13,7 @@ import {
 import { jokeById, jokeByQuestion } from '../../controllers';
 import prisma from '../../prisma';
 import { Category, JokeTypesDescriptions, CategoriesRefs, UnsignedJoke, UnsignedJokeKey } from '../../typings';
-import { correctionsChannel } from '../constants';
+import { correctionsChannel, downReaction, upReaction } from '../constants';
 import Command from '../lib/command';
 import clone from 'lodash/clone';
 import { ProposalType } from '@prisma/client';
@@ -349,7 +349,7 @@ export default class CorrectionCommand extends Command {
     const msg = messages.first()!;
     if (msg.deletable) await msg.delete();
 
-    joke[textReplyContent === 'question' ? 'joke' : 'answer'] = msg.content;
+    joke[textReplyContent === 'question' ? 'joke' : 'answer'] = msg.content.replace(/\n/g, ' ');
     if (questionMessage.deletable) await questionMessage.delete();
 
     return joke;
@@ -491,5 +491,9 @@ export default class CorrectionCommand extends Command {
       ],
       components: []
     });
+
+    for (const reaction of [upReaction, downReaction]) {
+      await message.react(reaction).catch(() => null);
+    }
   }
 }
