@@ -22,8 +22,19 @@ export default class Stickys {
             Si tu le souhaites, tu peux proposer tes blagues afin qu'elles soient ajoutées à l'API Blagues-API, elle regroupe actuellement **${Jokes.count}** blagues françaises.
             Elles sont toutes issues de ce salon proposées par la communauté.
 
-            > \`/suggestion\`
+            > \`/suggestion\` dans le salon <#${correctionsChannel}>
           `,
+          fields: [
+            {
+              name: 'Règles:',
+              value: stripIndents`
+              > - Espace avant les caractères: \`?\` et \`!\`.
+              > - Ponctuation de fin de phrase si elle contient un verbe.
+              > - 130 caractères maximum par partie d'une blague.
+              > - Majuscule en début de phrase à moins quelle ne soit précédée de \`...\`
+            `
+            }
+          ],
           color: 0x0067ad
         }
       ]
@@ -38,7 +49,7 @@ export default class Stickys {
           description: stripIndents`
             Si tu le souhaites, tu peux proposer des corrections aux blagues de l'API Blagues API qui regroupe actuellement **${Jokes.count}** blagues françaises.
 
-            > \`/correction\`
+            > \`/correction\` dans le salon <#${correctionsChannel}>
           `,
           color: 0x0067ad
         }
