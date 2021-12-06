@@ -431,6 +431,13 @@
   dependencies:
     "@types/node" "*"
 
+"@types/source-map-support@^0.5.4":
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/@types/source-map-support/-/source-map-support-0.5.4.tgz#574ff6a8636bc0ebae78a8014136f749b3177d58"
+  integrity sha512-9zGujX1sOPg32XLyfgEB/0G9ZnrjthL/Iv1ZfuAjj8LEilHZEpQSQs1scpRXPhHzGYgWiLz9ldF1cI8JhL+yMw==
+  dependencies:
+    source-map "^0.6.0"
+
 "@types/string-similarity@^4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@types/string-similarity/-/string-similarity-4.0.0.tgz#8cc03d5d1baad2b74530fe6c7d849d5768d391ad"
@@ -3223,7 +3230,7 @@ sonic-boom@^1.0.2:
     atomic-sleep "^1.0.0"
     flatstr "^1.0.12"
 
-source-map-support@^0.5.17:
+source-map-support@^0.5.17, source-map-support@^0.5.21:
   version "0.5.21"
   resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.5.21.tgz#04fe7c7f9e1ed2d662233c28cb2b35b9f63f6e4f"
   integrity sha512-uBHU3L3czsIyYXKX88fdrGovxdSCoTGDRZ6SYXtSRxLZUzHg5P/66Ht6uoUlHu9EZod+inXhKo3qQgwXUT/y1w==
