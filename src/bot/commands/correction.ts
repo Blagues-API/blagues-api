@@ -83,7 +83,7 @@ export default class CorrectionCommand extends Command {
         idle: 60_000
       });
       collector.on('collect', async (msg: Message) => {
-        if (msg.deletable) await msg.delete();
+        if (msg.deletable) await msg.delete().catch(() => null);
         const joke = await this.findJoke(msg.content);
 
         if (joke) {
@@ -93,7 +93,7 @@ export default class CorrectionCommand extends Command {
 
         question.channel
           .send("Aucune blague n'a été trouvée, veuillez réessayer !")
-          .then((m) => setTimeout(() => m.deletable && m.delete(), 5000));
+          .then((m) => setTimeout(() => m.deletable && m.delete().catch(() => null), 5000));
       });
       collector.once('end', async (collected, reason: string) => {
         if (reason === 'time') {
