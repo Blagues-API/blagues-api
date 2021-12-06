@@ -111,15 +111,11 @@ export default class ApproveCommand extends Command {
       return interaction.reply(interactionProblem(`Le message est invalide.`));
     }
 
-    // if (proposal.user_id === interaction.user.id) {
-    //   return interaction.reply(
-    //     interactionProblem(
-    //       `Vous ne pouvez pas approuver votre propre ${
-    //         isSuggestion ? 'blague' : 'correction'
-    //       }.`
-    //     )
-    //   );
-    // }
+    if (proposal.user_id === interaction.user.id) {
+      return interaction.reply(
+        interactionProblem(`Vous ne pouvez pas approuver votre propre ${isSuggestion ? 'blague' : 'correction'}.`)
+      );
+    }
 
     if (proposal.merged) {
       return interaction.reply(
