@@ -4,6 +4,7 @@ import { parrainRole } from '../constants';
 import Command from '../lib/command';
 import prisma from '../../prisma';
 import { ProposalType } from '@prisma/client';
+import { interactionProblem } from '../utils';
 
 export default class SuggestCommand extends Command {
   constructor() {
@@ -22,8 +23,10 @@ export default class SuggestCommand extends Command {
   }
 
   async run(interaction: CommandInteraction): Promise<void> {
-    const member = interaction.options.getMember('user') as GuildMember;
-    if (member) {
+    if (interaction.options.get('user')) {
+      const member = interaction.options.getMember('user') as GuildMember;
+      if (!member) return interaction.reply(interactionProblem("Cet utilisateur n'est plus présent sur le serveur."));
+
       const fields = [];
       const proposals = await prisma.proposal.findMany({
         where: {
