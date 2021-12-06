@@ -5,7 +5,8 @@ export const parrainRole: Snowflake = process.env.PARRAIN_ROLE ?? '8775118315251
 
 export const suggestsChannel: Snowflake = process.env.SUGGESTIONS_CHANNEL ?? '698826767221391390';
 export const correctionsChannel: Snowflake = process.env.CORRECTIONS_CHANNEL ?? '826856142793736213';
-export const logsChannel: Snowflake = process.env.LOGS_CHANNEL ?? '908302746665500682';
+export const logsChannel: Snowflake = process.env.LOGS_CHANNEL ?? '763778635857133599';
+export const commandsChannel: Snowflake = process.env.COMMANDS_CHANNEL ?? '821040840541077545';
 
 export const neededApprovals: number = Number(process.env.APPROVALS_COUNT) || 3;
 

@@ -1,6 +1,6 @@
 import { stripIndents } from 'common-tags';
 import { Client, Snowflake, TextChannel, MessageOptions } from 'discord.js';
-import { correctionsChannel, suggestsChannel } from '../constants';
+import { commandsChannel, correctionsChannel, suggestsChannel } from '../constants';
 import Jokes from '../../jokes';
 
 export default class Stickys {
@@ -22,7 +22,7 @@ export default class Stickys {
             Si tu le souhaites, tu peux proposer tes blagues afin qu'elles soient ajoutées à l'API Blagues-API, elle regroupe actuellement **${Jokes.count}** blagues françaises.
             Elles sont toutes issues de ce salon proposées par la communauté.
 
-            > \`/suggestion\` dans le salon <#${correctionsChannel}>
+            > \`/suggestion\` dans le salon <#${commandsChannel}>
           `,
           fields: [
             {
@@ -49,7 +49,7 @@ export default class Stickys {
           description: stripIndents`
             Si tu le souhaites, tu peux proposer des corrections aux blagues de l'API Blagues API qui regroupe actuellement **${Jokes.count}** blagues françaises.
 
-            > \`/correction\` dans le salon <#${correctionsChannel}>
+            > \`/correction\` dans le salon <#${commandsChannel}>
           `,
           color: 0x0067ad
         }
