@@ -4,7 +4,7 @@ import prisma from '../../prisma';
 import { correctionsChannel, logsChannel, neededApprovals, suggestsChannel } from '../constants';
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../lib/godfathers';
-import { interactionError, interactionInfo, interactionValidate, isEmbedable } from '../utils';
+import { interactionProblem, interactionInfo, interactionValidate, isEmbedable } from '../utils';
 
 export default class DisapproveCommand extends Command {
   constructor() {
@@ -21,14 +21,14 @@ export default class DisapproveCommand extends Command {
     const message = await channel.messages.fetch((interaction as ContextMenuInteraction).targetId);
     if (![suggestsChannel, correctionsChannel].includes(channel.id)) {
       return interaction.reply(
-        interactionError(
+        interactionProblem(
           `Vous ne pouvez pas désapprouver une blague ou une correction en dehors des salons <#${suggestsChannel}> et <#${correctionsChannel}>.`
         )
       );
     }
     if (message.author.id !== interaction.client.user!.id) {
       return interaction.reply(
-        interactionError(
+        interactionProblem(
           `Vous ne pouvez pas désapprouver une ${isSuggestion ? 'blague' : 'correction'} qui n'est pas gérée par ${
             interaction.client.user
           }.`
@@ -69,7 +69,7 @@ export default class DisapproveCommand extends Command {
     });
 
     if (!proposal) {
-      return interaction.reply(interactionError(`Le message est invalide.`));
+      return interaction.reply(interactionProblem(`Le message est invalide.`));
     }
 
     const embed = message.embeds[0];
@@ -79,15 +79,19 @@ export default class DisapproveCommand extends Command {
           id: proposal.id
         }
       });
-      return interaction.reply(interactionError(`Le message est invalide.`));
+      return interaction.reply(interactionProblem(`Le message est invalide.`));
     }
 
     if (proposal.merged) {
-      return interaction.reply(interactionError(`Cette ${isSuggestion ? 'blague' : 'correction'} a déjà été ajoutée.`));
+      return interaction.reply(
+        interactionProblem(`Cette ${isSuggestion ? 'blague' : 'correction'} a déjà été ajoutée.`)
+      );
     }
 
     if (proposal.refused) {
-      return interaction.reply(interactionError(`Cette ${isSuggestion ? 'blague' : 'correction'} a déjà été refusée.`));
+      return interaction.reply(
+        interactionProblem(`Cette ${isSuggestion ? 'blague' : 'correction'} a déjà été refusée.`)
+      );
     }
 
     const correction = proposal.type === ProposalType.SUGGESTION && proposal.corrections[0];

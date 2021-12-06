@@ -1,44 +1,62 @@
-import { InteractionReplyOptions, TextChannel } from 'discord.js';
+import { InteractionReplyOptions, TextChannel, MessageOptions } from 'discord.js';
 import { diffWords } from 'diff';
 
-export function interactionError(message: string, ephemeral = true): InteractionReplyOptions {
+export function interactionProblem(message: string, ephemeral = true): InteractionReplyOptions {
+  return {
+    ...problem(message),
+    ephemeral
+  };
+}
+
+export function problem(message: string): MessageOptions {
   return {
     embeds: [
       {
         description: `❌ ${message}`,
         color: 0xff0000
       }
-    ],
-    ephemeral
+    ]
   };
 }
 
 export function interactionInfo(message: string): InteractionReplyOptions {
+  return {
+    ...info(message),
+    ephemeral: true
+  };
+}
+
+export function info(message: string): MessageOptions {
   return {
     embeds: [
       {
         description: `💡 ${message}`,
         color: 0xffd983
       }
-    ],
-    ephemeral: true
+    ]
   };
 }
 
 export function interactionValidate(message: string): InteractionReplyOptions {
+  return {
+    ...validate(message),
+    ephemeral: true
+  };
+}
+
+export function validate(message: string): MessageOptions {
   return {
     embeds: [
       {
         description: `✅ ${message}`,
         color: 0x7fef34
       }
-    ],
-    ephemeral: true
+    ]
   };
 }
 
 export function showDiffs(oldValue: string, newValue: string): string {
-  return diffWords(oldValue, newValue)
+  return diffWords(oldValue, newValue, { ignoreWhitespace: true })
     .filter((part) => !part.removed)
     .map((part) => {
       const sep = part.added ? '__' : '';
