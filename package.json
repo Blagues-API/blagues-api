@@ -8,7 +8,7 @@
     "start": "docker-compose -p blagues_api_v2 -f ./docker-compose.yml up -d",
     "down": "docker-compose -p blagues_api_v2 -f ./docker-compose.yml down",
     "build": "docker-compose -p blagues_api_v2 -f ./docker-compose.yml build",
-    "logs": "docker-compose -p blagues_api_v2 -f ./docker-compose.yml logs -f app",
+    "logs": "docker-compose -p blagues_api_v2 -f ./docker-compose.yml logs -f",
     "shell": "docker exec -it blagues_api bash",
     "dev": "docker-compose -p blagues_api_dev -f ./docker-compose.dev.yml up",
     "dev:build": "docker-compose -p blagues_api_dev -f ./docker-compose.dev.yml build",
