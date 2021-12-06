@@ -6988,5 +6988,12 @@
     "type": "global",
     "joke": "Quelle est la différence entre un nouvel élève et un rayon gamma ?",
     "answer": "Le nouvel élève s'intègre alors que le rayon gamma se désintègre."
-  }
+  },
+  {
+    "id": 1167,
+    "type": "limit",
+    "joke": "Tu sais c'est quoi la différence entre moi et un moustique ?",
+    "answer": "Moi contrairement au moustique je continue de te sucer quand tu me claque"
+  },
+
 ]
