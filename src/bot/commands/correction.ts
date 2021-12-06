@@ -17,7 +17,7 @@ import { correctionsChannel } from '../constants';
 import Command from '../lib/command';
 import clone from 'lodash/clone';
 import { ProposalType } from '@prisma/client';
-import { interactionProblem, isEmbedable, problem, showDiffs } from '../utils';
+import { interactionInfo, interactionProblem, isEmbedable, problem, showDiffs } from '../utils';
 
 enum IdType {
   MESSAGE_ID,
@@ -162,9 +162,17 @@ export default class CorrectionCommand extends Command {
       fetchReply: true
     })) as Message;
 
-    const buttonInteraction = (await question.awaitMessageComponent({
-      filter: (i: Interaction) => i.user.id === commandInteraction.user.id
-    })) as ButtonInteraction;
+    const buttonInteraction = (await question
+      .awaitMessageComponent({
+        filter: (i: Interaction) => i.user.id === commandInteraction.user.id,
+        time: 120_000
+      })
+      .catch(() => null)) as ButtonInteraction | null;
+
+    if (!buttonInteraction) {
+      await commandInteraction.editReply(interactionInfo('Les 2 minutes de délais sont dépassés.'));
+      return null;
+    }
 
     switch (buttonInteraction.customId) {
       case 'type': {
@@ -189,6 +197,7 @@ export default class CorrectionCommand extends Command {
       case 'confirm':
         return joke;
       default:
+        await commandInteraction.deleteReply();
         return null;
     }
   }
