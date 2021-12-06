@@ -37,7 +37,7 @@ export default class Dispatcher {
     if (!command) {
       await interaction.reply('Commande innexistante !');
 
-      await interaction.client.application?.commands.delete(interaction.commandId).catch();
+      await interaction.guild?.commands.delete(interaction.commandId);
       return;
     }
 
