@@ -95,19 +95,19 @@ export default class DisapproveCommand extends Command {
     }
 
     const correction = proposal.type === ProposalType.SUGGESTION && proposal.corrections[0];
-    if (correction && !correction.merged) {
+    if (correction) {
       return interaction.reply(
         interactionInfo(
           `Il semblerait qu'une [correction ai été proposée](https://discord.com/channels/${
             interaction.guild!.id
           }/${correctionsChannel}/${
             correction.message_id
-          }), veuillez la désapprouver avant l'approbation de cette suggestion.`
+          }), veuillez la cloturer avant la désapprobation de cette suggestion.`
         )
       );
     }
 
-    const lastCorrection = proposal.type !== ProposalType.SUGGESTION && proposal.suggestion!.corrections[0];
+    const lastCorrection = proposal.type !== ProposalType.SUGGESTION && proposal.suggestion?.corrections[0];
     if (lastCorrection && lastCorrection.id !== proposal.id) {
       return interaction.reply(
         interactionInfo(`

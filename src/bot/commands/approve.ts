@@ -130,7 +130,7 @@ export default class ApproveCommand extends Command {
     }
 
     const correction = proposal.type === ProposalType.SUGGESTION && proposal.corrections[0];
-    if (correction && !correction.merged) {
+    if (correction) {
       return interaction.reply(
         interactionInfo(
           `Il semblerait qu'une [correction ai été proposée](https://discord.com/channels/${
