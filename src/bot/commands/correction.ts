@@ -262,10 +262,10 @@ export default class CorrectionCommand extends Command {
         answer: (origin.corrections[0]?.joke_answer ?? origin.joke_answer)!,
         correction_type: origin.merged ? ProposalType.CORRECTION : ProposalType.SUGGESTION_CORRECTION,
         suggestion: {
-          proposal_id: proposal.id,
-          type: proposal.joke_type as Category,
-          joke: proposal.joke_question!,
-          answer: proposal.joke_answer!
+          proposal_id: origin.id,
+          type: origin.joke_type as Category,
+          joke: origin.joke_question!,
+          answer: origin.joke_answer!
         }
       };
     }
