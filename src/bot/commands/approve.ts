@@ -186,10 +186,11 @@ export default class ApproveCommand extends Command {
 
     const godfathers = await renderGodfatherLine(interaction, proposal);
 
-    if (proposal.type === ProposalType.SUGGESTION) {
-      embed.description = `${embed.description!.split('\n\n')[0]}\n\n${godfathers}`;
+    const field = embed.fields?.[embed.fields.length - 1];
+    if (field) {
+      field.value = `${field.value.split('\n\n')[0]}\n\n${godfathers}`;
     } else {
-      embed.fields[1].value = `${embed.fields[1].value.split('\n\n')[0]}\n\n${godfathers}`;
+      embed.description = `${embed.description!.split('\n\n')[0]}\n\n${godfathers}`;
     }
 
     if (proposal.approvals.length < neededApprovals) {
@@ -231,7 +232,13 @@ export default class ApproveCommand extends Command {
 
     embed.color = 0x00ff00;
     embed.footer = { text: 'Blague ajoutée' };
-    embed.description = embed.description!.split('\n\n')[0];
+
+    const field = embed.fields?.[embed.fields.length - 1];
+    if (field) {
+      field.value = field.value.split('\n\n')[0];
+    } else {
+      embed.description = embed.description!.split('\n\n')[0];
+    }
 
     await message.edit({ embeds: [embed] });
 
