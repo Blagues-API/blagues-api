@@ -321,21 +321,23 @@ export default class CorrectionCommand extends Command {
     joke: JokeCorrectionPayload,
     textReplyContent: string
   ): Promise<JokeCorrectionPayload | null> {
-    const questionMessage = (await buttonInteraction.reply({
-      content: `Par quelle ${textReplyContent} voulez-vous changer la ${textReplyContent} actuelle ?`,
-      fetchReply: true
-    })) as Message;
+    await buttonInteraction.reply({
+      content: `Par quelle ${textReplyContent} voulez-vous changer la ${textReplyContent} actuelle ?`
+    });
 
     const messages = await commandInteraction
       .channel!.awaitMessages({
         filter: (m: Message) => m.author.id === commandInteraction.user.id,
-        time: 30000,
+        time: 60_000,
         max: 1
       })
       .catch(() => null);
 
-    if (!messages) {
-      questionMessage.edit({
+    // TODO: Vérifier la taille comme pour les suggestions
+
+    const msg = messages?.first();
+    if (!msg) {
+      await buttonInteraction.editReply({
         embeds: [
           {
             title: '💡 Les 60 secondes se sont écoulées',
@@ -346,11 +348,11 @@ export default class CorrectionCommand extends Command {
       return null;
     }
 
-    const msg = messages.first()!;
     if (msg.deletable) await msg.delete();
 
     joke[textReplyContent === 'question' ? 'joke' : 'answer'] = msg.content.replace(/\n/g, ' ');
-    if (questionMessage.deletable) await questionMessage.delete();
+
+    await buttonInteraction.deleteReply();
 
     return joke;
   }
@@ -386,7 +388,7 @@ export default class CorrectionCommand extends Command {
       .awaitMessageComponent({
         filter: (i: Interaction) => i.user.id === commandInteraction.user.id,
         componentType: 'SELECT_MENU',
-        time: 60000
+        time: 60_000
       })
       .catch(() => null);
 
