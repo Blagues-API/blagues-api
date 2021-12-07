@@ -142,7 +142,7 @@ export default class ApproveCommand extends Command {
       );
     }
 
-    const lastCorrection = proposal.type !== ProposalType.SUGGESTION && proposal.suggestion!.corrections[0];
+    const lastCorrection = proposal.type !== ProposalType.SUGGESTION && proposal.suggestion?.corrections[0];
     if (lastCorrection && lastCorrection.id !== proposal.id) {
       return interaction.reply(
         interactionInfo(`
@@ -150,7 +150,7 @@ export default class ApproveCommand extends Command {
             interaction.guild!.id
           }/${correctionsChannel}/${
           lastCorrection.message_id
-        }) par dessus rendant celle ci obselette, veuillez approuver la dernière version de la correction.`)
+        }) par dessus rendant celle-ci obselette, veuillez approuver la dernière version de la correction.`)
       );
     }
 
