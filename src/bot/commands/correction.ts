@@ -468,7 +468,6 @@ export default class CorrectionCommand extends Command {
         user_id: commandInteraction.user.id,
         message_id: message.id,
         type: ProposalType[newJoke.correction_type],
-        joke_id: newJoke.id,
         joke_question: newJoke.joke,
         joke_answer: newJoke.answer,
         joke_type: newJoke.type,
