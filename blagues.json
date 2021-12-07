@@ -6990,9 +6990,75 @@
     "answer": "Le nouvel élève s'intègre alors que le rayon gamma se désintègre."
   },
   {
-    "id": 1167,
+    "id": 1166,
     "type": "limit",
     "joke": "Tu sais c'est quoi la différence entre moi et un moustique ?",
     "answer": "Moi contrairement au moustique je continue de te sucer quand tu me claque"
+  },
+  {
+    "id": 1167,
+    "type": "global",
+    "joke": "Pourquoi les Nordistes ne savent pas conduire ?",
+    "answer": "Car ils arrêtent PAS DE CALAIS !"
+  },
+  {
+    "id": 1168,
+    "type": "global",
+    "joke": "Qu'est-ce qu'une carotte dans une flaque d'eau ?",
+    "answer": "Un bonhomme de neige en été."
+  },
+  {
+    "id": 1169,
+    "type": "global",
+    "joke": "Toto, quand un poème n'est pas en vers en quoi est-il ?",
+    "answer": " En plastique ?"
+  }, 
+  {
+    "id": 1170,
+    "type": "dark",
+    "joke": "Qu'est-ce qu'un nazi stupide ?",
+    "answer": "Un bon aryen"
+  },
+  {
+    "id": 1171,
+    "type": "dark",
+    "joke": "Il existe deux types de mineurs :",
+    "answer": "L'un descend dans les mines, l'autre dans la cave."
+  },
+  {
+    "id": 1172,
+    "type": "dark",
+    "joke": "Quel est le point commun entre John Kennedy et Abraham Lincoln ?",
+    "answer": "Ils sont tous les 2 partis sur un coup de tête."
+  },
+  {
+    "id": 1173,
+    "type": "global",
+    "joke": "Pourquoi ceux qui aiment les maths sont des menteurs ?",
+    "answer": "Car quand on aime on ne compte pas."
+  },
+  {
+    "id": 1174,
+    "type": "global",
+    "joke": "Comment appelle-t-on un alligator qui enquête ?",
+    "answer": "Un investi-gator"
+  },
+  {
+    "id": 1175,
+    "type": "global",
+    "joke": "Qu’est-ce que le livre de mathématiques dit au conseiller d’orientation ?",
+    "answer": "J’ai tellement de problèmes..."
+  },
+  {
+    "id": 1176,
+    "type": "dark",
+    "joke": "Qu'elle est l'expression favorite de John Kennedy ?",
+    "answer": "Rien de tel qu'une balade en voiture pour se vider la tête !"
+  },
+  {
+    "id": 1177,
+    "type": "global",
+    "joke": "Il y a 3 moyens de se faire de l'argent facile :",
+    "answer": "La bourse, le minage de cryptomonnaie et rencontrer Mr. Beast."
   }
 ]
