@@ -452,7 +452,7 @@ export default class CorrectionCommand extends Command {
             {
               name: 'Blague corrigée',
               value: stripIndents`
-                > **Type**: ${CategoriesRefs[newJoke.type]}
+                > **Type**: ${showDiffs(CategoriesRefs[newJoke.suggestion.type], CategoriesRefs[newJoke.type])}
                 > **Blague**: ${showDiffs(newJoke.suggestion.joke, newJoke.joke)}
                 > **Réponse**: ${showDiffs(newJoke.suggestion.answer, newJoke.answer)}
               `
