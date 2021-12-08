@@ -1,5 +1,7 @@
-import { Client, CommandInteraction, Intents, Interaction } from 'discord.js';
+import { Client, CommandInteraction, Intents, Interaction, Message, PartialMessage } from 'discord.js';
 import Jokes from '../jokes';
+import prisma from '../prisma';
+import { correctionsChannel, suggestsChannel } from './constants';
 import Dispatcher from './lib/dispatcher';
 import Stickys from './lib/stickys';
 
@@ -39,8 +41,17 @@ export default class Bot extends Client {
     }
   }
 
+  async onMessageDelete(message: Message | PartialMessage): Promise<void> {
+    if (message.author && message.author.id !== this.user!.id) return;
+    if (![correctionsChannel, suggestsChannel].includes(message.channelId)) return;
+    if (!message.embeds[0]?.author) return;
+
+    await prisma.proposal.delete({ where: { message_id: message.id } });
+  }
+
   registerEvents(): void {
     this.on('interactionCreate', this.onInteractionCreate.bind(this));
+    this.on('messageDelete', this.onMessageDelete.bind(this));
   }
 
   refreshStatus() {
