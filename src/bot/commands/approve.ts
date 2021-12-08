@@ -227,12 +227,13 @@ export default class ApproveCommand extends Command {
       where: { id: proposal.id }
     });
 
+    embed.color = 0x00ff00;
+
     await logs.send({
       content: "Blague ajoutée à l'API",
       embeds: [embed.setColor(0x245f8d)]
     });
 
-    embed.color = 0x00ff00;
     embed.footer = { text: 'Blague ajoutée' };
 
     const field = embed.fields?.[embed.fields.length - 1];
@@ -294,6 +295,8 @@ export default class ApproveCommand extends Command {
       where: { id: proposal.id }
     });
 
+    embed.color = 0x00ff00;
+
     if (isEmbedable(logs)) {
       await logs.send({
         content: `${isPublishedJoke ? 'Blague' : 'Suggestion'} corrigée`,
@@ -301,7 +304,6 @@ export default class ApproveCommand extends Command {
       });
     }
 
-    embed.color = 0x00ff00;
     embed.fields[1].value = embed.fields[1].value!.split('\n\n')[0];
     embed.footer = {
       text: `Correction migrée vers la ${isPublishedJoke ? 'blague' : 'suggestion'}`

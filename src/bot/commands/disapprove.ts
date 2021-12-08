@@ -181,14 +181,14 @@ export default class DisapproveCommand extends Command {
       where: { id: proposal.id }
     });
 
+    embed.color = 0xff0000;
+
     if (isEmbedable(logs)) {
       await logs.send({
         content: `${isSuggestion ? 'Blague' : 'Suggestion'} refusée`,
         embeds: [embed.setColor(0x245f8d)]
       });
     }
-
-    embed.color = 0xff0000;
 
     const field = embed.fields?.[embed.fields.length - 1];
     if (field) {
