@@ -51,7 +51,7 @@ export default class Bot extends Client {
 
   registerEvents(): void {
     this.on('interactionCreate', this.onInteractionCreate.bind(this));
-    this.on('messageDelete', this.onMessageDetete.bind(this));
+    this.on('messageDelete', this.onMessageDelete.bind(this));
   }
 
   refreshStatus() {
