@@ -41,7 +41,7 @@ export default class Bot extends Client {
     }
   }
 
-  async onMessageDetete(message: Message | PartialMessage): Promise<void> {
+  async onMessageDelete(message: Message | PartialMessage): Promise<void> {
     if (message.author && message.author.id !== this.user!.id) return;
     if (![correctionsChannel, suggestsChannel].includes(message.channelId)) return;
     if (!message.embeds[0]?.author) return;
