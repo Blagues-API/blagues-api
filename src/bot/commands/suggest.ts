@@ -88,37 +88,6 @@ export default class SuggestCommand extends Command {
       answer: interaction.options.get('response')!.value
     } as UnsignedJoke;
 
-    let description = stripIndents`
-      > **Type**: ${CategoriesRefs[payload.type]}
-      > **Blague**: ${payload.joke}
-      > **Réponse**: ${payload.answer}
-    `;
-
-    if (similarity !== Similarity.Different) {
-      const jokeMessage = await prisma.proposal.findUnique({
-        where: {
-          joke_id: Jokes.list[bestMatchIndex].id
-        }
-      });
-      description = stripIndents`
-        ${description}
-        ${
-          jokeMessage
-            ? `⚠️ Une [blague déjà existante](https://discord.com/channels/${
-                process.env.SERVER_ID
-              }/${suggestsChannel}/${jokeMessage.message_id}) y ressemble ${
-                similarity === Similarity.Same ? 'à plus de 80%' : 'fortement'
-              }`
-            : stripIndents`
-              **Blague y ressemblant**
-              > **Type**: ${CategoriesRefs[Jokes.list[bestMatchIndex].type as Category]}
-              > **Blague**: ${Jokes.list[bestMatchIndex].joke}
-              > **Réponse**: ${Jokes.list[bestMatchIndex].answer}
-            `
-        }
-      `;
-    }
-
     const embed: MessageEmbedOptions = {
       author: {
         icon_url: interaction.user.displayAvatarURL({
@@ -128,9 +97,41 @@ export default class SuggestCommand extends Command {
         }),
         name: interaction.user.tag
       },
-      description,
+      description: stripIndents`
+        > **Type**: ${CategoriesRefs[payload.type]}
+        > **Blague**: ${payload.joke}
+        > **Réponse**: ${payload.answer}
+      `,
       color: Colors[similarity] as ColorResolvable
     };
+
+    if (similarity !== Similarity.Different) {
+      const jokeMessage = await prisma.proposal.findUnique({
+        select: { message_id: true },
+        where: {
+          joke_id: Jokes.list[bestMatchIndex].id
+        }
+      });
+
+      if (jokeMessage) {
+        embed.description += `\n⚠️ Une [blague déjà existante](https://discord.com/channels/${
+          process.env.SERVER_ID
+        }/${suggestsChannel}/${jokeMessage.message_id}) y ressemble ${
+          similarity === Similarity.Same ? 'à plus de 80%' : 'fortement'
+        }`;
+      } else {
+        embed.fields = [
+          {
+            name: 'Blague y ressemblant',
+            value: stripIndents`
+              > **Type**: ${CategoriesRefs[Jokes.list[bestMatchIndex].type as Category]}
+              > **Blague**: ${Jokes.list[bestMatchIndex].joke}
+              > **Réponse**: ${Jokes.list[bestMatchIndex].answer}
+            `
+          }
+        ];
+      }
+    }
 
     if (similarity === Similarity.Same) {
       return interaction.reply({
