@@ -23,7 +23,7 @@ Afin de simplifier l'utilisation de Blagues API, des modules ont été créés:
 
 ## Utilisation
 
-Retrouvez la documentation des modules ainsi que de l'api directement sur le site [Blagues-API.fr](https://www.blagues-api.fr)
+Retrouvez la documentation des modules ainsi que de l'API directement sur le site [Blagues-API.fr](https://www.blagues-api.fr)
 
 ## Contribuer
 
