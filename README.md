@@ -7,20 +7,6 @@ API de Blagues françaises collaborative et Open Source
 [![Contributors](https://img.shields.io/github/contributors/Blagues-API/api.svg?style=for-the-badge)](https://github.com/Blagues-API/api/graphs/contributors)
 [![Stars](https://img.shields.io/github/stars/Blagues-API/api.svg?style=for-the-badge)](https://github.com/Blagues-API/api/stargazers)
 [![License](https://img.shields.io/github/license/Blagues-API/api?style=for-the-badge)](https://github.com/Blagues-API/api/blob/master/LICENCE)
-[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg?style=for-the-badge)](https://www.paypal.me/nicolasvanaarsen)
-
----
-
-## Roadmap
-
-Dans la volontée de faire évoluer ce projet, nous voudrillons faire une
-réécriture complête du projet avec des technologies plus maintenues, plus stable
-et plus poussées.
-
-Cette branche `dev` permettra notament cette réécriture.
-
-Retrouvez plus d'informations depuis l'issue
-[#49](https://github.com/Blagues-API/blagues-api/issues/49).
 
 ---
 
@@ -37,100 +23,35 @@ Afin de simplifier l'utilisation de Blagues API, des modules ont été créés:
 
 ## Utilisation
 
-Avant toute utilisation de l'API veuillez générer votre token Bearer en vous
-authentifiant avec votre compte Discord sur le site
-[blagues-api.fr](https://www.blagues-api.fr).
-
-Une fois le token généré voici quelques exemples vous permettant d'utiliser
-l'API
-
-### Blague aléatoire
-
-```
-GET /api/random
-```
-
-À cette url, vous pouvez spécifier certains types que vous ne souhaitez pas
-recevoir.
-
-```js
-GET /api/random?disallow=dark&disallow=limit
-```
-
-### Blague aléatoire d'une catégorie
-
-```js
-GET /api/type/:type:/random
-// type: global, dev, dark, limit, beauf, blondes
-```
-
-### Blague à partir de son ID
-
-Les blagues sont identifiées par un ID que vous recevez en même tant que chaque
-blague.
-
-Spécifiez cet identifiant en paramètre et vous l'obtiendez à nouveau.
-
-```js
-GET /api/id/:id:
-```
-
-## Exemples
-
-```javascript
-// NodeJS
-const fetch = require("node-fetch");
-
-fetch("https://www.blagues-api.fr/api/random", {
-  headers: {
-    Authorization: "Bearer VOTRE_TOKEN_ICI",
-  },
-})
-  .then((response) => response.json())
-  .then((data) => {
-    console.log(data);
-    /* Expected output:
-    { 
-      id: 1, 
-      type: 'type', 
-      joke: 'Question', 
-      answer: 'Response' 
-    }
-    */
-  });
-```
-
-```py
-# Python
-import requests
-
-response = requests.get(
-  'https://www.blagues-api.fr/api/random',
-  headers = {
-    'Authorization': 'Bearer VOTRE_TOKEN_ICI'
-  }
-)
-data = response.json()
-print(response)
-# Expected output:
-# {
-#   id: 1,
-#   type: 'type',
-#   joke: 'Question',
-#   answer: 'Response'
-# }
-```
-
----
+Retrouvez la documentation des modules ainsi que de l'api directement sur le site [Blagues-API.fr](https://www.blagues-api.fr)
 
 ## Contribuer
 
-1. 🍴 **Fork** le projet !
-1. 🔨 **Fais** tes modifications !
-1. ✨ **Commit** tes modifications !
-1. 🚀 **Push** tes commits
-1. 🔃 Crée une **pull request** depuis
-   <a href="https://github.com/Blagues-API/blagues-api/compare" target="_blank">`https://github.com/Blagues-API/blagues-api/compare`</a>.
+Le projet est open-source ce qui signifie que vous pouvez contribuer et faire évoluer le projet.
+Rendez-vous sur a page des [issues](https://github.com/Blagues-API/blagues-api/issues) et sélectionnez une issue qui vous intéresse et qui n'est assigné à personne (les issues ayant le label `good first issue` sont les plus faciles)
+
+### Prérequis
+
+#### Docker
+
+Le projet fonctionne avec Docker, il vous permetra d'obtenir le même environnement qu'en production.
+Si vous êtes sous Windows ou Mac, il vous faudra installer [Docker Desktop](https://www.docker.com/products/docker-desktop).
+
+⚠️ Si vous souhaitez contribuer au projet sans utiliser Docker veillez à installer et executer les même scripts que ceux qui sont faits dans les fichier [Dockerfile.dev](https://github.com/Blagues-API/blagues-api/blob/dev/docker/Dockerfile.dev) de développement, ensuite lancez l'instance de développement avec la commande `yarn dev:legacy`.
+
+### Génération de l'image de développement Docker
+
+```
+yarn dev:build # npm run dev:build
+```
+
+### Lancement de l'instance de développement
+
+```
+yarn dev # npm run dev
+```
+
+🎉 Votre instance est lancée, vous pouvez dès à présent vous lancer dans le développement de l'issue choisie
 
 ---
 
@@ -138,8 +59,7 @@ print(response)
 
 - **Pouvons nous proposer des blagues ?**
   - Oui bien sûr en rejoignant le serveur
-    <a href="https://discord.gg/PPNpVaF" target="_blank">`Blagues API`</a> un
-    salon y est dédié !
+    <a href="https://discord.gg/PPNpVaF" target="_blank">`Blagues API`</a>, des commandes tel que `/suggestion` ont été créé afin de rendre la proposition de nouvelles blagues plus facile !
 
 ---
 
@@ -156,17 +76,9 @@ Voici quelques liens pour obtenir de l'aide :
 
 ---
 
-## Donations
-
-Si vous souhaitez me soutenir, c'est possible grâce à PayPal
-
-[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg?style=for-the-badge)](https://www.paypal.me/draftproducts)
-
----
-
 ## License
 
 [![License](https://img.shields.io/github/license/Blagues-API/api?style=for-the-badge)](https://github.com/Blagues-API/api/blob/master/LICENCE)
 
-Copyright 2020-2021 ©
+Copyright 2020-2022 ©
 <a href="https://www.draftman.fr" target="_blank">DraftMan</a>.
