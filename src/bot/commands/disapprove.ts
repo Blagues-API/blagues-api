@@ -47,7 +47,8 @@ export default class DisapproveCommand extends Command {
             created_at: 'desc'
           },
           where: {
-            merged: false
+            merged: false,
+            refused: false
           }
         },
         suggestion: {
@@ -58,7 +59,8 @@ export default class DisapproveCommand extends Command {
                 created_at: 'desc'
               },
               where: {
-                merged: false
+                merged: false,
+                refused: false
               }
             }
           }

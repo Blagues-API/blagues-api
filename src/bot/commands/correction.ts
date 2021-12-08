@@ -226,7 +226,8 @@ export default class CorrectionCommand extends Command {
               created_at: 'desc'
             },
             where: {
-              merged: false
+              merged: false,
+              refused: false
             }
           },
           suggestion: {
@@ -237,7 +238,8 @@ export default class CorrectionCommand extends Command {
                   created_at: 'desc'
                 },
                 where: {
-                  merged: false
+                  merged: false,
+                  refused: false
                 }
               }
             }
@@ -289,7 +291,8 @@ export default class CorrectionCommand extends Command {
             created_at: 'desc'
           },
           where: {
-            merged: false
+            merged: false,
+            refused: false
           }
         }
       },
