@@ -117,7 +117,7 @@ export default class DisapproveCommand extends Command {
             interaction.guild!.id
           }/${correctionsChannel}/${
           lastCorrection.message_id
-        }) par dessus rendant celle ci obselette, veuillez désapprouver la dernière version de la correction.`)
+        }) par dessus rendant celle ci obsolète, veuillez désapprouver la dernière version de la correction.`)
       );
     }
 
