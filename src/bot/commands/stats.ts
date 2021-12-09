@@ -101,8 +101,7 @@ export default class SuggestCommand extends Command {
         }
       },
       _count: {
-        merged: true,
-        _all: true
+        merged: true
       }
     });
 
@@ -111,8 +110,8 @@ export default class SuggestCommand extends Command {
         {
           title: 'Statistiques',
           description: proposals
-            .sort((a, b) => b._count._all - a._count._all)
-            .map((proposal) => `<@${proposal.user_id}>: ${proposal._count.merged}/${proposal._count._all}`)
+            .sort((a, b) => b._count.merged - a._count.merged)
+            .map((proposal) => `<@${proposal.user_id}>: ${proposal._count.merged} contributions`)
             .join('\n'),
           color: 0x0067ad,
           footer: {
