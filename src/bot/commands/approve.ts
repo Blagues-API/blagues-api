@@ -198,7 +198,7 @@ export default class ApproveCommand extends Command {
     if (proposal.approvals.length < neededApprovals) {
       await message.edit({ embeds: [embed] });
 
-      return interaction.reply(interactionValidate(`Votre approbation a été prise en compte !`));
+      return interaction.reply(interactionValidate(`Votre [approbation](${message.url}) a été prise en compte !`));
     }
 
     return proposal.type === ProposalType.SUGGESTION
@@ -245,7 +245,7 @@ export default class ApproveCommand extends Command {
 
     await message.edit({ embeds: [embed] });
 
-    return interaction.reply(interactionValidate(`La suggestion a bien été ajoutée à l'API !`));
+    return interaction.reply(interactionValidate(`La [suggestion](${message.url}) a bien été ajoutée à l'API !`));
   }
 
   async approveCorrection(
@@ -328,6 +328,6 @@ export default class ApproveCommand extends Command {
         ]
       });
     }
-    return interaction.reply(interactionValidate(`La correction a bien été migrée vers la blague !`));
+    return interaction.reply(interactionValidate(`La [correction](${message.url}) a bien été migrée vers la blague !`));
   }
 }

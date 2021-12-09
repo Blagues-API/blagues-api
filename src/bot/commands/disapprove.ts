@@ -123,7 +123,7 @@ export default class DisapproveCommand extends Command {
 
     if (proposal.disapprovals.some((disapproval) => disapproval.user_id === interaction.user.id)) {
       return interaction.reply(
-        interactionInfo(`Vous avez déjà désapprouvé cette ${isSuggestion ? 'blague' : 'correction'}.`)
+        interactionInfo(`Vous avez déjà désapprouvé cette [${isSuggestion ? 'blague' : 'correction'}](${message.url}).`)
       );
     }
 
@@ -161,7 +161,7 @@ export default class DisapproveCommand extends Command {
     if (proposal.disapprovals.length < neededApprovals) {
       await message.edit({ embeds: [embed] });
 
-      return interaction.reply(interactionValidate(`Votre désapprobation a été prise en compte !`));
+      return interaction.reply(interactionValidate(`Votre [désapprobation](${message.url}) a été prise en compte !`));
     }
 
     return this.disapprove(interaction, proposal, message, embed);
@@ -206,7 +206,7 @@ export default class DisapproveCommand extends Command {
     await message.reactions.removeAll();
 
     return interaction.reply(
-      interactionValidate(`La ${isSuggestion ? 'suggestion' : 'correction'} a bien été refusée !`)
+      interactionValidate(`La [${isSuggestion ? 'suggestion' : 'correction'}](${message.url}) a bien été refusée !`)
     );
   }
 }
