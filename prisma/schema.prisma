@@ -22,28 +22,29 @@ model User {
 }
 
 model Godfather {
-  id        Int    @id @default(autoincrement())
-  user_id   String @unique @db.VarChar(255)
-  emoji_id  String @db.VarChar(255)
+  id       Int    @id @default(autoincrement())
+  user_id  String @unique @db.VarChar(255)
+  emoji_id String @db.VarChar(255)
 
   @@index([user_id], name: "godfathers_user_id")
   @@map("godfathers")
 }
 
 model Proposal {
-  id            Int          @id @default(autoincrement())
-  user_id       String?      @db.VarChar(255)
-  message_id    String?      @unique @db.VarChar(255)
+  id            Int           @id @default(autoincrement())
+  user_id       String?       @db.VarChar(255)
+  message_id    String?       @unique @db.VarChar(255)
   type          ProposalType
-  joke_id       Int?         @unique
-  joke_type     String?      @db.VarChar(255)
-  joke_question String?      @db.VarChar(255)
-  joke_answer   String?      @db.VarChar(255)
-  merged        Boolean      @default(false)
-  refused       Boolean      @default(false)
-  created_at    DateTime     @default(now())
+  joke_id       Int?          @unique
+  joke_type     String?       @db.VarChar(255)
+  joke_question String?       @db.VarChar(255)
+  joke_answer   String?       @db.VarChar(255)
+  merged        Boolean       @default(false)
+  refused       Boolean       @default(false)
+  stale         Boolean       @default(false)
+  created_at    DateTime      @default(now())
   approvals     Approval[]
-  disapprovals   Disapproval[]
+  disapprovals  Disapproval[]
 
   suggestion_id Int?
   suggestion    Proposal?  @relation("ProposalToCorrections", fields: [suggestion_id], references: [id], onDelete: Cascade)
