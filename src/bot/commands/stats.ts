@@ -5,6 +5,7 @@ import Command from '../lib/command';
 import prisma from '../../prisma';
 import { ProposalType } from '@prisma/client';
 import { interactionProblem } from '../utils';
+import partition from 'lodash/partition';
 
 export default class SuggestCommand extends Command {
   constructor() {
@@ -30,17 +31,21 @@ export default class SuggestCommand extends Command {
       const fields = [];
       const proposals = await prisma.proposal.findMany({
         where: {
-          user_id: member.id
+          user_id: member.id,
+          stale: false
         }
       });
 
-      const suggestions = proposals.filter((proposal) => proposal.type === ProposalType.SUGGESTION);
+      const [suggestions, corrections] = partition(proposals, (proposal) => proposal.type === ProposalType.SUGGESTION);
 
       fields.push({
         name: 'Statistiques globales',
         value: stripIndents`
           Blagues proposées: **${suggestions.length}**
           Blagues acceptées: **${suggestions.filter((suggestion) => suggestion.merged).length}**
+
+          Corrections proposées: **${corrections.length}**
+          Corrections acceptées: **${corrections.filter((correction) => correction.merged).length}**
         `
       });
 
@@ -60,7 +65,7 @@ export default class SuggestCommand extends Command {
         ).length;
 
         fields.push({
-          name: 'Parrain',
+          name: 'Décisions de Parrain',
           value: stripIndents`
             Décisions: **${totalDecisionsCount}**
 
@@ -75,9 +80,10 @@ export default class SuggestCommand extends Command {
           {
             author: {
               icon_url: member.displayAvatarURL({ dynamic: true, size: 32 }),
-              name: `${member.user.tag} (${member.id})`
+              name: `Statistiques de ${member.displayName}`
             },
             fields,
+            color: 0x0067ad,
             footer: {
               text: 'Blagues API',
               icon_url: interaction.guild!.iconURL({ size: 32 }) ?? undefined
@@ -89,6 +95,11 @@ export default class SuggestCommand extends Command {
 
     const proposals = await prisma.proposal.groupBy({
       by: ['user_id'],
+      having: {
+        user_id: {
+          not: null
+        }
+      },
       _count: {
         merged: true,
         _all: true
@@ -100,8 +111,10 @@ export default class SuggestCommand extends Command {
         {
           title: 'Statistiques',
           description: proposals
+            .sort((a, b) => b._count._all - a._count._all)
             .map((proposal) => `<@${proposal.user_id}>: ${proposal._count.merged}/${proposal._count._all}`)
             .join('\n'),
+          color: 0x0067ad,
           footer: {
             text: 'Blagues API',
             icon_url: interaction.guild!.iconURL({ size: 32 }) ?? undefined
