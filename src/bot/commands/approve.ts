@@ -26,6 +26,7 @@ import { compareTwoStrings } from 'string-similarity';
 
 type Correction = Proposal & {
   suggestion: Proposal & {
+    corrections: Proposal[];
     approvals: Approval[];
     disapprovals: Disapproval[];
   };
@@ -81,7 +82,6 @@ export default class ApproveCommand extends Command {
         suggestion: {
           include: {
             corrections: {
-              take: 1,
               orderBy: {
                 created_at: 'desc'
               },
@@ -152,7 +152,7 @@ export default class ApproveCommand extends Command {
             interaction.guild!.id
           }/${correctionsChannel}/${
           lastCorrection.message_id
-        }) par dessus rendant celle-ci obselette, veuillez approuver la dernière version de la correction.`)
+        }) par dessus rendant celle-ci obsolète, veuillez approuver la dernière version de la correction.`)
       );
     }
 
@@ -201,6 +201,8 @@ export default class ApproveCommand extends Command {
       return interaction.reply(interactionValidate(`Votre approbation a été prise en compte !`));
     }
 
+    await interaction.deferReply();
+
     return proposal.type === ProposalType.SUGGESTION
       ? this.approveSuggestion(interaction, proposal, message, embed)
       : this.approveCorrection(interaction, proposal as Correction, message, embed);
@@ -219,7 +221,7 @@ export default class ApproveCommand extends Command {
 
     interaction.client.refreshStatus();
 
-    await prisma.proposal.updateMany({
+    await prisma.proposal.update({
       data: {
         merged: true,
         joke_id
@@ -294,6 +296,25 @@ export default class ApproveCommand extends Command {
       },
       where: { id: proposal.id }
     });
+
+    for (const correction of proposal.suggestion.corrections) {
+      if (correction.id === proposal.id) continue;
+      if (correction.merged || correction.refused) continue;
+      await prisma.proposal.update({
+        data: { stale: true },
+        where: { id: correction.id }
+      });
+      const message = correction.message_id && (await channel.messages.fetch(correction.message_id).catch(() => null));
+      if (message) {
+        const staleEmbed = message.embeds[0];
+        staleEmbed.fields[1].value = staleEmbed.fields[1].value!.split('\n\n')[0];
+        staleEmbed.footer = {
+          text: `Correction obsolète`
+        };
+        staleEmbed.color = 0xbcbcbc;
+        await message.edit({ embeds: [staleEmbed] });
+      }
+    }
 
     embed.color = 0x00ff00;
 
