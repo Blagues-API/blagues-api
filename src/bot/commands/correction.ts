@@ -343,7 +343,7 @@ export default class CorrectionCommand extends Command {
       await buttonInteraction.editReply({
         embeds: [
           {
-            title: '💡 Les 60 secondes se sont écoulées',
+            description: '💡 Les 60 secondes se sont écoulées',
             color: 0xffda83
           }
         ]
@@ -399,7 +399,7 @@ export default class CorrectionCommand extends Command {
       questionMessage.edit({
         embeds: [
           {
-            title: '💡 Les 60 secondes se sont écoulées',
+            description: '💡 Les 60 secondes se sont écoulées',
             color: 0xffda83
           }
         ],
