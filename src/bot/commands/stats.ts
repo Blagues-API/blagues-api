@@ -31,8 +31,8 @@ export default class SuggestCommand extends Command {
       const fields = [];
       const proposals = await prisma.proposal.findMany({
         where: {
-          user_id: member.id,
-          stale: false
+          user_id: member.id
+          // stale: false
         }
       });
 
