@@ -76,7 +76,8 @@ export default class ApproveCommand extends Command {
           },
           where: {
             merged: false,
-            refused: false
+            refused: false,
+            stale: false
           }
         },
         suggestion: {
@@ -87,7 +88,8 @@ export default class ApproveCommand extends Command {
               },
               where: {
                 merged: false,
-                refused: false
+                refused: false,
+                stale: false
               }
             },
             approvals: true,
