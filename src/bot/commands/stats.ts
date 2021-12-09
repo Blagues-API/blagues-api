@@ -111,7 +111,12 @@ export default class SuggestCommand extends Command {
           title: 'Statistiques',
           description: proposals
             .sort((a, b) => b._count.merged - a._count.merged)
-            .map((proposal) => `<@${proposal.user_id}>: ${proposal._count.merged} contributions`)
+            .map(
+              (proposal) =>
+                `<@${proposal.user_id}> : ${proposal._count.merged} ${
+                  proposal._count.merged !== 1 ? 'points' : 'point'
+                }`
+            )
             .join('\n'),
           color: 0x0067ad,
           footer: {
