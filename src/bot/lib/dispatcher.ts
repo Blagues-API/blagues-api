@@ -9,6 +9,7 @@ import Command from './command';
 
 import CorrectCommand from '../commands/correction';
 import SuggestCommand from '../commands/suggest';
+import StatsCommand from '../commands/stats';
 import ApproveCommand from '../commands/approve';
 import DisapproveCommand from '../commands/disapprove';
 
@@ -20,7 +21,13 @@ export default class Dispatcher {
   }
 
   public get commands(): Command[] {
-    return [new SuggestCommand(), new CorrectCommand(), new ApproveCommand(), new DisapproveCommand()];
+    return [
+      new SuggestCommand(),
+      new CorrectCommand(),
+      new StatsCommand(),
+      new ApproveCommand(),
+      new DisapproveCommand()
+    ];
   }
 
   public get commandsData(): ApplicationCommandData[] {
