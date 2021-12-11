@@ -48,7 +48,8 @@ export default class DisapproveCommand extends Command {
           },
           where: {
             merged: false,
-            refused: false
+            refused: false,
+            stale: false
           }
         },
         suggestion: {
@@ -60,7 +61,8 @@ export default class DisapproveCommand extends Command {
               },
               where: {
                 merged: false,
-                refused: false
+                refused: false,
+                stale: false
               }
             }
           }
@@ -117,7 +119,7 @@ export default class DisapproveCommand extends Command {
             interaction.guild!.id
           }/${correctionsChannel}/${
           lastCorrection.message_id
-        }) par dessus rendant celle ci obselette, veuillez désapprouver la dernière version de la correction.`)
+        }) par dessus rendant celle ci obsolète, veuillez désapprouver la dernière version de la correction.`)
       );
     }
 
