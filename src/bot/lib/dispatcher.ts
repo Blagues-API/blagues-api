@@ -12,6 +12,7 @@ import SuggestCommand from '../commands/suggest';
 import StatsCommand from '../commands/stats';
 import ApproveCommand from '../commands/approve';
 import DisapproveCommand from '../commands/disapprove';
+import { guildId } from '../constants';
 
 export default class Dispatcher {
   private client: Client;
@@ -56,7 +57,7 @@ export default class Dispatcher {
   }
 
   public async register(): Promise<void> {
-    const guild = this.client.guilds.cache.get(process.env.SERVER_ID!);
+    const guild = this.client.guilds.cache.get(guildId);
     if (!guild) return;
 
     const registredCommands = await guild.commands.set(this.commandsData);
