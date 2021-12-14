@@ -3,7 +3,7 @@ import { CommandInteraction, ContextMenuInteraction, Message, MessageEmbed, Text
 import prisma from '../../prisma';
 import { correctionsChannel, logsChannel, neededApprovals, suggestsChannel } from '../constants';
 import Command from '../lib/command';
-import { renderGodfatherLine } from '../lib/godfathers';
+import { renderGodfatherLine } from '../modules/godfathers';
 import { interactionProblem, interactionInfo, interactionValidate, isEmbedable } from '../utils';
 
 export default class DisapproveCommand extends Command {

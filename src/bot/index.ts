@@ -3,7 +3,7 @@ import Jokes from '../jokes';
 import prisma from '../prisma';
 import { correctionsChannel, suggestsChannel } from './constants';
 import Dispatcher from './lib/dispatcher';
-import Stickys from './lib/stickys';
+import Stickys from './modules/stickys';
 
 export default class Bot extends Client {
   public dispatcher: Dispatcher;

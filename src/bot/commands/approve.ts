@@ -19,7 +19,7 @@ import {
   upReaction
 } from '../constants';
 import Command from '../lib/command';
-import { renderGodfatherLine } from '../lib/godfathers';
+import { renderGodfatherLine } from '../modules/godfathers';
 import { interactionProblem, interactionInfo, interactionValidate, isEmbedable } from '../utils';
 import Jokes from '../../jokes';
 import { compareTwoStrings } from 'string-similarity';
