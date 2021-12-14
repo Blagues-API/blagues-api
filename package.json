@@ -34,7 +34,7 @@
     "@types/dotenv": "^8.2.0",
     "@types/jsonwebtoken": "^8.5.6",
     "@types/lodash": "^4.14.178",
-    "@types/node": "^16.11.12",
+    "@types/node": "^16.11.13",
     "@types/sharp": "^0.29.4",
     "@types/source-map-support": "^0.5.4",
     "@types/string-similarity": "^4.0.0",
