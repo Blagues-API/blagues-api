@@ -12,7 +12,7 @@ import {
 import { findBestMatch } from 'string-similarity';
 import Jokes from '../../jokes';
 import { Category, CategoriesRefs, UnsignedJoke } from '../../typings';
-import { downReaction, suggestsChannel, upReaction } from '../constants';
+import { downReaction, guildId, suggestsChannel, upReaction } from '../constants';
 import Command from '../lib/command';
 import { interactionProblem, isEmbedable } from '../utils';
 import Collection from '@discordjs/collection';
@@ -114,11 +114,9 @@ export default class SuggestCommand extends Command {
       });
 
       if (jokeMessage) {
-        embed.description += `\n⚠️ Une [blague déjà existante](https://discord.com/channels/${
-          process.env.SERVER_ID
-        }/${suggestsChannel}/${jokeMessage.message_id}) y ressemble ${
-          similarity === Similarity.Same ? 'à plus de 80%' : 'fortement'
-        }`;
+        embed.description += `\n⚠️ Une [blague déjà existante](https://discord.com/channels/${guildId}/${suggestsChannel}/${
+          jokeMessage.message_id
+        }) y ressemble ${similarity === Similarity.Same ? 'à plus de 80%' : 'fortement'}`;
       } else {
         embed.fields = [
           {
