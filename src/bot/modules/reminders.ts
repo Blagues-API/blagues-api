@@ -20,7 +20,7 @@ export default class Reminders {
     this.client = client;
 
     // Every two days at 10 p.m.
-    schedule.scheduleJob('0 22 */2 * *', async () => {
+    schedule.scheduleJob('0 21 */2 * *', async () => {
       await this.run();
     });
   }
@@ -133,7 +133,7 @@ export default class Reminders {
         }
         return acc;
       }, new Collection<Snowflake, number>())
-      .filter((score) => score > 3)
+      .filter((score) => score >= 3)
       .map((member_id) => `<@${member_id}>`)
       .join(' ');
 
@@ -151,10 +151,10 @@ export default class Reminders {
         content: isFirstPage ? mentions : undefined,
         embeds: [
           {
-            title: isFirstPage ? 'Parrains du projet Blagues-API' : undefined,
+            title: isFirstPage ? 'Parrains du projet Blagues API' : undefined,
             description: pages[index],
             color: 0x0067ad,
-            footer: isLastPage ? { text: 'Blagues-API' } : undefined,
+            footer: isLastPage ? { text: 'Blagues API' } : undefined,
             timestamp: isLastPage ? new Date() : undefined
           }
         ]
