@@ -19,7 +19,7 @@ export default class Reminders {
   constructor(client: Client) {
     this.client = client;
 
-    // Every two days at 10 p.m.
+    // Every two days at 9 p.m.
     schedule.scheduleJob('0 21 */2 * *', async () => {
       await this.run();
     });
