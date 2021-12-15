@@ -31,8 +31,8 @@ export default class SuggestCommand extends Command {
       const fields = [];
       const proposals = await prisma.proposal.findMany({
         where: {
-          user_id: member.id
-          // stale: false
+          user_id: member.id,
+          stale: false
         }
       });
 
@@ -42,10 +42,12 @@ export default class SuggestCommand extends Command {
         name: 'Statistiques globales',
         value: stripIndents`
           Blagues proposées: **${suggestions.length}**
-          Blagues acceptées: **${suggestions.filter((suggestion) => suggestion.merged).length}**
+          Blagues en attente: **${suggestions.filter((s) => !s.refused && !s.merged).length}**
+          Blagues acceptées: **${suggestions.filter((s) => s.merged).length}**
 
           Corrections proposées: **${corrections.length}**
-          Corrections acceptées: **${corrections.filter((correction) => correction.merged).length}**
+          Corrections en attente: **${corrections.filter((c) => !c.refused && !c.merged).length}**
+          Corrections acceptées: **${corrections.filter((c) => c.merged).length}**
         `
       });
 
