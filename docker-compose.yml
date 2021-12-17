@@ -12,6 +12,8 @@ services:
       - ./.env
     ports:
       - '4003:4000'
+    depends_on:
+      - postgres
     networks:
       - global
 
@@ -24,6 +26,8 @@ services:
     tty: true
     env_file:
       - ../blagues-api.fr/.env
+    depends_on:
+      - app
     ports:
       - '3003:3000'
 
