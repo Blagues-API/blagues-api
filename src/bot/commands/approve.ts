@@ -249,7 +249,7 @@ export default class ApproveCommand extends Command {
 
     await message.edit({ embeds: [embed] });
 
-    return interaction.reply(interactionValidate(`La [suggestion](${message.url}) a bien été ajoutée à l'API !`));
+    await interaction.editReply(interactionValidate(`La [suggestion](${message.url}) a bien été ajoutée à l'API !`));
   }
 
   async approveCorrection(
@@ -351,6 +351,8 @@ export default class ApproveCommand extends Command {
         ]
       });
     }
-    return interaction.reply(interactionValidate(`La [correction](${message.url}) a bien été migrée vers la blague !`));
+    await interaction.editReply(
+      interactionValidate(`La [correction](${message.url}) a bien été migrée vers la blague !`)
+    );
   }
 }
