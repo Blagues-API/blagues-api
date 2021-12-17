@@ -11,6 +11,7 @@ import {
 import prisma from '../../prisma';
 import { CategoriesRefs, Category } from '../../typings';
 import {
+  Colors,
   correctionsChannel,
   downReaction,
   logsChannel,
@@ -231,11 +232,11 @@ export default class ApproveCommand extends Command {
       where: { id: proposal.id }
     });
 
-    embed.color = 0x00ff00;
+    embed.color = Colors.ACCEPTED;
 
     await logs.send({
       content: "Blague ajoutée à l'API",
-      embeds: [embed.setColor(0x245f8d)]
+      embeds: [embed]
     });
 
     embed.footer = { text: 'Blague ajoutée' };
@@ -313,17 +314,17 @@ export default class ApproveCommand extends Command {
         staleEmbed.footer = {
           text: `Correction obsolète`
         };
-        staleEmbed.color = 0xbcbcbc;
+        staleEmbed.color = Colors.REPLACED;
         await message.edit({ embeds: [staleEmbed] });
       }
     }
 
-    embed.color = 0x00ff00;
+    embed.color = Colors.ACCEPTED;
 
     if (isEmbedable(logs)) {
       await logs.send({
         content: `${isPublishedJoke ? 'Blague' : 'Suggestion'} corrigée`,
-        embeds: [embed.setColor(0x245f8d)]
+        embeds: [embed]
       });
     }
 

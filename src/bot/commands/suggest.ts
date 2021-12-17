@@ -1,7 +1,6 @@
 import { stripIndents } from 'common-tags';
 import {
   ButtonInteraction,
-  ColorResolvable,
   CommandInteraction,
   Message,
   MessageButton,
@@ -12,7 +11,7 @@ import {
 import { findBestMatch } from 'string-similarity';
 import Jokes from '../../jokes';
 import { Category, CategoriesRefs, UnsignedJoke } from '../../typings';
-import { downReaction, guildId, suggestsChannel, upReaction } from '../constants';
+import { Colors, downReaction, guildId, suggestsChannel, upReaction } from '../constants';
 import Command from '../lib/command';
 import { interactionProblem, isEmbedable } from '../utils';
 import Collection from '@discordjs/collection';
@@ -23,11 +22,6 @@ enum Similarity {
   Different,
   Like,
   Same
-}
-enum Colors {
-  BLUE,
-  YELLOW,
-  RED
 }
 
 export default class SuggestCommand extends Command {
@@ -102,7 +96,7 @@ export default class SuggestCommand extends Command {
         > **Blague**: ${payload.joke}
         > **Réponse**: ${payload.answer}
       `,
-      color: Colors[similarity] as ColorResolvable
+      color: Colors.PROPOSED
     };
 
     if (similarity !== Similarity.Different) {
