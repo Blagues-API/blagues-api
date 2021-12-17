@@ -3,11 +3,13 @@ import Jokes from '../jokes';
 import prisma from '../prisma';
 import { correctionsChannel, suggestsChannel } from './constants';
 import Dispatcher from './lib/dispatcher';
+import Reminders from './modules/reminders';
 import Stickys from './modules/stickys';
 
 export default class Bot extends Client {
   public dispatcher: Dispatcher;
   public stickys: Stickys;
+  public reminders: Reminders;
 
   constructor() {
     super({
@@ -17,6 +19,7 @@ export default class Bot extends Client {
 
     this.dispatcher = new Dispatcher(this);
     this.stickys = new Stickys(this);
+    this.reminders = new Reminders(this);
 
     this.once('ready', this.onReady.bind(this));
   }

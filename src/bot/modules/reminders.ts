@@ -19,11 +19,12 @@ export default class Reminders {
   constructor(client: Client) {
     this.client = client;
 
-    // Every two days at 9 p.m.
-    schedule.scheduleJob('0 21 */2 * *', async () => {
+    // Every two days at 9 p.m. (0 21 */2 * *)
+    schedule.scheduleJob('0 13 * * *', async () => {
       await this.run();
     });
   }
+
   async run() {
     // Get all open proposals with their dependencies and decisions
     const proposals = await prisma.proposal.findMany({
