@@ -5,11 +5,11 @@ import schedule from 'node-schedule';
 import prisma from '../../prisma';
 import {
   correctionsChannel,
-  emojisGuildId,
-  guildId,
-  parrainRole,
+  suggestionsChannel,
   remindersChannel,
-  suggestsChannel
+  guildId,
+  emojisGuildId,
+  parrainRole
 } from '../constants';
 import { getGodfatherEmoji } from './godfathers';
 
@@ -19,11 +19,12 @@ export default class Reminders {
   constructor(client: Client) {
     this.client = client;
 
-    // Every two days at 9 p.m.
-    schedule.scheduleJob('0 21 */2 * *', async () => {
+    // Every two days at 9 p.m. (0 21 */2 * *)
+    schedule.scheduleJob('0 13 * * *', async () => {
       await this.run();
     });
   }
+
   async run() {
     // Get all open proposals with their dependencies and decisions
     const proposals = await prisma.proposal.findMany({
@@ -107,7 +108,7 @@ export default class Reminders {
           .filter((e) => e)
           .join(' ');
         const line = `[${proposal.type.toLowerCase()}](https://discord.com/channels/${guild.id}/${
-          proposal.type === ProposalType.SUGGESTION ? suggestsChannel : correctionsChannel
+          proposal.type === ProposalType.SUGGESTION ? suggestionsChannel : correctionsChannel
         }/${proposal.message_id}) ${godfathers}\n`;
 
         if (line.length + acc.current.length > 4090) {

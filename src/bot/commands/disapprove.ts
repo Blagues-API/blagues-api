@@ -1,7 +1,7 @@
 import { Proposal, ProposalType } from '@prisma/client';
 import { CommandInteraction, ContextMenuInteraction, Message, MessageEmbed, TextChannel } from 'discord.js';
 import prisma from '../../prisma';
-import { Colors, correctionsChannel, logsChannel, neededApprovals, suggestsChannel } from '../constants';
+import { Colors, correctionsChannel, logsChannel, neededApprovals, suggestionsChannel } from '../constants';
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../modules/godfathers';
 import { interactionProblem, interactionInfo, interactionValidate, isEmbedable } from '../utils';
@@ -17,12 +17,12 @@ export default class DisapproveCommand extends Command {
 
   async run(interaction: CommandInteraction): Promise<void> {
     const channel = (interaction.channel as TextChannel)!;
-    const isSuggestion = channel.id === suggestsChannel;
+    const isSuggestion = channel.id === suggestionsChannel;
     const message = await channel.messages.fetch((interaction as ContextMenuInteraction).targetId);
-    if (![suggestsChannel, correctionsChannel].includes(channel.id)) {
+    if (![suggestionsChannel, correctionsChannel].includes(channel.id)) {
       return interaction.reply(
         interactionProblem(
-          `Vous ne pouvez pas désapprouver une blague ou une correction en dehors des salons <#${suggestsChannel}> et <#${correctionsChannel}>.`
+          `Vous ne pouvez pas désapprouver une blague ou une correction en dehors des salons <#${suggestionsChannel}> et <#${correctionsChannel}>.`
         )
       );
     }
