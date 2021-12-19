@@ -11,14 +11,15 @@ import {
 import prisma from '../../prisma';
 import { CategoriesRefs, Category } from '../../typings';
 import {
+  neededCorrectionsApprovals,
+  neededSuggestionsApprovals,
   correctionsChannel,
   suggestionsChannel,
-  neededApprovals,
-  upReaction,
-  downReaction,
   logsChannel,
   jokerRole,
-  correctorRole
+  correctorRole,
+  upReaction,
+  downReaction
 } from '../constants';
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../modules/godfathers';
@@ -135,7 +136,7 @@ export default class ApproveCommand extends Command {
       );
     }
 
-    const correction = proposal.type === ProposalType.SUGGESTION && proposal.corrections[0];
+    const correction = isSuggestion && proposal.corrections[0];
     if (correction) {
       return interaction.reply(
         interactionInfo(
@@ -150,7 +151,7 @@ export default class ApproveCommand extends Command {
       );
     }
 
-    const lastCorrection = proposal.type !== ProposalType.SUGGESTION && proposal.suggestion?.corrections[0];
+    const lastCorrection = !isSuggestion && proposal.suggestion?.corrections[0];
     if (lastCorrection && lastCorrection.id !== proposal.id) {
       return interaction.reply(
         interactionInfo(`
@@ -201,6 +202,8 @@ export default class ApproveCommand extends Command {
       embed.description = `${embed.description!.split('\n\n')[0]}\n\n${godfathers}`;
     }
 
+    const neededApprovals = isSuggestion ? neededSuggestionsApprovals : neededCorrectionsApprovals;
+
     if (proposal.approvals.length < neededApprovals) {
       await message.edit({ embeds: [embed] });
 
@@ -209,7 +212,7 @@ export default class ApproveCommand extends Command {
 
     await interaction.deferReply();
 
-    return proposal.type === ProposalType.SUGGESTION
+    return isSuggestion
       ? this.approveSuggestion(interaction, proposal, message, embed)
       : this.approveCorrection(interaction, proposal as Correction, message, embed);
   }

@@ -1,7 +1,13 @@
 import { Proposal, ProposalType } from '@prisma/client';
 import { CommandInteraction, ContextMenuInteraction, Message, MessageEmbed, TextChannel } from 'discord.js';
 import prisma from '../../prisma';
-import { correctionsChannel, logsChannel, neededApprovals, suggestionsChannel } from '../constants';
+import {
+  correctionsChannel,
+  logsChannel,
+  neededCorrectionsApprovals,
+  neededSuggestionsApprovals,
+  suggestionsChannel
+} from '../constants';
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../modules/godfathers';
 import { interactionProblem, interactionInfo, interactionValidate, isEmbedable } from '../utils';
@@ -161,6 +167,8 @@ export default class DisapproveCommand extends Command {
     } else {
       embed.description = `${embed.description!.split('\n\n')[0]}\n\n${godfathers}`;
     }
+
+    const neededApprovals = isSuggestion ? neededSuggestionsApprovals : neededCorrectionsApprovals;
 
     if (proposal.disapprovals.length < neededApprovals) {
       await message.edit({ embeds: [embed] });
