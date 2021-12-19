@@ -210,7 +210,7 @@ export default class ApproveCommand extends Command {
       return interaction.reply(interactionValidate(`Votre [approbation](${message.url}) a été prise en compte !`));
     }
 
-    await interaction.deferReply();
+    await interaction.deferReply({ ephemeral: true });
 
     return isSuggestion
       ? this.approveSuggestion(interaction, proposal, message, embed)
