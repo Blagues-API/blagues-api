@@ -98,7 +98,7 @@ export default class DisapproveCommand extends Command {
       );
     }
 
-    const correction = proposal.type === ProposalType.SUGGESTION && proposal.corrections[0];
+    const correction = isSuggestion && proposal.corrections[0];
     if (correction) {
       return interaction.reply(
         interactionInfo(
@@ -106,12 +106,14 @@ export default class DisapproveCommand extends Command {
             interaction.guild!.id
           }/${correctionsChannel}/${
             correction.message_id
-          }), veuillez la cloturer avant la désapprobation de cette suggestion.`
+          }), veuillez la cloturer avant la désapprobation de [cette suggestion](https://discord.com/channels/${
+            interaction.guild!.id
+          }/${suggestionsChannel}/${proposal.message_id}).`
         )
       );
     }
 
-    const lastCorrection = proposal.type !== ProposalType.SUGGESTION && proposal.suggestion?.corrections[0];
+    const lastCorrection = !isSuggestion && proposal.suggestion?.corrections[0];
     if (lastCorrection && lastCorrection.id !== proposal.id) {
       return interaction.reply(
         interactionInfo(`

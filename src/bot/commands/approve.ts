@@ -143,7 +143,9 @@ export default class ApproveCommand extends Command {
             interaction.guild!.id
           }/${correctionsChannel}/${
             correction.message_id
-          }), veuillez l'approuver avant l'approbation de cette suggestion.`
+          }), veuillez l'approuver avant l'approbation de [cette suggestion](https://discord.com/channels/${
+            interaction.guild!.id
+          }/${suggestionsChannel}/${proposal.message_id}).`
         )
       );
     }
