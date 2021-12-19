@@ -14,7 +14,7 @@ export default class Bot extends Client {
   constructor() {
     super({
       partials: ['REACTION'],
-      intents: Intents.FLAGS.GUILDS | Intents.FLAGS.GUILD_MESSAGES
+      intents: Intents.FLAGS.GUILDS | Intents.FLAGS.GUILD_MEMBERS | Intents.FLAGS.GUILD_MESSAGES
     });
 
     this.dispatcher = new Dispatcher(this);

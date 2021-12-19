@@ -12,12 +12,15 @@ import prisma from '../../prisma';
 import { CategoriesRefs, Category } from '../../typings';
 import {
   Colors,
+  neededCorrectionsApprovals,
+  neededSuggestionsApprovals,
   correctionsChannel,
   suggestionsChannel,
-  neededApprovals,
+  logsChannel,
+  jokerRole,
+  correctorRole,
   upReaction,
-  downReaction,
-  logsChannel
+  downReaction
 } from '../constants';
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../modules/godfathers';
@@ -134,7 +137,7 @@ export default class ApproveCommand extends Command {
       );
     }
 
-    const correction = proposal.type === ProposalType.SUGGESTION && proposal.corrections[0];
+    const correction = isSuggestion && proposal.corrections[0];
     if (correction) {
       return interaction.reply(
         interactionInfo(
@@ -142,12 +145,14 @@ export default class ApproveCommand extends Command {
             interaction.guild!.id
           }/${correctionsChannel}/${
             correction.message_id
-          }), veuillez l'approuver avant l'approbation de cette suggestion.`
+          }), veuillez l'approuver avant l'approbation de [cette suggestion](https://discord.com/channels/${
+            interaction.guild!.id
+          }/${suggestionsChannel}/${proposal.message_id}).`
         )
       );
     }
 
-    const lastCorrection = proposal.type !== ProposalType.SUGGESTION && proposal.suggestion?.corrections[0];
+    const lastCorrection = !isSuggestion && proposal.suggestion?.corrections[0];
     if (lastCorrection && lastCorrection.id !== proposal.id) {
       return interaction.reply(
         interactionInfo(`
@@ -198,6 +203,8 @@ export default class ApproveCommand extends Command {
       embed.description = `${embed.description!.split('\n\n')[0]}\n\n${godfathers}`;
     }
 
+    const neededApprovals = isSuggestion ? neededSuggestionsApprovals : neededCorrectionsApprovals;
+
     if (proposal.approvals.length < neededApprovals) {
       await message.edit({ embeds: [embed] });
 
@@ -206,7 +213,7 @@ export default class ApproveCommand extends Command {
 
     await interaction.deferReply();
 
-    return proposal.type === ProposalType.SUGGESTION
+    return isSuggestion
       ? this.approveSuggestion(interaction, proposal, message, embed)
       : this.approveCorrection(interaction, proposal as Correction, message, embed);
   }
@@ -218,6 +225,11 @@ export default class ApproveCommand extends Command {
     embed: MessageEmbed
   ): Promise<void> {
     const logs = interaction.client.channels.cache.get(logsChannel) as TextChannel;
+
+    const member = await interaction.guild?.members.fetch(proposal.user_id!).catch(() => null);
+    if (member && !member.roles.cache.has(jokerRole)) {
+      await member.roles.add(jokerRole);
+    }
 
     const { success, joke_id } = await Jokes.mergeJoke(proposal);
     if (!success) return;
@@ -265,6 +277,11 @@ export default class ApproveCommand extends Command {
     const suggestionMessage =
       proposal.suggestion.message_id &&
       (await channel.messages.fetch(proposal.suggestion.message_id).catch(() => null));
+
+    const member = await interaction.guild?.members.fetch(proposal.user_id!).catch(() => null);
+    if (member && !member.roles.cache.has(correctorRole)) {
+      await member.roles.add(correctorRole);
+    }
 
     if (isPublishedJoke) {
       const { success } = await Jokes.mergeJoke(proposal);

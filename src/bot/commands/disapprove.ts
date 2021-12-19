@@ -1,7 +1,14 @@
 import { Proposal, ProposalType } from '@prisma/client';
 import { CommandInteraction, ContextMenuInteraction, Message, MessageEmbed, TextChannel } from 'discord.js';
 import prisma from '../../prisma';
-import { Colors, correctionsChannel, logsChannel, neededApprovals, suggestionsChannel } from '../constants';
+import {
+  Colors,
+  correctionsChannel,
+  logsChannel,
+  neededCorrectionsApprovals,
+  neededSuggestionsApprovals,
+  suggestionsChannel
+} from '../constants';
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../modules/godfathers';
 import { interactionProblem, interactionInfo, interactionValidate, isEmbedable } from '../utils';
@@ -98,7 +105,7 @@ export default class DisapproveCommand extends Command {
       );
     }
 
-    const correction = proposal.type === ProposalType.SUGGESTION && proposal.corrections[0];
+    const correction = isSuggestion && proposal.corrections[0];
     if (correction) {
       return interaction.reply(
         interactionInfo(
@@ -106,12 +113,14 @@ export default class DisapproveCommand extends Command {
             interaction.guild!.id
           }/${correctionsChannel}/${
             correction.message_id
-          }), veuillez la cloturer avant la désapprobation de cette suggestion.`
+          }), veuillez la cloturer avant la désapprobation de [cette suggestion](https://discord.com/channels/${
+            interaction.guild!.id
+          }/${suggestionsChannel}/${proposal.message_id}).`
         )
       );
     }
 
-    const lastCorrection = proposal.type !== ProposalType.SUGGESTION && proposal.suggestion?.corrections[0];
+    const lastCorrection = !isSuggestion && proposal.suggestion?.corrections[0];
     if (lastCorrection && lastCorrection.id !== proposal.id) {
       return interaction.reply(
         interactionInfo(`
@@ -159,6 +168,8 @@ export default class DisapproveCommand extends Command {
     } else {
       embed.description = `${embed.description!.split('\n\n')[0]}\n\n${godfathers}`;
     }
+
+    const neededApprovals = isSuggestion ? neededSuggestionsApprovals : neededCorrectionsApprovals;
 
     if (proposal.disapprovals.length < neededApprovals) {
       await message.edit({ embeds: [embed] });

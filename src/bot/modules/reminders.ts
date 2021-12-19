@@ -20,7 +20,7 @@ export default class Reminders {
     this.client = client;
 
     // Every two days at 9 p.m. (0 21 */2 * *)
-    schedule.scheduleJob('0 13 * * *', async () => {
+    schedule.scheduleJob('0 21 */2 * *', async () => {
       await this.run();
     });
   }
@@ -64,7 +64,7 @@ export default class Reminders {
 
     const guild = this.client.guilds.cache.get(guildId);
     const emojisGuild = this.client.guilds.cache.get(emojisGuildId)!;
-    if (!guild) return;
+    if (!guild || !emojisGuild) return;
 
     await guild.members.fetch();
 
