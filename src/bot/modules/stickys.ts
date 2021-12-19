@@ -1,6 +1,6 @@
 import { stripIndents } from 'common-tags';
 import { Client, Snowflake, TextChannel, MessageOptions } from 'discord.js';
-import { commandsChannel, correctionsChannel, suggestsChannel } from '../constants';
+import { commandsChannel, correctionsChannel, suggestionsChannel } from '../constants';
 import Jokes from '../../jokes';
 
 export default class Stickys {
@@ -9,7 +9,7 @@ export default class Stickys {
   constructor(client: Client) {
     this.client = client;
 
-    setInterval(() => this.sticky(suggestsChannel, this.suggestsMessage()), 10000);
+    setInterval(() => this.sticky(suggestionsChannel, this.suggestsMessage()), 10000);
     setInterval(() => this.sticky(correctionsChannel, this.correctionsMessage()), 10000);
   }
 

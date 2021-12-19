@@ -6,7 +6,7 @@ import {
   logsChannel,
   neededCorrectionsApprovals,
   neededSuggestionsApprovals,
-  suggestsChannel
+  suggestionsChannel
 } from '../constants';
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../modules/godfathers';
@@ -23,12 +23,12 @@ export default class DisapproveCommand extends Command {
 
   async run(interaction: CommandInteraction): Promise<void> {
     const channel = (interaction.channel as TextChannel)!;
-    const isSuggestion = channel.id === suggestsChannel;
+    const isSuggestion = channel.id === suggestionsChannel;
     const message = await channel.messages.fetch((interaction as ContextMenuInteraction).targetId);
-    if (![suggestsChannel, correctionsChannel].includes(channel.id)) {
+    if (![suggestionsChannel, correctionsChannel].includes(channel.id)) {
       return interaction.reply(
         interactionProblem(
-          `Vous ne pouvez pas désapprouver une blague ou une correction en dehors des salons <#${suggestsChannel}> et <#${correctionsChannel}>.`
+          `Vous ne pouvez pas désapprouver une blague ou une correction en dehors des salons <#${suggestionsChannel}> et <#${correctionsChannel}>.`
         )
       );
     }
@@ -104,7 +104,7 @@ export default class DisapproveCommand extends Command {
       );
     }
 
-    const correction = proposal.type === ProposalType.SUGGESTION && proposal.corrections[0];
+    const correction = isSuggestion && proposal.corrections[0];
     if (correction) {
       return interaction.reply(
         interactionInfo(
@@ -112,12 +112,14 @@ export default class DisapproveCommand extends Command {
             interaction.guild!.id
           }/${correctionsChannel}/${
             correction.message_id
-          }), veuillez la cloturer avant la désapprobation de cette suggestion.`
+          }), veuillez la cloturer avant la désapprobation de [cette suggestion](https://discord.com/channels/${
+            interaction.guild!.id
+          }/${suggestionsChannel}/${proposal.message_id}).`
         )
       );
     }
 
-    const lastCorrection = proposal.type !== ProposalType.SUGGESTION && proposal.suggestion?.corrections[0];
+    const lastCorrection = !isSuggestion && proposal.suggestion?.corrections[0];
     if (lastCorrection && lastCorrection.id !== proposal.id) {
       return interaction.reply(
         interactionInfo(`
