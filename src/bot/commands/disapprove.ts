@@ -2,6 +2,7 @@ import { Proposal, ProposalType } from '@prisma/client';
 import { CommandInteraction, ContextMenuInteraction, Message, MessageEmbed, TextChannel } from 'discord.js';
 import prisma from '../../prisma';
 import {
+  Colors,
   correctionsChannel,
   logsChannel,
   neededCorrectionsApprovals,
@@ -193,12 +194,12 @@ export default class DisapproveCommand extends Command {
       where: { id: proposal.id }
     });
 
-    embed.color = 0xff0000;
+    embed.color = Colors.REFUSED;
 
     if (isEmbedable(logs)) {
       await logs.send({
         content: `${isSuggestion ? 'Blague' : 'Suggestion'} refusée`,
-        embeds: [embed.setColor(0x245f8d)]
+        embeds: [embed]
       });
     }
 

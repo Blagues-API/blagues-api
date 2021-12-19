@@ -18,3 +18,15 @@ export const downReaction: Snowflake = '705115406976680117';
 
 export const guildId: Snowflake = process.env.SERVER_ID ?? '698822532467523605';
 export const emojisGuildId: Snowflake = process.env.EMOJIS_SERVER_ID ?? '698822532467523605';
+
+export enum Colors {
+  PRIMARY = 0x245f8d,
+  SUCCESS = 0x248d5f,
+  DANGER = 0x8d2424,
+  INFO = 0xffda83,
+
+  PROPOSED = 0x245f8d,
+  ACCEPTED = 0x248d5f,
+  REFUSED = 0x8d2424,
+  REPLACED = 0xffe83b
+}

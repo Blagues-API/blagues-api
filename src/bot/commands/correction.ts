@@ -1,7 +1,6 @@
 import { stripIndents } from 'common-tags';
 import {
   ButtonInteraction,
-  ColorResolvable,
   CommandInteraction,
   Interaction,
   Message,
@@ -13,7 +12,7 @@ import {
 import { jokeById, jokeByQuestion } from '../../controllers';
 import prisma from '../../prisma';
 import { Category, JokeTypesDescriptions, CategoriesRefs, UnsignedJoke, UnsignedJokeKey } from '../../typings';
-import { correctionsChannel, downReaction, upReaction } from '../constants';
+import { Colors, correctionsChannel, downReaction, upReaction } from '../constants';
 import Command from '../lib/command';
 import clone from 'lodash/clone';
 import { ProposalType } from '@prisma/client';
@@ -71,7 +70,7 @@ export default class CorrectionCommand extends Command {
           title: 'Quelle blague voulez-vous corriger ?',
           description:
             "Il faut tout d'abord identifier la blague. Pour cela, il faut l'identifiant de la blague, l'identifiant du message la proposant ou la question de celle-ci.",
-          color: 'BLUE'
+          color: Colors.PRIMARY
         }
       ],
       fetchReply: true
@@ -102,7 +101,7 @@ export default class CorrectionCommand extends Command {
               question.embeds[0],
               {
                 title: '💡 Commande annulée',
-                color: 0xffda83
+                color: Colors.INFO
               }
             ]
           });
@@ -124,7 +123,7 @@ export default class CorrectionCommand extends Command {
         > **Question:** ${joke.joke}
         > **Réponse:** ${joke.answer}
       `,
-      color: 'BLUE' as ColorResolvable
+      color: Colors.PRIMARY
     };
     const question = (await commandInteraction[commandInteraction.replied ? 'editReply' : 'reply']({
       embeds: [embed],
@@ -344,7 +343,7 @@ export default class CorrectionCommand extends Command {
         embeds: [
           {
             description: '💡 Les 60 secondes se sont écoulées',
-            color: 0xffda83
+            color: Colors.INFO
           }
         ]
       });
@@ -400,7 +399,7 @@ export default class CorrectionCommand extends Command {
         embeds: [
           {
             description: '💡 Les 60 secondes se sont écoulées',
-            color: 0xffda83
+            color: Colors.INFO
           }
         ],
         components: []
@@ -463,7 +462,7 @@ export default class CorrectionCommand extends Command {
               `
             }
           ],
-          color: 'BLUE'
+          color: Colors.PROPOSED
         }
       ]
     });
@@ -490,7 +489,7 @@ export default class CorrectionCommand extends Command {
           description: `Votre [proposition de correction](https://discord.com/channels/${
             commandInteraction.guild!.id
           }/${correctionsChannel}/${message.id}) a bien été envoyée !`,
-          color: 'GREEN'
+          color: Colors.SUCCESS
         }
       ],
       components: []

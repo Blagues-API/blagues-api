@@ -1,6 +1,6 @@
 import { stripIndents } from 'common-tags';
 import { CommandInteraction, GuildMember } from 'discord.js';
-import { parrainRole } from '../constants';
+import { Colors, parrainRole } from '../constants';
 import Command from '../lib/command';
 import prisma from '../../prisma';
 import { ProposalType } from '@prisma/client';
@@ -85,7 +85,7 @@ export default class SuggestCommand extends Command {
               name: `Statistiques de ${member.displayName}`
             },
             fields,
-            color: 0x0067ad,
+            color: Colors.PRIMARY,
             footer: {
               text: 'Blagues API',
               icon_url: interaction.guild!.iconURL({ size: 32 }) ?? undefined
@@ -120,7 +120,7 @@ export default class SuggestCommand extends Command {
                 }`
             )
             .join('\n'),
-          color: 0x0067ad,
+          color: Colors.PRIMARY,
           footer: {
             text: 'Blagues API',
             icon_url: interaction.guild!.iconURL({ size: 32 }) ?? undefined
