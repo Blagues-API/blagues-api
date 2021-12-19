@@ -16,7 +16,9 @@ import {
   neededApprovals,
   upReaction,
   downReaction,
-  logsChannel
+  logsChannel,
+  jokerRole,
+  correctorRole
 } from '../constants';
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../modules/godfathers';
@@ -218,6 +220,11 @@ export default class ApproveCommand extends Command {
   ): Promise<void> {
     const logs = interaction.client.channels.cache.get(logsChannel) as TextChannel;
 
+    const member = await interaction.guild?.members.fetch(proposal.user_id!).catch(() => null);
+    if (member && !member.roles.cache.has(jokerRole)) {
+      await member.roles.add(jokerRole);
+    }
+
     const { success, joke_id } = await Jokes.mergeJoke(proposal);
     if (!success) return;
 
@@ -264,6 +271,11 @@ export default class ApproveCommand extends Command {
     const suggestionMessage =
       proposal.suggestion.message_id &&
       (await channel.messages.fetch(proposal.suggestion.message_id).catch(() => null));
+
+    const member = await interaction.guild?.members.fetch(proposal.user_id!).catch(() => null);
+    if (member && !member.roles.cache.has(correctorRole)) {
+      await member.roles.add(correctorRole);
+    }
 
     if (isPublishedJoke) {
       const { success } = await Jokes.mergeJoke(proposal);
