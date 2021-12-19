@@ -12,11 +12,11 @@ import prisma from '../../prisma';
 import { CategoriesRefs, Category } from '../../typings';
 import {
   correctionsChannel,
-  downReaction,
-  logsChannel,
+  suggestionsChannel,
   neededApprovals,
-  suggestsChannel,
-  upReaction
+  upReaction,
+  downReaction,
+  logsChannel
 } from '../constants';
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../modules/godfathers';
@@ -45,12 +45,12 @@ export default class ApproveCommand extends Command {
 
   async run(interaction: CommandInteraction): Promise<void> {
     const channel = (interaction.channel as TextChannel)!;
-    const isSuggestion = channel.id === suggestsChannel;
+    const isSuggestion = channel.id === suggestionsChannel;
     const message = await channel.messages.fetch((interaction as ContextMenuInteraction).targetId);
-    if (![suggestsChannel, correctionsChannel].includes(channel.id)) {
+    if (![suggestionsChannel, correctionsChannel].includes(channel.id)) {
       return interaction.reply(
         interactionProblem(
-          `Vous ne pouvez pas approuver une blague ou une correction en dehors des salons <#${suggestsChannel}> et <#${correctionsChannel}>.`
+          `Vous ne pouvez pas approuver une blague ou une correction en dehors des salons <#${suggestionsChannel}> et <#${correctionsChannel}>.`
         )
       );
     }
@@ -259,7 +259,7 @@ export default class ApproveCommand extends Command {
     embed: MessageEmbed
   ): Promise<void> {
     const logs = interaction.client.channels.cache.get(logsChannel) as TextChannel;
-    const channel = interaction.client.channels.cache.get(suggestsChannel) as TextChannel;
+    const channel = interaction.client.channels.cache.get(suggestionsChannel) as TextChannel;
     const isPublishedJoke = proposal.type === ProposalType.CORRECTION;
     const suggestionMessage =
       proposal.suggestion.message_id &&

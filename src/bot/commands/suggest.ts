@@ -12,7 +12,7 @@ import {
 import { findBestMatch } from 'string-similarity';
 import Jokes from '../../jokes';
 import { Category, CategoriesRefs, UnsignedJoke } from '../../typings';
-import { downReaction, guildId, suggestsChannel, upReaction } from '../constants';
+import { guildId, suggestionsChannel, upReaction, downReaction } from '../constants';
 import Command from '../lib/command';
 import { interactionProblem, isEmbedable } from '../utils';
 import Collection from '@discordjs/collection';
@@ -114,7 +114,7 @@ export default class SuggestCommand extends Command {
       });
 
       if (jokeMessage) {
-        embed.description += `\n⚠️ Une [blague déjà existante](https://discord.com/channels/${guildId}/${suggestsChannel}/${
+        embed.description += `\n⚠️ Une [blague déjà existante](https://discord.com/channels/${guildId}/${suggestionsChannel}/${
           jokeMessage.message_id
         }) y ressemble ${similarity === Similarity.Same ? 'à plus de 80%' : 'fortement'}`;
       } else {
@@ -150,7 +150,7 @@ export default class SuggestCommand extends Command {
       });
     }
 
-    const channel: TextChannel = interaction.guild!.channels.cache.get(suggestsChannel) as TextChannel;
+    const channel: TextChannel = interaction.guild!.channels.cache.get(suggestionsChannel) as TextChannel;
     if (!isEmbedable(channel)) {
       return interaction.reply(
         interactionProblem(`Je n'ai pas la permission d'envoyer la blague dans le salon ${channel}.`, false)
