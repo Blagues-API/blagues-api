@@ -14,7 +14,8 @@ import {
   correctionsChannel,
   downReaction,
   logsChannel,
-  neededApprovals,
+  neededCorrectionsApprovals,
+  neededSuggestionsApprovals,
   suggestsChannel,
   upReaction
 } from '../constants';
@@ -133,7 +134,7 @@ export default class ApproveCommand extends Command {
       );
     }
 
-    const correction = proposal.type === ProposalType.SUGGESTION && proposal.corrections[0];
+    const correction = isSuggestion && proposal.corrections[0];
     if (correction) {
       return interaction.reply(
         interactionInfo(
@@ -146,7 +147,7 @@ export default class ApproveCommand extends Command {
       );
     }
 
-    const lastCorrection = proposal.type !== ProposalType.SUGGESTION && proposal.suggestion?.corrections[0];
+    const lastCorrection = !isSuggestion && proposal.suggestion?.corrections[0];
     if (lastCorrection && lastCorrection.id !== proposal.id) {
       return interaction.reply(
         interactionInfo(`
@@ -197,6 +198,8 @@ export default class ApproveCommand extends Command {
       embed.description = `${embed.description!.split('\n\n')[0]}\n\n${godfathers}`;
     }
 
+    const neededApprovals = isSuggestion ? neededSuggestionsApprovals : neededCorrectionsApprovals;
+
     if (proposal.approvals.length < neededApprovals) {
       await message.edit({ embeds: [embed] });
 
@@ -205,7 +208,7 @@ export default class ApproveCommand extends Command {
 
     await interaction.deferReply();
 
-    return proposal.type === ProposalType.SUGGESTION
+    return isSuggestion
       ? this.approveSuggestion(interaction, proposal, message, embed)
       : this.approveCorrection(interaction, proposal as Correction, message, embed);
   }
