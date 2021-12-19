@@ -236,7 +236,7 @@ export default class ApproveCommand extends Command {
 
     interaction.client.refreshStatus();
 
-    await prisma.proposal.update({
+    await prisma.proposal.updateMany({
       data: {
         merged: true,
         joke_id
