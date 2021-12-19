@@ -28,6 +28,14 @@ export default class Reminders {
   async run() {
     // Get all open proposals with their dependencies and decisions
     const proposals = await prisma.proposal.findMany({
+      where: {
+        merged: false,
+        refused: false,
+        stale: false
+      },
+      orderBy: {
+        created_at: 'asc'
+      },
       include: {
         corrections: {
           take: 1,
@@ -135,7 +143,7 @@ export default class Reminders {
         return acc;
       }, new Collection<Snowflake, number>())
       .filter((score) => score >= 3)
-      .map((member_id) => `<@${member_id}>`)
+      .map((_score, member_id) => `<@${member_id}>`)
       .join(' ');
 
     const channel = this.client.channels.cache.get(remindersChannel) as TextChannel;
