@@ -7252,5 +7252,335 @@
     "type": "dark",
     "joke": "Pourquoi Mr. PROPRE n'a aucun poil sur le caillou ?",
     "answer": "Parce qu'il as le cancer."
+  },
+  {
+    "id": 1210,
+    "type": "dev",
+    "joke": "Vous savez pourquoi un développeur ne peut pas aller au musée d'histoire naturelle ?",
+    "answer": "Il y a beaucoup trop de bugs !"
+  },
+  {
+    "id": 1211,
+    "type": "dark",
+    "joke": "Qu'es-ce qui ne cuit pas dans un légume ?",
+    "answer": "Le fauteuil roulant"
+  },
+  {
+    "id": 1212,
+    "type": "global",
+    "joke": "Quelle surprise te fait le sulfate de cuivre anhydre à Noël ?",
+    "answer": "En cas d'eau, il devient bleu."
+  },
+  {
+    "id": 1213,
+    "type": "global",
+    "joke": "π² va dans un bar. Que fait-il 5 minutes plus tard ?",
+    "answer": "Il fait ππ !"
+  },
+  {
+    "id": 1214,
+    "type": "global",
+    "joke": "Comment appelle-t-on un rat sans queue ?",
+    "answer": "Un rat-courci."
+  },
+  {
+    "id": 1215,
+    "type": "dev",
+    "joke": "Comment répare-t-on un fichier corrompu ?",
+    "answer": "On lui donne encore plus d'argent !"
+  },
+  {
+    "id": 1216,
+    "type": "global",
+    "joke": "Que fait O en cours de maths ?",
+    "answer": "Il O' ses camarades"
+  },
+  {
+    "id": 1217,
+    "type": "global",
+    "joke": "Que dit une bouteille en retard à son patron ?",
+    "answer": "Désolé, j'étais dans les bouchons !"
+  },
+  {
+    "id": 1218,
+    "type": "blondes",
+    "joke": "Comment une blonde étudie les cellules du corps humain ?",
+    "answer": "Elle ouvre un tableau Excel !"
+  },
+  {
+    "id": 1219,
+    "type": "global",
+    "joke": "Un brocoli rencontre un chou-fleur.",
+    "answer": "AU SECOURS ! UN FANTÔME !"
+  },
+  {
+    "id": 1220,
+    "type": "dev",
+    "joke": "Pourquoi les documents Word sont parfaits pour discuter ?",
+    "answer": "Car ils font des petits Mo..."
+  },
+  {
+    "id": 1221,
+    "type": "dev",
+    "joke": "Il y a quoi après 403 ?",
+    "answer": "Bah je sais pas, j'ai pas trouvé..."
+  },
+  {
+    "id": 1222,
+    "type": "beauf",
+    "joke": "Pourquoi les alcooliques sont-ils des animaux à sang froid ?",
+    "answer": "Parce qu'ils ont en permanence 12 degrés 5 sous le bras."
+  },
+  {
+    "id": 1223,
+    "type": "global",
+    "joke": "Que dit un mec qui à perdu ses lunettes à son opticien ?",
+    "answer": "Mais t'es pas net Baptiste !"
+  },
+  {
+    "id": 1224,
+    "type": "global",
+    "joke": "Quel est le comble pour un marteau ?",
+    "answer": "Aller voir un prêtre pour ne plus avoir de vices."
+  },
+  {
+    "id": 1225,
+    "type": "global",
+    "joke": "C'est l'histoire de Paf le chien qui traverse la route.",
+    "answer": "Et paf le chien !"
+  },
+  {
+    "id": 1226,
+    "type": "dark",
+    "joke": "Quelle est la différence entre un oiseau et un arabe ?",
+    "answer": "Il y en a un qui vole pour immigrer et l'autre qui immigre pour voler."
+  },
+  {
+    "id": 1227,
+    "type": "dark",
+    "joke": "Quelle est le point commun entre de la cocaïne et une bombe au napalm ?",
+    "answer": "Tous les deux t'explosent !"
+  },
+  {
+    "id": 1228,
+    "type": "dev",
+    "joke": "C'est officiel, nous avons trouvé la source qui rend aveugle 80% de la population !",
+    "answer": "Le mode jour des applications !"
+  },
+  {
+    "id": 1229,
+    "type": "dark",
+    "joke": "Que fait un lépreux qui joue de la guitare ?",
+    "answer": "Du steak haché."
+  },
+  {
+    "id": 1230,
+    "type": "dark",
+    "joke": "Comment reconnaît-on une lettre envoyée par un lépreux?",
+    "answer": "La langue est collé sur le timbre."
+  },
+  {
+    "id": 1231,
+    "type": "dev",
+    "joke": "J'ai une blague sur la mémoire vive ...",
+    "answer": "... mais attendez elle RAM."
+  },
+  {
+    "id": 1232,
+    "type": "global",
+    "joke": "Que dit un ordinateur à un Minitel ?",
+    "answer": "Mais t'as pas l'net Baptiste !"
+  },
+  {
+    "id": 1233,
+    "type": "dev",
+    "joke": "Que fait un développeur en python qui a trop bu ?",
+    "answer": "Il va faire pypi !"
+  },
+  {
+    "id": 1234,
+    "type": "dark",
+    "joke": "Qui est le plus grand esclavagiste ?",
+    "answer": "Jeff Bezos"
+  },
+  {
+    "id": 1235,
+    "type": "global",
+    "joke": "Comment appelle-t-on un rassemblement de carnivores ?",
+    "answer": "Un meating"
+  },
+  {
+    "id": 1236,
+    "type": "global",
+    "joke": "Pourquoi aux Champs-Élysées ?",
+    "answer": "Car Elise est agricultrice."
+  },
+  {
+    "id": 1237,
+    "type": "global",
+    "joke": "Quel est le plus vieil exercice ?",
+    "answer": "L'exo-squelette"
+  },
+  {
+    "id": 1238,
+    "type": "blondes",
+    "joke": "Une blonde reçoit un texto d'une personne, contenant \"JTM très fort\".",
+    "answer": "Il paraît que mêmes les voisins ont entendu le journal télévisé matinal..."
+  },
+  {
+    "id": 1239,
+    "type": "dev",
+    "joke": "En programmation c'est le seul endroit où ...",
+    "answer": "... tu arrives à faire rentrer deux bool dans un string."
+  },
+  {
+    "id": 1240,
+    "type": "global",
+    "joke": "À quel endroit se retrouvent les poissons les plus sportifs ?",
+    "answer": "Dans une mare à thon"
+  },
+  {
+    "id": 1241,
+    "type": "dev",
+    "joke": "Tu fais plein d'erreurs dans une interro de maths et tu te chopes un 0/20.",
+    "answer": "Ca s'appelle une int err 0."
+  },
+  {
+    "id": 1242,
+    "type": "global",
+    "joke": "Pourquoi fait-on des marathons dans les rues ?",
+    "answer": "Parce que dans la mer, ça serait compliqué."
+  },
+  {
+    "id": 1243,
+    "type": "global",
+    "joke": "Que raconte une maman T-rex à son bébé ?",
+    "answer": "Une préhistoire !"
+  },
+  {
+    "id": 1244,
+    "type": "dark",
+    "joke": "Vous savez la différence entre un juif et une pizza ?",
+    "answer": "Après cuisson la pizza colle au plat alors que le juif part en un coup de balai !"
+  },
+  {
+    "id": 1245,
+    "type": "global",
+    "joke": "Allô ? C'est Jésus !",
+    "answer": "-Mais non ! -Mais si !"
+  },
+  {
+    "id": 1246,
+    "type": "dark",
+    "joke": "Quel est la seule chose a ne jamais dire a un juif ?",
+    "answer": "Ça gaze ?"
+  },
+  {
+    "id": 1247,
+    "type": "global",
+    "joke": "Pourquoi les femmes à caractère explosif sont-elles toujours magnifiques ?",
+    "answer": "Parce qu'elles sont canon !"
+  },
+  {
+    "id": 1248,
+    "type": "global",
+    "joke": "Avec quoi ramasse-t-on la papaye ?",
+    "answer": "Avec une foufourche"
+  },
+  {
+    "id": 1249,
+    "type": "limit",
+    "joke": "Quelle est la différence entre une pizza et une prositituée ?",
+    "answer": "Avec la pizza, on peut choisir avec ou sans champignons…"
+  },
+  {
+    "id": 1250,
+    "type": "global",
+    "joke": "Quel est l'animal poilu qui se rapproche le plus de l'homme ?",
+    "answer": "- Démis Roussos ?"
+  },
+  {
+    "id": 1251,
+    "type": "global",
+    "joke": "Quel est le comble pour un agriculteur ?",
+    "answer": "Ne pas avoir de détracteurs."
+  },
+  {
+    "id": 1252,
+    "type": "dark",
+    "joke": "Quelle est la différence entre Jeanne Calment et Lady Diana ?",
+    "answer": "La première est morte à 122 et la deuxième à 150"
+  },
+  {
+    "id": 1253,
+    "type": "dark",
+    "joke": "Que faut-il jamais dire a un survivant du 11 Septembre 2001 ?",
+    "answer": "Ca boom ?"
+  },
+  {
+    "id": 1254,
+    "type": "dark",
+    "joke": "Que faut-il jamais dire a un survivant du 11 Septembre 2001 ?",
+    "answer": "Ca boom ?"
+  },
+  {
+    "id": 1255,
+    "type": "global",
+    "joke": "Que faut-il dire à Groot pour qu'il travail ?",
+    "answer": "Au bouleau petit hêtre avant que je t'enchêne."
+  },
+  {
+    "id": 1256,
+    "type": "global",
+    "joke": "Quel est le comble pour un haricot vert ?",
+    "answer": "Payer les pois cassés."
+  },
+  {
+    "id": 1257,
+    "type": "global",
+    "joke": "Que faut-il dire à Groot pour qu'il travail ?",
+    "answer": "Au bouleau petit hêtre avant que je t'enchêne."
+  },
+  {
+    "id": 1258,
+    "type": "limit",
+    "joke": "Melon et Meleche trouve une maison à vendre....",
+    "answer": "...Melon l'achète et Meleche l'habite"
+  },
+  {
+    "id": 1259,
+    "type": "blondes",
+    "joke": "Quel est le point commun entre une blonde intelligente et un alien ?",
+    "answer": "Leurs existences n'ont jamais été prouvées."
+  },
+  {
+    "id": 1260,
+    "type": "global",
+    "joke": "Chuck Norris peut faire de la bière...",
+    "answer": "en brassant de l'air."
+  },
+  {
+    "id": 1261,
+    "type": "global",
+    "joke": "Quand la nuit tombe...",
+    "answer": "Chuck Norris sait la relever."
+  },
+  {
+    "id": 1262,
+    "type": "global",
+    "joke": "Chuck Norris peut faire des œufs...",
+    "answer": "avec une omelette."
+  },
+  {
+    "id": 1263,
+    "type": "global",
+    "joke": "À la fin d'un repas au restaurant...",
+    "answer": "Chuck Norris reçoit une soustraction."
+  },
+  {
+    "id": 1264,
+    "type": "global",
+    "joke": "Chuck Norris n'a pas besoin de parapluie...",
+    "answer": "les gouttes de pluie ne veulent pas avoir d'embrouilles avec Chuck Norris."
   }
 ]
