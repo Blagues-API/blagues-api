@@ -19,8 +19,8 @@ export default class Reminders {
   constructor(client: Client) {
     this.client = client;
 
-    // Every two days at 9 p.m. (0 21 */2 * *)
-    schedule.scheduleJob('0 21 */2 * *', async () => {
+    // Every day at 9 p.m. (0 21 * * *)
+    schedule.scheduleJob('0 21 * * *', async () => {
       await this.run();
     });
   }
@@ -142,7 +142,7 @@ export default class Reminders {
         }
         return acc;
       }, new Collection<Snowflake, number>())
-      .filter((score) => score >= 3)
+      .filter((score) => score >= 5)
       .map((_score, member_id) => `<@${member_id}>`)
       .join(' ');
 
