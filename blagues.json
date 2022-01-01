@@ -7581,6 +7581,600 @@
     "id": 1264,
     "type": "global",
     "joke": "Chuck Norris n'a pas besoin de parapluie...",
-    "answer": "les gouttes de pluie ne veulent pas avoir d'embrouilles avec Chuck Norris."
+    "answer": "...les gouttes de pluie ne veulent pas avoir d'embrouilles avec Chuck Norris."
+  },
+  {
+    "id": 1265,
+    "type": "dark",
+    "joke": "Que voit un malvoyant après s'être battu ?",
+    "answer": "Il voit flou."
+  },
+  {
+    "id": 1266,
+    "type": "global",
+    "joke": "Quel est le comble pour un agriculteur ?",
+    "answer": "Ne pas avoir de détracteurs."
+  },
+  {
+    "id": 1267,
+    "type": "dark",
+    "joke": "Qu'est-ce qu'un tremblement de terre pour une personne ayant Parkinson ?",
+    "answer": "Une crise..."
+  },
+  {
+    "id": 1268,
+    "type": "global",
+    "joke": "Chuck Norris peut boire de l'eau...",
+    "answer": "... en Inde."
+  },
+  {
+    "id": 1269,
+    "type": "limit",
+    "joke": "Une grosse queue qui rappelle un bon souvenir...",
+    "answer": "...ça reste dans les annales."
+  },
+  {
+    "id": 1270,
+    "type": "beauf",
+    "joke": "Pourquoi les cyclistes et les pratiquants de Stand-Up Paddle ne s'entendent pas bien ?",
+    "answer": "Car les cyclistes sont pédales et les autres pagaies."
+  },
+  {
+    "id": 1271,
+    "type": "beauf",
+    "joke": "Pourquoi Adolf Hitler détestait-il la mousse au chocolat ?",
+    "answer": "Parce que la moustache."
+  },
+  {
+    "id": 1272,
+    "type": "global",
+    "joke": "Que dit un poisson à un autre poisson en train de nager dans de l'huile ?",
+    "answer": "Mais t'es pané Baptiste !"
+  },
+  {
+    "id": 1273,
+    "type": "dark",
+    "joke": "Pourquoi grand-mère sait faire un bon café ?",
+    "answer": "Parce qu’elle a que ça à foutre cette vieille peau."
+  },
+  {
+    "id": 1274,
+    "type": "dark",
+    "joke": "Je vais faire une blague sur le nazisme ...",
+    "answer": "Elle va faire führer !"
+  },
+  {
+    "id": 1275,
+    "type": "global",
+    "joke": "Comment appelle-t-on un rassemblement de guêpes ?",
+    "answer": "La guêpe ride !"
+  },
+  {
+    "id": 1276,
+    "type": "dark",
+    "joke": "Comment appelle-t-on un chien sans organes ?",
+    "answer": "On ne l'appelle pas, il est mort."
+  },
+  {
+    "id": 1277,
+    "type": "global",
+    "joke": "Pourquoi les coquillages aiment-ils quand les sable est bien plat ?",
+    "answer": "Parce qu'ils aiment quand cétacé !"
+  },
+  {
+    "id": 1278,
+    "type": "global",
+    "joke": "Je vais faire une blague sur Amazon...",
+    "answer": "Ça va faire un carton !"
+  },
+  {
+    "id": 1279,
+    "type": "global",
+    "joke": "Que dit un prof à un bon éléve ?",
+    "answer": "Mais t'es pas bête Baptiste !"
+  },
+  {
+    "id": 1280,
+    "type": "beauf",
+    "joke": "Pourquoi les mamies sont les meilleurs putes ?",
+    "answer": "Parce qu'elles se laissent toujours peloter !"
+  },
+  {
+    "id": 1281,
+    "type": "global",
+    "joke": "Que dit une maman au bébé dans son ventre ?",
+    "answer": "Mais t'es pas né Baptiste !"
+  },
+  {
+    "id": 1282,
+    "type": "blondes",
+    "joke": "Quelle est la viennoiserie que les blondes préparent quand elles ont froid aux pieds ?",
+    "answer": "Le chausson aux pommes, car elles l'ont mis au four !"
+  },
+  {
+    "id": 1283,
+    "type": "global",
+    "joke": "C'est quoi un petit pois avec une épée face à une carotte avec une épée ?",
+    "answer": "Un bon duel."
+  },
+  {
+    "id": 1284,
+    "type": "global",
+    "joke": "Chuck Norris peut réanimer un feu...",
+    "answer": "...en lui faisant du bouche à bouche."
+  },
+  {
+    "id": 1285,
+    "type": "global",
+    "joke": "Que fait une théière devant un ascenseur ?",
+    "answer": "Elle veut mon thé."
+  },
+  {
+    "id": 1286,
+    "type": "global",
+    "joke": "Pourquoi les pêcheurs ne sont pas gros ?",
+    "answer": "Car ils surveillent leurs lignes !"
+  },
+  {
+    "id": 1287,
+    "type": "global",
+    "joke": "Avec quelle monnaie les marins payent-ils ?",
+    "answer": "Avec des sous marins !"
+  },
+  {
+    "id": 1288,
+    "type": "global",
+    "joke": "Quel est le fruit préféré des profs d'histoire ?",
+    "answer": "Les dates."
+  },
+  {
+    "id": 1289,
+    "type": "dev",
+    "joke": "Que fait un geek quand il a peur ?",
+    "answer": "Il URL"
+  },
+  {
+    "id": 1290,
+    "type": "global",
+    "joke": "Pourquoi est-ce que les chercheurs ont-ils des trous de mémoire?",
+    "answer": "Car ils se creusent la tête !"
+  },
+  {
+    "id": 1291,
+    "type": "global",
+    "joke": "Quel poisson n'a pas de certificat de naissance ?",
+    "answer": "Le poisson pané."
+  },
+  {
+    "id": 1292,
+    "type": "dark",
+    "joke": "Quelle est la différence entre Jeanne Calment et Lady Diana ?",
+    "answer": "La première est morte à 122 et la deuxième à 150"
+  },
+  {
+    "id": 1293,
+    "type": "global",
+    "joke": "Qu'est-ce qui a 4 côtés le jour et 7 côtés la nuit ?",
+    "answer": "Ta couverture à 2 heures du matin"
+  },
+  {
+    "id": 1294,
+    "type": "global",
+    "joke": "Au prochain trimestre, je double ma moyenne !",
+    "answer": "J'ai 0, ça devrait être jouable."
+  },
+  {
+    "id": 1295,
+    "type": "beauf",
+    "joke": "Que souhaitait-on aux servantes ayant une grosse patate au milieu du visage le jour de la Saint-Sylvestre ?",
+    "answer": "Bonne à nez !"
+  },
+  {
+    "id": 1296,
+    "type": "global",
+    "joke": "Que dit un Yaourt à une crème dessert ?",
+    "answer": "Mais t'es Danette Baptiste !"
+  },
+  {
+    "id": 1297,
+    "type": "limit",
+    "joke": "Quelle est la différence entre la bite et un gîte ?",
+    "answer": "Le gîte on l'habite et la bite on l'agite !"
+  },
+  {
+    "id": 1298,
+    "type": "dark",
+    "joke": "Maman, est-ce que tu m'aimes ?",
+    "answer": "Au vu du prix auquel je t'ai acheté, y'a intérêt !"
+  },
+  {
+    "id": 1299,
+    "type": "dark",
+    "joke": "C'est quoi la différence entre les terroristes et les époux Balkany?",
+    "answer": "Les terroristes, ils ne détournent que des avions."
+  },
+  {
+    "id": 1300,
+    "type": "dark",
+    "joke": "Si on libérait tous le animaux du parc Marineland et qu'on y enfermait tous les partisans du FN et bah...",
+    "answer": "ça s'appellerait toujours Marineland..."
+  },
+  {
+    "id": 1301,
+    "type": "global",
+    "joke": "Dans un four, un muffin croise un autre muffin, il lui dit \"Tu trouves pas qu'il fait chaud ?\"",
+    "answer": "L'autre crie \"HA ! Un muffin qui parle !\""
+  },
+  {
+    "id": 1302,
+    "type": "global",
+    "joke": "Que dit une pierre à une autre pierre ?",
+    "answer": "Rien : les pierres ne parlent pas !"
+  },
+  {
+    "id": 1303,
+    "type": "dark",
+    "joke": "Vous savez pourquoi New-York ne peux pas gagner aux échecs ? Parcequ'il lui manque 2 Tours.",
+    "answer": "En revanche, elle peut quand même gagner contre Paris qui a perdue sa Dame"
+  },
+  {
+    "id": 1304,
+    "type": "global",
+    "joke": "Quel est le pays le plus étonné du monde ?",
+    "answer": "l'Oman"
+  },
+  {
+    "id": 1305,
+    "type": "global",
+    "joke": "A et A' sont sur un bateau sur un bateau. A tombe à l'eau, que fait A' ?",
+    "answer": "Il dérive."
+  },
+  {
+    "id": 1306,
+    "type": "global",
+    "joke": "A et A' sont sur un bateau sur un bateau. A tombe à l'eau, que fait A' ?",
+    "answer": "Il dérive."
+  },
+  {
+    "id": 1307,
+    "type": "dark",
+    "joke": "C'est quoi la différence entre les terroristes et les époux Balkany?",
+    "answer": "Les terroristes, ils ne détournent que des avions."
+  },
+  {
+    "id": 1308,
+    "type": "global",
+    "joke": "Quand Chunk Norris se trompe dans son contrôle de physique...",
+    "answer": "...les lois de la physique changent."
+  },
+  {
+    "id": 1309,
+    "type": "dark",
+    "joke": "C'est l'histoire d'Hitler qui prend l'ascenseur avec un juif et qui lui demande...",
+    "answer": "... si il veut des cendres."
+  },
+  {
+    "id": 1310,
+    "type": "global",
+    "joke": "Quel est le réseau social préféré des pêcheurs ?",
+    "answer": "Truiteur."
+  },
+  {
+    "id": 1311,
+    "type": "global",
+    "joke": "Quand Chunk Norris se trompe dans son contrôle de physique...",
+    "answer": "...les lois de la physique changent."
+  },
+  {
+    "id": 1312,
+    "type": "global",
+    "joke": "Pourquoi Mario est dégoutant ?",
+    "answer": "Parce que Mario Maker"
+  },
+  {
+    "id": 1313,
+    "type": "dark",
+    "joke": "Comment mouraient les juifs les plus rapides à Auschwitz ?",
+    "answer": "Ils étaient passés au gaaaz, gaaaaaaz, gaz !"
+  },
+  {
+    "id": 1314,
+    "type": "global",
+    "joke": "Un homme se rend sur un site proposant des conseils concernant la perte du poids.",
+    "answer": "Dès son arrivée sur le site, on lui demande s'il veut des cookies..."
+  },
+  {
+    "id": 1315,
+    "type": "global",
+    "joke": "Vous savez pourquoi les Japonais ne veulent pas de chevaux ?",
+    "answer": "Parcequ'ils sont déjà Poney !"
+  },
+  {
+    "id": 1316,
+    "type": "global",
+    "joke": "Quel est le médecin qui nous fait tous craquer ?",
+    "answer": "L’osteo."
+  },
+  {
+    "id": 1317,
+    "type": "dark",
+    "joke": "Où trouve-t-on les marchés illégaux ?",
+    "answer": "En Afrique, car ce sont des marchés noirs."
+  },
+  {
+    "id": 1318,
+    "type": "global",
+    "joke": "Dans quel pays n'y a-t-il pas de cacao ?",
+    "answer": "À Cuba !"
+  },
+  {
+    "id": 1319,
+    "type": "dark",
+    "joke": "Maman, est-ce que tu m'aimes ?",
+    "answer": "Au vu du prix auquel je t'ai acheté, y'a intérêt !"
+  },
+  {
+    "id": 1320,
+    "type": "global",
+    "joke": "Que dit un jus de fruit à un soda ?",
+    "answer": "Mais t'es canette Baptiste !"
+  },
+  {
+    "id": 1321,
+    "type": "global",
+    "joke": "Un homme se rend sur un site proposant des conseils concernant la perte du poids.",
+    "answer": "Dès son arrivée sur le site, on lui demande s'il veut des cookies..."
+  },
+  {
+    "id": 1322,
+    "type": "global",
+    "joke": "Vous savez pourquoi les Japonais ne veulent pas de chevaux ?",
+    "answer": "Parcequ'ils sont déjà Poney !"
+  },
+  {
+    "id": 1323,
+    "type": "global",
+    "joke": "Pourquoi Mario est dégoutant ?",
+    "answer": "Parce que Mario Maker"
+  },
+  {
+    "id": 1324,
+    "type": "global",
+    "joke": "Que dit une pierre à une autre pierre ?",
+    "answer": "Rien : les pierres ne parlent pas !"
+  },
+  {
+    "id": 1325,
+    "type": "global",
+    "joke": "Dans un four, un muffin croise un autre muffin, il lui dit \"Tu trouves pas qu'il fait chaud ?\"",
+    "answer": "L'autre crie \"HA ! Un muffin qui parle !\""
+  },
+  {
+    "id": 1326,
+    "type": "global",
+    "joke": "Un homme se rend sur un site proposant des conseils concernant la perte du poids.",
+    "answer": "Dès son arrivée sur le site, on lui demande s'il veut des cookies..."
+  },
+  {
+    "id": 1327,
+    "type": "dark",
+    "joke": "Vous savez pourquoi New-York ne peux pas gagner aux échecs ? Parcequ'il lui manque 2 Tours.",
+    "answer": "En revanche, elle peut quand même gagner contre Paris qui a perdue sa Dame"
+  },
+  {
+    "id": 1328,
+    "type": "dark",
+    "joke": "Si on libérait tous le animaux du parc Marineland et qu'on y enfermait tous les partisans du FN et bah...",
+    "answer": "ça s'appellerait toujours Marineland..."
+  },
+  {
+    "id": 1329,
+    "type": "global",
+    "joke": "Quand la nuit tombe...",
+    "answer": "Chuck Norris sait la relever."
+  },
+  {
+    "id": 1330,
+    "type": "global",
+    "joke": "Pourquoi les Belges viennent-ils à la messe avec du savon ?",
+    "answer": "Pour l’Ave Maria."
+  },
+  {
+    "id": 1331,
+    "type": "global",
+    "joke": "A et A' sont sur un bateau sur un bateau. A tombe à l'eau, que fait A' ?",
+    "answer": "Il dérive."
+  },
+  {
+    "id": 1332,
+    "type": "dark",
+    "joke": "C'est quoi la différence entre les terroristes et les époux Balkany?",
+    "answer": "Les terroristes, ils ne détournent que des avions."
+  },
+  {
+    "id": 1333,
+    "type": "global",
+    "joke": "Quel est le réseau social préféré des pêcheurs ?",
+    "answer": "Truiteur."
+  },
+  {
+    "id": 1334,
+    "type": "global",
+    "joke": "Quel est le point commun entre un soda dans un four et une papillote ?",
+    "answer": "Ce sont tous les deux des chauds colas."
+  },
+  {
+    "id": 1335,
+    "type": "global",
+    "joke": "Un homme se rend sur un site proposant des conseils concernant la perte du poids.",
+    "answer": "Dès son arrivée sur le site, on lui demande s'il veut des cookies..."
+  },
+  {
+    "id": 1336,
+    "type": "global",
+    "joke": "Que dit une pierre à une autre pierre ?",
+    "answer": "Rien : les pierres ne parlent pas !"
+  },
+  {
+    "id": 1337,
+    "type": "global",
+    "joke": "Dans un four, un muffin croise un autre muffin, il lui dit \"Tu trouves pas qu'il fait chaud ?\"",
+    "answer": "L'autre crie \"HA ! Un muffin qui parle !\""
+  },
+  {
+    "id": 1338,
+    "type": "global",
+    "joke": "On pense que sous l'un des casques des Daft Punk se cache Chuck Norris.",
+    "answer": "Alors qu'en fait : il est sous les deux !"
+  },
+  {
+    "id": 1339,
+    "type": "global",
+    "joke": "Que fait un jardinier quand il ment ?",
+    "answer": "Il raconte des salades."
+  },
+  {
+    "id": 1340,
+    "type": "global",
+    "joke": "Vous savez pourquoi les Japonais ne veulent pas de chevaux ?",
+    "answer": "Parce qu'ils sont déjà Poney !"
+  },
+  {
+    "id": 1341,
+    "type": "global",
+    "joke": "Quand Chuck Norris regarde le soleil avec insistance",
+    "answer": "... c'est le soleil qui devient aveugle."
+  },
+  {
+    "id": 1342,
+    "type": "dark",
+    "joke": "Où trouve-t-on les marchés illégaux ?",
+    "answer": "En Afrique, car ce sont des marchés noirs."
+  },
+  {
+    "id": 1343,
+    "type": "global",
+    "joke": "Quand Chunk Norris se trompe dans son contrôle de physique...",
+    "answer": "...les lois de la physique changent."
+  },
+  {
+    "id": 1344,
+    "type": "dark",
+    "joke": "C'est l'histoire d'un zoophile...",
+    "answer": "...qui prend son élan."
+  },
+  {
+    "id": 1345,
+    "type": "global",
+    "joke": "Quel est le médecin qui nous fait tous craquer ?",
+    "answer": "L’ostéo."
+  },
+  {
+    "id": 1346,
+    "type": "dark",
+    "joke": "C'est l'histoire d'Hitler qui prend l'ascenseur avec un juif et qui lui demande...",
+    "answer": "... s'il veut des cendres."
+  },
+  {
+    "id": 1347,
+    "type": "global",
+    "joke": "Un pingouin qui fait un spectacle ...",
+    "answer": "Peut-on dire que c'est un one manchot ?"
+  },
+  {
+    "id": 1348,
+    "type": "global",
+    "joke": "C'est en sciant...",
+    "answer": "Que Léonard devint scie."
+  },
+  {
+    "id": 1349,
+    "type": "dev",
+    "joke": "Pourquoi un ordinateur se gratte-il tout le temps ?",
+    "answer": "Car il a des puces."
+  },
+  {
+    "id": 1350,
+    "type": "dev",
+    "joke": "C'est l'histoire d'une cocotte minute connectée...",
+    "answer": "... qui utilise WinRAR pour décompresser."
+  },
+  {
+    "id": 1351,
+    "type": "global",
+    "joke": "Quel est le comble pour Lara Croft ?",
+    "answer": "Qu'elle tombe raide morte."
+  },
+  {
+    "id": 1352,
+    "type": "global",
+    "joke": "Quel est le comble pour un toit ?",
+    "answer": "Ne pas avoir de comble."
+  },
+  {
+    "id": 1353,
+    "type": "dark",
+    "joke": "Les éoliennes c'est comme les migrants...",
+    "answer": "Tous les approuvent mais personne n'en veut à côté de chez lui."
+  },
+  {
+    "id": 1354,
+    "type": "dark",
+    "joke": "Emma n'as pas de bras. On frappe à la porte. Qui est là ?",
+    "answer": "Bah pas Emma ..."
+  },
+  {
+    "id": 1355,
+    "type": "limit",
+    "joke": "Quelle est la différence entre la bite et un gite ?",
+    "answer": "Le gîte on l’a bite et la bite on la gîte !"
+  },
+  {
+    "id": 1356,
+    "type": "global",
+    "joke": "Je suis un nez qui fait le tour du monde, qui suis-je ?",
+    "answer": "Un équateur"
+  },
+  {
+    "id": 1357,
+    "type": "dark",
+    "joke": "Qu'est ce qu'un exorcisme à l'envers ?",
+    "answer": "C'est quand le diable fait sortir le prêtre de l'enfant."
+  },
+  {
+    "id": 1358,
+    "type": "dark",
+    "joke": "Pourquoi je n'aime pas Marcel ?",
+    "answer": "Parce qu'il m’harcèle."
+  },
+  {
+    "id": 1359,
+    "type": "dark",
+    "joke": "Maman, est-ce que tu m'aimes ?",
+    "answer": "Au vu du prix auquel je t'ai acheté, y'a intérêt !"
+  },
+  {
+    "id": 1360,
+    "type": "global",
+    "joke": "Pourquoi Mario est dégoutant ?",
+    "answer": "Parce que Mario Maker"
+  },
+  {
+    "id": 1361,
+    "type": "dark",
+    "joke": "Quel est le point commun entre mon bureau et celui de Jean-Luc Lahaye ?",
+    "answer": "On y a tous les deux mis une petite enceinte."
+  },
+  {
+    "id": 1362,
+    "type": "blondes",
+    "joke": "Quel est le point commun entre la Chine et les blondes ?",
+    "answer": "Les deux pensent que Taiwan n'est pas un pays ..."
+  },
+  {
+    "id": 1363,
+    "type": "global",
+    "joke": "Qu'est-ce qui devient blanc quand il est sale ?",
+    "answer": "Un tableau noir."
   }
 ]
