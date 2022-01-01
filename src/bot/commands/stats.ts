@@ -95,16 +95,16 @@ export default class SuggestCommand extends Command {
       });
     }
 
+    // Issue reported: https://github.com/prisma/prisma/issues/10915
     const proposals = await prisma.proposal.groupBy({
-      by: ['user_id'],
+      by: ['user_id', 'merged'],
       having: {
         user_id: {
           not: null
-        }
-      },
-      _count: {
+        },
         merged: true
-      }
+      },
+      _count: true
     });
 
     return interaction.reply({
@@ -112,12 +112,9 @@ export default class SuggestCommand extends Command {
         {
           title: 'Statistiques',
           description: proposals
-            .sort((a, b) => b._count.merged - a._count.merged)
+            .sort((a, b) => b._count - a._count)
             .map(
-              (proposal) =>
-                `<@${proposal.user_id}> : ${proposal._count.merged} ${
-                  proposal._count.merged !== 1 ? 'points' : 'point'
-                }`
+              (proposal) => `<@${proposal.user_id}> : ${proposal._count} ${proposal._count !== 1 ? 'points' : 'point'}`
             )
             .join('\n'),
           color: Colors.PRIMARY,
