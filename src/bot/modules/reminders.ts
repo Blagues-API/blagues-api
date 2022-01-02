@@ -20,7 +20,7 @@ export default class Reminders {
     this.client = client;
 
     // Every day at 9 p.m. (0 21 * * *)
-    schedule.scheduleJob('0 * * * *', async () => {
+    schedule.scheduleJob('30 * * * *', async () => {
       await this.run();
     });
 
