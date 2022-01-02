@@ -20,12 +20,16 @@ export default class Reminders {
     this.client = client;
 
     // Every day at 9 p.m. (0 21 * * *)
-    schedule.scheduleJob('0 21 * * *', async () => {
+    schedule.scheduleJob('0 * * * *', async () => {
       await this.run();
+    });
+
+    schedule.scheduleJob('0 21 * * *', async () => {
+      await this.run(true);
     });
   }
 
-  async run() {
+  async run(needMentions = false) {
     // Get all open proposals with their dependencies and decisions
     const proposals = await prisma.proposal.findMany({
       where: {
@@ -133,18 +137,20 @@ export default class Reminders {
       { current: '>>> ', pages: [] }
     );
 
-    // Filter godfathers with a minimal of 3 acceptable decisions
-    const mentions = entries
-      .reduce((acc, { members_ids }) => {
-        for (const member_id of members_ids) {
-          const memberScore = acc.get(member_id) ?? 0;
-          acc.set(member_id, memberScore + 1);
-        }
-        return acc;
-      }, new Collection<Snowflake, number>())
-      .filter((score) => score >= 5)
-      .map((_score, member_id) => `<@${member_id}>`)
-      .join(' ');
+    // Filter godfathers with a minimal of 10 acceptable decisions
+    const mentions =
+      needMentions &&
+      entries
+        .reduce((acc, { members_ids }) => {
+          for (const member_id of members_ids) {
+            const memberScore = acc.get(member_id) ?? 0;
+            acc.set(member_id, memberScore + 1);
+          }
+          return acc;
+        }, new Collection<Snowflake, number>())
+        .filter((score) => score >= 5)
+        .map((_score, member_id) => `<@${member_id}>`)
+        .join(' ');
 
     const channel = this.client.channels.cache.get(remindersChannel) as TextChannel;
 
@@ -157,7 +163,7 @@ export default class Reminders {
       const isLastPage = Number(index) === pages.length;
 
       await channel.send({
-        content: isFirstPage ? mentions : undefined,
+        content: (isFirstPage && mentions) || undefined,
         embeds: [
           {
             title: isFirstPage ? 'Parrains du projet Blagues API' : undefined,
