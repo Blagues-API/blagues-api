@@ -11,9 +11,9 @@ import {
 import { findBestMatch } from 'string-similarity';
 import Jokes from '../../jokes';
 import { Category, CategoriesRefs, UnsignedJoke } from '../../typings';
-import { Colors, guildId, suggestionsChannel, upReaction, downReaction } from '../constants';
+import { Colors, guildId, suggestionsChannel, upReaction, downReaction, commandsChannel } from '../constants';
 import Command from '../lib/command';
-import { interactionProblem, isEmbedable } from '../utils';
+import { interactionInfo, interactionProblem, isEmbedable } from '../utils';
 import Collection from '@discordjs/collection';
 import prisma from '../../prisma';
 import { ProposalType } from '@prisma/client';
@@ -58,6 +58,10 @@ export default class SuggestCommand extends Command {
   }
 
   async run(interaction: CommandInteraction): Promise<void> {
+    if (interaction.channelId !== commandsChannel) {
+      return interaction.reply(interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannel}>.`));
+    }
+
     if (
       (interaction.options.get('joke')!.value as string).length > 130 ||
       (interaction.options.get('response')!.value as string).length > 130

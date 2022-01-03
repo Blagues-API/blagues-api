@@ -12,7 +12,7 @@ import {
 import { jokeById, jokeByQuestion } from '../../controllers';
 import prisma from '../../prisma';
 import { Category, JokeTypesDescriptions, CategoriesRefs, UnsignedJoke, UnsignedJokeKey } from '../../typings';
-import { Colors, correctionsChannel, downReaction, upReaction } from '../constants';
+import { Colors, commandsChannel, correctionsChannel, downReaction, upReaction } from '../constants';
 import Command from '../lib/command';
 import clone from 'lodash/clone';
 import { ProposalType } from '@prisma/client';
@@ -50,6 +50,10 @@ export default class CorrectionCommand extends Command {
   }
   async run(interaction: CommandInteraction): Promise<void> {
     const query = interaction.options.getString('recherche', true) as string;
+
+    if (interaction.channelId !== commandsChannel) {
+      return interaction.reply(interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannel}>.`));
+    }
 
     const joke = await this.resolveJoke(interaction, query);
     if (!joke) return;
