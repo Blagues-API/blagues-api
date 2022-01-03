@@ -63,6 +63,7 @@
     "discord.js": "^13.5.0",
     "dotenv": "^10.0.0",
     "fastify": "^3.25.3",
+    "fastify-cors": "^6.0.2",
     "fastify-formbody": "^5.2.0",
     "fastify-plugin": "^3.0.0",
     "got": "^11.8.3",
