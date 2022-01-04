@@ -8176,5 +8176,293 @@
     "type": "global",
     "joke": "Qu'est-ce qui devient blanc quand il est sale ?",
     "answer": "Un tableau noir."
+  },
+  {
+    "id": 1364,
+    "type": "global",
+    "joke": "J'apparais 2 fois dans l'année, qui suis-je ?",
+    "answer": "La lettre n"
+  },
+  {
+    "id": 1365,
+    "type": "global",
+    "joke": "Que dit un escargot quand il croise une limace ?",
+    "answer": "Oh la belle décapotable !"
+  },
+  {
+    "id": 1366,
+    "type": "dark",
+    "joke": "Que dit un Camerounais le 31 décembre ?",
+    "answer": "Bananier !"
+  },
+  {
+    "id": 1367,
+    "type": "global",
+    "joke": "Qu’est-ce qu’une chauve-souris avec une perruque ?",
+    "answer": "Une souris"
+  },
+  {
+    "id": 1368,
+    "type": "global",
+    "joke": "Deux asticots se retrouvent dans une pomme...",
+    "answer": "Je ne savais pas que vous habitiez dans ce quartier."
+  },
+  {
+    "id": 1369,
+    "type": "beauf",
+    "joke": "Quel est le point commun entre la méditerranée et ta maman ?",
+    "answer": "Ce sont toutes les deux des mers chaudes."
+  },
+  {
+    "id": 1370,
+    "type": "dark",
+    "joke": "Mon pote juif m'a demandé mon numéro.",
+    "answer": "Je lui ai dit que nous on utilisait des noms."
+  },
+  {
+    "id": 1371,
+    "type": "global",
+    "joke": "Je complimente toujours mes tomates quand elles poussent...",
+    "answer": "Ça les fait rougir."
+  },
+  {
+    "id": 1372,
+    "type": "global",
+    "joke": "Comment appelle t-on un fromage sorcier ?",
+    "answer": "Un faux-mage blanc !"
+  },
+  {
+    "id": 1373,
+    "type": "dark",
+    "joke": "J’ai voulu recoller les morceaux avec mon ex …",
+    "answer": "Mais je sais plus où sont enterrés ses jambes…"
+  },
+  {
+    "id": 1374,
+    "type": "global",
+    "joke": "Qu’est-ce qui fait que les manchots mâles gras sont un tel succès avec les femelles manchots?",
+    "answer": "Ils savent certainement comment briser la glace."
+  },
+  {
+    "id": 1375,
+    "type": "global",
+    "joke": "Comment s'appellent les parents de l'homme invisible ?",
+    "answer": "Les transparents."
+  },
+  {
+    "id": 1376,
+    "type": "global",
+    "joke": "Pourquoi une blonde a jeté sa guitare ?",
+    "answer": "Parce qu'il y avait un trou au milieu."
+  },
+  {
+    "id": 1377,
+    "type": "global",
+    "joke": "Quel est le nom de la série Passe-Partout pour les vieux ?",
+    "answer": "Pisse-Partout."
+  },
+  {
+    "id": 1378,
+    "type": "dark",
+    "joke": "Comment appelles-t-on 6 gays à la guerre ?",
+    "answer": "Rainbow six"
+  },
+  {
+    "id": 1379,
+    "type": "beauf",
+    "joke": "Les gens disent que les femmes ne sont pas drôles...",
+    "answer": "...mais hier ma femme m'a demandé de faire à manger."
+  },
+  {
+    "id": 1380,
+    "type": "global",
+    "joke": "Une femme chubbier: Miroir, Miroir sur le mur, qui est le plus beau de tous ?",
+    "answer": "Le miroir répond: \"Veuillez vous écarter, je ne vois rien...\""
+  },
+  {
+    "id": 1381,
+    "type": "dark",
+    "joke": "Quel est le plat que les juifs détestent le plus ?",
+    "answer": "Les petits fours"
+  },
+  {
+    "id": 1382,
+    "type": "dark",
+    "joke": "Comment on appelle un bébé musulman ?",
+    "answer": "Un Baby Bommer"
+  },
+  {
+    "id": 1383,
+    "type": "dark",
+    "joke": "J'ai crié \"JENGA !\" en classe...",
+    "answer": "On regardait un documentaire sur le 11 septembre."
+  },
+  {
+    "id": 1384,
+    "type": "global",
+    "joke": "Qu'est-ce que ça donne une tempête à Halloween ?",
+    "answer": "Des vents pires."
+  },
+  {
+    "id": 1385,
+    "type": "global",
+    "joke": "Comment fait-on pour arrêter un combat d'aveugles ?",
+    "answer": "\"Je parie sur celui avec le couteau !\""
+  },
+  {
+    "id": 1386,
+    "type": "dark",
+    "joke": "Je connais un esquimau en phase terminale...",
+    "answer": "Il est à l'Arctique de la mort."
+  },
+  {
+    "id": 1387,
+    "type": "global",
+    "joke": "C'est quoi la différence entre un fonctionnaire et quelqu'un au chômage ?",
+    "answer": "Le chômeur, lui, a déjà travaillé."
+  },
+  {
+    "id": 1388,
+    "type": "global",
+    "joke": "Au tribunal des couleurs, qui prend les décisions ?",
+    "answer": "Le vert, car le vert dicte."
+  },
+  {
+    "id": 1389,
+    "type": "global",
+    "joke": "- Docteur ! Je me sens comme une chaise !",
+    "answer": "- Justement, j'ai votre dossier ici."
+  },
+  {
+    "id": 1390,
+    "type": "global",
+    "joke": "C'est un père qui lave son automobile avec son fils. Un moment donné, le fils lui dit:",
+    "answer": "\"Tu pourrais pas utiliser l'éponge à la place ?"
+  },
+  {
+    "id": 1391,
+    "type": "global",
+    "joke": "Qu'est-ce qui est rouge et qui fait mal aux dents ?",
+    "answer": "Une brique."
+  },
+  {
+    "id": 1392,
+    "type": "global",
+    "joke": "Au tribunal des couleurs, qui prend les décisions ?",
+    "answer": "Le vert, car le vert dicte."
+  },
+  {
+    "id": 1393,
+    "type": "global",
+    "joke": "C'est quoi la différence entre un fonctionnaire et quelqu'un au chômage ?",
+    "answer": "Le chômeur, lui, a déjà travaillé."
+  },
+  {
+    "id": 1394,
+    "type": "global",
+    "joke": "Quel est le point commun entre Loki et le Covid ?",
+    "answer": "Il ont tous les deux pleins de variants."
+  },
+  {
+    "id": 1395,
+    "type": "global",
+    "joke": "Qu'est-ce que ça donne une tempête à Halloween ?",
+    "answer": "Des vents pires."
+  },
+  {
+    "id": 1396,
+    "type": "global",
+    "joke": "Qu'est-ce qui fait 999 fois tic et une fois toc ?",
+    "answer": "Un mille-pattes avec une jambe de bois."
+  },
+  {
+    "id": 1397,
+    "type": "global",
+    "joke": "Qu'est-ce que ça donne une tempête à Halloween ?",
+    "answer": "Des vents pires."
+  },
+  {
+    "id": 1398,
+    "type": "dark",
+    "joke": "Que faut-il pour réunir les Beatles ?",
+    "answer": "Encore deux morts"
+  },
+  {
+    "id": 1399,
+    "type": "dark",
+    "joke": "Selon une étude, 25% des enfants Européens savent utiliser une tablette. Ridicule :",
+    "answer": "100% des enfants Chinois savent les fabriquer."
+  },
+  {
+    "id": 1400,
+    "type": "dark",
+    "joke": "Que faut-il pour réunir les Beatles ?",
+    "answer": "Encore deux morts"
+  },
+  {
+    "id": 1401,
+    "type": "dark",
+    "joke": "Qu'est ce que le point commun entre mes ex et les ouvriers en Chine ?",
+    "answer": "Tous ont moins de 10 ans."
+  },
+  {
+    "id": 1402,
+    "type": "global",
+    "joke": "Que dit-on d'un chauffeur de train qui devient fou ?",
+    "answer": "Il déraille."
+  },
+  {
+    "id": 1403,
+    "type": "global",
+    "joke": "Docteur ! Je me sens comme une chaise !",
+    "answer": "Justement, j'ai votre dossier ici."
+  },
+  {
+    "id": null,
+    "type": "dark",
+    "joke": "Avez-vous déjà eu des sentiments partagés ?",
+    "answer": "Genre quand ta belle mère recule vers le ravin avec ta voiture toute neuve."
+  },
+  {
+    "id": 1,
+    "type": "global",
+    "joke": "Qu'est-ce que ça donne une tempête à Halloween ?",
+    "answer": "Des vents pires."
+  },
+  {
+    "id": 2,
+    "type": "global",
+    "joke": "Comment fait-on pour arrêter un combat d'aveugles ?",
+    "answer": "\"Je parie sur celui avec le couteau !\""
+  },
+  {
+    "id": 3,
+    "type": "global",
+    "joke": "Quelle est la différence entre un poisson et le Petit Poucet ?",
+    "answer": "Le poisson boit de l'air alors que le Petit Poucet erre dans les bois."
+  },
+  {
+    "id": 4,
+    "type": "global",
+    "joke": "Comment fait-on pour arrêter un combat d'aveugles ?",
+    "answer": "\"Je parie sur celui avec le couteau !\""
+  },
+  {
+    "id": 5,
+    "type": "global",
+    "joke": "Quelle est la différence entre un poisson et le Petit Poucet ?",
+    "answer": "Le poisson boit de l'air alors que le Petit Poucet erre dans les bois."
+  },
+  {
+    "id": 6,
+    "type": "dark",
+    "joke": "J'suis pas raciste.",
+    "answer": "Je supporte l'équipe de football française."
+  },
+  {
+    "id": 7,
+    "type": "dark",
+    "joke": "Un jour, un migrant m'a demandé \"Comment avoir papiers ?\". Je lui ai répondu \"Tu retournes chez toi à la nage...",
+    "answer": "...et au bout d'un moment t'auras pas pied.\""
   }
 ]
