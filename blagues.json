@@ -8240,49 +8240,19 @@
   {
     "id": 1374,
     "type": "global",
-    "joke": "Qu'est-ce qui fait 999 fois tic et une fois toc ?",
-    "answer": "Un mille-pattes avec une jambe de bois."
-  },
-  {
-    "id": 1375,
-    "type": "global",
     "joke": "Que fait-on à un enfant qui ne fait que perdre aux jeux vidéos ?",
     "answer": "On le console."
   },
   {
-    "id": 1376,
+    "id": 1375,
     "type": "global",
     "joke": "Quel est le plus gros ordinateur ?",
     "answer": "Le Big Mac"
   },
   {
-    "id": 1377,
-    "type": "global",
-    "joke": "Quelle est la différence entre un poisson et le Petit Poucet ?",
-    "answer": "Le poisson boit de l'air alors que le Petit Poucet erre dans les bois."
-  },
-  {
-    "id": 1378,
+    "id": 1376,
     "type": "dark",
     "joke": "Pourquoi les terroristes sont-ils toujours derniers aux jeux de société ?",
     "answer": "Parce qu’ils ont sauté 2 tours."
-  },
-  {
-    "id": 1379,
-    "type": "dark",
-    "joke": "J'suis pas raciste.",
-    "answer": "Je supporte l'équipe de football française."
-  },
-  {
-    "id": 1380,
-    "type": "global",
-    "joke": "Que fait-on à un enfant qui ne fait que perdre aux jeux vidéos ?",
-    "answer": "On le console."
-  },
-  {
-    "id": 1381,
-    "type": "global",
-    "joke": "Que fait-on à un enfant qui ne fait que perdre aux jeux vidéos ?",
-    "answer": "On le console."
   }
 ]
