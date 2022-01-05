@@ -1,4 +1,4 @@
-import { Proposal, ProposalType, Approval, Disapproval } from '@prisma/client';
+import { ProposalType } from '@prisma/client';
 import { stripIndents } from 'common-tags';
 import {
   CommandInteraction,
@@ -9,7 +9,7 @@ import {
   TextChannel
 } from 'discord.js';
 import prisma from '../../prisma';
-import { CategoriesRefs, Category } from '../../typings';
+import { CategoriesRefs, Category, Correction, ExtendedProposal, Suggestion } from '../../typings';
 import {
   Colors,
   neededCorrectionsApprovals,
@@ -27,16 +27,6 @@ import { renderGodfatherLine } from '../modules/godfathers';
 import { interactionProblem, interactionInfo, interactionValidate, isEmbedable } from '../utils';
 import Jokes from '../../jokes';
 import { compareTwoStrings } from 'string-similarity';
-
-type Correction = Proposal & {
-  suggestion: Proposal & {
-    corrections: Proposal[];
-    approvals: Approval[];
-    disapprovals: Disapproval[];
-  };
-  approvals: Approval[];
-  disapprovals: Disapproval[];
-};
 
 export default class ApproveCommand extends Command {
   constructor() {
@@ -68,22 +58,11 @@ export default class ApproveCommand extends Command {
       );
     }
 
-    const proposal = await prisma.proposal.findUnique({
+    const proposal: ExtendedProposal | null = await prisma.proposal.findUnique({
       where: {
         message_id: message.id
       },
       include: {
-        corrections: isSuggestion && {
-          take: 1,
-          orderBy: {
-            created_at: 'desc'
-          },
-          where: {
-            merged: false,
-            refused: false,
-            stale: false
-          }
-        },
         suggestion: {
           include: {
             corrections: {
@@ -98,6 +77,17 @@ export default class ApproveCommand extends Command {
             },
             approvals: true,
             disapprovals: true
+          }
+        },
+        corrections: isSuggestion && {
+          take: 1,
+          orderBy: {
+            created_at: 'desc'
+          },
+          where: {
+            merged: false,
+            refused: false,
+            stale: false
           }
         },
         approvals: true,
@@ -214,13 +204,13 @@ export default class ApproveCommand extends Command {
     await interaction.deferReply({ ephemeral: true });
 
     return isSuggestion
-      ? this.approveSuggestion(interaction, proposal, message, embed)
+      ? this.approveSuggestion(interaction, proposal as Suggestion, message, embed)
       : this.approveCorrection(interaction, proposal as Correction, message, embed);
   }
 
   async approveSuggestion(
     interaction: CommandInteraction,
-    proposal: Proposal,
+    proposal: Suggestion,
     message: Message,
     embed: MessageEmbed
   ): Promise<void> {

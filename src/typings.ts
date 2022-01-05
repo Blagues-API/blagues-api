@@ -1,3 +1,5 @@
+import { Approval, Disapproval, Proposal, ProposalType } from '@prisma/client';
+
 /**
  * Standard joke interface
  */
@@ -55,4 +57,35 @@ export const JokeTypesDescriptions: Record<Category, string> = {
   limit: 'Blagues portées sur la sexualité.',
   beauf: 'Blagues vulgaires et généralement stéréotypées.',
   blondes: 'Blagues ciblées sur les femmes blondes.'
+};
+
+export type ExtendedProposal = Proposal & {
+  suggestion:
+    | (Proposal & {
+        corrections: Proposal[];
+        approvals: Approval[];
+        disapprovals: Disapproval[];
+      })
+    | null;
+  corrections: Proposal[];
+  approvals: Approval[];
+  disapprovals: Disapproval[];
+};
+
+export type Correction = Proposal & {
+  type: typeof ProposalType['CORRECTION'] | typeof ProposalType['SUGGESTION_CORRECTION'];
+  suggestion: Proposal & {
+    corrections: Proposal[];
+    approvals: Approval[];
+    disapprovals: Disapproval[];
+  };
+  approvals: Approval[];
+  disapprovals: Disapproval[];
+};
+
+export type Suggestion = Proposal & {
+  type: typeof ProposalType['SUGGESTION'];
+  corrections: Proposal[];
+  approvals: Approval[];
+  disapprovals: Disapproval[];
 };

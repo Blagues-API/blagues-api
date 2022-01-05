@@ -1,6 +1,5 @@
-import { Proposal } from '.prisma/client';
 import { constants as fsConstants, promises as fs } from 'fs';
-import { Joke } from './typings';
+import { Correction, Joke, Suggestion } from './typings';
 import path from 'path';
 
 import { AsyncQueue } from '@sapphire/async-queue';
@@ -35,7 +34,9 @@ class JokesLoader {
     this.count = jokes.length;
   }
 
-  public async mergeJoke(proposal: Proposal): Promise<{ success: boolean; joke_id?: number; error?: string }> {
+  public async mergeJoke(
+    proposal: Correction | Suggestion
+  ): Promise<{ success: boolean; joke_id?: number; error?: string }> {
     const jokesPath = path.join(__dirname, '../blagues.json');
     try {
       await fs.access(jokesPath, fsConstants.R_OK | fsConstants.W_OK);
@@ -51,8 +52,10 @@ class JokesLoader {
       const jokes = (rawData.length ? JSON.parse(rawData) : []) as Joke[];
 
       const index =
-        proposal.type === 'CORRECTION' ? jokes.findIndex((joke) => joke.id === proposal.joke_id!) : jokes.length;
-      const joke_id = proposal.type === 'CORRECTION' ? proposal.joke_id! : jokes[jokes.length - 1].id + 1;
+        proposal.type === 'CORRECTION'
+          ? jokes.findIndex((joke) => joke.id === proposal.suggestion.joke_id!)
+          : jokes.length;
+      const joke_id = proposal.type === 'CORRECTION' ? proposal.suggestion.joke_id! : jokes[jokes.length - 1].id + 1;
       const joke = {
         id: joke_id,
         type: proposal.joke_type,
