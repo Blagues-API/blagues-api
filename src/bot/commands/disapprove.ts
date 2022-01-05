@@ -1,5 +1,5 @@
 import { Proposal, ProposalType } from '@prisma/client';
-import { CommandInteraction, ContextMenuInteraction, Message, MessageEmbed, TextChannel } from 'discord.js';
+import { ContextMenuInteraction, Message, MessageContextMenuInteraction, MessageEmbed, TextChannel } from 'discord.js';
 import prisma from '../../prisma';
 import {
   Colors,
@@ -22,7 +22,7 @@ export default class DisapproveCommand extends Command {
     });
   }
 
-  async run(interaction: CommandInteraction): Promise<void> {
+  async run(interaction: MessageContextMenuInteraction): Promise<void> {
     const channel = (interaction.channel as TextChannel)!;
     const isSuggestion = channel.id === suggestionsChannel;
     const message = await channel.messages.fetch((interaction as ContextMenuInteraction).targetId);
@@ -181,7 +181,7 @@ export default class DisapproveCommand extends Command {
   }
 
   async disapprove(
-    interaction: CommandInteraction,
+    interaction: MessageContextMenuInteraction,
     proposal: Proposal,
     message: Message,
     embed: MessageEmbed

@@ -1,13 +1,6 @@
 import { ProposalType } from '@prisma/client';
 import { stripIndents } from 'common-tags';
-import {
-  CommandInteraction,
-  ContextMenuInteraction,
-  Message,
-  MessageEmbed,
-  MessageEmbedOptions,
-  TextChannel
-} from 'discord.js';
+import { Message, MessageContextMenuInteraction, MessageEmbed, MessageEmbedOptions, TextChannel } from 'discord.js';
 import prisma from '../../prisma';
 import { CategoriesRefs, Category, Correction, ExtendedProposal, Suggestion } from '../../typings';
 import {
@@ -37,10 +30,12 @@ export default class ApproveCommand extends Command {
     });
   }
 
-  async run(interaction: CommandInteraction): Promise<void> {
+  async run(interaction: MessageContextMenuInteraction): Promise<void> {
     const channel = (interaction.channel as TextChannel)!;
     const isSuggestion = channel.id === suggestionsChannel;
-    const message = await channel.messages.fetch((interaction as ContextMenuInteraction).targetId);
+    const message = await interaction.channel?.messages.fetch(interaction.targetId);
+    if (!message) return;
+
     if (![suggestionsChannel, correctionsChannel].includes(channel.id)) {
       return interaction.reply(
         interactionProblem(
@@ -116,12 +111,40 @@ export default class ApproveCommand extends Command {
     }
 
     if (proposal.merged) {
+      if (!embed.footer) {
+        embed.color = Colors.ACCEPTED;
+        embed.footer = { text: `${isSuggestion ? 'Blague' : 'Correction'} déjà traité` };
+
+        const field = embed.fields?.[embed.fields.length - 1];
+        if (field) {
+          field.value = field.value.split('\n\n')[0];
+        } else {
+          embed.description = embed.description!.split('\n\n')[0];
+        }
+
+        await (message as Message).edit({ embeds: [embed] });
+      }
+
       return interaction.reply(
         interactionProblem(`Cette ${isSuggestion ? 'blague' : 'correction'} a déjà été ajoutée.`)
       );
     }
 
     if (proposal.refused) {
+      if (!embed.footer) {
+        embed.color = Colors.REFUSED;
+        embed.footer = { text: `${isSuggestion ? 'Suggestion' : 'Correction'} refusée` };
+
+        const field = embed.fields?.[embed.fields.length - 1];
+        if (field) {
+          field.value = field.value.split('\n\n')[0];
+        } else {
+          embed.description = embed.description!.split('\n\n')[0];
+        }
+
+        await (message as Message).edit({ embeds: [embed] });
+      }
+
       return interaction.reply(
         interactionProblem(`Cette ${isSuggestion ? 'blague' : 'correction'} a déjà été refusée.`)
       );
@@ -209,7 +232,7 @@ export default class ApproveCommand extends Command {
   }
 
   async approveSuggestion(
-    interaction: CommandInteraction,
+    interaction: MessageContextMenuInteraction,
     proposal: Suggestion,
     message: Message,
     embed: MessageEmbed
@@ -236,10 +259,12 @@ export default class ApproveCommand extends Command {
 
     embed.color = Colors.ACCEPTED;
 
-    await logs.send({
-      content: "Blague ajoutée à l'API",
-      embeds: [embed]
-    });
+    if (isEmbedable(logs)) {
+      await logs.send({
+        content: "Blague ajoutée à l'API",
+        embeds: [embed]
+      });
+    }
 
     embed.footer = { text: 'Blague ajoutée' };
 
@@ -256,7 +281,7 @@ export default class ApproveCommand extends Command {
   }
 
   async approveCorrection(
-    interaction: CommandInteraction,
+    interaction: MessageContextMenuInteraction,
     proposal: Correction,
     message: Message,
     embed: MessageEmbed

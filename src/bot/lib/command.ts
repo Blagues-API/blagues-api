@@ -2,7 +2,8 @@ import {
   ApplicationCommandPermissions,
   ChatInputApplicationCommandData,
   CommandInteraction,
-  MessageApplicationCommandData
+  MessageApplicationCommandData,
+  MessageContextMenuInteraction
 } from 'discord.js';
 import { parrainRole } from '../constants';
 
@@ -58,7 +59,7 @@ export default class Command {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public async run(interaction: CommandInteraction): Promise<void> {
+  public async run(interaction: CommandInteraction | MessageContextMenuInteraction): Promise<void> {
     throw new Error('No method run defined');
   }
 }
