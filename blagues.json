@@ -8254,5 +8254,101 @@
     "type": "dark",
     "joke": "Pourquoi les terroristes sont-ils toujours derniers aux jeux de société ?",
     "answer": "Parce qu’ils ont sauté 2 tours."
+  },
+  {
+    "id": 1377,
+    "type": "global",
+    "joke": "Que dit un douanier à un cochon qui veut passer la frontière ?",
+    "answer": "\"Passe-porc svp !\""
+  },
+  {
+    "id": 1378,
+    "type": "global",
+    "joke": "Comment fait-on pour arrêter un combat d'aveugles ?",
+    "answer": "\"Je parie sur celui avec le couteau !\""
+  },
+  {
+    "id": 1379,
+    "type": "dark",
+    "joke": "Je connais un esquimau en phase terminale...",
+    "answer": "Il est à l'Arctique de la mort."
+  },
+  {
+    "id": 1380,
+    "type": "global",
+    "joke": "La culture générale, c'est comme la confiture.",
+    "answer": "Moins tu en as, plus tu l'étales."
+  },
+  {
+    "id": 1381,
+    "type": "global",
+    "joke": "Comment cuire des carottes sans feu ?",
+    "answer": "On en met huit dans un chaudron, comme ça les carottes sont qu'huit."
+  },
+  {
+    "id": 1382,
+    "type": "global",
+    "joke": "Qu'est-ce que ça donne une tempête à Halloween ?",
+    "answer": "Des vents pires."
+  },
+  {
+    "id": 1383,
+    "type": "global",
+    "joke": "C'est quoi la différence entre un fonctionnaire et quelqu'un au chômage ?",
+    "answer": "Le chômeur, lui, a déjà travaillé."
+  },
+  {
+    "id": 1384,
+    "type": "global",
+    "joke": "Au tribunal des couleurs, qui prend les décisions ?",
+    "answer": "Le vert, car il prend le vert dicte."
+  },
+  {
+    "id": 1385,
+    "type": "global",
+    "joke": "Qu'est-ce qui est rouge et qui fait mal aux dents ?",
+    "answer": "Une brique."
+  },
+  {
+    "id": 1386,
+    "type": "global",
+    "joke": "L'autre jour au resto, j'ai demandé au serveur de me dire ce qu'il me suggérait sincèrement...",
+    "answer": "Il m'a dit: \"Un autre restaurant\""
+  },
+  {
+    "id": 1387,
+    "type": "dark",
+    "joke": "- Maman, mon chat est mort, j'en veux un autre !",
+    "answer": "- Niaiseuse, qu'est-ce que tu ferais avec un deuxième chat mort ?"
+  },
+  {
+    "id": 1388,
+    "type": "global",
+    "joke": "Un policier a arrêté Chuck Norris l'autre jour...",
+    "answer": "Le policier est reparti avec un avertissement."
+  },
+  {
+    "id": 1389,
+    "type": "global",
+    "joke": "Pourquoi le fermier fait manger du fer à ses moutons ?",
+    "answer": "Pour qu'ils produisent de la laine d'acier."
+  },
+  {
+    "id": 1390,
+    "type": "limit",
+    "joke": "Un vieux proverbe dit : qui se branle face au vent ...",
+    "answer": "... a le nombril tout gluant."
+  },
+  {
+    "id": 1391,
+    "type": "global",
+    "joke": "Une imprimante va à la piscine, plonge et coule, pourquoi ?",
+    "answer": "Car elle n'a pas pied."
+  },
+  {
+    "id": 1392,
+    "type": "global",
+    "joke": "Que dit un rouleau de papier de toilette à Luke Skywalker ?",
+    "answer": "J'essuie ton père."
   }
 ]
