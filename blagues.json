@@ -8360,79 +8360,325 @@
   {
     "id": 1394,
     "type": "dark",
+    "joke": "L'autre jour j'ai dit à un sdf que l'argent ne fait pas le bonheur...",
+    "answer": "Je crois qu'il l'a mal pris."
+  },
+  {
+    "id": 1395,
+    "type": "global",
+    "joke": "Pourquoi un homme est mort en buvant du lait ?",
+    "answer": "Parce que la vache a eu envie de s'assoir pendant qu'il buvait."
+  },
+  {
+    "id": 1396,
+    "type": "limit",
+    "joke": "Connaissez vous le point commun entre Neymar et une femme ?",
+    "answer": "Les deux savent simuler."
+  },
+  {
+    "id": 1397,
+    "type": "global",
+    "joke": "Où vivaient les hommes à l'âge de bière ?",
+    "answer": "Dans des tavernes"
+  },
+  {
+    "id": 1398,
+    "type": "global",
+    "joke": "Que dit une feuille qui se fait annoter alors qu'elle ne veut pas ?",
+    "answer": "Tu te fiche de moi !"
+  },
+  {
+    "id": 1399,
+    "type": "global",
+    "joke": "Un trou noir...",
+    "answer": "... c'est troublant !"
+  },
+  {
+    "id": 1400,
+    "type": "global",
+    "joke": "Le lion et la lionne sont...",
+    "answer": "... félins pour l'autre."
+  },
+  {
+    "id": 1401,
+    "type": "global",
+    "joke": "Je m'acier ou je métal.",
+    "answer": "Que fer ?"
+  },
+  {
+    "id": 1402,
+    "type": "global",
+    "joke": "Les mots rendent les cris...",
+    "answer": "... vains."
+  },
+  {
+    "id": 1403,
+    "type": "global",
+    "joke": "Comment peut-on aussi appeler un ingénieur du son ?",
+    "answer": "Un stéréo-type"
+  },
+  {
+    "id": 1404,
+    "type": "beauf",
+    "joke": "Combien coûte un homme ?",
+    "answer": "Deux boules."
+  },
+  {
+    "id": 1405,
+    "type": "global",
+    "joke": "J'ai vu un alien dans le frigo.",
+    "answer": "Il m'a dit : \"Ils sont extra tes restes\"."
+  },
+  {
+    "id": 1406,
+    "type": "global",
+    "joke": "Pourquoi la terre va chez le psy ?",
+    "answer": "Pour faire une terre-happy."
+  },
+  {
+    "id": 1407,
+    "type": "global",
+    "joke": "Je pense que je suis un cadeau.",
+    "answer": "Mais je m’emballe peut-être."
+  },
+  {
+    "id": 1408,
+    "type": "global",
+    "joke": "On ne dit pas le dernier délai.",
+    "answer": "Mais le plus nul des moches."
+  },
+  {
+    "id": 1409,
+    "type": "global",
+    "joke": "Quel est le comble pour des gens bons ?",
+    "answer": "Qu'on les bâillonne !"
+  },
+  {
+    "id": 1410,
+    "type": "global",
+    "joke": "On ne dit pas gaz à effet de cerf.",
+    "answer": "Mais Bambi a pété."
+  },
+  {
+    "id": 1411,
+    "type": "beauf",
+    "joke": "On ne dit pas ménopause.",
+    "answer": "Mais game-ovaire"
+  },
+  {
+    "id": 1412,
+    "type": "global",
+    "joke": "On ne dit pas Hercule.",
+    "answer": "Mais elle fait marche arrière."
+  },
+  {
+    "id": 1413,
+    "type": "global",
+    "joke": "Quel est le comble pour trois soupes ?",
+    "answer": "Faire du tripotages."
+  },
+  {
+    "id": 1414,
+    "type": "global",
+    "joke": "On ne dit pas qu'elle a un potager,",
+    "answer": "mais qu'elle a un ami en maison de retraite."
+  },
+  {
+    "id": 1415,
+    "type": "global",
+    "joke": "Ne va pas au fond de la mer.",
+    "answer": "ça l’abîme."
+  },
+  {
+    "id": 1416,
+    "type": "global",
+    "joke": "En chine, on pleure quand on meurt.",
+    "answer": "Et on riz cantonnais."
+  },
+  {
+    "id": 1417,
+    "type": "global",
+    "joke": "Si le président est K.O.",
+    "answer": "C'est le chaos."
+  },
+  {
+    "id": 1418,
+    "type": "global",
+    "joke": "On ne dit pas \"C'est l'Amazone\",",
+    "answer": "mais \"C'est là que j'habite\"."
+  },
+  {
+    "id": 1419,
+    "type": "global",
+    "joke": "Toutes mes tentatives de régimes...",
+    "answer": "... se sont soldées par un bide."
+  },
+  {
+    "id": 1420,
+    "type": "global",
+    "joke": "Quel est le comble pour une blague sur les pesticides ?",
+    "answer": "Ne pas être traité."
+  },
+  {
+    "id": 1421,
+    "type": "dark",
+    "joke": "Quel est le comble pour un Espagnol ?",
+    "answer": "Y aller Franco !"
+  },
+  {
+    "id": 1422,
+    "type": "global",
+    "joke": "Pendant la guerre en Irak, les États-Unis ont envoyé le gros de leur armée.",
+    "answer": "C'est-à-dire Chuck Norris."
+  },
+  {
+    "id": 1423,
+    "type": "global",
+    "joke": "Quand Graham Bell a inventé le téléphone en 1876...",
+    "answer": "... il avait déjà 3 appels en absence de Chuck Norris."
+  },
+  {
+    "id": 1424,
+    "type": "global",
+    "joke": "Les médecins grecs...",
+    "answer": "... adorent l’Épicure."
+  },
+  {
+    "id": 1425,
+    "type": "global",
+    "joke": "A ton avis, je m'acier ou je métal ?",
+    "answer": "T'étain et d'or !"
+  },
+  {
+    "id": 1426,
+    "type": "global",
+    "joke": "Tous jeu de mot avec les saumons...",
+    "answer": "... est fortruite."
+  },
+  {
+    "id": 1427,
+    "type": "global",
+    "joke": "Mon cordonnier me dit qu'il n'est pas curieux.",
+    "answer": "Pourtant il semelle de tout."
+  },
+  {
+    "id": 1428,
+    "type": "global",
+    "joke": "Mieux vaut un balcon...",
+    "answer": "... qu'une soirée nul."
+  },
+  {
+    "id": 1429,
+    "type": "global",
+    "joke": "On ne dit pas \"un parrain\".",
+    "answer": "Mais chacun son tour"
+  },
+  {
+    "id": 1430,
+    "type": "global",
+    "joke": "Si Chuck Norris dit \"Oui\" ou \"Non\" à un Ni Oui ni Non...",
+    "answer": "... c'est toi qui as perdu."
+  },
+  {
+    "id": 1431,
+    "type": "global",
+    "joke": "Chuck Norris a trouvé la huitième différence...",
+    "answer": "... dans le jeu des 7 différences."
+  },
+  {
+    "id": 1432,
+    "type": "beauf",
+    "joke": "Comment appelle-t-on une douche qui n'a pas d'eau ?",
+    "answer": "Une duche"
+  },
+  {
+    "id": 1433,
+    "type": "global",
+    "joke": "Trump voulait construire un mur...",
+    "answer": "... pour protéger les migrants de Chuck Norris."
+  },
+  {
+    "id": 1434,
+    "type": "global",
+    "joke": "Chuck Norris peut faire des scoubidous...",
+    "answer": "... avec des spaghettis pas cuit."
+  },
+  {
+    "id": 1435,
+    "type": "global",
+    "joke": "Quel est le comble pour un aveugle ?",
+    "answer": "Avoir un sentiment de déjà-vu."
+  },
+  {
+    "id": 1436,
+    "type": "global",
+    "joke": "Mr et Mme Bo on un fils comment s'appelle t-il ?",
+    "answer": "Harry"
+  },
+  {
+    "id": 1437,
+    "type": "dark",
+    "joke": "Quelle est la différence entre Amazon et le Père Noël ?",
+    "answer": "Le premier exploite les Ouïghours, le second les nains !"
+  },
+  {
+    "id": 1438,
+    "type": "dark",
+    "joke": "Pourquoi Claude François a eu son permis haut la main ?",
+    "answer": "Parce qu'il était un bon conducteur."
+  },
+  {
+    "id": 1439,
+    "type": "dark",
     "joke": "Quelle est la différence entre une grosse dans une twingo et un prêtre dans un enfant ?",
     "answer": "Aucune, tu ne sais pas comment les deux font pour rentrer !"
   },
   {
-    "id": 1395,
+    "id": 1440,
     "type": "dark",
     "joke": "J'ai beaucoup de blagues sur les personnes handicapées...",
     "answer": "... mais aucune d'entre elles ne marchent."
   },
   {
-    "id": 1396,
+    "id": 1441,
     "type": "global",
     "joke": "J’ai raconté une blague à un Parisien.",
     "answer": "Il n’a pas ri."
   },
   {
-    "id": 1397,
-    "type": "dark",
-    "joke": "J'ai beaucoup de blagues sur les personnes handicapées...",
-    "answer": "... mais aucune d'entre elles ne marchent."
-  },
-  {
-    "id": 1398,
+    "id": 1442,
     "type": "global",
     "joke": "Pour aller éteindre les incendies...",
     "answer": "... les pompiers brûlent tous les feux."
   },
   {
-    "id": 1399,
+    "id": 1443,
     "type": "global",
     "joke": "Qu'est ce qu'une bouteille qui voit l'avenir ?",
     "answer": "Une bouteille devin"
   },
   {
-    "id": 1400,
-    "type": "dark",
-    "joke": "Quelle est la différence entre une grosse dans une twingo et un prêtre dans un enfant ?",
-    "answer": "Aucune, tu ne sais pas comment les deux font pour rentrer !"
-  },
-  {
-    "id": 1401,
+    "id": 1444,
     "type": "global",
     "joke": "Quel est le poisson le moins cher ?",
     "answer": "Le requin marteau : il ne vaut pas un clou."
   },
   {
-    "id": 1402,
+    "id": 1445,
     "type": "global",
     "joke": "On m'avait dit que je pouvais être qui je voulais.",
     "answer": "Apparemment, l'usurpation d'identité c'est un crime."
   },
   {
-    "id": 1403,
+    "id": 1446,
     "type": "global",
     "joke": "Qu’est-ce qu’un hamster dans l’espace ?",
     "answer": "Un hamstéroïde."
   },
   {
-    "id": 1404,
+    "id": 1447,
     "type": "beauf",
     "joke": "Les enfants dans le noir font des bêtises.",
     "answer": "Mais les bêtises dans le noir font des enfants."
-  },
-  {
-    "id": 1405,
-    "type": "dark",
-    "joke": "J'ai beaucoup de blagues sur les personnes handicapées...",
-    "answer": "... mais aucune d'entre elles ne marchent."
-  },
-  {
-    "id": 1406,
-    "type": "global",
-    "joke": "On m'avait dit que je pouvais être qui je voulais.",
-    "answer": "Apparemment, l'usurpation d'identité c'est un crime."
   }
 ]
