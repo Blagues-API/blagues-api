@@ -226,9 +226,18 @@ export default class ApproveCommand extends Command {
 
     await interaction.deferReply({ ephemeral: true });
 
-    return isSuggestion
-      ? this.approveSuggestion(interaction, proposal as Suggestion, message, embed)
-      : this.approveCorrection(interaction, proposal as Correction, message, embed);
+    try {
+      return isSuggestion
+        ? this.approveSuggestion(interaction, proposal as Suggestion, message, embed)
+        : this.approveCorrection(interaction, proposal as Correction, message, embed);
+    } catch (error) {
+      console.error(error);
+      await interaction.editReply(
+        interactionProblem(
+          `Une erreur s'est produite lors de l'approbation de la [suggestion](${message.url}), veuillez contacter le développeur !`
+        )
+      );
+    }
   }
 
   async approveSuggestion(
