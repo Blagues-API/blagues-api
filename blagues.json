@@ -170,7 +170,7 @@
   {
     "id": 29,
     "type": "global",
-    "joke": "Avec quel fromage, pouvons-nous nous faire grossir les seins?",
+    "joke": "Avec quel fromage, pouvons nous nous faire grossir les seins ?",
     "answer": "Du Boursin."
   },
   {
@@ -753,7 +753,7 @@
     "id": 126,
     "type": "blondes",
     "joke": "Que dit une blonde quand elle voit une peau de banane sur le trottoir ?",
-    "answer": "Oh mince! Je vais encore tomber !"
+    "answer": "Oh mince ! Je vais encore tomber !"
   },
   {
     "id": 127,
@@ -1076,7 +1076,7 @@
   {
     "id": 180,
     "type": "global",
-    "joke": "Le prof dit à son élève: Ton devoir était mauvais.",
+    "joke": "Le prof dit à son élève : Ton devoir était mauvais.",
     "answer": "QUOI ! Vous l'avez mangé ?"
   },
   {
@@ -1478,7 +1478,7 @@
   {
     "id": 247,
     "type": "dark",
-    "joke": "Chéri, je me sens grosse et laide... S'il te plait, fais-moi un compliment...",
+    "joke": "Chéri, je me sens grosse et laide... s'il te plait, fais-moi un compliment...",
     "answer": "Tu as une bonne vue !"
   },
   {
@@ -1821,7 +1821,7 @@
     "id": 304,
     "type": "global",
     "joke": "Rien ne sert de courir...",
-    "answer": "... Je suis déjà en retard."
+    "answer": "... je suis déjà en retard."
   },
   {
     "id": 305,
@@ -2090,7 +2090,7 @@
   {
     "id": 349,
     "type": "limit",
-    "joke": "Pourquoi les pharaons ont ils 2 fesses?",
+    "joke": "Pourquoi les pharaons ont ils 2 fesses ?",
     "answer": "Parce que AnuBis !"
   },
   {
@@ -2223,7 +2223,7 @@
     "id": 371,
     "type": "limit",
     "joke": "Quelle est la vitesse maximale autorisée lors d'un rapport ?",
-    "answer": "68km/h car à 69..... Ça fait une tête à queue."
+    "answer": "68km/h car à 69... Ça fait une tête à queue."
   },
   {
     "id": 372,
@@ -2252,7 +2252,7 @@
   {
     "id": 376,
     "type": "global",
-    "joke": "Tu as aucune référence....",
+    "joke": "Tu as aucune référence...",
     "answer": "Peut-être car je suis pas à vendre !"
   },
   {
@@ -2312,7 +2312,7 @@
   {
     "id": 386,
     "type": "global",
-    "joke": "Mon plus grand défaut est l'honnêteté... Vous pensez le contraire ?",
+    "joke": "Mon plus grand défaut est l'honnêteté... vous pensez le contraire ?",
     "answer": "J'en ai rien à foutre de ce que vous pensez"
   },
   {
@@ -2498,7 +2498,7 @@
   {
     "id": 417,
     "type": "blondes",
-    "joke": "Mon Chat est mort... Je voudrais tellement en avoir un autre pareil !",
+    "joke": "Mon Chat est mort... je voudrais tellement en avoir un autre pareil !",
     "answer": "Mais qu'est-ce que tu ferais de deux chats morts ?"
   },
   {
@@ -2780,7 +2780,7 @@
   {
     "id": 464,
     "type": "blondes",
-    "joke": "Une blonde appelle son copain: \"Je n'arrive pas à démarrer la voiture !\"",
+    "joke": "Une blonde appelle son copain : \"Je n'arrive pas à démarrer la voiture !\"",
     "answer": "Je te l'ai déjà dis cent fois que, lorsque ce n'est pas moi qui conduit, tu dois te mettre à gauche !"
   },
   {
@@ -2852,7 +2852,7 @@
   {
     "id": 476,
     "type": "global",
-    "joke": "Un avaleur de sabres entre dans une mercerie : \"Bonjour, je voudrais des aiguilles.\", à cela elle répond: \"Ah, vous faites de la couture ?\"",
+    "joke": "Un avaleur de sabres entre dans une mercerie : \"Bonjour, je voudrais des aiguilles.\", à cela elle répond : \"Ah, vous faites de la couture ?\"",
     "answer": "Non, je fais un régime !"
   },
   {
@@ -2900,7 +2900,7 @@
   {
     "id": 484,
     "type": "global",
-    "joke": "Que donne un mouton et un cochon qui s'accouplent?",
+    "joke": "Que donne un mouton et un cochon qui s'accouplent ?",
     "answer": "De la Porcelaine."
   },
   {
@@ -3099,7 +3099,7 @@
     "id": 517,
     "type": "dark",
     "joke": "Les blagues sur George Floyd sont...",
-    "answer": "...à couper le souffle."
+    "answer": "... à couper le souffle."
   },
   {
     "id": 518,
@@ -3248,7 +3248,7 @@
   {
     "id": 542,
     "type": "dark",
-    "joke": "Jean d'Arc est sur le bucher et dit: \"Je veux descendre !\"",
+    "joke": "Jean d'Arc est sur le bucher et dit : \"Je veux descendre !\"",
     "answer": "Le peuple lui répond: \"T'inquiète pas, tu vas en avoir !\""
   },
   {
@@ -3459,7 +3459,7 @@
     "id": 577,
     "type": "global",
     "joke": "C'est l'histoire du client qui achète un tableau au peintre.",
-    "answer": "Le peintre lui dit: Cette affaire, j'y ai consacré dix ans de ma vie ! 2 jours pour la peindre et le reste pour la vendre !"
+    "answer": "Le peintre lui dit : Cette affaire, j'y ai consacré dix ans de ma vie ! 2 jours pour la peindre et le reste pour la vendre !"
   },
   {
     "id": 578,
@@ -3686,8 +3686,8 @@
   {
     "id": 615,
     "type": "dev",
-    "joke": "Une notice me disait: Nécessite windows xp ou mieux.",
-    "answer": "J'ai donc installé linux."
+    "joke": "Une notice me disait : Nécessite Windows XP ou mieux.",
+    "answer": "J'ai donc installé Linux."
   },
   {
     "id": 616,
@@ -3933,7 +3933,7 @@
     "id": 656,
     "type": "global",
     "joke": "Comment appelle-t-on un lapin sourd ?",
-    "answer": "LAAAAAAPIIIIIIIINNNNNNN!!!!!!"
+    "answer": "LAAAAAAPIIIIIIIINNNNNNN !!!!!!"
   },
   {
     "id": 657,
@@ -4004,7 +4004,7 @@
   {
     "id": 668,
     "type": "global",
-    "joke": "Purée fait chi#r, j'ai un problème avec mon téléphone .",
+    "joke": "Purée fait chi#r, j'ai un problème avec mon téléphone.",
     "answer": "Il manque juste ton numéro."
   },
   {
@@ -4094,7 +4094,7 @@
   {
     "id": 683,
     "type": "dark",
-    "joke": "Comment surprendre un aveugle?",
+    "joke": "Comment surprendre un aveugle ?",
     "answer": "Vous laissez la ventouse dans les toilettes."
   },
   {
@@ -4250,7 +4250,7 @@
   {
     "id": 709,
     "type": "global",
-    "joke": "2 mouches discutent sur un caca de chien: J'ai une de ces envies de péter moi.",
+    "joke": "2 mouches discutent sur un caca de chien : J'ai une de ces envies de péter moi.",
     "answer": "Grosse dégueulasse, on est à table !"
   },
   {
@@ -4268,7 +4268,7 @@
   {
     "id": 712,
     "type": "global",
-    "joke": "Deux lions discutent: Allez, avoue que tu es amoureux !",
+    "joke": "Deux lions discutent : Allez, avoue que tu es amoureux !",
     "answer": "Arrête, tu vas me faire rugir !"
   },
   {
@@ -4286,7 +4286,7 @@
   {
     "id": 715,
     "type": "dark",
-    "joke": "Un jeune homme demande à son boucher: Bonjour Monsieur, je voudrais la main de votre fille !",
+    "joke": "Un jeune homme demande à son boucher : Bonjour Monsieur, je voudrais la main de votre fille !",
     "answer": "D'accord, avec ou sans os ?"
   },
   {
@@ -4628,8 +4628,8 @@
   {
     "id": 772,
     "type": "dark",
-    "joke": "Papa, c'est quoi l'humour noir ? Le père répond : \"Demandes à ta mère !\"",
-    "answer": "Mais... Maman est morte !"
+    "joke": "Papa, c'est quoi l'humour noir ? Le père répond : \"Demande à ta mère !\"",
+    "answer": "Mais... maman est morte !"
   },
   {
     "id": 773,
@@ -4737,7 +4737,7 @@
     "id": 790,
     "type": "global",
     "joke": "Qu'est-ce qu'une carotte au milieu d'une flaque d'eau ?",
-    "answer": "Un bonhomme de neige... Au printemps !"
+    "answer": "Un bonhomme de neige... au printemps !"
   },
   {
     "id": 791,
@@ -4862,7 +4862,7 @@
   {
     "id": 811,
     "type": "global",
-    "joke": "Un homme est arrêté pour vol de voiture. Des années plus tard, il est libéré ...",
+    "joke": "Un homme est arrêté pour vol de voiture. Des années plus tard, il est libéré...",
     "answer": "Pour bonne conduite !"
   },
   {
@@ -4928,7 +4928,7 @@
   {
     "id": 822,
     "type": "global",
-    "joke": "Deux gars sont au camping, l'un dit:",
+    "joke": "Deux gars sont au camping, l'un dit :",
     "answer": "On va dormir ça te tente ?"
   },
   {
@@ -5072,7 +5072,7 @@
   {
     "id": 846,
     "type": "dark",
-    "joke": "Une fillette est retrouvée égorgée dans la rue… L'enquêteur questionne le légiste : Elle a été violée ?",
+    "joke": "Une fillette est retrouvée égorgée dans la rue… l'enquêteur questionne le légiste : Elle a été violée ?",
     "answer": "Non pas encore, j'attendais votre autorisation."
   },
   {
@@ -5126,8 +5126,8 @@
   {
     "id": 855,
     "type": "blondes",
-    "joke": "Deux blondes discutent : Dis, tu as revu Nathalie depuis tout ce temps ? Oh... Tu ne savais pas ? Elle est morte...",
-    "answer": "Ah bien tant mieux... J'ai cru qu'elle était fâchée avec moi !"
+    "joke": "Deux blondes discutent : Dis, tu as revu Nathalie depuis tout ce temps ? Oh... tu ne savais pas ? Elle est morte...",
+    "answer": "Ah bien tant mieux... j'ai cru qu'elle était fâchée avec moi !"
   },
   {
     "id": 856,
@@ -5415,7 +5415,7 @@
     "id": 903,
     "type": "global",
     "joke": "Le petit Poucet...",
-    "answer": "...mais rien ne sortait "
+    "answer": "... mais rien ne sortait"
   },
   {
     "id": 904,
@@ -5972,8 +5972,8 @@
   {
     "id": 996,
     "type": "global",
-    "joke": "Archimède a dit: \"Donnez moi un point d'appui, un levier, et je vous soulèverai le monde !\".",
-    "answer": "Chuck Norris a dit: \"Donnez moi 30 secondes !\"."
+    "joke": "Archimède a dit : \"Donnez moi un point d'appui, un levier, et je vous soulèverai le monde !\".",
+    "answer": "Chuck Norris a dit : \"Donnez moi 30 secondes !\"."
   },
   {
     "id": 997,
@@ -6015,7 +6015,7 @@
     "id": 1003,
     "type": "global",
     "joke": "Chuck Norris a fini \"Zelda Ocarina of Time\" plusieurs fois. Un jour, un mec lui a demandé de l'aide pour trouver l'épée au début.",
-    "answer": "Chuck Norris a répondu: \"Quelle épée ?\"."
+    "answer": "Chuck Norris a répondu : \"Quelle épée ?\"."
   },
   {
     "id": 1004,
@@ -6555,7 +6555,7 @@
     "id": 1093,
     "type": "global",
     "joke": "C'est l'histoire d'un donut qui va à la plage...",
-    "answer": "...pour se beignet."
+    "answer": "... pour se beignet."
   },
   {
     "id": 1094,
@@ -6567,7 +6567,7 @@
     "id": 1095,
     "type": "dark",
     "joke": "Tout à l'heure un policier m'a arrêté et m'a dit \"Papier\".",
-    "answer": "J'ai répondu \"Ciseaux\", j'ai gagné et j'ai accéléré. Depuis 35 minutes il me poursuit... Je pense qu'il veut une revanche."
+    "answer": "J'ai répondu \"Ciseaux\", j'ai gagné et j'ai accéléré. Depuis 35 minutes il me poursuit... je pense qu'il veut une revanche."
   },
   {
     "id": 1096,
@@ -6585,7 +6585,7 @@
     "id": 1098,
     "type": "global",
     "joke": "Les blagues racistes...",
-    "answer": "...ne servent aryen."
+    "answer": "... ne servent aryen."
   },
   {
     "id": 1099,
@@ -6795,7 +6795,7 @@
     "id": 1133,
     "type": "dark",
     "joke": "Un gamin, perpétuellement inquiet, demande à ses parents, \"Est-ce que j'ai été adopté ?\"",
-    "answer": "Pas encore. Nous n'avons mis l'annonce qu'hier!"
+    "answer": "Pas encore. Nous n'avons mis l'annonce qu'hier !"
   },
   {
     "id": 1134,
@@ -7071,7 +7071,7 @@
     "id": 1179,
     "type": "beauf",
     "joke": "Voir un bar, ça donne soif, voir un restaurant, ça donne faim...",
-    "answer": "...par contre ne pas trouver de chiottes ça fait chier."
+    "answer": "... par contre ne pas trouver de chiottes ça fait chier."
   },
   {
     "id": 1180,
@@ -7107,7 +7107,7 @@
     "id": 1185,
     "type": "global",
     "joke": "Un schtroumpf court, tombe...",
-    "answer": "...et se fait un bleu."
+    "answer": "... et se fait un bleu."
   },
   {
     "id": 1186,
@@ -7118,8 +7118,8 @@
   {
     "id": 1187,
     "type": "dev",
-    "joke": "J'allais faire une blague sur l'erreur 404 ...",
-    "answer": "Je ne l'ai pas trouvé ..."
+    "joke": "J'allais faire une blague sur l'erreur 404...",
+    "answer": "Je ne l'ai pas trouvé..."
   },
   {
     "id": 1188,
@@ -7364,7 +7364,7 @@
   {
     "id": 1228,
     "type": "dev",
-    "joke": "J'ai une blague sur la mémoire vive ...",
+    "joke": "J'ai une blague sur la mémoire vive...",
     "answer": "... mais attendez elle RAM."
   },
   {
@@ -7412,8 +7412,8 @@
   {
     "id": 1236,
     "type": "dev",
-    "joke": "En programmation c'est le seul endroit où ...",
-    "answer": "... tu arrives à faire rentrer deux bool dans un string."
+    "joke": "En programmation c'est le seul endroit où...",
+    "answer": "...tu arrives à faire rentrer deux bool dans un string."
   },
   {
     "id": 1237,
@@ -7514,8 +7514,8 @@
   {
     "id": 1253,
     "type": "limit",
-    "joke": "Melon et Meleche trouve une maison à vendre....",
-    "answer": "...Melon l'achète et Meleche l'habite"
+    "joke": "Melon et Meleche trouve une maison à vendre...",
+    "answer": "…Melon l’achète et Meleche l’habite."
   },
   {
     "id": 1254,
@@ -7551,7 +7551,7 @@
     "id": 1259,
     "type": "global",
     "joke": "Chuck Norris n'a pas besoin de parapluie...",
-    "answer": "...les gouttes de pluie ne veulent pas avoir d'embrouilles avec Chuck Norris."
+    "answer": "... les gouttes de pluie ne veulent pas avoir d'embrouilles avec Chuck Norris."
   },
   {
     "id": 1260,
@@ -7575,7 +7575,7 @@
     "id": 1263,
     "type": "limit",
     "joke": "Une grosse queue qui rappelle un bon souvenir...",
-    "answer": "...ça reste dans les annales."
+    "answer": "... ça reste dans les annales."
   },
   {
     "id": 1264,
@@ -7604,7 +7604,7 @@
   {
     "id": 1268,
     "type": "dark",
-    "joke": "Je vais faire une blague sur le nazisme ...",
+    "joke": "Je vais faire une blague sur le nazisme...",
     "answer": "Elle va faire führer !"
   },
   {
@@ -7665,7 +7665,7 @@
     "id": 1278,
     "type": "global",
     "joke": "Chuck Norris peut réanimer un feu...",
-    "answer": "...en lui faisant du bouche à bouche."
+    "answer": "... en lui faisant du bouche à bouche."
   },
   {
     "id": 1279,
@@ -7700,7 +7700,7 @@
   {
     "id": 1284,
     "type": "global",
-    "joke": "Pourquoi est-ce que les chercheurs ont-ils des trous de mémoire?",
+    "joke": "Pourquoi est-ce que les chercheurs ont-ils des trous de mémoire ?",
     "answer": "Car ils se creusent la tête !"
   },
   {
@@ -7748,7 +7748,7 @@
   {
     "id": 1292,
     "type": "dark",
-    "joke": "C'est quoi la différence entre les terroristes et les époux Balkany?",
+    "joke": "C'est quoi la différence entre les terroristes et les époux Balkany ?",
     "answer": "Les terroristes, ils ne détournent que des avions."
   },
   {
@@ -7791,7 +7791,7 @@
     "id": 1299,
     "type": "global",
     "joke": "Quand Chunk Norris se trompe dans son contrôle de physique...",
-    "answer": "...les lois de la physique changent."
+    "answer": "... les lois de la physique changent."
   },
   {
     "id": 1300,
@@ -7893,7 +7893,7 @@
     "id": 1316,
     "type": "dark",
     "joke": "C'est l'histoire d'un zoophile...",
-    "answer": "...qui prend son élan."
+    "answer": "... qui prend son élan."
   },
   {
     "id": 1317,
@@ -7910,7 +7910,7 @@
   {
     "id": 1319,
     "type": "global",
-    "joke": "Un pingouin qui fait un spectacle ...",
+    "joke": "Un pingouin qui fait un spectacle...",
     "answer": "Peut-on dire que c'est un one manchot ?"
   },
   {
@@ -7953,7 +7953,7 @@
     "id": 1326,
     "type": "dark",
     "joke": "Emma n'as pas de bras. On frappe à la porte. Qui est là ?",
-    "answer": "Bah pas Emma ..."
+    "answer": "Bah pas Emma..."
   },
   {
     "id": 1327,
@@ -7989,7 +7989,7 @@
     "id": 1332,
     "type": "blondes",
     "joke": "Quel est le point commun entre la Chine et les blondes ?",
-    "answer": "Les deux pensent que Taiwan n'est pas un pays ..."
+    "answer": "Les deux pensent que Taiwan n'est pas un pays..."
   },
   {
     "id": 1333,
@@ -8060,7 +8060,7 @@
   {
     "id": 1344,
     "type": "global",
-    "joke": "Qu’est-ce qui fait que les manchots mâles gras sont un tel succès avec les femelles manchots?",
+    "joke": "Qu’est-ce qui fait que les manchots mâles gras sont un tel succès avec les femelles manchots ?",
     "answer": "Ils savent certainement comment briser la glace."
   },
   {
@@ -8091,13 +8091,13 @@
     "id": 1349,
     "type": "beauf",
     "joke": "Les gens disent que les femmes ne sont pas drôles...",
-    "answer": "...mais hier ma femme m'a demandé de faire à manger."
+    "answer": "... mais hier ma femme m'a demandé de faire à manger."
   },
   {
     "id": 1350,
     "type": "global",
-    "joke": "Une femme chubbier: Miroir, Miroir sur le mur, qui est le plus beau de tous ?",
-    "answer": "Le miroir répond: \"Veuillez vous écarter, je ne vois rien...\""
+    "joke": "Une femme enrobé : Miroir, Miroir sur le mur, qui est le plus beau de tous ?",
+    "answer": "Le miroir répond : \"Veuillez vous écarter, je ne vois rien...\""
   },
   {
     "id": 1351,
@@ -8156,7 +8156,7 @@
   {
     "id": 1360,
     "type": "global",
-    "joke": "C'est un père qui lave son automobile avec son fils. Un moment donné, le fils lui dit:",
+    "joke": "C'est un père qui lave son automobile avec son fils. Un moment donné, le fils lui dit :",
     "answer": "\"Tu pourrais pas utiliser l'éponge à la place ?"
   },
   {
@@ -8223,7 +8223,7 @@
     "id": 1371,
     "type": "dark",
     "joke": "Un jour, un migrant m'a demandé \"Comment avoir papiers ?\". Je lui ai répondu \"Tu retournes chez toi à la nage...",
-    "answer": "...et au bout d'un moment t'auras pas pied.\""
+    "answer": "... et au bout d'un moment t'auras pas pied.\""
   },
   {
     "id": 1372,
@@ -8313,7 +8313,7 @@
     "id": 1386,
     "type": "global",
     "joke": "L'autre jour au resto, j'ai demandé au serveur de me dire ce qu'il me suggérait sincèrement...",
-    "answer": "Il m'a dit: \"Un autre restaurant\""
+    "answer": "Il m'a dit : \"Un autre restaurant\""
   },
   {
     "id": 1387,
@@ -8336,7 +8336,7 @@
   {
     "id": 1390,
     "type": "limit",
-    "joke": "Un vieux proverbe dit : qui se branle face au vent ...",
+    "joke": "Un vieux proverbe dit : qui se branle face au vent...",
     "answer": "... a le nombril tout gluant."
   },
   {
@@ -8350,5 +8350,89 @@
     "type": "global",
     "joke": "Que dit un rouleau de papier de toilette à Luke Skywalker ?",
     "answer": "J'essuie ton père."
+  },
+  {
+    "id": 1393,
+    "type": "global",
+    "joke": "J'admire les morts...",
+    "answer": "... pour leur sang-froid."
+  },
+  {
+    "id": 1394,
+    "type": "dark",
+    "joke": "Quelle est la différence entre une grosse dans une twingo et un prêtre dans un enfant ?",
+    "answer": "Aucune, tu ne sais pas comment les deux font pour rentrer !"
+  },
+  {
+    "id": 1395,
+    "type": "dark",
+    "joke": "J'ai beaucoup de blagues sur les personnes handicapées...",
+    "answer": "... mais aucune d'entre elles ne marchent."
+  },
+  {
+    "id": 1396,
+    "type": "global",
+    "joke": "J’ai raconté une blague à un Parisien.",
+    "answer": "Il n’a pas ri."
+  },
+  {
+    "id": 1397,
+    "type": "dark",
+    "joke": "J'ai beaucoup de blagues sur les personnes handicapées...",
+    "answer": "... mais aucune d'entre elles ne marchent."
+  },
+  {
+    "id": 1398,
+    "type": "global",
+    "joke": "Pour aller éteindre les incendies...",
+    "answer": "... les pompiers brûlent tous les feux."
+  },
+  {
+    "id": 1399,
+    "type": "global",
+    "joke": "Qu'est ce qu'une bouteille qui voit l'avenir ?",
+    "answer": "Une bouteille devin"
+  },
+  {
+    "id": 1400,
+    "type": "dark",
+    "joke": "Quelle est la différence entre une grosse dans une twingo et un prêtre dans un enfant ?",
+    "answer": "Aucune, tu ne sais pas comment les deux font pour rentrer !"
+  },
+  {
+    "id": 1401,
+    "type": "global",
+    "joke": "Quel est le poisson le moins cher ?",
+    "answer": "Le requin marteau : il ne vaut pas un clou."
+  },
+  {
+    "id": 1402,
+    "type": "global",
+    "joke": "On m'avait dit que je pouvais être qui je voulais.",
+    "answer": "Apparemment, l'usurpation d'identité c'est un crime."
+  },
+  {
+    "id": 1403,
+    "type": "global",
+    "joke": "Qu’est-ce qu’un hamster dans l’espace ?",
+    "answer": "Un hamstéroïde."
+  },
+  {
+    "id": 1404,
+    "type": "beauf",
+    "joke": "Les enfants dans le noir font des bêtises.",
+    "answer": "Mais les bêtises dans le noir font des enfants."
+  },
+  {
+    "id": 1405,
+    "type": "dark",
+    "joke": "J'ai beaucoup de blagues sur les personnes handicapées...",
+    "answer": "... mais aucune d'entre elles ne marchent."
+  },
+  {
+    "id": 1406,
+    "type": "global",
+    "joke": "On m'avait dit que je pouvais être qui je voulais.",
+    "answer": "Apparemment, l'usurpation d'identité c'est un crime."
   }
 ]
