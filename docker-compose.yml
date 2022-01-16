@@ -1,7 +1,7 @@
 version: '3'
 services:
   app:
-    container_name: blagues_api_v2
+    container_name: blagues_api
     restart: unless-stopped
     build:
       context: ./

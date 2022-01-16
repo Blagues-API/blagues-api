@@ -5,10 +5,10 @@
   "author": "DraftMan",
   "license": "MIT",
   "scripts": {
-    "start": "docker-compose -p blagues_api_v2 -f ./docker-compose.yml up -d",
-    "down": "docker-compose -p blagues_api_v2 -f ./docker-compose.yml down",
-    "build": "docker-compose -p blagues_api_v2 -f ./docker-compose.yml build",
-    "logs": "docker-compose -p blagues_api_v2 -f ./docker-compose.yml logs -f",
+    "start": "docker-compose -p blagues_api -f ./docker-compose.yml up -d",
+    "down": "docker-compose -p blagues_api -f ./docker-compose.yml down",
+    "build": "docker-compose -p blagues_api -f ./docker-compose.yml build",
+    "logs": "docker-compose -p blagues_api -f ./docker-compose.yml logs -f",
     "shell": "docker exec -it blagues_api bash",
     "dev": "docker-compose -p blagues_api_dev -f ./docker-compose.dev.yml up",
     "dev:legacy": "npx nodemon --watch '**/*' --ext 'ts,js' --ignore 'sw.js' --exec 'npx ts-node src/index.ts'",
@@ -20,8 +20,8 @@
     "lint": "eslint --ext .ts,.js ./src",
     "dev:migrate": "docker exec -it blagues_api_dev npx prisma migrate dev",
     "dev:generate": "docker exec -it blagues_api_dev npx prisma generate",
-    "db:migrate": "docker exec -it blagues_api_v2 npx prisma migrate deploy",
-    "db:generate": "docker exec -it blagues_api_v2 npx prisma generate"
+    "db:migrate": "docker exec -it blagues_api npx prisma migrate deploy",
+    "db:generate": "docker exec -it blagues_api npx prisma generate"
   },
   "lint-staged": {
     "*.{ts}": "eslint"
