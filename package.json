@@ -27,7 +27,7 @@
     "*.{ts}": "eslint"
   },
   "devDependencies": {
-    "@commitlint/cli": "^16.0.2",
+    "@commitlint/cli": "^16.1.0",
     "@commitlint/config-conventional": "^16.0.0",
     "@types/common-tags": "^1.8.1",
     "@types/diff": "^5.0.2",
@@ -45,7 +45,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.4",
-    "lint-staged": "^12.2.0",
+    "lint-staged": "^12.2.2",
     "nodemon": "^2.0.15",
     "prettier": "^2.5.1",
     "prisma": "3.8.1",
