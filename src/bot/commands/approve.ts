@@ -113,7 +113,7 @@ export default class ApproveCommand extends Command {
     if (proposal.merged) {
       if (!embed.footer) {
         embed.color = Colors.ACCEPTED;
-        embed.footer = { text: `${isSuggestion ? 'Blague' : 'Correction'} déjà traité` };
+        embed.footer = { text: `${isSuggestion ? 'Blague' : 'Correction'} déjà traitée` };
 
         const field = embed.fields?.[embed.fields.length - 1];
         if (field) {
@@ -177,17 +177,37 @@ export default class ApproveCommand extends Command {
       );
     }
 
-    if (proposal.approvals.some((approval) => approval.user_id === interaction.user.id)) {
-      return interaction.reply(
-        interactionInfo(`Vous avez déjà approuvé cette ${isSuggestion ? 'blague' : 'correction'}.`)
-      );
+    const approvalIndex = proposal.approvals.findIndex((approval) => approval.user_id === interaction.user.id);
+    if (approvalIndex !== -1) {
+      await prisma.approval.delete({
+        where: {
+          proposal_id_user_id: {
+            proposal_id: proposal.id,
+            user_id: interaction.user.id
+          }
+        }
+      });
+
+      proposal.approvals.splice(approvalIndex, 1);
+
+      const godfathers = await renderGodfatherLine(interaction, proposal);
+
+      const field = embed.fields?.[embed.fields.length - 1];
+      if (field) {
+        field.value = `${field.value.split('\n\n')[0]}\n\n${godfathers}`;
+      } else {
+        embed.description = `${embed.description!.split('\n\n')[0]}\n\n${godfathers}`;
+      }
+
+      await message.edit({ embeds: [embed] });
+
+      return interaction.reply(interactionInfo(`Votre approbation a bien été retirée.`));
     }
 
     const disapprovalIndex = proposal.disapprovals.findIndex(
       (disapproval) => disapproval.user_id === interaction.user.id
     );
     if (disapprovalIndex !== -1) {
-      proposal.disapprovals.splice(disapprovalIndex, 1);
       await prisma.disapproval.delete({
         where: {
           proposal_id_user_id: {
@@ -196,6 +216,8 @@ export default class ApproveCommand extends Command {
           }
         }
       });
+
+      proposal.disapprovals.splice(disapprovalIndex, 1);
     }
 
     proposal.approvals.push(

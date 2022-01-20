@@ -132,15 +132,37 @@ export default class DisapproveCommand extends Command {
       );
     }
 
-    if (proposal.disapprovals.some((disapproval) => disapproval.user_id === interaction.user.id)) {
-      return interaction.reply(
-        interactionInfo(`Vous avez déjà désapprouvé cette [${isSuggestion ? 'blague' : 'correction'}](${message.url}).`)
-      );
+    const disapprovalIndex = proposal.disapprovals.findIndex(
+      (disapproval) => disapproval.user_id === interaction.user.id
+    );
+    if (disapprovalIndex !== -1) {
+      await prisma.disapproval.delete({
+        where: {
+          proposal_id_user_id: {
+            proposal_id: proposal.id,
+            user_id: interaction.user.id
+          }
+        }
+      });
+
+      proposal.disapprovals.splice(disapprovalIndex, 1);
+
+      const godfathers = await renderGodfatherLine(interaction, proposal);
+
+      const field = embed.fields?.[embed.fields.length - 1];
+      if (field) {
+        field.value = `${field.value.split('\n\n')[0]}\n\n${godfathers}`;
+      } else {
+        embed.description = `${embed.description!.split('\n\n')[0]}\n\n${godfathers}`;
+      }
+
+      await message.edit({ embeds: [embed] });
+
+      return interaction.reply(interactionInfo(`Votre désapprobation a bien été retirée.`));
     }
 
     const approvalIndex = proposal.approvals.findIndex((approval) => approval.user_id === interaction.user.id);
     if (approvalIndex !== -1) {
-      proposal.approvals.splice(approvalIndex, 1);
       await prisma.approval.delete({
         where: {
           proposal_id_user_id: {
@@ -149,6 +171,8 @@ export default class DisapproveCommand extends Command {
           }
         }
       });
+
+      proposal.approvals.splice(approvalIndex, 1);
     }
 
     proposal.disapprovals.push(
