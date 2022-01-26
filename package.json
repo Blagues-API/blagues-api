@@ -61,7 +61,7 @@
     "diff": "^5.0.0",
     "discord-api-types": "^0.26.1",
     "discord.js": "^13.6.0",
-    "dotenv": "^14.2.0",
+    "dotenv": "^14.3.2",
     "fastify": "^3.27.0",
     "fastify-cors": "^6.0.2",
     "fastify-formbody": "^5.2.0",
