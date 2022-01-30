@@ -1628,8 +1628,8 @@
   {
     "id": 272,
     "type": "global",
-    "joke": "Pourquoi les coquilles ne font pas de régime ?",
-    "answer": "Parce qu'elles sont palourdes !"
+    "joke": "Est-ce que je suis une mauvaise mère, Léo ?",
+    "answer": "Je m'appelle Arthur."
   },
   {
     "id": 273,
@@ -4141,9 +4141,9 @@
   },
   {
     "id": 691,
-    "type": "limit",
-    "joke": "Qu'est-ce qui est rose, fait 5 cm, 15 cm déplié et qui fait rêver toutes les filles de 18 ans ?",
-    "answer": "Le permis de conduire."
+    "type": "global",
+    "joke": "Qu'est ce qu'une abeille sans ailes ?",
+    "answer": "Une abeie"
   },
   {
     "id": 692,
@@ -6055,9 +6055,9 @@
   },
   {
     "id": 1010,
-    "type": "beauf",
-    "joke": "Quel est l'application musique à l'heure ?",
-    "answer": "Deezer !"
+    "type": "global",
+    "joke": "Pourquoi personne n'est en vie à côté d'un balcon ?",
+    "answer": "Parce qu'il a terrassé tout le monde !"
   },
   {
     "id": 1011,
@@ -7795,9 +7795,9 @@
   },
   {
     "id": 1300,
-    "type": "dark",
-    "joke": "C'est l'histoire d'Hitler qui prend l'ascenseur avec un juif et qui lui demande...",
-    "answer": "... si il veut des cendres."
+    "type": "global",
+    "joke": "Quel est le film d'horreur le plus affamant ?",
+    "answer": "Saw 6"
   },
   {
     "id": 1301,
@@ -7905,7 +7905,7 @@
     "id": 1318,
     "type": "dark",
     "joke": "C'est l'histoire d'Hitler qui prend l'ascenseur avec un juif et qui lui demande...",
-    "answer": "... s'il veut des cendres."
+    "answer": "... si il veut des cendres."
   },
   {
     "id": 1319,
@@ -8130,10 +8130,10 @@
     "answer": "\"Je parie sur celui avec le couteau !\""
   },
   {
-    "id": 1356,
-    "type": "dark",
-    "joke": "Je connais un esquimau en phase terminale...",
-    "answer": "Il est à l'Arctique de la mort."
+    "id": 1506,
+    "type": "dev",
+    "joke": "À quoi reconnaît-on un métro ?",
+    "answer": "À son métroId !"
   },
   {
     "id": 1357,
@@ -8150,8 +8150,8 @@
   {
     "id": 1359,
     "type": "global",
-    "joke": "- Docteur ! Je me sens comme une chaise !",
-    "answer": "- Justement, j'ai votre dossier ici."
+    "joke": "Quelle est la couleur du cheval blanc d'Henri IV ?",
+    "answer": "Blanc"
   },
   {
     "id": 1360,
@@ -9010,47 +9010,5 @@
     "type": "dev",
     "joke": "Quel son fait la cigale d'un développeur ?",
     "answer": "Css... css... css... css... css..."
-  },
-  {
-    "id": 1503,
-    "type": "dev",
-    "joke": "Pourquoi les développeurs sont riches ?",
-    "answer": "Ils ont plein de Ruby !"
-  },
-  {
-    "id": 1504,
-    "type": "global",
-    "joke": "Est-ce que je suis une mauvaise mère, Léo ?",
-    "answer": "Je m'appelle Arthur."
-  },
-  {
-    "id": 1505,
-    "type": "global",
-    "joke": "Quel est le film d'horreur le plus affamant ?",
-    "answer": "Saw 6"
-  },
-  {
-    "id": 1506,
-    "type": "dev",
-    "joke": "À quoi reconnaît-on un métro ?",
-    "answer": "À son métroID !"
-  },
-  {
-    "id": 1507,
-    "type": "global",
-    "joke": "Qu'est ce qu'une abeille sans ailes ?",
-    "answer": "Une abeie"
-  },
-  {
-    "id": 1508,
-    "type": "global",
-    "joke": "Quelle est la couleur du cheval blanc d'Henri IV ?",
-    "answer": "Blanc"
-  },
-  {
-    "id": 1509,
-    "type": "global",
-    "joke": "Pourquoi personne n'est en vie à côté d'un balcon ?",
-    "answer": "Parce qu'il a terrassé tout le monde !"
   }
 ]
