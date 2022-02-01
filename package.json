@@ -71,7 +71,7 @@
     "lodash": "^4.17.21",
     "node-schedule": "^2.1.0",
     "prismjs": "^1.26.0",
-    "sharp": "^0.29.3",
+    "sharp": "^0.30.0",
     "source-map-support": "^0.5.21",
     "string-similarity": "^4.0.4"
   },
