@@ -49,7 +49,7 @@
     "nodemon": "^2.0.15",
     "prettier": "^2.5.1",
     "prisma": "3.8.1",
-    "ts-node": "^10.4.0",
+    "ts-node": "^10.5.0",
     "typescript": "^4.5.5"
   },
   "dependencies": {
@@ -62,7 +62,7 @@
     "discord-api-types": "^0.26.1",
     "discord.js": "^13.6.0",
     "dotenv": "^14.3.2",
-    "fastify": "^3.27.0",
+    "fastify": "^3.27.1",
     "fastify-cors": "^6.0.2",
     "fastify-formbody": "^5.2.0",
     "fastify-plugin": "^3.0.1",
@@ -71,7 +71,7 @@
     "lodash": "^4.17.21",
     "node-schedule": "^2.1.0",
     "prismjs": "^1.26.0",
-    "sharp": "^0.29.3",
+    "sharp": "^0.30.1",
     "source-map-support": "^0.5.21",
     "string-similarity": "^4.0.4"
   },
