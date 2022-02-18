@@ -55,13 +55,17 @@ export function validate(message: string): MessageOptions {
   };
 }
 
-export function showDiffs(oldValue: string, newValue: string): string {
+export function showPositiveDiffs(oldValue: string, newValue: string): string {
   return diffWords(oldValue, newValue)
     .filter((part) => !part.removed)
-    .map((part) => {
-      const sep = part.added ? '`' : '';
-      return `${sep}${part.value}${sep}`;
-    })
+    .map((part) => `${part.added ? '`' : ''}${part.value}${part.added ? '`' : ''}`)
+    .join('');
+}
+
+export function showNegativeDiffs(oldValue: string, newValue: string): string {
+  return diffWords(oldValue, newValue)
+    .filter((part) => !part.added)
+    .map((part) => `${part.removed ? '~~`' : ''}${part.value}${part.removed ? '`~~' : ''}`)
     .join('');
 }
 
