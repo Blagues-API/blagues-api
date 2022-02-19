@@ -1,7 +1,7 @@
 import { CommandInteraction } from 'discord.js';
 import { randomJokeByType } from '../../controllers';
 import { Category, CategoriesRefs } from '../../typings';
-import { commandsChannel } from '../constants';
+import { Colors, commandsChannel } from '../constants';
 import Command from '../lib/command';
 import { interactionInfo } from '../utils';
 
@@ -39,7 +39,7 @@ export default class JokeCommand extends Command {
     return interaction.reply({
       embeds: [
         {
-          color: 0xcd6e57,
+          color: Colors.PRIMARY,
           title: blague!.joke,
           description: `|| ${blague!.answer} ||`,
           timestamp: Date.now(),
