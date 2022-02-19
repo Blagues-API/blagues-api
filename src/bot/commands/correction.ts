@@ -16,7 +16,14 @@ import { Colors, commandsChannel, correctionsChannel, downReaction, upReaction }
 import Command from '../lib/command';
 import clone from 'lodash/clone';
 import { ProposalType } from '@prisma/client';
-import { interactionInfo, interactionProblem, isEmbedable, problem, showDiffs } from '../utils';
+import {
+  interactionInfo,
+  interactionProblem,
+  isEmbedable,
+  problem,
+  showNegativeDiffs,
+  showPositiveDiffs
+} from '../utils';
 
 enum IdType {
   MESSAGE_ID,
@@ -49,7 +56,7 @@ export default class CorrectionCommand extends Command {
     });
   }
   async run(interaction: CommandInteraction): Promise<void> {
-    const query = interaction.options.getString('recherche', true) as string;
+    const query = interaction.options.getString('recherche', true);
 
     if (interaction.channelId !== commandsChannel) {
       return interaction.reply(interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannel}>.`));
@@ -452,17 +459,17 @@ export default class CorrectionCommand extends Command {
             {
               name: 'Blague initiale',
               value: stripIndents`
-                > **Type**: ${CategoriesRefs[newJoke.suggestion.type]}
-                > **Blague**: ${newJoke.suggestion.joke}
-                > **Réponse**: ${newJoke.suggestion.answer}
+                > **Type**: ${showNegativeDiffs(CategoriesRefs[newJoke.suggestion.type], CategoriesRefs[newJoke.type])}
+                > **Blague**: ${showNegativeDiffs(newJoke.suggestion.joke, newJoke.joke)}
+                > **Réponse**: ${showNegativeDiffs(newJoke.suggestion.answer, newJoke.answer)}
               `
             },
             {
               name: 'Blague corrigée',
               value: stripIndents`
-                > **Type**: ${showDiffs(CategoriesRefs[newJoke.suggestion.type], CategoriesRefs[newJoke.type])}
-                > **Blague**: ${showDiffs(newJoke.suggestion.joke, newJoke.joke)}
-                > **Réponse**: ${showDiffs(newJoke.suggestion.answer, newJoke.answer)}
+                > **Type**: ${showPositiveDiffs(CategoriesRefs[newJoke.suggestion.type], CategoriesRefs[newJoke.type])}
+                > **Blague**: ${showPositiveDiffs(newJoke.suggestion.joke, newJoke.joke)}
+                > **Réponse**: ${showPositiveDiffs(newJoke.suggestion.answer, newJoke.answer)}
               `
             }
           ],
