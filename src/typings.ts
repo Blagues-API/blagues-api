@@ -50,6 +50,15 @@ export const CategoriesRefs: Record<Category, string> = {
   blondes: 'Blondes'
 };
 
+export const CategoriesRefsFull: Record<Category, string> = {
+  global: 'Tout public',
+  dark: 'Humour noir',
+  dev: 'Blague de dev',
+  limit: 'Blague 18+',
+  beauf: 'Humour beauf',
+  blondes: 'Blagues de blondes'
+};
+
 export const JokeTypesDescriptions: Record<Category, string> = {
   global: 'Blagues tout public, accessibles pour tous.',
   dark: 'Blagues qui souligne avec cruauté certains faits.',

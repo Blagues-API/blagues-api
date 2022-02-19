@@ -1,6 +1,6 @@
 import { CommandInteraction } from 'discord.js';
 import { randomJokeByType } from '../../controllers';
-import { Category, CategoriesRefs } from '../../typings';
+import { Category, CategoriesRefsFull } from '../../typings';
 import { Colors, commandsChannel } from '../constants';
 import Command from '../lib/command';
 import { interactionInfo } from '../utils';
@@ -17,7 +17,7 @@ export default class JokeCommand extends Command {
           name: 'type',
           description: 'Général, Développeur, Noir, +18, Beauf, Blondes',
           required: true,
-          choices: Object.entries(CategoriesRefs).map(([key, name]) => ({
+          choices: Object.entries(CategoriesRefsFull).map(([key, name]) => ({
             name,
             value: key
           }))
@@ -44,7 +44,7 @@ export default class JokeCommand extends Command {
           description: `|| ${blague!.answer} ||`,
           timestamp: Date.now(),
           footer: {
-            text: CategoriesRefs[blague!.type],
+            text: CategoriesRefsFull[blague!.type],
             icon_url: interaction.guild!.iconURL({ size: 32, dynamic: true })!
           }
         }
