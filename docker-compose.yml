@@ -34,7 +34,7 @@ services:
   postgres:
     container_name: blagues_api_postgres
     restart: unless-stopped
-    image: 'postgres:13'
+    image: 'postgres:14'
     volumes:
       - ./databases/postgres:/var/lib/postgresql/data
     env_file:
