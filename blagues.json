@@ -9055,6 +9055,174 @@
   },
   {
     "id": 1510,
+    "type": "dark",
+    "joke": "Que fait un bébé qui saute dans une piscine ?",
+    "answer": "Il se noit."
+  },
+  {
+    "id": 1511,
+    "type": "global",
+    "joke": "Dieu dit à Cho de coller sa feuille...",
+    "answer": "... et Cho colla."
+  },
+  {
+    "id": 1512,
+    "type": "beauf",
+    "joke": "Quelle est la différence entre une dinde et ma sœur ?",
+    "answer": "La dinde, je ne l'ai pas encore fourrée."
+  },
+  {
+    "id": 1513,
+    "type": "global",
+    "joke": "Que dit Ronaldo à la personne qui dit mais non ?",
+    "answer": "Messi"
+  },
+  {
+    "id": 1514,
+    "type": "dev",
+    "joke": "Quel logiciel de conception est très prisé des gourmands ?",
+    "answer": "SketchUp"
+  },
+  {
+    "id": 1515,
+    "type": "blondes",
+    "joke": "Une femme à son amie blonde : - Fais gaffe sur la route, il y a un chauffard qui roule en sens inverse !",
+    "answer": "- C'est pire, il y en a des centaines !"
+  },
+  {
+    "id": 1516,
+    "type": "global",
+    "joke": "Comment appelle-t-on la femme du caillou ?",
+    "answer": "La galette"
+  },
+  {
+    "id": 1517,
+    "type": "global",
+    "joke": "Quel est l'animal le plus drôle ?",
+    "answer": "Le dindon de la farce"
+  },
+  {
+    "id": 1518,
+    "type": "dark",
+    "joke": "Tu n'as pas besoin de parachute pour faire du parachutisme.",
+    "answer": "Cependant, tu as besoin d'un parachute si tu veux en faire deux fois."
+  },
+  {
+    "id": 1519,
+    "type": "dark",
+    "joke": "Pourquoi n'y a t'il pas de piscine en Algérie ?",
+    "answer": "Tous les habitants qui savent nager sont déjà en France."
+  },
+  {
+    "id": 1520,
+    "type": "dark",
+    "joke": "Comment la femme d'Hitler est-elle morte ?",
+    "answer": "Elle s'est trompée de chambre."
+  },
+  {
+    "id": 1521,
+    "type": "beauf",
+    "joke": "Pourquoi les filles ne mettent pas de mini-jupes en hiver ?",
+    "answer": "Pour ne pas avoir les lèvres gercées."
+  },
+  {
+    "id": 1522,
+    "type": "global",
+    "joke": "Mais où est donc Ornicar ?",
+    "answer": "Il part avec Adam pour Anvers avec 200 sous."
+  },
+  {
+    "id": 1523,
+    "type": "dark",
+    "joke": "Dans le ciel il y a des nuages, dans le désert il y a des mirages...",
+    "answer": "... et dans la rivière un Grégory qui nage."
+  },
+  {
+    "id": 1524,
+    "type": "dark",
+    "joke": "Quelle est la différence entre un incident et une catastrophe ?",
+    "answer": "Un incident c'est quand un bateau de migrants coule et une catastrophe c'est quand ils savent nager."
+  },
+  {
+    "id": 1525,
+    "type": "beauf",
+    "joke": "On me dit souvent que je suis un boulet...",
+    "answer": "... et comme t'es canon, je pourrai te rentrer dedans ?"
+  },
+  {
+    "id": 1526,
+    "type": "dark",
+    "joke": "Tu sais ce qui est écrit sur les portes du Bataclan ?",
+    "answer": "Tirez !"
+  },
+  {
+    "id": 1527,
+    "type": "dark",
+    "joke": "Quelle est la différence entre Johnny Hallyday et Michael Jackson ?",
+    "answer": "Les enfants de Johnny se battent pour toucher quelque chose."
+  },
+  {
+    "id": 1528,
+    "type": "global",
+    "joke": "Quand Chuck Norris voit quelqu'un blessé, il n'appelle pas les pompiers.",
+    "answer": "Ce sont les pompiers qui l'appellent."
+  },
+  {
+    "id": 1529,
+    "type": "global",
+    "joke": "Que dit un crustacé quand on lui dit \"Au secours, je me noie !\" ?",
+    "answer": "Tu devrais flotter, t'es palourde."
+  },
+  {
+    "id": 1530,
+    "type": "dark",
+    "joke": "Que regarde un juif dans le ciel ?",
+    "answer": "L'étoile jaune"
+  },
+  {
+    "id": 1531,
+    "type": "global",
+    "joke": "Ma copine m’a traité de travesti, j’ai pas supporté...",
+    "answer": "... j’ai pris ses affaires et je suis parti."
+  },
+  {
+    "id": 1532,
+    "type": "global",
+    "joke": "Il y a trois poussins sur la table et tu veux qu'il en reste deux. Comment fait tu",
+    "answer": "Tu en poussin (pousse un)"
+  },
+  {
+    "id": 1533,
+    "type": "dark",
+    "joke": "J'ai une blague sur les talibans.",
+    "answer": "Mais je ne veux pas la dévoiler."
+  },
+  {
+    "id": 1534,
+    "type": "dark",
+    "joke": "Que sépare l'homme de l'animal ?",
+    "answer": "La mer Méditerranée"
+  },
+  {
+    "id": 1535,
+    "type": "dev",
+    "joke": "Pourquoi lorsqu'on mange une poutine le goût arrive 5 secondes après ?",
+    "answer": "Parce que le GouLag"
+  },
+  {
+    "id": 1536,
+    "type": "dark",
+    "joke": "Quel est le point commun entre la seconde Guerre Mondiale et un appareil à raclette ?",
+    "answer": "C’est très chaud d’être dans la résistance."
+  },
+  {
+    "id": 1537,
+    "type": "dark",
+    "joke": "Quelle était la principale source d'énergie du 3ème Reich ?",
+    "answer": "La biomasse !"
+  },
+  {
+    "id": 1538,
     "type": "global",
     "joke": "Que dit Groot à une fille qui lui plait ?",
     "answer": "Tu me branches."
