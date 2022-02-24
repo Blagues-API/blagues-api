@@ -4082,7 +4082,7 @@
   {
     "id": 681,
     "type": "beauf",
-    "joke": "Quel est le légume les plus alcoolique ?",
+    "joke": "Quel est le légume le plus alcoolique ?",
     "answer": "L'épinard"
   },
   {
@@ -9010,5 +9010,47 @@
     "type": "dev",
     "joke": "Quel son fait la cigale d'un développeur ?",
     "answer": "Css... css... css... css... css..."
+  },
+  {
+    "id": 1503,
+    "type": "beauf",
+    "joke": "Quel est le point commun entre les blagues et les jupes ?",
+    "answer": "Les plus courtes sont les meilleures."
+  },
+  {
+    "id": 1504,
+    "type": "beauf",
+    "joke": "Quel est le point commun entre les blagues et les jupes ?",
+    "answer": "Les plus courtes sont les meilleures."
+  },
+  {
+    "id": 1505,
+    "type": "dark",
+    "joke": "Pourquoi les pédophiles n'aiment pas les jeux de société ?",
+    "answer": "Car il y a des règles."
+  },
+  {
+    "id": 1506,
+    "type": "dev",
+    "joke": "Que fait un développeur en hiver ?",
+    "answer": "Du saut ASCII"
+  },
+  {
+    "id": 1507,
+    "type": "global",
+    "joke": "Quel est le point commun entre un lingot de fer et une musique rock ?",
+    "answer": "Ce sont tous les deux des morceaux de métal."
+  },
+  {
+    "id": 1508,
+    "type": "dark",
+    "joke": "Quelle est la différence entre une prostituée et une meule de reblochon ?",
+    "answer": "La meule de reblochon, plus elle est vieille, plus elle est bonne."
+  },
+  {
+    "id": 1509,
+    "type": "dev",
+    "joke": "Qu'est ce qu'un terroriste sur un fauteuil roulant ?",
+    "answer": "Une RC-XD"
   }
 ]
