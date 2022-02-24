@@ -2701,9 +2701,9 @@
   },
   {
     "id": 451,
-    "type": "global",
-    "joke": "Pourquoi les chinois ne croient pas au Père Noël ?",
-    "answer": "Car c'est eux qui font les jouets."
+    "type": "dark",
+    "joke": "Pourquoi les petits chinois ne croient pas au Père Noël ?",
+    "answer": "Car ce sont eux qui font les jouets."
   },
   {
     "id": 452,
@@ -8235,7 +8235,7 @@
     "id": 1373,
     "type": "global",
     "joke": "Quelle est la danse préférée des poules ?",
-    "answer": "La poulka."
+    "answer": "La poulka"
   },
   {
     "id": 1374,
@@ -9052,5 +9052,11 @@
     "type": "dev",
     "joke": "Qu'est ce qu'un terroriste sur un fauteuil roulant ?",
     "answer": "Une RC-XD"
+  },
+  {
+    "id": 1510,
+    "type": "global",
+    "joke": "Que dit Groot à une fille qui lui plait ?",
+    "answer": "Tu me branches."
   }
 ]
