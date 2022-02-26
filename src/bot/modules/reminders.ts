@@ -19,17 +19,12 @@ export default class Reminders {
   constructor(client: Client) {
     this.client = client;
 
-    // Every day at 9 p.m. (0 21 * * *)
-    schedule.scheduleJob('30 * * * *', async () => {
-      await this.run();
-    });
-
-    schedule.scheduleJob('0 21 * * *', async () => {
-      await this.run(true);
-    });
+    // Every 10 minutes
+    schedule.scheduleJob('*/10 * * * *', (date) => this.run(date));
   }
 
-  async run(needMentions = false) {
+  async run(date: Date): Promise<void> {
+    const needMentions = date.getHours() === 21 && date.getMinutes() === 0;
     // Get all open proposals with their dependencies and decisions
     const proposals = await prisma.proposal.findMany({
       where: {
@@ -83,7 +78,7 @@ export default class Reminders {
     const role = guild.roles.cache.get(parrainRole);
     if (!role) return;
 
-    const godfathersEmojis = await Promise.all(role.members.map((member) => getGodfatherEmoji(emojisGuild, member!)));
+    const godfathersEmojis = await Promise.all(role.members.map((member) => getGodfatherEmoji(emojisGuild, member)));
 
     // Remap proposals with godfathers acceptable decisions
     const entries: Array<{ proposal: Proposal; members_ids: Snowflake[] }> = [];
