@@ -11,18 +11,12 @@ import {
 import { findBestMatch } from 'string-similarity';
 import Jokes from '../../jokes';
 import { Category, CategoriesRefs, UnsignedJoke } from '../../typings';
-import { Colors, guildId, suggestionsChannel, upReaction, downReaction, commandsChannel } from '../constants';
+import { Colors, suggestionsChannel, upReaction, downReaction, commandsChannel } from '../constants';
 import Command from '../lib/command';
 import { interactionInfo, interactionProblem, isEmbedable } from '../utils';
 import Collection from '@discordjs/collection';
 import prisma from '../../prisma';
 import { ProposalType } from '@prisma/client';
-
-enum Similarity {
-  Different,
-  Like,
-  Same
-}
 
 export default class SuggestCommand extends Command {
   constructor() {
@@ -70,15 +64,32 @@ export default class SuggestCommand extends Command {
       return;
     }
 
+    const proposals = await prisma.proposal.findMany({
+      select: {
+        joke_type: true,
+        joke_question: true,
+        joke_answer: true
+      },
+      where: {
+        type: ProposalType.SUGGESTION,
+        merged: false,
+        refused: false
+      }
+    });
+
+    const currentJokes = [
+      ...Jokes.list,
+      ...proposals.map((entry) => ({
+        type: entry.joke_type,
+        joke: entry.joke_question,
+        answer: entry.joke_answer
+      }))
+    ];
+
     const { bestMatch, bestMatchIndex } = findBestMatch(
       `${interaction.options.get('joke')!.value} ${interaction.options.get('response')!.value}`,
-      Jokes.list.map((entry) => `${entry.joke} ${entry.answer}`)
+      currentJokes.map((entry) => `${entry.joke} ${entry.answer}`)
     );
-
-    // TODO: Compare with saved updates
-
-    const similarity =
-      bestMatch.rating > 0.6 ? (bestMatch.rating > 0.8 ? Similarity.Same : Similarity.Like) : Similarity.Different;
 
     const payload = {
       type: interaction.options.get('type')!.value as Category,
@@ -103,33 +114,20 @@ export default class SuggestCommand extends Command {
       color: Colors.PROPOSED
     };
 
-    if (similarity !== Similarity.Different) {
-      const jokeMessage = await prisma.proposal.findUnique({
-        select: { message_id: true },
-        where: {
-          joke_id: Jokes.list[bestMatchIndex].id
-        }
-      });
-
-      if (jokeMessage) {
-        embed.description += `\n⚠️ Une [blague déjà existante](https://discord.com/channels/${guildId}/${suggestionsChannel}/${
-          jokeMessage.message_id
-        }) y ressemble ${similarity === Similarity.Same ? 'à plus de 80%' : 'fortement'}`;
-      } else {
-        embed.fields = [
-          {
-            name: 'Blague y ressemblant',
-            value: stripIndents`
-              > **Type**: ${CategoriesRefs[Jokes.list[bestMatchIndex].type as Category]}
-              > **Blague**: ${Jokes.list[bestMatchIndex].joke}
-              > **Réponse**: ${Jokes.list[bestMatchIndex].answer}
+    if (bestMatch.rating > 0.6) {
+      embed.fields = [
+        {
+          name: 'Blague similaire',
+          value: stripIndents`
+              > **Type**: ${CategoriesRefs[currentJokes[bestMatchIndex].type as Category]}
+              > **Blague**: ${currentJokes[bestMatchIndex].joke}
+              > **Réponse**: ${currentJokes[bestMatchIndex].answer}
             `
-          }
-        ];
-      }
+        }
+      ];
     }
 
-    if (similarity === Similarity.Same) {
+    if (bestMatch.rating > 0.8) {
       return interaction.reply({
         content: 'Cette blague existe déjà.',
         embeds: [embed],
