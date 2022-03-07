@@ -1,4 +1,4 @@
-FROM node:16.13 as builder
+FROM node:16.14 as builder
 WORKDIR /app
 
 COPY --chown=node:node package.json yarn.lock ./
@@ -15,7 +15,7 @@ COPY --chown=node:node ./blagues.json ./
 RUN npx prisma generate
 RUN npx tsc
 
-FROM node:16.13 as production
+FROM node:16.14 as production
 WORKDIR /app
 
 COPY --chown=node:node package.json yarn.lock ./
