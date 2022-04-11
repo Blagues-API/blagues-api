@@ -277,10 +277,15 @@
   resolved "https://registry.yarnpkg.com/@prisma/engines/-/engines-3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f.tgz#4479099b99f6a082ce5843ee7208943ccedd127f"
   integrity sha512-bHYubuItSN/DGYo36aDu7xJiJmK52JOSHs4MK+KbceAtwS20BCWadRgtpQ3iZ2EXfN/B1T0iCXlNraaNwnpU2w==
 
-"@sapphire/async-queue@^1.1.9", "@sapphire/async-queue@^1.3.0":
+"@sapphire/async-queue@^1.1.9":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@sapphire/async-queue/-/async-queue-1.3.0.tgz#98b1b364a5fe820366a786827f2e987590de5964"
   integrity sha512-z+CDw5X4UgIEpZL8KM+ThVx1i8V60HBg0l/oFewTNbQQeRDJHdVxHyJykv+SF1H+Rc8EkMS81VTWo95jVYgO/g==
+
+"@sapphire/async-queue@^1.3.1":
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/@sapphire/async-queue/-/async-queue-1.3.1.tgz#9d861e626dbffae02d808e13f823d4510e450a78"
+  integrity sha512-FFTlPOWZX1kDj9xCAsRzH5xEJfawg1lNoYAA+ecOWJMHOfiZYb1uXOI3ne9U4UILSEPwfE68p3T9wUHwIQfR0g==
 
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
@@ -377,10 +382,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/lodash@^4.14.180":
-  version "4.14.180"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.180.tgz#4ab7c9ddfc92ec4a887886483bc14c79fb380670"
-  integrity sha512-XOKXa1KIxtNXgASAnwj7cnttJxS4fksBRywK/9LzRV5YxrF80BXZIGeQSuoESQ/VkUj30Ae0+YcuHc15wJCB2g==
+"@types/lodash@^4.14.181":
+  version "4.14.181"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.181.tgz#d1d3740c379fda17ab175165ba04e2d03389385d"
+  integrity sha512-n3tyKthHJbkiWhDZs3DkhkCzt2MexYHXlX0td5iMplyfwketaOeKboEVBqzceH7juqvEg3q5oUoBFxSLu7zFag==
 
 "@types/minimist@^1.2.0":
   version "1.2.2"
@@ -429,10 +434,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/sharp@^0.30.0":
-  version "0.30.0"
-  resolved "https://registry.yarnpkg.com/@types/sharp/-/sharp-0.30.0.tgz#58cb016c8fdc558b4c5771ad1f3668336685c843"
-  integrity sha512-bZ0Y/JVlrOyqwlBMJ2taEgnwFavjLnyZmLOLecmOesuG5kR2Lx9b2fM4osgfVjLJi8UlE+t3R1JzRVMxF6MbfA==
+"@types/sharp@^0.30.1":
+  version "0.30.1"
+  resolved "https://registry.yarnpkg.com/@types/sharp/-/sharp-0.30.1.tgz#31bd128f2437e8fc31424eb23d8284aa127bfa8d"
+  integrity sha512-LxzQsKo2YtvA2DlqACNXmlbLGMVJCSU/HhV4N9RrStClUEf02iN+AakD/zUOpZkbo1OG+lHk2LeqoHedLwln2w==
   dependencies:
     "@types/node" "*"
 
@@ -1252,10 +1257,10 @@ discord-api-types@^0.26.0:
   resolved "https://registry.yarnpkg.com/discord-api-types/-/discord-api-types-0.26.1.tgz#726f766ddc37d60da95740991d22cb6ef2ed787b"
   integrity sha512-T5PdMQ+Y1MEECYMV5wmyi9VEYPagEDEi4S0amgsszpWY0VB9JJ/hEvM6BgLhbdnKky4gfmZEXtEEtojN8ZKJQQ==
 
-discord-api-types@^0.30.0:
-  version "0.30.0"
-  resolved "https://registry.yarnpkg.com/discord-api-types/-/discord-api-types-0.30.0.tgz#3050ff1f06b8bd4259bb2c2b1b67517268ea7188"
-  integrity sha512-wYst0jrT8EJs2tVlwUTQ2xT0oWMjUrRMpFTkNY3NMleWyQNHgWaKhqFfxdLPdC2im9IuR5EsxcEgjhf/npeftw==
+discord-api-types@^0.31.0:
+  version "0.31.0"
+  resolved "https://registry.yarnpkg.com/discord-api-types/-/discord-api-types-0.31.0.tgz#f393b7632ea08f4e43487feb9e6ddc30dcc69fe5"
+  integrity sha512-IL4KKEo3QOQRcrtkpAYiDOQHIVuDBgtzFgDKsMqllbPKi3o/54mJOvYEG38oFa1G2qR4b+nTB5mMgc85W4/eQw==
 
 discord.js@^13.6.0:
   version "13.6.0"
@@ -1582,10 +1587,10 @@ fastify-plugin@^3.0.0, fastify-plugin@^3.0.1:
   resolved "https://registry.yarnpkg.com/fastify-plugin/-/fastify-plugin-3.0.1.tgz#79e84c29f401020f38b524f59f2402103fd21ed2"
   integrity sha512-qKcDXmuZadJqdTm6vlCqioEbyewF60b/0LOFCcYN1B6BIZGlYJumWWOYs70SFYLDAH4YqdE1cxH/RKMG7rFxgA==
 
-fastify@^3.27.4:
-  version "3.27.4"
-  resolved "https://registry.yarnpkg.com/fastify/-/fastify-3.27.4.tgz#67ffd61b5bea74768a7de28dbef5b6bc58f9e953"
-  integrity sha512-SOfnHBxG9zxCSIvt6aHoR/cao8QBddWmGP/mb5KQKRc+KI1kB7b79M2hCDOTSyHdLAF2OX+oI6X3weeLc+MqKg==
+fastify@^3.28.0:
+  version "3.28.0"
+  resolved "https://registry.yarnpkg.com/fastify/-/fastify-3.28.0.tgz#14d939a2f176b82af1094de7abcb0b2d83bcff8f"
+  integrity sha512-LAQtGllpkRe8L6Tpf3zdbvXzXFOrgaWV3Tbvp3xMv9ngcr9zht9U2/mo5zq9qp9kplSiBJ0w43aVAMqv6PBMbw==
   dependencies:
     "@fastify/ajv-compiler" "^1.0.0"
     abstract-logging "^2.0.0"
