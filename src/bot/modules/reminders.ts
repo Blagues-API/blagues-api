@@ -1,5 +1,5 @@
 import { Proposal, ProposalType } from '@prisma/client';
-import { Snowflake } from 'discord-api-types';
+import { Snowflake } from 'discord-api-types/v9';
 import { Client, Collection, TextChannel } from 'discord.js';
 import schedule from 'node-schedule';
 import prisma from '../../prisma';

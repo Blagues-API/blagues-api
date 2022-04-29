@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { Snowflake } from 'discord-api-types';
+import { Snowflake } from 'discord-api-types/v9';
 import jwt from 'jsonwebtoken';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

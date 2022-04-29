@@ -1,4 +1,4 @@
-import { Snowflake } from 'discord-api-types';
+import { Snowflake } from 'discord-api-types/v9';
 
 export const jokerRole: Snowflake = process.env.JOKER_ROLE ?? '699244416849674310';
 export const correctorRole: Snowflake = process.env.CORRECTOR_ROLE ?? '829996106808426516';
