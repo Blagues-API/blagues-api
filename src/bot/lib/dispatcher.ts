@@ -1,10 +1,4 @@
-import {
-  ApplicationCommand,
-  ApplicationCommandData,
-  Client,
-  CommandInteraction,
-  GuildApplicationCommandPermissionData
-} from 'discord.js';
+import { ApplicationCommandData, Client, CommandInteraction } from 'discord.js';
 import Command from './command';
 
 import CorrectCommand from '../commands/correction';
@@ -37,10 +31,6 @@ export default class Dispatcher {
     return this.commands.map((command: Command) => command.data);
   }
 
-  public get commandsPermissions(): Command[] {
-    return this.commands.filter((command: Command) => command.parrainOnly);
-  }
-
   public async execute(interaction: CommandInteraction): Promise<void> {
     const command = this.commands.find((cmd: Command) => cmd.name === interaction.commandName);
 
@@ -62,15 +52,6 @@ export default class Dispatcher {
     const guild = this.client.guilds.cache.get(guildId);
     if (!guild) return;
 
-    const registredCommands = await guild.commands.set(this.commandsData);
-    await guild.commands.permissions.set({
-      fullPermissions: this.commandsPermissions.map((command: Command) => {
-        const registredCommand = registredCommands.find((c: ApplicationCommand) => c.name === command.name);
-        return {
-          id: registredCommand!.id,
-          permissions: command.permissions
-        };
-      }) as GuildApplicationCommandPermissionData[]
-    });
+    await guild.commands.set(this.commandsData);
   }
 }

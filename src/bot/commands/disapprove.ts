@@ -17,8 +17,7 @@ export default class DisapproveCommand extends Command {
   constructor() {
     super({
       name: 'Désapprouver',
-      type: 'MESSAGE',
-      parrainOnly: true
+      type: 'MESSAGE'
     });
   }
 

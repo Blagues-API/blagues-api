@@ -1,32 +1,18 @@
 import {
-  ApplicationCommandPermissions,
   ChatInputApplicationCommandData,
   CommandInteraction,
   MessageApplicationCommandData,
   MessageContextMenuInteraction
 } from 'discord.js';
-import { parrainRole } from '../constants';
-
-interface CommandChatInfos extends ChatInputApplicationCommandData {
-  parrainOnly?: boolean;
-}
-
-interface CommandMessageInfos extends MessageApplicationCommandData {
-  parrainOnly?: boolean;
-}
 
 export default class Command {
   public name: string;
 
-  private raw: CommandChatInfos | CommandMessageInfos;
+  private raw: ChatInputApplicationCommandData | MessageApplicationCommandData;
 
-  public parrainOnly: boolean;
-
-  constructor(data: CommandChatInfos | CommandMessageInfos) {
+  constructor(data: ChatInputApplicationCommandData | MessageApplicationCommandData) {
     this.name = data.name;
     this.raw = data;
-
-    this.parrainOnly = data.parrainOnly ?? false;
   }
 
   public get data(): ChatInputApplicationCommandData | MessageApplicationCommandData {
@@ -35,31 +21,18 @@ export default class Command {
         name: this.name,
         description: this.raw.description,
         type: this.raw.type,
-        options: this.raw.options,
-        defaultPermission: !this.raw.parrainOnly
+        options: this.raw.options
       } as ChatInputApplicationCommandData;
     }
 
     return {
       name: this.name,
-      type: this.raw.type,
-      defaultPermission: !this.raw.parrainOnly
-    } as CommandMessageInfos;
-  }
-
-  public get permissions(): ApplicationCommandPermissions[] | null {
-    if (!this.raw.parrainOnly) return null;
-    return [
-      {
-        id: parrainRole,
-        type: 'ROLE',
-        permission: true
-      }
-    ];
+      type: this.raw.type
+    } as MessageApplicationCommandData;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public async run(interaction: CommandInteraction | MessageContextMenuInteraction): Promise<void> {
+  public async run(_interaction: CommandInteraction | MessageContextMenuInteraction): Promise<void> {
     throw new Error('No method run defined');
   }
 }

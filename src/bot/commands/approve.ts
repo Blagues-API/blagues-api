@@ -25,8 +25,7 @@ export default class ApproveCommand extends Command {
   constructor() {
     super({
       name: 'Approuver',
-      type: 'MESSAGE',
-      parrainOnly: true
+      type: 'MESSAGE'
     });
   }
 
