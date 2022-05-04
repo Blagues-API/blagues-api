@@ -1584,7 +1584,7 @@ fast-safe-stringify@^2.0.8:
     fastify-plugin "^3.0.0"
     vary "^1.1.2"
 
-fastify-cors@^6.1.0:
+fastify-cors@^6.0.3:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/fastify-cors/-/fastify-cors-6.1.0.tgz#b47bd7faf29113a884e59413ee198a9c323cf180"
   integrity sha512-QBKz32IoY/iuT74CunRY1XOSpjSTIOh9E3FxulXIBhd0D2vdgG0kDvy0eG6HA/88sRfWHeba43LkGEXPz0Rh8g==
