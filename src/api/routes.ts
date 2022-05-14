@@ -9,13 +9,13 @@ import { generateAPIToken, generateKey } from '../utils';
 import Jokes from '../jokes';
 
 export default async (fastify: FastifyInstance): Promise<void> => {
-  fastify.get('/count', async (req: FastifyRequest, res) => {
+  fastify.get('/count', async (_req: FastifyRequest, res) => {
     return res.code(200).send({
       count: Jokes.count
     });
   });
 
-  fastify.get('/types', async (req: FastifyRequest, res) => {
+  fastify.get('/types', async (_req: FastifyRequest, res) => {
     return res.code(200).send({
       count: Categories.length,
       accepted_types: Categories,

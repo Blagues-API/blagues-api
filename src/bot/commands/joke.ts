@@ -1,6 +1,6 @@
 import { CommandInteraction } from 'discord.js';
 import { randomJokeByType } from '../../controllers';
-import { Category, CategoriesRefsFull } from '../../typings';
+import { Category, CategoriesRefsFull, Joke } from '../../typings';
 import { Colors, commandsChannel } from '../constants';
 import Command from '../lib/command';
 import { interactionInfo } from '../utils';
@@ -34,17 +34,17 @@ export default class JokeCommand extends Command {
       );
     }
 
-    const { response: blague } = randomJokeByType(type);
+    const { response: blague } = randomJokeByType(type) as { response: Joke };
 
     return interaction.reply({
       embeds: [
         {
           color: Colors.PRIMARY,
-          title: blague!.joke,
-          description: `|| ${blague!.answer} ||`,
+          title: blague.joke,
+          description: `|| ${blague.answer} ||`,
           timestamp: Date.now(),
           footer: {
-            text: CategoriesRefsFull[blague!.type],
+            text: `${CategoriesRefsFull[blague.type]} • (${blague.id})`,
             icon_url: interaction.guild!.iconURL({ size: 32, dynamic: true })!
           }
         }
