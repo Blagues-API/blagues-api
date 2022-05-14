@@ -2,7 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "description": "Blagues API renovate config",
   "extends": ["config:base", "helpers:pinGitHubActionDigests", "group:allNonMajor"],
-  "schedule": ["before 12pm on Sunday"],
+  "schedule": ["before 3am on the first day of the month"],
   "baseBranches": ["dev"],
   "rangeStrategy": "bump",
   "npm": {
