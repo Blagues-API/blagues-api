@@ -1,12 +1,14 @@
 import { stripIndents } from 'common-tags';
 import {
+  ApplicationCommandOptionType,
+  ApplicationCommandType,
   ButtonInteraction,
+  ButtonStyle,
+  ChatInputCommandInteraction,
   CommandInteraction,
+  ComponentType,
   Interaction,
   Message,
-  MessageActionRow,
-  MessageButton,
-  MessageSelectMenu,
   TextChannel
 } from 'discord.js';
 import { jokeById, jokeByQuestion } from '../../controllers';
@@ -44,10 +46,10 @@ export default class CorrectionCommand extends Command {
     super({
       name: 'correction',
       description: 'Proposer une modification de blague',
-      type: 'CHAT_INPUT',
+      type: ApplicationCommandType.ChatInput,
       options: [
         {
-          type: 'STRING',
+          type: ApplicationCommandOptionType.String,
           name: 'recherche',
           description: 'ID ou question de la blague ou ID du message',
           required: true
@@ -55,7 +57,7 @@ export default class CorrectionCommand extends Command {
       ]
     });
   }
-  async run(interaction: CommandInteraction): Promise<void> {
+  async run(interaction: ChatInputCommandInteraction) {
     const query = interaction.options.getString('recherche', true);
 
     if (interaction.channelId !== commandsChannel) {
@@ -75,7 +77,7 @@ export default class CorrectionCommand extends Command {
     const joke = await this.findJoke(interaction, query);
     if (joke) return joke;
 
-    const question = (await interaction.reply({
+    const question = await interaction.reply({
       embeds: [
         {
           title: 'Quelle blague voulez-vous corriger ?',
@@ -85,7 +87,7 @@ export default class CorrectionCommand extends Command {
         }
       ],
       fetchReply: true
-    })) as Message;
+    });
 
     return new Promise((resolve) => {
       const collector = question.channel.createMessageCollector({
@@ -105,7 +107,7 @@ export default class CorrectionCommand extends Command {
           .send("Aucune blague n'a été trouvée, veuillez réessayer !")
           .then((m) => setTimeout(() => m.deletable && m.delete().catch(() => null), 5000));
       });
-      collector.once('end', async (collected, reason: string) => {
+      collector.once('end', async (_collected, reason: string) => {
         if (reason === 'time') {
           await interaction.editReply({
             embeds: [
@@ -136,48 +138,55 @@ export default class CorrectionCommand extends Command {
       `,
       color: Colors.PRIMARY
     };
-    const question = (await commandInteraction[commandInteraction.replied ? 'editReply' : 'reply']({
+    const question = await commandInteraction[commandInteraction.replied ? 'editReply' : 'reply']({
       embeds: [embed],
       components: [
-        new MessageActionRow({
+        {
+          type: ComponentType.ActionRow,
           components: [
-            new MessageButton({
+            {
               label: 'Type',
               customId: 'type',
-              style: 'PRIMARY'
-            }),
-            new MessageButton({
+              type: ComponentType.Button,
+              style: ButtonStyle.Primary
+            },
+            {
               label: 'Question',
               customId: 'question',
-              style: 'PRIMARY'
-            }),
-            new MessageButton({
+              type: ComponentType.Button,
+              style: ButtonStyle.Primary
+            },
+            {
               label: 'Réponse',
               customId: 'answer',
-              style: 'PRIMARY'
-            }),
-            new MessageButton({
+              type: ComponentType.Button,
+              style: ButtonStyle.Primary
+            },
+            {
               label: 'Valider',
               customId: 'confirm',
-              style: 'SUCCESS'
-            }),
-            new MessageButton({
+              type: ComponentType.Button,
+              style: ButtonStyle.Success
+            },
+            {
               label: 'Annuler',
               customId: 'cancel',
-              style: 'SECONDARY'
-            })
+              type: ComponentType.Button,
+              style: ButtonStyle.Secondary
+            }
           ]
-        })
+        }
       ],
       fetchReply: true
-    })) as Message;
+    });
 
-    const buttonInteraction = (await question
+    const buttonInteraction = await question
       .awaitMessageComponent({
         filter: (i: Interaction) => i.user.id === commandInteraction.user.id,
+        componentType: ComponentType.Button,
         time: 120_000
       })
-      .catch(() => null)) as ButtonInteraction | null;
+      .catch(() => null);
 
     if (!buttonInteraction) {
       await commandInteraction.editReply(interactionInfo('Les 2 minutes de délais sont dépassés.'));
@@ -375,12 +384,14 @@ export default class CorrectionCommand extends Command {
     commandInteraction: CommandInteraction,
     joke: JokeCorrectionPayload
   ): Promise<JokeCorrectionPayload | null> {
-    const questionMessage = (await buttonInteraction.reply({
+    const questionMessage = await buttonInteraction.reply({
       content: 'Par quel type de blague voulez-vous changer le type actuel ?',
       components: [
-        new MessageActionRow({
+        {
+          type: ComponentType.ActionRow,
           components: [
-            new MessageSelectMenu({
+            {
+              type: ComponentType.SelectMenu,
               customId: 'type',
               placeholder: 'Nouveau type de blague',
               options: Object.entries(CategoriesRefs).map(([key, name]) => ({
@@ -390,17 +401,17 @@ export default class CorrectionCommand extends Command {
               })),
               maxValues: 1,
               minValues: 1
-            })
+            }
           ]
-        })
+        }
       ],
       fetchReply: true
-    })) as Message;
+    });
 
     const response = await questionMessage
       .awaitMessageComponent({
         filter: (i: Interaction) => i.user.id === commandInteraction.user.id,
-        componentType: 'SELECT_MENU',
+        componentType: ComponentType.SelectMenu,
         time: 60_000
       })
       .catch(() => null);
@@ -429,7 +440,7 @@ export default class CorrectionCommand extends Command {
     commandInteraction: CommandInteraction,
     oldJoke: JokeCorrectionPayload,
     newJoke: JokeCorrectionPayload
-  ): Promise<void> {
+  ) {
     if (!(['type', 'joke', 'answer'] as UnsignedJokeKey[]).some((key) => newJoke[key] !== oldJoke[key])) {
       await commandInteraction.editReply({
         content: "Aucun élément n'a été modifié",
@@ -451,7 +462,6 @@ export default class CorrectionCommand extends Command {
           author: {
             name: commandInteraction.user.username,
             icon_url: commandInteraction.user.displayAvatarURL({
-              dynamic: true,
               size: 32
             })
           },

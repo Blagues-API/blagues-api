@@ -35,7 +35,7 @@ export default class Dispatcher {
     const command = this.commands.find((cmd: Command) => cmd.name === interaction.commandName);
 
     if (!command) {
-      await interaction.reply('Commande innexistante !');
+      await interaction.reply('Commande inexistante !');
 
       await interaction.guild?.commands.delete(interaction.commandId);
       return;

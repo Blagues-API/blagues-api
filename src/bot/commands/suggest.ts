@@ -1,12 +1,14 @@
 import { stripIndents } from 'common-tags';
 import {
+  ApplicationCommandOptionType,
+  ApplicationCommandType,
   ButtonInteraction,
+  ButtonStyle,
   CommandInteraction,
-  Message,
-  MessageButton,
+  ComponentType,
   MessageComponentInteraction,
-  MessageEmbedOptions,
-  TextChannel
+  TextChannel,
+  APIEmbed
 } from 'discord.js';
 import { findBestMatch } from 'string-similarity';
 import Jokes from '../../jokes';
@@ -14,7 +16,6 @@ import { Category, CategoriesRefs, UnsignedJoke } from '../../typings';
 import { Colors, suggestionsChannel, upReaction, downReaction, commandsChannel } from '../constants';
 import Command from '../lib/command';
 import { interactionInfo, interactionProblem, isEmbedable } from '../utils';
-import Collection from '@discordjs/collection';
 import prisma from '../../prisma';
 import { ProposalType } from '@prisma/client';
 
@@ -23,10 +24,10 @@ export default class SuggestCommand extends Command {
     super({
       name: 'suggestion',
       description: 'Proposer une blague',
-      type: 'CHAT_INPUT',
+      type: ApplicationCommandType.ChatInput,
       options: [
         {
-          type: 'STRING',
+          type: ApplicationCommandOptionType.String,
           name: 'type',
           description: 'Général, Développeur, Noir, +18, Beauf, Blondes',
           required: true,
@@ -36,13 +37,13 @@ export default class SuggestCommand extends Command {
           }))
         },
         {
-          type: 'STRING',
+          type: ApplicationCommandOptionType.String,
           name: 'joke',
           description: 'Contenue de la blague',
           required: true
         },
         {
-          type: 'STRING',
+          type: ApplicationCommandOptionType.String,
           name: 'response',
           description: 'Réponse de la blague',
           required: true
@@ -51,7 +52,7 @@ export default class SuggestCommand extends Command {
     });
   }
 
-  async run(interaction: CommandInteraction): Promise<void> {
+  async run(interaction: CommandInteraction) {
     if (interaction.channelId !== commandsChannel) {
       return interaction.reply(interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannel}>.`));
     }
@@ -97,12 +98,10 @@ export default class SuggestCommand extends Command {
       answer: interaction.options.get('response')!.value
     } as UnsignedJoke;
 
-    const embed: MessageEmbedOptions = {
+    const embed: APIEmbed = {
       author: {
         icon_url: interaction.user.displayAvatarURL({
-          format: 'png',
-          size: 32,
-          dynamic: true
+          size: 32
         }),
         name: interaction.user.tag
       },
@@ -146,7 +145,7 @@ export default class SuggestCommand extends Command {
       });
     }
 
-    const channel: TextChannel = interaction.guild!.channels.cache.get(suggestionsChannel) as TextChannel;
+    const channel = interaction.guild!.channels.cache.get(suggestionsChannel) as TextChannel;
     if (!isEmbedable(channel)) {
       return interaction.reply(
         interactionProblem(`Je n'ai pas la permission d'envoyer la blague dans le salon ${channel}.`, false)
@@ -177,40 +176,40 @@ export default class SuggestCommand extends Command {
     });
   }
 
-  async waitForConfirmation(
-    interaction: CommandInteraction,
-    embed: MessageEmbedOptions
-  ): Promise<ButtonInteraction | null> {
-    const message = (await interaction.reply({
+  async waitForConfirmation(interaction: CommandInteraction, embed: APIEmbed): Promise<ButtonInteraction | null> {
+    const message = await interaction.reply({
       content: 'Êtes-vous sûr de vouloir confirmer la proposition de cette blague ?',
       embeds: [embed],
       components: [
         {
-          type: 'ACTION_ROW',
+          type: ComponentType.ActionRow,
           components: [
-            new MessageButton({
+            {
+              type: ComponentType.Button,
               label: 'Envoyer',
               customId: 'send',
-              style: 'SUCCESS'
-            }),
-            new MessageButton({
+              style: ButtonStyle.Success
+            },
+            {
+              type: ComponentType.Button,
               label: 'Annuler',
               customId: 'cancel',
-              style: 'DANGER'
-            })
+              style: ButtonStyle.Danger
+            }
           ]
         }
       ],
       ephemeral: true,
       fetchReply: true
-    })) as Message;
+    });
 
     return new Promise((resolve) => {
       const collector = message.createMessageComponentCollector({
         max: 1,
+        componentType: ComponentType.Button,
         filter: (i: MessageComponentInteraction) => i.user.id === interaction.user.id
       });
-      collector.once('end', async (interactions: Collection<string, ButtonInteraction>, reason: string) => {
+      collector.once('end', async (interactions, reason) => {
         const buttonInteraction = interactions.first();
         if (!buttonInteraction) {
           if (reason !== 'time') resolve(null);

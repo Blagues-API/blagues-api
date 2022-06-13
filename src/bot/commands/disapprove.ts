@@ -1,5 +1,11 @@
 import { Proposal, ProposalType } from '@prisma/client';
-import { ContextMenuInteraction, Message, MessageContextMenuInteraction, MessageEmbed, TextChannel } from 'discord.js';
+import {
+  APIEmbed,
+  ApplicationCommandType,
+  Message,
+  MessageContextMenuCommandInteraction,
+  TextChannel
+} from 'discord.js';
 import prisma from '../../prisma';
 import {
   Colors,
@@ -17,14 +23,14 @@ export default class DisapproveCommand extends Command {
   constructor() {
     super({
       name: 'Désapprouver',
-      type: 'MESSAGE'
+      type: ApplicationCommandType.Message
     });
   }
 
-  async run(interaction: MessageContextMenuInteraction): Promise<void> {
+  async run(interaction: MessageContextMenuCommandInteraction) {
     const channel = (interaction.channel as TextChannel)!;
     const isSuggestion = channel.id === suggestionsChannel;
-    const message = await channel.messages.fetch((interaction as ContextMenuInteraction).targetId);
+    const message = await channel.messages.fetch(interaction.targetId);
     if (![suggestionsChannel, correctionsChannel].includes(channel.id)) {
       return interaction.reply(
         interactionProblem(
@@ -82,7 +88,7 @@ export default class DisapproveCommand extends Command {
       return interaction.reply(interactionProblem(`Le message est invalide.`));
     }
 
-    const embed = message.embeds[0];
+    const embed = message.embeds[0]?.toJSON();
     if (!embed) {
       await prisma.proposal.delete({
         where: {
@@ -204,11 +210,11 @@ export default class DisapproveCommand extends Command {
   }
 
   async disapprove(
-    interaction: MessageContextMenuInteraction,
+    interaction: MessageContextMenuCommandInteraction,
     proposal: Proposal,
     message: Message,
-    embed: MessageEmbed
-  ): Promise<void> {
+    embed: APIEmbed
+  ) {
     const logs = interaction.client.channels.cache.get(logsChannel) as TextChannel;
     const isSuggestion = proposal.type === ProposalType.SUGGESTION;
 

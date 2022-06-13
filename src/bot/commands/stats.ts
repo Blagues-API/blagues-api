@@ -1,5 +1,10 @@
 import { stripIndents } from 'common-tags';
-import { CommandInteraction, GuildMember } from 'discord.js';
+import {
+  ApplicationCommandOptionType,
+  ApplicationCommandType,
+  ChatInputCommandInteraction,
+  GuildMember
+} from 'discord.js';
 import { Colors, commandsChannel, parrainRole } from '../constants';
 import Command from '../lib/command';
 import prisma from '../../prisma';
@@ -12,10 +17,10 @@ export default class SuggestCommand extends Command {
     super({
       name: 'stats',
       description: 'Voir les statistiques',
-      type: 'CHAT_INPUT',
+      type: ApplicationCommandType.ChatInput,
       options: [
         {
-          type: 'USER',
+          type: ApplicationCommandOptionType.String,
           name: 'user',
           description: 'Utilisateur dont vous voulez les statistiques'
         }
@@ -23,7 +28,7 @@ export default class SuggestCommand extends Command {
     });
   }
 
-  async run(interaction: CommandInteraction): Promise<void> {
+  async run(interaction: ChatInputCommandInteraction) {
     if (interaction.channelId !== commandsChannel) {
       return interaction.reply(interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannel}>.`));
     }
@@ -35,7 +40,7 @@ export default class SuggestCommand extends Command {
     return this.globalStats(interaction);
   }
 
-  async userStats(interaction: CommandInteraction) {
+  async userStats(interaction: ChatInputCommandInteraction) {
     const member = interaction.options.getMember('user') as GuildMember;
     if (!member) return interaction.reply(interactionProblem("Cet utilisateur n'est plus présent sur le serveur."));
 
@@ -92,7 +97,7 @@ export default class SuggestCommand extends Command {
       embeds: [
         {
           author: {
-            icon_url: member.displayAvatarURL({ dynamic: true, size: 32 }),
+            icon_url: member.displayAvatarURL({ size: 32 }),
             name: `Statistiques de ${member.displayName}`
           },
           fields,
@@ -106,7 +111,7 @@ export default class SuggestCommand extends Command {
     });
   }
 
-  async globalStats(interaction: CommandInteraction) {
+  async globalStats(interaction: ChatInputCommandInteraction) {
     // Issue reported: https://github.com/prisma/prisma/issues/10915
     const proposals = await prisma.proposal.groupBy({
       by: ['user_id', 'merged'],

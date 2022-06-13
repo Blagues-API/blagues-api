@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import fastify, { FastifyInstance } from 'fastify';
-import formBody from 'fastify-formbody';
-import cors from 'fastify-cors';
+import formBody from '@fastify/formbody';
+import cors from '@fastify/cors';
 
 import auth from './auth';
 import routes from './routes';

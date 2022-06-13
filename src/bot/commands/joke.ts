@@ -1,4 +1,4 @@
-import { CommandInteraction } from 'discord.js';
+import { ApplicationCommandOptionType, ApplicationCommandType, ChatInputCommandInteraction } from 'discord.js';
 import { randomJokeByType } from '../../controllers';
 import { Category, CategoriesRefsFull, Joke } from '../../typings';
 import { Colors, commandsChannel } from '../constants';
@@ -10,10 +10,10 @@ export default class JokeCommand extends Command {
     super({
       name: 'blague',
       description: 'Afficher une blague aléatoire',
-      type: 'CHAT_INPUT',
+      type: ApplicationCommandType.ChatInput,
       options: [
         {
-          type: 'STRING',
+          type: ApplicationCommandOptionType.String,
           name: 'type',
           description: 'Général, Développeur, Noir, +18, Beauf, Blondes',
           required: true,
@@ -25,7 +25,7 @@ export default class JokeCommand extends Command {
       ]
     });
   }
-  async run(interaction: CommandInteraction): Promise<void> {
+  async run(interaction: ChatInputCommandInteraction) {
     const type = interaction.options.getString('type', true) as Category;
 
     if (interaction.channelId !== commandsChannel) {
@@ -42,10 +42,10 @@ export default class JokeCommand extends Command {
           color: Colors.PRIMARY,
           title: blague.joke,
           description: `|| ${blague.answer} ||`,
-          timestamp: Date.now(),
+          timestamp: new Date().toISOString(),
           footer: {
             text: `${CategoriesRefsFull[blague.type]} • (${blague.id})`,
-            icon_url: interaction.guild!.iconURL({ size: 32, dynamic: true })!
+            icon_url: interaction.guild!.iconURL({ size: 32 })!
           }
         }
       ]
