@@ -10342,5 +10342,17 @@
     "type": "global",
     "joke": "Que fait Christohe Colomb après avoir posé un pied en Amérique ?",
     "answer": "Il pose le deuxième pied."
+  },
+  {
+    "id": 1725,
+    "type": "dark",
+    "joke": "Fiston, tu sais ce qu’a dit ta sœur quand elle a perdu sa virginité ? Oh non papa…",
+    "answer": "Exactement !"
+  },
+  {
+    "id": 1726,
+    "type": "global",
+    "joke": "Que font deux canards qui se séparent ?",
+    "answer": "Ils partent chacun dans leur coin !"
   }
 ]

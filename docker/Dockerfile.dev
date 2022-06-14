@@ -16,4 +16,4 @@ EXPOSE 4000
 
 USER node
 
-CMD npx nodemon --watch '**/*' --ext 'ts,js' --ignore 'sw.js' --exec 'npx ts-node src/index.ts'
+CMD npx nodemon --watch '**/*' --ext 'ts,js' --exec 'npx ts-node src/index.ts'

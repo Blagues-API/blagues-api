@@ -1,4 +1,13 @@
-import { Client, CommandInteraction, Intents, Interaction, Message, PartialMessage } from 'discord.js';
+import {
+  ActivityType,
+  AnyInteraction,
+  Client,
+  IntentsBitField,
+  InteractionType,
+  Message,
+  PartialMessage,
+  Partials
+} from 'discord.js';
 import Jokes from '../jokes';
 import prisma from '../prisma';
 import { correctionsChannel, suggestionsChannel } from './constants';
@@ -13,8 +22,8 @@ export default class Bot extends Client {
 
   constructor() {
     super({
-      partials: ['REACTION'],
-      intents: Intents.FLAGS.GUILDS | Intents.FLAGS.GUILD_MEMBERS | Intents.FLAGS.GUILD_MESSAGES
+      partials: [Partials.Reaction],
+      intents: IntentsBitField.Flags.Guilds | IntentsBitField.Flags.GuildMembers | IntentsBitField.Flags.GuildMessages
     });
 
     this.dispatcher = new Dispatcher(this);
@@ -38,9 +47,9 @@ export default class Bot extends Client {
     this.refreshStatus();
   }
 
-  async onInteractionCreate(interaction: Interaction): Promise<void> {
-    if (interaction.type === 'APPLICATION_COMMAND') {
-      return this.dispatcher.execute(interaction as CommandInteraction);
+  async onInteractionCreate(interaction: AnyInteraction): Promise<void> {
+    if (interaction.type === InteractionType.ApplicationCommand) {
+      return this.dispatcher.execute(interaction);
     }
   }
 
@@ -59,7 +68,7 @@ export default class Bot extends Client {
 
   refreshStatus() {
     this.user!.setActivity(`les ${Jokes.count} blagues`, {
-      type: 'WATCHING'
+      type: ActivityType.Watching
     });
   }
 

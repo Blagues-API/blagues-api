@@ -165,7 +165,7 @@ export default class Reminders {
             description: pages[index],
             color: 0x0067ad,
             footer: isLastPage ? { text: 'Blagues API' } : undefined,
-            timestamp: isLastPage ? new Date() : undefined
+            timestamp: isLastPage ? new Date().toISOString() : undefined
           }
         ]
       });

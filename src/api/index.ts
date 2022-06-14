@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import fastify, { FastifyInstance } from 'fastify';
-import formBody from 'fastify-formbody';
-import cors from 'fastify-cors';
+import formBody from '@fastify/formbody';
+import cors from '@fastify/cors';
 
 import auth from './auth';
 import routes from './routes';
@@ -18,18 +18,13 @@ export default class App {
       return console.log('Service api désactivé');
     }
 
-    try {
-      await this.fastify.register(cors);
-      await this.fastify.register(formBody);
-      await this.fastify.register(auth);
-      await this.fastify.register(routes, { prefix: 'api' });
+    await this.fastify.register(cors);
+    await this.fastify.register(formBody);
+    await this.fastify.register(auth);
+    await this.fastify.register(routes, { prefix: 'api' });
 
-      await this.fastify.listen(4000, '0.0.0.0');
+    await this.fastify.listen(4000, '0.0.0.0');
 
-      console.log(`🚀 Blagues API lancé: http://localhost:4000`);
-    } catch (err) {
-      this.fastify.log.error(err);
-      process.exit(1);
-    }
+    console.log(`🚀 Blagues API lancé: http://localhost:4000`);
   }
 }

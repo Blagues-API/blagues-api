@@ -1,4 +1,4 @@
-import { CommandInteraction, Guild, GuildMember, MessageContextMenuInteraction, Snowflake } from 'discord.js';
+import { AnyInteraction, Guild, GuildMember, Snowflake } from 'discord.js';
 import prisma from '../../prisma';
 import sharp from 'sharp';
 import got from 'got';
@@ -26,12 +26,12 @@ export async function getGodfatherEmoji(emojisGuild: Guild, member: GuildMember)
     where: { user_id: member.id }
   });
   if (!godfather) {
-    const memberAvatar = member.displayAvatarURL({ size: 128, format: 'png' });
+    const memberAvatar = member.displayAvatarURL({ size: 128, forceStatic: true, extension: 'png' });
     const bufferAvatar = await got(memberAvatar).buffer();
     const bufferEmoji = await sharp(bufferAvatar)
       .composite([{ input: rect, blend: 'dest-in' }])
       .toBuffer();
-    const emoji = await emojisGuild.emojis.create(bufferEmoji, snakeCase(member.displayName.toLowerCase()));
+    const emoji = await emojisGuild.emojis.create({ name: snakeCase(member.displayName), attachment: bufferEmoji });
     godfather = await prisma.godfather.create({
       data: {
         user_id: member.id,
@@ -42,10 +42,7 @@ export async function getGodfatherEmoji(emojisGuild: Guild, member: GuildMember)
   return { id: member.id, emoji: `<:vote:${godfather.emoji_id}>` };
 }
 
-export async function renderGodfatherLine(
-  interaction: CommandInteraction | MessageContextMenuInteraction,
-  proposal: ProposalFull
-) {
+export async function renderGodfatherLine(interaction: AnyInteraction, proposal: ProposalFull) {
   const emojisGuild = interaction.client.guilds.cache.get(emojisGuildId)!;
   const approvalsIds = proposal.approvals.map((approval) => approval.user_id);
   const disapprovalsIds = proposal.disapprovals.map((disapproval) => disapproval.user_id);

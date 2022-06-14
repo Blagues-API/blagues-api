@@ -1,8 +1,10 @@
 import {
+  ApplicationCommandType,
   ChatInputApplicationCommandData,
   CommandInteraction,
+  InteractionResponse,
   MessageApplicationCommandData,
-  MessageContextMenuInteraction
+  MessageContextMenuCommandInteraction
 } from 'discord.js';
 
 export default class Command {
@@ -16,7 +18,7 @@ export default class Command {
   }
 
   public get data(): ChatInputApplicationCommandData | MessageApplicationCommandData {
-    if (this.raw.type === 'CHAT_INPUT') {
+    if (this.raw.type === ApplicationCommandType.ChatInput) {
       return {
         name: this.name,
         description: this.raw.description,
@@ -31,8 +33,10 @@ export default class Command {
     } as MessageApplicationCommandData;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public async run(_interaction: CommandInteraction | MessageContextMenuInteraction): Promise<void> {
+  public async run(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _interaction: CommandInteraction | MessageContextMenuCommandInteraction
+  ): Promise<void | InteractionResponse> {
     throw new Error('No method run defined');
   }
 }

@@ -13,10 +13,14 @@ export default class Tesseract {
   }
 
   async init(): Promise<void> {
-    await Promise.all([
-      // eslint-disable-next-line
-      this.api.start(),
-      this.bot.start()
-    ]);
+    try {
+      await Promise.all([
+        // eslint-disable-next-line
+        this.api.start(),
+        this.bot.start()
+      ]);
+    } catch (error) {
+      console.error(error);
+    }
   }
 }

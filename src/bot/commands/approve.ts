@@ -1,6 +1,12 @@
 import { ProposalType } from '@prisma/client';
 import { stripIndents } from 'common-tags';
-import { Message, MessageContextMenuInteraction, MessageEmbed, MessageEmbedOptions, TextChannel } from 'discord.js';
+import {
+  ApplicationCommandType,
+  Message,
+  MessageContextMenuCommandInteraction,
+  TextChannel,
+  APIEmbed
+} from 'discord.js';
 import prisma from '../../prisma';
 import { CategoriesRefs, Category, Correction, ExtendedProposal, Suggestion } from '../../typings';
 import {
@@ -25,11 +31,11 @@ export default class ApproveCommand extends Command {
   constructor() {
     super({
       name: 'Approuver',
-      type: 'MESSAGE'
+      type: ApplicationCommandType.Message
     });
   }
 
-  async run(interaction: MessageContextMenuInteraction): Promise<void> {
+  async run(interaction: MessageContextMenuCommandInteraction) {
     const channel = (interaction.channel as TextChannel)!;
     const isSuggestion = channel.id === suggestionsChannel;
     const message = await interaction.channel?.messages.fetch(interaction.targetId);
@@ -93,7 +99,7 @@ export default class ApproveCommand extends Command {
       return interaction.reply(interactionProblem(`Le message est invalide.`));
     }
 
-    const embed = message.embeds[0];
+    const embed = message.embeds[0]?.toJSON();
     if (!embed) {
       await prisma.proposal.delete({
         where: {
@@ -121,7 +127,7 @@ export default class ApproveCommand extends Command {
           embed.description = embed.description!.split('\n\n')[0];
         }
 
-        await (message as Message).edit({ embeds: [embed] });
+        await message.edit({ embeds: [embed] });
       }
 
       return interaction.reply(
@@ -141,7 +147,7 @@ export default class ApproveCommand extends Command {
           embed.description = embed.description!.split('\n\n')[0];
         }
 
-        await (message as Message).edit({ embeds: [embed] });
+        await message.edit({ embeds: [embed] });
       }
 
       return interaction.reply(
@@ -248,9 +254,11 @@ export default class ApproveCommand extends Command {
     await interaction.deferReply({ ephemeral: true });
 
     try {
-      return isSuggestion
-        ? this.approveSuggestion(interaction, proposal as Suggestion, message, embed)
-        : this.approveCorrection(interaction, proposal as Correction, message, embed);
+      if (isSuggestion) {
+        await this.approveSuggestion(interaction, proposal as Suggestion, message, embed);
+      } else {
+        await this.approveCorrection(interaction, proposal as Correction, message, embed);
+      }
     } catch (error) {
       console.error(error);
       await interaction.editReply(
@@ -262,10 +270,10 @@ export default class ApproveCommand extends Command {
   }
 
   async approveSuggestion(
-    interaction: MessageContextMenuInteraction,
+    interaction: MessageContextMenuCommandInteraction,
     proposal: Suggestion,
     message: Message,
-    embed: MessageEmbed
+    embed: APIEmbed
   ): Promise<void> {
     const logs = interaction.client.channels.cache.get(logsChannel) as TextChannel;
 
@@ -311,10 +319,10 @@ export default class ApproveCommand extends Command {
   }
 
   async approveCorrection(
-    interaction: MessageContextMenuInteraction,
+    interaction: MessageContextMenuCommandInteraction,
     proposal: Correction,
     message: Message,
-    embed: MessageEmbed
+    embed: APIEmbed
   ): Promise<void> {
     const logs = interaction.client.channels.cache.get(logsChannel) as TextChannel;
     const channel = interaction.client.channels.cache.get(suggestionsChannel) as TextChannel;
@@ -371,13 +379,15 @@ export default class ApproveCommand extends Command {
       });
       const message = correction.message_id && (await channel.messages.fetch(correction.message_id).catch(() => null));
       if (message) {
-        const staleEmbed = message.embeds[0];
-        staleEmbed.fields[1].value = staleEmbed.fields[1].value!.split('\n\n')[0];
-        staleEmbed.footer = {
-          text: `Correction obsolète`
-        };
-        staleEmbed.color = Colors.REPLACED;
-        await message.edit({ embeds: [staleEmbed] });
+        const staleEmbed = message.embeds[0]?.toJSON();
+        if (staleEmbed?.fields) {
+          staleEmbed.fields[1].value = staleEmbed.fields[1].value.split('\n\n')[0];
+          staleEmbed.footer = {
+            text: `Correction obsolète`
+          };
+          staleEmbed.color = Colors.REPLACED;
+          await message.edit({ embeds: [staleEmbed] });
+        }
       }
     }
 
@@ -390,7 +400,7 @@ export default class ApproveCommand extends Command {
       });
     }
 
-    embed.fields[1].value = embed.fields[1].value!.split('\n\n')[0];
+    embed.fields![1].value = embed.fields![1].value.split('\n\n')[0];
     embed.footer = {
       text: `Correction migrée vers la ${isPublishedJoke ? 'blague' : 'suggestion'}`
     };
@@ -410,7 +420,7 @@ export default class ApproveCommand extends Command {
 
               ${godfathers}
             `
-          } as MessageEmbedOptions
+          } as APIEmbed
         ]
       });
     }

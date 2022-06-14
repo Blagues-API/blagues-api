@@ -1,5 +1,6 @@
-import { InteractionReplyOptions, TextChannel, MessageOptions } from 'discord.js';
+import { InteractionReplyOptions, TextChannel } from 'discord.js';
 import { diffWords } from 'diff';
+import { APIEmbed } from 'discord-api-types/v10';
 
 export function interactionProblem(message: string, ephemeral = true): InteractionReplyOptions {
   return {
@@ -8,7 +9,7 @@ export function interactionProblem(message: string, ephemeral = true): Interacti
   };
 }
 
-export function problem(message: string): MessageOptions {
+export function problem(message: string): { embeds: APIEmbed[] } {
   return {
     embeds: [
       {
@@ -26,7 +27,7 @@ export function interactionInfo(message: string): InteractionReplyOptions {
   };
 }
 
-export function info(message: string): MessageOptions {
+export function info(message: string): { embeds: APIEmbed[] } {
   return {
     embeds: [
       {
@@ -44,7 +45,7 @@ export function interactionValidate(message: string): InteractionReplyOptions {
   };
 }
 
-export function validate(message: string): MessageOptions {
+export function validate(message: string): { embeds: APIEmbed[] } {
   return {
     embeds: [
       {
@@ -70,6 +71,6 @@ export function showNegativeDiffs(oldValue: string, newValue: string): string {
 }
 
 export function isEmbedable(channel: TextChannel) {
-  const permissions = channel.permissionsFor(channel.guild.me!);
-  return permissions?.has(['VIEW_CHANNEL', 'SEND_MESSAGES', 'EMBED_LINKS']);
+  const permissions = channel.permissionsFor(channel.guild.members.me!);
+  return permissions?.has(['ViewChannel', 'SendMessages', 'EmbedLinks']);
 }
