@@ -64,7 +64,7 @@
     "discord-api-types": "^0.32.1",
     "discord.js": "^14.0.0-dev.1654949087-96053ba",
     "dotenv": "^14.3.2",
-    "fastify": "^3.29.0",
+    "fastify": "^4.0.2",
     "fastify-plugin": "^3.0.1",
     "got": "^11.8.3",
     "jsonwebtoken": "^8.5.1",
