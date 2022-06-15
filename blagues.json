@@ -10354,5 +10354,11 @@
     "type": "global",
     "joke": "Que font deux canards qui se séparent ?",
     "answer": "Ils partent chacun dans leur coin !"
+  },
+  {
+    "id": 1727,
+    "type": "dark",
+    "joke": "Peut-on dire que les blagues sur les tours jumelles...",
+    "answer": "... sont des blagues à deux chutes ?"
   }
 ]
