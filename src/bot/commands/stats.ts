@@ -20,7 +20,7 @@ export default class SuggestCommand extends Command {
       type: ApplicationCommandType.ChatInput,
       options: [
         {
-          type: ApplicationCommandOptionType.String,
+          type: ApplicationCommandOptionType.User,
           name: 'user',
           description: 'Utilisateur dont vous voulez les statistiques'
         }
