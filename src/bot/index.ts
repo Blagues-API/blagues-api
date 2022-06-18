@@ -2,6 +2,7 @@ import {
   ActivityType,
   AnyInteraction,
   Client,
+  GuildTextBasedChannel,
   IntentsBitField,
   InteractionType,
   Message,
@@ -54,11 +55,37 @@ export default class Bot extends Client {
   }
 
   async onMessageDelete(message: Message | PartialMessage): Promise<void> {
+    if (!message.inGuild()) return;
     if (message.author && message.author.id !== this.user!.id) return;
     if (![correctionsChannel, suggestionsChannel].includes(message.channelId)) return;
     if (!message.embeds[0]?.author) return;
 
-    await prisma.proposal.delete({ where: { message_id: message.id } });
+    const proposal = await prisma.proposal.findUnique({
+      where: { message_id: message.id },
+      include: {
+        corrections: suggestionsChannel === message.channelId
+      }
+    });
+
+    if (!proposal) return;
+
+    await prisma.proposal.delete({
+      where: {
+        id: proposal.id
+      }
+    });
+
+    if (proposal.corrections?.length) {
+      const channel = message.guild.channels.resolve(correctionsChannel) as GuildTextBasedChannel;
+      for (const correction of proposal.corrections) {
+        try {
+          const fetchedMessage = await channel.messages.fetch(correction.message_id!);
+          if (fetchedMessage.deletable) await fetchedMessage.delete();
+        } catch {
+          continue;
+        }
+      }
+    }
   }
 
   registerEvents(): void {
