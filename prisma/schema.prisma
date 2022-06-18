@@ -56,7 +56,7 @@ model Proposal {
 model Approval {
   proposal_id Int
   user_id     String   @db.VarChar(255)
-  proposal    Proposal @relation(fields: [proposal_id], references: [id])
+  proposal    Proposal @relation(fields: [proposal_id], references: [id], onDelete: Cascade)
 
   @@id([proposal_id, user_id])
   @@index([proposal_id], name: "approvals_proposal_id")
@@ -66,7 +66,7 @@ model Approval {
 model Disapproval {
   proposal_id Int
   user_id     String   @db.VarChar(255)
-  proposal    Proposal @relation(fields: [proposal_id], references: [id])
+  proposal    Proposal @relation(fields: [proposal_id], references: [id], onDelete: Cascade)
 
   @@id([proposal_id, user_id])
   @@index([proposal_id], name: "disapprovals_proposal_id")
