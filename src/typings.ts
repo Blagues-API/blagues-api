@@ -68,19 +68,6 @@ export const JokeTypesDescriptions: Record<Category, string> = {
   blondes: 'Blagues ciblées sur les femmes blondes.'
 };
 
-export type ExtendedProposal = Proposal & {
-  suggestion:
-    | (Proposal & {
-        corrections: Proposal[];
-        approvals: Approval[];
-        disapprovals: Disapproval[];
-      })
-    | null;
-  corrections: Proposal[];
-  approvals: Approval[];
-  disapprovals: Disapproval[];
-};
-
 export type Correction = Proposal & {
   type: typeof ProposalType['CORRECTION'] | typeof ProposalType['SUGGESTION_CORRECTION'];
   suggestion: Proposal & {

@@ -8,7 +8,7 @@ import {
   APIEmbed
 } from 'discord.js';
 import prisma from '../../prisma';
-import { CategoriesRefs, Category, Correction, ExtendedProposal, Suggestion } from '../../typings';
+import { CategoriesRefs, Category, Correction, Suggestion } from '../../typings';
 import {
   Colors,
   neededCorrectionsApprovals,
@@ -37,7 +37,7 @@ export default class ApproveCommand extends Command {
 
   async run(interaction: MessageContextMenuCommandInteraction) {
     const channel = (interaction.channel as TextChannel)!;
-    const isSuggestion = channel.id === suggestionsChannel;
+
     const message = await interaction.channel?.messages.fetch(interaction.targetId);
     if (!message) return;
 
@@ -48,6 +48,9 @@ export default class ApproveCommand extends Command {
         )
       );
     }
+
+    let isSuggestion = channel.id === suggestionsChannel;
+
     if (message.author.id !== interaction.client.user!.id) {
       return interaction.reply(
         interactionProblem(
@@ -58,7 +61,7 @@ export default class ApproveCommand extends Command {
       );
     }
 
-    const proposal: ExtendedProposal | null = await prisma.proposal.findUnique({
+    const proposal = await prisma.proposal.findUnique({
       where: {
         message_id: message.id
       },
@@ -79,7 +82,7 @@ export default class ApproveCommand extends Command {
             disapprovals: true
           }
         },
-        corrections: isSuggestion && {
+        corrections: {
           take: 1,
           orderBy: {
             created_at: 'desc'
@@ -88,6 +91,10 @@ export default class ApproveCommand extends Command {
             merged: false,
             refused: false,
             stale: false
+          },
+          include: {
+            approvals: true,
+            disapprovals: true
           }
         },
         approvals: true,
@@ -98,6 +105,8 @@ export default class ApproveCommand extends Command {
     if (!proposal) {
       return interaction.reply(interactionProblem(`Le message est invalide.`));
     }
+
+    isSuggestion = proposal.type === ProposalType.SUGGESTION;
 
     const embed = message.embeds[0]?.toJSON();
     if (!embed) {
@@ -155,31 +164,36 @@ export default class ApproveCommand extends Command {
       );
     }
 
-    const correction = isSuggestion && proposal.corrections[0];
-    if (correction) {
-      return interaction.reply(
-        interactionInfo(
-          `Il semblerait qu'une [correction ai été proposée](https://discord.com/channels/${
-            interaction.guild!.id
-          }/${correctionsChannel}/${
-            correction.message_id
-          }), veuillez l'approuver avant l'approbation de [cette suggestion](https://discord.com/channels/${
-            interaction.guild!.id
-          }/${suggestionsChannel}/${proposal.message_id}).`
-        )
-      );
-    }
-
-    const lastCorrection = !isSuggestion && proposal.suggestion?.corrections[0];
-    if (lastCorrection && lastCorrection.id !== proposal.id) {
-      return interaction.reply(
-        interactionInfo(`
-          Il semblerait qu'une [correction ai été ajoutée](https://discord.com/channels/${
-            interaction.guild!.id
-          }/${correctionsChannel}/${
-          lastCorrection.message_id
-        }) par dessus rendant celle-ci obsolète, veuillez approuver la dernière version de la correction.`)
-      );
+    if (isSuggestion) {
+      const correction = proposal.corrections[0];
+      if (correction) {
+        const beenApproved = correction.approvals.some((approval) => approval.user_id === interaction.user.id);
+        if (!beenApproved) {
+          return interaction.reply(
+            interactionInfo(
+              `Il semblerait qu'une [correction ai été proposée](https://discord.com/channels/${
+                interaction.guild!.id
+              }/${correctionsChannel}/${
+                correction.message_id
+              }), veuillez l'approuver avant l'approbation de [cette suggestion](https://discord.com/channels/${
+                interaction.guild!.id
+              }/${suggestionsChannel}/${proposal.message_id}).`
+            )
+          );
+        }
+      }
+    } else {
+      const lastCorrection = proposal.suggestion?.corrections[0];
+      if (lastCorrection && lastCorrection.id !== proposal.id) {
+        return interaction.reply(
+          interactionInfo(`
+            Il semblerait qu'une [correction ai été ajoutée](https://discord.com/channels/${
+              interaction.guild!.id
+            }/${correctionsChannel}/${
+            lastCorrection.message_id
+          }) par dessus rendant celle-ci obsolète, veuillez approuver la dernière version de la correction.`)
+        );
+      }
     }
 
     const approvalIndex = proposal.approvals.findIndex((approval) => approval.user_id === interaction.user.id);
@@ -234,6 +248,26 @@ export default class ApproveCommand extends Command {
       })
     );
 
+    const neededApprovalsCount = isSuggestion ? neededSuggestionsApprovals : neededCorrectionsApprovals;
+
+    // TODO: Merge une suggestion lors de l'approbation d'une correction manquante
+    // TODO: Empêcher la suppresion d'un approbation d'une suggestion si la correction a été approuvée.
+    // TODO: faire le même taff pour la déapprobation
+    // TODO: Créer un utilitaire pour les liens
+
+    if (proposal.approvals.length >= neededApprovalsCount && proposal.corrections[0]) {
+      return interaction.reply(
+        interactionInfo(`
+          Le nombre d'approbations requises pour l'ajout de [cette suggestion](https://discord.com/channels/${
+            interaction.guild!.id
+          }/${suggestionsChannel}/${
+          proposal.message_id
+        }) a déjà été atteint, seul [cette correction](https://discord.com/channels/${
+          interaction.guild!.id
+        }/${correctionsChannel}/${proposal.corrections[0].message_id}) nécessite encore des approbations.`)
+      );
+    }
+
     const godfathers = await renderGodfatherLine(interaction, proposal);
 
     const field = embed.fields?.[embed.fields.length - 1];
@@ -243,9 +277,7 @@ export default class ApproveCommand extends Command {
       embed.description = `${embed.description!.split('\n\n')[0]}\n\n${godfathers}`;
     }
 
-    const neededApprovals = isSuggestion ? neededSuggestionsApprovals : neededCorrectionsApprovals;
-
-    if (proposal.approvals.length < neededApprovals) {
+    if (proposal.approvals.length < neededApprovalsCount) {
       await message.edit({ embeds: [embed] });
 
       return interaction.reply(interactionValidate(`Votre [approbation](${message.url}) a été prise en compte !`));
