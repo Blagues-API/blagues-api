@@ -5,7 +5,6 @@ import {
   ButtonInteraction,
   ButtonStyle,
   ChatInputCommandInteraction,
-  CommandInteraction,
   ComponentType,
   Interaction,
   Message,
@@ -73,7 +72,7 @@ export default class CorrectionCommand extends Command {
     await this.editJoke(interaction, joke, newJoke);
   }
 
-  async resolveJoke(interaction: CommandInteraction, query: string): Promise<JokeCorrectionPayload | null> {
+  async resolveJoke(interaction: ChatInputCommandInteraction, query: string): Promise<JokeCorrectionPayload | null> {
     const joke = await this.findJoke(interaction, query);
     if (joke) return joke;
 
@@ -125,7 +124,7 @@ export default class CorrectionCommand extends Command {
   }
 
   async requestChanges(
-    commandInteraction: CommandInteraction,
+    commandInteraction: ChatInputCommandInteraction,
     joke: JokeCorrectionPayload,
     changes = false
   ): Promise<JokeCorrectionPayload | null> {
@@ -231,7 +230,7 @@ export default class CorrectionCommand extends Command {
     return IdType.JOKE_ID;
   }
 
-  async findJoke(interaction: CommandInteraction, query: string): Promise<JokeCorrectionPayload | null> {
+  async findJoke(interaction: ChatInputCommandInteraction, query: string): Promise<JokeCorrectionPayload | null> {
     const idType = this.getIdType(query);
     if (idType === IdType.MESSAGE_ID) {
       const proposal = await prisma.proposal.findUnique({
@@ -339,7 +338,7 @@ export default class CorrectionCommand extends Command {
 
   async requestTextChange(
     buttonInteraction: ButtonInteraction,
-    commandInteraction: CommandInteraction,
+    commandInteraction: ChatInputCommandInteraction,
     joke: JokeCorrectionPayload,
     textReplyContent: string
   ): Promise<JokeCorrectionPayload | null> {
@@ -381,7 +380,7 @@ export default class CorrectionCommand extends Command {
 
   async requestTypeChange(
     buttonInteraction: ButtonInteraction,
-    commandInteraction: CommandInteraction,
+    commandInteraction: ChatInputCommandInteraction,
     joke: JokeCorrectionPayload
   ): Promise<JokeCorrectionPayload | null> {
     const questionMessage = await buttonInteraction.reply({
@@ -437,7 +436,7 @@ export default class CorrectionCommand extends Command {
   }
 
   async editJoke(
-    commandInteraction: CommandInteraction,
+    commandInteraction: ChatInputCommandInteraction,
     oldJoke: JokeCorrectionPayload,
     newJoke: JokeCorrectionPayload
   ) {

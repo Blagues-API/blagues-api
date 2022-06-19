@@ -4,7 +4,7 @@ import {
   ApplicationCommandType,
   ButtonInteraction,
   ButtonStyle,
-  CommandInteraction,
+  ChatInputCommandInteraction,
   ComponentType,
   MessageComponentInteraction,
   TextChannel,
@@ -52,7 +52,7 @@ export default class SuggestCommand extends Command {
     });
   }
 
-  async run(interaction: CommandInteraction) {
+  async run(interaction: ChatInputCommandInteraction) {
     if (interaction.channelId !== commandsChannel) {
       return interaction.reply(interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannel}>.`));
     }
@@ -176,7 +176,10 @@ export default class SuggestCommand extends Command {
     });
   }
 
-  async waitForConfirmation(interaction: CommandInteraction, embed: APIEmbed): Promise<ButtonInteraction | null> {
+  async waitForConfirmation(
+    interaction: ChatInputCommandInteraction,
+    embed: APIEmbed
+  ): Promise<ButtonInteraction | null> {
     const message = await interaction.reply({
       content: 'Êtes-vous sûr de vouloir confirmer la proposition de cette blague ?',
       embeds: [embed],
