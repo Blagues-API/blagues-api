@@ -23,7 +23,8 @@ import {
   isEmbedable,
   problem,
   showNegativeDiffs,
-  showPositiveDiffs
+  showPositiveDiffs,
+  tDelete
 } from '../utils';
 
 enum IdType {
@@ -265,11 +266,13 @@ export default class CorrectionCommand extends Command {
         }
       });
       if (!proposal) {
-        interaction.channel?.send(
-          problem(
-            `Impossible de trouver une blague ou correction liée à cet ID de blague, assurez vous que cet ID provient bien d\'un message envoyé par le bot ${interaction.client.user}`
+        interaction.channel
+          ?.send(
+            problem(
+              `Impossible de trouver une blague ou correction liée à cet ID de blague, assurez vous que cet ID provient bien d\'un message envoyé par le bot ${interaction.client.user}`
+            )
           )
-        );
+          .then(tDelete(5000));
         return null;
       }
 
