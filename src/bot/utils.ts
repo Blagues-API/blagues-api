@@ -5,7 +5,8 @@ import { APIEmbed } from 'discord-api-types/v10';
 export function interactionProblem(message: string, ephemeral = true): InteractionReplyOptions {
   return {
     ...problem(message),
-    ephemeral
+    ephemeral,
+    components: []
   };
 }
 
@@ -23,7 +24,8 @@ export function problem(message: string): { embeds: APIEmbed[] } {
 export function interactionInfo(message: string): InteractionReplyOptions {
   return {
     ...info(message),
-    ephemeral: true
+    ephemeral: true,
+    components: []
   };
 }
 
