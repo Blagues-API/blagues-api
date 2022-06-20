@@ -13,7 +13,14 @@ import {
 import { jokeById, jokeByQuestion } from '../../controllers';
 import prisma from '../../prisma';
 import { Category, JokeTypesDescriptions, CategoriesRefs, UnsignedJoke, UnsignedJokeKey } from '../../typings';
-import { Colors, commandsChannel, correctionsChannel, downReaction, upReaction } from '../constants';
+import {
+  Colors,
+  commandsChannel,
+  correctionsChannel,
+  downReaction,
+  suggestionsChannel,
+  upReaction
+} from '../constants';
 import Command from '../lib/command';
 import clone from 'lodash/clone';
 import { ProposalType } from '@prisma/client';
@@ -36,6 +43,7 @@ interface JokeCorrectionPayload extends UnsignedJoke {
   id?: number;
   correction_type: ProposalType;
   suggestion: UnsignedJoke & {
+    message_id: string | null;
     proposal_id: number;
   };
 }
@@ -282,6 +290,7 @@ export default class CorrectionCommand extends Command {
         answer: (origin.corrections[0]?.joke_answer ?? origin.joke_answer)!,
         correction_type: origin.merged ? ProposalType.CORRECTION : ProposalType.SUGGESTION_CORRECTION,
         suggestion: {
+          message_id: origin.message_id,
           proposal_id: origin.id,
           type: origin.joke_type as Category,
           joke: origin.joke_question!,
@@ -328,6 +337,7 @@ export default class CorrectionCommand extends Command {
       answer: (correction?.joke_answer ?? proposal.joke_answer)!,
       correction_type: ProposalType.CORRECTION,
       suggestion: {
+        message_id: proposal.message_id,
         proposal_id: proposal.id,
         type: proposal.joke_type as Category,
         joke: proposal.joke_question!,
@@ -448,14 +458,16 @@ export default class CorrectionCommand extends Command {
       return;
     }
 
-    const channel: TextChannel = commandInteraction.client.channels.cache.get(correctionsChannel) as TextChannel;
-    if (!isEmbedable(channel)) {
+    const correctsChannel: TextChannel = commandInteraction.client.channels.cache.get(
+      correctionsChannel
+    ) as TextChannel;
+    if (!isEmbedable(correctsChannel)) {
       return commandInteraction.reply(
-        interactionProblem(`Je n'ai pas la permission d'envoyer la correction dans le salon ${channel}.`, false)
+        interactionProblem(`Je n'ai pas la permission d'envoyer la correction dans le salon ${correctsChannel}.`, false)
       );
     }
 
-    const message = await channel.send({
+    const message = await correctsChannel.send({
       embeds: [
         {
           author: {
@@ -502,6 +514,30 @@ export default class CorrectionCommand extends Command {
         }
       }
     });
+
+    if (newJoke.suggestion.message_id) {
+      const suggestsChannel: TextChannel = commandInteraction.client.channels.cache.get(
+        suggestionsChannel
+      ) as TextChannel;
+      const suggestion = await suggestsChannel.messages.fetch(newJoke.suggestion.message_id);
+
+      await suggestion.edit({
+        embeds: [
+          {
+            ...suggestion.embeds[0].toJSON(),
+            description: stripIndents`
+              > **Type**: ${CategoriesRefs[newJoke.type as Category]}
+              > **Blague**: ${oldJoke.joke}
+              > **Réponse**: ${oldJoke.answer}
+
+              ⚠️ Une [correction](https://discord.com/channels/${commandInteraction.guild!.id}/${correctionsChannel}/${
+              message.id
+            }) est en cours.
+            `
+          }
+        ]
+      });
+    }
 
     await commandInteraction.editReply({
       embeds: [
