@@ -503,6 +503,27 @@ export default class CorrectionCommand extends Command {
       }
     });
 
+   const suggestion = await channel.messages.fetch(`${newJoke.id}`);
+
+    await suggestion.edit({
+      embeds: [
+        {
+          author: {
+            icon_url: suggestion.embeds[0].author?.iconURL
+          },
+          description: stripIndents`
+          ${suggestion.embeds[0].description}
+          > **Correction**: [Voir ici](https://discord.com/channels/${
+            commandInteraction.guild!.id
+          }/${correctionsChannel}/${message.id})
+          `,
+          footer: {
+            text: suggestion.embeds[0].footer?.text
+          }
+        }
+      ]
+    });    
+
     await commandInteraction.editReply({
       embeds: [
         {
