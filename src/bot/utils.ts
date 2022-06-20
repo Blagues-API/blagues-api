@@ -1,4 +1,4 @@
-import { InteractionReplyOptions, TextChannel } from 'discord.js';
+import { InteractionReplyOptions, Message, TextChannel } from 'discord.js';
 import { diffWords } from 'diff';
 import { APIEmbed } from 'discord-api-types/v10';
 
@@ -75,4 +75,8 @@ export function showNegativeDiffs(oldValue: string, newValue: string): string {
 export function isEmbedable(channel: TextChannel) {
   const permissions = channel.permissionsFor(channel.guild.members.me!);
   return permissions?.has(['ViewChannel', 'SendMessages', 'EmbedLinks']);
+}
+
+export function tDelete(timeout = 6000) {
+  return (message: Message) => setTimeout(() => message.deletable && message.delete().catch(() => null), timeout);
 }
