@@ -24,7 +24,11 @@ export default class Bot extends Client {
   constructor() {
     super({
       partials: [Partials.Reaction],
-      intents: IntentsBitField.Flags.Guilds | IntentsBitField.Flags.GuildMembers | IntentsBitField.Flags.GuildMessages
+      intents:
+        IntentsBitField.Flags.Guilds |
+        IntentsBitField.Flags.GuildMembers |
+        IntentsBitField.Flags.GuildMessages |
+        IntentsBitField.Flags.MessageContent
     });
 
     this.dispatcher = new Dispatcher(this);
