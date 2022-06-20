@@ -519,12 +519,12 @@ export default class CorrectionCommand extends Command {
       const suggestsChannel: TextChannel = commandInteraction.client.channels.cache.get(
         suggestionsChannel
       ) as TextChannel;
-      const suggestion = await suggestsChannel.messages.fetch(newJoke.suggestion.message_id);
+      const suggestionMessage = await suggestsChannel.messages.fetch(newJoke.suggestion.message_id);
 
-      await suggestion.edit({
+      await suggestionMessage.edit({
         embeds: [
           {
-            ...suggestion.embeds[0].toJSON(),
+            ...suggestionMessage.embeds[0].toJSON(),
             description: stripIndents`
               > **Type**: ${CategoriesRefs[newJoke.type as Category]}
               > **Blague**: ${oldJoke.joke}
