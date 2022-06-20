@@ -412,7 +412,7 @@ export default class ApproveCommand extends Command {
       await suggestionMessage.edit({
         embeds: [
           {
-            ...suggestionMessage.embeds[0],
+            ...suggestionMessage.embeds[0].toJSON(),
             description: stripIndents`
               > **Type**: ${CategoriesRefs[proposal.joke_type as Category]}
               > **Blague**: ${proposal.joke_question}
@@ -420,7 +420,7 @@ export default class ApproveCommand extends Command {
 
               ${godfathers}
             `
-          } as APIEmbed
+          }
         ]
       });
     }
