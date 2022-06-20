@@ -103,9 +103,7 @@ export default class CorrectionCommand extends Command {
           return resolve(joke);
         }
 
-        question.channel
-          .send("Aucune blague n'a été trouvée, veuillez réessayer !")
-          .then((m) => setTimeout(() => m.deletable && m.delete().catch(() => null), 5000));
+        question.channel.send("Aucune blague n'a été trouvée, veuillez réessayer !").then(tDelete(5000));
       });
       collector.once('end', async (_collected, reason: string) => {
         if (reason === 'time') {
