@@ -9,6 +9,8 @@ export default class Stickys {
   constructor(client: Client) {
     this.client = client;
 
+    if (process.env.bot_stickies === 'false') return;
+
     setInterval(() => this.sticky(suggestionsChannel, this.suggestsMessage()), 10000);
     setInterval(() => this.sticky(correctionsChannel, this.correctionsMessage()), 10000);
   }
