@@ -1,6 +1,7 @@
-import { InteractionReplyOptions, TextChannel } from 'discord.js';
+import { GuildMember, InteractionReplyOptions, TextChannel } from 'discord.js';
 import { diffWords } from 'diff';
 import { APIEmbed } from 'discord-api-types/v10';
+import { godfatherRoleId } from './constants';
 
 export function interactionProblem(message: string, ephemeral = true): InteractionReplyOptions {
   return {
@@ -82,4 +83,8 @@ export function isEmbedable(channel: TextChannel) {
 
 export function messageLink(guildId: string, channelId: string, messageId: string) {
   return `https://discord.com/channels/${guildId}/${channelId}/${messageId}`;
+}
+
+export function isParrain(member: GuildMember) {
+  return member.roles.cache.has(godfatherRoleId);
 }
