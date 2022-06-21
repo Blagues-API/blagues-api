@@ -59,7 +59,7 @@ export default class DisapproveCommand extends Command {
     if (!isParrain(interaction.member)) {
       return interaction.reply(
         interactionProblem(
-          `Seuls un <@${godfatherRoleId}> peut désapprouver une ${isSuggestion ? 'blague' : 'correction'}.`
+          `Seul un <@${godfatherRoleId}> peut désapprouver une ${isSuggestion ? 'blague' : 'correction'}.`
         )
       );
     }

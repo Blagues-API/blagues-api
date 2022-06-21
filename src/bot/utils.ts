@@ -84,6 +84,5 @@ export function messageLink(guildId: string, channelId: string, messageId: strin
 }
 
 export function isParrain(member: GuildMember) {
-  if (godfatherRoleId != '877511831525154837') return false;
   return member.roles.cache.has(godfatherRoleId);
 }
