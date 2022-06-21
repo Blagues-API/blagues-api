@@ -1,10 +1,13 @@
-import { InteractionReplyOptions, TextChannel } from 'discord.js';
+import { GuildMember, InteractionReplyOptions, TextChannel } from 'discord.js';
 import { diffWords } from 'diff';
 import { APIEmbed } from 'discord-api-types/v10';
+import { godfatherRoleId } from './constants';
 
 export function interactionProblem(message: string, ephemeral = true): InteractionReplyOptions {
   return {
     ...problem(message),
+    components: [],
+    content: '',
     ephemeral
   };
 }
@@ -20,10 +23,12 @@ export function problem(message: string): { embeds: APIEmbed[] } {
   };
 }
 
-export function interactionInfo(message: string): InteractionReplyOptions {
+export function interactionInfo(message: string, ephemeral = true): InteractionReplyOptions {
   return {
     ...info(message),
-    ephemeral: true
+    components: [],
+    content: '',
+    ephemeral
   };
 }
 
@@ -41,6 +46,7 @@ export function info(message: string): { embeds: APIEmbed[] } {
 export function interactionValidate(message: string): InteractionReplyOptions {
   return {
     ...validate(message),
+    components: [],
     ephemeral: true
   };
 }
@@ -73,4 +79,12 @@ export function showNegativeDiffs(oldValue: string, newValue: string): string {
 export function isEmbedable(channel: TextChannel) {
   const permissions = channel.permissionsFor(channel.guild.members.me!);
   return permissions?.has(['ViewChannel', 'SendMessages', 'EmbedLinks']);
+}
+
+export function messageLink(guildId: string, channelId: string, messageId: string) {
+  return `https://discord.com/channels/${guildId}/${channelId}/${messageId}`;
+}
+
+export function isParrain(member: GuildMember) {
+  return member.roles.cache.has(godfatherRoleId);
 }

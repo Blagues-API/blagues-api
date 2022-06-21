@@ -13,9 +13,9 @@ import {
 import { findBestMatch } from 'string-similarity';
 import Jokes from '../../jokes';
 import { Category, CategoriesRefs, UnsignedJoke } from '../../typings';
-import { Colors, suggestionsChannel, upReaction, downReaction, commandsChannel } from '../constants';
+import { Colors, suggestionsChannelId, upReaction, downReaction, commandsChannelId } from '../constants';
 import Command from '../lib/command';
-import { interactionInfo, interactionProblem, isEmbedable } from '../utils';
+import { interactionInfo, interactionProblem, isEmbedable, validate } from '../utils';
 import prisma from '../../prisma';
 import { ProposalType } from '@prisma/client';
 
@@ -53,8 +53,10 @@ export default class SuggestCommand extends Command {
   }
 
   async run(interaction: ChatInputCommandInteraction) {
-    if (interaction.channelId !== commandsChannel) {
-      return interaction.reply(interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannel}>.`));
+    if (interaction.channelId !== commandsChannelId) {
+      return interaction.reply(
+        interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannelId}>.`)
+      );
     }
 
     if (
@@ -145,14 +147,14 @@ export default class SuggestCommand extends Command {
       });
     }
 
-    const channel = interaction.guild!.channels.cache.get(suggestionsChannel) as TextChannel;
-    if (!isEmbedable(channel)) {
+    const suggestionsChannel = interaction.guild!.channels.cache.get(suggestionsChannelId) as TextChannel;
+    if (!isEmbedable(suggestionsChannel)) {
       return interaction.reply(
-        interactionProblem(`Je n'ai pas la permission d'envoyer la blague dans le salon ${channel}.`, false)
+        interactionProblem(`Je n'ai pas la permission d'envoyer la blague dans le salon ${suggestionsChannel}.`, false)
       );
     }
 
-    const suggestion = await channel.send({ embeds: [embed] });
+    const suggestion = await suggestionsChannel.send({ embeds: [embed] });
 
     await prisma.proposal.create({
       data: {
@@ -169,11 +171,7 @@ export default class SuggestCommand extends Command {
       await suggestion.react(reaction).catch(() => null);
     }
 
-    return confirmation.update({
-      content: 'La blague à été envoyée',
-      components: [],
-      embeds: []
-    });
+    return confirmation.update(validate(`La [blague](${suggestion.url}) a été envoyé !`));
   }
 
   async waitForConfirmation(
