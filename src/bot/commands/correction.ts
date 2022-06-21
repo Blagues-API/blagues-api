@@ -270,7 +270,7 @@ export default class CorrectionCommand extends Command {
               `Impossible de trouver une blague ou correction liée à cet ID de blague, assurez vous que cet ID provient bien d\'un message envoyé par le bot ${interaction.client.user}`
             )
           )
-          .then(tDelete(5000));
+          .then(tDelete(10000));
         return null;
       }
 
