@@ -250,8 +250,6 @@ export default class ApproveCommand extends Command {
 
     const neededApprovalsCount = isSuggestion ? neededSuggestionsApprovals : neededCorrectionsApprovals;
 
-    // TODO: Merge une suggestion lors de l'approbation d'une correction manquante
-    // TODO: Empêcher la suppresion d'un approbation d'une suggestion si la correction a été approuvée.
     // TODO: faire le même taff pour la déapprobation
     // TODO: Créer un utilitaire pour les liens
 
@@ -289,7 +287,16 @@ export default class ApproveCommand extends Command {
       if (isSuggestion) {
         await this.approveSuggestion(interaction, proposal as Suggestion, message, embed);
       } else {
-        await this.approveCorrection(interaction, proposal as Correction, message, embed);
+        const suggestion = await this.approveCorrection(interaction, proposal as Correction, message, embed);
+
+        if (suggestion && proposal.suggestion && proposal.suggestion.approvals.length >= neededSuggestionsApprovals)
+          await this.approveSuggestion(
+            interaction,
+            proposal.suggestion as Suggestion,
+            suggestion,
+            suggestion.embeds[0].toJSON(),
+            true
+          );
       }
     } catch (error) {
       console.error(error);
@@ -305,7 +312,8 @@ export default class ApproveCommand extends Command {
     interaction: MessageContextMenuCommandInteraction,
     proposal: Suggestion,
     message: Message,
-    embed: APIEmbed
+    embed: APIEmbed,
+    automerge = false
   ): Promise<void> {
     const logs = interaction.client.channels.cache.get(logsChannel) as TextChannel;
 
@@ -347,6 +355,15 @@ export default class ApproveCommand extends Command {
 
     await message.edit({ embeds: [embed] });
 
+    if (automerge) {
+      await interaction.followUp(
+        interactionValidate(
+          `La [suggestion](${message.url}) a bien été automatiquement ajoutée à l'API suite à la validation de la correction manquante !`
+        )
+      );
+      return;
+    }
+
     await interaction.editReply(interactionValidate(`La [suggestion](${message.url}) a bien été ajoutée à l'API !`));
   }
 
@@ -355,13 +372,13 @@ export default class ApproveCommand extends Command {
     proposal: Correction,
     message: Message,
     embed: APIEmbed
-  ): Promise<void> {
+  ) {
     const logs = interaction.client.channels.cache.get(logsChannel) as TextChannel;
     const channel = interaction.client.channels.cache.get(suggestionsChannel) as TextChannel;
     const isPublishedJoke = proposal.type === ProposalType.CORRECTION;
-    const suggestionMessage =
-      proposal.suggestion.message_id &&
-      (await channel.messages.fetch(proposal.suggestion.message_id).catch(() => null));
+    const suggestionMessage = proposal.suggestion.message_id
+      ? await channel.messages.fetch(proposal.suggestion.message_id).catch(() => null)
+      : null;
 
     const member = await interaction.guild?.members.fetch(proposal.user_id!).catch(() => null);
     if (member && !member.roles.cache.has(correctorRole)) {
@@ -459,5 +476,7 @@ export default class ApproveCommand extends Command {
     await interaction.editReply(
       interactionValidate(`La [correction](${message.url}) a bien été migrée vers la blague !`)
     );
+
+    return suggestionMessage;
   }
 }
