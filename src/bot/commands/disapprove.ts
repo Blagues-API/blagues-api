@@ -236,7 +236,8 @@ export default class DisapproveCommand extends Command {
       text: `${isSuggestion ? 'Suggestion' : 'Correction'} refusée`
     };
 
-    await message.edit({ embeds: [embed] });
+    const jokeMessage = await message.edit({ embeds: [embed] });
+    jokeMessage.reactions.removeAll();
 
     await message.reactions.removeAll();
 
