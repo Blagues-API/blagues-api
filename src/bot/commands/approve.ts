@@ -73,7 +73,7 @@ export default class ApproveCommand extends Command {
     if (!isParrain(interaction.member)) {
       return interaction.reply(
         interactionProblem(
-          `Seul un <@${godfatherRoleId}> peut approuver une ${isSuggestion ? 'blague' : 'correction'}.`
+          `Seul un <@&${godfatherRoleId}> peut approuver une ${isSuggestion ? 'blague' : 'correction'}.`
         )
       );
     }
