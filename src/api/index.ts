@@ -23,7 +23,10 @@ export default class App {
     await this.fastify.register(auth);
     await this.fastify.register(routes, { prefix: 'api' });
 
-    await this.fastify.listen(4000, '0.0.0.0');
+    await this.fastify.listen({
+      host: '0.0.0.0',
+      port: 4000
+    });
 
     console.log(`🚀 Blagues API lancé: http://localhost:4000`);
   }
