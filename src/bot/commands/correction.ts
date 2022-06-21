@@ -25,6 +25,7 @@ import Command from '../lib/command';
 import clone from 'lodash/clone';
 import { ProposalType } from '@prisma/client';
 import {
+  info,
   interactionInfo,
   interactionProblem,
   interactionValidate,
@@ -148,7 +149,7 @@ export default class CorrectionCommand extends Command {
       `,
       color: Colors.PRIMARY
     };
-    const question = await commandInteraction[commandInteraction.replied ? 'editReply' : 'reply']({
+    const question = (await commandInteraction[commandInteraction.replied ? 'editReply' : 'reply']({
       embeds: [embed],
       components: [
         {
@@ -188,7 +189,7 @@ export default class CorrectionCommand extends Command {
         }
       ],
       fetchReply: true
-    });
+    })) as Message<true>;
 
     const buttonInteraction = await question
       .awaitMessageComponent({
@@ -212,13 +213,25 @@ export default class CorrectionCommand extends Command {
       }
 
       case 'question': {
-        const response = await this.requestTextChange(buttonInteraction, commandInteraction, joke, 'question');
+        const response = await this.requestTextChange(
+          buttonInteraction,
+          commandInteraction,
+          joke,
+          'question',
+          joke.joke
+        );
         if (!response) return null;
 
         return this.requestChanges(commandInteraction, response, true);
       }
       case 'answer': {
-        const response = await this.requestTextChange(buttonInteraction, commandInteraction, joke, 'réponse');
+        const response = await this.requestTextChange(
+          buttonInteraction,
+          commandInteraction,
+          joke,
+          'réponse',
+          joke.answer
+        );
         if (!response) return null;
 
         return this.requestChanges(commandInteraction, response, true);
@@ -353,10 +366,20 @@ export default class CorrectionCommand extends Command {
     buttonInteraction: ButtonInteraction,
     commandInteraction: ChatInputCommandInteraction,
     joke: JokeCorrectionPayload,
-    textReplyContent: string
+    textReplyContent: string,
+    oldValue: string
   ): Promise<JokeCorrectionPayload | null> {
-    await buttonInteraction.reply({
-      content: `Par quelle ${textReplyContent} voulez-vous changer la ${textReplyContent} actuelle ?`
+    const baseEmbed = buttonInteraction.message.embeds[0].toJSON();
+    await buttonInteraction.update({
+      embeds: [
+        baseEmbed,
+        {
+          color: Colors.PRIMARY,
+          title: `Par quelle ${textReplyContent} voulez-vous changer la ${textReplyContent} actuelle ?`,
+          description: `\`\`\`${oldValue}\`\`\``
+        }
+      ],
+      components: []
     });
 
     const messages = await commandInteraction
@@ -371,14 +394,7 @@ export default class CorrectionCommand extends Command {
 
     const msg = messages?.first();
     if (!msg) {
-      await buttonInteraction.editReply({
-        embeds: [
-          {
-            description: '💡 Les 60 secondes se sont écoulées',
-            color: Colors.INFO
-          }
-        ]
-      });
+      await buttonInteraction.editReply(interactionInfo('💡 Les 60 secondes se sont écoulées', false));
       return null;
     }
 
@@ -386,18 +402,23 @@ export default class CorrectionCommand extends Command {
 
     joke[textReplyContent === 'question' ? 'joke' : 'answer'] = msg.content.replace(/\n/g, ' ');
 
-    await buttonInteraction.deleteReply();
-
     return joke;
   }
 
   async requestTypeChange(
-    buttonInteraction: ButtonInteraction,
+    buttonInteraction: ButtonInteraction<'cached'>,
     commandInteraction: ChatInputCommandInteraction,
     joke: JokeCorrectionPayload
   ): Promise<JokeCorrectionPayload | null> {
-    const questionMessage = await buttonInteraction.reply({
-      content: 'Par quel type de blague voulez-vous changer le type actuel ?',
+    const baseEmbed = buttonInteraction.message.embeds[0].toJSON();
+    const questionMessage = await buttonInteraction.update({
+      embeds: [
+        baseEmbed,
+        {
+          color: Colors.PRIMARY,
+          title: `Par quel type de blague voulez-vous changer le type actuel ?`
+        }
+      ],
       components: [
         {
           type: ComponentType.ActionRow,
@@ -430,12 +451,7 @@ export default class CorrectionCommand extends Command {
 
     if (!response) {
       questionMessage.edit({
-        embeds: [
-          {
-            description: '💡 Les 60 secondes se sont écoulées',
-            color: Colors.INFO
-          }
-        ],
+        ...info('💡 Les 60 secondes se sont écoulées'),
         components: []
       });
       return null;
@@ -443,7 +459,7 @@ export default class CorrectionCommand extends Command {
 
     joke.type = response.values[0] as Category;
 
-    if (questionMessage.deletable) await questionMessage.delete();
+    await response.deferUpdate();
 
     return joke;
   }
