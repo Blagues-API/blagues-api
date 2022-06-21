@@ -8,8 +8,6 @@ export default class Tesseract {
   constructor() {
     this.bot = new Bot();
     this.api = new Api();
-
-    this.init();
   }
 
   async init(): Promise<void> {
