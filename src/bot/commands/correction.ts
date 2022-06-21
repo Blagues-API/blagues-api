@@ -5,7 +5,6 @@ import {
   ButtonInteraction,
   ButtonStyle,
   ChatInputCommandInteraction,
-  CommandInteraction,
   ComponentType,
   Interaction,
   Message,
@@ -14,13 +13,22 @@ import {
 import { jokeById, jokeByQuestion } from '../../controllers';
 import prisma from '../../prisma';
 import { Category, JokeTypesDescriptions, CategoriesRefs, UnsignedJoke, UnsignedJokeKey } from '../../typings';
-import { Colors, commandsChannel, correctionsChannel, downReaction, upReaction } from '../constants';
+import {
+  Colors,
+  commandsChannelId,
+  correctionsChannelId,
+  downReaction,
+  suggestionsChannelId,
+  upReaction
+} from '../constants';
 import Command from '../lib/command';
 import clone from 'lodash/clone';
 import { ProposalType } from '@prisma/client';
 import {
+  info,
   interactionInfo,
   interactionProblem,
+  interactionValidate,
   isEmbedable,
   problem,
   showNegativeDiffs,
@@ -37,6 +45,7 @@ interface JokeCorrectionPayload extends UnsignedJoke {
   id?: number;
   correction_type: ProposalType;
   suggestion: UnsignedJoke & {
+    message_id: string | null;
     proposal_id: number;
   };
 }
@@ -60,8 +69,10 @@ export default class CorrectionCommand extends Command {
   async run(interaction: ChatInputCommandInteraction) {
     const query = interaction.options.getString('recherche', true);
 
-    if (interaction.channelId !== commandsChannel) {
-      return interaction.reply(interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannel}>.`));
+    if (interaction.channelId !== commandsChannelId) {
+      return interaction.reply(
+        interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannelId}>.`)
+      );
     }
 
     const joke = await this.resolveJoke(interaction, query);
@@ -73,7 +84,7 @@ export default class CorrectionCommand extends Command {
     await this.editJoke(interaction, joke, newJoke);
   }
 
-  async resolveJoke(interaction: CommandInteraction, query: string): Promise<JokeCorrectionPayload | null> {
+  async resolveJoke(interaction: ChatInputCommandInteraction, query: string): Promise<JokeCorrectionPayload | null> {
     const joke = await this.findJoke(interaction, query);
     if (joke) return joke;
 
@@ -125,7 +136,7 @@ export default class CorrectionCommand extends Command {
   }
 
   async requestChanges(
-    commandInteraction: CommandInteraction,
+    commandInteraction: ChatInputCommandInteraction,
     joke: JokeCorrectionPayload,
     changes = false
   ): Promise<JokeCorrectionPayload | null> {
@@ -138,7 +149,7 @@ export default class CorrectionCommand extends Command {
       `,
       color: Colors.PRIMARY
     };
-    const question = await commandInteraction[commandInteraction.replied ? 'editReply' : 'reply']({
+    const question = (await commandInteraction[commandInteraction.replied ? 'editReply' : 'reply']({
       embeds: [embed],
       components: [
         {
@@ -178,7 +189,7 @@ export default class CorrectionCommand extends Command {
         }
       ],
       fetchReply: true
-    });
+    })) as Message<true>;
 
     const buttonInteraction = await question
       .awaitMessageComponent({
@@ -202,13 +213,25 @@ export default class CorrectionCommand extends Command {
       }
 
       case 'question': {
-        const response = await this.requestTextChange(buttonInteraction, commandInteraction, joke, 'question');
+        const response = await this.requestTextChange(
+          buttonInteraction,
+          commandInteraction,
+          joke,
+          'question',
+          joke.joke
+        );
         if (!response) return null;
 
         return this.requestChanges(commandInteraction, response, true);
       }
       case 'answer': {
-        const response = await this.requestTextChange(buttonInteraction, commandInteraction, joke, 'réponse');
+        const response = await this.requestTextChange(
+          buttonInteraction,
+          commandInteraction,
+          joke,
+          'réponse',
+          joke.answer
+        );
         if (!response) return null;
 
         return this.requestChanges(commandInteraction, response, true);
@@ -231,7 +254,7 @@ export default class CorrectionCommand extends Command {
     return IdType.JOKE_ID;
   }
 
-  async findJoke(interaction: CommandInteraction, query: string): Promise<JokeCorrectionPayload | null> {
+  async findJoke(interaction: ChatInputCommandInteraction, query: string): Promise<JokeCorrectionPayload | null> {
     const idType = this.getIdType(query);
     if (idType === IdType.MESSAGE_ID) {
       const proposal = await prisma.proposal.findUnique({
@@ -283,6 +306,7 @@ export default class CorrectionCommand extends Command {
         answer: (origin.corrections[0]?.joke_answer ?? origin.joke_answer)!,
         correction_type: origin.merged ? ProposalType.CORRECTION : ProposalType.SUGGESTION_CORRECTION,
         suggestion: {
+          message_id: origin.message_id,
           proposal_id: origin.id,
           type: origin.joke_type as Category,
           joke: origin.joke_question!,
@@ -329,6 +353,7 @@ export default class CorrectionCommand extends Command {
       answer: (correction?.joke_answer ?? proposal.joke_answer)!,
       correction_type: ProposalType.CORRECTION,
       suggestion: {
+        message_id: proposal.message_id,
         proposal_id: proposal.id,
         type: proposal.joke_type as Category,
         joke: proposal.joke_question!,
@@ -339,12 +364,22 @@ export default class CorrectionCommand extends Command {
 
   async requestTextChange(
     buttonInteraction: ButtonInteraction,
-    commandInteraction: CommandInteraction,
+    commandInteraction: ChatInputCommandInteraction,
     joke: JokeCorrectionPayload,
-    textReplyContent: string
+    textReplyContent: string,
+    oldValue: string
   ): Promise<JokeCorrectionPayload | null> {
-    await buttonInteraction.reply({
-      content: `Par quelle ${textReplyContent} voulez-vous changer la ${textReplyContent} actuelle ?`
+    const baseEmbed = buttonInteraction.message.embeds[0].toJSON();
+    await buttonInteraction.update({
+      embeds: [
+        baseEmbed,
+        {
+          color: Colors.PRIMARY,
+          title: `Par quelle ${textReplyContent} voulez-vous changer la ${textReplyContent} actuelle ?`,
+          description: `\`\`\`${oldValue}\`\`\``
+        }
+      ],
+      components: []
     });
 
     const messages = await commandInteraction
@@ -359,14 +394,7 @@ export default class CorrectionCommand extends Command {
 
     const msg = messages?.first();
     if (!msg) {
-      await buttonInteraction.editReply({
-        embeds: [
-          {
-            description: '💡 Les 60 secondes se sont écoulées',
-            color: Colors.INFO
-          }
-        ]
-      });
+      await buttonInteraction.editReply(interactionInfo('💡 Les 60 secondes se sont écoulées', false));
       return null;
     }
 
@@ -374,18 +402,23 @@ export default class CorrectionCommand extends Command {
 
     joke[textReplyContent === 'question' ? 'joke' : 'answer'] = msg.content.replace(/\n/g, ' ');
 
-    await buttonInteraction.deleteReply();
-
     return joke;
   }
 
   async requestTypeChange(
-    buttonInteraction: ButtonInteraction,
-    commandInteraction: CommandInteraction,
+    buttonInteraction: ButtonInteraction<'cached'>,
+    commandInteraction: ChatInputCommandInteraction,
     joke: JokeCorrectionPayload
   ): Promise<JokeCorrectionPayload | null> {
-    const questionMessage = await buttonInteraction.reply({
-      content: 'Par quel type de blague voulez-vous changer le type actuel ?',
+    const baseEmbed = buttonInteraction.message.embeds[0].toJSON();
+    const questionMessage = await buttonInteraction.update({
+      embeds: [
+        baseEmbed,
+        {
+          color: Colors.PRIMARY,
+          title: `Par quel type de blague voulez-vous changer le type actuel ?`
+        }
+      ],
       components: [
         {
           type: ComponentType.ActionRow,
@@ -418,12 +451,7 @@ export default class CorrectionCommand extends Command {
 
     if (!response) {
       questionMessage.edit({
-        embeds: [
-          {
-            description: '💡 Les 60 secondes se sont écoulées',
-            color: Colors.INFO
-          }
-        ],
+        ...info('💡 Les 60 secondes se sont écoulées'),
         components: []
       });
       return null;
@@ -431,13 +459,13 @@ export default class CorrectionCommand extends Command {
 
     joke.type = response.values[0] as Category;
 
-    if (questionMessage.deletable) await questionMessage.delete();
+    await response.deferUpdate();
 
     return joke;
   }
 
   async editJoke(
-    commandInteraction: CommandInteraction,
+    commandInteraction: ChatInputCommandInteraction,
     oldJoke: JokeCorrectionPayload,
     newJoke: JokeCorrectionPayload
   ) {
@@ -449,14 +477,19 @@ export default class CorrectionCommand extends Command {
       return;
     }
 
-    const channel: TextChannel = commandInteraction.client.channels.cache.get(correctionsChannel) as TextChannel;
-    if (!isEmbedable(channel)) {
+    const correctionsChannel: TextChannel = commandInteraction.client.channels.cache.get(
+      correctionsChannelId
+    ) as TextChannel;
+    if (!isEmbedable(correctionsChannel)) {
       return commandInteraction.reply(
-        interactionProblem(`Je n'ai pas la permission d'envoyer la correction dans le salon ${channel}.`, false)
+        interactionProblem(
+          `Je n'ai pas la permission d'envoyer la correction dans le salon ${correctionsChannel}.`,
+          false
+        )
       );
     }
 
-    const message = await channel.send({
+    const message = await correctionsChannel.send({
       embeds: [
         {
           author: {
@@ -504,17 +537,31 @@ export default class CorrectionCommand extends Command {
       }
     });
 
-    await commandInteraction.editReply({
-      embeds: [
-        {
-          description: `Votre [proposition de correction](https://discord.com/channels/${
-            commandInteraction.guild!.id
-          }/${correctionsChannel}/${message.id}) a bien été envoyée !`,
-          color: Colors.SUCCESS
-        }
-      ],
-      components: []
-    });
+    if (newJoke.suggestion.message_id) {
+      const suggestionsChannel: TextChannel = commandInteraction.client.channels.cache.get(
+        suggestionsChannelId
+      ) as TextChannel;
+      const suggestionMessage = await suggestionsChannel.messages.fetch(newJoke.suggestion.message_id);
+
+      await suggestionMessage.edit({
+        embeds: [
+          {
+            ...suggestionMessage.embeds[0].toJSON(),
+            description: stripIndents`
+              > **Type**: ${CategoriesRefs[newJoke.type]}
+              > **Blague**: ${oldJoke.joke}
+              > **Réponse**: ${oldJoke.answer}
+
+              ⚠️ Une [correction](${message.url}) est en cours.
+            `
+          }
+        ]
+      });
+    }
+
+    await commandInteraction.editReply(
+      interactionValidate(`Votre [proposition de correction](${message.url}) a bien été envoyée !`)
+    );
 
     for (const reaction of [upReaction, downReaction]) {
       await message.react(reaction).catch(() => null);

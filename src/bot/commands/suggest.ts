@@ -4,7 +4,7 @@ import {
   ApplicationCommandType,
   ButtonInteraction,
   ButtonStyle,
-  CommandInteraction,
+  ChatInputCommandInteraction,
   ComponentType,
   MessageComponentInteraction,
   TextChannel,
@@ -13,7 +13,7 @@ import {
 import { findBestMatch } from 'string-similarity';
 import Jokes from '../../jokes';
 import { Category, CategoriesRefs, UnsignedJoke } from '../../typings';
-import { Colors, suggestionsChannel, upReaction, downReaction, commandsChannel } from '../constants';
+import { Colors, suggestionsChannelId, upReaction, downReaction, commandsChannelId } from '../constants';
 import Command from '../lib/command';
 import { interactionInfo, interactionProblem, isEmbedable } from '../utils';
 import prisma from '../../prisma';
@@ -52,9 +52,11 @@ export default class SuggestCommand extends Command {
     });
   }
 
-  async run(interaction: CommandInteraction) {
-    if (interaction.channelId !== commandsChannel) {
-      return interaction.reply(interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannel}>.`));
+  async run(interaction: ChatInputCommandInteraction) {
+    if (interaction.channelId !== commandsChannelId) {
+      return interaction.reply(
+        interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannelId}>.`)
+      );
     }
 
     if (
@@ -145,14 +147,14 @@ export default class SuggestCommand extends Command {
       });
     }
 
-    const channel = interaction.guild!.channels.cache.get(suggestionsChannel) as TextChannel;
-    if (!isEmbedable(channel)) {
+    const suggestionsChannel = interaction.guild!.channels.cache.get(suggestionsChannelId) as TextChannel;
+    if (!isEmbedable(suggestionsChannel)) {
       return interaction.reply(
-        interactionProblem(`Je n'ai pas la permission d'envoyer la blague dans le salon ${channel}.`, false)
+        interactionProblem(`Je n'ai pas la permission d'envoyer la blague dans le salon ${suggestionsChannel}.`, false)
       );
     }
 
-    const suggestion = await channel.send({ embeds: [embed] });
+    const suggestion = await suggestionsChannel.send({ embeds: [embed] });
 
     await prisma.proposal.create({
       data: {
@@ -176,7 +178,10 @@ export default class SuggestCommand extends Command {
     });
   }
 
-  async waitForConfirmation(interaction: CommandInteraction, embed: APIEmbed): Promise<ButtonInteraction | null> {
+  async waitForConfirmation(
+    interaction: ChatInputCommandInteraction,
+    embed: APIEmbed
+  ): Promise<ButtonInteraction | null> {
     const message = await interaction.reply({
       content: 'Êtes-vous sûr de vouloir confirmer la proposition de cette blague ?',
       embeds: [embed],

@@ -2,6 +2,7 @@ import {
   ActivityType,
   AnyInteraction,
   Client,
+  GuildTextBasedChannel,
   IntentsBitField,
   InteractionType,
   Message,
@@ -10,7 +11,7 @@ import {
 } from 'discord.js';
 import Jokes from '../jokes';
 import prisma from '../prisma';
-import { correctionsChannel, suggestionsChannel } from './constants';
+import { correctionsChannelId, suggestionsChannelId } from './constants';
 import Dispatcher from './lib/dispatcher';
 import Reminders from './modules/reminders';
 import Stickys from './modules/stickys';
@@ -23,7 +24,11 @@ export default class Bot extends Client {
   constructor() {
     super({
       partials: [Partials.Reaction],
-      intents: IntentsBitField.Flags.Guilds | IntentsBitField.Flags.GuildMembers | IntentsBitField.Flags.GuildMessages
+      intents:
+        IntentsBitField.Flags.Guilds |
+        IntentsBitField.Flags.GuildMembers |
+        IntentsBitField.Flags.GuildMessages |
+        IntentsBitField.Flags.MessageContent
     });
 
     this.dispatcher = new Dispatcher(this);
@@ -54,11 +59,37 @@ export default class Bot extends Client {
   }
 
   async onMessageDelete(message: Message | PartialMessage): Promise<void> {
+    if (!message.inGuild()) return;
     if (message.author && message.author.id !== this.user!.id) return;
-    if (![correctionsChannel, suggestionsChannel].includes(message.channelId)) return;
+    if (![correctionsChannelId, suggestionsChannelId].includes(message.channelId)) return;
     if (!message.embeds[0]?.author) return;
 
-    await prisma.proposal.delete({ where: { message_id: message.id } });
+    const proposal = await prisma.proposal.findUnique({
+      where: { message_id: message.id },
+      include: {
+        corrections: suggestionsChannelId === message.channelId
+      }
+    });
+
+    if (!proposal) return;
+
+    await prisma.proposal.delete({
+      where: {
+        id: proposal.id
+      }
+    });
+
+    if (proposal.corrections?.length) {
+      const correctionsChannel = message.guild.channels.resolve(correctionsChannelId) as GuildTextBasedChannel;
+      for (const correction of proposal.corrections) {
+        try {
+          const fetchedMessage = await correctionsChannel.messages.fetch(correction.message_id!);
+          if (fetchedMessage.deletable) await fetchedMessage.delete();
+        } catch {
+          continue;
+        }
+      }
+    }
   }
 
   registerEvents(): void {
