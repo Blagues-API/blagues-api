@@ -15,10 +15,10 @@ import prisma from '../../prisma';
 import { Category, JokeTypesDescriptions, CategoriesRefs, UnsignedJoke, UnsignedJokeKey } from '../../typings';
 import {
   Colors,
-  commandsChannel,
-  correctionsChannel,
+  commandsChannelId,
+  correctionsChannelId,
   downReaction,
-  suggestionsChannel,
+  suggestionsChannelId,
   upReaction
 } from '../constants';
 import Command from '../lib/command';
@@ -68,8 +68,10 @@ export default class CorrectionCommand extends Command {
   async run(interaction: ChatInputCommandInteraction) {
     const query = interaction.options.getString('recherche', true);
 
-    if (interaction.channelId !== commandsChannel) {
-      return interaction.reply(interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannel}>.`));
+    if (interaction.channelId !== commandsChannelId) {
+      return interaction.reply(
+        interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannelId}>.`)
+      );
     }
 
     const joke = await this.resolveJoke(interaction, query);
@@ -459,16 +461,19 @@ export default class CorrectionCommand extends Command {
       return;
     }
 
-    const correctsChannel: TextChannel = commandInteraction.client.channels.cache.get(
-      correctionsChannel
+    const correctionsChannel: TextChannel = commandInteraction.client.channels.cache.get(
+      correctionsChannelId
     ) as TextChannel;
-    if (!isEmbedable(correctsChannel)) {
+    if (!isEmbedable(correctionsChannel)) {
       return commandInteraction.reply(
-        interactionProblem(`Je n'ai pas la permission d'envoyer la correction dans le salon ${correctsChannel}.`, false)
+        interactionProblem(
+          `Je n'ai pas la permission d'envoyer la correction dans le salon ${correctionsChannel}.`,
+          false
+        )
       );
     }
 
-    const message = await correctsChannel.send({
+    const message = await correctionsChannel.send({
       embeds: [
         {
           author: {
@@ -517,10 +522,10 @@ export default class CorrectionCommand extends Command {
     });
 
     if (newJoke.suggestion.message_id) {
-      const suggestsChannel: TextChannel = commandInteraction.client.channels.cache.get(
-        suggestionsChannel
+      const suggestionsChannel: TextChannel = commandInteraction.client.channels.cache.get(
+        suggestionsChannelId
       ) as TextChannel;
-      const suggestionMessage = await suggestsChannel.messages.fetch(newJoke.suggestion.message_id);
+      const suggestionMessage = await suggestionsChannel.messages.fetch(newJoke.suggestion.message_id);
 
       await suggestionMessage.edit({
         embeds: [
