@@ -11,8 +11,8 @@ export default class Stickys {
 
     if (process.env.bot_stickies === 'false') return;
 
-    setInterval(() => this.sticky(suggestionsChannelId, this.suggestsMessage()), 10000);
-    setInterval(() => this.sticky(correctionsChannelId, this.correctionsMessage()), 10000);
+    setInterval(() => this.sticky(suggestionsChannelId, this.suggestsMessage()), 10_000);
+    setInterval(() => this.sticky(correctionsChannelId, this.correctionsMessage()), 10_000);
   }
 
   suggestsMessage(): APIEmbed {

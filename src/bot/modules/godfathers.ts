@@ -3,16 +3,11 @@ import prisma from '../../prisma';
 import sharp from 'sharp';
 import got from 'got';
 import snakeCase from 'lodash/snakeCase';
-import { Proposal, Approval, Disapproval } from '@prisma/client';
 import { emojisGuildId } from '../constants';
+import { ProposalFull } from '../../typings';
 
 const approveEmoji = '<:approve:908300630563651615>';
 const disapproveEmoji = '<:disapprove:908300630878203954>';
-
-type ProposalFull = Proposal & {
-  approvals: Approval[];
-  disapprovals: Disapproval[];
-};
 
 interface GodfatherEmoji {
   id: Snowflake;
@@ -42,14 +37,14 @@ export async function getGodfatherEmoji(emojisGuild: Guild, member: GuildMember)
   return { id: member.id, emoji: `<:vote:${godfather.emoji_id}>` };
 }
 
-export async function renderGodfatherLine(interaction: AnyInteraction, proposal: ProposalFull) {
+export async function renderGodfatherLine(interaction: AnyInteraction<'cached'>, proposal: ProposalFull) {
   const emojisGuild = interaction.client.guilds.cache.get(emojisGuildId)!;
   const approvalsIds = proposal.approvals.map((approval) => approval.user_id);
   const disapprovalsIds = proposal.disapprovals.map((disapproval) => disapproval.user_id);
 
   const members = await Promise.all(
     [...new Set([...approvalsIds, ...disapprovalsIds])].map((user_id) =>
-      interaction.guild?.members.fetch(user_id).catch(() => null)
+      interaction.guild.members.fetch(user_id).catch(() => null)
     )
   );
   const godfathersEmojis = await Promise.all(
@@ -60,7 +55,7 @@ export async function renderGodfatherLine(interaction: AnyInteraction, proposal:
   const disapprovalsEmojis = disapprovalsIds.length
     ? `${disapproveEmoji} ${mapEmojis(godfathersEmojis, disapprovalsIds)}`
     : '';
-  return `${approvalsEmojis} ${disapprovalsEmojis}`;
+  return `${approvalsEmojis} ${disapprovalsEmojis}`.trim();
 }
 
 function mapEmojis(emojis: GodfatherEmoji[], users_ids: Snowflake[]) {
