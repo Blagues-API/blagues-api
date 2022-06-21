@@ -454,10 +454,7 @@ export default class CorrectionCommand extends Command {
     newJoke: JokeCorrectionPayload
   ) {
     if (!(['type', 'joke', 'answer'] as UnsignedJokeKey[]).some((key) => newJoke[key] !== oldJoke[key])) {
-      await commandInteraction.editReply({
-        content: "Aucun élément n'a été modifié",
-        embeds: []
-      });
+      await commandInteraction.editReply(interactionProblem("Aucun élément n'a été modifié"));
       return;
     }
 
