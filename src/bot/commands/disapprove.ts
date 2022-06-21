@@ -10,6 +10,7 @@ import prisma from '../../prisma';
 import {
   Colors,
   correctionsChannelId,
+  godfatherRoleId,
   logsChannelId,
   neededCorrectionsApprovals,
   neededSuggestionsApprovals,
@@ -58,7 +59,7 @@ export default class DisapproveCommand extends Command {
     if (!isParrain(interaction.member)) {
       return interaction.reply(
         interactionProblem(
-          `Vous n'êtes pas parrain, vous ne pouvez pas désapprouver une ${isSuggestion ? 'blague' : 'correction'}.`
+          `Seuls un <@${godfatherRoleId}> peut désapprouver une ${isSuggestion ? 'blague' : 'correction'}.`
         )
       );
     }

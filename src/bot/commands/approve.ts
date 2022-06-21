@@ -19,7 +19,8 @@ import {
   jokerRoleId,
   correctorRoleId,
   upReaction,
-  downReaction
+  downReaction,
+  godfatherRoleId
 } from '../constants';
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../modules/godfathers';
@@ -68,7 +69,7 @@ export default class ApproveCommand extends Command {
     if (!isParrain(interaction.member)) {
       return interaction.reply(
         interactionProblem(
-          `Vous n'êtes pas parrain, vous ne pouvez pas approuver une ${isSuggestion ? 'blague' : 'correction'}.`
+          `Seuls un <@${godfatherRoleId}> peut approuver une ${isSuggestion ? 'blague' : 'correction'}.`
         )
       );
     }
