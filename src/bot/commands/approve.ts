@@ -23,7 +23,7 @@ import {
 } from '../constants';
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../modules/godfathers';
-import { interactionProblem, interactionInfo, interactionValidate, isEmbedable } from '../utils';
+import { interactionProblem, interactionInfo, interactionValidate, isEmbedable, messageLink } from '../utils';
 import Jokes from '../../jokes';
 import { compareTwoStrings } from 'string-similarity';
 
@@ -35,7 +35,7 @@ export default class ApproveCommand extends Command {
     });
   }
 
-  async run(interaction: MessageContextMenuCommandInteraction) {
+  async run(interaction: MessageContextMenuCommandInteraction<'cached'>) {
     const channel = (interaction.channel as TextChannel)!;
     const isSuggestion = channel.id === suggestionsChannel;
     const message = await interaction.channel?.messages.fetch(interaction.targetId);
@@ -157,28 +157,21 @@ export default class ApproveCommand extends Command {
 
     const correction = isSuggestion && proposal.corrections[0];
     if (correction) {
+      const correctionLink = messageLink(interaction.guild.id, correctionsChannel, correction.message_id!);
+      const suggestionLink = messageLink(interaction.guild.id, suggestionsChannel, proposal.message_id!);
       return interaction.reply(
         interactionInfo(
-          `Il semblerait qu'une [correction ai été proposée](https://discord.com/channels/${
-            interaction.guild!.id
-          }/${correctionsChannel}/${
-            correction.message_id
-          }), veuillez l'approuver avant l'approbation de [cette suggestion](https://discord.com/channels/${
-            interaction.guild!.id
-          }/${suggestionsChannel}/${proposal.message_id}).`
+          `Il semblerait qu'une [correction ai été proposée](${correctionLink}), veuillez l'approuver avant l'approbation de [cette suggestion](${suggestionLink}).`
         )
       );
     }
 
     const lastCorrection = !isSuggestion && proposal.suggestion?.corrections[0];
     if (lastCorrection && lastCorrection.id !== proposal.id) {
+      const correctionLink = messageLink(interaction.guild.id, correctionsChannel, lastCorrection.message_id!);
       return interaction.reply(
         interactionInfo(`
-          Il semblerait qu'une [correction ai été ajoutée](https://discord.com/channels/${
-            interaction.guild!.id
-          }/${correctionsChannel}/${
-          lastCorrection.message_id
-        }) par dessus rendant celle-ci obsolète, veuillez approuver la dernière version de la correction.`)
+          Il semblerait qu'une [correction ai été ajoutée](${correctionLink}) par dessus rendant celle-ci obsolète, veuillez approuver la dernière version de la correction.`)
       );
     }
 

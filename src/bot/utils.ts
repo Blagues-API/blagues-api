@@ -5,8 +5,7 @@ import { APIEmbed } from 'discord-api-types/v10';
 export function interactionProblem(message: string, ephemeral = true): InteractionReplyOptions {
   return {
     ...problem(message),
-    ephemeral,
-    components: []
+    ephemeral
   };
 }
 
@@ -24,8 +23,7 @@ export function problem(message: string): { embeds: APIEmbed[] } {
 export function interactionInfo(message: string): InteractionReplyOptions {
   return {
     ...info(message),
-    ephemeral: true,
-    components: []
+    ephemeral: true
   };
 }
 
@@ -75,4 +73,8 @@ export function showNegativeDiffs(oldValue: string, newValue: string): string {
 export function isEmbedable(channel: TextChannel) {
   const permissions = channel.permissionsFor(channel.guild.members.me!);
   return permissions?.has(['ViewChannel', 'SendMessages', 'EmbedLinks']);
+}
+
+export function messageLink(guildId: string, channelId: string, messageId: string) {
+  return `https://discord.com/channels/${guildId}/${channelId}/${messageId}`;
 }

@@ -27,6 +27,7 @@ import { ProposalType } from '@prisma/client';
 import {
   interactionInfo,
   interactionProblem,
+  interactionValidate,
   isEmbedable,
   problem,
   showNegativeDiffs,
@@ -526,30 +527,20 @@ export default class CorrectionCommand extends Command {
           {
             ...suggestionMessage.embeds[0].toJSON(),
             description: stripIndents`
-              > **Type**: ${CategoriesRefs[newJoke.type as Category]}
+              > **Type**: ${CategoriesRefs[newJoke.type]}
               > **Blague**: ${oldJoke.joke}
               > **Réponse**: ${oldJoke.answer}
 
-              ⚠️ Une [correction](https://discord.com/channels/${commandInteraction.guild!.id}/${correctionsChannel}/${
-              message.id
-            }) est en cours.
+              ⚠️ Une [correction](${message.url}) est en cours.
             `
           }
         ]
       });
     }
 
-    await commandInteraction.editReply({
-      embeds: [
-        {
-          description: `Votre [proposition de correction](https://discord.com/channels/${
-            commandInteraction.guild!.id
-          }/${correctionsChannel}/${message.id}) a bien été envoyée !`,
-          color: Colors.SUCCESS
-        }
-      ],
-      components: []
-    });
+    await commandInteraction.editReply(
+      interactionValidate(`Votre [proposition de correction](${message.url}) a bien été envoyée !`)
+    );
 
     for (const reaction of [upReaction, downReaction]) {
       await message.react(reaction).catch(() => null);
