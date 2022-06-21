@@ -9,15 +9,15 @@ import {
 import prisma from '../../prisma';
 import {
   Colors,
-  correctionsChannel,
-  logsChannel,
+  correctionsChannelId,
+  logsChannelId,
   neededCorrectionsApprovals,
   neededSuggestionsApprovals,
-  suggestionsChannel
+  suggestionsChannelId
 } from '../constants';
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../modules/godfathers';
-import { interactionProblem, interactionInfo, interactionValidate, isEmbedable } from '../utils';
+import { interactionProblem, interactionInfo, interactionValidate, isEmbedable, messageLink } from '../utils';
 
 export default class DisapproveCommand extends Command {
   constructor() {
@@ -27,14 +27,14 @@ export default class DisapproveCommand extends Command {
     });
   }
 
-  async run(interaction: MessageContextMenuCommandInteraction) {
+  async run(interaction: MessageContextMenuCommandInteraction<'cached'>) {
     const channel = (interaction.channel as TextChannel)!;
-    const isSuggestion = channel.id === suggestionsChannel;
+    const isSuggestion = channel.id === suggestionsChannelId;
     const message = await channel.messages.fetch(interaction.targetId);
-    if (![suggestionsChannel, correctionsChannel].includes(channel.id)) {
+    if (![suggestionsChannelId, correctionsChannelId].includes(channel.id)) {
       return interaction.reply(
         interactionProblem(
-          `Vous ne pouvez pas désapprouver une blague ou une correction en dehors des salons <#${suggestionsChannel}> et <#${correctionsChannel}>.`
+          `Vous ne pouvez pas désapprouver une blague ou une correction en dehors des salons <#${suggestionsChannelId}> et <#${correctionsChannelId}>.`
         )
       );
     }
@@ -112,28 +112,21 @@ export default class DisapproveCommand extends Command {
 
     const correction = isSuggestion && proposal.corrections[0];
     if (correction) {
+      const correctionLink = messageLink(interaction.guild.id, correctionsChannelId, correction.message_id!);
+      const suggestionLink = messageLink(interaction.guild.id, suggestionsChannelId, proposal.message_id!);
       return interaction.reply(
         interactionInfo(
-          `Il semblerait qu'une [correction ai été proposée](https://discord.com/channels/${
-            interaction.guild!.id
-          }/${correctionsChannel}/${
-            correction.message_id
-          }), veuillez la cloturer avant la désapprobation de [cette suggestion](https://discord.com/channels/${
-            interaction.guild!.id
-          }/${suggestionsChannel}/${proposal.message_id}).`
+          `Il semblerait qu'une [correction ai été proposée](${correctionLink}), veuillez la cloturer avant la désapprobation de [cette suggestion](${suggestionLink}).`
         )
       );
     }
 
     const lastCorrection = !isSuggestion && proposal.suggestion?.corrections[0];
     if (lastCorrection && lastCorrection.id !== proposal.id) {
+      const correctionLink = messageLink(interaction.guild.id, correctionsChannelId, lastCorrection.message_id!);
       return interaction.reply(
         interactionInfo(`
-          Il semblerait qu'une [correction ai été ajoutée](https://discord.com/channels/${
-            interaction.guild!.id
-          }/${correctionsChannel}/${
-          lastCorrection.message_id
-        }) par dessus rendant celle ci obsolète, veuillez désapprouver la dernière version de la correction.`)
+          Il semblerait qu'une [correction ai été ajoutée](${correctionLink}) par dessus rendant celle ci obsolète, veuillez désapprouver la dernière version de la correction.`)
       );
     }
 
@@ -215,7 +208,7 @@ export default class DisapproveCommand extends Command {
     message: Message,
     embed: APIEmbed
   ) {
-    const logs = interaction.client.channels.cache.get(logsChannel) as TextChannel;
+    const logsChannel = interaction.client.channels.cache.get(logsChannelId) as TextChannel;
     const isSuggestion = proposal.type === ProposalType.SUGGESTION;
 
     await prisma.proposal.update({
@@ -225,8 +218,8 @@ export default class DisapproveCommand extends Command {
 
     embed.color = Colors.REFUSED;
 
-    if (isEmbedable(logs)) {
-      await logs.send({
+    if (isEmbedable(logsChannel)) {
+      await logsChannel.send({
         content: `${isSuggestion ? 'Blague' : 'Suggestion'} refusée`,
         embeds: [embed]
       });

@@ -5,8 +5,8 @@ import { APIEmbed } from 'discord-api-types/v10';
 export function interactionProblem(message: string, ephemeral = true): InteractionReplyOptions {
   return {
     ...problem(message),
-    ephemeral,
-    components: []
+    components: [],
+    ephemeral
   };
 }
 
@@ -21,11 +21,11 @@ export function problem(message: string): { embeds: APIEmbed[] } {
   };
 }
 
-export function interactionInfo(message: string): InteractionReplyOptions {
+export function interactionInfo(message: string, ephemeral = true): InteractionReplyOptions {
   return {
     ...info(message),
-    ephemeral: true,
-    components: []
+    components: [],
+    ephemeral
   };
 }
 
@@ -43,6 +43,7 @@ export function info(message: string): { embeds: APIEmbed[] } {
 export function interactionValidate(message: string): InteractionReplyOptions {
   return {
     ...validate(message),
+    components: [],
     ephemeral: true
   };
 }
@@ -79,4 +80,8 @@ export function isEmbedable(channel: TextChannel) {
 
 export function tDelete(timeout = 6000) {
   return (message: Message) => setTimeout(() => message.deletable && message.delete().catch(() => null), timeout);
+}
+
+export function messageLink(guildId: string, channelId: string, messageId: string) {
+  return `https://discord.com/channels/${guildId}/${channelId}/${messageId}`;
 }
