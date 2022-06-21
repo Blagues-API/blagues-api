@@ -23,7 +23,14 @@ import {
 } from '../constants';
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../modules/godfathers';
-import { interactionProblem, interactionInfo, interactionValidate, isEmbedable, messageLink } from '../utils';
+import {
+  interactionProblem,
+  interactionInfo,
+  interactionValidate,
+  isEmbedable,
+  messageLink,
+  isParrain
+} from '../utils';
 import Jokes from '../../jokes';
 import { compareTwoStrings } from 'string-similarity';
 
@@ -54,6 +61,14 @@ export default class ApproveCommand extends Command {
           `Vous ne pouvez pas approuver une ${isSuggestion ? 'blague' : 'correction'} qui n'est pas gérée par ${
             interaction.client.user
           }.`
+        )
+      );
+    }
+
+    if (!isParrain(interaction.member)) {
+      return interaction.reply(
+        interactionProblem(
+          `Vous n'êtes pas parrain, vous ne pouvez pas approuver une ${isSuggestion ? 'blague' : 'correction'}.`
         )
       );
     }
