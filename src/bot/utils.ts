@@ -1,4 +1,4 @@
-import { ContextMenuCommandInteraction, GuildMember, InteractionReplyOptions, TextChannel } from 'discord.js';
+import { GuildMember, InteractionReplyOptions, TextChannel } from 'discord.js';
 import { diffWords } from 'diff';
 import { APIEmbed } from 'discord-api-types/v10';
 import { godfatherRoleId } from './constants';
