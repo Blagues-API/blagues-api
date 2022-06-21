@@ -5,7 +5,7 @@ import {
   ChatInputCommandInteraction,
   GuildMember
 } from 'discord.js';
-import { Colors, commandsChannel, parrainRole } from '../constants';
+import { Colors, commandsChannelId, godfatherRoleId } from '../constants';
 import Command from '../lib/command';
 import prisma from '../../prisma';
 import { ProposalType } from '@prisma/client';
@@ -29,8 +29,10 @@ export default class SuggestCommand extends Command {
   }
 
   async run(interaction: ChatInputCommandInteraction) {
-    if (interaction.channelId !== commandsChannel) {
-      return interaction.reply(interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannel}>.`));
+    if (interaction.channelId !== commandsChannelId) {
+      return interaction.reply(
+        interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannelId}>.`)
+      );
     }
 
     if (interaction.options.get('user')) {
@@ -67,7 +69,7 @@ export default class SuggestCommand extends Command {
       `
     });
 
-    if (member.roles.cache.has(parrainRole)) {
+    if (member.roles.cache.has(godfatherRoleId)) {
       const approvals = await prisma.approval.findMany({
         where: { user_id: member.id },
         include: { proposal: true }

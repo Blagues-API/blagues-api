@@ -11,7 +11,7 @@ import {
 } from 'discord.js';
 import Jokes from '../jokes';
 import prisma from '../prisma';
-import { correctionsChannel, suggestionsChannel } from './constants';
+import { correctionsChannelId, suggestionsChannelId } from './constants';
 import Dispatcher from './lib/dispatcher';
 import Reminders from './modules/reminders';
 import Stickys from './modules/stickys';
@@ -61,13 +61,13 @@ export default class Bot extends Client {
   async onMessageDelete(message: Message | PartialMessage): Promise<void> {
     if (!message.inGuild()) return;
     if (message.author && message.author.id !== this.user!.id) return;
-    if (![correctionsChannel, suggestionsChannel].includes(message.channelId)) return;
+    if (![correctionsChannelId, suggestionsChannelId].includes(message.channelId)) return;
     if (!message.embeds[0]?.author) return;
 
     const proposal = await prisma.proposal.findUnique({
       where: { message_id: message.id },
       include: {
-        corrections: suggestionsChannel === message.channelId
+        corrections: suggestionsChannelId === message.channelId
       }
     });
 
@@ -80,10 +80,10 @@ export default class Bot extends Client {
     });
 
     if (proposal.corrections?.length) {
-      const channel = message.guild.channels.resolve(correctionsChannel) as GuildTextBasedChannel;
+      const correctionsChannel = message.guild.channels.resolve(correctionsChannelId) as GuildTextBasedChannel;
       for (const correction of proposal.corrections) {
         try {
-          const fetchedMessage = await channel.messages.fetch(correction.message_id!);
+          const fetchedMessage = await correctionsChannel.messages.fetch(correction.message_id!);
           if (fetchedMessage.deletable) await fetchedMessage.delete();
         } catch {
           continue;
