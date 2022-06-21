@@ -12,6 +12,7 @@ import {
   correctionsChannelId,
   godfatherRoleId,
   logsChannelId,
+  dataSplitRegex,
   neededCorrectionsApprovals,
   neededSuggestionsApprovals,
   suggestionsChannelId
@@ -132,7 +133,7 @@ export default class DisapproveCommand extends Command {
       const suggestionLink = messageLink(interaction.guild.id, suggestionsChannelId, proposal.message_id!);
       return interaction.reply(
         interactionInfo(
-          `Il semblerait qu'une [correction ai été proposée](${correctionLink}), veuillez la cloturer avant la désapprobation de [cette suggestion](${suggestionLink}).`
+          `Il semblerait qu'une [correction aie été proposée](${correctionLink}), veuillez la cloturer avant la désapprobation de [cette suggestion](${suggestionLink}).`
         )
       );
     }
@@ -142,7 +143,7 @@ export default class DisapproveCommand extends Command {
       const correctionLink = messageLink(interaction.guild.id, correctionsChannelId, lastCorrection.message_id!);
       return interaction.reply(
         interactionInfo(`
-          Il semblerait qu'une [correction ai été ajoutée](${correctionLink}) par dessus rendant celle ci obsolète, veuillez désapprouver la dernière version de la correction.`)
+          Il semblerait qu'une [correction aie été ajoutée](${correctionLink}) par dessus rendant celle ci obsolète, veuillez désapprouver la dernière version de la correction.`)
       );
     }
 
@@ -165,9 +166,11 @@ export default class DisapproveCommand extends Command {
 
       const field = embed.fields?.[embed.fields.length - 1];
       if (field) {
-        field.value = `${field.value.split('\n\n')[0]}\n\n${godfathers}`;
+        const { base, correction } = field.value.match(dataSplitRegex)!.groups!;
+        field.value = [base, correction, godfathers].filter(Boolean).join('\n\n');
       } else {
-        embed.description = `${embed.description!.split('\n\n')[0]}\n\n${godfathers}`;
+        const { base, correction } = embed.description!.match(dataSplitRegex)!.groups!;
+        embed.description = [base, correction, godfathers].filter(Boolean).join('\n\n');
       }
 
       await message.edit({ embeds: [embed] });
@@ -202,9 +205,11 @@ export default class DisapproveCommand extends Command {
 
     const field = embed.fields?.[embed.fields.length - 1];
     if (field) {
-      field.value = `${field.value.split('\n\n')[0]}\n\n${godfathers}`;
+      const { base, correction } = field.value.match(dataSplitRegex)!.groups!;
+      field.value = [base, correction, godfathers].filter(Boolean).join('\n\n');
     } else {
-      embed.description = `${embed.description!.split('\n\n')[0]}\n\n${godfathers}`;
+      const { base, correction } = embed.description!.match(dataSplitRegex)!.groups!;
+      embed.description = [base, correction, godfathers].filter(Boolean).join('\n\n');
     }
 
     const neededApprovals = isSuggestion ? neededSuggestionsApprovals : neededCorrectionsApprovals;
@@ -243,9 +248,9 @@ export default class DisapproveCommand extends Command {
 
     const field = embed.fields?.[embed.fields.length - 1];
     if (field) {
-      field.value = field.value.split('\n\n')[0];
+      field.value = field.value.match(dataSplitRegex)!.groups!.base;
     } else {
-      embed.description = embed.description!.split('\n\n')[0];
+      embed.description = embed.description!.match(dataSplitRegex)!.groups!.base;
     }
 
     embed.footer = {
