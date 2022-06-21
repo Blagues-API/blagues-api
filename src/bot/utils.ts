@@ -6,6 +6,7 @@ export function interactionProblem(message: string, ephemeral = true): Interacti
   return {
     ...problem(message),
     components: [],
+    content: '',
     ephemeral
   };
 }
@@ -25,6 +26,7 @@ export function interactionInfo(message: string, ephemeral = true): InteractionR
   return {
     ...info(message),
     components: [],
+    content: '',
     ephemeral
   };
 }
