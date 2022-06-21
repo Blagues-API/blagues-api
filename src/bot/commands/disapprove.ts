@@ -115,7 +115,7 @@ export default class DisapproveCommand extends Command {
     if (correction) {
       return interaction.reply(
         interactionInfo(
-          `Il semblerait qu'une [correction ai été proposée](https://discord.com/channels/${interaction.guild.id}/${correctionsChannel}/${correction.message_id}), veuillez la cloturer avant la désapprobation de [cette suggestion](https://discord.com/channels/${interaction.guild.id}/${suggestionsChannel}/${proposal.message_id}).`
+          `Il semblerait qu'une [correction aie été proposée](https://discord.com/channels/${interaction.guild.id}/${correctionsChannel}/${correction.message_id}), veuillez la cloturer avant la désapprobation de [cette suggestion](https://discord.com/channels/${interaction.guild.id}/${suggestionsChannel}/${proposal.message_id}).`
         )
       );
     }
@@ -124,7 +124,7 @@ export default class DisapproveCommand extends Command {
     if (lastCorrection && lastCorrection.id !== proposal.id) {
       return interaction.reply(
         interactionInfo(`
-          Il semblerait qu'une [correction ai été ajoutée](https://discord.com/channels/${interaction.guild.id}/${correctionsChannel}/${lastCorrection.message_id}) par dessus rendant celle ci obsolète, veuillez désapprouver la dernière version de la correction.`)
+          Il semblerait qu'une [correction aie été ajoutée](https://discord.com/channels/${interaction.guild.id}/${correctionsChannel}/${lastCorrection.message_id}) par dessus rendant celle ci obsolète, veuillez désapprouver la dernière version de la correction.`)
       );
     }
 
