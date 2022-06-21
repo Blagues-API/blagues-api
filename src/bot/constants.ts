@@ -30,3 +30,5 @@ export enum Colors {
   REFUSED = 0x8d2424,
   REPLACED = 0xffe83b
 }
+
+export const dataSplitRegex = /(?<base>(?:\n?> .+)+)(?:\n(?<correction>:warning: .+))?(?:\n\n?(?<godfather>.+))?/;

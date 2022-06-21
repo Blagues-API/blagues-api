@@ -19,7 +19,8 @@ import {
   jokerRole,
   correctorRole,
   upReaction,
-  downReaction
+  downReaction,
+  dataSplitRegex
 } from '../constants';
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../modules/godfathers';
@@ -35,7 +36,7 @@ export default class ApproveCommand extends Command {
     });
   }
 
-  async run(interaction: MessageContextMenuCommandInteraction) {
+  async run(interaction: MessageContextMenuCommandInteraction<'cached'>) {
     const channel = (interaction.channel as TextChannel)!;
     const isSuggestion = channel.id === suggestionsChannel;
     const message = await interaction.channel?.messages.fetch(interaction.targetId);
@@ -122,9 +123,9 @@ export default class ApproveCommand extends Command {
 
         const field = embed.fields?.[embed.fields.length - 1];
         if (field) {
-          field.value = field.value.split('\n\n')[0];
+          field.value = field.value.match(dataSplitRegex)!.groups!.base;
         } else {
-          embed.description = embed.description!.split('\n\n')[0];
+          embed.description = embed.description!.match(dataSplitRegex)!.groups!.base;
         }
 
         await message.edit({ embeds: [embed] });
@@ -142,9 +143,9 @@ export default class ApproveCommand extends Command {
 
         const field = embed.fields?.[embed.fields.length - 1];
         if (field) {
-          field.value = field.value.split('\n\n')[0];
+          field.value = field.value.match(dataSplitRegex)!.groups!.base;
         } else {
-          embed.description = embed.description!.split('\n\n')[0];
+          embed.description = embed.description!.match(dataSplitRegex)!.groups!.base;
         }
 
         await message.edit({ embeds: [embed] });
@@ -159,13 +160,7 @@ export default class ApproveCommand extends Command {
     if (correction) {
       return interaction.reply(
         interactionInfo(
-          `Il semblerait qu'une [correction ai été proposée](https://discord.com/channels/${
-            interaction.guild!.id
-          }/${correctionsChannel}/${
-            correction.message_id
-          }), veuillez l'approuver avant l'approbation de [cette suggestion](https://discord.com/channels/${
-            interaction.guild!.id
-          }/${suggestionsChannel}/${proposal.message_id}).`
+          `Il semblerait qu'une [correction ai été proposée](https://discord.com/channels/${interaction.guild.id}/${correctionsChannel}/${correction.message_id}), veuillez l'approuver avant l'approbation de [cette suggestion](https://discord.com/channels/${interaction.guild.id}/${suggestionsChannel}/${proposal.message_id}).`
         )
       );
     }
@@ -174,11 +169,7 @@ export default class ApproveCommand extends Command {
     if (lastCorrection && lastCorrection.id !== proposal.id) {
       return interaction.reply(
         interactionInfo(`
-          Il semblerait qu'une [correction ai été ajoutée](https://discord.com/channels/${
-            interaction.guild!.id
-          }/${correctionsChannel}/${
-          lastCorrection.message_id
-        }) par dessus rendant celle-ci obsolète, veuillez approuver la dernière version de la correction.`)
+          Il semblerait qu'une [correction ai été ajoutée](https://discord.com/channels/${interaction.guild.id}/${correctionsChannel}/${lastCorrection.message_id}) par dessus rendant celle-ci obsolète, veuillez approuver la dernière version de la correction.`)
       );
     }
 
@@ -199,9 +190,11 @@ export default class ApproveCommand extends Command {
 
       const field = embed.fields?.[embed.fields.length - 1];
       if (field) {
-        field.value = `${field.value.split('\n\n')[0]}\n\n${godfathers}`;
+        const { base, correction } = field.value.match(dataSplitRegex)!.groups!;
+        field.value = [base, correction, godfathers].filter(Boolean).join('\n\n');
       } else {
-        embed.description = `${embed.description!.split('\n\n')[0]}\n\n${godfathers}`;
+        const { base, correction } = embed.description!.match(dataSplitRegex)!.groups!;
+        embed.description = [base, correction, godfathers].filter(Boolean).join('\n\n');
       }
 
       await message.edit({ embeds: [embed] });
@@ -238,9 +231,11 @@ export default class ApproveCommand extends Command {
 
     const field = embed.fields?.[embed.fields.length - 1];
     if (field) {
-      field.value = `${field.value.split('\n\n')[0]}\n\n${godfathers}`;
+      const { base, correction } = field.value.match(dataSplitRegex)!.groups!;
+      field.value = [base, correction, godfathers].filter(Boolean).join('\n\n');
     } else {
-      embed.description = `${embed.description!.split('\n\n')[0]}\n\n${godfathers}`;
+      const { base, correction } = embed.description!.match(dataSplitRegex)!.groups!;
+      embed.description = [base, correction, godfathers].filter(Boolean).join('\n\n');
     }
 
     const neededApprovals = isSuggestion ? neededSuggestionsApprovals : neededCorrectionsApprovals;
@@ -308,9 +303,9 @@ export default class ApproveCommand extends Command {
 
     const field = embed.fields?.[embed.fields.length - 1];
     if (field) {
-      field.value = field.value.split('\n\n')[0];
+      field.value = field.value.match(dataSplitRegex)!.groups!.base;
     } else {
-      embed.description = embed.description!.split('\n\n')[0];
+      embed.description = embed.description!.match(dataSplitRegex)!.groups!.base;
     }
 
     await message.edit({ embeds: [embed] });
@@ -319,7 +314,7 @@ export default class ApproveCommand extends Command {
   }
 
   async approveCorrection(
-    interaction: MessageContextMenuCommandInteraction,
+    interaction: MessageContextMenuCommandInteraction<'cached'>,
     proposal: Correction,
     message: Message,
     embed: APIEmbed
@@ -373,19 +368,20 @@ export default class ApproveCommand extends Command {
     for (const correction of proposal.suggestion.corrections) {
       if (correction.id === proposal.id) continue;
       if (correction.merged || correction.refused) continue;
+
       await prisma.proposal.update({
         data: { stale: true },
         where: { id: correction.id }
       });
+
       const message = correction.message_id && (await channel.messages.fetch(correction.message_id).catch(() => null));
       if (message) {
         const staleEmbed = message.embeds[0]?.toJSON();
         if (staleEmbed?.fields) {
-          staleEmbed.fields[1].value = staleEmbed.fields[1].value.split('\n\n')[0];
-          staleEmbed.footer = {
-            text: `Correction obsolète`
-          };
+          staleEmbed.fields[1].value = staleEmbed.fields[1].value.match(dataSplitRegex)!.groups!.base;
+          staleEmbed.footer = { text: `Correction obsolète` };
           staleEmbed.color = Colors.REPLACED;
+
           await message.edit({ embeds: [staleEmbed] });
         }
       }
@@ -400,10 +396,8 @@ export default class ApproveCommand extends Command {
       });
     }
 
-    embed.fields![1].value = embed.fields![1].value.split('\n\n')[0];
-    embed.footer = {
-      text: `Correction migrée vers la ${isPublishedJoke ? 'blague' : 'suggestion'}`
-    };
+    embed.fields![1].value = embed.fields![1].value.match(dataSplitRegex)!.groups!.base;
+    embed.footer = { text: `Correction migrée vers la ${isPublishedJoke ? 'blague' : 'suggestion'}` };
 
     await message.edit({ embeds: [embed] });
     if (suggestionMessage) {
