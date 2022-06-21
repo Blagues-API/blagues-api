@@ -71,7 +71,6 @@
     "node-schedule": "^2.1.0",
     "prismjs": "^1.28.0",
     "sharp": "^0.30.6",
-    "source-map-support": "^0.5.21",
     "string-similarity": "^4.0.4"
   },
   "repository": {

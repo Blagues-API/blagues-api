@@ -3,9 +3,9 @@ import { Snowflake } from 'discord-api-types/v9';
 import jwt from 'jsonwebtoken';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const random = (items: any[]): any => {
+export function random<Type = any>(items: Type[]): Type {
   return items[Math.floor(Math.random() * items.length)];
-};
+}
 
 export const generateAPIToken = (userId: Snowflake, key: string, limit: number) => {
   return jwt.sign(

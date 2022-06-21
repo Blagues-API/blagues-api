@@ -10,6 +10,7 @@ import prisma from '../../prisma';
 import {
   Colors,
   correctionsChannelId,
+  godfatherRoleId,
   logsChannelId,
   dataSplitRegex,
   neededCorrectionsApprovals,
@@ -18,7 +19,14 @@ import {
 } from '../constants';
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../modules/godfathers';
-import { interactionProblem, interactionInfo, interactionValidate, isEmbedable, messageLink } from '../utils';
+import {
+  interactionProblem,
+  interactionInfo,
+  interactionValidate,
+  isEmbedable,
+  messageLink,
+  isParrain
+} from '../utils';
 
 export default class DisapproveCommand extends Command {
   constructor() {
@@ -45,6 +53,14 @@ export default class DisapproveCommand extends Command {
           `Vous ne pouvez pas désapprouver une ${isSuggestion ? 'blague' : 'correction'} qui n'est pas gérée par ${
             interaction.client.user
           }.`
+        )
+      );
+    }
+
+    if (!isParrain(interaction.member)) {
+      return interaction.reply(
+        interactionProblem(
+          `Seul un <@${godfatherRoleId}> peut désapprouver une ${isSuggestion ? 'blague' : 'correction'}.`
         )
       );
     }
@@ -241,7 +257,8 @@ export default class DisapproveCommand extends Command {
       text: `${isSuggestion ? 'Suggestion' : 'Correction'} refusée`
     };
 
-    await message.edit({ embeds: [embed] });
+    const jokeMessage = await message.edit({ embeds: [embed] });
+    await jokeMessage.reactions.removeAll();
 
     await message.reactions.removeAll();
 

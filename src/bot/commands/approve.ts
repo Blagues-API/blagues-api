@@ -20,11 +20,19 @@ import {
   correctorRoleId,
   upReaction,
   downReaction,
-  dataSplitRegex
+  dataSplitRegex,
+  godfatherRoleId
 } from '../constants';
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../modules/godfathers';
-import { interactionProblem, interactionInfo, interactionValidate, isEmbedable, messageLink } from '../utils';
+import {
+  interactionProblem,
+  interactionInfo,
+  interactionValidate,
+  isEmbedable,
+  messageLink,
+  isParrain
+} from '../utils';
 import Jokes from '../../jokes';
 import { compareTwoStrings } from 'string-similarity';
 
@@ -55,6 +63,14 @@ export default class ApproveCommand extends Command {
           `Vous ne pouvez pas approuver une ${isSuggestion ? 'blague' : 'correction'} qui n'est pas gérée par ${
             interaction.client.user
           }.`
+        )
+      );
+    }
+
+    if (!isParrain(interaction.member)) {
+      return interaction.reply(
+        interactionProblem(
+          `Seul un <@${godfatherRoleId}> peut approuver une ${isSuggestion ? 'blague' : 'correction'}.`
         )
       );
     }
@@ -311,7 +327,8 @@ export default class ApproveCommand extends Command {
       embed.description = embed.description!.match(dataSplitRegex)!.groups!.base;
     }
 
-    await message.edit({ embeds: [embed] });
+    const jokeMessage = await message.edit({ embeds: [embed] });
+    await jokeMessage.reactions.removeAll();
 
     await interaction.editReply(interactionValidate(`La [suggestion](${message.url}) a bien été ajoutée à l'API !`));
   }
@@ -402,7 +419,9 @@ export default class ApproveCommand extends Command {
     embed.fields![1].value = embed.fields![1].value.match(dataSplitRegex)!.groups!.base;
     embed.footer = { text: `Correction migrée vers la ${isPublishedJoke ? 'blague' : 'suggestion'}` };
 
-    await message.edit({ embeds: [embed] });
+    const jokeMessage = await message.edit({ embeds: [embed] });
+    await jokeMessage.reactions.removeAll();
+
     if (suggestionMessage) {
       const godfathers = await renderGodfatherLine(interaction, proposal.suggestion);
 
