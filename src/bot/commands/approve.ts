@@ -13,18 +13,18 @@ import {
   Colors,
   neededCorrectionsApprovals,
   neededSuggestionsApprovals,
-  correctionsChannel,
-  suggestionsChannel,
-  logsChannel,
-  jokerRole,
-  correctorRole,
+  correctionsChannelId,
+  suggestionsChannelId,
+  logsChannelId,
+  jokerRoleId,
+  correctorRoleId,
   upReaction,
   downReaction,
   dataSplitRegex
 } from '../constants';
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../modules/godfathers';
-import { interactionProblem, interactionInfo, interactionValidate, isEmbedable } from '../utils';
+import { interactionProblem, interactionInfo, interactionValidate, isEmbedable, messageLink } from '../utils';
 import Jokes from '../../jokes';
 import { compareTwoStrings } from 'string-similarity';
 
@@ -38,14 +38,14 @@ export default class ApproveCommand extends Command {
 
   async run(interaction: MessageContextMenuCommandInteraction<'cached'>) {
     const channel = (interaction.channel as TextChannel)!;
-    const isSuggestion = channel.id === suggestionsChannel;
+    const isSuggestion = channel.id === suggestionsChannelId;
     const message = await interaction.channel?.messages.fetch(interaction.targetId);
     if (!message) return;
 
-    if (![suggestionsChannel, correctionsChannel].includes(channel.id)) {
+    if (![suggestionsChannelId, correctionsChannelId].includes(channel.id)) {
       return interaction.reply(
         interactionProblem(
-          `Vous ne pouvez pas approuver une blague ou une correction en dehors des salons <#${suggestionsChannel}> et <#${correctionsChannel}>.`
+          `Vous ne pouvez pas approuver une blague ou une correction en dehors des salons <#${suggestionsChannelId}> et <#${correctionsChannelId}>.`
         )
       );
     }
@@ -158,18 +158,21 @@ export default class ApproveCommand extends Command {
 
     const correction = isSuggestion && proposal.corrections[0];
     if (correction) {
+      const correctionLink = messageLink(interaction.guild.id, correctionsChannelId, correction.message_id!);
+      const suggestionLink = messageLink(interaction.guild.id, suggestionsChannelId, proposal.message_id!);
       return interaction.reply(
         interactionInfo(
-          `Il semblerait qu'une [correction aie été proposée](https://discord.com/channels/${interaction.guild.id}/${correctionsChannel}/${correction.message_id}), veuillez l'approuver avant l'approbation de [cette suggestion](https://discord.com/channels/${interaction.guild.id}/${suggestionsChannel}/${proposal.message_id}).`
+          `Il semblerait qu'une [correction aie été proposée](${correctionLink}), veuillez l'approuver avant l'approbation de [cette suggestion](${suggestionLink}).`
         )
       );
     }
 
     const lastCorrection = !isSuggestion && proposal.suggestion?.corrections[0];
     if (lastCorrection && lastCorrection.id !== proposal.id) {
+      const correctionLink = messageLink(interaction.guild.id, correctionsChannelId, lastCorrection.message_id!);
       return interaction.reply(
         interactionInfo(`
-          Il semblerait qu'une [correction aie été ajoutée](https://discord.com/channels/${interaction.guild.id}/${correctionsChannel}/${lastCorrection.message_id}) par dessus rendant celle-ci obsolète, veuillez approuver la dernière version de la correction.`)
+          Il semblerait qu'une [correction aie été ajoutée](${correctionLink}) par dessus rendant celle-ci obsolète, veuillez approuver la dernière version de la correction.`)
       );
     }
 
@@ -270,11 +273,11 @@ export default class ApproveCommand extends Command {
     message: Message,
     embed: APIEmbed
   ): Promise<void> {
-    const logs = interaction.client.channels.cache.get(logsChannel) as TextChannel;
+    const logsChannel = interaction.client.channels.cache.get(logsChannelId) as TextChannel;
 
     const member = await interaction.guild?.members.fetch(proposal.user_id!).catch(() => null);
-    if (member && !member.roles.cache.has(jokerRole)) {
-      await member.roles.add(jokerRole);
+    if (member && !member.roles.cache.has(jokerRoleId)) {
+      await member.roles.add(jokerRoleId);
     }
 
     const { success, joke_id } = await Jokes.mergeJoke(proposal);
@@ -292,8 +295,8 @@ export default class ApproveCommand extends Command {
 
     embed.color = Colors.ACCEPTED;
 
-    if (isEmbedable(logs)) {
-      await logs.send({
+    if (isEmbedable(logsChannel)) {
+      await logsChannel.send({
         content: "Blague ajoutée à l'API",
         embeds: [embed]
       });
@@ -319,16 +322,16 @@ export default class ApproveCommand extends Command {
     message: Message,
     embed: APIEmbed
   ): Promise<void> {
-    const logs = interaction.client.channels.cache.get(logsChannel) as TextChannel;
-    const channel = interaction.client.channels.cache.get(suggestionsChannel) as TextChannel;
+    const logsChannel = interaction.client.channels.cache.get(logsChannelId) as TextChannel;
+    const suggestionsChannel = interaction.client.channels.cache.get(suggestionsChannelId) as TextChannel;
     const isPublishedJoke = proposal.type === ProposalType.CORRECTION;
     const suggestionMessage =
       proposal.suggestion.message_id &&
-      (await channel.messages.fetch(proposal.suggestion.message_id).catch(() => null));
+      (await suggestionsChannel.messages.fetch(proposal.suggestion.message_id).catch(() => null));
 
     const member = await interaction.guild?.members.fetch(proposal.user_id!).catch(() => null);
-    if (member && !member.roles.cache.has(correctorRole)) {
-      await member.roles.add(correctorRole);
+    if (member && !member.roles.cache.has(correctorRoleId)) {
+      await member.roles.add(correctorRoleId);
     }
 
     if (isPublishedJoke) {
@@ -373,8 +376,8 @@ export default class ApproveCommand extends Command {
         data: { stale: true },
         where: { id: correction.id }
       });
-
-      const message = correction.message_id && (await channel.messages.fetch(correction.message_id).catch(() => null));
+      const message =
+        correction.message_id && (await suggestionsChannel.messages.fetch(correction.message_id).catch(() => null));
       if (message) {
         const staleEmbed = message.embeds[0]?.toJSON();
         if (staleEmbed?.fields) {
@@ -389,8 +392,8 @@ export default class ApproveCommand extends Command {
 
     embed.color = Colors.ACCEPTED;
 
-    if (isEmbedable(logs)) {
-      await logs.send({
+    if (isEmbedable(logsChannel)) {
+      await logsChannel.send({
         content: `${isPublishedJoke ? 'Blague' : 'Suggestion'} corrigée`,
         embeds: [embed]
       });
@@ -406,7 +409,7 @@ export default class ApproveCommand extends Command {
       await suggestionMessage.edit({
         embeds: [
           {
-            ...suggestionMessage.embeds[0],
+            ...suggestionMessage.embeds[0].toJSON(),
             description: stripIndents`
               > **Type**: ${CategoriesRefs[proposal.joke_type as Category]}
               > **Blague**: ${proposal.joke_question}
@@ -414,7 +417,7 @@ export default class ApproveCommand extends Command {
 
               ${godfathers}
             `
-          } as APIEmbed
+          }
         ]
       });
     }

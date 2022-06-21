@@ -1,6 +1,6 @@
 import { stripIndents } from 'common-tags';
 import { Client, Snowflake, TextChannel, APIEmbed } from 'discord.js';
-import { commandsChannel, correctionsChannel, suggestionsChannel } from '../constants';
+import { commandsChannelId, correctionsChannelId, suggestionsChannelId } from '../constants';
 import Jokes from '../../jokes';
 
 export default class Stickys {
@@ -11,8 +11,8 @@ export default class Stickys {
 
     if (process.env.bot_stickies === 'false') return;
 
-    setInterval(() => this.sticky(suggestionsChannel, this.suggestsMessage()), 10000);
-    setInterval(() => this.sticky(correctionsChannel, this.correctionsMessage()), 10000);
+    setInterval(() => this.sticky(suggestionsChannelId, this.suggestsMessage()), 10000);
+    setInterval(() => this.sticky(correctionsChannelId, this.correctionsMessage()), 10000);
   }
 
   suggestsMessage(): APIEmbed {
@@ -22,7 +22,7 @@ export default class Stickys {
         Si tu le souhaites, tu peux proposer tes blagues afin qu'elles soient ajoutées à l'API Blagues-API, elle regroupe actuellement **${Jokes.count}** blagues françaises.
         Elles sont toutes issues de ce salon proposées par la communauté.
 
-        > \`/suggestion\` dans le salon <#${commandsChannel}>
+        > \`/suggestion\` dans le salon <#${commandsChannelId}>
       `,
       fields: [
         {
@@ -45,7 +45,7 @@ export default class Stickys {
       description: stripIndents`
         Si tu le souhaites, tu peux proposer des corrections aux blagues de l'API Blagues API qui regroupe actuellement **${Jokes.count}** blagues françaises.
 
-        > \`/correction\` dans le salon <#${commandsChannel}>
+        > \`/correction\` dans le salon <#${commandsChannelId}>
       `,
       color: 0x0067ad
     };

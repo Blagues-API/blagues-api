@@ -4,12 +4,12 @@ import { Client, Collection, TextChannel } from 'discord.js';
 import schedule from 'node-schedule';
 import prisma from '../../prisma';
 import {
-  correctionsChannel,
-  suggestionsChannel,
-  remindersChannel,
+  correctionsChannelId,
+  suggestionsChannelId,
+  remindersChannelId,
   guildId,
   emojisGuildId,
-  parrainRole
+  godfatherRoleId
 } from '../constants';
 import { getGodfatherEmoji } from './godfathers';
 
@@ -77,10 +77,12 @@ export default class Reminders {
 
     await guild.members.fetch();
 
-    const role = guild.roles.cache.get(parrainRole);
-    if (!role) return;
+    const godfatherRole = guild.roles.cache.get(godfatherRoleId);
+    if (!godfatherRole) return;
 
-    const godfathersEmojis = await Promise.all(role.members.map((member) => getGodfatherEmoji(emojisGuild, member)));
+    const godfathersEmojis = await Promise.all(
+      godfatherRole.members.map((member) => getGodfatherEmoji(emojisGuild, member))
+    );
 
     // Remap proposals with godfathers acceptable decisions
     const entries: Array<{ proposal: Proposal; members_ids: Snowflake[] }> = [];
@@ -93,7 +95,7 @@ export default class Reminders {
       }
 
       const members_ids: Snowflake[] = [
-        ...role.members
+        ...godfatherRole.members
           .filter((member) => {
             if (proposal.approvals.some((approval) => approval.user_id === member.id)) return false;
             if (proposal.disapprovals.some((disapproval) => disapproval.user_id === member.id)) return false;
@@ -117,7 +119,7 @@ export default class Reminders {
           .filter((e) => e)
           .join(' ');
         const line = `[${proposal.type.toLowerCase()}](https://discord.com/channels/${guild.id}/${
-          proposal.type === ProposalType.SUGGESTION ? suggestionsChannel : correctionsChannel
+          proposal.type === ProposalType.SUGGESTION ? suggestionsChannelId : correctionsChannelId
         }/${proposal.message_id}) ${godfathers}\n`;
 
         if (line.length + acc.current.length > 4090) {
@@ -149,17 +151,17 @@ export default class Reminders {
         .map((_score, member_id) => `<@${member_id}>`)
         .join(' ');
 
-    const channel = this.client.channels.cache.get(remindersChannel) as TextChannel;
+    const remindersChannel = this.client.channels.cache.get(remindersChannelId) as TextChannel;
 
     // Delete all previous channel messages
-    await channel.bulkDelete(await channel.messages.fetch());
+    await remindersChannel.bulkDelete(await remindersChannel.messages.fetch());
 
     // Send all reminders pages in separate messages
     for (const index in pages) {
       const isFirstPage = Number(index) === 0;
       const isLastPage = Number(index) === pages.length;
 
-      await channel.send({
+      await remindersChannel.send({
         content: (isFirstPage && mentions) || undefined,
         embeds: [
           {
