@@ -1,9 +1,15 @@
 import { ApplicationCommandOptionType, ApplicationCommandType, ChatInputCommandInteraction } from 'discord.js';
-import { randomJokeByType } from '../../controllers';
-import { Category, CategoriesRefsFull, Joke } from '../../typings';
+import JokesLoader from '../../jokes';
+import { Category, CategoriesRefsFull } from '../../typings';
+import { random } from '../../utils';
 import { Colors, commandsChannelId } from '../constants';
 import Command from '../lib/command';
 import { interactionInfo } from '../utils';
+
+const CategoriesList = {
+  random: 'Aléatoire',
+  ...CategoriesRefsFull
+};
 
 export default class JokeCommand extends Command {
   constructor() {
@@ -15,9 +21,9 @@ export default class JokeCommand extends Command {
         {
           type: ApplicationCommandOptionType.String,
           name: 'type',
-          description: 'Général, Développeur, Noir, +18, Beauf, Blondes',
+          description: 'Aléatoire, Général, Développeur, Noir, +18, Beauf, Blondes',
           required: true,
-          choices: Object.entries(CategoriesRefsFull).map(([key, name]) => ({
+          choices: Object.entries(CategoriesList).map(([key, name]) => ({
             name,
             value: key
           }))
@@ -26,7 +32,7 @@ export default class JokeCommand extends Command {
     });
   }
   async run(interaction: ChatInputCommandInteraction<'cached'>) {
-    const type = interaction.options.getString('type', true) as Category;
+    const type = interaction.options.getString('type', true) as Category | 'random';
 
     if (interaction.channelId !== commandsChannelId) {
       return interaction.reply(
@@ -34,7 +40,7 @@ export default class JokeCommand extends Command {
       );
     }
 
-    const { response: blague } = randomJokeByType(type) as { response: Joke };
+    const blague = random(type === 'random' ? JokesLoader.list : JokesLoader.list.filter((joke) => joke.type === type));
 
     return interaction.reply({
       embeds: [
