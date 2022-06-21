@@ -306,7 +306,8 @@ export default class ApproveCommand extends Command {
       embed.description = embed.description!.split('\n\n')[0];
     }
 
-    await message.edit({ embeds: [embed] });
+    const jokeMessage = await message.edit({ embeds: [embed] });
+    await jokeMessage.reactions.removeAll();
 
     await interaction.editReply(interactionValidate(`La [suggestion](${message.url}) a bien été ajoutée à l'API !`));
   }
@@ -399,7 +400,9 @@ export default class ApproveCommand extends Command {
       text: `Correction migrée vers la ${isPublishedJoke ? 'blague' : 'suggestion'}`
     };
 
-    await message.edit({ embeds: [embed] });
+    const jokeMessage = await message.edit({ embeds: [embed] });
+    await jokeMessage.reactions.removeAll();
+
     if (suggestionMessage) {
       const godfathers = await renderGodfatherLine(interaction, proposal.suggestion);
 
