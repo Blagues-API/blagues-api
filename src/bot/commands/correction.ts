@@ -267,7 +267,7 @@ export default class CorrectionCommand extends Command {
         interaction.channel
           ?.send(
             problem(
-              `Impossible de trouver une blague ou correction liée à cet ID de blague, assurez vous que cet ID provient bien d\'un message envoyé par le bot ${interaction.client.user}`
+              `Impossible de trouver une blague ou correction liée à cet identifiant de message, assurez-vous que ce dernier provienne bien d\'un message envoyé par ${interaction.client.user}. Veuillez réessayer !`
             )
           )
           .then(tDelete(10000));
