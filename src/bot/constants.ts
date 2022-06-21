@@ -13,8 +13,8 @@ export const remindersChannelId: Snowflake = process.env.REMINDERS_CHANNEL ?? '9
 export const neededSuggestionsApprovals: number = Number(process.env.SUGGESTIONS_APPROVALS_COUNT) || 3;
 export const neededCorrectionsApprovals: number = Number(process.env.CORRECTIONS_APPROVALS_COUNT) || 2;
 
-export const upReaction: Snowflake = '705115420495183979';
-export const downReaction: Snowflake = '705115406976680117';
+export const upReaction: Snowflake = process.env.UP_REACTION ?? '⬆️';
+export const downReaction: Snowflake = process.env.DOWN_REACTION ?? '⬇️';
 
 export const guildId: Snowflake = process.env.SERVER_ID ?? '698822532467523605';
 export const emojisGuildId: Snowflake = process.env.EMOJIS_SERVER_ID ?? '698822532467523605';
@@ -30,3 +30,5 @@ export enum Colors {
   REFUSED = 0x8d2424,
   REPLACED = 0xffe83b
 }
+
+export const dataSplitRegex = /(?<base>(?:\n?> .+)+)(?:\n(?<correction>:warning: .+))?(?:\n\n?(?<godfather>.+))?/;

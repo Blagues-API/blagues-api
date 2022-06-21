@@ -85,3 +85,8 @@ export type Suggestion = Proposal & {
   approvals: Approval[];
   disapprovals: Disapproval[];
 };
+
+export type ProposalFull = Proposal & {
+  approvals: Approval[];
+  disapprovals: Disapproval[];
+};

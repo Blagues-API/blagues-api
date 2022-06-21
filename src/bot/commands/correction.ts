@@ -17,6 +17,7 @@ import {
   Colors,
   commandsChannelId,
   correctionsChannelId,
+  dataSplitRegex,
   downReaction,
   suggestionsChannelId,
   upReaction
@@ -32,7 +33,8 @@ import {
   isEmbedable,
   problem,
   showNegativeDiffs,
-  showPositiveDiffs
+  showPositiveDiffs,
+  tDelete
 } from '../utils';
 
 enum IdType {
@@ -66,7 +68,7 @@ export default class CorrectionCommand extends Command {
       ]
     });
   }
-  async run(interaction: ChatInputCommandInteraction) {
+  async run(interaction: ChatInputCommandInteraction<'cached'>) {
     const query = interaction.options.getString('recherche', true);
 
     if (interaction.channelId !== commandsChannelId) {
@@ -114,9 +116,6 @@ export default class CorrectionCommand extends Command {
           return resolve(joke);
         }
 
-        question.channel
-          .send("Aucune blague n'a été trouvée, veuillez réessayer !")
-          .then((m) => setTimeout(() => m.deletable && m.delete().catch(() => null), 5000));
       });
       collector.once('end', async (_collected, reason: string) => {
         if (reason === 'time') {
@@ -289,11 +288,13 @@ export default class CorrectionCommand extends Command {
         }
       });
       if (!proposal) {
-        interaction.channel?.send(
-          problem(
-            `Impossible de trouver une blague ou correction liée à cet ID de blague, assurez vous que cet ID provient bien d\'un message envoyé par le bot ${interaction.client.user}`
+        interaction.channel
+          ?.send(
+            problem(
+              `Impossible de trouver une blague ou correction liée à cet ID de blague, assurez vous que cet ID provient bien d\'un message envoyé par le bot ${interaction.client.user}`
+            )
           )
-        );
+          .then(tDelete(5000));
         return null;
       }
 
@@ -316,7 +317,16 @@ export default class CorrectionCommand extends Command {
     }
 
     const joke = idType === IdType.JOKE_ID ? jokeById(Number(query)) : jokeByQuestion(query);
-    if (!joke) return null;
+    if (!joke) {
+      interaction.channel?.send(
+        problem(
+          `Impossible de trouver une blague à partir de ${
+            idType === IdType.JOKE_ID ? 'cet identifiant' : 'cette question'
+          }, veuillez réessayer !`
+        )
+      );
+      return null;
+    }
 
     const proposal = await prisma.proposal.upsert({
       create: {
@@ -407,7 +417,7 @@ export default class CorrectionCommand extends Command {
 
   async requestTypeChange(
     buttonInteraction: ButtonInteraction<'cached'>,
-    commandInteraction: ChatInputCommandInteraction,
+    commandInteraction: ChatInputCommandInteraction<'cached'>,
     joke: JokeCorrectionPayload
   ): Promise<JokeCorrectionPayload | null> {
     const baseEmbed = buttonInteraction.message.embeds[0].toJSON();
@@ -465,15 +475,12 @@ export default class CorrectionCommand extends Command {
   }
 
   async editJoke(
-    commandInteraction: ChatInputCommandInteraction,
+    commandInteraction: ChatInputCommandInteraction<'cached'>,
     oldJoke: JokeCorrectionPayload,
     newJoke: JokeCorrectionPayload
   ) {
     if (!(['type', 'joke', 'answer'] as UnsignedJokeKey[]).some((key) => newJoke[key] !== oldJoke[key])) {
-      await commandInteraction.editReply({
-        content: "Aucun élément n'a été modifié",
-        embeds: []
-      });
+      await commandInteraction.editReply(interactionProblem("Aucun élément n'a été modifié"));
       return;
     }
 
@@ -543,20 +550,14 @@ export default class CorrectionCommand extends Command {
       ) as TextChannel;
       const suggestionMessage = await suggestionsChannel.messages.fetch(newJoke.suggestion.message_id);
 
-      await suggestionMessage.edit({
-        embeds: [
-          {
-            ...suggestionMessage.embeds[0].toJSON(),
-            description: stripIndents`
-              > **Type**: ${CategoriesRefs[newJoke.type]}
-              > **Blague**: ${oldJoke.joke}
-              > **Réponse**: ${oldJoke.answer}
+      const embed = suggestionMessage.embeds[0].toJSON();
 
-              ⚠️ Une [correction](${message.url}) est en cours.
-            `
-          }
-        ]
-      });
+      const { base, godfathers } = embed.description!.match(dataSplitRegex)!.groups!;
+
+      const correctionText = `⚠️ Une [correction](${message.url}) est en cours.`;
+      embed.description = [base, correctionText, godfathers].filter(Boolean).join('\n\n');
+
+      await suggestionMessage.edit({ embeds: [embed] });
     }
 
     await commandInteraction.editReply(
