@@ -237,7 +237,7 @@ export default class DisapproveCommand extends Command {
     };
 
     const jokeMessage = await message.edit({ embeds: [embed] });
-    jokeMessage.reactions.removeAll();
+    await jokeMessage.reactions.removeAll();
 
     await message.reactions.removeAll();
 
