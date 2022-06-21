@@ -267,10 +267,10 @@ export default class CorrectionCommand extends Command {
         interaction.channel
           ?.send(
             problem(
-              `Impossible de trouver une blague ou correction liée à cet identifiant de message, assurez-vous que ce dernier provienne bien d\'un message envoyé par ${interaction.client.user}. Veuillez réessayer !`
+              `Impossible de trouver une blague ou correction liée à cet ID de blague, assurez vous que cet ID provient bien d\'un message envoyé par le bot ${interaction.client.user}`
             )
           )
-          .then(tDelete(10000));
+          .then(tDelete(5000));
         return null;
       }
 
@@ -292,7 +292,16 @@ export default class CorrectionCommand extends Command {
     }
 
     const joke = idType === IdType.JOKE_ID ? jokeById(Number(query)) : jokeByQuestion(query);
-    if (!joke) return null;
+    if (!joke) {
+      interaction.channel?.send(
+        problem(
+          `Impossible de trouver une blague à partir de ${
+            idType === IdType.JOKE_ID ? 'cet identifiant' : 'cette question'
+          }, veuillez réessayer !`
+        )
+      );
+      return null;
+    }
 
     const proposal = await prisma.proposal.upsert({
       create: {
