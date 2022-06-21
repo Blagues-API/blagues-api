@@ -14,6 +14,4 @@ RUN npx prisma generate
 
 EXPOSE 4000
 
-USER node
-
 CMD npx tsc-watch --onSuccess "node dist/index.js"
