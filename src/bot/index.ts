@@ -1,21 +1,24 @@
+import { stripIndents } from 'common-tags';
 import {
   ActivityType,
   AnyInteraction,
+  APIEmbed,
   Client,
   GuildTextBasedChannel,
   IntentsBitField,
   InteractionType,
   Message,
   PartialMessage,
-  Partials
+  Partials,
+  Snowflake,
+  TextChannel
 } from 'discord.js';
 import Jokes from '../jokes';
 import prisma from '../prisma';
-import { correctionsChannelId, suggestionsChannelId } from './constants';
+import { commandsChannelId, correctionsChannelId, suggestionsChannelId } from './constants';
 import Dispatcher from './lib/dispatcher';
 import Reminders from './modules/reminders';
 import Stickys from './modules/stickys';
-
 export default class Bot extends Client {
   public dispatcher: Dispatcher;
   public stickys: Stickys;
@@ -92,9 +95,21 @@ export default class Bot extends Client {
     }
   }
 
+  async onMessageCreate(message: Message | PartialMessage): Promise<void> {
+    if (message.channelId != suggestionsChannelId && message.channelId != correctionsChannelId) return;
+    if (process.env.bot_stickies === 'false') return;
+
+    if (message.channelId === suggestionsChannelId) {
+      this.sticky(suggestionsChannelId, this.suggestsMessage());
+    } else {
+      this.sticky(correctionsChannelId, this.correctionsMessage());
+    }
+  }
+
   registerEvents(): void {
     this.on('interactionCreate', this.onInteractionCreate.bind(this));
     this.on('messageDelete', this.onMessageDelete.bind(this));
+    this.on('messageCreate', this.onMessageCreate.bind(this));
   }
 
   refreshStatus() {
@@ -111,6 +126,59 @@ export default class Bot extends Client {
       return console.log("Bot non lancé car aucun token n'a été défini");
     }
     await this.login(process.env.BOT_TOKEN);
+  }
+
+  // Needed functions for stickys messages running
+  suggestsMessage(): APIEmbed {
+    return {
+      title: 'Bienvenue à toi ! 👋',
+      description: stripIndents`
+        Si tu le souhaites, tu peux proposer tes blagues afin qu'elles soient ajoutées à l'API Blagues-API, elle regroupe actuellement **${Jokes.count}** blagues françaises.
+        Elles sont toutes issues de ce salon proposées par la communauté.
+
+        > \`/suggestion\` dans le salon <#${commandsChannelId}>
+      `,
+      fields: [
+        {
+          name: 'Règles:',
+          value: stripIndents`
+            > - Espace avant les caractères: \`?\` et \`!\`.
+            > - Ponctuation de fin de phrase si elle contient un verbe.
+            > - 130 caractères maximum par partie d'une blague.
+            > - Majuscule en début de phrase à moins quelle ne soit précédée de \`...\`
+          `
+        }
+      ],
+      color: 0x0067ad
+    };
+  }
+
+  correctionsMessage(): APIEmbed {
+    return {
+      title: 'Bienvenue à toi ! 👋',
+      description: stripIndents`
+        Si tu le souhaites, tu peux proposer des corrections aux blagues de l'API Blagues API qui regroupe actuellement **${Jokes.count}** blagues françaises.
+
+        > \`/correction\` dans le salon <#${commandsChannelId}>
+      `,
+      color: 0x0067ad
+    };
+  }
+
+  async sticky(targetChannel: Snowflake, embed: APIEmbed) {
+    const channel = this.channels.cache.get(targetChannel) as TextChannel;
+    if (!channel) return;
+
+    const messages = await channel.messages.fetch({ limit: 10 }).catch(() => null);
+    if (!messages) return;
+
+    const message = messages.find((m) => m.author.id === this.user!.id && m.embeds?.[0]?.title === embed.title);
+    const last_message = messages.first();
+    if (!message || !last_message || message.id !== last_message.id) {
+      if (message) await message.delete();
+
+      return channel.send({ embeds: [embed] });
+    }
   }
 }
 
