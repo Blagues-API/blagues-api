@@ -1,4 +1,5 @@
 import { Proposal, ProposalType } from '@prisma/client';
+import { messageLink } from '../utils';
 import { Snowflake } from 'discord-api-types/v9';
 import { Client, Collection, TextChannel } from 'discord.js';
 import schedule from 'node-schedule';
@@ -118,9 +119,11 @@ export default class Reminders {
           .map((members_id) => godfathersEmojis.find(({ id }) => members_id === id)?.emoji)
           .filter((e) => e)
           .join(' ');
-        const line = `[${proposal.type.toLowerCase()}](https://discord.com/channels/${guild.id}/${
-          proposal.type === ProposalType.SUGGESTION ? suggestionsChannelId : correctionsChannelId
-        }/${proposal.message_id}) ${godfathers}\n`;
+        const line = `[Voir la ${proposal.type.toLowerCase()}](${messageLink(
+          guild.id,
+          proposal.type === ProposalType.SUGGESTION ? suggestionsChannelId : correctionsChannelId,
+          proposal.message_id!
+        )}) ${godfathers}\n`;
 
         if (line.length + acc.current.length > 4090) {
           acc.pages.push(acc.current);
@@ -159,16 +162,42 @@ export default class Reminders {
     // Send all reminders pages in separate messages
     for (const index in pages) {
       const isFirstPage = Number(index) === 0;
-      const isLastPage = Number(index) === pages.length;
-
+      const isLastPage = Number(index) === pages.length - 1;
+      const lengthProposals = proposals.length;
+      const isOneProposal = Number(lengthProposals) <= 1;
+      const unRepeat = (arr: unknown[]) => arr.filter((v: unknown, i: unknown) => i == arr.indexOf(v));
+      const unRepatProposals = unRepeat(
+        proposals.map((m) => m.type.toLowerCase().replace('suggestion_correction', 'correction'))
+      );
+      const props = unRepatProposals
+        .join('/')
+        .replaceAll('suggestion', 'suggestions')
+        .replaceAll('correction', 'corrections');
+      console.log(props);
       await remindersChannel.send({
         content: (isFirstPage && mentions) || undefined,
         embeds: [
           {
-            title: isFirstPage ? 'Parrains du projet Blagues API' : undefined,
+            author: isFirstPage
+              ? {
+                  name: 'Parrains du projet Blagues API',
+                  url: 'https://blagues-api.fr',
+                  icon_url: `${this.client.user!.avatarURL({ extension: 'png', size: 128 })}`
+                }
+              : undefined,
+            title: isFirstPage
+              ? `Voici ${
+                  isOneProposal ? `la ${proposals.map((m) => m.type.toLowerCase())}` : `les ${props}`
+                } en cours: `
+              : undefined,
             description: pages[index],
             color: 0x0067ad,
-            footer: isLastPage ? { text: 'Blagues API' } : undefined,
+            footer: isLastPage
+              ? {
+                  text: 'Blagues API',
+                  icon_url: pages.length > 2 ? `${this.client.user?.avatarURL({ extension: 'png' })}` : undefined
+                }
+              : undefined,
             timestamp: isLastPage ? new Date().toISOString() : undefined
           }
         ]
