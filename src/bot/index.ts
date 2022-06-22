@@ -93,7 +93,7 @@ export default class Bot extends Client {
   }
 
   async onMessageCreate(message: Message | PartialMessage): Promise<void> {
-    if (message.channelId != suggestionsChannelId && message.channelId != correctionsChannelId) return;
+    if (message.channelId !== suggestionsChannelId && message.channelId !== correctionsChannelId) return;
     if (process.env.bot_stickies === 'false') return;
 
     if (message.channelId === suggestionsChannelId) {
