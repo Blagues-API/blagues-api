@@ -4,21 +4,20 @@ import {
   CommandInteraction,
   InteractionResponse,
   MessageApplicationCommandData,
-  MessageContextMenuCommandInteraction,
-  UserApplicationCommandData
+  MessageContextMenuCommandInteraction
 } from 'discord.js';
 
 export default class Command {
   public name: string;
 
-  private raw: ChatInputApplicationCommandData | MessageApplicationCommandData | UserApplicationCommandData;
+  private raw: ChatInputApplicationCommandData | MessageApplicationCommandData;
 
-  constructor(data: ChatInputApplicationCommandData | MessageApplicationCommandData | UserApplicationCommandData) {
+  constructor(data: ChatInputApplicationCommandData | MessageApplicationCommandData) {
     this.name = data.name;
     this.raw = data;
   }
 
-  public get data(): ChatInputApplicationCommandData | MessageApplicationCommandData | UserApplicationCommandData {
+  public get data(): ChatInputApplicationCommandData | MessageApplicationCommandData {
     if (this.raw.type === ApplicationCommandType.ChatInput) {
       return {
         name: this.name,
@@ -31,7 +30,7 @@ export default class Command {
     return {
       name: this.name,
       type: this.raw.type
-    } as MessageApplicationCommandData | UserApplicationCommandData;
+    } as MessageApplicationCommandData;
   }
 
   public async run(
