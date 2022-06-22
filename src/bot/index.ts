@@ -96,10 +96,14 @@ export default class Bot extends Client {
     if (![suggestionsChannelId, correctionsChannelId].includes(message.channelId)) return;
     if (process.env.bot_stickies === 'false') return;
 
-    if (message.channelId === suggestionsChannelId) {
-      this.stickys.sticky(suggestionsChannelId, this.stickys.suggestsMessage());
-    } else {
-      this.stickys.sticky(correctionsChannelId, this.stickys.correctionsMessage());
+    switch (message.channelId) {
+      case suggestionsChannelId:
+        this.stickys.sticky(suggestionsChannelId, this.stickys.suggestsMessage());
+        break;
+
+      default:
+        this.stickys.sticky(correctionsChannelId, this.stickys.correctionsMessage());
+        break;
     }
   }
 
