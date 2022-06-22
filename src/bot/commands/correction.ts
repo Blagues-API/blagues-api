@@ -134,7 +134,7 @@ export default class CorrectionCommand extends Command {
   }
 
   async requestChanges(
-    commandInteraction: ChatInputCommandInteraction,
+    commandInteraction: ChatInputCommandInteraction<'cached'>,
     joke: JokeCorrectionPayload,
     changes = false
   ): Promise<JokeCorrectionPayload | null> {
