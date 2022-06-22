@@ -115,7 +115,6 @@ export default class CorrectionCommand extends Command {
           collector.stop();
           return resolve(joke);
         }
-
       });
       collector.once('end', async (_collected, reason: string) => {
         if (reason === 'time') {
@@ -135,7 +134,7 @@ export default class CorrectionCommand extends Command {
   }
 
   async requestChanges(
-    commandInteraction: ChatInputCommandInteraction,
+    commandInteraction: ChatInputCommandInteraction<'cached'>,
     joke: JokeCorrectionPayload,
     changes = false
   ): Promise<JokeCorrectionPayload | null> {
@@ -318,13 +317,15 @@ export default class CorrectionCommand extends Command {
 
     const joke = idType === IdType.JOKE_ID ? jokeById(Number(query)) : jokeByQuestion(query);
     if (!joke) {
-      interaction.channel?.send(
-        problem(
-          `Impossible de trouver une blague à partir de ${
-            idType === IdType.JOKE_ID ? 'cet identifiant' : 'cette question'
-          }, veuillez réessayer !`
+      interaction.channel
+        ?.send(
+          problem(
+            `Impossible de trouver une blague à partir de ${
+              idType === IdType.JOKE_ID ? 'cet identifiant' : 'cette question'
+            }, veuillez réessayer !`
+          )
         )
-      );
+        .then(tDelete(5000));
       return null;
     }
 
