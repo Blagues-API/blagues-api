@@ -171,7 +171,11 @@ export default class SuggestCommand extends Command {
       await suggestion.react(reaction).catch(() => null);
     }
 
-    return confirmation.update(validate(`La [blague](${suggestion.url}) a été envoyé !`));
+    return confirmation.update({
+      ...validate(`La [blague](${suggestion.url}) a été envoyé !`),
+      content: '',
+      components: []
+    });
   }
 
   async waitForConfirmation(
