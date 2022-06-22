@@ -18,6 +18,7 @@ import Stickys from './modules/stickys';
 
 export default class Bot extends Client {
   public dispatcher: Dispatcher;
+  public stickys: Stickys;
   public reminders: Reminders;
 
   constructor() {
