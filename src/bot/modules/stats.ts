@@ -4,14 +4,13 @@ import { Colors, godfatherRoleId } from '../constants';
 import prisma from 'prisma';
 import { interactionProblem } from '../utils';
 import { partition } from 'lodash';
-import { ProposalType } from '@prisma/client';
+import { Proposal, ProposalType } from '@prisma/client';
 
 export default class Stats {
   static async userStats(interaction: CommandInteraction<'cached'>, ephemeral: boolean) {
     const member = interaction.options.getMember('user');
     if (!member) return interaction.reply(interactionProblem("Cet utilisateur n'est plus présent sur le serveur."));
 
-    const fields = [];
     const proposals = await prisma.proposal.findMany({
       where: {
         user_id: member.id,
@@ -19,32 +18,7 @@ export default class Stats {
       }
     });
 
-    function proposalField(member: GuildMember, proposalType: string): APIEmbedField {
-      const [suggestions, corrections] = partition(proposals, (proposal) => proposal.type === ProposalType.SUGGESTION);
-      let proposal;
-
-      if (proposalType === 'suggestions') {
-        proposal = suggestions;
-      } else {
-        proposal = corrections;
-      }
-
-      return {
-        name: 'Suggestions',
-        value: stripIndents`
-        ${proposal === suggestions ? 'Blagues' : 'Corrections'} proposées: **${proposal.length}**
-        ${proposal === suggestions ? 'Blagues' : 'Corrections'} en attente: **${
-          proposal.filter((s) => !s.refused && !s.merged).length
-        }**
-        ${proposal === suggestions ? 'Blagues' : 'Correction'} acceptées: **${proposal.filter((s) => s.merged).length}**
-        Up votee: **0** (à venir)
-        Down vote: **0** (à venir)
-      `
-      };
-    }
-
-    fields.push(proposalField(member, 'suggestions'));
-    fields.push(proposalField(member, 'corrections'));
+    const fields = [proposalField(member, 'suggestions', proposals), proposalField(member, 'corrections', proposals)];
 
     if (member.roles.cache.has(godfatherRoleId)) {
       const approvals = await prisma.approval.findMany({
@@ -122,4 +96,29 @@ export default class Stats {
       ]
     });
   }
+}
+
+function proposalField(member: GuildMember, proposalType: string, proposals: Proposal[]): APIEmbedField {
+  const [suggestions, corrections] = partition(proposals, (proposal) => proposal.type === ProposalType.SUGGESTION);
+  let proposal;
+
+  if (proposalType === 'suggestions') {
+    proposal = suggestions;
+  } else {
+    proposal = corrections;
+  }
+
+  return {
+    name: 'Suggestions',
+    value: stripIndents`
+    ${proposal === suggestions ? 'Blagues' : 'Corrections'} proposées: **${proposal.length}**
+    ${proposal === suggestions ? 'Blagues' : 'Corrections'} en attente: **${
+      proposal.filter((s) => !s.refused && !s.merged).length
+    }**
+    ${proposal === suggestions ? 'Blagues' : 'Correction'} acceptées: **${proposal.filter((s) => s.merged).length}**
+    Up votee: **0** (à venir)
+    Down vote: **0** (à venir)
+  `,
+    inline: true
+  };
 }
