@@ -20,7 +20,7 @@ export default class SuggestCommand extends Command {
     });
   }
 
-  async run(interaction: ChatInputCommandInteraction) {
+  async run(interaction: ChatInputCommandInteraction<'cached'>) {
     if (interaction.channelId !== commandsChannelId) {
       return interaction.reply(
         interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannelId}>.`)

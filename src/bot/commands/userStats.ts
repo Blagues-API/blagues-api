@@ -10,7 +10,7 @@ export default class UserStatsCommand extends Command {
     });
   }
 
-  async run(interaction: UserContextMenuCommandInteraction) {
+  async run(interaction: UserContextMenuCommandInteraction<'cached'>) {
     return Stats.userStats(interaction, true);
   }
 }
