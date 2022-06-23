@@ -1,3 +1,5 @@
 import Tesseract from './tesseract';
 
-new Tesseract();
+const app = new Tesseract();
+
+app.init();

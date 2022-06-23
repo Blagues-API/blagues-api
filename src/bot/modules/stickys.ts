@@ -1,13 +1,42 @@
 import { stripIndents } from 'common-tags';
-import { Client, Snowflake, TextChannel, APIEmbed } from 'discord.js';
-import { commandsChannelId } from '../constants';
+import { Client, Snowflake, TextChannel, APIEmbed, Message } from 'discord.js';
+import { commandsChannelId, correctionsChannelId, suggestionsChannelId } from '../constants';
 import Jokes from '../../jokes';
 
 export default class Stickys {
   public client: Client;
+  private messages: Record<string, APIEmbed>;
 
   constructor(client: Client) {
     this.client = client;
+
+    this.messages = {
+      [suggestionsChannelId]: this.suggestsMessage(),
+      [correctionsChannelId]: this.correctionsMessage()
+    };
+  }
+
+  async run(message: Message<true>) {
+    if (process.env.bot_stickies === 'false') return;
+    if (!(message.channelId in this.messages)) return;
+
+    return this.check(suggestionsChannelId, this.messages[message.channelId]);
+  }
+
+  private async check(targetChannel: Snowflake, embed: APIEmbed) {
+    const channel = this.client.channels.cache.get(targetChannel) as TextChannel;
+    if (!channel) return;
+
+    const messages = await channel.messages.fetch({ limit: 10 }).catch(() => null);
+    if (!messages) return;
+
+    const message = messages.find((m) => m.author.id === this.client.user!.id && m.embeds?.[0]?.title === embed.title);
+    const last_message = messages.first();
+    if (!message || !last_message || message.id !== last_message.id) {
+      if (message) await message.delete();
+
+      await channel.send({ embeds: [embed] });
+    }
   }
 
   suggestsMessage(): APIEmbed {
@@ -44,21 +73,5 @@ export default class Stickys {
       `,
       color: 0x0067ad
     };
-  }
-
-  async sticky(targetChannel: Snowflake, embed: APIEmbed) {
-    const channel = this.client.channels.cache.get(targetChannel) as TextChannel;
-    if (!channel) return;
-
-    const messages = await channel.messages.fetch({ limit: 10 }).catch(() => null);
-    if (!messages) return;
-
-    const message = messages.find((m) => m.author.id === this.client.user!.id && m.embeds?.[0]?.title === embed.title);
-    const last_message = messages.first();
-    if (!message || !last_message || message.id !== last_message.id) {
-      if (message) await message.delete();
-
-      return channel.send({ embeds: [embed] });
-    }
   }
 }

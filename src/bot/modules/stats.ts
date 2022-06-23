@@ -1,17 +1,14 @@
 import { stripIndents } from 'common-tags';
-import { ChatInputCommandInteraction, GuildMember, UserContextMenuCommandInteraction } from 'discord.js';
+import { CommandInteraction } from 'discord.js';
 import { Colors, godfatherRoleId } from '../constants';
 import prisma from 'prisma';
-import { interactionProblem } from 'bot/utils';
+import { interactionProblem } from '../utils';
 import { partition } from 'lodash';
 import { ProposalType } from '@prisma/client';
 
 export default class Stats {
-  static async userStats(
-    interaction: ChatInputCommandInteraction | UserContextMenuCommandInteraction<import('discord.js').CacheType>,
-    ephemeral: boolean
-  ) {
-    const member = interaction.options.getMember('user') as GuildMember;
+  static async userStats(interaction: CommandInteraction<'cached'>, ephemeral: boolean) {
+    const member = interaction.options.getMember('user');
     if (!member) return interaction.reply(interactionProblem("Cet utilisateur n'est plus présent sur le serveur."));
 
     const fields = [];
@@ -89,7 +86,7 @@ export default class Stats {
     });
   }
 
-  static async globalStats(interaction: ChatInputCommandInteraction<import('discord.js').CacheType>) {
+  static async globalStats(interaction: CommandInteraction<'cached'>) {
     // Issue reported: https://github.com/prisma/prisma/issues/10915
     const proposals = await prisma.proposal.groupBy({
       by: ['user_id', 'merged'],
