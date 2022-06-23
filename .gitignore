@@ -5,10 +5,9 @@ databases
 build
 archive
 .nuxt
-
+.DS_Store
 # en réflexion
 examples
 
 # Service worker
 sw.*
-
