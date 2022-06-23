@@ -101,8 +101,7 @@ export default class Bot extends Client {
         return this.stickys.sticky(suggestionsChannelId, this.stickys.suggestsMessage());
 
       case correctionsChannelId:
-        this.stickys.sticky(correctionsChannelId, this.stickys.correctionsMessage());
-        break;
+        return this.stickys.sticky(correctionsChannelId, this.stickys.correctionsMessage());
 
       default:
         break;
