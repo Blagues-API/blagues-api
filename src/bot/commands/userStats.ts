@@ -7,7 +7,7 @@ import { ProposalType } from '@prisma/client';
 import { interactionProblem } from '../utils';
 import partition from 'lodash/partition';
 
-export default class SuggestCommand extends Command {
+export default class UserStatsCommand extends Command {
   constructor() {
     super({
       name: 'userStats',
