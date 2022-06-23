@@ -25,15 +25,23 @@ export default class Stats {
     const [suggestions, corrections] = partition(proposals, (proposal) => proposal.type === ProposalType.SUGGESTION);
 
     fields.push({
-      name: 'Statistiques globales',
+      name: 'Blagues',
       value: stripIndents`
         Blagues proposées: **${suggestions.length}**
         Blagues en attente: **${suggestions.filter((s) => !s.refused && !s.merged).length}**
         Blagues acceptées: **${suggestions.filter((s) => s.merged).length}**
-
-        Corrections proposées: **${corrections.length}**
-        Corrections en attente: **${corrections.filter((c) => !c.refused && !c.merged).length}**
-        Corrections acceptées: **${corrections.filter((c) => c.merged).length}**
+        Up votee: **0 (à venir)**
+        Down vote: **0 (à venir)**
+      `
+    });
+    fields.push({
+      name: 'Corrections',
+      value: stripIndents`
+        Proposées: **${corrections.length}**
+        En attente: **${corrections.filter((c) => !c.refused && !c.merged).length}**
+        Blagues acceptées: **${corrections.filter((c) => c.merged).length}**
+        Up votee: **0 (à venir)**
+        Down vote: **0 (à venir)**
       `
     });
 
@@ -55,8 +63,7 @@ export default class Stats {
       fields.push({
         name: 'Décisions de Parrain',
         value: stripIndents`
-          Décisions: **${totalDecisionsCount}**
-
+          Décisions totales: **${totalDecisionsCount}**
           Blagues: **${suggestsDecisionsCount}**
           Corrections: **${totalDecisionsCount - suggestsDecisionsCount}**
         `
