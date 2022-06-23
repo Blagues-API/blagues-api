@@ -28,7 +28,7 @@ export default class SuggestCommand extends Command {
     }
 
     if (interaction.options.get('user')) {
-      return stats.userStats(interaction);
+      return stats.userStats(interaction, false);
     }
 
     return stats.globalStats(interaction);

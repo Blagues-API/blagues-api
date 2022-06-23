@@ -11,6 +11,6 @@ export default class UserStatsCommand extends Command {
   }
 
   async run(interaction: UserContextMenuCommandInteraction) {
-    return stats.userStats(interaction);
+    return stats.userStats(interaction, true);
   }
 }

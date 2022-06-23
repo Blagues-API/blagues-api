@@ -8,7 +8,8 @@ import { ProposalType } from '@prisma/client';
 
 export default class Stats {
   static async userStats(
-    interaction: ChatInputCommandInteraction | UserContextMenuCommandInteraction<import('discord.js').CacheType>
+    interaction: ChatInputCommandInteraction | UserContextMenuCommandInteraction<import('discord.js').CacheType>,
+    ephemeral: boolean
   ) {
     const member = interaction.options.getMember('user') as GuildMember;
     if (!member) return interaction.reply(interactionProblem("Cet utilisateur n'est plus présent sur le serveur."));
@@ -76,7 +77,8 @@ export default class Stats {
             icon_url: interaction.guild!.iconURL({ size: 32 }) ?? undefined
           }
         }
-      ]
+      ],
+      ephemeral: ephemeral
     });
   }
 
