@@ -10,7 +10,7 @@ import partition from 'lodash/partition';
 export default class SuggestCommand extends Command {
   constructor() {
     super({
-      name: 'userStats',
+      name: 'Statistiques',
       type: ApplicationCommandType.User
     });
   }
