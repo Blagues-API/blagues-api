@@ -23,7 +23,8 @@ export default class Dispatcher {
       new StatsCommand(),
       new JokeCommand(),
       new ApproveCommand(),
-      new DisapproveCommand()
+      new DisapproveCommand(),
+      new StatsCommand()
     ];
   }
 
