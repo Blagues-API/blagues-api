@@ -98,8 +98,7 @@ export default class Bot extends Client {
 
     switch (message.channelId) {
       case suggestionsChannelId:
-        this.stickys.sticky(suggestionsChannelId, this.stickys.suggestsMessage());
-        break;
+        return this.stickys.sticky(suggestionsChannelId, this.stickys.suggestsMessage());
 
       case correctionsChannelId:
         this.stickys.sticky(correctionsChannelId, this.stickys.correctionsMessage());
