@@ -4,17 +4,18 @@ import Command from '../lib/command';
 import { interactionInfo } from '../utils';
 import Stats from '../modules/stats';
 
-export default class SuggestCommand extends Command {
+export default class StatsCommand extends Command {
   constructor() {
     super({
       name: 'stats',
-      description: 'Voir les statistiques',
+      description: "Afficher les statistiques d'un utilisateur",
       type: ApplicationCommandType.ChatInput,
       options: [
         {
           type: ApplicationCommandOptionType.User,
           name: 'user',
-          description: 'Utilisateur dont vous voulez les statistiques'
+          description: 'Utilisateur dont vous voulez les statistiques',
+          required: false
         }
       ]
     });
@@ -26,11 +27,10 @@ export default class SuggestCommand extends Command {
         interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannelId}>.`)
       );
     }
-
-    if (interaction.options.get('user')) {
-      return Stats.userStats(interaction, false);
-    }
-
-    return Stats.globalStats(interaction);
+    let user = interaction.options.getMember('user');
+    console.log(user?.id);
+    if (!user) user = interaction.member;
+    console.log(user?.id);
+    return Stats.userStats(interaction, user, false);
   }
 }

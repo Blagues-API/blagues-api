@@ -1,17 +1,21 @@
 import { stripIndents } from 'common-tags';
-import { CommandInteraction } from 'discord.js';
+import {
+  ChatInputCommandInteraction,
+  CommandInteraction,
+  GuildMember,
+  UserContextMenuCommandInteraction
+} from 'discord.js';
 import { Colors, godfatherRoleId } from '../constants';
-import prisma from 'prisma';
-import { interactionProblem } from '../utils';
+import prisma from '../../prisma';
 import { partition } from 'lodash';
 import { ProposalType } from '@prisma/client';
 
 export default class Stats {
-  static async userStats(interaction: CommandInteraction<'cached'>, ephemeral: boolean) {
-    const member = interaction.options.getMember('user');
-    if (!member) return interaction.reply(interactionProblem("Cet utilisateur n'est plus présent sur le serveur."));
-
-    const fields = [];
+  static async userStats(
+    interaction: ChatInputCommandInteraction<'cached'> | UserContextMenuCommandInteraction<'cached'>,
+    member: GuildMember,
+    ephemeral: boolean
+  ) {
     const proposals = await prisma.proposal.findMany({
       where: {
         user_id: member.id,
@@ -20,7 +24,7 @@ export default class Stats {
     });
 
     const [suggestions, corrections] = partition(proposals, (proposal) => proposal.type === ProposalType.SUGGESTION);
-
+    const fields = [];
     fields.push({
       name: 'Statistiques globales',
       value: stripIndents`

@@ -1,4 +1,4 @@
-import Command from 'bot/lib/command';
+import Command from '../lib/command';
 import { ApplicationCommandType, UserContextMenuCommandInteraction } from 'discord.js';
 import Stats from '../modules/stats';
 
@@ -11,6 +11,6 @@ export default class UserStatsCommand extends Command {
   }
 
   async run(interaction: UserContextMenuCommandInteraction<'cached'>) {
-    return Stats.userStats(interaction, true);
+    return Stats.userStats(interaction, interaction.targetMember, true);
   }
 }
