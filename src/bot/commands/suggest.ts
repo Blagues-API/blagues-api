@@ -15,7 +15,7 @@ import Jokes from '../../jokes';
 import { Category, CategoriesRefs, UnsignedJoke } from '../../typings';
 import { Colors, suggestionsChannelId, upReaction, downReaction, commandsChannelId } from '../constants';
 import Command from '../lib/command';
-import { interactionInfo, interactionProblem, isEmbedable, validate } from '../utils';
+import { interactionInfo, interactionProblem, interactionValidate, isEmbedable } from '../utils';
 import prisma from '../../prisma';
 import { ProposalType } from '@prisma/client';
 
@@ -171,7 +171,7 @@ export default class SuggestCommand extends Command {
       await suggestion.react(reaction).catch(() => null);
     }
 
-    return confirmation.update(validate(`La [blague](${suggestion.url}) a été envoyé !`));
+    return confirmation.update(interactionValidate(`La [blague](${suggestion.url}) a été envoyé !`, false));
   }
 
   async waitForConfirmation(

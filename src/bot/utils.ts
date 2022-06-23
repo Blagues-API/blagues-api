@@ -3,7 +3,9 @@ import { diffWords } from 'diff';
 import { APIEmbed } from 'discord-api-types/v10';
 import { godfatherRoleId } from './constants';
 
-export function interactionProblem(message: string, ephemeral = true): InteractionReplyOptions {
+type UniversalInteractionOptions = Omit<InteractionReplyOptions, 'flags'>;
+
+export function interactionProblem(message: string, ephemeral = true): UniversalInteractionOptions {
   return {
     ...problem(message),
     components: [],
@@ -23,7 +25,7 @@ export function problem(message: string): { embeds: APIEmbed[] } {
   };
 }
 
-export function interactionInfo(message: string, ephemeral = true): InteractionReplyOptions {
+export function interactionInfo(message: string, ephemeral = true): UniversalInteractionOptions {
   return {
     ...info(message),
     components: [],
@@ -43,11 +45,12 @@ export function info(message: string): { embeds: APIEmbed[] } {
   };
 }
 
-export function interactionValidate(message: string): InteractionReplyOptions {
+export function interactionValidate(message: string, ephemeral = true): UniversalInteractionOptions {
   return {
     ...validate(message),
+    content: '',
     components: [],
-    ephemeral: true
+    ephemeral
   };
 }
 

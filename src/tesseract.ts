@@ -13,7 +13,7 @@ export default class Tesseract {
   async init(): Promise<void> {
     try {
       await Promise.all([
-        // eslint-disable-next-line
+        // eslint-disable-next-line prettier/prettier
         this.api.start(),
         this.bot.start()
       ]);
