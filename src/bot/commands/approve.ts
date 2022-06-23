@@ -8,7 +8,7 @@ import {
   APIEmbed
 } from 'discord.js';
 import prisma from '../../prisma';
-import { CategoriesRefs, Category, Correction, Suggestion } from '../../typings';
+import { CategoriesRefs, Category, Correction, Proposals, Suggestion } from '../../typings';
 import {
   Colors,
   neededCorrectionsApprovals,
@@ -58,12 +58,12 @@ export default class ApproveCommand extends Command {
       );
     }
 
-    let isSuggestion = channel.id === suggestionsChannel;
+    const isSuggestionChannel = channel.id === suggestionsChannelId;
 
     if (message.author.id !== interaction.client.user!.id) {
       return interaction.reply(
         interactionProblem(
-          `Vous ne pouvez pas approuver une ${isSuggestion ? 'blague' : 'correction'} qui n'est pas gérée par ${
+          `Vous ne pouvez pas approuver une ${isSuggestionChannel ? 'blague' : 'correction'} qui n'est pas gérée par ${
             interaction.client.user
           }.`
         )
@@ -73,12 +73,12 @@ export default class ApproveCommand extends Command {
     if (!isParrain(interaction.member)) {
       return interaction.reply(
         interactionProblem(
-          `Seul un <@&${godfatherRoleId}> peut approuver une ${isSuggestion ? 'blague' : 'correction'}.`
+          `Seul un <@&${godfatherRoleId}> peut approuver une ${isSuggestionChannel ? 'blague' : 'correction'}.`
         )
       );
     }
 
-    const proposal = await prisma.proposal.findUnique({
+    const proposal = (await prisma.proposal.findUnique({
       where: {
         message_id: message.id
       },
@@ -117,13 +117,13 @@ export default class ApproveCommand extends Command {
         approvals: true,
         disapprovals: true
       }
-    });
+    })) as Proposals | null;
 
     if (!proposal) {
       return interaction.reply(interactionProblem(`Le message est invalide.`));
     }
 
-    isSuggestion = proposal.type === ProposalType.SUGGESTION;
+    const isSuggestion = proposal.type === ProposalType.SUGGESTION;
 
     const embed = message.embeds[0]?.toJSON();
     if (!embed) {
@@ -263,19 +263,16 @@ export default class ApproveCommand extends Command {
 
     const neededApprovalsCount = isSuggestion ? neededSuggestionsApprovals : neededCorrectionsApprovals;
 
-    // TODO: faire le même taff pour la déapprobation
-    // TODO: Créer un utilitaire pour les liens
-
-    if (proposal.approvals.length >= neededApprovalsCount && proposal.corrections[0]) {
+    if (isSuggestion && proposal.approvals.length >= neededApprovalsCount && proposal.corrections[0]) {
+      const suggestionLink = messageLink(interaction.guild.id, suggestionsChannelId, proposal.message_id!);
+      const correctionLink = messageLink(
+        interaction.guild.id,
+        correctionsChannelId,
+        proposal.corrections[0].message_id!
+      );
       return interaction.reply(
         interactionInfo(`
-          Le nombre d'approbations requises pour l'ajout de [cette suggestion](https://discord.com/channels/${
-            interaction.guild!.id
-          }/${suggestionsChannel}/${
-          proposal.message_id
-        }) a déjà été atteint, seul [cette correction](https://discord.com/channels/${
-          interaction.guild!.id
-        }/${correctionsChannel}/${proposal.corrections[0].message_id}) nécessite encore des approbations.`)
+          Le nombre d'approbations requises pour l'ajout de [cette suggestion](${suggestionLink}) a déjà été atteint, seul [cette correction](${correctionLink}) nécessite encore des approbations.`)
       );
     }
 
@@ -300,11 +297,11 @@ export default class ApproveCommand extends Command {
 
     try {
       if (isSuggestion) {
-        await this.approveSuggestion(interaction, proposal as Suggestion, message, embed);
+        await this.approveSuggestion(interaction, proposal, message, embed);
       } else {
-        const suggestion = await this.approveCorrection(interaction, proposal as Correction, message, embed);
+        const suggestion = await this.approveCorrection(interaction, proposal, message, embed);
 
-        if (suggestion && proposal.suggestion && proposal.suggestion.approvals.length >= neededSuggestionsApprovals)
+        if (suggestion && proposal.suggestion && proposal.suggestion.approvals.length >= neededSuggestionsApprovals) {
           await this.approveSuggestion(
             interaction,
             proposal.suggestion as Suggestion,
@@ -312,6 +309,7 @@ export default class ApproveCommand extends Command {
             suggestion.embeds[0].toJSON(),
             true
           );
+        }
       }
     } catch (error) {
       console.error(error);
