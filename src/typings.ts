@@ -1,4 +1,4 @@
-import { Approval, Disapproval, Proposal, ProposalType } from '@prisma/client';
+import { Approval, Disapproval, Proposal } from '@prisma/client';
 
 /**
  * Standard joke interface
@@ -68,25 +68,24 @@ export const JokeTypesDescriptions: Record<Category, string> = {
   blondes: 'Blagues ciblées sur les femmes blondes.'
 };
 
-export type Correction = Proposal & {
-  type: typeof ProposalType['CORRECTION'] | typeof ProposalType['SUGGESTION_CORRECTION'];
-  suggestion: Proposal & {
-    corrections: Proposal[];
-    approvals: Approval[];
-    disapprovals: Disapproval[];
-  };
+export type ProposalExtended = Proposal & {
   approvals: Approval[];
   disapprovals: Disapproval[];
 };
 
-export type Suggestion = Proposal & {
-  type: typeof ProposalType['SUGGESTION'];
+export type Correction = ProposalExtended & {
+  type: 'SUGGESTION_CORRECTION' | 'CORRECTION';
+  suggestion: ProposalSuggestion;
+};
+
+export type Suggestion = ProposalExtended & {
+  type: 'SUGGESTION';
+  corrections: ProposalExtended[];
+};
+
+export type ProposalSuggestion = ProposalExtended & {
+  type: 'SUGGESTION';
   corrections: Proposal[];
-  approvals: Approval[];
-  disapprovals: Disapproval[];
 };
 
-export type ProposalFull = Proposal & {
-  approvals: Approval[];
-  disapprovals: Disapproval[];
-};
+export type Proposals = Correction | Suggestion;
