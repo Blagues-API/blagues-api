@@ -92,9 +92,25 @@ export default class Bot extends Client {
     }
   }
 
+  async onMessageCreate(message: Message | PartialMessage): Promise<void> {
+    if (![suggestionsChannelId, correctionsChannelId].includes(message.channelId)) return;
+    if (process.env.bot_stickies === 'false') return;
+
+    switch (message.channelId) {
+      case suggestionsChannelId:
+        this.stickys.sticky(suggestionsChannelId, this.stickys.suggestsMessage());
+        break;
+
+      case correctionsChannelId:
+        this.stickys.sticky(correctionsChannelId, this.stickys.correctionsMessage());
+        break;
+    }
+  }
+
   registerEvents(): void {
     this.on('interactionCreate', this.onInteractionCreate.bind(this));
     this.on('messageDelete', this.onMessageDelete.bind(this));
+    this.on('messageCreate', this.onMessageCreate.bind(this));
   }
 
   refreshStatus() {

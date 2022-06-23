@@ -1,6 +1,6 @@
 import { stripIndents } from 'common-tags';
 import { Client, Snowflake, TextChannel, APIEmbed } from 'discord.js';
-import { commandsChannelId, correctionsChannelId, suggestionsChannelId } from '../constants';
+import { commandsChannelId } from '../constants';
 import Jokes from '../../jokes';
 
 export default class Stickys {
@@ -8,11 +8,6 @@ export default class Stickys {
 
   constructor(client: Client) {
     this.client = client;
-
-    if (process.env.bot_stickies === 'false') return;
-
-    setInterval(() => this.sticky(suggestionsChannelId, this.suggestsMessage()), 10_000);
-    setInterval(() => this.sticky(correctionsChannelId, this.correctionsMessage()), 10_000);
   }
 
   suggestsMessage(): APIEmbed {
