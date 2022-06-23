@@ -60,8 +60,8 @@ export default class SuggestCommand extends Command {
     }
 
     if (
-      (interaction.options.get('joke')!.value as string).length > 130 ||
-      (interaction.options.get('response')!.value as string).length > 130
+      interaction.options.getString('joke', true).length > 130 ||
+      interaction.options.getString('response', true).length > 130
     ) {
       interaction.reply(interactionProblem("Chaque partie d'une blague ne peut pas dépasser les 130 caractères !"));
       return;
@@ -90,14 +90,14 @@ export default class SuggestCommand extends Command {
     ];
 
     const { bestMatch, bestMatchIndex } = findBestMatch(
-      `${interaction.options.get('joke')!.value} ${interaction.options.get('response')!.value}`,
+      `${interaction.options.getString('joke', true)} ${interaction.options.get('response')!.value}`,
       currentJokes.map((entry) => `${entry.joke} ${entry.answer}`)
     );
 
     const payload = {
-      type: interaction.options.get('type')!.value as Category,
-      joke: interaction.options.get('joke')!.value,
-      answer: interaction.options.get('response')!.value
+      type: interaction.options.getString('type', true) as Category,
+      joke: interaction.options.getString('joke', true),
+      answer: interaction.options.getString('response', true)
     } as UnsignedJoke;
 
     const embed: APIEmbed = {
