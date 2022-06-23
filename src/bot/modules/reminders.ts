@@ -119,7 +119,7 @@ export default class Reminders {
           .map((members_id) => godfathersEmojis.find(({ id }) => members_id === id)?.emoji)
           .filter((e) => e)
           .join(' ');
-        const line = `[Voir la ${proposal.type.toLowerCase()}](${messageLink(
+        const line = `[[${proposal.type === ProposalType.SUGGESTION ? 'Suggestion' : 'Correction'}]](${messageLink(
           guild.id,
           proposal.type === ProposalType.SUGGESTION ? suggestionsChannelId : correctionsChannelId,
           proposal.message_id!
