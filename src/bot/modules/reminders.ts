@@ -175,7 +175,7 @@ export default class Reminders {
               ? {
                   name: 'Parrains du projet Blagues API',
                   url: 'https://blagues-api.fr',
-                  icon_url: `${this.client.user!.avatarURL({ extension: 'png', size: 128 })}`
+                  icon_url: this.client.user?.avatarURL({ extension: 'png', size: 128 }) || undefined
                 }
               : undefined,
             title: isFirstPage
