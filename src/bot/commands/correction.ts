@@ -293,7 +293,7 @@ export default class CorrectionCommand extends Command {
               `Impossible de trouver une blague ou correction liée à cet ID de blague, assurez vous que cet ID provient bien d\'un message envoyé par le bot ${interaction.client.user}`
             )
           )
-          .then(tDelete(5000));
+          .then(tDelete(10_000));
         return null;
       }
 
@@ -325,7 +325,7 @@ export default class CorrectionCommand extends Command {
             }, veuillez réessayer !`
           )
         )
-        .then(tDelete(5000));
+        .then(tDelete(10_000));
       return null;
     }
 
@@ -405,7 +405,7 @@ export default class CorrectionCommand extends Command {
 
     const msg = messages?.first();
     if (!msg) {
-      await buttonInteraction.editReply(interactionInfo('💡 Les 60 secondes se sont écoulées', false));
+      await buttonInteraction.editReply(interactionInfo('Les 60 secondes se sont écoulées', false));
       return null;
     }
 
@@ -462,7 +462,7 @@ export default class CorrectionCommand extends Command {
 
     if (!response) {
       questionMessage.edit({
-        ...info('💡 Les 60 secondes se sont écoulées'),
+        ...info('Les 60 secondes se sont écoulées'),
         components: []
       });
       return null;
