@@ -4,6 +4,7 @@ database.db*
 databases
 build
 archive
+dist
 .nuxt
 
 # en réflexion
@@ -11,4 +12,3 @@ examples
 
 # Service worker
 sw.*
-
