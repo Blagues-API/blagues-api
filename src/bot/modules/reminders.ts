@@ -163,17 +163,10 @@ export default class Reminders {
     for (const index in pages) {
       const isFirstPage = Number(index) === 0;
       const isLastPage = Number(index) === pages.length - 1;
-      const lengthProposals = proposals.length;
-      const isOneProposal = Number(lengthProposals) <= 1;
-      const unRepeat = (arr: unknown[]) => arr.filter((v: unknown, i: unknown) => i == arr.indexOf(v));
-      const unRepatProposals = unRepeat(
-        proposals.map((m) => m.type.toLowerCase().replace('suggestion_correction', 'correction'))
+      const types = proposals.reduce(
+        (acc, proposal) => acc.add(proposal.type === ProposalType.SUGGESTION ? 'suggestions' : 'corrections'),
+        new Set()
       );
-      const props = unRepatProposals
-        .join('/')
-        .replaceAll('suggestion', 'suggestions')
-        .replaceAll('correction', 'corrections');
-      console.log(props);
       await remindersChannel.send({
         content: (isFirstPage && mentions) || undefined,
         embeds: [
@@ -187,8 +180,10 @@ export default class Reminders {
               : undefined,
             title: isFirstPage
               ? `Voici ${
-                  isOneProposal ? `la ${proposals.map((m) => m.type.toLowerCase())}` : `les ${props}`
-                } en cours: `
+                  proposals.length === 1
+                    ? `la ${proposals[0].type === ProposalType.SUGGESTION ? 'suggestion' : 'correction'}`
+                    : `les ${[...types.values()].join('/')}`
+                } en cours :`
               : undefined,
             description: pages[index],
             color: 0x0067ad,
