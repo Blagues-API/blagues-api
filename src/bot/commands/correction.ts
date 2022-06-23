@@ -115,7 +115,6 @@ export default class CorrectionCommand extends Command {
           collector.stop();
           return resolve(joke);
         }
-
       });
       collector.once('end', async (_collected, reason: string) => {
         if (reason === 'time') {
@@ -135,7 +134,7 @@ export default class CorrectionCommand extends Command {
   }
 
   async requestChanges(
-    commandInteraction: ChatInputCommandInteraction,
+    commandInteraction: ChatInputCommandInteraction<'cached'>,
     joke: JokeCorrectionPayload,
     changes = false
   ): Promise<JokeCorrectionPayload | null> {
