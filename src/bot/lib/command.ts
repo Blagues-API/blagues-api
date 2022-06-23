@@ -11,7 +11,7 @@ import {
 export default class Command {
   public name: string;
 
-  private raw: ChatInputApplicationCommandData | MessageApplicationCommandData | UserApplicationCommandData;
+  private raw: ApplicationCommandData;
 
   constructor(data: ChatInputApplicationCommandData | MessageApplicationCommandData | UserApplicationCommandData) {
     this.name = data.name;
