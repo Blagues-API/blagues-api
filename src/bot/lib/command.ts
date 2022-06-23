@@ -26,10 +26,8 @@ export default class Command {
     };
   }
 
-  public async run(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    _interaction: CommandInteraction
-  ): Promise<void | InteractionResponse> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  public async run(_interaction: CommandInteraction): Promise<void | InteractionResponse> {
     throw new Error('No method run defined');
   }
 }

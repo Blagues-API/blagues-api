@@ -2,7 +2,7 @@ import { ApplicationCommandOptionType, ApplicationCommandType, ChatInputCommandI
 import { commandsChannelId } from '../constants';
 import Command from '../lib/command';
 import { interactionInfo } from '../utils';
-import stats from '../modules/stats';
+import Stats from '../modules/stats';
 
 export default class SuggestCommand extends Command {
   constructor() {
@@ -20,7 +20,7 @@ export default class SuggestCommand extends Command {
     });
   }
 
-  async run(interaction: ChatInputCommandInteraction) {
+  async run(interaction: ChatInputCommandInteraction<'cached'>) {
     if (interaction.channelId !== commandsChannelId) {
       return interaction.reply(
         interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannelId}>.`)
@@ -28,9 +28,9 @@ export default class SuggestCommand extends Command {
     }
 
     if (interaction.options.get('user')) {
-      return stats.userStats(interaction, false);
+      return Stats.userStats(interaction, false);
     }
 
-    return stats.globalStats(interaction);
+    return Stats.globalStats(interaction);
   }
 }
