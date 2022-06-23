@@ -41,7 +41,8 @@ export default class Stats {
           Décisions totales: **${totalDecisionsCount}**
           Blagues: **${suggestsDecisionsCount}**
           Corrections: **${totalDecisionsCount - suggestsDecisionsCount}**
-        `
+        `,
+        inline: true
       });
     }
 
