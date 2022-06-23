@@ -27,10 +27,7 @@ export default class StatsCommand extends Command {
         interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannelId}>.`)
       );
     }
-    let user = interaction.options.getMember('user');
-    console.log(user?.id);
-    if (!user) user = interaction.member;
-    console.log(user?.id);
-    return Stats.userStats(interaction, user, false);
+    const member = interaction.options.getMember('user') || interaction.member;
+    return Stats.userStats(interaction, member, false);
   }
 }
