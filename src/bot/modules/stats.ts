@@ -1,5 +1,5 @@
 import { stripIndents } from 'common-tags';
-import { CommandInteraction } from 'discord.js';
+import { CommandInteraction, GuildMember, APIEmbedField } from 'discord.js';
 import { Colors, godfatherRoleId } from '../constants';
 import prisma from 'prisma';
 import { interactionProblem } from '../utils';
@@ -19,28 +19,32 @@ export default class Stats {
       }
     });
 
-    const [suggestions, corrections] = partition(proposals, (proposal) => proposal.type === ProposalType.SUGGESTION);
+    function proposalField(member: GuildMember, proposalType: string): APIEmbedField {
+      const [suggestions, corrections] = partition(proposals, (proposal) => proposal.type === ProposalType.SUGGESTION);
+      let proposal;
 
-    fields.push({
-      name: 'Blagues',
-      value: stripIndents`
-        Blagues proposées: **${suggestions.length}**
-        Blagues en attente: **${suggestions.filter((s) => !s.refused && !s.merged).length}**
-        Blagues acceptées: **${suggestions.filter((s) => s.merged).length}**
-        Up votee: **0 (à venir)**
-        Down vote: **0 (à venir)**
+      if (proposalType === 'suggestions') {
+        proposal = suggestions;
+      } else {
+        proposal = corrections;
+      }
+
+      return {
+        name: 'Suggestions',
+        value: stripIndents`
+        ${proposal === suggestions ? 'Blagues' : 'Corrections'} proposées: **${proposal.length}**
+        ${proposal === suggestions ? 'Blagues' : 'Corrections'} en attente: **${
+          proposal.filter((s) => !s.refused && !s.merged).length
+        }**
+        ${proposal === suggestions ? 'Blagues' : 'Correction'} acceptées: **${proposal.filter((s) => s.merged).length}**
+        Up votee: **0** (à venir)
+        Down vote: **0** (à venir)
       `
-    });
-    fields.push({
-      name: 'Corrections',
-      value: stripIndents`
-        Proposées: **${corrections.length}**
-        En attente: **${corrections.filter((c) => !c.refused && !c.merged).length}**
-        Blagues acceptées: **${corrections.filter((c) => c.merged).length}**
-        Up votee: **0 (à venir)**
-        Down vote: **0 (à venir)**
-      `
-    });
+      };
+    }
+
+    fields.push(proposalField(member, 'suggestions'));
+    fields.push(proposalField(member, 'corrections'));
 
     if (member.roles.cache.has(godfatherRoleId)) {
       const approvals = await prisma.approval.findMany({
