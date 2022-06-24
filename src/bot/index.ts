@@ -15,10 +15,11 @@ import { correctionsChannelId, suggestionsChannelId } from './constants';
 import Dispatcher from './lib/dispatcher';
 import Reminders from './modules/reminders';
 import Stickys from './modules/stickys';
-
+import buttonsReminder from './modules/buttonsReminder';
 export default class Bot extends Client {
   public dispatcher: Dispatcher;
   public stickys: Stickys;
+  public buttonsReminder: buttonsReminder;
   public reminders: Reminders;
 
   constructor() {
@@ -34,6 +35,7 @@ export default class Bot extends Client {
     this.dispatcher = new Dispatcher(this);
     this.stickys = new Stickys(this);
     this.reminders = new Reminders(this);
+    this.buttonsReminder = new buttonsReminder(this);
 
     this.once('ready', this.onReady.bind(this));
   }
@@ -55,6 +57,11 @@ export default class Bot extends Client {
   async onInteractionCreate(interaction: AnyInteraction): Promise<void> {
     if (interaction.type === InteractionType.ApplicationCommand) {
       return this.dispatcher.execute(interaction);
+    } else if (interaction.type === InteractionType.MessageComponent) {
+      if (interaction.customId === 'reminderButton') {
+        this.buttonsReminder.run(interaction);
+        interaction.reply({ content: 'Salut ! ça va ?', ephemeral: true });
+      }
     }
   }
 

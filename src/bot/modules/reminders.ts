@@ -1,7 +1,7 @@
 import { Proposal, ProposalType } from '@prisma/client';
 import { messageLink } from '../utils';
 import { Snowflake } from 'discord-api-types/v9';
-import { Client, Collection, TextChannel } from 'discord.js';
+import { ButtonStyle, Client, Collection, ComponentType, TextChannel } from 'discord.js';
 import schedule from 'node-schedule';
 import prisma from '../../prisma';
 import {
@@ -23,7 +23,7 @@ export default class Reminders {
     if (process.env.bot_reminders === 'false') return;
 
     // Every 10 minutes
-    schedule.scheduleJob('*/10 * * * *', (date) => this.run(date));
+    schedule.scheduleJob('*/1 * * * *', (date) => this.run(date));
   }
 
   async run(date: Date): Promise<void> {
@@ -168,7 +168,7 @@ export default class Reminders {
         new Set()
       );
       await remindersChannel.send({
-        content: (isFirstPage && mentions) || undefined,
+        content: (isFirstPage && mentions) || undefined + 'edited !',
         embeds: [
           {
             author: isFirstPage
@@ -194,6 +194,19 @@ export default class Reminders {
                 }
               : undefined,
             timestamp: isLastPage ? new Date().toISOString() : undefined
+          }
+        ],
+        components: [
+          {
+            type: ComponentType.ActionRow,
+            components: [
+              {
+                type: ComponentType.Button,
+                label: "Plus D'informations",
+                customId: 'reminderButton',
+                style: ButtonStyle.Success
+              }
+            ]
           }
         ]
       });
