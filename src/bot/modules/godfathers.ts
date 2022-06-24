@@ -4,7 +4,7 @@ import sharp from 'sharp';
 import got from 'got';
 import snakeCase from 'lodash/snakeCase';
 import { emojisGuildId } from '../constants';
-import { ProposalFull } from '../../typings';
+import { ProposalExtended } from '../../typings';
 
 const approveEmoji = '<:approve:908300630563651615>';
 const disapproveEmoji = '<:disapprove:908300630878203954>';
@@ -34,10 +34,14 @@ export async function getGodfatherEmoji(emojisGuild: Guild, member: GuildMember)
       }
     });
   }
+  if (!emojisGuild.emojis.cache.has(godfather.emoji_id)) {
+    await prisma.godfather.delete({ where: { id: godfather.id } });
+    return getGodfatherEmoji(emojisGuild, member);
+  }
   return { id: member.id, emoji: `<:vote:${godfather.emoji_id}>` };
 }
 
-export async function renderGodfatherLine(interaction: AnyInteraction<'cached'>, proposal: ProposalFull) {
+export async function renderGodfatherLine(interaction: AnyInteraction<'cached'>, proposal: ProposalExtended) {
   const emojisGuild = interaction.client.guilds.cache.get(emojisGuildId)!;
   const approvalsIds = proposal.approvals.map((approval) => approval.user_id);
   const disapprovalsIds = proposal.disapprovals.map((disapproval) => disapproval.user_id);

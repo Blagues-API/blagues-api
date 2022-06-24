@@ -86,7 +86,10 @@ export default class CorrectionCommand extends Command {
     await this.editJoke(interaction, joke, newJoke);
   }
 
-  async resolveJoke(interaction: ChatInputCommandInteraction, query: string): Promise<JokeCorrectionPayload | null> {
+  async resolveJoke(
+    interaction: ChatInputCommandInteraction<'cached'>,
+    query: string
+  ): Promise<JokeCorrectionPayload | null> {
     const joke = await this.findJoke(interaction, query);
     if (joke) return joke;
 
@@ -252,7 +255,10 @@ export default class CorrectionCommand extends Command {
     return IdType.JOKE_ID;
   }
 
-  async findJoke(interaction: ChatInputCommandInteraction, query: string): Promise<JokeCorrectionPayload | null> {
+  async findJoke(
+    interaction: ChatInputCommandInteraction<'cached'>,
+    query: string
+  ): Promise<JokeCorrectionPayload | null> {
     const idType = this.getIdType(query);
     if (idType === IdType.MESSAGE_ID) {
       const proposal = await prisma.proposal.findUnique({
@@ -293,7 +299,7 @@ export default class CorrectionCommand extends Command {
               `Impossible de trouver une blague ou correction liée à cet ID de blague, assurez vous que cet ID provient bien d\'un message envoyé par le bot ${interaction.client.user}`
             )
           )
-          .then(tDelete(10_000));
+          .then(tDelete(5000));
         return null;
       }
 
@@ -317,15 +323,13 @@ export default class CorrectionCommand extends Command {
 
     const joke = idType === IdType.JOKE_ID ? jokeById(Number(query)) : jokeByQuestion(query);
     if (!joke) {
-      interaction.channel
-        ?.send(
-          problem(
-            `Impossible de trouver une blague à partir de ${
-              idType === IdType.JOKE_ID ? 'cet identifiant' : 'cette question'
-            }, veuillez réessayer !`
-          )
+      interaction.channel?.send(
+        problem(
+          `Impossible de trouver une blague à partir de ${
+            idType === IdType.JOKE_ID ? 'cet identifiant' : 'cette question'
+          }, veuillez réessayer !`
         )
-        .then(tDelete(10_000));
+      );
       return null;
     }
 
@@ -405,7 +409,7 @@ export default class CorrectionCommand extends Command {
 
     const msg = messages?.first();
     if (!msg) {
-      await buttonInteraction.editReply(interactionInfo('Les 60 secondes se sont écoulées', false));
+      await buttonInteraction.editReply(interactionInfo('💡 Les 60 secondes se sont écoulées', false));
       return null;
     }
 
@@ -462,7 +466,7 @@ export default class CorrectionCommand extends Command {
 
     if (!response) {
       questionMessage.edit({
-        ...info('Les 60 secondes se sont écoulées'),
+        ...info('💡 Les 60 secondes se sont écoulées'),
         components: []
       });
       return null;

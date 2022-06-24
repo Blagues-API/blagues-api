@@ -3,11 +3,10 @@ name: ci
 on:
   push:
     branches:
-      - master
       - dev
   pull_request:
     branches:
-      - master
+      - dev
 
 jobs:
   ci:
@@ -46,3 +45,6 @@ jobs:
 
       - name: Run linter 👀
         run: yarn lint
+
+      - name: Run typescript build
+        run: npx tsc
