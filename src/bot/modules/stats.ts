@@ -8,7 +8,7 @@ import {
 import { Colors, godfatherRoleId } from '../constants';
 import prisma from '../../prisma';
 import { partition } from 'lodash';
-import { ProposalType } from '@prisma/client';
+import { Proposal, ProposalType } from '@prisma/client';
 
 export default class Stats {
   static async userStats(
@@ -56,11 +56,11 @@ export default class Stats {
       fields.push({
         name: 'Décisions de Parrain',
         value: stripIndents`
-          Décisions: **${totalDecisionsCount}**
-
+          Décisions totales: **${totalDecisionsCount}**
           Blagues: **${suggestsDecisionsCount}**
           Corrections: **${totalDecisionsCount - suggestsDecisionsCount}**
-        `
+        `,
+        inline: true
       });
     }
 
@@ -115,4 +115,29 @@ export default class Stats {
       ]
     });
   }
+}
+
+function proposalField(member: GuildMember, proposalType: string, proposals: Proposal[]): APIEmbedField {
+  const [suggestions, corrections] = partition(proposals, (proposal) => proposal.type === ProposalType.SUGGESTION);
+  let proposal;
+
+  if (proposalType === 'suggestions') {
+    proposal = suggestions;
+  } else {
+    proposal = corrections;
+  }
+
+  return {
+    name: 'Suggestions',
+    value: stripIndents`
+      ${proposal === suggestions ? 'Blagues' : 'Corrections'} proposées: **${proposal.length}**
+      ${proposal === suggestions ? 'Blagues' : 'Corrections'} en attente: **${
+        proposal.filter((s) => !s.refused && !s.merged).length
+      }**
+      ${proposal === suggestions ? 'Blagues' : 'Correction'} acceptées: **${proposal.filter((s) => s.merged).length}**
+      Up votee: **0** (à venir)
+      Down vote: **0** (à venir)
+    `,
+    inline: true
+  };
 }
