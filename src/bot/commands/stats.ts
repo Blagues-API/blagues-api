@@ -8,13 +8,15 @@ export default class StatsCommand extends Command {
   constructor() {
     super({
       name: 'stats',
-      description: 'Voir les statistiques',
+      description: "Afficher les statistiques d'un utilisateur",
       type: ApplicationCommandType.ChatInput,
       options: [
         {
           type: ApplicationCommandOptionType.User,
-          name: 'utilisatreur',
-          description: 'Utilisateur dont vous souhaitez voir les statistiques'
+          name: 'user',
+          nameLocalizations: { fr: 'utilisateur' },
+          description: 'Utilisateur dont vous voulez les statistiques',
+          required: false
         }
       ]
     });
@@ -26,11 +28,7 @@ export default class StatsCommand extends Command {
         interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannelId}>.`)
       );
     }
-
-    if (interaction.options.get('user')) {
-      return Stats.userStats(interaction, false);
-    }
-
-    return Stats.globalStats(interaction);
+    const member = interaction.options.getMember('user') || interaction.member;
+    return Stats.userStats(interaction, member, false);
   }
 }

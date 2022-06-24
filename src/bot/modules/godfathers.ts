@@ -34,6 +34,10 @@ export async function getGodfatherEmoji(emojisGuild: Guild, member: GuildMember)
       }
     });
   }
+  if (!emojisGuild.emojis.cache.has(godfather.emoji_id)) {
+    await prisma.godfather.delete({ where: { id: godfather.id } });
+    return getGodfatherEmoji(emojisGuild, member);
+  }
   return { id: member.id, emoji: `<:vote:${godfather.emoji_id}>` };
 }
 
