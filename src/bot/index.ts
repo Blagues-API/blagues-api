@@ -7,7 +7,11 @@ import {
   InteractionType,
   Message,
   PartialMessage,
-  Partials
+  Partials,
+  MessageReaction,
+  PartialMessageReaction,
+  User,
+  PartialUser
 } from 'discord.js';
 import Jokes from '../jokes';
 import prisma from '../prisma';
@@ -15,11 +19,13 @@ import { correctionsChannelId, suggestionsChannelId } from './constants';
 import Dispatcher from './lib/dispatcher';
 import Reminders from './modules/reminders';
 import Stickys from './modules/stickys';
+import UpVote from './modules/upvote';
 
 export default class Bot extends Client {
   public dispatcher: Dispatcher;
   public stickys: Stickys;
   public reminders: Reminders;
+  public upvote: UpVote;
 
   constructor() {
     super({
@@ -34,6 +40,7 @@ export default class Bot extends Client {
     this.dispatcher = new Dispatcher(this);
     this.stickys = new Stickys(this);
     this.reminders = new Reminders(this);
+    this.upvote = new UpVote(this);
 
     this.once('ready', this.onReady.bind(this));
   }
@@ -48,7 +55,6 @@ export default class Bot extends Client {
     await this.dispatcher.register();
 
     this.registerEvents();
-
     this.refreshStatus();
   }
 
@@ -92,9 +98,17 @@ export default class Bot extends Client {
     }
   }
 
+  async onMessageReactionAdd(
+    reaction: MessageReaction | PartialMessageReaction,
+    user: User | PartialUser
+  ): Promise<void> {
+    await this.upvote.reactionAdd(reaction, user);
+  }
+
   registerEvents(): void {
     this.on('interactionCreate', this.onInteractionCreate.bind(this));
     this.on('messageDelete', this.onMessageDelete.bind(this));
+    this.on('messageReactionAdd', this.onMessageReactionAdd.bind(this));
   }
 
   refreshStatus() {
@@ -110,6 +124,7 @@ export default class Bot extends Client {
     if (!process.env.BOT_TOKEN) {
       return console.log("Bot non lancé car aucun token n'a été défini");
     }
+
     await this.login(process.env.BOT_TOKEN);
   }
 }
