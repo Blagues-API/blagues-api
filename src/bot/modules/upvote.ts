@@ -10,7 +10,7 @@ import {
   User
 } from 'discord.js';
 import prisma from '../../prisma';
-import { ExtendedProposal } from '../../typings';
+import { Proposals } from '../../typings';
 
 export default class UpVote {
   public client: Client;
@@ -30,7 +30,7 @@ export default class UpVote {
     )
       return;
 
-    const proposal: ExtendedProposal | null = await prisma.proposal.findUnique({
+    const proposal = (await prisma.proposal.findUnique({
       where: {
         message_id: message.id
       },
@@ -65,7 +65,7 @@ export default class UpVote {
         approvals: true,
         disapprovals: true
       }
-    });
+    })) as Proposals | null;
     if (!proposal) return;
 
     const embed = message.embeds[0]?.toJSON();
