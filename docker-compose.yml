@@ -17,19 +17,19 @@ services:
     networks:
       - global
 
-  # website:
-  #   container_name: blagues_api.fr
-  #   restart: unless-stopped
-  #   build:
-  #     context: ../blagues-api.fr/
-  #     dockerfile: ./docker/Dockerfile
-  #   tty: true
-  #   env_file:
-  #     - ../blagues-api.fr/.env
-  #   depends_on:
-  #     - app
-  #   ports:
-  #     - '3003:3000'
+  website:
+    container_name: blagues_api.fr
+    restart: unless-stopped
+    build:
+      context: ../blagues-api.fr/
+      dockerfile: ./docker/Dockerfile
+    tty: true
+    env_file:
+      - ../blagues-api.fr/.env
+    depends_on:
+      - app
+    ports:
+      - '3003:3000'
 
   postgres:
     container_name: blagues_api_postgres

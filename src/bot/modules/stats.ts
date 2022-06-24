@@ -1,18 +1,17 @@
 import { stripIndents } from 'common-tags';
-import { APIEmbed, CommandInteraction } from 'discord.js';
+import { CommandInteraction, GuildMember, APIEmbed, APIEmbedField } from 'discord.js';
 import { Colors, godfatherRoleId } from '../constants';
 import prisma from '../../prisma';
 import { interactionProblem, paginate } from '../utils';
 import chunk from 'lodash/chunk';
 import partition from 'lodash/partition';
-import { ProposalType } from '@prisma/client';
+import { Proposal, ProposalType } from '@prisma/client';
 
 export default class Stats {
   static async userStats(interaction: CommandInteraction<'cached'>, ephemeral: boolean) {
     const member = interaction.options.getMember('user');
     if (!member) return interaction.reply(interactionProblem("Cet utilisateur n'est plus présent sur le serveur."));
 
-    const fields = [];
     const proposals = await prisma.proposal.findMany({
       where: {
         user_id: member.id,
@@ -20,20 +19,7 @@ export default class Stats {
       }
     });
 
-    const [suggestions, corrections] = partition(proposals, (proposal) => proposal.type === ProposalType.SUGGESTION);
-
-    fields.push({
-      name: 'Statistiques globales',
-      value: stripIndents`
-        Blagues proposées: **${suggestions.length}**
-        Blagues en attente: **${suggestions.filter((s) => !s.refused && !s.merged).length}**
-        Blagues acceptées: **${suggestions.filter((s) => s.merged).length}**
-
-        Corrections proposées: **${corrections.length}**
-        Corrections en attente: **${corrections.filter((c) => !c.refused && !c.merged).length}**
-        Corrections acceptées: **${corrections.filter((c) => c.merged).length}**
-      `
-    });
+    const fields = [proposalField(member, 'suggestions', proposals), proposalField(member, 'corrections', proposals)];
 
     if (member.roles.cache.has(godfatherRoleId)) {
       const approvals = await prisma.approval.findMany({
@@ -53,11 +39,11 @@ export default class Stats {
       fields.push({
         name: 'Décisions de Parrain',
         value: stripIndents`
-          Décisions: **${totalDecisionsCount}**
-
+          Décisions totales: **${totalDecisionsCount}**
           Blagues: **${suggestsDecisionsCount}**
           Corrections: **${totalDecisionsCount - suggestsDecisionsCount}**
-        `
+        `,
+        inline: true
       });
     }
 
@@ -115,4 +101,29 @@ export default class Stats {
 
     return paginate(interaction, embed, pages);
   }
+}
+
+function proposalField(member: GuildMember, proposalType: string, proposals: Proposal[]): APIEmbedField {
+  const [suggestions, corrections] = partition(proposals, (proposal) => proposal.type === ProposalType.SUGGESTION);
+  let proposal;
+
+  if (proposalType === 'suggestions') {
+    proposal = suggestions;
+  } else {
+    proposal = corrections;
+  }
+
+  return {
+    name: 'Suggestions',
+    value: stripIndents`
+      ${proposal === suggestions ? 'Blagues' : 'Corrections'} proposées: **${proposal.length}**
+      ${proposal === suggestions ? 'Blagues' : 'Corrections'} en attente: **${
+        proposal.filter((s) => !s.refused && !s.merged).length
+      }**
+      ${proposal === suggestions ? 'Blagues' : 'Correction'} acceptées: **${proposal.filter((s) => s.merged).length}**
+      Up votee: **0** (à venir)
+      Down vote: **0** (à venir)
+    `,
+    inline: true
+  };
 }

@@ -1,4 +1,4 @@
-import Command from 'bot/lib/command';
+import Command from '../lib/command';
 import { ApplicationCommandType, UserContextMenuCommandInteraction } from 'discord.js';
 import Stats from '../modules/stats';
 
