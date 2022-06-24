@@ -64,6 +64,11 @@ export default class Bot extends Client {
     }
   }
 
+  async onMessageCreate(message: Message | PartialMessage): Promise<void> {
+    if (!message.inGuild()) return;
+    this.stickys.run(message);
+  }
+
   async onMessageDelete(message: Message | PartialMessage): Promise<void> {
     if (!message.inGuild()) return;
     if (message.author && message.author.id !== this.user!.id) return;
@@ -107,6 +112,7 @@ export default class Bot extends Client {
 
   registerEvents(): void {
     this.on('interactionCreate', this.onInteractionCreate.bind(this));
+    this.on('messageCreate', this.onMessageCreate.bind(this));
     this.on('messageDelete', this.onMessageDelete.bind(this));
     this.on('messageReactionAdd', this.onMessageReactionAdd.bind(this));
   }

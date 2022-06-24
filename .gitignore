@@ -2,13 +2,8 @@ node_modules
 .env
 database.db*
 databases
-build
+dist
 archive
 .nuxt
-
-# en réflexion
-examples
-
-# Service worker
+.DS_Store
 sw.*
-

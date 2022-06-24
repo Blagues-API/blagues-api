@@ -31,4 +31,4 @@ export enum Colors {
   REPLACED = 0xffe83b
 }
 
-export const dataSplitRegex = /(?<base>(?:\n?> .+)+)(?:\n(?<correction>:warning: .+))?(?:\n\n?(?<godfather>.+))?/;
+export const dataSplitRegex = /(?<base>(?:\n?> .+)+)(?:\n(?<correction>:warning: .+))?(?:\n\n?(?<godfathers>.+))?/;
