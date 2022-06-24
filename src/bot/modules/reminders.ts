@@ -267,8 +267,7 @@ export default class Reminders {
         ...godfatherRole.members
           .filter((member) => {
             if (proposal.approvals.some((approval) => approval.user_id === member.id)) return true;
-            if (proposal.disapprovals.some((disapproval) => disapproval.user_id === member.id))
-              return true;
+            if (proposal.disapprovals.some((disapproval) => disapproval.user_id === member.id)) return true;
             return false;
           })
           .keys()
@@ -302,7 +301,6 @@ export default class Reminders {
           acc.pages.push(acc.current);
           acc.current = '>>> ';
         }
-        console.log(line);
         acc.current += line;
 
         if (array.length === index + 1) acc.pages.push(acc.current);
