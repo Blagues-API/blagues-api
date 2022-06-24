@@ -6,12 +6,12 @@ import {
   IntentsBitField,
   InteractionType,
   Message,
-  PartialMessage,
-  Partials,
   MessageReaction,
+  PartialMessage,
   PartialMessageReaction,
-  User,
-  PartialUser
+  Partials,
+  PartialUser,
+  User
 } from 'discord.js';
 import Jokes from '../jokes';
 import prisma from '../prisma';
@@ -19,13 +19,13 @@ import { correctionsChannelId, suggestionsChannelId } from './constants';
 import Dispatcher from './lib/dispatcher';
 import Reminders from './modules/reminders';
 import Stickys from './modules/stickys';
-import UpVote from './modules/upvote';
+import Votes from './modules/votes';
 
 export default class Bot extends Client {
   public dispatcher: Dispatcher;
   public stickys: Stickys;
   public reminders: Reminders;
-  public upvote: UpVote;
+  public votes: Votes;
 
   constructor() {
     super({
@@ -34,13 +34,14 @@ export default class Bot extends Client {
         IntentsBitField.Flags.Guilds |
         IntentsBitField.Flags.GuildMembers |
         IntentsBitField.Flags.GuildMessages |
-        IntentsBitField.Flags.MessageContent
+        IntentsBitField.Flags.MessageContent |
+        IntentsBitField.Flags.GuildMessageReactions
     });
 
     this.dispatcher = new Dispatcher(this);
     this.stickys = new Stickys(this);
     this.reminders = new Reminders(this);
-    this.upvote = new UpVote(this);
+    this.votes = new Votes(this);
 
     this.once('ready', this.onReady.bind(this));
   }
@@ -103,11 +104,8 @@ export default class Bot extends Client {
     }
   }
 
-  async onMessageReactionAdd(
-    reaction: MessageReaction | PartialMessageReaction,
-    user: User | PartialUser
-  ): Promise<void> {
-    await this.upvote.reactionAdd(reaction, user);
+  async onMessageReactionAdd(reaction: MessageReaction | PartialMessageReaction, user: User | PartialUser) {
+    return this.votes.run(reaction, user);
   }
 
   registerEvents(): void {
