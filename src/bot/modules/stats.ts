@@ -21,22 +21,18 @@ export default class Stats {
       {
         name: 'Suggestions',
         value: stripIndents`
-          Blagues proposées: **${suggestions.length}**
-          Blagues en attente: **${suggestions.filter((s) => !s.refused && !s.merged).length}**
-          Blagues acceptées: **${suggestions.filter((s) => s.merged).length}**
-          Up votee: **0** (à venir)
-          Down vote: **0** (à venir)
+          Proposées: **${suggestions.length}**
+          En attente: **${suggestions.filter((s) => !s.refused && !s.merged).length}**
+          Acceptées: **${suggestions.filter((s) => s.merged).length}**
         `,
         inline: true
       },
       {
         name: 'Corrections',
         value: stripIndents`
-          Corrections proposées: **${corrections.length}**
-          Corrections en attente: **${corrections.filter((s) => !s.refused && !s.merged).length}**
-          Corrections acceptées: **${corrections.filter((s) => s.merged).length}**
-          Up votee: **0** (à venir)
-          Down vote: **0** (à venir)
+          Proposées: **${corrections.length}**
+          En attente: **${corrections.filter((s) => !s.refused && !s.merged).length}**
+          Acceptées: **${corrections.filter((s) => s.merged).length}**
         `,
         inline: true
       }
