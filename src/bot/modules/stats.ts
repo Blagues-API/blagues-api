@@ -112,14 +112,14 @@ function proposalField(member: GuildMember, proposalType: string, proposals: Pro
   return {
     name: 'Suggestions',
     value: stripIndents`
-    ${proposal === suggestions ? 'Blagues' : 'Corrections'} proposées: **${proposal.length}**
-    ${proposal === suggestions ? 'Blagues' : 'Corrections'} en attente: **${
-      proposal.filter((s) => !s.refused && !s.merged).length
-    }**
-    ${proposal === suggestions ? 'Blagues' : 'Correction'} acceptées: **${proposal.filter((s) => s.merged).length}**
-    Up votee: **0** (à venir)
-    Down vote: **0** (à venir)
-  `,
+      ${proposal === suggestions ? 'Blagues' : 'Corrections'} proposées: **${proposal.length}**
+      ${proposal === suggestions ? 'Blagues' : 'Corrections'} en attente: **${
+        proposal.filter((s) => !s.refused && !s.merged).length
+      }**
+      ${proposal === suggestions ? 'Blagues' : 'Correction'} acceptées: **${proposal.filter((s) => s.merged).length}**
+      Up votee: **0** (à venir)
+      Down vote: **0** (à venir)
+    `,
     inline: true
   };
 }
