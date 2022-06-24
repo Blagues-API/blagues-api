@@ -111,7 +111,7 @@ export default class Stats {
       description: pages[0],
       color: Colors.PRIMARY,
       footer: {
-        text: pages.length > 1 ? `Page 1/${pages.length} • Blagues-API` : '• Blagues-API',
+        text: pages.length > 1 ? `Page 1/${pages.length} • Blagues-API` : 'Blagues-API',
         icon_url: interaction.guild!.iconURL({ size: 32 }) ?? undefined
       }
     };
