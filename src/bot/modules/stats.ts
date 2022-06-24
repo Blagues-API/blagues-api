@@ -1,5 +1,5 @@
 import { stripIndents } from 'common-tags';
-import { CommandInteraction, GuildMember, APIEmbedField } from 'discord.js';
+import { CommandInteraction, APIEmbedField } from 'discord.js';
 import { Colors, godfatherRoleId } from '../constants';
 import prisma from 'prisma';
 import { interactionProblem } from '../utils';
@@ -18,7 +18,7 @@ export default class Stats {
       }
     });
 
-    const fields = [proposalField(member, 'suggestions', proposals), proposalField(member, 'corrections', proposals)];
+    const fields = [proposalField('suggestions', proposals), proposalField('corrections', proposals)];
 
     if (member.roles.cache.has(godfatherRoleId)) {
       const approvals = await prisma.approval.findMany({
@@ -99,7 +99,7 @@ export default class Stats {
   }
 }
 
-function proposalField(member: GuildMember, proposalType: string, proposals: Proposal[]): APIEmbedField {
+function proposalField(proposalType: string, proposals: Proposal[]): APIEmbedField {
   const [suggestions, corrections] = partition(proposals, (proposal) => proposal.type === ProposalType.SUGGESTION);
   let proposal;
 
