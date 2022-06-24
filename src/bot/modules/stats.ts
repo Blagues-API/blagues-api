@@ -1,9 +1,10 @@
 import { stripIndents } from 'common-tags';
-import { CommandInteraction, GuildMember, APIEmbedField } from 'discord.js';
+import { CommandInteraction, GuildMember, APIEmbed, APIEmbedField } from 'discord.js';
 import { Colors, godfatherRoleId } from '../constants';
-import prisma from 'prisma';
-import { interactionProblem } from '../utils';
-import { partition } from 'lodash';
+import prisma from '../../prisma';
+import { interactionProblem, paginate } from '../utils';
+import chunk from 'lodash/chunk';
+import partition from 'lodash/partition';
 import { Proposal, ProposalType } from '@prisma/client';
 
 export default class Stats {
@@ -66,7 +67,6 @@ export default class Stats {
   }
 
   static async globalStats(interaction: CommandInteraction<'cached'>) {
-    // Issue reported: https://github.com/prisma/prisma/issues/10915
     const proposals = await prisma.proposal.groupBy({
       by: ['user_id', 'merged'],
       having: {
@@ -78,24 +78,28 @@ export default class Stats {
       _count: true
     });
 
-    return interaction.reply({
-      embeds: [
-        {
-          title: 'Statistiques',
-          description: [...proposals]
-            .sort((a, b) => b._count - a._count)
-            .map(
-              (proposal) => `<@${proposal.user_id}> : ${proposal._count} ${proposal._count !== 1 ? 'points' : 'point'}`
-            )
-            .join('\n'),
-          color: Colors.PRIMARY,
-          footer: {
-            text: 'Blagues API',
-            icon_url: interaction.guild!.iconURL({ size: 32 }) ?? undefined
-          }
-        }
-      ]
-    });
+    const membersProposals = proposals
+      .filter((proposal) => interaction.guild.members.cache.has(proposal.user_id!))
+      .sort((a, b) => b._count - a._count);
+
+    const pages = chunk(
+      membersProposals.map(
+        (proposal) => `<@${proposal.user_id}> : ${proposal._count} ${proposal._count !== 1 ? 'points' : 'point'}`
+      ),
+      20
+    ).map((entries) => entries.join('\n'));
+
+    const embed: APIEmbed = {
+      title: 'Statistiques',
+      description: pages[0],
+      color: Colors.PRIMARY,
+      footer: {
+        text: pages.length > 1 ? `Page 1/${pages.length} • Blagues-API` : 'Blagues-API',
+        icon_url: interaction.guild!.iconURL({ size: 32 }) ?? undefined
+      }
+    };
+
+    return paginate(interaction, embed, pages);
   }
 }
 
