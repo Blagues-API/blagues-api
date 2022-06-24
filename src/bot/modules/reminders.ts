@@ -26,7 +26,7 @@ export default class Reminders {
     if (process.env.bot_reminders === 'false') return;
 
     // Every 10 minutes
-    schedule.scheduleJob('*/1 * * * *', (date) => this.run(date));
+    schedule.scheduleJob('*/10 * * * *', (date) => this.run(date));
   }
 
   async run(date: Date): Promise<void> {
