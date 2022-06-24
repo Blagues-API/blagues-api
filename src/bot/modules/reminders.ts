@@ -1,4 +1,4 @@
-import { Proposal, ProposalType } from '@prisma/client';
+import { ProposalType } from '@prisma/client';
 import { messageLink } from '../utils';
 import { Snowflake } from 'discord-api-types/v9';
 import { ButtonStyle, Client, Collection, ComponentType, MessageComponentInteraction, TextChannel } from 'discord.js';
@@ -10,9 +10,12 @@ import {
   remindersChannelId,
   guildId,
   emojisGuildId,
-  godfatherRoleId
+  godfatherRoleId,
+  neededSuggestionsApprovals,
+  neededCorrectionsApprovals
 } from '../constants';
 import { getGodfatherEmoji } from './godfathers';
+import { ReminderProposal } from 'typings';
 
 export default class Reminders {
   public client: Client;
@@ -29,7 +32,7 @@ export default class Reminders {
   async run(date: Date): Promise<void> {
     const needMentions = date.getHours() === 21 && date.getMinutes() === 0;
     // Get all open proposals with their dependencies and decisions
-    const proposals = await prisma.proposal.findMany({
+    const proposals: ReminderProposal[] = await prisma.proposal.findMany({
       where: {
         merged: false,
         refused: false,
@@ -84,9 +87,8 @@ export default class Reminders {
     const godfathersEmojis = await Promise.all(
       godfatherRole.members.map((member) => getGodfatherEmoji(emojisGuild, member))
     );
-    console.log('001');
     // Remap proposals with godfathers acceptable decisions
-    const entries: Array<{ proposal: Proposal; members_ids: Snowflake[] }> = [];
+    const entries: Array<{ proposal: ReminderProposal; members_ids: Snowflake[] }> = [];
     for (const proposal of proposals) {
       if (proposal.type === ProposalType.SUGGESTION) {
         if (proposal.corrections[0]) continue;
@@ -98,9 +100,9 @@ export default class Reminders {
       const members_ids: Snowflake[] = [
         ...godfatherRole.members
           .filter((member) => {
-            if (proposal.approvals.some((approval) => approval.user_id === member.id)) return false;
-            if (proposal.disapprovals.some((disapproval) => disapproval.user_id === member.id)) return false;
-            if (proposal.user_id === member.id) return false;
+            if (proposal.approvals.some((approval) => approval.user_id !== member.id)) return false;
+            if (proposal.disapprovals.some((disapproval) => disapproval.user_id !== member.id)) return false;
+            if (proposal.user_id !== member.id) return false;
 
             return true;
           })
@@ -111,7 +113,6 @@ export default class Reminders {
 
       entries.push({ proposal, members_ids });
     }
-    console.log('002');
     // Reduce previous data into pages with a length < 4096 (max of embed description size)
     const { pages } = entries.reduce<{ current: string; pages: string[] }>(
       (acc, { proposal, members_ids }, index, array) => {
@@ -119,7 +120,7 @@ export default class Reminders {
           .map((members_id) => godfathersEmojis.find(({ id }) => members_id === id)?.emoji)
           .filter((e) => e)
           .join(' ');
-        const line = `[[${proposal.type === ProposalType.SUGGESTION ? 'Suggestion' : 'Correction'}]](${messageLink(
+        const line = `[${proposal.type === ProposalType.SUGGESTION ? 'Suggestion' : 'Correction'}](${messageLink(
           guild.id,
           proposal.type === ProposalType.SUGGESTION ? suggestionsChannelId : correctionsChannelId,
           proposal.message_id!
@@ -138,7 +139,6 @@ export default class Reminders {
       },
       { current: '>>> ', pages: [] }
     );
-    console.log('002');
 
     // Filter godfathers with a minimal of 10 acceptable decisions
     const mentions =
@@ -156,8 +156,6 @@ export default class Reminders {
         .join(' ');
 
     const remindersChannel = this.client.channels.cache.get(remindersChannelId) as TextChannel;
-    console.log('002');
-
     // Delete all previous channel messages
     await remindersChannel.bulkDelete(await remindersChannel.messages.fetch());
 
@@ -165,36 +163,22 @@ export default class Reminders {
     for (const index in pages) {
       const isFirstPage = Number(index) === 0;
       const isLastPage = Number(index) === pages.length - 1;
-      const types = proposals.reduce(
-        (acc, proposal) => acc.add(proposal.type === ProposalType.SUGGESTION ? 'suggestions' : 'corrections'),
-        new Set()
-      );
-      console.log('003');
-
       await remindersChannel.send({
         content: (isFirstPage && mentions) || undefined,
         embeds: [
           {
             author: isFirstPage
               ? {
-                  name: 'Parrains du projet Blagues API',
-                  url: 'https://blagues-api.fr',
-                  icon_url: this.client.user?.avatarURL({ extension: 'png', size: 128 }) || undefined
+                  name: "Propositions en attante d'approbation",
+                  icon_url: this.client.user!.displayAvatarURL({ extension: 'png', size: 128 })
                 }
-              : undefined,
-            title: isFirstPage
-              ? `Voici ${
-                  proposals.length === 1
-                    ? `la ${proposals[0].type === ProposalType.SUGGESTION ? 'suggestion' : 'correction'}`
-                    : `les ${[...types.values()].join('/')}`
-                } en cours :`
               : undefined,
             description: pages[index],
             color: 0x0067ad,
             footer: isLastPage
               ? {
                   text: 'Blagues API',
-                  icon_url: pages.length > 2 ? `${this.client.user?.avatarURL({ extension: 'png' })}` : undefined
+                  icon_url: pages.length > 2 ? this.client.user!.displayAvatarURL({ extension: 'png' }) : undefined
                 }
               : undefined,
             timestamp: isLastPage ? new Date().toISOString() : undefined
@@ -271,12 +255,8 @@ export default class Reminders {
     const godfatherRole = guild.roles.cache.get(godfatherRoleId);
     if (!godfatherRole) return;
 
-    const godfathersEmojis = await Promise.all(
-      godfatherRole.members.map((member) => getGodfatherEmoji(emojisGuild, member))
-    );
-
     // Remap proposals with godfathers acceptable decisions
-    const entries: Array<{ proposal: Proposal; members_ids: Snowflake[] }> = [];
+    const entries: Array<{ proposal: ReminderProposal; members_ids: Snowflake[] }> = [];
     for (const proposal of proposals) {
       if (proposal.type === ProposalType.SUGGESTION) {
         if (proposal.corrections[0]) continue;
@@ -302,18 +282,18 @@ export default class Reminders {
       entries.push({ proposal, members_ids });
     }
 
+    //{proposal.type === ProposalType.SUGGESTION ? 'Suggestion' : 'Correction'}
+
     // Reduce previous data into pages with a length < 4096 (max of embed description size)
     const { pages } = entries.reduce<{ current: string; pages: string[] }>(
-      (acc, { proposal, members_ids }, index, array) => {
-        const godfathers = members_ids
-          .map((members_id) => godfathersEmojis.find(({ id }) => members_id === id)?.emoji)
-          .filter((e) => e)
-          .join(' ');
-        const line = `[[${proposal.type === ProposalType.SUGGESTION ? 'Suggestion' : 'Correction'}]](${messageLink(
+      (acc, { proposal }, index, array) => {
+        const neededApprovalsCount =
+          proposal.type === ProposalType.SUGGESTION ? neededSuggestionsApprovals : neededCorrectionsApprovals;
+        const line = `[${ProposalType.SUGGESTION ? 'Suggestion' : 'Correction'}](${messageLink(
           guild.id,
           proposal.type === ProposalType.SUGGESTION ? suggestionsChannelId : correctionsChannelId,
           proposal.message_id!
-        )}) ${godfathers}\n`;
+        )}) (${Math.max(proposal.approvals.length, proposal.disapprovals.length)}/${neededApprovalsCount})\n`;
 
         if (line.length + acc.current.length > 4090) {
           acc.pages.push(acc.current);
@@ -333,10 +313,6 @@ export default class Reminders {
     for (const index in pages) {
       const isFirstPage = Number(index) === 0;
       const isLastPage = Number(index) === pages.length - 1;
-      const types = proposals.reduce(
-        (acc, proposal) => acc.add(proposal.type === ProposalType.SUGGESTION ? 'suggestions' : 'corrections'),
-        new Set()
-      );
       await interaction[interaction.replied ? 'editReply' : 'reply']({
         embeds: [
           {
@@ -346,13 +322,6 @@ export default class Reminders {
                   url: 'https://blagues-api.fr',
                   icon_url: this.client.user?.avatarURL({ extension: 'png', size: 128 }) || undefined
                 }
-              : undefined,
-            title: isFirstPage
-              ? `Voici ${
-                  proposals.length === 1
-                    ? `la ${proposals[0].type === ProposalType.SUGGESTION ? 'suggestion' : 'correction'}`
-                    : `les ${[...types.values()].join('/')}`
-                } en cours :`
               : undefined,
             description: pages[index],
             color: 0x0067ad,
