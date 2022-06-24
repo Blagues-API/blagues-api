@@ -4,7 +4,6 @@ import Command from './command';
 import CorrectCommand from '../commands/correction';
 import SuggestCommand from '../commands/suggest';
 import StatsCommand from '../commands/stats';
-import UserStatsCommand from '../commands/userStats';
 import JokeCommand from '../commands/joke';
 import ApproveCommand from '../commands/approve';
 import DisapproveCommand from '../commands/disapprove';
