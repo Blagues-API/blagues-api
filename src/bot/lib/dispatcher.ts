@@ -58,5 +58,7 @@ export default class Dispatcher {
     if (!guild) return;
 
     await guild.commands.set(this.commandsData);
+
+    await guild.members.fetch();
   }
 }
