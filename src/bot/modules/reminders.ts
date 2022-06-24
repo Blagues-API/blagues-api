@@ -266,8 +266,8 @@ export default class Reminders {
       const members_ids: Snowflake[] = [
         ...godfatherRole.members
           .filter((member) => {
-            if (proposal.approvals.some((approval) => approval.user_id === member.id || interaction.id)) return true;
-            if (proposal.disapprovals.some((disapproval) => disapproval.user_id === member.id || interaction.id))
+            if (proposal.approvals.some((approval) => approval.user_id === member.id)) return true;
+            if (proposal.disapprovals.some((disapproval) => disapproval.user_id === member.id))
               return true;
             return false;
           })
