@@ -88,4 +88,9 @@ export type ProposalSuggestion = ProposalExtended & {
   corrections: Proposal[];
 };
 
+export type ReminderProposal = ProposalExtended & {
+  corrections: Proposal[];
+  suggestion: (ProposalExtended & { corrections: Proposal[] }) | null;
+};
+
 export type Proposals = Correction | Suggestion;

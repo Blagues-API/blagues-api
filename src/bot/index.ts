@@ -15,7 +15,6 @@ import { correctionsChannelId, suggestionsChannelId } from './constants';
 import Dispatcher from './lib/dispatcher';
 import Reminders from './modules/reminders';
 import Stickys from './modules/stickys';
-
 export default class Bot extends Client {
   public dispatcher: Dispatcher;
   public stickys: Stickys;
@@ -55,6 +54,8 @@ export default class Bot extends Client {
   async onInteractionCreate(interaction: AnyInteraction): Promise<void> {
     if (interaction.type === InteractionType.ApplicationCommand) {
       return this.dispatcher.execute(interaction);
+    } else if (interaction.isButton() && interaction.customId === 'user_reminder') {
+      return this.reminders.pendingUserReminders(interaction);
     }
   }
 

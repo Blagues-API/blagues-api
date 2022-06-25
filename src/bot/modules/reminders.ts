@@ -1,7 +1,7 @@
-import { Proposal, ProposalType } from '@prisma/client';
+import { ProposalType } from '@prisma/client';
 import { messageLink } from '../utils';
 import { Snowflake } from 'discord-api-types/v9';
-import { Client, Collection, TextChannel } from 'discord.js';
+import { ButtonStyle, Client, Collection, ComponentType, MessageComponentInteraction, TextChannel } from 'discord.js';
 import schedule from 'node-schedule';
 import prisma from '../../prisma';
 import {
@@ -10,9 +10,12 @@ import {
   remindersChannelId,
   guildId,
   emojisGuildId,
-  godfatherRoleId
+  godfatherRoleId,
+  neededSuggestionsApprovals,
+  neededCorrectionsApprovals
 } from '../constants';
 import { getGodfatherEmoji } from './godfathers';
+import { ReminderProposal } from '../../typings';
 
 export default class Reminders {
   public client: Client;
@@ -29,7 +32,7 @@ export default class Reminders {
   async run(date: Date): Promise<void> {
     const needMentions = date.getHours() === 21 && date.getMinutes() === 0;
     // Get all open proposals with their dependencies and decisions
-    const proposals = await prisma.proposal.findMany({
+    const proposals: ReminderProposal[] = await prisma.proposal.findMany({
       where: {
         merged: false,
         refused: false,
@@ -84,9 +87,8 @@ export default class Reminders {
     const godfathersEmojis = await Promise.all(
       godfatherRole.members.map((member) => getGodfatherEmoji(emojisGuild, member))
     );
-
     // Remap proposals with godfathers acceptable decisions
-    const entries: Array<{ proposal: Proposal; members_ids: Snowflake[] }> = [];
+    const entries: Array<{ proposal: ReminderProposal; members_ids: Snowflake[] }> = [];
     for (const proposal of proposals) {
       if (proposal.type === ProposalType.SUGGESTION) {
         if (proposal.corrections[0]) continue;
@@ -98,11 +100,11 @@ export default class Reminders {
       const members_ids: Snowflake[] = [
         ...godfatherRole.members
           .filter((member) => {
-            if (proposal.approvals.some((approval) => approval.user_id === member.id)) return false;
-            if (proposal.disapprovals.some((disapproval) => disapproval.user_id === member.id)) return false;
+            if (proposal.approvals.some((approval) => approval.user_id === member.id)) return true;
+            if (proposal.disapprovals.some((disapproval) => disapproval.user_id === member.id)) return true;
             if (proposal.user_id === member.id) return false;
 
-            return true;
+            return false;
           })
           .keys()
       ];
@@ -111,7 +113,6 @@ export default class Reminders {
 
       entries.push({ proposal, members_ids });
     }
-
     // Reduce previous data into pages with a length < 4096 (max of embed description size)
     const { pages } = entries.reduce<{ current: string; pages: string[] }>(
       (acc, { proposal, members_ids }, index, array) => {
@@ -119,7 +120,7 @@ export default class Reminders {
           .map((members_id) => godfathersEmojis.find(({ id }) => members_id === id)?.emoji)
           .filter((e) => e)
           .join(' ');
-        const line = `[[${proposal.type === ProposalType.SUGGESTION ? 'Suggestion' : 'Correction'}]](${messageLink(
+        const line = `[${proposal.type === ProposalType.SUGGESTION ? 'Suggestion' : 'Correction'}](${messageLink(
           guild.id,
           proposal.type === ProposalType.SUGGESTION ? suggestionsChannelId : correctionsChannelId,
           proposal.message_id!
@@ -155,7 +156,6 @@ export default class Reminders {
         .join(' ');
 
     const remindersChannel = this.client.channels.cache.get(remindersChannelId) as TextChannel;
-
     // Delete all previous channel messages
     await remindersChannel.bulkDelete(await remindersChannel.messages.fetch());
 
@@ -163,39 +163,178 @@ export default class Reminders {
     for (const index in pages) {
       const isFirstPage = Number(index) === 0;
       const isLastPage = Number(index) === pages.length - 1;
-      const types = proposals.reduce(
-        (acc, proposal) => acc.add(proposal.type === ProposalType.SUGGESTION ? 'suggestions' : 'corrections'),
-        new Set()
-      );
       await remindersChannel.send({
         content: (isFirstPage && mentions) || undefined,
         embeds: [
           {
             author: isFirstPage
               ? {
-                  name: 'Parrains du projet Blagues API',
-                  url: 'https://blagues-api.fr',
-                  icon_url: this.client.user?.avatarURL({ extension: 'png', size: 128 }) || undefined
+                  name: "Propositions en attante d'approbation",
+                  icon_url: this.client.user!.displayAvatarURL({ extension: 'png', size: 128 })
                 }
-              : undefined,
-            title: isFirstPage
-              ? `Voici ${
-                  proposals.length === 1
-                    ? `la ${proposals[0].type === ProposalType.SUGGESTION ? 'suggestion' : 'correction'}`
-                    : `les ${[...types.values()].join('/')}`
-                } en cours :`
               : undefined,
             description: pages[index],
             color: 0x0067ad,
             footer: isLastPage
               ? {
                   text: 'Blagues API',
-                  icon_url: pages.length > 2 ? `${this.client.user?.avatarURL({ extension: 'png' })}` : undefined
+                  icon_url: pages.length > 2 ? this.client.user!.displayAvatarURL({ extension: 'png' }) : undefined
                 }
               : undefined,
             timestamp: isLastPage ? new Date().toISOString() : undefined
           }
+        ],
+        components: [
+          {
+            type: ComponentType.ActionRow,
+            components: [
+              {
+                type: ComponentType.Button,
+                label: "Plus d'informations",
+                customId: 'user_reminder',
+                style: ButtonStyle.Success
+              }
+            ]
+          }
         ]
+      });
+    }
+  }
+
+  async pendingUserReminders(interaction: MessageComponentInteraction) {
+    const proposals = await prisma.proposal.findMany({
+      where: {
+        merged: false,
+        refused: false,
+        stale: false
+      },
+      orderBy: {
+        created_at: 'asc'
+      },
+      include: {
+        corrections: {
+          take: 1,
+          orderBy: {
+            created_at: 'desc'
+          },
+          where: {
+            merged: false,
+            refused: false,
+            stale: false
+          }
+        },
+        suggestion: {
+          include: {
+            corrections: {
+              take: 1,
+              orderBy: {
+                created_at: 'desc'
+              },
+              where: {
+                merged: false,
+                refused: false,
+                stale: false
+              }
+            },
+            approvals: true,
+            disapprovals: true
+          }
+        },
+        approvals: true,
+        disapprovals: true
+      }
+    });
+
+    const guild = this.client.guilds.cache.get(guildId);
+    const emojisGuild = this.client.guilds.cache.get(emojisGuildId)!;
+    if (!guild || !emojisGuild) return;
+
+    await guild.members.fetch();
+
+    const godfatherRole = guild.roles.cache.get(godfatherRoleId);
+    if (!godfatherRole) return;
+    // Remap proposals with godfathers acceptable decisions
+    const entries: Array<{ proposal: ReminderProposal; members_ids: Snowflake[] }> = [];
+    for (const proposal of proposals) {
+      if (proposal.type === ProposalType.SUGGESTION) {
+        if (proposal.corrections[0]) continue;
+      } else {
+        const lastCorrection = proposal.suggestion?.corrections[0];
+        if (lastCorrection && lastCorrection.id !== proposal.id) continue;
+      }
+
+      const members_ids: Snowflake[] = [
+        ...godfatherRole.members
+          .filter((member) => {
+            if (proposal.approvals.some((approval) => approval.user_id === member.id)) return true;
+            if (proposal.disapprovals.some((disapproval) => disapproval.user_id === member.id)) return true;
+            return false;
+          })
+          .keys()
+      ];
+      if (!members_ids.length) continue;
+      entries.push({ proposal, members_ids });
+    }
+
+    //{proposal.type === ProposalType.SUGGESTION ? 'Suggestion' : 'Correction'}
+
+    // Reduce previous data into pages with a length < 4096 (max of embed description size)
+    const { pages } = entries.reduce<{ current: string; pages: string[] }>(
+      (acc, { proposal }, index, array) => {
+        const neededApprovalsCount =
+          proposal.type === ProposalType.SUGGESTION ? neededSuggestionsApprovals : neededCorrectionsApprovals;
+
+        if (
+          proposal.approvals.map((m) => m.user_id).includes(`${interaction.user.id}`) ||
+          proposal.disapprovals.map((m) => m.user_id).includes(`${interaction.user.id}`) ||
+          proposal.user_id === interaction.user.id
+        ) {
+          return acc;
+        }
+        const line = `[${ProposalType.SUGGESTION ? 'Suggestion' : 'Correction'}](${messageLink(
+          guild.id,
+          proposal.type === ProposalType.SUGGESTION ? suggestionsChannelId : correctionsChannelId,
+          proposal.message_id!
+        )}) (${Math.max(proposal.approvals.length, proposal.disapprovals.length)}/${neededApprovalsCount})\n`;
+        if (line.length + acc.current.length > 4090) {
+          acc.pages.push(acc.current);
+          acc.current = '>>> ';
+        }
+        acc.current += line;
+
+        if (array.length === index + 1) acc.pages.push(acc.current);
+
+        return acc;
+      },
+      { current: '', pages: [] }
+    );
+
+    // Send all reminders pages in separate messages
+    for (const index in pages) {
+      const isFirstPage = Number(index) === 0;
+      const isLastPage = Number(index) === pages.length - 1;
+      await interaction[interaction.replied ? 'editReply' : 'reply']({
+        embeds: [
+          {
+            author: isFirstPage
+              ? {
+                  name: 'Parrains du projet Blagues API',
+                  url: 'https://blagues-api.fr',
+                  icon_url: this.client.user?.displayAvatarURL({ extension: 'png', size: 128 }) || undefined
+                }
+              : undefined,
+            description: pages[index] || "Aucune proposition en cours d'approbation.",
+            color: 0x0067ad,
+            footer: isLastPage
+              ? {
+                  text: 'Blagues API',
+                  icon_url: pages.length > 2 ? `${this.client.user?.displayAvatarURL({ extension: 'png' })}` : undefined
+                }
+              : undefined,
+            timestamp: isLastPage ? new Date().toISOString() : undefined
+          }
+        ],
+        ephemeral: true
       });
     }
   }
