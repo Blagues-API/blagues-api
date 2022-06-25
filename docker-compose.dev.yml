@@ -16,6 +16,22 @@ services:
     networks:
       - global_dev
 
+  # website:
+  #   container_name: blagues_api_dev.fr
+  #   restart: unless-stopped
+  #   build:
+  #     context: ../blagues-api.fr/
+  #     dockerfile: ./docker/Dockerfile
+  #   tty: true
+  #   env_file:
+  #     - ../blagues-api.fr/.env
+  #   depends_on:
+  #     - app
+  #   ports:
+  #     - '3000:3000'
+  #   networks:
+  #     - global_dev
+
   postgres:
     container_name: blagues_api_postgres_dev
     image: 'postgres:13'
@@ -30,6 +46,7 @@ services:
 
 volumes:
   data:
+
 
 networks:
   global_dev:
