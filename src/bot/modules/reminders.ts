@@ -313,7 +313,7 @@ export default class Reminders {
     for (const index in pages) {
       const isFirstPage = Number(index) === 0;
       const isLastPage = Number(index) === pages.length - 1;
-      await interaction.reply({
+      await interaction[interaction.replied ? 'editReply' : 'reply']({
         embeds: [
           {
             author: isFirstPage
