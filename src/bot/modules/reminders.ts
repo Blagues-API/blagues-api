@@ -323,7 +323,7 @@ export default class Reminders {
                   icon_url: this.client.user?.displayAvatarURL({ extension: 'png', size: 128 }) || undefined
                 }
               : undefined,
-            description: pages[index] || 'Aucune Propsitions',
+            description: pages[index] || "Aucune proposition en cours d'approbation.",
             color: 0x0067ad,
             footer: isLastPage
               ? {
