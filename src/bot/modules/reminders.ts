@@ -284,17 +284,17 @@ export default class Reminders {
         const neededApprovalsCount =
           proposal.type === ProposalType.SUGGESTION ? neededSuggestionsApprovals : neededCorrectionsApprovals;
 
-       if (
-         proposal.approvals.map((m) => m.user_id).includes(`${interaction.user.id}`) ||
-         proposal.disapprovals.map((m) => m.user_id).includes(`${interaction.user.id}`) ||
-         proposal.user_id === interaction.user.id
+        if (
+          proposal.approvals.map((m) => m.user_id).includes(`${interaction.user.id}`) ||
+          proposal.disapprovals.map((m) => m.user_id).includes(`${interaction.user.id}`) ||
+          proposal.user_id === interaction.user.id
         ) {
-            return acc;
+          return acc;
         }
         const line = `[${ProposalType.SUGGESTION ? 'Suggestion' : 'Correction'}](${messageLink(
-            guild.id,
-            proposal.type === ProposalType.SUGGESTION ? suggestionsChannelId : correctionsChannelId,
-            proposal.message_id!
+          guild.id,
+          proposal.type === ProposalType.SUGGESTION ? suggestionsChannelId : correctionsChannelId,
+          proposal.message_id!
         )}) (${Math.max(proposal.approvals.length, proposal.disapprovals.length)}/${neededApprovalsCount})\n`;
         if (line.length + acc.current.length > 4090) {
           acc.pages.push(acc.current);
