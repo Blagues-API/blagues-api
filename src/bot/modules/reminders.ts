@@ -169,7 +169,7 @@ export default class Reminders {
           {
             author: isFirstPage
               ? {
-                  name: "Propositions en attante d'approbation",
+                  name: "Propositions en attente d'approbation",
                   icon_url: this.client.user!.displayAvatarURL({ extension: 'png', size: 128 })
                 }
               : undefined,
@@ -289,6 +289,7 @@ export default class Reminders {
           proposal.disapprovals.map((m) => m.user_id).includes(`${interaction.user.id}`) ||
           proposal.user_id === interaction.user.id
         ) {
+          acc.pages = [''];
           return acc;
         }
         const line = `[${ProposalType.SUGGESTION ? 'Suggestion' : 'Correction'}](${messageLink(
@@ -306,24 +307,22 @@ export default class Reminders {
 
         return acc;
       },
-      { current: '', pages: [] }
+      { current: '>>> ', pages: [] }
     );
 
     // Send all reminders pages in separate messages
     for (const index in pages) {
       const isFirstPage = Number(index) === 0;
       const isLastPage = Number(index) === pages.length - 1;
-      await interaction[interaction.replied ? 'editReply' : 'reply']({
+      await interaction.reply({
         embeds: [
           {
             author: isFirstPage
               ? {
-                  name: 'Parrains du projet Blagues API',
-                  url: 'https://blagues-api.fr',
-                  icon_url: this.client.user?.displayAvatarURL({ extension: 'png', size: 128 }) || undefined
+                  name: "Propositions en attente d'approbation:"
                 }
               : undefined,
-            description: pages[index] || "Aucune proposition en cours d'approbation.",
+            description: pages[index] || "> Vous n'avez aucun proposition en cours d'approbation.",
             color: 0x0067ad,
             footer: isLastPage
               ? {
