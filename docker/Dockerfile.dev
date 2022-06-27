@@ -14,4 +14,6 @@ RUN npx prisma generate
 
 EXPOSE 4000
 
+ENV NODE_OPTIONS="--enable-source-maps"
+
 CMD npx tsc-watch --onSuccess "node dist/index.js"

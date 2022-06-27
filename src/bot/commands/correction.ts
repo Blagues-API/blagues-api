@@ -26,15 +26,16 @@ import Command from '../lib/command';
 import clone from 'lodash/clone';
 import { ProposalType } from '@prisma/client';
 import {
-  info,
+  messageInfo,
   interactionInfo,
   interactionProblem,
   interactionValidate,
   isEmbedable,
-  problem,
+  messageProblem,
   showNegativeDiffs,
   showPositiveDiffs,
-  tDelete
+  tDelete,
+  info
 } from '../utils';
 
 enum IdType {
@@ -120,15 +121,9 @@ export default class CorrectionCommand extends Command {
         }
       });
       collector.once('end', async (_collected, reason: string) => {
-        if (reason === 'time') {
+        if (reason === 'idle') {
           await interaction.editReply({
-            embeds: [
-              question.embeds[0],
-              {
-                title: '💡 Commande annulée',
-                color: Colors.INFO
-              }
-            ]
+            embeds: [question.embeds[0], info('Commande annulée')]
           });
           return resolve(null);
         }
@@ -295,7 +290,7 @@ export default class CorrectionCommand extends Command {
       if (!proposal) {
         interaction.channel
           ?.send(
-            problem(
+            messageProblem(
               `Impossible de trouver une blague ou correction liée à cet ID de blague, assurez vous que cet ID provient bien d\'un message envoyé par le bot ${interaction.client.user}`
             )
           )
@@ -323,13 +318,15 @@ export default class CorrectionCommand extends Command {
 
     const joke = idType === IdType.JOKE_ID ? jokeById(Number(query)) : jokeByQuestion(query);
     if (!joke) {
-      interaction.channel?.send(
-        problem(
-          `Impossible de trouver une blague à partir de ${
-            idType === IdType.JOKE_ID ? 'cet identifiant' : 'cette question'
-          }, veuillez réessayer !`
+      interaction.channel
+        ?.send(
+          messageProblem(
+            `Impossible de trouver une blague à partir de ${
+              idType === IdType.JOKE_ID ? 'cet identifiant' : 'cette question'
+            }, veuillez réessayer !`
+          )
         )
-      );
+        .then(tDelete(5000));
       return null;
     }
 
@@ -409,7 +406,7 @@ export default class CorrectionCommand extends Command {
 
     const msg = messages?.first();
     if (!msg) {
-      await buttonInteraction.editReply(interactionInfo('💡 Les 60 secondes se sont écoulées', false));
+      await buttonInteraction.editReply(interactionInfo('Les 60 secondes se sont écoulées.', false));
       return null;
     }
 
@@ -465,10 +462,7 @@ export default class CorrectionCommand extends Command {
       .catch(() => null);
 
     if (!response) {
-      questionMessage.edit({
-        ...info('💡 Les 60 secondes se sont écoulées'),
-        components: []
-      });
+      questionMessage.edit(messageInfo('Les 60 secondes se sont écoulées.'));
       return null;
     }
 
