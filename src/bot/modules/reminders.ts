@@ -169,7 +169,7 @@ export default class Reminders {
           {
             author: isFirstPage
               ? {
-                  name: "Propositions en attente d'approbation",
+                  name: "Propositions en attente d'approbation:",
                   icon_url: this.client.user!.displayAvatarURL({ extension: 'png', size: 128 })
                 }
               : undefined,
@@ -322,7 +322,7 @@ export default class Reminders {
                   name: "Propositions en attente d'approbation:"
                 }
               : undefined,
-            description: pages[index] || "> Vous n'avez aucun proposition en cours d'approbation.",
+            description: pages[index] || "> Vous n'avez aucune proposition en cours d'approbation.",
             color: 0x0067ad,
             footer: isLastPage
               ? {
