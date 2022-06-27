@@ -318,13 +318,15 @@ export default class CorrectionCommand extends Command {
 
     const joke = idType === IdType.JOKE_ID ? jokeById(Number(query)) : jokeByQuestion(query);
     if (!joke) {
-      interaction.channel?.send(
-        messageProblem(
-          `Impossible de trouver une blague à partir de ${
-            idType === IdType.JOKE_ID ? 'cet identifiant' : 'cette question'
-          }, veuillez réessayer !`
+      interaction.channel
+        ?.send(
+          messageProblem(
+            `Impossible de trouver une blague à partir de ${
+              idType === IdType.JOKE_ID ? 'cet identifiant' : 'cette question'
+            }, veuillez réessayer !`
+          )
         )
-      );
+        .then(tDelete(5000));
       return null;
     }
 
@@ -550,8 +552,6 @@ export default class CorrectionCommand extends Command {
       const embed = suggestionMessage.embeds[0].toJSON();
 
       const { base, godfathers } = embed.description!.match(dataSplitRegex)!.groups!;
-
-      console.log(base, godfathers);
 
       const correctionText = `⚠️ Une [correction](${message.url}) est en cours.`;
       embed.description = [base, correctionText, godfathers].filter(Boolean).join('\n\n');
