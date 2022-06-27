@@ -18,6 +18,7 @@ Afin de simplifier l'utilisation de Blagues API, des modules ont été créés 
   CommonJS, Browser)
 - Module PyPi [`blagues-api`](https://pypi.org/project/blagues-api) (python >=
   3.8)
+- Module Packagist [`zuruuh/blagues-api`](https://packagist.org/packages/zuruuh/blagues-api) (PHP 7.4+)
 
 > Dans le cas où aucun module n'a été créé vous pouvez utiliser l'api standard.
 

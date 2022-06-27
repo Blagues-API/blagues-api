@@ -62,6 +62,8 @@ export default class Bot extends Client {
   async onInteractionCreate(interaction: AnyInteraction): Promise<void> {
     if (interaction.type === InteractionType.ApplicationCommand) {
       return this.dispatcher.execute(interaction);
+    } else if (interaction.isButton() && interaction.customId === 'user_reminder') {
+      return this.reminders.pendingUserReminders(interaction);
     }
   }
 
