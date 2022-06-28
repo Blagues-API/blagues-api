@@ -2,7 +2,7 @@ import { ProposalType } from '@prisma/client';
 import { messageLink } from '../utils';
 import { Snowflake } from 'discord-api-types/v9';
 import { ButtonInteraction, ButtonStyle, Client, Collection, ComponentType, TextChannel } from 'discord.js';
-// import schedule from 'node-schedule';
+import schedule from 'node-schedule';
 import prisma from '../../prisma';
 import {
   correctionsChannelId,
@@ -25,12 +25,8 @@ export default class Reminders {
 
     if (process.env.bot_reminders === 'false') return;
 
-    setTimeout(() => {
-      this.run(new Date());
-    }, 3000);
-
     // Every 10 minutes
-    // schedule.scheduleJob('*/10 * * * *', (date) => );
+    schedule.scheduleJob('*/10 * * * *', (date) => this.run(date));
   }
 
   async run(date: Date): Promise<void> {
@@ -188,19 +184,21 @@ export default class Reminders {
             timestamp: isLastPage ? new Date().toISOString() : undefined
           }
         ],
-        components: [
-          {
-            type: ComponentType.ActionRow,
-            components: [
+        components: isLastPage
+          ? [
               {
-                type: ComponentType.Button,
-                label: "Plus d'informations",
-                customId: 'user_reminder',
-                style: ButtonStyle.Success
+                type: ComponentType.ActionRow,
+                components: [
+                  {
+                    type: ComponentType.Button,
+                    label: "Plus d'informations",
+                    customId: 'user_reminder',
+                    style: ButtonStyle.Success
+                  }
+                ]
               }
             ]
-          }
-        ]
+          : []
       });
     }
   }
