@@ -20,7 +20,7 @@ export default class Stickys {
     if (process.env.bot_stickies === 'false') return;
     if (!(message.channelId in this.messages)) return;
 
-    return this.check(suggestionsChannelId, this.messages[message.channelId]);
+    return this.check(message.channelId, this.messages[message.channelId]);
   }
 
   private async check(targetChannel: Snowflake, embed: APIEmbed) {
