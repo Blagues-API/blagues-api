@@ -73,8 +73,13 @@ export default class Votes {
     }
     if (proposal.merged || proposal.refused || proposal.stale) return;
 
+    const type = reaction.emoji.name == upReaction ? 'UP' : reaction.emoji.name == downReaction ? 'DOWN' : null;
+    if (!type) return;
+    (message.reactions.resolve(type == 'UP' ? downReaction : upReaction) as MessageReaction).users.remove(user.id);
     const voteIndex = proposal.votes.findIndex((vote) => vote.user_id == user.id);
     if (voteIndex !== -1) {
+      //message.reactions.resolve(type == 'UP' ? downReaction : upReaction).users.remove(user.id);
+
       await prisma.vote.delete({
         where: {
           proposal_id_user_id: {
@@ -84,9 +89,6 @@ export default class Votes {
         }
       });
     }
-
-    const type = reaction.emoji.name == upReaction ? 'UP' : reaction.emoji.name == downReaction ? 'DOWN' : null;
-    if (!type) return;
 
     proposal.votes.push(
       await prisma.vote.create({
