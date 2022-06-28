@@ -1,4 +1,4 @@
-import { correctionsChannelId, suggestionsChannelId } from '../constants';
+import { correctionsChannelId, downReaction, suggestionsChannelId, upReaction } from '../constants';
 import { isParrain } from '../utils';
 import { Client, GuildTextBasedChannel, MessageReaction, PartialMessageReaction, PartialUser, User } from 'discord.js';
 import prisma from '../../prisma';
@@ -22,7 +22,7 @@ export default class Votes {
 
     const member = await channel.guild.members.fetch(user.id);
 
-    if (![suggestionsChannelId, correctionsChannelId].includes(channel.id) || !isParrain(member)) return;
+    if (![suggestionsChannelId, correctionsChannelId].includes(channel.id) || isParrain(member)) return;
     const proposal = await prisma.proposal.findUnique({
       where: {
         message_id: message.id
@@ -41,7 +41,8 @@ export default class Votes {
               }
             },
             approvals: true,
-            disapprovals: true
+            disapprovals: true,
+            votes: true
           }
         },
         corrections: {
@@ -56,11 +57,11 @@ export default class Votes {
           }
         },
         approvals: true,
-        disapprovals: true
+        disapprovals: true,
+        votes: true
       }
     });
     if (!proposal) return;
-
     const embed = message.embeds[0]?.toJSON();
     if (!embed) {
       await prisma.proposal.delete({
@@ -70,7 +71,32 @@ export default class Votes {
       });
       return;
     }
-    if (proposal.merged || proposal.refused) return;
+    if (proposal.merged || proposal.refused || proposal.stale) return;
+
+    const voteIndex = proposal.votes.findIndex((vote) => vote.user_id == user.id);
+    if (voteIndex !== -1) {
+      await prisma.vote.delete({
+        where: {
+          proposal_id_user_id: {
+            proposal_id: proposal.id,
+            user_id: user.id
+          }
+        }
+      });
+    }
+
+    const type = reaction.emoji.name == upReaction ? 'UP' : reaction.emoji.name == downReaction ? 'DOWN' : null;
+    if (!type) return;
+
+    proposal.votes.push(
+      await prisma.vote.create({
+        data: {
+          proposal_id: proposal.id,
+          user_id: user.id,
+          type: type
+        }
+      })
+    );
   }
 
   async checkReaction(messageReaction: MessageReaction | PartialMessageReaction) {
