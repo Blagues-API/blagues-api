@@ -78,8 +78,6 @@ export default class Votes {
     (message.reactions.resolve(type == 'UP' ? downReaction : upReaction) as MessageReaction).users.remove(user.id);
     const voteIndex = proposal.votes.findIndex((vote) => vote.user_id == user.id);
     if (voteIndex !== -1) {
-      //message.reactions.resolve(type == 'UP' ? downReaction : upReaction).users.remove(user.id);
-
       await prisma.vote.delete({
         where: {
           proposal_id_user_id: {
