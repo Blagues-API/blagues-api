@@ -5,14 +5,14 @@ import Jokes from '../../jokes';
 
 export default class Stickys {
   public client: Client;
-  private messages: Record<string, APIEmbed>;
+  private messages: Record<string, () => APIEmbed>;
 
   constructor(client: Client) {
     this.client = client;
 
     this.messages = {
-      [suggestionsChannelId]: this.suggestsMessage(),
-      [correctionsChannelId]: this.correctionsMessage()
+      [suggestionsChannelId]: this.suggestsMessage,
+      [correctionsChannelId]: this.correctionsMessage
     };
   }
 
@@ -20,7 +20,7 @@ export default class Stickys {
     if (process.env.bot_stickies === 'false') return;
     if (!(message.channelId in this.messages)) return;
 
-    return this.check(suggestionsChannelId, this.messages[message.channelId]);
+    return this.check(message.channelId, this.messages[message.channelId]());
   }
 
   private async check(targetChannel: Snowflake, embed: APIEmbed) {

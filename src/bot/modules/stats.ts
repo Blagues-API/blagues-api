@@ -108,7 +108,7 @@ export default class Stats {
 
     const embed: APIEmbed = {
       title: 'Statistiques',
-      description: pages[0],
+      description: pages[0] || "Il n'y a aucune statistiques.",
       color: Colors.PRIMARY,
       footer: {
         text: pages.length > 1 ? `Page 1/${pages.length} • Blagues-API` : 'Blagues-API',
