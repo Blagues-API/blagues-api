@@ -7,7 +7,7 @@ import StatsCommand from '../commands/stats';
 import JokeCommand from '../commands/joke';
 import ApproveCommand from '../commands/approve';
 import DisapproveCommand from '../commands/disapprove';
-import LeaderboardCommand from '../commands/leaderbord';
+import LeaderboardCommand from '../commands/leaderboard';
 import UserStatsCommand from '../commands/userStats';
 import { guildId } from '../constants';
 
