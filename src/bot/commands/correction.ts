@@ -112,7 +112,7 @@ export default class CorrectionCommand extends Command {
         idle: 60_000
       });
       collector.on('collect', async (msg: Message) => {
-        if (msg.deletable) await msg.delete().catch(() => null);
+        if (msg.deletable) setInterval(() => msg.delete().catch(() => null), 5000);
         const joke = await this.findJoke(interaction, msg.content);
 
         if (joke) {
@@ -123,7 +123,7 @@ export default class CorrectionCommand extends Command {
       collector.once('end', async (_collected, reason: string) => {
         if (reason === 'idle') {
           await interaction.editReply({
-            embeds: [question.embeds[0], info('Commande annulée')]
+            embeds: [question.embeds[0], info('Les 60 secondes se sont écoulées.')]
           });
           return resolve(null);
         }
@@ -196,7 +196,7 @@ export default class CorrectionCommand extends Command {
       .catch(() => null);
 
     if (!buttonInteraction) {
-      await commandInteraction.editReply(interactionInfo('Les 2 minutes de délais sont dépassés.'));
+      await commandInteraction.editReply(interactionInfo('Les 2 minutes se sont écoulées.'));
       return null;
     }
 

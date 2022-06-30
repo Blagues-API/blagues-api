@@ -19,7 +19,11 @@ export default class Stickys {
   async run(message: Message<true>) {
     if (process.env.bot_stickies === 'false') return;
     if (!(message.channelId in this.messages)) return;
-
+    if (message.author.id != message.client.user!.id) {
+      if (message.deletable) {
+        return message.delete();
+      }
+    }
     return this.check(message.channelId, this.messages[message.channelId]());
   }
 
