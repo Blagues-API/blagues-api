@@ -49,7 +49,9 @@ export default class Bot extends Client {
 
     this.registerEvents();
 
-    this.refreshStatus();
+    setInterval(() => {
+      this.refreshStatus();
+    }, 120000);
   }
 
   async onInteractionCreate(interaction: AnyInteraction): Promise<void> {
@@ -92,9 +94,15 @@ export default class Bot extends Client {
     }
   }
 
+  async onMessageCreate(message: Message | PartialMessage): Promise<void> {
+    if (!message.inGuild()) return;
+    this.stickys.run(message);
+  }
+
   registerEvents(): void {
     this.on('interactionCreate', this.onInteractionCreate.bind(this));
     this.on('messageDelete', this.onMessageDelete.bind(this));
+    this.on('messageCreate', this.onMessageCreate.bind(this));
   }
 
   refreshStatus() {

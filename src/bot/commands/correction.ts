@@ -86,7 +86,10 @@ export default class CorrectionCommand extends Command {
     await this.editJoke(interaction, joke, newJoke);
   }
 
-  async resolveJoke(interaction: ChatInputCommandInteraction, query: string): Promise<JokeCorrectionPayload | null> {
+  async resolveJoke(
+    interaction: ChatInputCommandInteraction<'cached'>,
+    query: string
+  ): Promise<JokeCorrectionPayload | null> {
     const joke = await this.findJoke(interaction, query);
     if (joke) return joke;
 
@@ -115,7 +118,6 @@ export default class CorrectionCommand extends Command {
           collector.stop();
           return resolve(joke);
         }
-
       });
       collector.once('end', async (_collected, reason: string) => {
         if (reason === 'time') {
@@ -135,7 +137,7 @@ export default class CorrectionCommand extends Command {
   }
 
   async requestChanges(
-    commandInteraction: ChatInputCommandInteraction,
+    commandInteraction: ChatInputCommandInteraction<'cached'>,
     joke: JokeCorrectionPayload,
     changes = false
   ): Promise<JokeCorrectionPayload | null> {
@@ -253,7 +255,10 @@ export default class CorrectionCommand extends Command {
     return IdType.JOKE_ID;
   }
 
-  async findJoke(interaction: ChatInputCommandInteraction, query: string): Promise<JokeCorrectionPayload | null> {
+  async findJoke(
+    interaction: ChatInputCommandInteraction<'cached'>,
+    query: string
+  ): Promise<JokeCorrectionPayload | null> {
     const idType = this.getIdType(query);
     if (idType === IdType.MESSAGE_ID) {
       const proposal = await prisma.proposal.findUnique({

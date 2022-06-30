@@ -8,14 +8,12 @@ export default class Tesseract {
   constructor() {
     this.bot = new Bot();
     this.api = new Api();
-
-    this.init();
   }
 
   async init(): Promise<void> {
     try {
       await Promise.all([
-        // eslint-disable-next-line
+        // eslint-disable-next-line prettier/prettier
         this.api.start(),
         this.bot.start()
       ]);
