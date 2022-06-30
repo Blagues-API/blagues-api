@@ -112,7 +112,7 @@ export default class CorrectionCommand extends Command {
         idle: 60_000
       });
       collector.on('collect', async (msg: Message) => {
-        if (msg.deletable) setInterval(async () => await msg.delete().catch(() => null), 5000);
+        if (msg.deletable) setInterval(() => msg.delete().catch(() => null), 5000);
         const joke = await this.findJoke(interaction, msg.content);
 
         if (joke) {
