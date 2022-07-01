@@ -19,7 +19,7 @@ export default class Stats {
     const [suggestions, corrections] = partition(proposals, (proposal) => proposal.type === ProposalType.SUGGESTION);
     const fields = [
       {
-        name: 'Suggestions',
+        name: 'Suggestions :',
         value: stripIndents`
           Proposées: **${suggestions.length}**
           En attente: **${suggestions.filter((s) => !s.refused && !s.merged).length}**
@@ -28,7 +28,7 @@ export default class Stats {
         inline: true
       },
       {
-        name: 'Corrections',
+        name: 'Corrections :',
         value: stripIndents`
           Proposées: **${corrections.length}**
           En attente: **${corrections.filter((s) => !s.refused && !s.merged).length}**
@@ -52,7 +52,6 @@ export default class Stats {
       const suggestsDecisionsCount = [...approvals, ...disapprovals].filter(
         (approval) => approval.proposal.type === ProposalType.SUGGESTION
       ).length;
-
       fields.push({
         name: 'Décisions de Parrain',
         value: stripIndents`
@@ -108,7 +107,7 @@ export default class Stats {
 
     const embed: APIEmbed = {
       title: 'Statistiques',
-      description: pages[0],
+      description: pages[0] || "Il n'y a aucune statistiques.",
       color: Colors.PRIMARY,
       footer: {
         text: pages.length > 1 ? `Page 1/${pages.length} • Blagues-API` : 'Blagues-API',

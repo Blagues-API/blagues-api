@@ -6,6 +6,7 @@ import {
   GuildMember,
   InteractionReplyOptions,
   Message,
+  MessageOptions,
   TextChannel,
   User
 } from 'discord.js';
@@ -14,64 +15,77 @@ import { APIEmbed } from 'discord-api-types/v10';
 import { godfatherRoleId } from './constants';
 
 type UniversalInteractionOptions = Omit<InteractionReplyOptions, 'flags'>;
+type UniversalMessageOptions = Omit<MessageOptions, 'flags'>;
+
+export function problem(message: string): APIEmbed {
+  return {
+    description: `❌ ${message}`,
+    color: 0xff0000
+  };
+}
+
+export function messageProblem(message: string): UniversalMessageOptions {
+  return {
+    content: '',
+    embeds: [problem(message)],
+    components: []
+  };
+}
 
 export function interactionProblem(message: string, ephemeral = true): UniversalInteractionOptions {
   return {
-    ...problem(message),
-    components: [],
     content: '',
+    embeds: [problem(message)],
+    components: [],
     ephemeral
   };
 }
 
-export function problem(message: string): { embeds: APIEmbed[] } {
+export function info(message: string): APIEmbed {
   return {
-    embeds: [
-      {
-        description: `❌ ${message}`,
-        color: 0xff0000
-      }
-    ]
+    description: `💡 ${message}`,
+    color: 0xffd983
+  };
+}
+
+export function messageInfo(message: string): UniversalMessageOptions {
+  return {
+    content: '',
+    embeds: [info(message)],
+    components: []
   };
 }
 
 export function interactionInfo(message: string, ephemeral = true): UniversalInteractionOptions {
   return {
-    ...info(message),
-    components: [],
     content: '',
+    embeds: [info(message)],
+    components: [],
     ephemeral
   };
 }
 
-export function info(message: string): { embeds: APIEmbed[] } {
+export function validate(message: string): APIEmbed {
   return {
-    embeds: [
-      {
-        description: `💡 ${message}`,
-        color: 0xffd983
-      }
-    ]
+    description: `✅ ${message}`,
+    color: 0x7fef34
+  };
+}
+
+export function messageValidate(message: string): UniversalMessageOptions {
+  return {
+    content: '',
+    embeds: [validate(message)],
+    components: []
   };
 }
 
 export function interactionValidate(message: string, ephemeral = true): UniversalInteractionOptions {
   return {
-    ...validate(message),
     content: '',
+    embeds: [validate(message)],
     components: [],
     ephemeral
-  };
-}
-
-export function validate(message: string): { embeds: APIEmbed[] } {
-  return {
-    embeds: [
-      {
-        description: `✅ ${message}`,
-        color: 0x7fef34
-      }
-    ]
   };
 }
 

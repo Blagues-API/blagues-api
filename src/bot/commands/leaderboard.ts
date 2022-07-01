@@ -7,7 +7,7 @@ import Stats from '../modules/stats';
 export default class LeaderboardCommand extends Command {
   constructor() {
     super({
-      name: 'leaderbord',
+      name: 'leaderboard',
       description: 'Afficher les statistiques',
       type: ApplicationCommandType.ChatInput
     });
