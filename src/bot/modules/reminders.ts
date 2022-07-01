@@ -174,7 +174,7 @@ export default class Reminders {
           {
             author: isFirstPage
               ? {
-                  name: " Propositions en attente d'approbation :",
+                  name: "Propositions en attente d'approbation:",
                   icon_url: this.client.user!.displayAvatarURL({ extension: 'png', size: 128 })
                 }
               : undefined,
