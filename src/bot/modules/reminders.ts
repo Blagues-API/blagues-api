@@ -107,8 +107,7 @@ export default class Reminders {
           .filter(
             (member) =>
               proposal.approvals.some((approval) => approval.user_id === member.id) ||
-              proposal.disapprovals.some((disapproval) => disapproval.user_id === member.id) ||
-              proposal.user_id === member.id
+              proposal.disapprovals.some((disapproval) => disapproval.user_id === member.id)
           )
           .keys()
       ];
@@ -175,7 +174,7 @@ export default class Reminders {
           {
             author: isFirstPage
               ? {
-                  name: "Propositions en attente d'approbation:",
+                  name: " Propositions en attente d'approbation :",
                   icon_url: this.client.user!.displayAvatarURL({ extension: 'png', size: 128 })
                 }
               : undefined,
@@ -197,7 +196,8 @@ export default class Reminders {
                 components: [
                   {
                     type: ComponentType.Button,
-                    label: "Plus d'informations",
+                    emoji: '📑',
+                    label: 'Cliquez ici pour recevoir vos propositions !',
                     customId: 'user_reminder',
                     style: ButtonStyle.Success
                   }
