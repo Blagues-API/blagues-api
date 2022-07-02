@@ -198,7 +198,7 @@ export default class Reminders {
                   {
                     type: ComponentType.Button,
                     emoji: '📑',
-                    label: 'Cliquez ici pour recevoir vos propositions !',
+                    label: 'Mes propositions',
                     customId: 'user_reminder',
                     style: ButtonStyle.Success
                   }
