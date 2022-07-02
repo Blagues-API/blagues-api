@@ -99,7 +99,7 @@ export default class Bot extends Client {
   async onMessageCreate(message: Message | PartialMessage): Promise<void> {
     if (!message.inGuild()) return;
     this.stickys.run(message);
-  } // dis moi je chauffe ou je refroidis
+  }
 
   async onGuildMemberUpdate(oldMember: GuildMember, newMember: GuildMember) {
     if (oldMember.displayAvatarURL() !== newMember.displayAvatarURL()) {
