@@ -143,12 +143,14 @@ export default class Reminders {
       { current: '>>> ', pages: [] }
     );
 
+    const godFatherMember: Snowflake[] = [...godfatherRole.members.keys()];
+
     // Filter godfathers with a minimal of 10 acceptable decisions
     const mentions =
       needMentions &&
       entries
         .reduce((acc, { members_ids }) => {
-          for (const member_id of members_ids) {
+          for (const member_id of godFatherMember.filter((m) => !members_ids.includes(m))) {
             const memberScore = acc.get(member_id) ?? 0;
             acc.set(member_id, memberScore + 1);
           }
@@ -195,7 +197,8 @@ export default class Reminders {
                 components: [
                   {
                     type: ComponentType.Button,
-                    label: "Plus d'informations",
+                    emoji: '📑',
+                    label: 'Mes propositions',
                     customId: 'user_reminder',
                     style: ButtonStyle.Success
                   }
