@@ -107,7 +107,8 @@ export default class Reminders {
           .filter(
             (member) =>
               proposal.approvals.some((approval) => approval.user_id === member.id) ||
-              proposal.disapprovals.some((disapproval) => disapproval.user_id === member.id)
+              proposal.disapprovals.some((disapproval) => disapproval.user_id === member.id) ||
+              proposal.user_id === member.id
           )
           .keys()
       ];
