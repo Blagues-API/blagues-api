@@ -102,36 +102,33 @@ export default class Bot extends Client {
   }
 
   async onGuildMemberUpdate(oldMember: GuildMember, newMember: GuildMember) {
-    if (oldMember.displayAvatarURL() !== newMember.displayAvatarURL()) {
-      if (!newMember.roles.cache.has(godfatherRoleId)) return;
-      const guild = this.guilds.cache.get(emojisGuildId);
-      const emoji = getGodfatherEmoji(emojisGuildId, oldMember).emoji;
-      if (emoji! in guild) {
-        return console.log(`L'émoji de parrain de ${newMember.displayName} n'est pas présent sur ${guild.name} !`);
-      }
-      const rect = Buffer.from('<svg><rect x="0" y="0" width="128" height="128" rx="64" ry="64"/></svg>');
-      const bufferAvatar = await got(
-        newMember.displayAvatarURL({ size: 128, forceStatic: true, extension: 'png' })
-      ).buffer();
-      const bufferEmoji = await sharp(bufferAvatar)
-        .composite([{ input: rect, blend: 'dest-in' }])
-        .toBuffer();
-      const newEmoji = await guild.emojis.create({
-        name: 'vote',
-        attachment: bufferEmoji,
-        roles: ['698914163677724753', '969717353963225191']
-      });
-      await prisma.godfather.update({
-        where: {
-          user_id: newMember.id
-        },
-        data: {
-          emoji_id: newEmoji.id
-        }
-      });
-    } else {
-      return;
+    if ((oldMember.avatar ?? oldMember.user.avatar) === (newMember.avatar ?? newMember.user.avatar)) return;
+    if (!newMember.roles.cache.has(godfatherRoleId)) return;
+    const guild = this.guilds.cache.get(emojisGuildId);
+    const emoji = getGodfatherEmoji(emojisGuildId, oldMember).emoji;
+    if (emoji! in guild) {
+      return console.log(`L'émoji de parrain de ${newMember.displayName} n'est pas présent sur ${guild.name} !`);
     }
+    const rect = Buffer.from('<svg><rect x="0" y="0" width="128" height="128" rx="64" ry="64"/></svg>');
+    const bufferAvatar = await got(
+      newMember.displayAvatarURL({ size: 128, forceStatic: true, extension: 'png' })
+    ).buffer();
+    const bufferEmoji = await sharp(bufferAvatar)
+      .composite([{ input: rect, blend: 'dest-in' }])
+      .toBuffer();
+    const newEmoji = await guild.emojis.create({
+      name: 'vote',
+      attachment: bufferEmoji,
+      roles: ['698914163677724753', '969717353963225191']
+    });
+    await prisma.godfather.update({
+      where: {
+        user_id: newMember.id
+      },
+      data: {
+        emoji_id: newEmoji.id
+      }
+    });
   }
 
   registerEvents(): void {
