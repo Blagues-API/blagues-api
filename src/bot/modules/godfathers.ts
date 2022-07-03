@@ -68,3 +68,39 @@ function mapEmojis(emojis: GodfatherEmoji[], users_ids: Snowflake[]) {
     .filter((e) => e)
     .join(' ');
 }
+
+export async function updateGodfatherEmoji(member: GuildMember) {
+  const godfather = await prisma.godfather.findUnique({
+    where: { user_id: member.id }
+  });
+  const bufferEmoji = await generateEmoji(member);
+  const newEmoji = await member.guild.emojis.create({ name: snakeCase(member.displayName), attachment: bufferEmoji });
+  if (godfather) {
+    const oldEmoji = member.guild.emojis.cache.get(godfather.emoji_id);
+    if (oldEmoji) await oldEmoji.delete();
+    await prisma.godfather.update({
+      where: {
+        user_id: member.id
+      },
+      data: {
+        emoji_id: newEmoji.id
+      }
+    });
+  } else {
+    return prisma.godfather.create({
+      data: {
+        user_id: member.id,
+        emoji_id: newEmoji.id
+      }
+    });
+  }
+}
+
+async function generateEmoji(member: GuildMember) {
+  const memberAvatar = member.displayAvatarURL({ size: 128, forceStatic: true, extension: 'png' });
+  const bufferAvatar = await got(memberAvatar).buffer();
+  const bufferEmoji = await sharp(bufferAvatar)
+    .composite([{ input: rect, blend: 'dest-in' }])
+    .toBuffer();
+  return bufferEmoji;
+}

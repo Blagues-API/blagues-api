@@ -2,16 +2,19 @@ import {
   ActivityType,
   AnyInteraction,
   Client,
+  GuildMember,
   GuildTextBasedChannel,
   IntentsBitField,
   InteractionType,
   Message,
+  PartialGuildMember,
   PartialMessage,
   Partials
 } from 'discord.js';
 import Jokes from '../jokes';
 import prisma from '../prisma';
-import { correctionsChannelId, suggestionsChannelId } from './constants';
+import { correctionsChannelId, suggestionsChannelId, guildId, godfatherRoleId } from './constants';
+import { updateGodfatherEmoji } from './modules/godfathers';
 import Dispatcher from './lib/dispatcher';
 import Reminders from './modules/reminders';
 import Stickys from './modules/stickys';
@@ -19,7 +22,6 @@ export default class Bot extends Client {
   public dispatcher: Dispatcher;
   public stickys: Stickys;
   public reminders: Reminders;
-
   constructor() {
     super({
       partials: [Partials.Reaction],
@@ -98,10 +100,18 @@ export default class Bot extends Client {
     this.stickys.run(message);
   }
 
+  async onGuildMemberUpdate(oldMember: GuildMember | PartialGuildMember, newMember: GuildMember) {
+    if (newMember.guild.id !== guildId) return;
+    if ((oldMember.avatar ?? oldMember.user.avatar) === (newMember.avatar ?? newMember.user.avatar)) return;
+    if (!newMember.roles.cache.has(godfatherRoleId)) return;
+    await updateGodfatherEmoji(newMember);
+  }
+
   registerEvents(): void {
     this.on('interactionCreate', this.onInteractionCreate.bind(this));
     this.on('messageDelete', this.onMessageDelete.bind(this));
     this.on('messageCreate', this.onMessageCreate.bind(this));
+    this.on('guildMemberUpdate', this.onGuildMemberUpdate.bind(this));
   }
 
   refreshStatus() {
