@@ -1,6 +1,6 @@
 import { stripIndents } from 'common-tags';
 import { Client, Snowflake, TextChannel, APIEmbed, Message } from 'discord.js';
-import { commandsChannelId, correctionsChannelId, suggestionsChannelId } from '../constants';
+import { Colors, commandsChannelId, correctionsChannelId, suggestionsChannelId } from '../constants';
 import Jokes from '../../jokes';
 
 export default class Stickys {
@@ -63,7 +63,7 @@ export default class Stickys {
           `
         }
       ],
-      color: 0x0067ad
+      color: Colors.SECONDARY
     };
   }
 
@@ -75,7 +75,7 @@ export default class Stickys {
 
         > \`/correction\` dans le salon <#${commandsChannelId}>
       `,
-      color: 0x0067ad
+      color: Colors.SECONDARY
     };
   }
 }

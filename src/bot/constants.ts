@@ -21,6 +21,7 @@ export const emojisGuildId: Snowflake = process.env.EMOJIS_SERVER_ID ?? '6988225
 
 export enum Colors {
   PRIMARY = 0x245f8d,
+  SECONDARY = 0x0067ad,
   SUCCESS = 0x248d5f,
   DANGER = 0x8d2424,
   INFO = 0xffda83,
