@@ -1,10 +1,11 @@
 import {
   ActivityType,
-  AnyInteraction,
+  CacheType,
   Client,
   GuildMember,
   GuildTextBasedChannel,
   IntentsBitField,
+  Interaction,
   InteractionType,
   Message,
   PartialGuildMember,
@@ -53,7 +54,7 @@ export default class Bot extends Client {
     this.refreshStatus();
   }
 
-  async onInteractionCreate(interaction: AnyInteraction): Promise<void> {
+  async onInteractionCreate(interaction: Interaction<CacheType>): Promise<void> {
     if (interaction.type === InteractionType.ApplicationCommand) {
       return this.dispatcher.execute(interaction);
     } else if (interaction.isButton() && interaction.customId === 'user_reminder') {
