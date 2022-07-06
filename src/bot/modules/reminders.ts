@@ -201,7 +201,7 @@ export default class Reminders {
                     emoji: '📑',
                     label: 'Mes propositions',
                     customId: 'user_reminder',
-                    style: ButtonStyle.Success
+                    style: ButtonStyle.Primary
                   }
                 ]
               }
