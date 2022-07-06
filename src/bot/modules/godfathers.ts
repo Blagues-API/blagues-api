@@ -3,11 +3,8 @@ import prisma from '../../prisma';
 import sharp from 'sharp';
 import got from 'got';
 import snakeCase from 'lodash/snakeCase';
-import { emojisGuildId } from '../constants';
+import { emojisGuildId, approveEmoji, disapproveEmoji } from '../constants';
 import { ProposalExtended } from '../../typings';
-
-const approveEmoji = '<:approve:908300630563651615>';
-const disapproveEmoji = '<:disapprove:908300630878203954>';
 
 interface GodfatherEmoji {
   id: Snowflake;

@@ -16,6 +16,9 @@ export const neededCorrectionsApprovals: number = Number(process.env.CORRECTIONS
 export const upReaction: Snowflake = process.env.UP_REACTION ?? '⬆️';
 export const downReaction: Snowflake = process.env.DOWN_REACTION ?? '⬇️';
 
+export const approveEmoji: Snowflake = process.env.APPROVE_EMOJI ?? '👍';
+export const disapproveEmoji: Snowflake = process.env.DISAPPROVE_EMOJI ?? '👎';
+
 export const guildId: Snowflake = process.env.SERVER_ID ?? '698822532467523605';
 export const emojisGuildId: Snowflake = process.env.EMOJIS_SERVER_ID ?? '698822532467523605';
 
