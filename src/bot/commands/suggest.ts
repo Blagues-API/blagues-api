@@ -208,17 +208,15 @@ export default class SuggestCommand extends Command {
       const collector = message.createMessageComponentCollector({
         max: 1,
         componentType: ComponentType.Button,
-        filter: (i: MessageComponentInteraction) => i.user.id === interaction.user.id
+        filter: (i: MessageComponentInteraction) => i.user.id === interaction.user.id,
+        time: 60_000
       });
       collector.once('end', async (interactions, reason) => {
         const buttonInteraction = interactions.first();
         if (!buttonInteraction) {
           if (reason !== 'time') resolve(null);
           if (message.deletable) await message.delete();
-          await interaction.reply({
-            content: 'Les 60 secondes sont écoulées',
-            ephemeral: true
-          });
+          await interaction.reply(interactionInfo('Les 60 secondes se sont ecoulées.'));
           return resolve(null);
         }
 
