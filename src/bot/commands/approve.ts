@@ -369,6 +369,10 @@ export default class ApproveCommand extends Command {
     const jokeMessage = await message.edit({ embeds: [embed] });
     await jokeMessage.reactions.removeAll();
 
+    const stickys = message.client.stickys;
+    await stickys.check(suggestionsChannelId, stickys.suggestsMessage());
+    await stickys.check(correctionsChannelId, stickys.correctionsMessage());
+
     if (automerge) {
       await interaction.followUp(
         interactionValidate(
