@@ -29,7 +29,7 @@ export default class Bot extends Client {
   public stickys: Stickys;
   public reminders: Reminders;
   public votes: Votes;
-  
+
   constructor() {
     super({
       partials: [Partials.Reaction],
