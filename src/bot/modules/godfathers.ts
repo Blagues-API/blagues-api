@@ -1,4 +1,4 @@
-import { Guild, GuildMember, MessageContextMenuCommandInteraction, Snowflake } from 'discord.js';
+import { AnyInteraction, Guild, GuildMember, Snowflake } from 'discord.js';
 import prisma from '../../prisma';
 import sharp from 'sharp';
 import got from 'got';
@@ -41,10 +41,7 @@ export async function getGodfatherEmoji(emojisGuild: Guild, member: GuildMember)
   return { id: member.id, emoji: `<:vote:${godfather.emoji_id}>` };
 }
 
-export async function renderGodfatherLine(
-  interaction: MessageContextMenuCommandInteraction<'cached'>,
-  proposal: ProposalExtended
-) {
+export async function renderGodfatherLine(interaction: AnyInteraction<'cached'>, proposal: ProposalExtended) {
   const emojisGuild = interaction.client.guilds.cache.get(emojisGuildId)!;
   const approvalsIds = proposal.approvals.map((approval) => approval.user_id);
   const disapprovalsIds = proposal.disapprovals.map((disapproval) => disapproval.user_id);
