@@ -171,7 +171,7 @@ export default class Stats {
     let userPoints = 0;
     for (const proposal of proposals) {
       if (proposal.refused) userPoints += 3;
-      if (proposal.stale === true) userPoints += 5;
+      if (proposal.stale) userPoints += 5;
       if (proposal.merged) {
         userPoints += correction ? 7 : 10;
 
