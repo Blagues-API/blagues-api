@@ -133,7 +133,7 @@ export default class Stats {
     let userPoints = 0;
 
     userPoints += this.proposalPoint(suggestions, false);
-    userPoints += this.proposalPoint(corrections, false);
+    userPoints += this.proposalPoint(corrections, true);
 
     if (!isParrain(member)) {
       const votes = await prisma.vote.findMany({
