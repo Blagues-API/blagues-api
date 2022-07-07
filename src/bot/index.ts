@@ -47,6 +47,7 @@ export default class Bot extends Client {
     console.log(`${this.user!.tag} connecté !`);
 
     await this.dispatcher.register();
+    await this.stickys.reload();
 
     this.registerEvents();
 
