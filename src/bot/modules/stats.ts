@@ -1,11 +1,11 @@
 import { stripIndents } from 'common-tags';
-import { CommandInteraction, GuildMember, APIEmbed, User } from 'discord.js';
+import { CommandInteraction, GuildMember, APIEmbed } from 'discord.js';
 import { Colors, godfatherRoleId } from '../constants';
 import { paginate } from '../utils';
 import prisma from '../../prisma';
 import chunk from 'lodash/chunk';
 import partition from 'lodash/partition';
-import { ProposalType } from '@prisma/client';
+import { ProposalType, VoteType } from '@prisma/client';
 
 export default class Stats {
   static async userStats(interaction: CommandInteraction<'cached'>, member: GuildMember, ephemeral: boolean) {
@@ -99,9 +99,7 @@ export default class Stats {
       .sort((a, b) => b._count - a._count);
 
     const pages = chunk(
-      membersProposals.map(
-        (proposal) => `<@${proposal.user_id}> : ${proposal._count} ${proposal._count !== 1 ? 'points' : 'point'}`
-      ),
+      membersProposals.map((proposal) => `<@${proposal.user_id}> : ${this.getPoints(interaction.member)}}`),
       20
     ).map((entries) => entries.join('\n'));
 
@@ -144,6 +142,13 @@ export default class Stats {
         include: { proposal: true }
       });
       userPoints += disapproval.length * -2;
+
+      const votes = await prisma.vote.findMany({
+        where: { proposal_id: suggestion.id }
+      });
+      const [vote_up, vote_down] = partition(votes, (vote) => vote.type === VoteType.UP);
+      userPoints += vote_up.length * 1;
+      userPoints += vote_down.length * -1;
     }
     for (const correction of corrections) {
       if (correction.merged) userPoints += 7;
@@ -159,6 +164,37 @@ export default class Stats {
         include: { proposal: true }
       });
       userPoints += disapproval.length * -2;
+
+      const votes = await prisma.vote.findMany({
+        where: { proposal_id: correction.id }
+      });
+      const [vote_up, vote_down] = partition(votes, (vote) => vote.type === VoteType.UP);
+      userPoints += vote_up.length * 1;
+      userPoints += vote_down.length * -1;
+    }
+
+    if (member.roles.cache.has(godfatherRoleId)) {
+      const approvals = await prisma.approval.findMany({
+        where: {
+          user_id: member.id
+        }
+      });
+      const disapprovals = await prisma.disapproval.findMany({
+        where: {
+          user_id: member.id
+        }
+      });
+
+      userPoints += approvals.length * 4;
+      userPoints += disapprovals.length * 4;
+    }
+
+    if (!member.roles.cache.has(godfatherRoleId)) {
+      const votes = await prisma.vote.findMany({
+        where: { user_id: member.id }
+      });
+
+      userPoints += votes.length * 2;
     }
 
     return userPoints;
