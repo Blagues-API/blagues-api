@@ -1,6 +1,6 @@
 import { stripIndents } from 'common-tags';
 import { Client, Snowflake, TextChannel, APIEmbed, Message } from 'discord.js';
-import { commandsChannelId, correctionsChannelId, suggestionsChannelId } from '../constants';
+import { Colors, commandsChannelId, correctionsChannelId, suggestionsChannelId } from '../constants';
 import Jokes from '../../jokes';
 
 export default class Stickys {
@@ -27,6 +27,11 @@ export default class Stickys {
     return this.check(message.channelId, this.messages[message.channelId]());
   }
 
+  async reload() {
+    await this.check(suggestionsChannelId, this.suggestsMessage());
+    await this.check(correctionsChannelId, this.correctionsMessage());
+  }
+
   private async check(targetChannel: Snowflake, embed: APIEmbed) {
     const channel = this.client.channels.cache.get(targetChannel) as TextChannel;
     if (!channel) return;
@@ -36,9 +41,11 @@ export default class Stickys {
 
     const message = messages.find((m) => m.author.id === this.client.user!.id && m.embeds?.[0]?.title === embed.title);
     const last_message = messages.first();
-    if (!message || !last_message || message.id !== last_message.id) {
-      if (message) await message.delete();
 
+    if (message && last_message && message.id === last_message.id) {
+      await message.edit({ embeds: [embed] });
+    } else {
+      if (message) await message.delete();
       await channel.send({ embeds: [embed] });
     }
   }
@@ -63,7 +70,7 @@ export default class Stickys {
           `
         }
       ],
-      color: 0x0067ad
+      color: Colors.SECONDARY
     };
   }
 
@@ -75,7 +82,7 @@ export default class Stickys {
 
         > \`/correction\` dans le salon <#${commandsChannelId}>
       `,
-      color: 0x0067ad
+      color: Colors.SECONDARY
     };
   }
 }

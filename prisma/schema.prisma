@@ -17,7 +17,7 @@ model User {
   token_key          String
   limit              Int    @default(100)
 
-  @@index([user_id], name: "users_user_id")
+  @@index([user_id], map: "users_user_id")
   @@map("users")
 }
 
@@ -26,7 +26,7 @@ model Godfather {
   user_id  String @unique @db.VarChar(255)
   emoji_id String @db.VarChar(255)
 
-  @@index([user_id], name: "godfathers_user_id")
+  @@index([user_id], map: "godfathers_user_id")
   @@map("godfathers")
 }
 
@@ -47,8 +47,8 @@ model Proposal {
   disapprovals  Disapproval[]
 
   suggestion_id Int?
-  suggestion    Proposal?  @relation("ProposalToCorrections", fields: [suggestion_id], references: [id], onDelete: Cascade)
-  corrections   Proposal[] @relation("ProposalToCorrections")
+  suggestion    Proposal?     @relation("ProposalToCorrections", fields: [suggestion_id], references: [id], onDelete: Cascade)
+  corrections   Proposal[]    @relation("ProposalToCorrections")
 
   @@map("proposals")
 }
@@ -59,7 +59,7 @@ model Approval {
   proposal    Proposal @relation(fields: [proposal_id], references: [id], onDelete: Cascade)
 
   @@id([proposal_id, user_id])
-  @@index([proposal_id], name: "approvals_proposal_id")
+  @@index([proposal_id], map: "approvals_proposal_id")
   @@map("approvals")
 }
 
@@ -69,7 +69,7 @@ model Disapproval {
   proposal    Proposal @relation(fields: [proposal_id], references: [id], onDelete: Cascade)
 
   @@id([proposal_id, user_id])
-  @@index([proposal_id], name: "disapprovals_proposal_id")
+  @@index([proposal_id], map: "disapprovals_proposal_id")
   @@map("disapprovals")
 }
 

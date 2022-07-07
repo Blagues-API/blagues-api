@@ -4,9 +4,10 @@
 
 API de Blagues françaises collaborative et Open Source
 
-[![Contributeurs](https://img.shields.io/github/contributors/Blagues-API/api.svg?style=for-the-badge)](https://github.com/Blagues-API/api/graphs/contributors)
-[![Stars](https://img.shields.io/github/stars/Blagues-API/api.svg?style=for-the-badge)](https://github.com/Blagues-API/api/stargazers)
-[![Licence](https://img.shields.io/github/license/Blagues-API/api?style=for-the-badge)](https://github.com/Blagues-API/api/blob/master/LICENCE)
+[![Jokes](https://img.shields.io/badge/dynamic/json?color=informational&label=jokes%20&query=%24.count&suffix=%20&url=https%3A%2F%2Fwww.blagues-api.fr%2Fapi%2Fcount)](https://www.blagues-api.fr)
+[![Contributeurs](https://img.shields.io/github/contributors/Blagues-API/api.svg?style=flat)](https://github.com/Blagues-API/api/graphs/contributors)
+[![Stars](https://img.shields.io/github/stars/Blagues-API/api.svg?style=flat)](https://github.com/Blagues-API/api/stargazers)
+[![Licence](https://img.shields.io/github/license/Blagues-API/api?style=flat)](https://github.com/Blagues-API/api/blob/master/LICENCE)
 
 ---
 
@@ -14,11 +15,11 @@ API de Blagues françaises collaborative et Open Source
 
 Afin de simplifier l'utilisation de Blagues API, des modules ont été créés :
 
-- Module npm [`blagues-api`](https://www.npmjs.com/package/blagues-api) (ES6,
+- [![npm](https://img.shields.io/badge/Module%20Npm-blagues--api-red?style=flat&logo=npm)](https://www.npmjs.com/package/blagues-api) (ES6,
   CommonJS, Browser)
-- Module PyPi [`blagues-api`](https://pypi.org/project/blagues-api) (python >=
+- [![pypi](https://img.shields.io/badge/Module%20Pypi-blagues--api-blue?style=flat&logo=pypi)](https://pypi.org/project/blagues-api) (python >=
   3.8)
-- Module Packagist [`zuruuh/blagues-api`](https://packagist.org/packages/zuruuh/blagues-api) (PHP 7.4+)
+- [![php](https://img.shields.io/badge/Module%20Packagist-zuruuh%2Fblagues--api-orange?style=flat&logo=packagist)](https://packagist.org/packages/zuruuh/blagues-api) (PHP 7.4+)
 
 > Dans le cas où aucun module n'a été créé vous pouvez utiliser l'api standard.
 
@@ -84,7 +85,7 @@ Voici quelques liens pour obtenir de l'aide :
 
 ## Licence
 
-[![Licence](https://img.shields.io/github/license/Blagues-API/api?style=for-the-badge)](https://github.com/Blagues-API/api/blob/master/LICENCE)
+[![Licence](https://img.shields.io/github/license/Blagues-API/api?style=flat)](https://github.com/Blagues-API/api/blob/master/LICENCE)
 
 Copyright 2020-2022 ©
 <a href="https://www.draftman.fr" target="_blank">DraftMan</a>.

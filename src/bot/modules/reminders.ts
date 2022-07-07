@@ -12,7 +12,8 @@ import {
   emojisGuildId,
   godfatherRoleId,
   neededSuggestionsApprovals,
-  neededCorrectionsApprovals
+  neededCorrectionsApprovals,
+  Colors
 } from '../constants';
 import { getGodfatherEmoji } from './godfathers';
 import { ReminderProposal } from '../../typings';
@@ -180,7 +181,7 @@ export default class Reminders {
                 }
               : undefined,
             description: pages[index],
-            color: 0x0067ad,
+            color: Colors.SECONDARY,
             footer: isLastPage
               ? {
                   text: 'Blagues API',
@@ -200,7 +201,7 @@ export default class Reminders {
                     emoji: '📑',
                     label: 'Mes propositions',
                     customId: 'user_reminder',
-                    style: ButtonStyle.Success
+                    style: ButtonStyle.Primary
                   }
                 ]
               }
@@ -333,7 +334,7 @@ export default class Reminders {
             name: "Propositions en attente d'approbation:"
           },
           description: `>>> ${description || "Vous n'avez aucune proposition en cours d'approbation."}`,
-          color: 0x0067ad,
+          color: Colors.SECONDARY,
           footer: {
             text: 'Blagues API',
             icon_url: this.client.user?.displayAvatarURL({ extension: 'png' })
