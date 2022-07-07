@@ -4,7 +4,7 @@
 
 API de Blagues françaises collaborative et Open Source
 
-[![Jokes](https://img.shields.io/badge/dynamic/json?color=informational&label=Actuellement&query=%24.count&suffix=%20blagues&url=https%3A%2F%2Fwww.blagues-api.fr%2Fapi%2Fcount)](https://www.blagues-api.fr)
+[![Jokes](https://img.shields.io/badge/dynamic/json?color=informational&label=jokes%20&query=%24.count&suffix=%20&url=https%3A%2F%2Fwww.blagues-api.fr%2Fapi%2Fcount)](https://www.blagues-api.fr)
 [![Contributeurs](https://img.shields.io/github/contributors/Blagues-API/api.svg?style=flat)](https://github.com/Blagues-API/api/graphs/contributors)
 [![Stars](https://img.shields.io/github/stars/Blagues-API/api.svg?style=flat)](https://github.com/Blagues-API/api/stargazers)
 [![Licence](https://img.shields.io/github/license/Blagues-API/api?style=flat)](https://github.com/Blagues-API/api/blob/master/LICENCE)
