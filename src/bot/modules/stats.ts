@@ -1,11 +1,11 @@
 import { stripIndents } from 'common-tags';
 import { CommandInteraction, GuildMember, APIEmbed } from 'discord.js';
 import { Colors, godfatherRoleId } from '../constants';
-import { paginate } from '../utils';
+import { isParrain, paginate } from '../utils';
 import prisma from '../../prisma';
 import chunk from 'lodash/chunk';
 import partition from 'lodash/partition';
-import { ProposalType, VoteType } from '@prisma/client';
+import { Approval, Disapproval, Proposal, ProposalType, Vote, VoteType } from '@prisma/client';
 
 export default class Stats {
   static async userStats(interaction: CommandInteraction<'cached'>, member: GuildMember, ephemeral: boolean) {
@@ -119,8 +119,12 @@ export default class Stats {
   static async getPoints(member: GuildMember): Promise<number> {
     const proposals = await prisma.proposal.findMany({
       where: {
-        user_id: member.id,
-        stale: false
+        user_id: member.id
+      },
+      include: {
+        approvals: true,
+        disapprovals: true,
+        votes: true
       }
     });
 
@@ -128,52 +132,16 @@ export default class Stats {
 
     let userPoints = 0;
 
-    for (const suggestion of suggestions) {
-      if (suggestion.merged) userPoints += 10;
+    userPoints += this.proposalPoint(suggestions, false);
+    userPoints += this.proposalPoint(corrections, false);
 
-      const approvals = await prisma.approval.findMany({
-        where: { proposal_id: suggestion.id },
-        include: { proposal: true }
-      });
-      userPoints += approvals.length * 2;
-
-      const disapproval = await prisma.disapproval.findMany({
-        where: { proposal_id: suggestion.id },
-        include: { proposal: true }
-      });
-      userPoints += disapproval.length * -2;
-
+    if (!isParrain(member)) {
       const votes = await prisma.vote.findMany({
-        where: { proposal_id: suggestion.id }
+        where: { user_id: member.id }
       });
-      const [vote_up, vote_down] = partition(votes, (vote) => vote.type === VoteType.UP);
-      userPoints += vote_up.length * 1;
-      userPoints += vote_down.length * -1;
-    }
-    for (const correction of corrections) {
-      if (correction.merged) userPoints += 7;
 
-      const approvals = await prisma.approval.findMany({
-        where: { proposal_id: correction.id },
-        include: { proposal: true }
-      });
-      userPoints += approvals.length * 2;
-
-      const disapproval = await prisma.disapproval.findMany({
-        where: { proposal_id: correction.id },
-        include: { proposal: true }
-      });
-      userPoints += disapproval.length * -2;
-
-      const votes = await prisma.vote.findMany({
-        where: { proposal_id: correction.id }
-      });
-      const [vote_up, vote_down] = partition(votes, (vote) => vote.type === VoteType.UP);
-      userPoints += vote_up.length * 1;
-      userPoints += vote_down.length * -1;
-    }
-
-    if (member.roles.cache.has(godfatherRoleId)) {
+      userPoints += votes.length * 2;
+    } else {
       const approvals = await prisma.approval.findMany({
         where: {
           user_id: member.id
@@ -189,14 +157,33 @@ export default class Stats {
       userPoints += disapprovals.length * 4;
     }
 
-    if (!member.roles.cache.has(godfatherRoleId)) {
-      const votes = await prisma.vote.findMany({
-        where: { user_id: member.id }
-      });
+    return userPoints;
+  }
 
-      userPoints += votes.length * 2;
+  static proposalPoint(
+    proposals: (Proposal & {
+      approvals: Approval[];
+      disapprovals: Disapproval[];
+      votes: Vote[];
+    })[],
+    correction: boolean
+  ) {
+    let userPoints = 0;
+    for (const proposal of proposals) {
+      if (proposal.refused) userPoints += 3;
+      if (proposal.stale === true) userPoints += 5;
+      if (proposal.merged) {
+        userPoints += correction ? 7 : 10;
+
+        userPoints += proposal.approvals.length * 2;
+
+        userPoints += proposal.disapprovals.length * -2;
+
+        const [vote_up, vote_down] = partition(proposal.votes, (vote) => vote.type === VoteType.UP);
+        userPoints += vote_up.length * 1;
+        userPoints += vote_down.length * -1;
+      }
     }
-
     return userPoints;
   }
 }
