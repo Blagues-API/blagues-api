@@ -1,5 +1,5 @@
 import { stripIndents } from 'common-tags';
-import { CommandInteraction, GuildMember, APIEmbed } from 'discord.js';
+import { CommandInteraction, GuildMember, APIEmbed, User } from 'discord.js';
 import { Colors, godfatherRoleId } from '../constants';
 import { paginate } from '../utils';
 import prisma from '../../prisma';
@@ -116,5 +116,51 @@ export default class Stats {
     };
 
     return paginate(interaction, embed, pages);
+  }
+
+  static async getPoints(member: GuildMember): Promise<number> {
+    const proposals = await prisma.proposal.findMany({
+      where: {
+        user_id: member.id,
+        stale: false
+      }
+    });
+
+    const [suggestions, corrections] = partition(proposals, (proposal) => proposal.type === ProposalType.SUGGESTION);
+
+    let userPoints = 0;
+
+    for (const suggestion of suggestions) {
+      if (suggestion.merged) userPoints += 10;
+
+      const approvals = await prisma.approval.findMany({
+        where: { proposal_id: suggestion.id },
+        include: { proposal: true }
+      });
+      userPoints += approvals.length * 2;
+
+      const disapproval = await prisma.disapproval.findMany({
+        where: { proposal_id: suggestion.id },
+        include: { proposal: true }
+      });
+      userPoints += disapproval.length * -2;
+    }
+    for (const correction of corrections) {
+      if (correction.merged) userPoints += 7;
+
+      const approvals = await prisma.approval.findMany({
+        where: { proposal_id: correction.id },
+        include: { proposal: true }
+      });
+      userPoints += approvals.length * 2;
+
+      const disapproval = await prisma.disapproval.findMany({
+        where: { proposal_id: correction.id },
+        include: { proposal: true }
+      });
+      userPoints += disapproval.length * -2;
+    }
+
+    return userPoints;
   }
 }
