@@ -35,6 +35,7 @@ import {
 } from '../utils';
 import Jokes from '../../jokes';
 import { compareTwoStrings } from 'string-similarity';
+import Stickys from 'bot/modules/stickys';
 
 export default class ApproveCommand extends Command {
   constructor() {
@@ -369,9 +370,7 @@ export default class ApproveCommand extends Command {
     const jokeMessage = await message.edit({ embeds: [embed] });
     await jokeMessage.reactions.removeAll();
 
-    const stickys = message.client.stickys;
-    await stickys.check(suggestionsChannelId, stickys.suggestsMessage());
-    await stickys.check(correctionsChannelId, stickys.correctionsMessage());
+    message.client.stickys.reload();
 
     if (automerge) {
       await interaction.followUp(

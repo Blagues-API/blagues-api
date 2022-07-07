@@ -27,7 +27,12 @@ export default class Stickys {
     return this.check(message.channelId, this.messages[message.channelId]());
   }
 
-  async check(targetChannel: Snowflake, embed: APIEmbed) {
+  async reload() {
+    await this.check(suggestionsChannelId, this.suggestsMessage());
+    await this.check(correctionsChannelId, this.correctionsMessage());
+  }
+
+  private async check(targetChannel: Snowflake, embed: APIEmbed) {
     const channel = this.client.channels.cache.get(targetChannel) as TextChannel;
     if (!channel) return;
 
@@ -37,13 +42,11 @@ export default class Stickys {
     const message = messages.find((m) => m.author.id === this.client.user!.id && m.embeds?.[0]?.title === embed.title);
     const last_message = messages.first();
 
-    if (!message || !last_message || message.id !== last_message.id) {
+    if (message && last_message && message.id === last_message.id) {
+      await message.edit({ embeds: [embed] });
+    } else {
       if (message) await message.delete();
-
       await channel.send({ embeds: [embed] });
-    }
-    if (message?.id === last_message?.id) {
-      await message?.edit({ embeds: [embed] });
     }
   }
 
