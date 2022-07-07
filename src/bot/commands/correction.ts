@@ -204,7 +204,6 @@ export default class CorrectionCommand extends Command {
       case 'type': {
         const response = await this.requestTypeChange(buttonInteraction, commandInteraction, joke);
         if (!response) return null;
-        if (response.suggestion.type === joke.type) return response;
 
         return this.requestChanges(commandInteraction, joke, true);
       }
@@ -218,7 +217,6 @@ export default class CorrectionCommand extends Command {
           joke.joke
         );
         if (!response) return null;
-        if (response.suggestion.joke === joke.joke) return response;
 
         return this.requestChanges(commandInteraction, response, true);
       }
@@ -231,7 +229,6 @@ export default class CorrectionCommand extends Command {
           joke.answer
         );
         if (!response) return null;
-        if (response.suggestion.answer === joke.answer) return response;
 
         return this.requestChanges(commandInteraction, response, true);
       }
