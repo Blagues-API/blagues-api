@@ -35,7 +35,6 @@ import {
 } from '../utils';
 import Jokes from '../../jokes';
 import { compareTwoStrings } from 'string-similarity';
-import Stickys from 'bot/modules/stickys';
 
 export default class ApproveCommand extends Command {
   constructor() {
