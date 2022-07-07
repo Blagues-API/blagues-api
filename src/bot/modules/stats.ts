@@ -160,7 +160,7 @@ export default class Stats {
     return userPoints;
   }
 
-  static proposalPoint(
+  private static proposalPoint(
     proposals: (Proposal & {
       approvals: Approval[];
       disapprovals: Disapproval[];
