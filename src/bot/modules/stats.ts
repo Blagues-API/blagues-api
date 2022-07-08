@@ -1,11 +1,11 @@
 import { stripIndents } from 'common-tags';
-import { CommandInteraction, GuildMember, APIEmbed } from 'discord.js';
+import { CommandInteraction, GuildMember, APIEmbed, Snowflake } from 'discord.js';
 import { Colors, godfatherRoleId } from '../constants';
 import { isParrain, paginate } from '../utils';
 import prisma from '../../prisma';
 import chunk from 'lodash/chunk';
 import partition from 'lodash/partition';
-import { Approval, Disapproval, Proposal, ProposalType, Vote, VoteType } from '@prisma/client';
+import { ProposalType, VoteType } from '@prisma/client';
 
 export default class Stats {
   static async userStats(interaction: CommandInteraction<'cached'>, member: GuildMember, ephemeral: boolean) {
@@ -99,7 +99,10 @@ export default class Stats {
       .sort((a, b) => b._count - a._count);
 
     const pages = chunk(
-      membersProposals.map((proposal) => `<@${proposal.user_id}> : ${this.getPoints(interaction.member)}}`),
+      membersProposals.map(async (proposal) => {
+        const point = await this.getPoints(interaction, proposal.user_id!);
+        return `<@${proposal.user_id}> : ${point}}`;
+      }),
       20
     ).map((entries) => entries.join('\n'));
 
@@ -116,10 +119,10 @@ export default class Stats {
     return paginate(interaction, embed, pages);
   }
 
-  static async getPoints(member: GuildMember): Promise<number> {
+  static async getPoints(interaction: CommandInteraction<'cached'>, userID: Snowflake): Promise<number> {
     const proposals = await prisma.proposal.findMany({
       where: {
-        user_id: member.id
+        user_id: userID
       },
       include: {
         approvals: true,
@@ -128,52 +131,13 @@ export default class Stats {
       }
     });
 
-    const [suggestions, corrections] = partition(proposals, (proposal) => proposal.type === ProposalType.SUGGESTION);
-
     let userPoints = 0;
 
-    userPoints += this.proposalPoint(suggestions, false);
-    userPoints += this.proposalPoint(corrections, true);
-
-    if (!isParrain(member)) {
-      const votes = await prisma.vote.findMany({
-        where: { user_id: member.id }
-      });
-
-      userPoints += votes.length * 2;
-    } else {
-      const approvals = await prisma.approval.findMany({
-        where: {
-          user_id: member.id
-        }
-      });
-      const disapprovals = await prisma.disapproval.findMany({
-        where: {
-          user_id: member.id
-        }
-      });
-
-      userPoints += approvals.length * 4;
-      userPoints += disapprovals.length * 4;
-    }
-
-    return userPoints;
-  }
-
-  private static proposalPoint(
-    proposals: (Proposal & {
-      approvals: Approval[];
-      disapprovals: Disapproval[];
-      votes: Vote[];
-    })[],
-    correction: boolean
-  ) {
-    let userPoints = 0;
     for (const proposal of proposals) {
       if (proposal.refused) userPoints += 3;
       if (proposal.stale) userPoints += 5;
       if (proposal.merged) {
-        userPoints += correction ? 7 : 10;
+        userPoints += proposal.type === ProposalType.SUGGESTION ? 10 : 7;
 
         userPoints += proposal.approvals.length * 2;
 
@@ -184,6 +148,29 @@ export default class Stats {
         userPoints += vote_down.length * -1;
       }
     }
+    const member = interaction.guild.members.cache.get(userID);
+    if (member && !isParrain(member)) {
+      const votes = await prisma.vote.findMany({
+        where: { user_id: userID }
+      });
+
+      userPoints += votes.length * 2;
+    } else {
+      const approvals = await prisma.approval.findMany({
+        where: {
+          user_id: userID
+        }
+      });
+      const disapprovals = await prisma.disapproval.findMany({
+        where: {
+          user_id: userID
+        }
+      });
+
+      userPoints += approvals.length * 4;
+      userPoints += disapprovals.length * 4;
+    }
+
     return userPoints;
   }
 }
