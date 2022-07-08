@@ -122,7 +122,7 @@ export default class Stats {
   static async getPoints(interaction: CommandInteraction<'cached'>, userId: Snowflake): Promise<number> {
     const proposals = await prisma.proposal.findMany({
       where: {
-        user_id: userID
+        user_id: userId
       },
       include: {
         approvals: true,
@@ -148,22 +148,22 @@ export default class Stats {
         userPoints += vote_down.length * -1;
       }
     }
-    const member = interaction.guild.members.cache.get(userID);
+    const member = interaction.guild.members.cache.get(userId);
     if (member && !isParrain(member)) {
       const votes = await prisma.vote.findMany({
-        where: { user_id: userID }
+        where: { user_id: userId }
       });
 
       userPoints += votes.length * 2;
     } else {
       const approvals = await prisma.approval.findMany({
         where: {
-          user_id: userID
+          user_id: userId
         }
       });
       const disapprovals = await prisma.disapproval.findMany({
         where: {
-          user_id: userID
+          user_id: userId
         }
       });
 
