@@ -119,7 +119,7 @@ export default class Stats {
     return paginate(interaction, embed, pages);
   }
 
-  static async getPoints(interaction: CommandInteraction<'cached'>, userID: Snowflake): Promise<number> {
+  static async getPoints(interaction: CommandInteraction<'cached'>, userId: Snowflake): Promise<number> {
     const proposals = await prisma.proposal.findMany({
       where: {
         user_id: userID
