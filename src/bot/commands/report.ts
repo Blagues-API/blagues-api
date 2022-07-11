@@ -1,15 +1,20 @@
 // npx tsc-watch --onSuccess "node dist/index.js
 import { jokeById, jokeByQuestion } from '../../controllers';
 import {
+  APIEmbed,
   ApplicationCommandOptionType,
   ApplicationCommandType,
-  ChatInputCommandInteraction, 
-  Message
+  ButtonInteraction,
+  ButtonStyle,
+  ChatInputCommandInteraction,
+  ComponentType,
+  Message,
+  MessageComponentInteraction,
+  TextChannel
 } from 'discord.js';
 import {
   Category,
   CategoriesRefsFull,
-  Reason,
   ReportReasons,
   UnsignedJoke,
   Joke
@@ -18,12 +23,18 @@ import prisma from '../../prisma';
 import { ProposalType } from '@prisma/client';
 import { Colors, commandsChannelId } from '../constants';
 import Command from '../lib/command';
+import { compareTwoStrings } from 'string-similarity';
 import {
   interactionInfo,
+  interactionProblem,
   info,
   messageProblem,
-  tDelete
+  tDelete,
+  isEmbedable
 } from '../utils';
+import {
+  reportsChannelId
+} from '../constants'
 
 enum IdType {
   MESSAGE_ID,
@@ -79,6 +90,8 @@ export default class ReportCommand extends Command {
       );
     }
 
+    // TODO : ajouter un choix pour signaler une blague refusée injustement
+
     const jokeId = interaction.options.getInteger('id', true);
     const joke = jokeById(jokeId);
     if (!joke) {
@@ -103,25 +116,113 @@ export default class ReportCommand extends Command {
           > **Réponse**: ${joke.answer}
           `,
           inline: true
-        },
-        {
-          name: 'Raison',
-          value: ReportReasons[raison as Reason]
         }
-      ]
+      ],
+      color: Colors.PROPOSED
     }
-
-    await interaction.channel!.send({
-      embeds: [
-        embed
-      ]
-    })
 
     if (raison === 'doublon') {
       const doublon = await this.getDoublon(interaction, joke);
 
       if (!doublon) return;
+  
+      const match = compareTwoStrings(
+        `${joke.joke.toLowerCase()} ${joke.answer.toLowerCase()}`,
+        `${doublon.joke.toLowerCase()} ${doublon.answer.toLowerCase()}`
+      );
+      if (match < 0.8) {
+        return info(`Les blagues \`${jokeId}\` et \`${doublon.id}\` ne sont pas assez ressemblantes.`)
+      }
+      embed.fields.push({
+        name: 'Doublon',
+        value: `
+        > **Type**: ${CategoriesRefsFull[doublon.type]}
+        > **Blague**: ${doublon.joke}
+        > **Réponse**: ${doublon.answer}
+        `,
+        inline: true
+      });
+
+      const confirmation = await this.waitForSendConfirmation(interaction, embed, match)
+      if (!confirmation) return;
+
+      if (confirmation.customId === 'cancel') {
+        return confirmation.update({
+          content: "La blague n'a pas été envoyée.",
+          components: [],
+          embeds: [embed]
+        });
+      }
+  
+      const reportsChannel = interaction.guild!.channels.cache.get(reportsChannelId) as TextChannel;
+      if (!isEmbedable(reportsChannel)) {
+        return interaction.reply(
+          interactionProblem(`Je n'ai pas la permission d'envoyer la blague dans le salon ${reportsChannel}.`, false)
+        );
+      }
+
+      if (confirmation.customId !== 'send') {
+        return interaction.reply(
+          interactionProblem('Il y a eu une erreur lors de l\'exécution de la commande, veillez contacter')
+        )
+      }
+
+      return interaction.reply({
+        embeds: [embed]
+      })
     }
+  }
+
+  async waitForSendConfirmation(
+    interaction: ChatInputCommandInteraction,
+    embed: APIEmbed,
+    match: Number
+  ): Promise<ButtonInteraction | null> {
+    const message = await interaction.reply({
+      content: `${match > 0.9 ? 'Voulez-vous' : 'Êtes-vous sûr de vouloir'} envoyer le signalement suivant ?`,
+      embeds: [embed],
+      components: [
+        {
+          type: ComponentType.ActionRow,
+          components: [
+            {
+              type: ComponentType.Button,
+              label: 'Envoyer',
+              customId: 'send',
+              style: ButtonStyle.Success
+            },
+            {
+              type: ComponentType.Button,
+              label: 'Annuler',
+              customId: 'cancel',
+              style: ButtonStyle.Danger
+            }
+          ]
+        }
+      ],
+      ephemeral: true,
+      fetchReply: true
+    })
+
+    return new Promise((resolve) => {
+      const collector = message.createMessageComponentCollector({
+        max: 1,
+        componentType: ComponentType.Button,
+        filter: (i: MessageComponentInteraction) => i.user.id === interaction.user.id,
+        time: 60_000
+      });
+      collector.once('end', async (interactions, reason) => {
+        const buttonInteraction = interactions.first();
+        if (!buttonInteraction) {
+          if (reason !== 'time') resolve(null);
+          if (message.deletable) await message.delete();
+          await interaction.reply(interactionInfo('Les 60 secondes se sont ecoulées.'));
+          return resolve(null);
+        }
+
+        return resolve(buttonInteraction);
+      });
+    });
   }
 
   async getDoublon(
