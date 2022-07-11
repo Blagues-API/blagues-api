@@ -1,29 +1,12 @@
 // npx tsc-watch --onSuccess "node dist/index.js
 import { jokeById, jokeByQuestion } from '../../controllers';
-import {
-  ApplicationCommandOptionType,
-  ApplicationCommandType,
-  ChatInputCommandInteraction, 
-  Message
-} from 'discord.js';
-import {
-  Category,
-  CategoriesRefsFull,
-  Reason,
-  ReportReasons,
-  UnsignedJoke,
-  Joke
-} from '../../typings';
+import { ApplicationCommandOptionType, ApplicationCommandType, ChatInputCommandInteraction, Message } from 'discord.js';
+import { Category, CategoriesRefsFull, Reason, ReportReasons, UnsignedJoke, Joke } from '../../typings';
 import prisma from '../../prisma';
 import { ProposalType } from '@prisma/client';
 import { Colors, commandsChannelId } from '../constants';
 import Command from '../lib/command';
-import {
-  interactionInfo,
-  info,
-  messageProblem,
-  tDelete
-} from '../utils';
+import { interactionInfo, info, messageProblem, tDelete } from '../utils';
 
 enum IdType {
   MESSAGE_ID,
@@ -109,13 +92,11 @@ export default class ReportCommand extends Command {
           value: ReportReasons[raison as Reason]
         }
       ]
-    }
+    };
 
     await interaction.channel!.send({
-      embeds: [
-        embed
-      ]
-    })
+      embeds: [embed]
+    });
 
     if (raison === 'doublon') {
       const doublon = await this.getDoublon(interaction, joke);
