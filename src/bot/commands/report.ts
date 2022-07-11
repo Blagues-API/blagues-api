@@ -40,7 +40,7 @@ interface JokeCorrectionPayload extends UnsignedJoke {
   };
 }
 
-export default class Reportcommand extends Command {
+export default class ReportCommand extends Command {
   constructor() {
     super({
       name: 'report',
