@@ -12,7 +12,7 @@ import {
   MessageComponentInteraction,
   TextChannel
 } from 'discord.js';
-import { Category, CategoriesRefsFull, ReportReasons, UnsignedJoke, Joke } from '../../typings';
+import { Category, CategoriesRefsFull, ReportReasons, UnsignedJoke, Joke, Reason } from '../../typings';
 import prisma from '../../prisma';
 import { ProposalType } from '@prisma/client';
 import { Colors, commandsChannelId } from '../constants';
@@ -75,7 +75,7 @@ export default class ReportCommand extends Command {
       );
     }
 
-    // TODO : ajouter un choix pour signaler une blague refusée injustement
+    // TODO : ajouter un choix pour signaler une blague refusée injustement + dans approve, mettre le lien de la blague dans le "Votre approbation a bien été retirée."
 
     const jokeId = interaction.options.getInteger('id', true);
     const joke = jokeById(jokeId);
@@ -87,7 +87,7 @@ export default class ReportCommand extends Command {
 
     const embed = {
       author: {
-        name: interaction.user.username,
+        name: interaction.user.tag,
         icon_url: interaction.user.displayAvatarURL({
           size: 32
         })
@@ -106,10 +106,6 @@ export default class ReportCommand extends Command {
       color: Colors.PROPOSED
     };
 
-    await interaction.channel!.send({
-      embeds: [embed]
-    });
-
     if (raison === 'doublon') {
       const doublon = await this.getDoublon(interaction, joke);
 
@@ -120,17 +116,10 @@ export default class ReportCommand extends Command {
         `${doublon.joke.toLowerCase()} ${doublon.answer.toLowerCase()}`
       );
       if (match < 0.8) {
-        return info(`Les blagues \`${jokeId}\` et \`${doublon.id}\` ne sont pas assez ressemblantes.`);
+        return interaction.reply(
+          interactionInfo(`Les blagues \`${jokeId}\` et \`${doublon.id}\` ne sont pas assez ressemblantes.`)
+        );
       }
-      embed.fields.push({
-        name: 'Doublon',
-        value: `
-        > **Type**: ${CategoriesRefsFull[doublon.type]}
-        > **Blague**: ${doublon.joke}
-        > **Réponse**: ${doublon.answer}
-        `,
-        inline: true
-      });
 
       const confirmation = await this.waitForSendConfirmation(interaction, embed, match);
       if (!confirmation) return;
@@ -152,14 +141,38 @@ export default class ReportCommand extends Command {
 
       if (confirmation.customId !== 'send') {
         return interaction.reply(
-          interactionProblem("Il y a eu une erreur lors de l'exécution de la commande, veillez contacter")
+          interactionProblem(
+            "Il y a eu une erreur lors de l'exécution de la commande, veillez contacter le développeur !",
+            true
+          )
         );
       }
 
-      return interaction.reply({
-        embeds: [embed]
+      embed.fields.push({
+        name: 'Doublon',
+        value: `
+        > **Type**: ${CategoriesRefsFull[doublon.type]}
+        > **Blague**: ${doublon.joke}
+        > **Réponse**: ${doublon.answer}
+        `,
+        inline: false
+      });
+      embed.fields.push({
+        name: 'Ressemblance',
+        value: `${match * 100} %`,
+        inline: false
+      });
+    } else {
+      embed.fields.push({
+        name: 'Raison',
+        value: ReportReasons[raison as Reason],
+        inline: false
       });
     }
+
+    return interaction.reply({
+      embeds: [embed]
+    });
   }
 
   async waitForSendConfirmation(
