@@ -12,29 +12,14 @@ import {
   MessageComponentInteraction,
   TextChannel
 } from 'discord.js';
-import {
-  Category,
-  CategoriesRefsFull,
-  ReportReasons,
-  UnsignedJoke,
-  Joke
-} from '../../typings';
+import { Category, CategoriesRefsFull, ReportReasons, UnsignedJoke, Joke } from '../../typings';
 import prisma from '../../prisma';
 import { ProposalType } from '@prisma/client';
 import { Colors, commandsChannelId } from '../constants';
 import Command from '../lib/command';
 import { compareTwoStrings } from 'string-similarity';
-import {
-  interactionInfo,
-  interactionProblem,
-  info,
-  messageProblem,
-  tDelete,
-  isEmbedable
-} from '../utils';
-import {
-  reportsChannelId
-} from '../constants'
+import { interactionInfo, interactionProblem, info, messageProblem, tDelete, isEmbedable } from '../utils';
+import { reportsChannelId } from '../constants';
 
 enum IdType {
   MESSAGE_ID,
@@ -119,19 +104,23 @@ export default class ReportCommand extends Command {
         }
       ],
       color: Colors.PROPOSED
-    }
+    };
+
+    await interaction.channel!.send({
+      embeds: [embed]
+    });
 
     if (raison === 'doublon') {
       const doublon = await this.getDoublon(interaction, joke);
 
       if (!doublon) return;
-  
+
       const match = compareTwoStrings(
         `${joke.joke.toLowerCase()} ${joke.answer.toLowerCase()}`,
         `${doublon.joke.toLowerCase()} ${doublon.answer.toLowerCase()}`
       );
       if (match < 0.8) {
-        return info(`Les blagues \`${jokeId}\` et \`${doublon.id}\` ne sont pas assez ressemblantes.`)
+        return info(`Les blagues \`${jokeId}\` et \`${doublon.id}\` ne sont pas assez ressemblantes.`);
       }
       embed.fields.push({
         name: 'Doublon',
@@ -143,7 +132,7 @@ export default class ReportCommand extends Command {
         inline: true
       });
 
-      const confirmation = await this.waitForSendConfirmation(interaction, embed, match)
+      const confirmation = await this.waitForSendConfirmation(interaction, embed, match);
       if (!confirmation) return;
 
       if (confirmation.customId === 'cancel') {
@@ -153,7 +142,7 @@ export default class ReportCommand extends Command {
           embeds: [embed]
         });
       }
-  
+
       const reportsChannel = interaction.guild!.channels.cache.get(reportsChannelId) as TextChannel;
       if (!isEmbedable(reportsChannel)) {
         return interaction.reply(
@@ -163,20 +152,20 @@ export default class ReportCommand extends Command {
 
       if (confirmation.customId !== 'send') {
         return interaction.reply(
-          interactionProblem('Il y a eu une erreur lors de l\'exécution de la commande, veillez contacter')
-        )
+          interactionProblem("Il y a eu une erreur lors de l'exécution de la commande, veillez contacter")
+        );
       }
 
       return interaction.reply({
         embeds: [embed]
-      })
+      });
     }
   }
 
   async waitForSendConfirmation(
     interaction: ChatInputCommandInteraction,
     embed: APIEmbed,
-    match: Number
+    match: number
   ): Promise<ButtonInteraction | null> {
     const message = await interaction.reply({
       content: `${match > 0.9 ? 'Voulez-vous' : 'Êtes-vous sûr de vouloir'} envoyer le signalement suivant ?`,
@@ -202,7 +191,7 @@ export default class ReportCommand extends Command {
       ],
       ephemeral: true,
       fetchReply: true
-    })
+    });
 
     return new Promise((resolve) => {
       const collector = message.createMessageComponentCollector({
