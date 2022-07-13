@@ -15,43 +15,43 @@
     "id": 3,
     "type": "dev",
     "joke": "Un développeur ne descend pas du métro.",
-    "answer": "Il libère la RAM..."
+    "answer": "Il libère la RAM."
   },
   {
     "id": 4,
     "type": "dev",
     "joke": "Où partent les développeurs en vacances ?",
-    "answer": "Au C-Shell."
+    "answer": "Aux C-Shell"
   },
   {
     "id": 5,
     "type": "dev",
     "joke": "Pourquoi les développeurs doivent-ils suivre une formation incendie ?",
-    "answer": "À cause des pare-feu."
+    "answer": "À cause des pare-feu"
   },
   {
     "id": 6,
     "type": "dark",
     "joke": "Qu'est-ce qui a 4 pattes et un bras ?",
-    "answer": "Un pitbull dans un jardin d'enfant !"
+    "answer": "Un pitbull dans un jardin d'enfants"
   },
   {
     "id": 7,
     "type": "dark",
-    "joke": "Ma fille vient de perdre sa première dent...",
+    "joke": "Ma fille vient de perdre sa première dent.",
     "answer": "Ça lui apprendra à me répondre !"
   },
   {
     "id": 8,
     "type": "dark",
     "joke": "Qui court plus vite qu'Usain Bolt ?",
-    "answer": "Un Somalien avec un ticket-restaurant"
+    "answer": "Un Somalien avec un ticket restaurant"
   },
   {
     "id": 9,
     "type": "blondes",
-    "joke": "Pourquoi les alpinistes aiment-ils bien les blondes ?",
-    "answer": "Parce qu'ils n'ont pas peur du vide !"
+    "joke": "Pourquoi les alpinistes aiment bien les blondes ?",
+    "answer": "Parce qu'ils n'ont pas peur du vide."
   },
   {
     "id": 10,
@@ -69,13 +69,13 @@
     "id": 12,
     "type": "limit",
     "joke": "Quel est le point commun entre un cunnilingus et un lapsus ?",
-    "answer": "Une erreur de langue et vous êtes vite dans la merde..."
+    "answer": "Une erreur de langue et vous êtes vite dans la merde."
   },
   {
     "id": 13,
     "type": "global",
     "joke": "Quel super-héros donne le plus vite l'heure ?",
-    "answer": "Speed heure man !"
+    "answer": "Speed heure man"
   },
   {
     "id": 14,
@@ -87,19 +87,19 @@
     "id": 15,
     "type": "global",
     "joke": "Pourquoi il n'y a pas de ballon à question pour un champion ?",
-    "answer": "Parce que Julien Lepers !"
+    "answer": "Parce que Julien Lepers."
   },
   {
     "id": 16,
     "type": "global",
     "joke": "Pourquoi les canards sont-ils toujours à l'heure ?",
-    "answer": "Parce qu'ils sont dans l'étang"
+    "answer": "Parce qu'ils sont dans l'étang."
   },
   {
     "id": 17,
     "type": "global",
     "joke": "Tu as 4 poussins et tu n'en veux que 3, comment faire ?",
-    "answer": "Tu en pousses un !"
+    "answer": "Tu en pousses un."
   },
   {
     "id": 18,
@@ -109,9 +109,9 @@
   },
   {
     "id": 19,
-    "type": "global",
-    "joke": "Pourquoi il y a une baignoire au-dessus des camions de pompiers belges ?",
-    "answer": "Pour mettre la sirène."
+    "type": "blondes",
+    "joke": "Pourquoi il y a une baignoire au-dessus des camions de pompiers des blondes ?",
+    "answer": "Pour mettre la sirène"
   },
   {
     "id": 20,
@@ -123,19 +123,19 @@
     "id": 21,
     "type": "dark",
     "joke": "Qu'est-ce qu'un légume rigolo ?",
-    "answer": "Un chou marreur !"
+    "answer": "Un chou marreur"
   },
   {
     "id": 22,
     "type": "limit",
-    "joke": "Quelle est la différence entre un ascenseur et un vagin ?",
-    "answer": "Aucune, dans les deux cas, tu mets ton doigt où t'habites."
+    "joke": "Quel est le point commun entre un ascenseur et un vagin ?",
+    "answer": "Tu mets ton doigt où t'habites."
   },
   {
     "id": 23,
     "type": "global",
     "joke": "Pourquoi le lapin est bleu ?",
-    "answer": "Parce qu'on l'a peint !"
+    "answer": "Parce qu'on l'a peint."
   },
   {
     "id": 24,
@@ -159,7 +159,7 @@
     "id": 27,
     "type": "blondes",
     "joke": "Qu'est-ce qu'un squelette dans une armoire ?",
-    "answer": "Une blonde qui a gagné à cache-cache !"
+    "answer": "Une blonde qui a gagné à cache-cache."
   },
   {
     "id": 28,
@@ -169,8 +169,8 @@
   },
   {
     "id": 29,
-    "type": "global",
-    "joke": "Avec quel fromage, pouvons-nous nous faire grossir les seins ?",
+    "type": "limit",
+    "joke": "Avec quel fromage peut-on faire grossir les seins ?",
     "answer": "Du Boursin."
   },
   {
@@ -195,13 +195,13 @@
     "id": 33,
     "type": "global",
     "joke": "Quel est le comble pour un électricien ?",
-    "answer": "Ne pas être au courant."
+    "answer": "Ne pas être au courant"
   },
   {
     "id": 34,
     "type": "beauf",
     "joke": "Ce que j'ai en commun avec mon mari ?",
-    "answer": "On s'est mariés le même jour..."
+    "answer": "On s'est mariés le même jour."
   },
   {
     "id": 35,
@@ -213,31 +213,31 @@
     "id": 36,
     "type": "dark",
     "joke": "Pourquoi le petit garçon a fait tomber sa glace ?",
-    "answer": "Parce qu'il s'est fait renverser par un bus !"
+    "answer": "Parce qu'il s'est fait renverser par un bus."
   },
   {
     "id": 37,
     "type": "dark",
     "joke": "Que fait un DJ djihadiste ?",
-    "answer": "Il fait péter le son !"
+    "answer": "Il fait péter le son."
   },
   {
     "id": 38,
     "type": "dark",
     "joke": "Combien faut-il d'hommes pour peindre une voiture en rouge ?",
-    "answer": "Un seul ! Mais il faut le lancer très fort..."
+    "answer": "Un seul ! Mais il faut le lancer très fort."
   },
   {
     "id": 39,
     "type": "dark",
     "joke": "À quel endroit se trouvent les tétraplégiques ?",
-    "answer": "Là où on les a laissés..."
+    "answer": "Là où on les a laissés."
   },
   {
     "id": 40,
     "type": "dark",
     "joke": "Savez-vous comment la femme d'Hitler est morte ?",
-    "answer": "En se trompant de douche..."
+    "answer": "En se trompant de douche."
   },
   {
     "id": 41,
@@ -273,7 +273,7 @@
     "id": 46,
     "type": "global",
     "joke": "Quel est le comble pour un coq ?",
-    "answer": "Avoir la chair de poule !"
+    "answer": "Avoir la chair de poule"
   },
   {
     "id": 47,
@@ -405,7 +405,7 @@
     "id": 68,
     "type": "global",
     "joke": "Qu'est-ce qu'un éléphant dit à un homme tout nu ?",
-    "answer": "- Et, tu arrives à attraper des cacahuètes avec ça ?"
+    "answer": "- Et tu arrives à attraper des cacahuètes avec ça ?"
   },
   {
     "id": 69,
@@ -423,7 +423,7 @@
     "id": 71,
     "type": "dark",
     "joke": "Qu'est-ce qui est jaune, orange, rouge et qui tourne très vite ?",
-    "answer": "Un poussin dans un mixeur."
+    "answer": "Un poussin dans un mixeur"
   },
   {
     "id": 72,
@@ -457,9 +457,9 @@
   },
   {
     "id": 77,
-    "type": "beauf",
+    "type": "global",
     "joke": "Connaissez-vous l'histoire du lit escamotable ?",
-    "answer": "C'est une histoire à faire dormir debout !"
+    "answer": "C'est une histoire à faire dormir debout."
   },
   {
     "id": 78,
@@ -531,7 +531,7 @@
     "id": 89,
     "type": "global",
     "joke": "L'école et l'alcool riment, vous savez pourquoi ?",
-    "answer": "Car les deux saoulent"
+    "answer": "Car les deux saoulent."
   },
   {
     "id": 90,
@@ -543,7 +543,7 @@
     "id": 91,
     "type": "global",
     "joke": "Comment est-ce que les abeilles communiquent entre elles ?",
-    "answer": "Par e-miel !"
+    "answer": "Par e-miel"
   },
   {
     "id": 92,
@@ -591,7 +591,7 @@
     "id": 99,
     "type": "global",
     "joke": "Il y a un boucher qui mesure 1 mètre 80, mais combien pèse-t-il ?",
-    "answer": "La viande, parce que les bouchers pèsent la viande."
+    "answer": "500g de boudin noir"
   },
   {
     "id": 100,
@@ -603,19 +603,19 @@
     "id": 101,
     "type": "global",
     "joke": "Pourquoi un chasseur emmène-t-il son fusil aux toilettes ?",
-    "answer": "Pour tirer la chasse."
+    "answer": "Pour tirer la chasse"
   },
   {
     "id": 102,
     "type": "global",
     "joke": "Vous connaissez l'histoire de l'armoire ?",
-    "answer": "Elle n'est pas commode..."
+    "answer": "Elle n'est pas commode."
   },
   {
     "id": 103,
     "type": "global",
     "joke": "Pourquoi les Martiens ne renversent-ils jamais de café sur la table ?",
-    "answer": "Parce qu'ils ont des soucoupes !"
+    "answer": "Parce qu'ils ont des soucoupes."
   },
   {
     "id": 104,
@@ -626,14 +626,14 @@
   {
     "id": 105,
     "type": "global",
-    "joke": "C'est l'histoire du p'tit dej', vous la connaissez ?",
-    "answer": "Non ? Pas de bol..."
+    "joke": "C'est l'histoire du petit déjeuner, vous la connaissez ?",
+    "answer": "Non ? Pas de bol."
   },
   {
     "id": 106,
     "type": "global",
-    "joke": "Dans la phrase \"le voleur a volé une télévision\", où est le sujet ?",
-    "answer": "En prison !"
+    "joke": "Dans la phrase \"Le voleur a volé une télévision.\", où est le sujet ?",
+    "answer": "En prison"
   },
   {
     "id": 107,
@@ -645,13 +645,13 @@
     "id": 108,
     "type": "dark",
     "joke": "Comment appelle-t-on un chien qui n'a pas de pattes ?",
-    "answer": "On ne l'appelle pas, on va le chercher..."
+    "answer": "On ne l'appelle pas, on va le chercher."
   },
   {
     "id": 109,
     "type": "global",
     "joke": "Que fait une vache quand elle a les yeux fermés ?",
-    "answer": "Elle fabrique du lait concentré !"
+    "answer": "Elle fabrique du lait concentré."
   },
   {
     "id": 110,
@@ -663,13 +663,13 @@
     "id": 111,
     "type": "limit",
     "joke": "Pourquoi Cendrillon est-elle morte à minuit ?",
-    "answer": "Parce que son tampon s'est transformé en citrouille !"
+    "answer": "Parce que son tampon s'est transformé en citrouille."
   },
   {
     "id": 112,
     "type": "limit",
-    "joke": "L'amour, c'est comme les cartes :",
-    "answer": "Quand on n'a pas de partenaires, mieux vaut avoir une bonne-main."
+    "joke": "L'amour, c'est comme les cartes.",
+    "answer": "Quand on n'a pas de partenaire, mieux vaut avoir une bonne main."
   },
   {
     "id": 113,
@@ -686,31 +686,31 @@
   {
     "id": 115,
     "type": "global",
-    "joke": "C'est une femme qui prend son bain, son chien pète, elle se noie, pourquoi ?",
-    "answer": "Parce que son chien, c'est un Pékinois."
+    "joke": "C'est une femme qui prend son bain, son chien pète, elle se noie. Pourquoi ?",
+    "answer": "Parce que son chien est un Pékinois."
   },
   {
     "id": 116,
     "type": "global",
     "joke": "Savez-vous pourquoi le père Noël rit tout le temps ?",
-    "answer": "Parce que ce n'est pas lui qui paye les cadeaux !"
+    "answer": "Parce que ce n'est pas lui qui paye les cadeaux."
   },
   {
     "id": 117,
     "type": "global",
     "joke": "Tu connais la blague du photographe ?",
-    "answer": "Elle n'est pas encore développée !"
+    "answer": "Elle n'est pas encore développée."
   },
   {
     "id": 118,
     "type": "global",
     "joke": "Qu'est-ce qui est jaune et qui court vite ?",
-    "answer": "Un citron pressé."
+    "answer": "Un citron pressé"
   },
   {
     "id": 119,
     "type": "limit",
-    "joke": "Le viagra, c'est comme l'enfer,",
+    "joke": "Le viagra, c'est comme l'enfer.",
     "answer": "Satan l'habite."
   },
   {
@@ -722,7 +722,7 @@
   {
     "id": 121,
     "type": "dark",
-    "joke": "Quelle est la dernière chose que Lady Dianna ait mangé ?",
+    "joke": "Quelle est la dernière chose que Lady Diana ait mangé ?",
     "answer": "Le volant"
   },
   {
@@ -759,13 +759,13 @@
     "id": 127,
     "type": "blondes",
     "joke": "Pourquoi les blondes passent-elles à la caisse avec un seau d'eau ?",
-    "answer": "Pour payer en liquide."
+    "answer": "Pour payer en liquide"
   },
   {
     "id": 128,
     "type": "blondes",
     "joke": "Pourquoi les blondes ne mangent-elles pas de bananes ?",
-    "answer": "Parce qu'elles ne trouvent pas la fermeture éclair !"
+    "answer": "Parce qu'elles ne trouvent pas la fermeture éclair."
   },
   {
     "id": 129,
@@ -783,7 +783,7 @@
     "id": 131,
     "type": "global",
     "joke": "Quels desserts portent des sous-vêtements ?",
-    "answer": "Les bananes à slips !"
+    "answer": "Les bananes à slips"
   },
   {
     "id": 132,
@@ -806,14 +806,14 @@
   {
     "id": 135,
     "type": "global",
-    "joke": "Robinson Crusoé habitait t'il une île déserte ?",
+    "joke": "Robinson Crusoé habitait-t-il une île déserte ?",
     "answer": "Non, puisqu'il y habitait."
   },
   {
     "id": 136,
     "type": "beauf",
     "joke": "Qui est le plus menteur entre un boucher et un jardinier ?",
-    "answer": "Le jardinier, car il ne raconte que des salades !"
+    "answer": "Le jardinier, car il ne raconte que des salades."
   },
   {
     "id": 137,
@@ -831,7 +831,7 @@
     "id": 139,
     "type": "beauf",
     "joke": "Pourquoi les petits poissons ne vont pas à l'école ?",
-    "answer": "Parce qu'ils s'en fish !"
+    "answer": "Parce qu'ils s'en fish."
   },
   {
     "id": 140,
@@ -855,13 +855,13 @@
     "id": 143,
     "type": "global",
     "joke": "Pourquoi les sorcières utilisent des balais pour voler ?",
-    "answer": "Car un aspirateur est trop lourd !"
+    "answer": "Car un aspirateur est trop lourd."
   },
   {
     "id": 144,
     "type": "global",
     "joke": "Qu'est-ce qu'une diarrhée mentale ?",
-    "answer": "C'est quant à chaque fois que t'as une idée, c'est de la merde !"
+    "answer": "
   },
   {
     "id": 145,
@@ -873,13 +873,13 @@
     "id": 146,
     "type": "blondes",
     "joke": "Pourquoi les blondes portent-elles des ceintures D&G ?",
-    "answer": "Pour reconnaître leur droite et leur gauche !"
+    "answer": "Pour reconnaître leur droite et leur gauche."
   },
   {
     "id": 147,
     "type": "global",
     "joke": "Connaissez-vous la blague sur les magasins ?",
-    "answer": "En-tout-cas, elle a supermarché !"
+    "answer": "En-tout-cas, elle a supermarché."
   },
   {
     "id": 148,
@@ -891,7 +891,7 @@
     "id": 149,
     "type": "global",
     "joke": "Que dit-on d'un gamer triste ?",
-    "answer": "On dit qu'il se console !"
+    "answer": "On dit qu'il se console ."
   },
   {
     "id": 150,
