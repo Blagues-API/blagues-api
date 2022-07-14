@@ -405,7 +405,7 @@
     "id": 68,
     "type": "global",
     "joke": "Qu'est-ce qu'un éléphant dit à un homme tout nu ?",
-    "answer": "- Et tu arrives à attraper des cacahuètes avec ça ?"
+    "answer": "Et tu arrives à attraper des cacahuètes avec ça ?"
   },
   {
     "id": 69,
@@ -861,7 +861,7 @@
     "id": 144,
     "type": "global",
     "joke": "Qu'est-ce qu'une diarrhée mentale ?",
-    "answer": "
+    "answer": "C'est quant à chaque fois que t'as une idée, c'est de la merde !"
   },
   {
     "id": 145,
@@ -3188,7 +3188,7 @@
   {
     "id": 532,
     "type": "global",
-    "joke": "Que se passe-t-il quand 2 poissons s'énervent ?",
+    "joke": "Que se passe-t-il lorsque deux poissons se disputent ?",
     "answer": "Le thon monte."
   },
   {
@@ -3352,18 +3352,6 @@
     "type": "dev",
     "joke": "Je pense qu'il faut désinstaller et réinstaller 2020.",
     "answer": "Je pense qu'il y a un virus."
-  },
-  {
-    "id": 560,
-    "type": "global",
-    "joke": "C'est quoi un chat dans l'espace ?",
-    "answer": "Un chatellite."
-  },
-  {
-    "id": 561,
-    "type": "global",
-    "joke": "Tu sais pourquoi l'iPhone 6 se plie ?",
-    "answer": "Parce que l'Apple store."
   },
   {
     "id": 562,
@@ -4701,7 +4689,7 @@
     "id": 784,
     "type": "global",
     "joke": "Quel est le sport le plus fruité ?",
-    "answer": "La boxe, parce que tu te prends des pêches dans la poire et tu tombes dans les pommes."
+    "answer": "La boxe, car quand tu te prends une pêche en pleine poire, tu ne ramènes pas ta fraise pour des prunes ou tu te prends une châtaigne."
   },
   {
     "id": 785,
@@ -5367,7 +5355,7 @@
     "id": 895,
     "type": "dark",
     "joke": "La vie, c'est comme un 100 mètres.",
-    "answer": "Les asthmatiques n'arrivent pas jusqu'au bout."
+    "answer": "Les asthmatiques et les obèses n'arrivent pas jusqu'au bout."
   },
   {
     "id": 896,
@@ -6108,12 +6096,6 @@
     "answer": "Car elle n'a pas de papiers."
   },
   {
-    "id": 1019,
-    "type": "dark",
-    "joke": "La vie, c'est comme un 100 mètres.",
-    "answer": "Les obèses n'arrivent pas jusqu'au bout."
-  },
-  {
     "id": 1020,
     "type": "global",
     "joke": "Comment appelle-t-on un avion qui rebondit ?",
@@ -6750,12 +6732,6 @@
     "answer": "C'est pas commode !"
   },
   {
-    "id": 1126,
-    "type": "global",
-    "joke": "Quel est le sport le plus fruité ?",
-    "answer": "La boxe, car quand tu te prends une pêche en pleine poire, tu ne ramènes pas ta fraise pour des prunes ou tu te prends une châtaigne."
-  },
-  {
     "id": 1127,
     "type": "global",
     "joke": "Un anorexique monte sur une balance pour se peser.",
@@ -7104,12 +7080,6 @@
     "answer": "Parce que c'est la place du mort."
   },
   {
-    "id": 1185,
-    "type": "global",
-    "joke": "Un schtroumpf court, tombe...",
-    "answer": "... et se fait un bleu."
-  },
-  {
     "id": 1186,
     "type": "global",
     "joke": "Deux nombres réels vont dans une boîte de nuit.",
@@ -7185,7 +7155,7 @@
     "id": 1198,
     "type": "global",
     "joke": "Chuck Norris peut faire de la bière...",
-    "answer": "en brassant de l'air"
+    "answer": "en brassant de l'air."
   },
   {
     "id": 1199,
@@ -7524,12 +7494,6 @@
     "answer": "Leurs existences n'ont jamais été prouvées."
   },
   {
-    "id": 1255,
-    "type": "global",
-    "joke": "Chuck Norris peut faire de la bière...",
-    "answer": "en brassant de l'air."
-  },
-  {
     "id": 1256,
     "type": "global",
     "joke": "Quand la nuit tombe...",
@@ -7833,7 +7797,7 @@
     "id": 1306,
     "type": "global",
     "joke": "Quel est le médecin qui nous fait tous craquer ?",
-    "answer": "L’osteo."
+    "answer": "L’ostéo."
   },
   {
     "id": 1307,
@@ -7878,12 +7842,6 @@
     "answer": "Il raconte des salades."
   },
   {
-    "id": 1314,
-    "type": "global",
-    "joke": "Vous savez pourquoi les Japonais ne veulent pas de chevaux ?",
-    "answer": "Parce qu'ils sont déjà Poney !"
-  },
-  {
     "id": 1315,
     "type": "global",
     "joke": "Quand Chuck Norris regarde le soleil avec insistance...",
@@ -7894,12 +7852,6 @@
     "type": "dark",
     "joke": "C'est l'histoire d'un zoophile...",
     "answer": "... qui prend son élan."
-  },
-  {
-    "id": 1317,
-    "type": "global",
-    "joke": "Quel est le médecin qui nous fait tous craquer ?",
-    "answer": "L’ostéo."
   },
   {
     "id": 1318,
@@ -8130,7 +8082,7 @@
     "answer": "\"Je parie sur celui avec le couteau !\""
   },
   {
-    "id": 1506,
+    "id": 1356,
     "type": "dev",
     "joke": "À quoi reconnaît-on un métro ?",
     "answer": "À son metroId !"
@@ -8145,7 +8097,7 @@
     "id": 1358,
     "type": "global",
     "joke": "Au tribunal des couleurs, qui prend les décisions ?",
-    "answer": "Le vert, car le vert dicte."
+    "answer": "Le vert, car il prend le vert dicte."
   },
   {
     "id": 1359,
@@ -8262,12 +8214,6 @@
     "answer": "\"Passe-porc svp !\""
   },
   {
-    "id": 1378,
-    "type": "global",
-    "joke": "Comment fait-on pour arrêter un combat d'aveugles ?",
-    "answer": "\"Je parie sur celui avec le couteau !\""
-  },
-  {
     "id": 1379,
     "type": "dark",
     "joke": "Je connais un esquimau en phase terminale...",
@@ -8284,30 +8230,6 @@
     "type": "global",
     "joke": "Comment cuire des carottes sans feu ?",
     "answer": "On en met huit dans un chaudron, comme ça les carottes sont qu'huit."
-  },
-  {
-    "id": 1382,
-    "type": "global",
-    "joke": "Qu'est-ce que ça donne une tempête à Halloween ?",
-    "answer": "Des vents pires."
-  },
-  {
-    "id": 1383,
-    "type": "global",
-    "joke": "C'est quoi la différence entre un fonctionnaire et quelqu'un au chômage ?",
-    "answer": "Le chômeur, lui, a déjà travaillé."
-  },
-  {
-    "id": 1384,
-    "type": "global",
-    "joke": "Au tribunal des couleurs, qui prend les décisions ?",
-    "answer": "Le vert, car il prend le vert dicte."
-  },
-  {
-    "id": 1385,
-    "type": "global",
-    "joke": "Qu'est-ce qui est rouge et qui fait mal aux dents ?",
-    "answer": "Une brique."
   },
   {
     "id": 1386,
@@ -9013,12 +8935,6 @@
   },
   {
     "id": 1503,
-    "type": "beauf",
-    "joke": "Quel est le point commun entre les blagues et les jupes ?",
-    "answer": "Les plus courtes sont les meilleures."
-  },
-  {
-    "id": 1504,
     "type": "beauf",
     "joke": "Quel est le point commun entre les blagues et les jupes ?",
     "answer": "Les plus courtes sont les meilleures."
@@ -9994,12 +9910,6 @@
     "type": "global",
     "joke": "Que dit un Doliprane dans sa boîte ?",
     "answer": "Je me sens comprimé…"
-  },
-  {
-    "id": 1667,
-    "type": "global",
-    "joke": "Que se passe-t-il lorsque deux poissons se disputent ?",
-    "answer": "Le thon monte."
   },
   {
     "id": 1668,
