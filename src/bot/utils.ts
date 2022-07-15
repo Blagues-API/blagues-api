@@ -1,6 +1,7 @@
 import {
   ButtonInteraction,
   ButtonStyle,
+  ChatInputCommandInteraction,
   CommandInteraction,
   ComponentType,
   GuildMember,
@@ -13,6 +14,10 @@ import {
 import { diffWords } from 'diff';
 import { APIEmbed } from 'discord-api-types/v10';
 import { godfatherRoleId } from './constants';
+import prisma from '../prisma';
+import { Category, UnsignedJoke } from 'typings';
+import { ProposalType } from '@prisma/client';
+import { jokeById, jokeByQuestion } from 'controllers';
 
 type UniversalInteractionOptions = Omit<InteractionReplyOptions, 'flags'>;
 type UniversalMessageOptions = Omit<MessageOptions, 'flags'>;
@@ -191,4 +196,153 @@ export async function paginate(
   }
 
   return paginate(interaction, embed, pages, page, message);
+}
+
+enum IdType {
+  MESSAGE_ID,
+  JOKE_ID,
+  MESSAGE_QUESTION
+}
+
+export interface JokeCorrectionPayload extends UnsignedJoke {
+  id?: number;
+  correction_type: ProposalType;
+  suggestion: UnsignedJoke & {
+    message_id: string | null;
+    proposal_id: number;
+  };
+}
+
+function getIdType(query: string): IdType {
+  if (isNaN(Number(query))) {
+    return IdType.MESSAGE_QUESTION;
+  }
+  if (query.length > 6) {
+    return IdType.MESSAGE_ID;
+  }
+  return IdType.JOKE_ID;
+}
+
+export async function findJoke(
+  interaction: ChatInputCommandInteraction<'cached'>,
+  query: string
+): Promise<JokeCorrectionPayload | null> {
+  const idType = getIdType(query);
+  if (idType === IdType.MESSAGE_ID) {
+    const proposal = await prisma.proposal.findUnique({
+      where: {
+        message_id: query
+      },
+      include: {
+        corrections: {
+          take: 1,
+          orderBy: {
+            created_at: 'desc'
+          },
+          where: {
+            merged: false,
+            refused: false
+          }
+        },
+        suggestion: {
+          include: {
+            corrections: {
+              take: 1,
+              orderBy: {
+                created_at: 'desc'
+              },
+              where: {
+                merged: false,
+                refused: false
+              }
+            }
+          }
+        }
+      }
+    });
+    if (!proposal) {
+      interaction.channel
+        ?.send(
+          messageProblem(
+            `Impossible de trouver une blague ou correction liée à cet ID de blague, assurez vous que cet ID provient bien d\'un message envoyé par le bot ${interaction.client.user}`
+          )
+        )
+        .then(tDelete(5000));
+      return null;
+    }
+
+    const origin = proposal.type === ProposalType.SUGGESTION ? proposal : proposal.suggestion!;
+
+    return {
+      id: proposal.joke_id ?? undefined,
+      type: (origin.corrections[0]?.joke_type ?? origin.joke_type) as Category,
+      joke: (origin.corrections[0]?.joke_question ?? origin.joke_question)!,
+      answer: (origin.corrections[0]?.joke_answer ?? origin.joke_answer)!,
+      correction_type: origin.merged ? ProposalType.CORRECTION : ProposalType.SUGGESTION_CORRECTION,
+      suggestion: {
+        message_id: origin.message_id,
+        proposal_id: origin.id,
+        type: origin.joke_type as Category,
+        joke: origin.joke_question!,
+        answer: origin.joke_answer!
+      }
+    };
+  }
+
+  const joke = idType === IdType.JOKE_ID ? jokeById(Number(query)) : jokeByQuestion(query);
+  if (!joke) {
+    interaction.channel
+      ?.send(
+        messageProblem(
+          `Impossible de trouver une blague à partir de ${
+            idType === IdType.JOKE_ID ? 'cet identifiant' : 'cette question'
+          }, veuillez réessayer !`
+        )
+      )
+      .then(tDelete(5000));
+    return null;
+  }
+
+  const proposal = await prisma.proposal.upsert({
+    create: {
+      joke_id: joke.id,
+      joke_type: joke.type,
+      joke_question: joke.joke,
+      joke_answer: joke.answer,
+      type: ProposalType.SUGGESTION,
+      merged: true
+    },
+    include: {
+      corrections: {
+        take: 1,
+        orderBy: {
+          created_at: 'desc'
+        },
+        where: {
+          merged: false,
+          refused: false
+        }
+      }
+    },
+    update: {},
+    where: {
+      joke_id: joke.id
+    }
+  });
+
+  const correction = proposal.corrections[0];
+  return {
+    id: proposal.joke_id!,
+    type: (correction?.joke_type ?? proposal.joke_type) as Category,
+    joke: (correction?.joke_question ?? proposal.joke_question)!,
+    answer: (correction?.joke_answer ?? proposal.joke_answer)!,
+    correction_type: ProposalType.CORRECTION,
+    suggestion: {
+      message_id: proposal.message_id,
+      proposal_id: proposal.id,
+      type: proposal.joke_type as Category,
+      joke: proposal.joke_question!,
+      answer: proposal.joke_answer!
+    }
+  };
 }
