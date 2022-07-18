@@ -397,7 +397,7 @@ export default class CorrectionCommand extends Command {
     return new Promise((resolve) => {
       const collector = commandInteraction.channel!.createMessageCollector({
         filter: (m: Message) => m.author.id === commandInteraction.user.id,
-        idle: 1_000
+        idle: 60_000
       });
       collector.on('collect', async (msg: Message) => {
         if (msg.deletable) await msg.delete();
