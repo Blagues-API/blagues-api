@@ -402,7 +402,7 @@ export default class CorrectionCommand extends Command {
       collector.on('collect', async (msg: Message) => {
         if (msg.deletable) await msg.delete();
 
-        if (msg.content.length >= 130) {
+        if (msg.content.length > 130) {
           commandInteraction
             .channel!.send(
               interactionProblem(`La ${textReplyContent} d'une blague ne peut pas dépasser 130 caractères.`)
