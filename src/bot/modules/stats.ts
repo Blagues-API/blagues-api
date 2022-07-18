@@ -98,13 +98,14 @@ export default class Stats {
       .filter((proposal) => interaction.guild.members.cache.has(proposal.user_id!))
       .sort((a, b) => b._count - a._count);
 
-    const pages = chunk(
+    const membersPoints = await Promise.all(
       membersProposals.map(async (proposal) => {
-        const point = await this.getPoints(interaction, proposal.user_id!);
-        return `<@${proposal.user_id}> : ${point}}`;
-      }),
-      20
-    ).map((entries) => entries.join('\n'));
+        const points = await this.getPoints(interaction, proposal.user_id!);
+        return `<@${proposal.user_id}> : ${points}}`;
+      })
+    );
+
+    const pages = chunk(membersPoints, 20).map((entries) => entries.join('\n'));
 
     const embed: APIEmbed = {
       title: 'Statistiques',
