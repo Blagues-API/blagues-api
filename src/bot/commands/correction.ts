@@ -394,27 +394,33 @@ export default class CorrectionCommand extends Command {
       components: []
     });
 
-    const messages = await commandInteraction
-      .channel!.awaitMessages({
+    return new Promise((resolve) => {
+      const collector = commandInteraction.channel!.createMessageCollector({
         filter: (m: Message) => m.author.id === commandInteraction.user.id,
-        time: 60_000,
-        max: 1
-      })
-      .catch(() => null);
+        idle: 1_000
+      });
+      collector.on('collect', async (msg: Message) => {
+        if (msg.deletable) await msg.delete();
 
-    // TODO: Vérifier la taille comme pour les suggestions
-
-    const msg = messages?.first();
-    if (!msg) {
-      await buttonInteraction.editReply(interactionInfo('Les 60 secondes se sont écoulées.', false));
-      return null;
-    }
-
-    if (msg.deletable) await msg.delete();
-
-    joke[textReplyContent === 'question' ? 'joke' : 'answer'] = msg.content.replace(/\n/g, ' ');
-
-    return joke;
+        if (msg.content.length >= 130) {
+          commandInteraction
+            .channel!.send(interactionProblem("Chaque partie d'une blague ne peut pas dépasser les 130 caractères !"))
+            .then(tDelete(5_000));
+        } else {
+          joke[textReplyContent === 'question' ? 'joke' : 'answer'] = msg.content.replace(/\n/g, ' ');
+          collector.stop();
+          return resolve(joke);
+        }
+      });
+      collector.once('end', async (_collected, reason: string) => {
+        if (reason === 'idle') {
+          await commandInteraction.editReply({
+            embeds: [info('Les 60 secondes se sont écoulées.')]
+          });
+          return resolve(null);
+        }
+      });
+    });
   }
 
   async requestTypeChange(
