@@ -416,9 +416,7 @@ export default class CorrectionCommand extends Command {
       });
       collector.once('end', async (_collected, reason: string) => {
         if (reason === 'idle') {
-          await commandInteraction.editReply({
-            embeds: [info('Les 60 secondes se sont écoulées.')]
-          });
+          await commandInteraction.editReply(interactionInfo('Les 60 secondes se sont écoulées.'));
           return resolve(null);
         }
       });
