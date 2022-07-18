@@ -404,7 +404,9 @@ export default class CorrectionCommand extends Command {
 
         if (msg.content.length >= 130) {
           commandInteraction
-            .channel!.send(interactionProblem("Chaque partie d'une blague ne peut pas dépasser les 130 caractères !"))
+            .channel!.send(
+              interactionProblem(`La ${textReplyContent} d'une blague ne peut pas dépasser 130 caractères.`)
+            )
             .then(tDelete(5_000));
         } else {
           joke[textReplyContent === 'question' ? 'joke' : 'answer'] = msg.content.replace(/\n/g, ' ');
