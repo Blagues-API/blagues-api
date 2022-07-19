@@ -1,7 +1,7 @@
 import { stripIndents } from 'common-tags';
 import { CommandInteraction, GuildMember, APIEmbed } from 'discord.js';
 import { Colors, godfatherRoleId } from '../constants';
-import { isParrain, paginate } from '../utils';
+import { isGodfather, paginate } from '../utils';
 import prisma from '../../prisma';
 import chunk from 'lodash/chunk';
 import partition from 'lodash/partition';
@@ -111,17 +111,17 @@ export default class Stats {
     const membersVotes = proposals.reduce<Vote[]>((votes, proposal) => (votes.push(...proposal.votes), votes), []);
     const godfathersDecisions = await Promise.all([prisma.approval.findMany(), prisma.disapproval.findMany()]);
 
-    const membersIds = [...new Set(membersProposals.map((p) => p.user_id!))];
+    const membersIds = [...new Set(membersProposals.map((mP) => mP.user_id!))];
 
     const membersPoints = membersIds.map((userId) => {
       const member = interaction.guild.members.cache.get(userId)!;
 
-      const memberProposals = membersProposals.filter((mP) => mP.user_id === userId);
-      const memberVotes = membersVotes.filter((mP) => mP.user_id === userId);
+      const memberProposals = membersProposals.filter((p) => p.user_id === userId);
+      const memberVotes = membersVotes.filter((v) => v.user_id === userId);
 
       const points = this.calculatePoints(member, memberProposals, memberVotes, godfathersDecisions);
 
-      return `<@${userId}> : ${points}}`;
+      return `<@${userId}> : ${points} ${points !== 1 ? 'points' : 'point'}`;
     });
 
     const pages = chunk(membersPoints, 20).map((entries) => entries.join('\n'));
@@ -139,12 +139,12 @@ export default class Stats {
     return paginate(interaction, embed, pages);
   }
 
-  static async calculatePoints(
+  static calculatePoints(
     member: GuildMember,
     proposals: MemberProposal[],
     votes: Vote[],
     decisions: GodfathersDecisions
-  ): Promise<number> {
+  ) {
     let userPoints = 0;
 
     for (const proposal of proposals) {
@@ -162,9 +162,9 @@ export default class Stats {
       }
     }
 
-    if (isParrain(member)) {
-      const approvals = decisions[0].filter((a) => a.user_id === member.id);
-      const disapprovals = decisions[1].filter((d) => d.user_id === member.id);
+    if (isGodfather(member)) {
+      const approvals = decisions[0].filter((approval) => approval.user_id === member.id);
+      const disapprovals = decisions[1].filter((disapproval) => disapproval.user_id === member.id);
 
       userPoints += approvals.length * 4;
       userPoints += disapprovals.length * 4;
