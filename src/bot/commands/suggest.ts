@@ -40,13 +40,15 @@ export default class SuggestCommand extends Command {
           type: ApplicationCommandOptionType.String,
           name: 'joke',
           description: 'Contenue de la blague',
-          required: true
+          required: true,
+          max_length: 130
         },
         {
           type: ApplicationCommandOptionType.String,
           name: 'response',
           description: 'Réponse de la blague',
-          required: true
+          required: true,
+          max_length: 130
         }
       ]
     });
@@ -57,14 +59,6 @@ export default class SuggestCommand extends Command {
       return interaction.reply(
         interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannelId}>.`)
       );
-    }
-
-    if (
-      interaction.options.getString('joke', true).length > 130 ||
-      interaction.options.getString('response', true).length > 130
-    ) {
-      interaction.reply(interactionProblem("Chaque partie d'une blague ne peut pas dépasser les 130 caractères !"));
-      return;
     }
 
     const proposals = await prisma.proposal.findMany({

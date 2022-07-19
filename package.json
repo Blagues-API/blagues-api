@@ -61,7 +61,7 @@
     "dayjs": "^1.11.3",
     "diff": "^5.1.0",
     "discord-api-types": "^0.36.1",
-    "discord.js": "^14.0.0-dev.1654949087-96053ba",
+    "discord.js": "^14.0.2",
     "dotenv": "^14.3.2",
     "fastify": "^4.2.0",
     "fastify-plugin": "^3.0.1",

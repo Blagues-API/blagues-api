@@ -1,10 +1,10 @@
 import {
   ActivityType,
-  AnyInteraction,
   Client,
+  GatewayIntentBits,
   GuildMember,
   GuildTextBasedChannel,
-  IntentsBitField,
+  Interaction,
   InteractionType,
   Message,
   PartialGuildMember,
@@ -26,10 +26,10 @@ export default class Bot extends Client {
     super({
       partials: [Partials.Reaction],
       intents:
-        IntentsBitField.Flags.Guilds |
-        IntentsBitField.Flags.GuildMembers |
-        IntentsBitField.Flags.GuildMessages |
-        IntentsBitField.Flags.MessageContent
+        GatewayIntentBits.Guilds |
+        GatewayIntentBits.GuildMembers |
+        GatewayIntentBits.GuildMessages |
+        GatewayIntentBits.MessageContent
     });
 
     this.dispatcher = new Dispatcher(this);
@@ -54,7 +54,7 @@ export default class Bot extends Client {
     this.refreshStatus();
   }
 
-  async onInteractionCreate(interaction: AnyInteraction): Promise<void> {
+  async onInteractionCreate(interaction: Interaction): Promise<void> {
     if (interaction.type === InteractionType.ApplicationCommand) {
       return this.dispatcher.execute(interaction);
     } else if (interaction.isButton() && interaction.customId === 'user_reminder') {
