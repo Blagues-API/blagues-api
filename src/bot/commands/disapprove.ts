@@ -25,7 +25,7 @@ import {
   interactionProblem,
   interactionValidate,
   isEmbedable,
-  isParrain,
+  isGodfather,
   messageLink
 } from '../utils';
 
@@ -58,7 +58,7 @@ export default class DisapproveCommand extends Command {
       );
     }
 
-    if (!isParrain(interaction.member)) {
+    if (!isGodfather(interaction.member)) {
       return interaction.reply(
         interactionProblem(
           `Seul un <@${godfatherRoleId}> peut désapprouver une ${isSuggestionChannel ? 'blague' : 'correction'}.`
@@ -241,6 +241,8 @@ export default class DisapproveCommand extends Command {
       const { base, correction } = embed.description!.match(dataSplitRegex)!.groups!;
       embed.description = [base, correction, godfathers].filter(Boolean).join('\n\n');
     }
+
+    await interaction.client.votes.deleteUserVotes(message, interaction.user.id);
 
     if (proposal.disapprovals.length < neededApprovalsCount) {
       await message.edit({ embeds: [embed] });
