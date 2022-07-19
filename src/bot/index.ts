@@ -151,6 +151,7 @@ declare module 'discord.js' {
   interface Client {
     dispatcher: Dispatcher;
     stickys: Stickys;
+    votes: Votes;
     refreshStatus(): void;
   }
 }
