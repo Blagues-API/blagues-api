@@ -40,13 +40,17 @@ export default class SuggestCommand extends Command {
           type: ApplicationCommandOptionType.String,
           name: 'joke',
           description: 'Contenue de la blague',
-          required: true
+          required: true,
+          min_length: 1,
+          max_length: 130
         },
         {
           type: ApplicationCommandOptionType.String,
           name: 'response',
           description: 'Réponse de la blague',
-          required: true
+          required: true,
+          min_length: 1,
+          max_length: 130
         }
       ]
     });
