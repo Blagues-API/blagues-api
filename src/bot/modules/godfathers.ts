@@ -96,8 +96,7 @@ export async function updateGodfatherEmoji(member: GuildMember) {
 async function generateEmoji(member: GuildMember) {
   const memberAvatar = member.displayAvatarURL({ size: 128, forceStatic: true, extension: 'png' });
   const bufferAvatar = await got(memberAvatar).buffer();
-  const bufferEmoji = await sharp(bufferAvatar)
+  return sharp(bufferAvatar)
     .composite([{ input: rect, blend: 'dest-in' }])
     .toBuffer();
-  return bufferEmoji;
 }
