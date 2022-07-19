@@ -1,9 +1,9 @@
 import {
   ActivityType,
   Client,
+  GatewayIntentBits,
   GuildMember,
   GuildTextBasedChannel,
-  IntentsBitField,
   Interaction,
   InteractionType,
   Message,
@@ -26,10 +26,10 @@ export default class Bot extends Client {
     super({
       partials: [Partials.Reaction],
       intents:
-        IntentsBitField.Flags.Guilds |
-        IntentsBitField.Flags.GuildMembers |
-        IntentsBitField.Flags.GuildMessages |
-        IntentsBitField.Flags.MessageContent
+        GatewayIntentBits.Guilds |
+        GatewayIntentBits.GuildMembers |
+        GatewayIntentBits.GuildMessages |
+        GatewayIntentBits.MessageContent
     });
 
     this.dispatcher = new Dispatcher(this);
