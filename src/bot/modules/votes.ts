@@ -1,7 +1,21 @@
-import { correctionsChannelId, downReaction, suggestionsChannelId, upReaction } from '../constants';
-import { isParrain } from '../utils';
-import { Client, GuildTextBasedChannel, MessageReaction, PartialMessageReaction, PartialUser, User } from 'discord.js';
+import { correctionsChannelId, downReactionIdentifier, suggestionsChannelId, upReactionIdentifier } from '../constants';
+import { isGodfather } from '../utils';
+import {
+  Client,
+  GuildTextBasedChannel,
+  Message,
+  MessageReaction,
+  PartialMessageReaction,
+  PartialUser,
+  User
+} from 'discord.js';
 import prisma from '../../prisma';
+import { VoteType } from '@prisma/client';
+
+const Reactions = {
+  [upReactionIdentifier]: VoteType.UP,
+  [downReactionIdentifier]: VoteType.DOWN
+};
 
 export default class Votes {
   public client: Client;
@@ -9,6 +23,7 @@ export default class Votes {
   constructor(client: Client) {
     this.client = client;
   }
+
   async run(partialReaction: MessageReaction | PartialMessageReaction, partialUser: User | PartialUser) {
     if (!partialReaction.message.guild) return;
     const reaction = await this.checkReaction(partialReaction);
@@ -22,46 +37,28 @@ export default class Votes {
 
     const member = await channel.guild.members.fetch(user.id);
 
-    if (![suggestionsChannelId, correctionsChannelId].includes(channel.id) || isParrain(member)) return;
+    if (![suggestionsChannelId, correctionsChannelId].includes(channel.id) || isGodfather(member)) return;
+
     const proposal = await prisma.proposal.findUnique({
       where: {
         message_id: message.id
       },
       include: {
-        suggestion: {
-          include: {
-            corrections: {
-              orderBy: {
-                created_at: 'desc'
-              },
-              where: {
-                merged: false,
-                refused: false,
-                stale: false
-              }
-            },
-            approvals: true,
-            disapprovals: true,
-            votes: true
+        approvals: {
+          select: {
+            user_id: true
           }
         },
-        corrections: {
-          take: 1,
-          orderBy: {
-            created_at: 'desc'
-          },
-          where: {
-            merged: false,
-            refused: false,
-            stale: false
+        disapprovals: {
+          select: {
+            user_id: true
           }
         },
-        approvals: true,
-        disapprovals: true,
         votes: true
       }
     });
     if (!proposal) return;
+
     const embed = message.embeds[0]?.toJSON();
     if (!embed) {
       await prisma.proposal.delete({
@@ -71,35 +68,70 @@ export default class Votes {
       });
       return;
     }
+
     if (proposal.merged || proposal.refused || proposal.stale) return;
 
-    const type = reaction.emoji.name == upReaction ? 'UP' : reaction.emoji.name == downReaction ? 'DOWN' : null;
+    const emoji = (reaction.emoji.id || reaction.emoji.name) as string;
+    const type = Reactions[emoji];
     if (!type) return;
-    (message.reactions.resolve(type == 'UP' ? downReaction : upReaction) as MessageReaction).users.remove(user.id);
-    const voteIndex = proposal.votes.findIndex((vote) => vote.user_id == user.id);
-    if (voteIndex !== -1) {
-      await prisma.vote.delete({
-        where: {
-          proposal_id_user_id: {
-            proposal_id: proposal.id,
-            user_id: user.id
-          }
-        }
-      });
+
+    if (
+      isGodfather(member) &&
+      (proposal.approvals.some((approval) => approval.user_id === member.id) ||
+        proposal.disapprovals.some((disapproval) => disapproval.user_id === member.id))
+    ) {
+      await reaction.users.remove(user);
+      return;
     }
 
-    proposal.votes.push(
+    const vote = proposal.votes.find((vote) => vote.user_id == user.id);
+    if (vote) {
+      const oppositReaction = message.reactions.resolve(
+        type === VoteType.UP ? downReactionIdentifier : upReactionIdentifier
+      );
+      if (oppositReaction) {
+        const users = await oppositReaction.users.fetch();
+        if (users.has(user.id)) await oppositReaction.users.remove(user.id);
+      }
+
+      if (vote.type !== type) {
+        await prisma.vote.update({
+          data: {
+            type: type
+          },
+          where: {
+            proposal_id_user_id: {
+              proposal_id: proposal.id,
+              user_id: user.id
+            }
+          }
+        });
+      }
+    } else {
       await prisma.vote.create({
         data: {
           proposal_id: proposal.id,
           user_id: user.id,
           type: type
         }
-      })
-    );
+      });
+    }
   }
 
-  async checkReaction(messageReaction: MessageReaction | PartialMessageReaction) {
+  async deleteUserVotes(message: Message, userId: string) {
+    const upReaction = message.reactions.resolve(upReactionIdentifier);
+    if (upReaction) {
+      const users = await upReaction.users.fetch();
+      if (users.has(userId)) await upReaction.users.remove(userId);
+    }
+    const downReaction = message.reactions.resolve(downReactionIdentifier);
+    if (downReaction) {
+      const users = await downReaction.users.fetch();
+      if (users.has(userId)) await downReaction.users.remove(userId);
+    }
+  }
+
+  private async checkReaction(messageReaction: MessageReaction | PartialMessageReaction) {
     try {
       if (messageReaction.partial) {
         messageReaction = await messageReaction.fetch();
@@ -114,7 +146,7 @@ export default class Votes {
     return messageReaction;
   }
 
-  async checkUser(user: User | PartialUser) {
+  private async checkUser(user: User | PartialUser) {
     try {
       if (user.partial) user = await user.fetch();
     } catch {
