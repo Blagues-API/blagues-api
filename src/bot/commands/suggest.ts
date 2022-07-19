@@ -63,14 +63,6 @@ export default class SuggestCommand extends Command {
       );
     }
 
-    if (
-      interaction.options.getString('joke', true).length > 130 ||
-      interaction.options.getString('response', true).length > 130
-    ) {
-      interaction.reply(interactionProblem("Chaque partie d'une blague ne peut pas dépasser les 130 caractères !"));
-      return;
-    }
-
     const proposals = await prisma.proposal.findMany({
       select: {
         joke_type: true,
