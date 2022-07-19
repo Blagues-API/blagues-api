@@ -41,7 +41,6 @@ export default class SuggestCommand extends Command {
           name: 'joke',
           description: 'Contenue de la blague',
           required: true,
-          min_length: 1,
           max_length: 130
         },
         {
@@ -49,7 +48,6 @@ export default class SuggestCommand extends Command {
           name: 'response',
           description: 'Réponse de la blague',
           required: true,
-          min_length: 1,
           max_length: 130
         }
       ]
