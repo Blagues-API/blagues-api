@@ -1,5 +1,5 @@
 // npx tsc-watch --onSuccess "node dist/index.js
-import { jokeById } from '../../controllers';
+import { jokeById, jokeByQuestion } from '../../controllers';
 import {
   APIEmbed,
   ApplicationCommandOptionType,
@@ -8,6 +8,7 @@ import {
   ButtonStyle,
   ChatInputCommandInteraction,
   ComponentType,
+  Interaction,
   Message,
   MessageComponentInteraction,
   TextChannel
@@ -15,10 +16,9 @@ import {
 import { CategoriesRefsFull, ReportReasons, Joke, Reason } from '../../typings';
 import { Colors, commandsChannelId, reportsChannelId } from '../constants';
 import Command from '../lib/command';
-import { compareTwoStrings } from 'string-similarity';
-import { interactionInfo, interactionProblem, info, isEmbedable, JokeCorrectionPayload } from '../utils';
+import { compareTwoStrings, findBestMatch } from 'string-similarity';
+import { interactionInfo, interactionProblem, info, isEmbedable, JokeCorrectionPayload, messageInfo } from '../utils';
 import Jokes from '../../jokes';
-
 export default class ReportCommand extends Command {
   constructor() {
     super({
@@ -95,8 +95,8 @@ export default class ReportCommand extends Command {
       if (!doublon) return;
 
       const match = compareTwoStrings(
-        `${joke.joke.toLowerCase()} ${joke.answer.toLowerCase()}`,
-        `${doublon.joke.toLowerCase()} ${doublon.answer.toLowerCase()}`
+        `${joke.joke} ${joke.answer}`,
+        `${doublon.joke} ${doublon.answer}`
       );
       if (match < 0.8) {
         return interaction.reply(
@@ -211,40 +211,16 @@ export default class ReportCommand extends Command {
   }
 
   async getDoublon(
-    interaction: ChatInputCommandInteraction<'cached'>,
+    commandInteraction: ChatInputCommandInteraction<'cached'>,
     joke: Joke
   ): Promise<JokeCorrectionPayload | null> {
-    const bestDoublons: Joke[] = Jokes.list.filter((j) => j.id < 11);
-    for (const b of Jokes.list) {
-      const match = compareTwoStrings(
-        `${joke.joke.toLowerCase()} ${joke.answer.toLowerCase()}`,
-        `${b.joke.toLowerCase()} ${b.answer.toLowerCase()}`
-      );
-      for (const _b of bestDoublons) {
-        const _match = compareTwoStrings(
-          `${joke.joke.toLowerCase()} ${joke.answer.toLowerCase()}`,
-          `${_b.joke.toLowerCase()} ${_b.answer.toLowerCase()}`
-        );
-        if (match > _match) {
-          const index = bestDoublons.indexOf(_b);
-          bestDoublons.splice(index, 1);
-          bestDoublons.push(b);
-          bestDoublons.sort((d1: Joke, d2: Joke) => {
-            const match = compareTwoStrings(
-            `${joke.joke.toLowerCase()} ${joke.answer.toLowerCase()}`,
-            `${d1.joke.toLowerCase()} ${d1.answer.toLowerCase()}`
-            );
-            const _match = compareTwoStrings(
-            `${joke.joke.toLowerCase()} ${joke.answer.toLowerCase()}`,
-            `${d2.joke.toLowerCase()} ${d2.answer.toLowerCase()}`
-            );
-            return (match > _match) ? 1 : -1
-            }
-          )
-        }
-      }
-    }
-    const question = await interaction.reply({
+    const { ratings } = findBestMatch(
+      `${joke.joke}|${joke.answer}`,
+      Jokes.list.map((entry) => `${entry.joke}|${entry.answer}`)
+    );
+    ratings.sort((a, b) => a.rating - b.rating).reverse().splice(11, ratings.length - 11);
+    ratings.shift();
+    const question = await commandInteraction[commandInteraction.replied ? 'editReply' : 'reply']({
       embeds: [
         {
           title: `Quel est le doublon de la blague suivante ? (ID : \`${joke.id}\`)`,
@@ -252,8 +228,6 @@ export default class ReportCommand extends Command {
           > **Type**: ${CategoriesRefsFull[joke.type]}
           > **Blague**: ${joke.joke}
           > **Réponse**: ${joke.answer}
-
-          Répondez par \`cancel\` pour annuler la commande.
           `,
           color: Colors.PROPOSED
         }
@@ -266,11 +240,10 @@ export default class ReportCommand extends Command {
               type: ComponentType.SelectMenu,
               customId: 'doublons',
               placeholder: 'Choisissez un doublon...',
-              // TODO : Il faudrait faire quelque chose avec bestDoublons, mais j'y arrive pas... Au secours
-              options: Object.entries({texte_hey: 'Hey !'}).map(([key, name]) => ({
-                label: name,
-                value: key,
-                description: 'JokeTypesDescriptions[key as Category]'
+              options: ratings.map((value) => ({
+                label: `Ressemblance à ${(value.rating * 100).toFixed(0)} %`,
+                value: jokeByQuestion(value.target.split('|')[0])!.id.toString(),
+                description: value.target.split('|')[0].slice(0, 100)
               })),
               maxValues: 1,
               minValues: 1
@@ -281,9 +254,38 @@ export default class ReportCommand extends Command {
       fetchReply: true
     });
 
+    const response = await question
+      .awaitMessageComponent({
+        filter: (i: Interaction) => i.user.id === commandInteraction.user.id,
+        componentType: ComponentType.SelectMenu,
+        time: 60_000
+      })
+      .catch(() => null);
+
+    if (!response) {
+      question.edit(messageInfo('Les 60 secondes se sont écoulées.'));
+      return null;
+    }
+
+    const blague = jokeById(+response.values[0])!;
+
+    await response.deferUpdate();
+    const isRightDoublon = await this.isRightDoublon(commandInteraction, question, blague);
+
+    if (isRightDoublon) {
+      question.edit({
+        embeds: [question.embeds[0]],
+
+      })
+    }
+    
+    
+
+    // À modifier
+
     return new Promise((resolve) => {
       const collector = question.channel.createMessageCollector({
-        filter: (m: Message) => m.author.id === interaction.user.id,
+        filter: (m: Message) => m.author.id === commandInteraction.user.id,
         idle: 60_000
       });
       collector.on('collect', async (msg: Message) => {
@@ -292,12 +294,70 @@ export default class ReportCommand extends Command {
       });
       collector.once('end', async (_collected, reason: string) => {
         if (reason === 'idle') {
-          await interaction.editReply({
+          await commandInteraction.editReply({
             embeds: [info('Les 60 secondes se sont écoulées.')]
           });
           return resolve(null);
         }
       });
     });
+  }
+
+  async isRightDoublon(interaction: ChatInputCommandInteraction<'cached'>, question: Message<boolean>, blague: Joke) {
+    await question.edit({
+      embeds: [
+        question.embeds[0],
+        {
+          title: 'Est-ce bien le doublon que vous avez choisi ?',
+          description: `
+          > **Type**: ${CategoriesRefsFull[blague.type]}
+          > **Blague**: ${blague.joke}
+          > **Réponse**: ${blague.answer}
+          `,
+          color: Colors.PRIMARY
+        }
+      ],
+      components: [
+        {
+          type: ComponentType.ActionRow,
+          components: [
+            {
+              label: 'Oui',
+              customId: 'oui',
+              type: ComponentType.Button,
+              style: ButtonStyle.Success
+            },
+            {
+              label: 'Non',
+              customId: 'non',
+              type: ComponentType.Button,
+              style: ButtonStyle.Danger
+            }
+          ]
+        }
+      ]
+    });
+
+    const response = await question
+      .awaitMessageComponent({
+        filter: (i: Interaction) => i.user.id === interaction.user.id,
+        componentType: ComponentType.Button,
+        time: 60_000
+      })
+      .catch(() => null);
+
+    if (!response) {
+      question.edit(messageInfo('Les 60 secondes se sont écoulées.'));
+      return null;
+    }
+      
+    switch (response.customId) {
+      case 'oui': {
+        return true;
+      }
+      case 'non': {
+        return this.getDoublon(interaction, blague);
+      }
+    }
   }
 }

@@ -17,7 +17,7 @@ import { godfatherRoleId } from './constants';
 import prisma from '../prisma';
 import { Category, UnsignedJoke } from 'typings';
 import { ProposalType } from '@prisma/client';
-import { jokeById, jokeByQuestion } from 'controllers';
+import { jokeById, jokeByQuestion } from '../controllers';
 
 type UniversalInteractionOptions = Omit<InteractionReplyOptions, 'flags'>;
 type UniversalMessageOptions = Omit<MessageOptions, 'flags'>;
