@@ -11938,5 +11938,11 @@
     "type": "global",
     "joke": "La victime a-t-elle succombé à une intoxication, Sherlock ?",
     "answer": "Alimentaire, mon cher Watson."
+  },
+  {
+    "id": 1991,
+    "type": "limit",
+    "joke": "Qu'est-ce qui suit la lettre X ?",
+    "answer": "Hamster."
   }
 ]
