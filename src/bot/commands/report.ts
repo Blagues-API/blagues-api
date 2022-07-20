@@ -1,4 +1,3 @@
-// npx tsc-watch --onSuccess "node dist/index.js
 import { jokeById, jokeByQuestion } from '../../controllers';
 import {
   APIEmbed,
@@ -13,7 +12,7 @@ import {
   MessageComponentInteraction,
   TextChannel
 } from 'discord.js';
-import { CategoriesRefsFull, ReportReasons, Joke, Reason } from '../../typings';
+import { CategoriesRefs, ReportReasons, Joke, Reason } from '../../typings';
 import { Colors, commandsChannelId, reportsChannelId } from '../constants';
 import Command from '../lib/command';
 import { compareTwoStrings, findBestMatch } from 'string-similarity';
@@ -66,7 +65,7 @@ export default class ReportCommand extends Command {
       return interaction.reply(interactionInfo(`L'identifiant \`${jokeId}\` ne correspond à aucune blague connue.`));
     }
 
-    const raison = interaction.options.getString('raison', true);
+    const reason = interaction.options.getString('raison', true);
 
     const embed = {
       author: {
@@ -79,7 +78,7 @@ export default class ReportCommand extends Command {
         {
           name: 'Blague signalée',
           value: `
-          > **Type**: ${CategoriesRefsFull[joke.type]}
+          > **Type**: ${CategoriesRefs[joke.type]}
           > **Blague**: ${joke.joke}
           > **Réponse**: ${joke.answer}
           `,
@@ -89,8 +88,8 @@ export default class ReportCommand extends Command {
       color: Colors.PROPOSED
     };
 
-    if (raison === 'doublon') {
-      const doublon = await this.getDoublon(interaction, joke);
+    if (reason === 'duplicate') {
+      const doublon = await this.getDuplicate(interaction, joke);
 
       if (!doublon) return;
 
@@ -134,7 +133,7 @@ export default class ReportCommand extends Command {
       embed.fields.push({
         name: 'Doublon',
         value: `
-        > **Type**: ${CategoriesRefsFull[doublon.type]}
+        > **Type**: ${CategoriesRefs[doublon.type]}
         > **Blague**: ${doublon.joke}
         > **Réponse**: ${doublon.answer}
         `,
@@ -148,7 +147,7 @@ export default class ReportCommand extends Command {
     } else {
       embed.fields.push({
         name: 'Raison',
-        value: ReportReasons[raison as Reason],
+        value: ReportReasons[reason as Reason],
         inline: false
       });
     }
@@ -210,7 +209,7 @@ export default class ReportCommand extends Command {
     });
   }
 
-  async getDoublon(
+  async getDuplicate(
     commandInteraction: ChatInputCommandInteraction<'cached'>,
     joke: Joke
   ): Promise<JokeCorrectionPayload | null> {
@@ -225,7 +224,7 @@ export default class ReportCommand extends Command {
         {
           title: `Quel est le doublon de la blague suivante ? (ID : \`${joke.id}\`)`,
           description: `
-          > **Type**: ${CategoriesRefsFull[joke.type]}
+          > **Type**: ${CategoriesRefs[joke.type]}
           > **Blague**: ${joke.joke}
           > **Réponse**: ${joke.answer}
           `,
@@ -238,7 +237,7 @@ export default class ReportCommand extends Command {
           components: [
             {
               type: ComponentType.SelectMenu,
-              customId: 'doublons',
+              customId: 'duplicate',
               placeholder: 'Choisissez un doublon...',
               options: ratings.map((value) => ({
                 label: `Ressemblance à ${(value.rating * 100).toFixed(0)} %`,
@@ -270,17 +269,14 @@ export default class ReportCommand extends Command {
     const blague = jokeById(+response.values[0])!;
 
     await response.deferUpdate();
-    const isRightDoublon = await this.isRightDoublon(commandInteraction, question, blague);
+    const isRightDoublon = await this.isRightDuplicate(commandInteraction, question, blague);
 
     if (isRightDoublon) {
-      question.edit({
+      await question.edit({
         embeds: [question.embeds[0]],
 
       })
     }
-    
-    
-
     // À modifier
 
     return new Promise((resolve) => {
@@ -303,14 +299,14 @@ export default class ReportCommand extends Command {
     });
   }
 
-  async isRightDoublon(interaction: ChatInputCommandInteraction<'cached'>, question: Message<boolean>, blague: Joke) {
+  async isRightDuplicate(interaction: ChatInputCommandInteraction<'cached'>, question: Message<boolean>, blague: Joke) {
     await question.edit({
       embeds: [
         question.embeds[0],
         {
           title: 'Est-ce bien le doublon que vous avez choisi ?',
           description: `
-          > **Type**: ${CategoriesRefsFull[blague.type]}
+          > **Type**: ${CategoriesRefs[blague.type]}
           > **Blague**: ${blague.joke}
           > **Réponse**: ${blague.answer}
           `,
@@ -323,13 +319,13 @@ export default class ReportCommand extends Command {
           components: [
             {
               label: 'Oui',
-              customId: 'oui',
+              customId: 'yes',
               type: ComponentType.Button,
               style: ButtonStyle.Success
             },
             {
               label: 'Non',
-              customId: 'non',
+              customId: 'no',
               type: ComponentType.Button,
               style: ButtonStyle.Danger
             }
@@ -338,7 +334,7 @@ export default class ReportCommand extends Command {
       ]
     });
 
-    const response = await question
+    const buttonInteraction = await question
       .awaitMessageComponent({
         filter: (i: Interaction) => i.user.id === interaction.user.id,
         componentType: ComponentType.Button,
@@ -346,17 +342,21 @@ export default class ReportCommand extends Command {
       })
       .catch(() => null);
 
-    if (!response) {
+    if (!buttonInteraction) {
       question.edit(messageInfo('Les 60 secondes se sont écoulées.'));
       return null;
     }
-      
-    switch (response.customId) {
-      case 'oui': {
-        return true;
+
+    buttonInteraction.reply({
+      embeds: [buttonInteraction.message.embeds[0]]
+    });
+
+    switch (buttonInteraction.customId) {
+      case 'yes': {
+        return false;
       }
-      case 'non': {
-        return this.getDoublon(interaction, blague);
+      case 'no': {
+        return this.getDuplicate(interaction, blague)
       }
     }
   }

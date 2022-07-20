@@ -264,7 +264,7 @@ export async function findJoke(
       interaction.channel
         ?.send(
           messageProblem(
-            `Impossible de trouver une blague ou correction liée à cet ID de blague, assurez vous que cet ID provient bien d\'un message envoyé par le bot ${interaction.client.user}`
+            `Impossible de trouver une blague ou correction liée à cet ID de blague, assurez vous que cet ID provient bien d'un message envoyé par le bot ${interaction.client.user}`
           )
         )
         .then(tDelete(5000));

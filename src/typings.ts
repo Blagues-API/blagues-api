@@ -68,14 +68,13 @@ export const JokeTypesDescriptions: Record<Category, string> = {
   blondes: 'Blagues ciblées sur les femmes blondes.'
 };
 
-export const Reasons = ['doublon', 'inappropriate', 'nulle'] as const;
+export const Reasons = ['duplicate', 'inappropriate'] as const;
 
 export type Reason = typeof Reasons[number];
 
 export const ReportReasons: Record<Reason, string> = {
-  doublon: 'Doublon',
-  inappropriate: 'Inappropriée',
-  nulle: 'Nulle'
+  duplicate: 'Doublon',
+  inappropriate: 'Inappropriée'
 };
 
 export type ProposalExtended = Proposal & {
