@@ -89,17 +89,17 @@ export default class ReportCommand extends Command {
     };
 
     if (reason === 'duplicate') {
-      const doublon = await this.getDuplicate(interaction, joke);
+      const duplicate = await this.getDuplicate(interaction, joke);
 
-      if (!doublon) return;
+      if (!duplicate) return;
 
       const match = compareTwoStrings(
         `${joke.joke} ${joke.answer}`,
-        `${doublon.joke} ${doublon.answer}`
+        `${duplicate.joke} ${duplicate.answer}`
       );
       if (match < 0.8) {
         return interaction.reply(
-          interactionInfo(`Les blagues \`${jokeId}\` et \`${doublon.id}\` ne sont pas assez ressemblantes.`)
+          interactionInfo(`Les blagues \`${jokeId}\` et \`${duplicate.id}\` ne sont pas assez ressemblantes.`)
         );
       }
 
@@ -133,9 +133,9 @@ export default class ReportCommand extends Command {
       embed.fields.push({
         name: 'Doublon',
         value: `
-        > **Type**: ${CategoriesRefs[doublon.type]}
-        > **Blague**: ${doublon.joke}
-        > **Réponse**: ${doublon.answer}
+        > **Type**: ${CategoriesRefs[duplicate.type]}
+        > **Blague**: ${duplicate.joke}
+        > **Réponse**: ${duplicate.answer}
         `,
         inline: false
       });
@@ -269,9 +269,9 @@ export default class ReportCommand extends Command {
     const blague = jokeById(+response.values[0])!;
 
     await response.deferUpdate();
-    const isRightDoublon = await this.isRightDuplicate(commandInteraction, question, blague);
+    const isRightDuplicate = await this.isRightDuplicate(commandInteraction, question, blague);
 
-    if (isRightDoublon) {
+    if (isRightDuplicate) {
       await question.edit({
         embeds: [question.embeds[0]],
 
