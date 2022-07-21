@@ -1,6 +1,13 @@
 import { stripIndents } from 'common-tags';
 import { CommandInteraction, GuildMember, APIEmbed } from 'discord.js';
-import { Colors, godfatherRoleId } from '../constants';
+import {
+  approveEmoji,
+  Colors,
+  disapproveEmoji,
+  downReactionIdentifier,
+  godfatherRoleId,
+  upReactionIdentifier
+} from '../constants';
 import { isGodfather, paginate } from '../utils';
 import prisma from '../../prisma';
 import chunk from 'lodash/chunk';
@@ -19,14 +26,29 @@ type GodfathersDecisions = (Approval | Disapproval)[][];
 
 export default class Stats {
   static async userStats(interaction: CommandInteraction<'cached'>, member: GuildMember, ephemeral: boolean) {
-    const proposals = await prisma.proposal.findMany({
-      where: {
-        user_id: member.id,
-        stale: false
-      }
-    });
+    const [proposals, votes] = await Promise.all([
+      prisma.proposal.findMany({
+        where: {
+          user_id: member.id,
+          stale: false
+        }
+      }),
+      prisma.vote.findMany({
+        where: {
+          user_id: member.id
+        },
+        include: {
+          proposal: true
+        }
+      })
+    ]);
 
     const [suggestions, corrections] = partition(proposals, (proposal) => proposal.type === ProposalType.SUGGESTION);
+    const [suggest_votes, corrections_votes] = partition(
+      votes,
+      (vote) => vote.proposal.type === ProposalType.SUGGESTION
+    );
+
     const fields = [
       {
         name: 'Suggestions :',
@@ -34,6 +56,9 @@ export default class Stats {
           Proposées: **${suggestions.length}**
           En attente: **${suggestions.filter((s) => !s.refused && !s.merged).length}**
           Acceptées: **${suggestions.filter((s) => s.merged).length}**
+          Votes: **${upReactionIdentifier} ${
+          suggest_votes.filter((v) => v.type === VoteType.UP).length
+        } ${downReactionIdentifier} ${suggest_votes.filter((v) => v.type === VoteType.DOWN).length}**
         `,
         inline: true
       },
@@ -43,31 +68,46 @@ export default class Stats {
           Proposées: **${corrections.length}**
           En attente: **${corrections.filter((s) => !s.refused && !s.merged).length}**
           Acceptées: **${corrections.filter((s) => s.merged).length}**
+          Votes: **${upReactionIdentifier} ${
+          corrections_votes.filter((v) => v.type === VoteType.UP).length
+        } ${downReactionIdentifier} ${suggest_votes.filter((v) => v.type === VoteType.DOWN).length}**
         `,
         inline: true
       }
     ];
 
     if (member.roles.cache.has(godfatherRoleId)) {
-      const approvals = await prisma.approval.findMany({
-        where: { user_id: member.id },
-        include: { proposal: true }
-      });
-      const disapprovals = await prisma.disapproval.findMany({
-        where: { user_id: member.id },
-        include: { proposal: true }
-      });
+      const [approvals, disapprovals] = await Promise.all([
+        prisma.approval.findMany({
+          where: { user_id: member.id },
+          include: { proposal: true }
+        }),
+        prisma.disapproval.findMany({
+          where: { user_id: member.id },
+          include: { proposal: true }
+        })
+      ]);
 
-      const totalDecisionsCount = approvals.length + disapprovals.length;
-      const suggestsDecisionsCount = [...approvals, ...disapprovals].filter(
+      const [suggestions_approvals, corrections_approvals] = partition(
+        approvals,
         (approval) => approval.proposal.type === ProposalType.SUGGESTION
-      ).length;
+      );
+      const [suggestions_disapprovals, corrections_disapprovals] = partition(
+        disapprovals,
+        (disapproval) => disapproval.proposal.type === ProposalType.SUGGESTION
+      );
+      const ratio = (approvals.length / disapprovals.length) * 100;
       fields.push({
-        name: 'Décisions de Parrain',
+        name: 'Décisions de Parrain :',
         value: stripIndents`
-          Décisions totales: **${totalDecisionsCount}**
-          Blagues: **${suggestsDecisionsCount}**
-          Corrections: **${totalDecisionsCount - suggestsDecisionsCount}**
+          Décisions totales: **${approvals.length + disapprovals.length}**
+          Suggestions: **${approveEmoji} ${suggestions_approvals.length} ${disapproveEmoji} ${
+          suggestions_disapprovals.length
+        }**
+          Corrections: **${approveEmoji} ${corrections_approvals.length} ${disapproveEmoji}  ${
+          corrections_disapprovals.length
+        }**
+          Ratio: **${ratio ? `${ratio}` : 0}%**
         `,
         inline: true
       });
