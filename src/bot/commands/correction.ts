@@ -18,9 +18,9 @@ import {
   commandsChannelId,
   correctionsChannelId,
   dataSplitRegex,
-  downReaction,
+  downReactionIdentifier,
   suggestionsChannelId,
-  upReaction
+  upReactionIdentifier
 } from '../constants';
 import Command from '../lib/command';
 import clone from 'lodash/clone';
@@ -569,7 +569,7 @@ export default class CorrectionCommand extends Command {
       interactionValidate(`Votre [proposition de correction](${message.url}) a bien été envoyée !`)
     );
 
-    for (const reaction of [upReaction, downReaction]) {
+    for (const reaction of [upReactionIdentifier, downReactionIdentifier]) {
       await message.react(reaction).catch(() => null);
     }
   }

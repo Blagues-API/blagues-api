@@ -116,7 +116,7 @@ export function messageLink(guildId: string, channelId: string, messageId: strin
   return `https://discord.com/channels/${guildId}/${channelId}/${messageId}`;
 }
 
-export function isParrain(member: GuildMember) {
+export function isGodfather(member: GuildMember) {
   return member.roles.cache.has(godfatherRoleId);
 }
 

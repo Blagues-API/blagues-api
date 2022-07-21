@@ -14,6 +14,7 @@ export default class StatsCommand extends Command {
         {
           type: ApplicationCommandOptionType.User,
           name: 'user',
+          nameLocalizations: { fr: 'utilisateur' },
           description: 'Utilisateur dont vous voulez les statistiques',
           required: false
         }

@@ -7,9 +7,13 @@ import {
   Interaction,
   InteractionType,
   Message,
+  MessageReaction,
   PartialGuildMember,
   PartialMessage,
-  Partials
+  PartialMessageReaction,
+  Partials,
+  PartialUser,
+  User
 } from 'discord.js';
 import Jokes from '../jokes';
 import prisma from '../prisma';
@@ -18,10 +22,14 @@ import { updateGodfatherEmoji } from './modules/godfathers';
 import Dispatcher from './lib/dispatcher';
 import Reminders from './modules/reminders';
 import Stickys from './modules/stickys';
+import Votes from './modules/votes';
+
 export default class Bot extends Client {
   public dispatcher: Dispatcher;
   public stickys: Stickys;
   public reminders: Reminders;
+  public votes: Votes;
+
   constructor() {
     super({
       partials: [Partials.Reaction],
@@ -29,12 +37,14 @@ export default class Bot extends Client {
         GatewayIntentBits.Guilds |
         GatewayIntentBits.GuildMembers |
         GatewayIntentBits.GuildMessages |
-        GatewayIntentBits.MessageContent
+        GatewayIntentBits.MessageContent |
+        GatewayIntentBits.GuildMessageReactions
     });
 
     this.dispatcher = new Dispatcher(this);
     this.stickys = new Stickys(this);
     this.reminders = new Reminders(this);
+    this.votes = new Votes(this);
 
     this.once('ready', this.onReady.bind(this));
   }
@@ -50,7 +60,6 @@ export default class Bot extends Client {
     await this.stickys.reload();
 
     this.registerEvents();
-
     this.refreshStatus();
   }
 
@@ -60,6 +69,11 @@ export default class Bot extends Client {
     } else if (interaction.isButton() && interaction.customId === 'user_reminder') {
       return this.reminders.pendingUserReminders(interaction);
     }
+  }
+
+  async onMessageCreate(message: Message | PartialMessage): Promise<void> {
+    if (!message.inGuild()) return;
+    this.stickys.run(message);
   }
 
   async onMessageDelete(message: Message | PartialMessage): Promise<void> {
@@ -96,9 +110,8 @@ export default class Bot extends Client {
     }
   }
 
-  async onMessageCreate(message: Message | PartialMessage): Promise<void> {
-    if (!message.inGuild()) return;
-    this.stickys.run(message);
+  async onMessageReactionAdd(reaction: MessageReaction | PartialMessageReaction, user: User | PartialUser) {
+    return this.votes.run(reaction, user);
   }
 
   async onGuildMemberUpdate(oldMember: GuildMember | PartialGuildMember, newMember: GuildMember) {
@@ -110,8 +123,9 @@ export default class Bot extends Client {
 
   registerEvents(): void {
     this.on('interactionCreate', this.onInteractionCreate.bind(this));
-    this.on('messageDelete', this.onMessageDelete.bind(this));
     this.on('messageCreate', this.onMessageCreate.bind(this));
+    this.on('messageDelete', this.onMessageDelete.bind(this));
+    this.on('messageReactionAdd', this.onMessageReactionAdd.bind(this));
     this.on('guildMemberUpdate', this.onGuildMemberUpdate.bind(this));
   }
 
@@ -128,6 +142,7 @@ export default class Bot extends Client {
     if (!process.env.BOT_TOKEN) {
       return console.log("Bot non lancé car aucun token n'a été défini");
     }
+
     await this.login(process.env.BOT_TOKEN);
   }
 }
@@ -136,6 +151,7 @@ declare module 'discord.js' {
   interface Client {
     dispatcher: Dispatcher;
     stickys: Stickys;
+    votes: Votes;
     refreshStatus(): void;
   }
 }

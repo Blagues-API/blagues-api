@@ -18,8 +18,8 @@ import {
   logsChannelId,
   jokerRoleId,
   correctorRoleId,
-  upReaction,
-  downReaction,
+  upReactionIdentifier,
+  downReactionIdentifier,
   dataSplitRegex,
   godfatherRoleId
 } from '../constants';
@@ -31,7 +31,7 @@ import {
   interactionValidate,
   isEmbedable,
   messageLink,
-  isParrain
+  isGodfather
 } from '../utils';
 import Jokes from '../../jokes';
 import { compareTwoStrings } from 'string-similarity';
@@ -70,7 +70,7 @@ export default class ApproveCommand extends Command {
       );
     }
 
-    if (!isParrain(interaction.member)) {
+    if (!isGodfather(interaction.member)) {
       return interaction.reply(
         interactionProblem(
           `Seul un <@&${godfatherRoleId}> peut approuver une ${isSuggestionChannel ? 'blague' : 'correction'}.`
@@ -115,7 +115,8 @@ export default class ApproveCommand extends Command {
           }
         },
         approvals: true,
-        disapprovals: true
+        disapprovals: true,
+        votes: true
       }
     })) as Proposals | null;
 
@@ -287,6 +288,8 @@ export default class ApproveCommand extends Command {
       embed.description = [base, correction, godfathers].filter(Boolean).join('\n\n');
     }
 
+    await interaction.client.votes.deleteUserVotes(message, interaction.user.id);
+
     if (proposal.approvals.length < neededApprovalsCount) {
       await message.edit({ embeds: [embed] });
 
@@ -415,7 +418,7 @@ export default class ApproveCommand extends Command {
       );
       if (diff > 0.5) {
         await suggestionMessage.reactions.removeAll();
-        for (const reaction of [upReaction, downReaction]) {
+        for (const reaction of [upReactionIdentifier, downReactionIdentifier]) {
           await suggestionMessage.react(reaction).catch(() => null);
         }
       }

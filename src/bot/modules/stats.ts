@@ -1,11 +1,21 @@
 import { stripIndents } from 'common-tags';
 import { CommandInteraction, GuildMember, APIEmbed } from 'discord.js';
 import { Colors, godfatherRoleId } from '../constants';
-import { paginate } from '../utils';
+import { isGodfather, paginate } from '../utils';
 import prisma from '../../prisma';
 import chunk from 'lodash/chunk';
 import partition from 'lodash/partition';
-import { ProposalType } from '@prisma/client';
+import { Proposal, ProposalType, Vote, VoteType, Approval, Disapproval } from '@prisma/client';
+
+interface MemberProposal extends Proposal {
+  votes: Vote[];
+  _count: {
+    approvals: number;
+    disapprovals: number;
+  };
+}
+
+type GodfathersDecisions = (Approval | Disapproval)[][];
 
 export default class Stats {
   static async userStats(interaction: CommandInteraction<'cached'>, member: GuildMember, ephemeral: boolean) {
@@ -74,7 +84,7 @@ export default class Stats {
           color: Colors.PRIMARY,
           footer: {
             text: 'Blagues API',
-            icon_url: interaction.guild!.iconURL({ size: 32 }) ?? undefined
+            icon_url: interaction.guild.iconURL({ size: 32 }) ?? undefined
           }
         }
       ],
@@ -83,27 +93,38 @@ export default class Stats {
   }
 
   static async globalStats(interaction: CommandInteraction<'cached'>) {
-    const proposals = await prisma.proposal.groupBy({
-      by: ['user_id', 'merged'],
-      having: {
-        user_id: {
-          not: null
+    const proposals = await prisma.proposal.findMany({
+      include: {
+        _count: {
+          select: {
+            approvals: true,
+            disapprovals: true
+          }
         },
-        merged: true
-      },
-      _count: true
+        votes: true
+      }
     });
 
-    const membersProposals = proposals
-      .filter((proposal) => interaction.guild.members.cache.has(proposal.user_id!))
-      .sort((a, b) => b._count - a._count);
+    const membersProposals = proposals.filter(
+      (proposal) => proposal.user_id && interaction.guild.members.cache.has(proposal.user_id)
+    );
+    const membersVotes = proposals.reduce<Vote[]>((votes, proposal) => (votes.push(...proposal.votes), votes), []);
+    const godfathersDecisions = await Promise.all([prisma.approval.findMany(), prisma.disapproval.findMany()]);
 
-    const pages = chunk(
-      membersProposals.map(
-        (proposal) => `<@${proposal.user_id}> : ${proposal._count} ${proposal._count !== 1 ? 'points' : 'point'}`
-      ),
-      20
-    ).map((entries) => entries.join('\n'));
+    const membersIds = [...new Set(membersProposals.map((mP) => mP.user_id!))];
+
+    const membersPoints = membersIds.map((userId) => {
+      const member = interaction.guild.members.cache.get(userId)!;
+
+      const memberProposals = membersProposals.filter((p) => p.user_id === userId);
+      const memberVotes = membersVotes.filter((v) => v.user_id === userId);
+
+      const points = this.calculatePoints(member, memberProposals, memberVotes, godfathersDecisions);
+
+      return `<@${userId}> : ${points} ${points !== 1 ? 'points' : 'point'}`;
+    });
+
+    const pages = chunk(membersPoints, 20).map((entries) => entries.join('\n'));
 
     const embed: APIEmbed = {
       title: 'Statistiques',
@@ -111,10 +132,46 @@ export default class Stats {
       color: Colors.PRIMARY,
       footer: {
         text: pages.length > 1 ? `Page 1/${pages.length} • Blagues-API` : 'Blagues-API',
-        icon_url: interaction.guild!.iconURL({ size: 32 }) ?? undefined
+        icon_url: interaction.guild.iconURL({ size: 32 }) ?? undefined
       }
     };
 
     return paginate(interaction, embed, pages);
+  }
+
+  static calculatePoints(
+    member: GuildMember,
+    proposals: MemberProposal[],
+    votes: Vote[],
+    decisions: GodfathersDecisions
+  ) {
+    let userPoints = 0;
+
+    for (const proposal of proposals) {
+      if (proposal.refused) userPoints += 3;
+      if (proposal.stale) userPoints += 5;
+      if (proposal.merged) {
+        userPoints += proposal.type === ProposalType.SUGGESTION ? 10 : 7;
+
+        userPoints += proposal._count.approvals * 2;
+        userPoints += proposal._count.disapprovals * -2;
+
+        const [vote_up, vote_down] = partition(proposal.votes, (vote) => vote.type === VoteType.UP);
+        userPoints += vote_up.length * 1;
+        userPoints += vote_down.length * -1;
+      }
+    }
+
+    if (isGodfather(member)) {
+      const approvals = decisions[0].filter((approval) => approval.user_id === member.id);
+      const disapprovals = decisions[1].filter((disapproval) => disapproval.user_id === member.id);
+
+      userPoints += approvals.length * 4;
+      userPoints += disapprovals.length * 4;
+    }
+
+    userPoints += votes.length * 2;
+
+    return userPoints;
   }
 }
