@@ -7,6 +7,7 @@ import {
   GuildMember,
   InteractionReplyOptions,
   Message,
+  MessageComponentInteraction,
   MessageOptions,
   TextChannel,
   User
@@ -345,4 +346,56 @@ export async function findJoke(
       answer: proposal.joke_answer!
     }
   };
+}
+
+export async function waitForConfirmation(
+  interaction: ChatInputCommandInteraction,
+  embed: APIEmbed,
+  sendType: string
+): Promise<ButtonInteraction | null> {
+  const message = await interaction.reply({
+    content: `Êtes-vous sûr de vouloir confirmer la proposition de ce${sendType === 'report' ? ' signalement' : 'tte blague'} ?`,
+    embeds: [embed],
+    components: [
+      {
+      type: ComponentType.ActionRow,
+      components: [
+        {
+          type: ComponentType.Button,
+          label: 'Envoyer',
+          customId: 'send',
+          style: ButtonStyle.Success
+        },
+        {
+          type: ComponentType.Button,
+          label: 'Annuler',
+          customId: 'cancel',
+          style: ButtonStyle.Danger
+        }
+      ]
+    }
+  ],
+    ephemeral: true,
+    fetchReply: true
+  });
+
+  return new Promise((resolve) => {
+    const collector = message.createMessageComponentCollector({
+      max: 1,
+      componentType: ComponentType.Button,
+      filter: (i: MessageComponentInteraction) => i.user.id === interaction.user.id,
+      time: 60_000
+    });
+    collector.once('end', async (interactions, reason) => {
+      const buttonInteraction = interactions.first();
+      if (!buttonInteraction) {
+        if (reason !== 'time') resolve(null);
+        if (message.deletable) await message.delete();
+        await interaction.reply(interactionInfo('Les 60 secondes se sont ecoulées.'));
+        return resolve(null);
+      }
+
+      return resolve(buttonInteraction);
+    });
+  });
 }

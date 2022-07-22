@@ -3,20 +3,18 @@ import {
   APIEmbed,
   ApplicationCommandOptionType,
   ApplicationCommandType,
-  ButtonInteraction,
   ButtonStyle,
   ChatInputCommandInteraction,
   ComponentType,
   Interaction,
-  Message,
-  MessageComponentInteraction,
+  SelectMenuInteraction,
   TextChannel
 } from 'discord.js';
-import { CategoriesRefs, ReportReasons, Joke, Reason } from '../../typings';
+import { CategoriesRefs, Category, ReportReasons, Joke, Reason } from '../../typings';
 import { Colors, commandsChannelId, reportsChannelId } from '../constants';
 import Command from '../lib/command';
-import { compareTwoStrings, findBestMatch } from 'string-similarity';
-import { interactionInfo, interactionProblem, info, isEmbedable, JokeCorrectionPayload, messageInfo } from '../utils';
+import { findBestMatch } from 'string-similarity';
+import { interactionInfo, interactionProblem, isEmbedable, messageInfo, waitForConfirmation } from '../utils';
 import Jokes from '../../jokes';
 export default class ReportCommand extends Command {
   constructor() {
@@ -57,7 +55,7 @@ export default class ReportCommand extends Command {
       );
     }
 
-    // TODO : ajouter un choix pour signaler une blague refusée injustement + dans approve, mettre le lien de la blague dans le "Votre approbation a bien été retirée."
+    // TODO : ajouter un choix pour signaler une blague refusée injustement + dans approve, mettre le lien de la blague dans le "Votre approbation a bien été retirée." + ajouter le message des logs comme message dans prisma
 
     const jokeId = interaction.options.getInteger('id', true);
     const joke = jokeById(jokeId);
@@ -90,58 +88,15 @@ export default class ReportCommand extends Command {
 
     if (reason === 'duplicate') {
       const duplicate = await this.getDuplicate(interaction, joke);
-
       if (!duplicate) return;
-
-      const match = compareTwoStrings(
-        `${joke.joke} ${joke.answer}`,
-        `${duplicate.joke} ${duplicate.answer}`
-      );
-      if (match < 0.8) {
-        return interaction.reply(
-          interactionInfo(`Les blagues \`${jokeId}\` et \`${duplicate.id}\` ne sont pas assez ressemblantes.`)
-        );
-      }
-
-      const confirmation = await this.waitForSendConfirmation(interaction, embed, match);
-      if (!confirmation) return;
-
-      if (confirmation.customId === 'cancel') {
-        return confirmation.update({
-          content: "La blague n'a pas été envoyée.",
-          components: [],
-          embeds: [embed]
-        });
-      }
-
-      const reportsChannel = interaction.guild!.channels.cache.get(reportsChannelId) as TextChannel;
-      if (!isEmbedable(reportsChannel)) {
-        return interaction.reply(
-          interactionProblem(`Je n'ai pas la permission d'envoyer la blague dans le salon ${reportsChannel}.`, false)
-        );
-      }
-
-      if (confirmation.customId !== 'send') {
-        return interaction.reply(
-          interactionProblem(
-            "Il y a eu une erreur lors de l'exécution de la commande, veillez contacter le développeur !",
-            true
-          )
-        );
-      }
 
       embed.fields.push({
         name: 'Doublon',
         value: `
-        > **Type**: ${CategoriesRefs[duplicate.type]}
+        > **Type**: ${CategoriesRefs[duplicate.type as Category]}
         > **Blague**: ${duplicate.joke}
         > **Réponse**: ${duplicate.answer}
         `,
-        inline: false
-      });
-      embed.fields.push({
-        name: 'Ressemblance',
-        value: `${match * 100} %`,
         inline: false
       });
     } else {
@@ -152,67 +107,46 @@ export default class ReportCommand extends Command {
       });
     }
 
-    return interaction.reply({
+    const confirmation = await waitForConfirmation(interaction, embed, 'report');
+    if (!confirmation) return;
+
+    if (confirmation.customId === 'cancel') {
+      return confirmation.update({
+        content: "La blague n'a pas été envoyée.",
+        components: [],
+        embeds: [embed]
+      });
+    }
+
+    if (confirmation.customId !== 'send') {
+      return interaction.reply(
+        interactionProblem(
+          "Il y a eu une erreur lors de l'exécution de la commande, veillez contacter le développeur !",
+          true
+        )
+      );
+    }
+
+    const reportsChannel = interaction.guild!.channels.cache.get(reportsChannelId) as TextChannel;
+    if (!isEmbedable(reportsChannel)) {
+      return interaction.reply(
+        interactionProblem(`Je n'ai pas la permission d'envoyer la blague dans le salon ${reportsChannel}.`, false)
+      );
+    }
+
+    reportsChannel.send({
       embeds: [embed]
     });
-  }
 
-  async waitForSendConfirmation(
-    interaction: ChatInputCommandInteraction,
-    embed: APIEmbed,
-    match: number
-  ): Promise<ButtonInteraction | null> {
-    const message = await interaction.reply({
-      content: `${match > 0.9 ? 'Voulez-vous' : 'Êtes-vous sûr de vouloir'} envoyer le signalement suivant ?`,
-      embeds: [embed],
-      components: [
-        {
-          type: ComponentType.ActionRow,
-          components: [
-            {
-              type: ComponentType.Button,
-              label: 'Envoyer',
-              customId: 'send',
-              style: ButtonStyle.Success
-            },
-            {
-              type: ComponentType.Button,
-              label: 'Annuler',
-              customId: 'cancel',
-              style: ButtonStyle.Danger
-            }
-          ]
-        }
-      ],
-      ephemeral: true,
-      fetchReply: true
-    });
-
-    return new Promise((resolve) => {
-      const collector = message.createMessageComponentCollector({
-        max: 1,
-        componentType: ComponentType.Button,
-        filter: (i: MessageComponentInteraction) => i.user.id === interaction.user.id,
-        time: 60_000
-      });
-      collector.once('end', async (interactions, reason) => {
-        const buttonInteraction = interactions.first();
-        if (!buttonInteraction) {
-          if (reason !== 'time') resolve(null);
-          if (message.deletable) await message.delete();
-          await interaction.reply(interactionInfo('Les 60 secondes se sont ecoulées.'));
-          return resolve(null);
-        }
-
-        return resolve(buttonInteraction);
-      });
+    return interaction.reply({
+      embeds: [embed]
     });
   }
 
   async getDuplicate(
     commandInteraction: ChatInputCommandInteraction<'cached'>,
     joke: Joke
-  ): Promise<JokeCorrectionPayload | null> {
+  ): Promise<Joke | null> {
     const { ratings } = findBestMatch(
       `${joke.joke}|${joke.answer}`,
       Jokes.list.map((entry) => `${entry.joke}|${entry.answer}`)
@@ -239,8 +173,8 @@ export default class ReportCommand extends Command {
               type: ComponentType.SelectMenu,
               customId: 'duplicate',
               placeholder: 'Choisissez un doublon...',
-              options: ratings.map((value) => ({
-                label: `Ressemblance à ${(value.rating * 100).toFixed(0)} %`,
+              options: ratings.map((value, index) => ({
+                label: `${index}. Ressemblance à ${(value.rating * 100).toFixed(0)} %`,
                 value: jokeByQuestion(value.target.split('|')[0])!.id.toString(),
                 description: value.target.split('|')[0].slice(0, 100)
               })),
@@ -253,7 +187,7 @@ export default class ReportCommand extends Command {
       fetchReply: true
     });
 
-    const response = await question
+    const selectInteraction = await question
       .awaitMessageComponent({
         filter: (i: Interaction) => i.user.id === commandInteraction.user.id,
         componentType: ComponentType.SelectMenu,
@@ -261,56 +195,32 @@ export default class ReportCommand extends Command {
       })
       .catch(() => null);
 
-    if (!response) {
+    if (!selectInteraction) {
       question.edit(messageInfo('Les 60 secondes se sont écoulées.'));
       return null;
     }
 
-    const blague = jokeById(+response.values[0])!;
-
-    await response.deferUpdate();
-    const isRightDuplicate = await this.isRightDuplicate(commandInteraction, question, blague);
-
-    if (isRightDuplicate) {
-      await question.edit({
-        embeds: [question.embeds[0]],
-
-      })
-    }
-    // À modifier
-
-    return new Promise((resolve) => {
-      const collector = question.channel.createMessageCollector({
-        filter: (m: Message) => m.author.id === commandInteraction.user.id,
-        idle: 60_000
-      });
-      collector.on('collect', async (msg: Message) => {
-        if (msg.deletable) setInterval(() => msg.delete().catch(() => null), 5000);
-        // TODO : faire en sorte que la sélection du doublon renvoie à la modification du message avec un EMBED "Est-ce ce doublon ?" et 2 boutons oui / non. Oui => Message de demande d'envoi du report, Non => Retour au message sélecteur
-      });
-      collector.once('end', async (_collected, reason: string) => {
-        if (reason === 'idle') {
-          await commandInteraction.editReply({
-            embeds: [info('Les 60 secondes se sont écoulées.')]
-          });
-          return resolve(null);
-        }
-      });
-    });
+    return this.checkDuplicate(commandInteraction, selectInteraction);
   }
+  
 
-  async isRightDuplicate(interaction: ChatInputCommandInteraction<'cached'>, question: Message<boolean>, blague: Joke) {
-    await question.edit({
+  async checkDuplicate(
+    commandInteraction: ChatInputCommandInteraction<'cached'>,
+    selectInteraction: SelectMenuInteraction
+  ): Promise<Joke | null> {
+    const duplicate = jokeById(+selectInteraction.values[0])!;
+    const baseEmbed = selectInteraction.message.embeds[0].toJSON();
+    await selectInteraction.update({
       embeds: [
-        question.embeds[0],
+        baseEmbed,
         {
+          color: Colors.PRIMARY,
           title: 'Est-ce bien le doublon que vous avez choisi ?',
           description: `
-          > **Type**: ${CategoriesRefs[blague.type]}
-          > **Blague**: ${blague.joke}
-          > **Réponse**: ${blague.answer}
-          `,
-          color: Colors.PRIMARY
+          > **Type**: ${CategoriesRefs[duplicate.type]}
+          > **Blague**: ${duplicate.joke}
+          > **Réponse**: ${duplicate.answer}
+          `
         }
       ],
       components: [
@@ -334,30 +244,50 @@ export default class ReportCommand extends Command {
       ]
     });
 
-    const buttonInteraction = await question
+    const buttonInteraction = await selectInteraction.message
       .awaitMessageComponent({
-        filter: (i: Interaction) => i.user.id === interaction.user.id,
+        filter: (i: Interaction) => i.user.id === selectInteraction.user.id,
         componentType: ComponentType.Button,
         time: 60_000
       })
       .catch(() => null);
 
     if (!buttonInteraction) {
-      question.edit(messageInfo('Les 60 secondes se sont écoulées.'));
+      selectInteraction.message.edit(messageInfo('Les 60 secondes se sont écoulées.'));
       return null;
     }
 
-    buttonInteraction.reply({
-      embeds: [buttonInteraction.message.embeds[0]]
-    });
+    const joke = jokeById(commandInteraction.options.getInteger('id', true))!;
 
     switch (buttonInteraction.customId) {
-      case 'yes': {
-        return false;
-      }
-      case 'no': {
-        return this.getDuplicate(interaction, blague)
-      }
+      case 'yes': return duplicate;
+      case 'no': return this.getDuplicate(commandInteraction, joke);
+      default: return null;
+    }
+  }
+
+  async reportJoke(
+    interaction: ChatInputCommandInteraction<'cached'>,
+    joke: Joke,
+    embed: APIEmbed
+  ) {
+
+    const confirmation = await waitForConfirmation(interaction, embed, 'suggestion');
+    if (!confirmation) return;
+
+    if (confirmation.customId === 'cancel') {
+      return confirmation.update({
+        content: "La blague n'a pas été envoyée.",
+        components: [],
+        embeds: [embed]
+      });
+    }
+
+    const reportsChannel = interaction.guild!.channels.cache.get(reportsChannelId) as TextChannel;
+    if (!isEmbedable(reportsChannel)) {
+      return interaction.reply(
+        interactionProblem(`Je n'ai pas la permission d'envoyer la blague dans le salon ${reportsChannel}.`, false)
+      );
     }
   }
 }
