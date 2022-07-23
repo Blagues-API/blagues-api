@@ -16,6 +16,8 @@ import Command from '../lib/command';
 import { findBestMatch } from 'string-similarity';
 import { interactionInfo, interactionProblem, isEmbedable, messageInfo, waitForConfirmation } from '../utils';
 import Jokes from '../../jokes';
+import prisma from '../../prisma';
+import { ProposalType } from '@prisma/client';
 export default class ReportCommand extends Command {
   constructor() {
     super({
@@ -63,6 +65,25 @@ export default class ReportCommand extends Command {
       return interaction.reply(interactionInfo(`L'identifiant \`${jokeId}\` ne correspond à aucune blague connue.`));
     }
 
+    const isAlreadyReport = await prisma.proposal.findMany({
+      select: {
+        joke_id: true,
+      },
+      where: {
+        type: ProposalType.REPORT,
+        merged: true || false,
+        refused: false
+      }
+    });
+    if (isAlreadyReport) {
+      return interaction.reply(
+        interactionProblem(
+          "Cette blague a déjà été signalée.",
+          true
+        )
+      );
+    }
+
     const reason = interaction.options.getString('raison', true);
 
     const embed = {
@@ -99,48 +120,17 @@ export default class ReportCommand extends Command {
         `,
         inline: false
       });
+
+      return await this.reportJoke(interaction, duplicate, embed, reason);
     } else {
       embed.fields.push({
         name: 'Raison',
         value: ReportReasons[reason as Reason],
         inline: false
       });
+
+      return await this.reportJoke(interaction, joke, embed, reason);
     }
-
-    const confirmation = await waitForConfirmation(interaction, embed, 'report');
-    if (!confirmation) return;
-
-    if (confirmation.customId === 'cancel') {
-      return confirmation.update({
-        content: "La blague n'a pas été envoyée.",
-        components: [],
-        embeds: [embed]
-      });
-    }
-
-    if (confirmation.customId !== 'send') {
-      return interaction.reply(
-        interactionProblem(
-          "Il y a eu une erreur lors de l'exécution de la commande, veillez contacter le développeur !",
-          true
-        )
-      );
-    }
-
-    const reportsChannel = interaction.guild!.channels.cache.get(reportsChannelId) as TextChannel;
-    if (!isEmbedable(reportsChannel)) {
-      return interaction.reply(
-        interactionProblem(`Je n'ai pas la permission d'envoyer la blague dans le salon ${reportsChannel}.`, false)
-      );
-    }
-
-    reportsChannel.send({
-      embeds: [embed]
-    });
-
-    return interaction.reply({
-      embeds: [embed]
-    });
   }
 
   async getDuplicate(
@@ -203,7 +193,6 @@ export default class ReportCommand extends Command {
     return this.checkDuplicate(commandInteraction, selectInteraction);
   }
   
-
   async checkDuplicate(
     commandInteraction: ChatInputCommandInteraction<'cached'>,
     selectInteraction: SelectMenuInteraction
@@ -269,7 +258,8 @@ export default class ReportCommand extends Command {
   async reportJoke(
     interaction: ChatInputCommandInteraction<'cached'>,
     joke: Joke,
-    embed: APIEmbed
+    embed: APIEmbed,
+    reportReason: string
   ) {
 
     const confirmation = await waitForConfirmation(interaction, embed, 'suggestion');
@@ -277,7 +267,7 @@ export default class ReportCommand extends Command {
 
     if (confirmation.customId === 'cancel') {
       return confirmation.update({
-        content: "La blague n'a pas été envoyée.",
+        content: "Le signalement n'a pas été envoyée.",
         components: [],
         embeds: [embed]
       });
@@ -289,5 +279,16 @@ export default class ReportCommand extends Command {
         interactionProblem(`Je n'ai pas la permission d'envoyer la blague dans le salon ${reportsChannel}.`, false)
       );
     }
+
+    const message = await reportsChannel.send({ embeds: [embed] })
+
+    await prisma.proposal.create({
+      data: {
+        user_id: interaction.user.id,
+        message_id: message.id,
+        type: ProposalType.REPORT,
+        report_reason: reportReason
+      }
+    });
   }
 }

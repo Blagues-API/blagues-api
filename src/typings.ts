@@ -92,6 +92,10 @@ export type Suggestion = ProposalExtended & {
   corrections: ProposalExtended[];
 };
 
+export type Report = ProposalExtended & {
+  type: 'REPORT';
+}
+
 export type ProposalSuggestion = ProposalExtended & {
   type: 'SUGGESTION';
   corrections: Proposal[];
@@ -102,4 +106,4 @@ export type ReminderProposal = ProposalExtended & {
   suggestion: (ProposalExtended & { corrections: Proposal[] }) | null;
 };
 
-export type Proposals = Correction | Suggestion;
+export type Proposals = Correction | Suggestion | Report;

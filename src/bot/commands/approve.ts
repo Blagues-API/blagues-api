@@ -8,11 +8,12 @@ import {
   APIEmbed
 } from 'discord.js';
 import prisma from '../../prisma';
-import { CategoriesRefs, Category, Correction, Proposals, Suggestion } from '../../typings';
+import { CategoriesRefs, Category, Correction, Proposals, Report, Suggestion } from '../../typings';
 import {
   Colors,
   neededCorrectionsApprovals,
   neededSuggestionsApprovals,
+  neededReportsApprovals,
   correctionsChannelId,
   suggestionsChannelId,
   logsChannelId,
@@ -21,7 +22,8 @@ import {
   upReaction,
   downReaction,
   dataSplitRegex,
-  godfatherRoleId
+  godfatherRoleId,
+  reportsChannelId
 } from '../constants';
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../modules/godfathers';
@@ -50,20 +52,21 @@ export default class ApproveCommand extends Command {
     const message = await interaction.channel?.messages.fetch(interaction.targetId);
     if (!message) return;
 
-    if (![suggestionsChannelId, correctionsChannelId].includes(channel.id)) {
+    if (![suggestionsChannelId, correctionsChannelId, reportsChannelId].includes(channel.id)) {
       return interaction.reply(
         interactionProblem(
-          `Vous ne pouvez pas approuver une blague ou une correction en dehors des salons <#${suggestionsChannelId}> et <#${correctionsChannelId}>.`
+          `Vous ne pouvez pas approuver une blague, une correction ou un signalement en dehors des salons <#${suggestionsChannelId}>, <#${correctionsChannelId}> et <"${reportsChannelId}>.`
         )
       );
     }
 
     const isSuggestionChannel = channel.id === suggestionsChannelId;
+    const isCorrectionChannel = channel.id === correctionsChannelId;
 
     if (message.author.id !== interaction.client.user!.id) {
       return interaction.reply(
         interactionProblem(
-          `Vous ne pouvez pas approuver une ${isSuggestionChannel ? 'blague' : 'correction'} qui n'est pas gérée par ${
+          `Vous ne pouvez pas approuver ${isSuggestionChannel ? 'une blague' : isCorrectionChannel ? 'une correction' : 'un signalement'} qui n'est pas gérée par ${
             interaction.client.user
           }.`
         )
@@ -73,7 +76,7 @@ export default class ApproveCommand extends Command {
     if (!isParrain(interaction.member)) {
       return interaction.reply(
         interactionProblem(
-          `Seul un <@&${godfatherRoleId}> peut approuver une ${isSuggestionChannel ? 'blague' : 'correction'}.`
+          `Seul un <@&${godfatherRoleId}> peut approuver ${isSuggestionChannel ? 'une blague' : isCorrectionChannel ? 'une correction' : 'un signalement'}.`
         )
       );
     }
@@ -114,6 +117,22 @@ export default class ApproveCommand extends Command {
             disapprovals: true
           }
         },
+        report: {
+          include: {
+            corrections: {
+              orderBy: {
+                created_at: 'desc'
+              },
+              where: {
+                merged: false,
+                refused: false,
+                stale: false
+              }
+            },
+            approvals: true,
+            disapprovals: true
+          }
+        },
         approvals: true,
         disapprovals: true
       }
@@ -124,6 +143,7 @@ export default class ApproveCommand extends Command {
     }
 
     const isSuggestion = proposal.type === ProposalType.SUGGESTION;
+    const isReport = proposal.type === ProposalType.REPORT;
 
     const embed = message.embeds[0]?.toJSON();
     if (!embed) {
@@ -137,14 +157,14 @@ export default class ApproveCommand extends Command {
 
     if (proposal.user_id === interaction.user.id) {
       return interaction.reply(
-        interactionProblem(`Vous ne pouvez pas approuver votre propre ${isSuggestion ? 'blague' : 'correction'}.`)
+        interactionProblem(`Vous ne pouvez pas approuver votre propre ${isSuggestion ? 'blague' : isReport ? 'signalement' : 'correction'}.`)
       );
     }
 
     if (proposal.merged) {
       if (!embed.footer) {
         embed.color = Colors.ACCEPTED;
-        embed.footer = { text: `${isSuggestion ? 'Blague' : 'Correction'} déjà traitée` };
+        embed.footer = { text: `${isSuggestion ? 'Blague' : isReport ? 'Signalement' : 'Correction'} déjà traité${isReport ? '' : 'e'}` };
 
         const field = embed.fields?.[embed.fields.length - 1];
         if (field) {
@@ -157,14 +177,14 @@ export default class ApproveCommand extends Command {
       }
 
       return interaction.reply(
-        interactionProblem(`Cette ${isSuggestion ? 'blague' : 'correction'} a déjà été ajoutée.`)
+        interactionProblem(`${isSuggestion ? 'Cette blague' : isReport ? 'Ce signalement' : 'Cette correction'} a déjà été ajouté${isReport ? '' : 'e'}.`)
       );
     }
 
     if (proposal.refused) {
       if (!embed.footer) {
         embed.color = Colors.REFUSED;
-        embed.footer = { text: `${isSuggestion ? 'Suggestion' : 'Correction'} refusée` };
+        embed.footer = { text: `${isSuggestion ? 'Blague' : isReport ? 'Signalement' : 'Correction'} refusé${isReport ? '' : 'e'}` };
 
         const field = embed.fields?.[embed.fields.length - 1];
         if (field) {
@@ -177,7 +197,7 @@ export default class ApproveCommand extends Command {
       }
 
       return interaction.reply(
-        interactionProblem(`Cette ${isSuggestion ? 'blague' : 'correction'} a déjà été refusée.`)
+        interactionProblem(`${isSuggestion ? 'Cette blague' : isReport ? 'Ce signalement' : 'Cette correction'} a déjà été refusé${isReport ? '' : 'e'}.`)
       );
     }
 
@@ -195,6 +215,8 @@ export default class ApproveCommand extends Command {
           );
         }
       }
+    } else if (isReport) {
+
     } else {
       const lastCorrection = proposal.suggestion?.corrections[0];
       if (lastCorrection && lastCorrection.id !== proposal.id) {
@@ -261,7 +283,7 @@ export default class ApproveCommand extends Command {
       })
     );
 
-    const neededApprovalsCount = isSuggestion ? neededSuggestionsApprovals : neededCorrectionsApprovals;
+    const neededApprovalsCount = isSuggestion ? neededSuggestionsApprovals : isReport ? neededReportsApprovals : neededCorrectionsApprovals;
 
     if (isSuggestion && proposal.approvals.length >= neededApprovalsCount && proposal.corrections[0]) {
       const suggestionLink = messageLink(interaction.guild.id, suggestionsChannelId, proposal.message_id!);
@@ -298,6 +320,8 @@ export default class ApproveCommand extends Command {
     try {
       if (isSuggestion) {
         await this.approveSuggestion(interaction, proposal, message, embed);
+      } else if (isReport) {
+        await this.approveReport(interaction, proposal, message, embed);
       } else {
         const suggestion = await this.approveCorrection(interaction, proposal, message, embed);
 
@@ -336,6 +360,68 @@ export default class ApproveCommand extends Command {
     }
 
     const { success, joke_id } = await Jokes.mergeJoke(proposal);
+    if (!success) return;
+
+    interaction.client.refreshStatus();
+
+    await prisma.proposal.updateMany({
+      data: {
+        merged: true,
+        joke_id
+      },
+      where: { id: proposal.id }
+    });
+
+    embed.color = Colors.ACCEPTED;
+
+    if (isEmbedable(logsChannel)) {
+      await logsChannel.send({
+        content: "Blague ajoutée à l'API",
+        embeds: [embed]
+      });
+    }
+
+    embed.footer = { text: 'Blague ajoutée' };
+
+    const field = embed.fields?.[embed.fields.length - 1];
+    if (field) {
+      field.value = field.value.match(dataSplitRegex)!.groups!.base;
+    } else {
+      embed.description = embed.description!.match(dataSplitRegex)!.groups!.base;
+    }
+
+    const jokeMessage = await message.edit({ embeds: [embed] });
+    await jokeMessage.reactions.removeAll();
+
+    message.client.stickys.reload();
+
+    if (automerge) {
+      await interaction.followUp(
+        interactionValidate(
+          `La [suggestion](${message.url}) a bien été automatiquement ajoutée à l'API suite à la validation de la correction manquante !`
+        )
+      );
+      return;
+    }
+
+    await interaction.editReply(interactionValidate(`La [suggestion](${message.url}) a bien été ajoutée à l'API !`));
+  }
+
+  async approveReport(
+    interaction: MessageContextMenuCommandInteraction,
+    proposal: Report,
+    message: Message,
+    embed: APIEmbed,
+    automerge = false
+  ): Promise<void> {
+    const logsChannel = interaction.client.channels.cache.get(logsChannelId) as TextChannel;
+
+    const member = await interaction.guild?.members.fetch(proposal.user_id!).catch(() => null);
+    if (member && !member.roles.cache.has(jokerRoleId)) {
+      await member.roles.add(jokerRoleId);
+    }
+
+    const { success, joke_id } = await Jokes.removeJoke(proposal);
     if (!success) return;
 
     interaction.client.refreshStatus();
