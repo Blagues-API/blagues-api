@@ -215,9 +215,7 @@ export default class ApproveCommand extends Command {
           );
         }
       }
-    } else if (isReport) {
-
-    } else {
+    } else if (!isReport) {
       const lastCorrection = proposal.suggestion?.corrections[0];
       if (lastCorrection && lastCorrection.id !== proposal.id) {
         const correctionLink = messageLink(interaction.guild.id, correctionsChannelId, lastCorrection.message_id!);
@@ -412,7 +410,6 @@ export default class ApproveCommand extends Command {
     proposal: Report,
     message: Message,
     embed: APIEmbed,
-    automerge = false
   ): Promise<void> {
     const logsChannel = interaction.client.channels.cache.get(logsChannelId) as TextChannel;
 
@@ -443,7 +440,7 @@ export default class ApproveCommand extends Command {
       });
     }
 
-    embed.footer = { text: 'Blague ajoutée' };
+    embed.footer = { text: 'Blague signalée' };
 
     const field = embed.fields?.[embed.fields.length - 1];
     if (field) {
@@ -457,16 +454,7 @@ export default class ApproveCommand extends Command {
 
     message.client.stickys.reload();
 
-    if (automerge) {
-      await interaction.followUp(
-        interactionValidate(
-          `La [suggestion](${message.url}) a bien été automatiquement ajoutée à l'API suite à la validation de la correction manquante !`
-        )
-      );
-      return;
-    }
-
-    await interaction.editReply(interactionValidate(`La [suggestion](${message.url}) a bien été ajoutée à l'API !`));
+    await interaction.editReply(interactionValidate(`La [blague](${message.url}) a bien été signalée et retirée de l'API !`));
   }
 
   async approveCorrection(
