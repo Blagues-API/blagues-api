@@ -16,7 +16,7 @@ interface MemberProposal extends Proposal {
 }
 
 const reaction = {
-  up: `<:vote_up:1000313060860383365> `,
+  up: `<:vote_up:1000313060860383365>`,
   down: `<:vote_down:1000721148444672072>`
 };
 
