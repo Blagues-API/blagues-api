@@ -149,16 +149,19 @@ export default class Stats {
 
     const membersIds = [...new Set(membersProposals.map((mP) => mP.user_id!))];
 
-    const membersPoints = membersIds.map((userId) => {
-      const member = interaction.guild.members.cache.get(userId)!;
+    const membersPoints = membersIds
+      .map((userId) => {
+        const member = interaction.guild.members.cache.get(userId)!;
 
-      const memberProposals = membersProposals.filter((p) => p.user_id === userId);
-      const memberVotes = membersVotes.filter((v) => v.user_id === userId);
+        const memberProposals = membersProposals.filter((p) => p.user_id === userId);
+        const memberVotes = membersVotes.filter((v) => v.user_id === userId);
 
-      const points = this.calculatePoints(member, memberProposals, memberVotes, godfathersDecisions);
+        const points = this.calculatePoints(member, memberProposals, memberVotes, godfathersDecisions);
 
-      return `<@${userId}> : ${points} ${points !== 1 ? 'points' : 'point'}`;
-    });
+        return { userId, points };
+      })
+      .sort((a, b) => b.points - a.points)
+      .map((entry) => `<@${entry.userId}> : ${entry.points} ${entry.points !== 1 ? 'points' : 'point'}`);
 
     const pages = chunk(membersPoints, 20).map((entries) => entries.join('\n'));
 

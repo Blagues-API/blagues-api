@@ -11854,5 +11854,77 @@
     "type": "limit",
     "joke": "Qu'est-ce qui suit la lettre X ?",
     "answer": "Hamster."
+  },
+  {
+    "id": 1992,
+    "type": "blondes",
+    "joke": "Tu sais, pour moi tu seras toujours la huitième merveille du monde !",
+    "answer": "Ah bon ? Et qui sont ces sept salopes que tu classes devant moi ?"
+  },
+  {
+    "id": 1993,
+    "type": "limit",
+    "joke": "Pourquoi les prêtres ont-ils inventé le baptême ?",
+    "answer": "Parce qu'il faut toujours laver des sextoys après usage !"
+  },
+  {
+    "id": 1994,
+    "type": "limit",
+    "joke": "Quel est l'inverse de l'exorcisme ?",
+    "answer": "C'est quand le diable demande au prêtre de sortir de l'enfant."
+  },
+  {
+    "id": 1995,
+    "type": "global",
+    "joke": "Quel est la seule forme géométrique qui peut s'évader ?",
+    "answer": "Le Carlos Ghosn"
+  },
+  {
+    "id": 1996,
+    "type": "global",
+    "joke": "Quelle est la différence entre travailler au Pôle Emploi et à une autre structure ?",
+    "answer": "Celui qui est viré au Pôle Emploi y retournera le lendemain."
+  },
+  {
+    "id": 1997,
+    "type": "dark",
+    "joke": "On n'est jamais mieux servi que par Swamem",
+    "answer": "C'est le nom de mon domestique"
+  },
+  {
+    "id": 1998,
+    "type": "global",
+    "joke": "Que fait un Japonais quand il a peur ?",
+    "answer": "Il sushi dessus."
+  },
+  {
+    "id": 1999,
+    "type": "global",
+    "joke": "Où dorment les Parisiens en fauteuil roulant ?",
+    "answer": "À l’hôtel des Invalides."
+  },
+  {
+    "id": 2000,
+    "type": "global",
+    "joke": "Quel est le meilleur mélange pour alimenter une voiture de sport ?",
+    "answer": "Vin + Diesel"
+  },
+  {
+    "id": 2001,
+    "type": "limit",
+    "joke": "Quelle est la femme la plus pénétrée de Paris ?",
+    "answer": "Notre-Dame de Paris"
+  },
+  {
+    "id": 2002,
+    "type": "global",
+    "joke": "De quelle couleur est le ciel à Paris ?",
+    "answer": "On sait pas, on le voit jamais."
+  },
+  {
+    "id": 2003,
+    "type": "global",
+    "joke": "Quelle est la différence entre un parisien, une cravate et une ceinture ?",
+    "answer": "La cravate serre le cou, la ceinture serre la taille, le Parisien sert à rien."
   }
 ]

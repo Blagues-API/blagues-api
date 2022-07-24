@@ -18,11 +18,7 @@ export async function getGodfatherEmoji(emojisGuild: Guild, member: GuildMember)
     where: { user_id: member.id }
   });
   if (!godfather) {
-    const memberAvatar = member.displayAvatarURL({ size: 128, forceStatic: true, extension: 'png' });
-    const bufferAvatar = await got(memberAvatar).buffer();
-    const bufferEmoji = await sharp(bufferAvatar)
-      .composite([{ input: rect, blend: 'dest-in' }])
-      .toBuffer();
+    const bufferEmoji = await generateEmoji(member);
     const emoji = await emojisGuild.emojis.create({ name: snakeCase(member.displayName), attachment: bufferEmoji });
     godfather = await prisma.godfather.create({
       data: {
