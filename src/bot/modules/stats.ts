@@ -78,11 +78,11 @@ export default class Stats {
       const [approvals, disapprovals] = await Promise.all([
         prisma.approval.findMany({
           where: { user_id: member.id },
-          include: { proposal: true }
+          include: { proposal: { select: { type: true } } }
         }),
         prisma.disapproval.findMany({
           where: { user_id: member.id },
-          include: { proposal: true }
+          include: { proposal: { select: { type: true } } }
         })
       ]);
 
@@ -91,18 +91,20 @@ export default class Stats {
         (approval) => approval.proposal.type === ProposalType.SUGGESTION
       );
 
-      const ratio_approvals = (approvals.length / [...approvals, ...disapprovals].length) * 100;
-      const ratio_disapprovals = (disapprovals.length / [...approvals, ...disapprovals].length) * 100;
+      const totalDecisions = approvals.length + disapprovals.length;
+      const approvalsRatio = (approvals.length / totalDecisions) * 100;
+      const disapprovalsRatio = (disapprovals.length / totalDecisions) * 100;
+
       fields.push({
         name: 'Décisions de Parrain :',
         value: stripIndents`
-          Décisions totales: **${[...approvals, ...disapprovals].length}**
+          Décisions totales: **${totalDecisions}**
           Suggestions: **${suggestions.length}**
           Corrections: **${corrections.length}**
           Ratio: **${
-            ratio_approvals >= ratio_disapprovals
-              ? `${approveEmoji} ${ratio_approvals}%`
-              : `${disapproveEmoji} ${ratio_disapprovals}%`
+            approvalsRatio >= disapprovalsRatio
+              ? `${approveEmoji} ${approvalsRatio}%`
+              : `${disapproveEmoji} ${disapprovalsRatio}%`
           }**
         `,
         inline: false
