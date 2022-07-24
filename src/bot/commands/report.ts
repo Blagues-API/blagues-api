@@ -56,9 +56,7 @@ export default class ReportCommand extends Command {
         interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannelId}>.`)
       );
     }
-
-    // TODO : ajouter un choix pour signaler une blague refusée injustement + dans approve, mettre le lien de la blague dans le "Votre approbation a bien été retirée." + ajouter le message des logs comme message dans prisma
-
+    
     const jokeId = interaction.options.getInteger('id', true);
     const joke = jokeById(jokeId);
     if (!joke) {
