@@ -1,13 +1,6 @@
 import { stripIndents } from 'common-tags';
 import { CommandInteraction, GuildMember, APIEmbed } from 'discord.js';
-import {
-  approveEmoji,
-  Colors,
-  disapproveEmoji,
-  downReactionIdentifier,
-  godfatherRoleId,
-  upReactionIdentifier
-} from '../constants';
+import { approveEmoji, Colors, disapproveEmoji, godfatherRoleId } from '../constants';
 import { isGodfather, paginate } from '../utils';
 import prisma from '../../prisma';
 import chunk from 'lodash/chunk';
@@ -21,6 +14,11 @@ interface MemberProposal extends Proposal {
     disapprovals: number;
   };
 }
+
+const reaction = {
+  up: `<:vote_up:1000313060860383365> `,
+  down: `<:vote_down:1000721148444672072>`
+};
 
 type GodfathersDecisions = (Approval | Disapproval)[][];
 
@@ -56,9 +54,9 @@ export default class Stats {
           Proposées: **${suggestions.length}**
           En attente: **${suggestions.filter((s) => !s.refused && !s.merged).length}**
           Acceptées: **${suggestions.filter((s) => s.merged).length}**
-          Votes: **${upReactionIdentifier} ${
-          suggest_votes.filter((v) => v.type === VoteType.UP).length
-        } ${downReactionIdentifier} ${suggest_votes.filter((v) => v.type === VoteType.DOWN).length}**
+          Votes: **${reaction.up} ${suggest_votes.filter((v) => v.type === VoteType.UP).length} ${reaction.down} ${
+          suggest_votes.filter((v) => v.type === VoteType.DOWN).length
+        }**
         `,
         inline: true
       },
@@ -68,9 +66,9 @@ export default class Stats {
           Proposées: **${corrections.length}**
           En attente: **${corrections.filter((s) => !s.refused && !s.merged).length}**
           Acceptées: **${corrections.filter((s) => s.merged).length}**
-          Votes: **${upReactionIdentifier} ${
-          corrections_votes.filter((v) => v.type === VoteType.UP).length
-        } ${downReactionIdentifier} ${suggest_votes.filter((v) => v.type === VoteType.DOWN).length}**
+          Votes: **${reaction.up} ${corrections_votes.filter((v) => v.type === VoteType.UP).length} ${reaction.down} ${
+          suggest_votes.filter((v) => v.type === VoteType.DOWN).length
+        }**
         `,
         inline: true
       }
@@ -88,28 +86,26 @@ export default class Stats {
         })
       ]);
 
-      const [suggestions_approvals, corrections_approvals] = partition(
-        approvals,
+      const [suggestions, corrections] = partition(
+        [...approvals, ...disapprovals],
         (approval) => approval.proposal.type === ProposalType.SUGGESTION
       );
-      const [suggestions_disapprovals, corrections_disapprovals] = partition(
-        disapprovals,
-        (disapproval) => disapproval.proposal.type === ProposalType.SUGGESTION
-      );
-      const ratio = (approvals.length / disapprovals.length) * 100;
+
+      const ratio_approvals = (approvals.length / [...approvals, ...disapprovals].length) * 100;
+      const ratio_disapprovals = (disapprovals.length / [...approvals, ...disapprovals].length) * 100;
       fields.push({
         name: 'Décisions de Parrain :',
         value: stripIndents`
-          Décisions totales: **${approvals.length + disapprovals.length}**
-          Suggestions: **${approveEmoji} ${suggestions_approvals.length} ${disapproveEmoji} ${
-          suggestions_disapprovals.length
-        }**
-          Corrections: **${approveEmoji} ${corrections_approvals.length} ${disapproveEmoji}  ${
-          corrections_disapprovals.length
-        }**
-          Ratio: **${ratio ? `${ratio}` : 0}%**
+          Décisions totales: **${[...approvals, ...disapprovals].length}**
+          Suggestions: **${suggestions.length}**
+          Corrections: **${corrections.length}**
+          Ratio: **${
+            ratio_approvals >= ratio_disapprovals
+              ? `${approveEmoji} ${ratio_approvals}%`
+              : `${disapproveEmoji} ${ratio_disapprovals}%`
+          }**
         `,
-        inline: true
+        inline: false
       });
     }
 
