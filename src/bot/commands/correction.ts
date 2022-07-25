@@ -188,7 +188,7 @@ export default class CorrectionCommand extends Command {
       fetchReply: true
     })) as Message<true>;
 
-    const buttonInteraction = await interactionWaiter(question, commandInteraction.user, false, 120_000);
+    const buttonInteraction = await interactionWaiter(question, commandInteraction.user, 120_000);
 
     if (!buttonInteraction) {
       await commandInteraction.editReply(interactionInfo('Les 2 minutes se sont écoulées.'));

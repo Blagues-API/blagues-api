@@ -123,8 +123,8 @@ export function isGodfather(member: GuildMember): boolean {
 export async function interactionWaiter(
   message: Message<true>,
   user: User,
-  deleteMessage?: boolean,
-  idle?: number
+  idle?: number,
+  deleteMessage?: boolean
 ): Promise<ButtonInteraction<'cached'>> {
   return new Promise<ButtonInteraction<'cached'>>((resolve, reject) => {
     message
