@@ -6,8 +6,8 @@ import {
   ButtonStyle,
   ChatInputCommandInteraction,
   ComponentType,
-  Interaction,
   Message,
+  SelectMenuInteraction,
   TextChannel
 } from 'discord.js';
 import { jokeById, jokeByQuestion } from '../../controllers';
@@ -188,7 +188,12 @@ export default class CorrectionCommand extends Command {
       fetchReply: true
     })) as Message<true>;
 
-    const buttonInteraction = await interactionWaiter(question, commandInteraction.user, 120_000);
+    const buttonInteraction = (await interactionWaiter(
+      ComponentType.Button,
+      question,
+      commandInteraction.user,
+      120_000
+    )) as ButtonInteraction<'cached'>;
 
     if (!buttonInteraction) {
       await commandInteraction.editReply(interactionInfo('Les 2 minutes se sont écoulées.'));
@@ -424,7 +429,7 @@ export default class CorrectionCommand extends Command {
     joke: JokeCorrectionPayload
   ): Promise<JokeCorrectionPayload | null> {
     const baseEmbed = buttonInteraction.message.embeds[0].toJSON();
-    const questionMessage = await buttonInteraction.update({
+    const questionMessage = (await buttonInteraction.update({
       embeds: [
         baseEmbed,
         {
@@ -452,15 +457,13 @@ export default class CorrectionCommand extends Command {
         }
       ],
       fetchReply: true
-    });
+    })) as Message<true>;
 
-    const response = await questionMessage
-      .awaitMessageComponent({
-        filter: (i: Interaction) => i.user.id === commandInteraction.user.id,
-        componentType: ComponentType.SelectMenu,
-        time: 60_000
-      })
-      .catch(() => null);
+    const response = (await interactionWaiter(
+      ComponentType.SelectMenu,
+      questionMessage,
+      commandInteraction.user
+    )) as SelectMenuInteraction<'cached'>;
 
     if (!response) {
       questionMessage.edit(messageInfo('Les 60 secondes se sont écoulées.'));

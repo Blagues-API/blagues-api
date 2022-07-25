@@ -6,7 +6,9 @@ import {
   GuildMember,
   InteractionReplyOptions,
   Message,
+  MessageComponentType,
   MessageOptions,
+  SelectMenuInteraction,
   TextChannel,
   User
 } from 'discord.js';
@@ -121,15 +123,16 @@ export function isGodfather(member: GuildMember): boolean {
 }
 
 export async function interactionWaiter(
+  componentType: MessageComponentType,
   message: Message<true>,
   user: User,
   idle?: number,
   deleteMessage?: boolean
-): Promise<ButtonInteraction<'cached'>> {
-  return new Promise<ButtonInteraction<'cached'>>((resolve, reject) => {
+): Promise<ButtonInteraction<'cached'> | SelectMenuInteraction<'cached'>> {
+  return new Promise<ButtonInteraction<'cached'> | SelectMenuInteraction<'cached'>>((resolve, reject) => {
     message
       .createMessageComponentCollector({
-        componentType: ComponentType.Button,
+        componentType: componentType,
         idle: idle ?? 60_000
       })
       .on('collect', async (interaction) => {
@@ -175,7 +178,12 @@ export async function paginate(
   if (pages.length <= 1) return;
 
   try {
-    const buttonInteraction = await interactionWaiter(message, interaction.user);
+    const buttonInteraction = (await interactionWaiter(
+      ComponentType.Button,
+      message,
+      interaction.user
+    )) as ButtonInteraction<'cached'>;
+
     if (!buttonInteraction) return;
 
     switch (buttonInteraction.customId) {
