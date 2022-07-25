@@ -60,13 +60,23 @@ export default class ApproveCommand extends Command {
       );
     }
 
-    const isSuggestionChannel = channel.id === suggestionsChannelId;
-    const isCorrectionChannel = channel.id === correctionsChannelId;
+    type declarationTemplate = {
+      WITH_DETERMINANT: string;
+      WITHOUT_DETERMINANT: string;
+      EMBED_FOOTER_WITH_DETERMINANT: string;
+      EMBED_FOOTER_WITHOUT_DETERMINANT: string;
+    }
+
+    const Declaration = {
+      [suggestionsChannelId]: { WITH_DETERMINANT: 'une blague', WITHOUT_DETERMINANT: 'blague', EMBED_FOOTER_WITH_DETERMINANT: 'Cette blague', EMBED_FOOTER_WITHOUT_DETERMINANT: 'Blague' } as declarationTemplate,
+      [correctionsChannelId]: { WITH_DETERMINANT: 'une correction', WITHOUT_DETERMINANT: 'correction', EMBED_FOOTER_WITH_DETERMINANT: 'Cette correction', EMBED_FOOTER_WITHOUT_DETERMINANT: 'Correction' } as declarationTemplate,
+      [reportsChannelId]: { WITH_DETERMINANT: 'un signalement', WITHOUT_DETERMINANT: 'signalement', EMBED_FOOTER_WITH_DETERMINANT: 'Ce signalement', EMBED_FOOTER_WITHOUT_DETERMINANT: 'Signalement' } as declarationTemplate,
+    }[channel.id];
 
     if (message.author.id !== interaction.client.user!.id) {
       return interaction.reply(
         interactionProblem(
-          `Vous ne pouvez pas approuver ${isSuggestionChannel ? 'une blague' : isCorrectionChannel ? 'une correction' : 'un signalement'} qui n'est pas gérée par ${
+          `Vous ne pouvez pas approuver ${Declaration.WITH_DETERMINANT} qui n'est pas gérée par ${
             interaction.client.user
           }.`
         )
@@ -76,9 +86,9 @@ export default class ApproveCommand extends Command {
     if (!isParrain(interaction.member)) {
       return interaction.reply(
         interactionProblem(
-          `Seul un <@&${godfatherRoleId}> peut approuver ${isSuggestionChannel ? 'une blague' : isCorrectionChannel ? 'une correction' : 'un signalement'}.`
+          `Seul un <@&${godfatherRoleId}> peut approuver ${Declaration.WITH_DETERMINANT}.`
         )
-      );
+      )
     }
 
     const proposal = (await prisma.proposal.findUnique({
@@ -157,14 +167,14 @@ export default class ApproveCommand extends Command {
 
     if (proposal.user_id === interaction.user.id) {
       return interaction.reply(
-        interactionProblem(`Vous ne pouvez pas approuver votre propre ${isSuggestion ? 'blague' : isReport ? 'signalement' : 'correction'}.`)
+        interactionProblem(`Vous ne pouvez pas approuver votre propre ${Declaration.WITHOUT_DETERMINANT}.`)
       );
     }
 
     if (proposal.merged) {
       if (!embed.footer) {
         embed.color = Colors.ACCEPTED;
-        embed.footer = { text: `${isSuggestion ? 'Blague' : isReport ? 'Signalement' : 'Correction'} déjà traité${isReport ? '' : 'e'}` };
+        embed.footer = { text: `${Declaration.EMBED_FOOTER_WITHOUT_DETERMINANT} déjà traité${isReport ? '' : 'e'}` };
 
         const field = embed.fields?.[embed.fields.length - 1];
         if (field) {
@@ -184,7 +194,7 @@ export default class ApproveCommand extends Command {
     if (proposal.refused) {
       if (!embed.footer) {
         embed.color = Colors.REFUSED;
-        embed.footer = { text: `${isSuggestion ? 'Blague' : isReport ? 'Signalement' : 'Correction'} refusé${isReport ? '' : 'e'}` };
+        embed.footer = { text: `${Declaration.EMBED_FOOTER_WITHOUT_DETERMINANT} refusé${isReport ? '' : 'e'}` };
 
         const field = embed.fields?.[embed.fields.length - 1];
         if (field) {
@@ -197,7 +207,7 @@ export default class ApproveCommand extends Command {
       }
 
       return interaction.reply(
-        interactionProblem(`${isSuggestion ? 'Cette blague' : isReport ? 'Ce signalement' : 'Cette correction'} a déjà été refusé${isReport ? '' : 'e'}.`)
+        interactionProblem(`${Declaration.EMBED_FOOTER_WITH_DETERMINANT} a déjà été refusé${isReport ? '' : 'e'}.`)
       );
     }
 
@@ -316,21 +326,28 @@ export default class ApproveCommand extends Command {
     await interaction.deferReply({ ephemeral: true });
 
     try {
-      if (isSuggestion) {
-        await this.approveSuggestion(interaction, proposal, message, embed);
-      } else if (isReport) {
-        await this.approveReport(interaction, proposal, message, embed);
-      } else {
-        const suggestion = await this.approveCorrection(interaction, proposal, message, embed);
+      switch (proposal.type) {
+        case ProposalType.SUGGESTION: {
+          await this.approveSuggestion(interaction, proposal, message, embed);
+          break;
+        }
+        case ProposalType.REPORT: {
+          await this.approveReport(interaction, proposal, message, embed);
+          break;
+        }
+        case ProposalType.CORRECTION: {
+          const suggestion = await this.approveCorrection(interaction, proposal, message, embed);
 
-        if (suggestion && proposal.suggestion && proposal.suggestion.approvals.length >= neededSuggestionsApprovals) {
-          await this.approveSuggestion(
-            interaction,
-            proposal.suggestion as Suggestion,
-            suggestion,
-            suggestion.embeds[0].toJSON(),
-            true
-          );
+          if (suggestion && proposal.suggestion && proposal.suggestion.approvals.length >= neededSuggestionsApprovals) {
+            await this.approveSuggestion(
+              interaction,
+              proposal.suggestion as Suggestion,
+              suggestion,
+              suggestion.embeds[0].toJSON(),
+              true
+            );
+          }
+          break;
         }
       }
     } catch (error) {
