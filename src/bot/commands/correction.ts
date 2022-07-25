@@ -35,7 +35,8 @@ import {
   showNegativeDiffs,
   showPositiveDiffs,
   tDelete,
-  info
+  info,
+  interactionWaiter
 } from '../utils';
 
 enum IdType {
@@ -187,13 +188,7 @@ export default class CorrectionCommand extends Command {
       fetchReply: true
     })) as Message<true>;
 
-    const buttonInteraction = await question
-      .awaitMessageComponent({
-        filter: (i: Interaction) => i.user.id === commandInteraction.user.id,
-        componentType: ComponentType.Button,
-        time: 120_000
-      })
-      .catch(() => null);
+    const buttonInteraction = await interactionWaiter(question, commandInteraction.user, false, 120_000);
 
     if (!buttonInteraction) {
       await commandInteraction.editReply(interactionInfo('Les 2 minutes se sont écoulées.'));
