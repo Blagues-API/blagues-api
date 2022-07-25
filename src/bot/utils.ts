@@ -120,23 +120,27 @@ export function isGodfather(member: GuildMember): boolean {
   return member.roles.cache.has(godfatherRoleId);
 }
 
-export async function interactionWaiter(message: Message<true>, user: User) {
+export async function interactionWaiter(
+  message: Message<true>,
+  user: User,
+  deleteMessage?: boolean
+): Promise<ButtonInteraction<'cached'>> {
   return new Promise<ButtonInteraction<'cached'>>((resolve, reject) => {
-    const collector = message
+    message
       .createMessageComponentCollector({
         componentType: ComponentType.Button,
         idle: 60_000
       })
       .on('collect', async (interaction) => {
+        if (deleteMessage && message.deletable) await message.delete();
         if (interaction.user.id !== user.id) {
           await interaction.reply(interactionInfo("Vous n'êtes pas autorisé à interagir avec ce message."));
           return;
         }
-        collector.stop('finish');
         resolve(interaction);
       })
       .once('end', (_interactions, reason) => {
-        if (reason !== 'finish') reject(reason);
+        if (reason !== 'idle') reject(reason);
       });
   });
 }
