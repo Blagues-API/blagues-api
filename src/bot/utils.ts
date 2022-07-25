@@ -123,13 +123,14 @@ export function isGodfather(member: GuildMember): boolean {
 export async function interactionWaiter(
   message: Message<true>,
   user: User,
-  deleteMessage?: boolean
+  deleteMessage?: boolean,
+  idle?: number
 ): Promise<ButtonInteraction<'cached'>> {
   return new Promise<ButtonInteraction<'cached'>>((resolve, reject) => {
     message
       .createMessageComponentCollector({
         componentType: ComponentType.Button,
-        idle: 60_000
+        idle: idle ?? 60_000
       })
       .on('collect', async (interaction) => {
         if (deleteMessage && message.deletable) await message.delete();
