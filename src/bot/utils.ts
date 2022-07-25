@@ -103,20 +103,20 @@ export function showNegativeDiffs(oldValue: string, newValue: string): string {
     .join('');
 }
 
-export function isEmbedable(channel: TextChannel) {
+export function isEmbedable(channel: TextChannel): boolean {
   const permissions = channel.permissionsFor(channel.guild.members.me!);
   return permissions?.has(['ViewChannel', 'SendMessages', 'EmbedLinks']);
 }
 
-export function tDelete(timeout = 6000) {
+export function tDelete(timeout = 6000): (message: Message) => NodeJS.Timeout {
   return (message: Message) => setTimeout(() => message.deletable && message.delete().catch(() => null), timeout);
 }
 
-export function messageLink(guildId: string, channelId: string, messageId: string) {
+export function messageLink(guildId: string, channelId: string, messageId: string): string {
   return `https://discord.com/channels/${guildId}/${channelId}/${messageId}`;
 }
 
-export function isGodfather(member: GuildMember) {
+export function isGodfather(member: GuildMember): boolean {
   return member.roles.cache.has(godfatherRoleId);
 }
 
