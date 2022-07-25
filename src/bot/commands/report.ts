@@ -162,7 +162,7 @@ export default class ReportCommand extends Command {
               customId: 'duplicate',
               placeholder: 'Choisissez un doublon...',
               options: ratings.map((value, index) => ({
-                label: `${index}. Ressemblance à ${(value.rating * 100).toFixed(0)} %`,
+                label: `${index + 1}. Ressemblance à ${(value.rating * 100).toFixed(0)} %`,
                 value: jokeByQuestion(value.target.split('|')[0])!.id.toString(),
                 description: value.target.split('|')[0].slice(0, 100)
               })),
