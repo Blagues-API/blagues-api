@@ -72,7 +72,7 @@ export const Reasons = ['duplicate', 'inappropriate'] as const;
 
 export type Reason = typeof Reasons[number];
 
-export const ReportReasons: Record<Reason, string> = {
+export const ReasonsRefs: Record<Reason, string> = {
   duplicate: 'Doublon',
   inappropriate: 'Inappropriée'
 };

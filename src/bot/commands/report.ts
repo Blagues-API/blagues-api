@@ -10,7 +10,7 @@ import {
   SelectMenuInteraction,
   TextChannel
 } from 'discord.js';
-import { CategoriesRefs, Category, ReportReasons, Joke, Reason } from '../../typings';
+import { CategoriesRefs, Category, ReasonsRefs, Joke, Reason } from '../../typings';
 import { Colors, commandsChannelId, reportsChannelId } from '../constants';
 import Command from '../lib/command';
 import { findBestMatch } from 'string-similarity';
@@ -36,7 +36,7 @@ export default class ReportCommand extends Command {
           name: 'raison',
           description: 'Raison du signalement de la blague',
           required: true,
-          choices: Object.entries(ReportReasons).map(([key, name]) => ({
+          choices: Object.entries(ReasonsRefs).map(([key, name]) => ({
             name,
             value: key
           }))
@@ -118,7 +118,7 @@ export default class ReportCommand extends Command {
     } else {
       embed.fields.push({
         name: 'Raison',
-        value: ReportReasons[reason as Reason],
+        value: ReasonsRefs[reason as Reason],
         inline: false
       });
 
