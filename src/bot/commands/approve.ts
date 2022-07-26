@@ -302,17 +302,7 @@ export default class ApproveCommand extends Command {
       if (isSuggestion) {
         await this.approveSuggestion(interaction, proposal, message, embed);
       } else {
-        const suggestion = await this.approveCorrection(interaction, proposal, message, embed);
-
-        if (suggestion && proposal.suggestion && proposal.suggestion.approvals.length >= neededSuggestionsApprovals) {
-          await this.approveSuggestion(
-            interaction,
-            proposal.suggestion as Suggestion,
-            suggestion,
-            suggestion.embeds[0].toJSON(),
-            true
-          );
-        }
+        await this.approveCorrection(interaction, proposal, message, embed);
       }
     } catch (error) {
       console.error(error);
@@ -391,7 +381,7 @@ export default class ApproveCommand extends Command {
     proposal: Correction,
     message: Message,
     embed: APIEmbed
-  ) {
+  ): Promise<void> {
     const logsChannel = interaction.client.channels.cache.get(logsChannelId) as TextChannel;
     const suggestionsChannel = interaction.client.channels.cache.get(suggestionsChannelId) as TextChannel;
     const isPublishedJoke = proposal.type === ProposalType.CORRECTION;
@@ -497,6 +487,18 @@ export default class ApproveCommand extends Command {
       interactionValidate(`La [correction](${message.url}) a bien été migrée vers la blague !`)
     );
 
-    return suggestionMessage;
+    if (
+      suggestionMessage &&
+      proposal.suggestion &&
+      proposal.suggestion.approvals.length >= neededSuggestionsApprovals
+    ) {
+      await this.approveSuggestion(
+        interaction,
+        proposal.suggestion as Suggestion,
+        suggestionMessage,
+        suggestionMessage.embeds[0].toJSON(),
+        true
+      );
+    }
   }
 }
