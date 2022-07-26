@@ -53,9 +53,9 @@ export default class DisapproveCommand extends Command {
     if (message.author.id !== interaction.client.user!.id) {
       return interaction.reply(
         interactionProblem(
-          `Vous ne pouvez pas désapprouver ${
-            Declaration[channel.id].WITH_UNDEFINED_ARTICLE
-          } qui n'est pas gérée par ${interaction.client.user}.`
+          `Vous ne pouvez pas désapprouver ${Declaration[channel.id].WITH_UNDEFINED_ARTICLE} qui n'est pas gérée par ${
+            interaction.client.user
+          }.`
         )
       );
     }
@@ -144,13 +144,17 @@ export default class DisapproveCommand extends Command {
 
     if (proposal.merged) {
       return interaction.reply(
-        interactionProblem(`${Declaration[channel.id].WITH_DEMONSTRATIVE_DETERMINANT} a déjà été ajouté${isReport ? '' : 'e'}.`)
+        interactionProblem(
+          `${Declaration[channel.id].WITH_DEMONSTRATIVE_DETERMINANT} a déjà été ajouté${isReport ? '' : 'e'}.`
+        )
       );
     }
 
     if (proposal.refused) {
       return interaction.reply(
-        interactionProblem(`${Declaration[channel.id].WITH_DEMONSTRATIVE_DETERMINANT} a déjà été refusé${isReport ? '' : 'e'}.`)
+        interactionProblem(
+          `${Declaration[channel.id].WITH_DEMONSTRATIVE_DETERMINANT} a déjà été refusé${isReport ? '' : 'e'}.`
+        )
       );
     }
 
@@ -345,7 +349,11 @@ export default class DisapproveCommand extends Command {
     await message.reactions.removeAll();
 
     await interaction.reply(
-      interactionValidate(`L${isReport ? 'e' : 'a'} [${Declaration[interaction.channel!.id].WORD}](${message.url}) a bien été refusé${isReport ? '' : 'e'} !`)
+      interactionValidate(
+        `L${isReport ? 'e' : 'a'} [${Declaration[interaction.channel!.id].WORD}](${message.url}) a bien été refusé${
+          isReport ? '' : 'e'
+        } !`
+      )
     );
   }
 }

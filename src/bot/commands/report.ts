@@ -56,7 +56,7 @@ export default class ReportCommand extends Command {
         interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannelId}>.`)
       );
     }
-    
+
     const jokeId = interaction.options.getInteger('id', true);
     const joke = jokeById(jokeId);
     if (!joke) {
@@ -65,7 +65,7 @@ export default class ReportCommand extends Command {
 
     const isAlreadyReport = await prisma.proposal.findMany({
       select: {
-        joke_id: true,
+        joke_id: true
       },
       where: {
         type: ProposalType.REPORT,
@@ -74,12 +74,7 @@ export default class ReportCommand extends Command {
       }
     });
     if (isAlreadyReport) {
-      return interaction.reply(
-        interactionProblem(
-          "Cette blague a déjà été signalée.",
-          true
-        )
-      );
+      return interaction.reply(interactionProblem('Cette blague a déjà été signalée.', true));
     }
 
     const reason = interaction.options.getString('raison', true);
@@ -131,15 +126,15 @@ export default class ReportCommand extends Command {
     }
   }
 
-  async getDuplicate(
-    commandInteraction: ChatInputCommandInteraction<'cached'>,
-    joke: Joke
-  ): Promise<Joke | null> {
+  async getDuplicate(commandInteraction: ChatInputCommandInteraction<'cached'>, joke: Joke): Promise<Joke | null> {
     const { ratings } = findBestMatch(
       `${joke.joke}|${joke.answer}`,
       Jokes.list.map((entry) => `${entry.joke}|${entry.answer}`)
     );
-    ratings.sort((a, b) => a.rating - b.rating).reverse().splice(11, ratings.length - 11);
+    ratings
+      .sort((a, b) => a.rating - b.rating)
+      .reverse()
+      .splice(11, ratings.length - 11);
     ratings.shift();
     const question = await commandInteraction[commandInteraction.replied ? 'editReply' : 'reply']({
       embeds: [
@@ -190,7 +185,7 @@ export default class ReportCommand extends Command {
 
     return this.checkDuplicate(commandInteraction, selectInteraction);
   }
-  
+
   async checkDuplicate(
     commandInteraction: ChatInputCommandInteraction<'cached'>,
     selectInteraction: SelectMenuInteraction
@@ -247,9 +242,12 @@ export default class ReportCommand extends Command {
     const joke = jokeById(commandInteraction.options.getInteger('id', true))!;
 
     switch (buttonInteraction.customId) {
-      case 'yes': return duplicate;
-      case 'no': return this.getDuplicate(commandInteraction, joke);
-      default: return null;
+      case 'yes':
+        return duplicate;
+      case 'no':
+        return this.getDuplicate(commandInteraction, joke);
+      default:
+        return null;
     }
   }
 
@@ -259,7 +257,6 @@ export default class ReportCommand extends Command {
     embed: APIEmbed,
     reportReason: string
   ) {
-
     const confirmation = await waitForConfirmation(interaction, embed, 'suggestion');
     if (!confirmation) return;
 
@@ -278,7 +275,7 @@ export default class ReportCommand extends Command {
       );
     }
 
-    const message = await reportsChannel.send({ embeds: [embed] })
+    const message = await reportsChannel.send({ embeds: [embed] });
 
     await prisma.proposal.create({
       data: {

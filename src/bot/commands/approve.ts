@@ -76,7 +76,7 @@ export default class ApproveCommand extends Command {
         interactionProblem(
           `Seul un <@&${godfatherRoleId}> peut approuver ${Declaration[channel.id].WITH_UNDEFINED_ARTICLE}.`
         )
-      )
+      );
     }
 
     const proposal = (await prisma.proposal.findUnique({
@@ -195,7 +195,9 @@ export default class ApproveCommand extends Command {
       }
 
       return interaction.reply(
-        interactionProblem(`${Declaration[channel.id].WITH_DEMONSTRATIVE_DETERMINANT} a déjà été refusé${isReport ? '' : 'e'}.`)
+        interactionProblem(
+          `${Declaration[channel.id].WITH_DEMONSTRATIVE_DETERMINANT} a déjà été refusé${isReport ? '' : 'e'}.`
+        )
       );
     }
 
@@ -279,7 +281,11 @@ export default class ApproveCommand extends Command {
       })
     );
 
-    const neededApprovalsCount = isSuggestion ? neededSuggestionsApprovals : isReport ? neededReportsApprovals : neededCorrectionsApprovals;
+    const neededApprovalsCount = isSuggestion
+      ? neededSuggestionsApprovals
+      : isReport
+      ? neededReportsApprovals
+      : neededCorrectionsApprovals;
 
     if (isSuggestion && proposal.approvals.length >= neededApprovalsCount && proposal.corrections[0]) {
       const suggestionLink = messageLink(interaction.guild.id, suggestionsChannelId, proposal.message_id!);
@@ -414,7 +420,7 @@ export default class ApproveCommand extends Command {
     interaction: MessageContextMenuCommandInteraction,
     proposal: Report,
     message: Message,
-    embed: APIEmbed,
+    embed: APIEmbed
   ): Promise<void> {
     const logsChannel = interaction.client.channels.cache.get(logsChannelId) as TextChannel;
 
@@ -459,7 +465,9 @@ export default class ApproveCommand extends Command {
 
     message.client.stickys.reload();
 
-    await interaction.editReply(interactionValidate(`La [blague](${message.url}) a bien été signalée et retirée de l'API !`));
+    await interaction.editReply(
+      interactionValidate(`La [blague](${message.url}) a bien été signalée et retirée de l'API !`)
+    );
   }
 
   async approveCorrection(

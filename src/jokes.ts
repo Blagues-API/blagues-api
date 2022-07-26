@@ -78,9 +78,7 @@ class JokesLoader {
     }
   }
 
-  public async removeJoke(
-    proposal: Report
-  ): Promise<{ success: boolean; joke_id?: number; error?: string }> {
+  public async removeJoke(proposal: Report): Promise<{ success: boolean; joke_id?: number; error?: string }> {
     const jokesPath = path.join(__dirname, '../blagues.json');
     try {
       await fs.access(jokesPath, fsConstants.R_OK | fsConstants.W_OK);
@@ -98,7 +96,7 @@ class JokesLoader {
       const index = jokes.findIndex((joke) => joke.id === proposal.joke_id!);
       const joke_id = proposal.joke_id!;
       jokes.splice(index, 1);
-      for (var joke of jokes.splice(index, jokes.length)) {
+      for (const joke of jokes.splice(index, jokes.length)) {
         joke.id -= 1;
       }
 
@@ -114,7 +112,6 @@ class JokesLoader {
     } finally {
       this.loader.shift();
     }
-
   }
 }
 

@@ -355,27 +355,29 @@ export async function waitForConfirmation(
   sendType: string
 ): Promise<ButtonInteraction | null> {
   const message = await interaction.reply({
-    content: `Êtes-vous sûr de vouloir confirmer la proposition de ce${sendType === 'report' ? ' signalement' : 'tte blague'} ?`,
+    content: `Êtes-vous sûr de vouloir confirmer la proposition de ce${
+      sendType === 'report' ? ' signalement' : 'tte blague'
+    } ?`,
     embeds: [embed],
     components: [
       {
-      type: ComponentType.ActionRow,
-      components: [
-        {
-          type: ComponentType.Button,
-          label: 'Envoyer',
-          customId: 'send',
-          style: ButtonStyle.Success
-        },
-        {
-          type: ComponentType.Button,
-          label: 'Annuler',
-          customId: 'cancel',
-          style: ButtonStyle.Danger
-        }
-      ]
-    }
-  ],
+        type: ComponentType.ActionRow,
+        components: [
+          {
+            type: ComponentType.Button,
+            label: 'Envoyer',
+            customId: 'send',
+            style: ButtonStyle.Success
+          },
+          {
+            type: ComponentType.Button,
+            label: 'Annuler',
+            customId: 'cancel',
+            style: ButtonStyle.Danger
+          }
+        ]
+      }
+    ],
     ephemeral: true,
     fetchReply: true
   });
@@ -406,10 +408,25 @@ type declarationTemplate = {
   WORD_CAPITALIZED: string;
   WITH_UNDEFINED_ARTICLE: string;
   WITH_DEMONSTRATIVE_DETERMINANT: string;
-}
+};
 
 export const Declaration = {
-  [suggestionsChannelId]: { WORD: 'blague', WORD_CAPITALIZED: 'Blague', WITH_UNDEFINED_ARTICLE: 'une blague', WITH_DEMONSTRATIVE_DETERMINANT: 'Cette blague' } as declarationTemplate,
-  [correctionsChannelId]: { WORD: 'correction', WORD_CAPITALIZED: 'Correction', WITH_UNDEFINED_ARTICLE: 'une correction', WITH_DEMONSTRATIVE_DETERMINANT: 'Cette correction' } as declarationTemplate,
-  [reportsChannelId]: { WORD: 'signalement', WORD_CAPITALIZED: 'Signalement', WITH_UNDEFINED_ARTICLE: 'un signalement', WITH_DEMONSTRATIVE_DETERMINANT: 'Ce signalement' } as declarationTemplate,
+  [suggestionsChannelId]: {
+    WORD: 'blague',
+    WORD_CAPITALIZED: 'Blague',
+    WITH_UNDEFINED_ARTICLE: 'une blague',
+    WITH_DEMONSTRATIVE_DETERMINANT: 'Cette blague'
+  } as declarationTemplate,
+  [correctionsChannelId]: {
+    WORD: 'correction',
+    WORD_CAPITALIZED: 'Correction',
+    WITH_UNDEFINED_ARTICLE: 'une correction',
+    WITH_DEMONSTRATIVE_DETERMINANT: 'Cette correction'
+  } as declarationTemplate,
+  [reportsChannelId]: {
+    WORD: 'signalement',
+    WORD_CAPITALIZED: 'Signalement',
+    WITH_UNDEFINED_ARTICLE: 'un signalement',
+    WITH_DEMONSTRATIVE_DETERMINANT: 'Ce signalement'
+  } as declarationTemplate
 } as const;

@@ -94,7 +94,7 @@ export type Suggestion = ProposalExtended & {
 
 export type Report = ProposalExtended & {
   type: 'REPORT';
-}
+};
 
 export type ProposalSuggestion = ProposalExtended & {
   type: 'SUGGESTION';
