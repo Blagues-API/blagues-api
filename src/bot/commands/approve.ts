@@ -234,7 +234,7 @@ export default class ApproveCommand extends Command {
 
       await message.edit({ embeds: [embed] });
 
-      return interaction.reply(interactionInfo(`Votre approbation a bien été retirée.`));
+      return interaction.reply(interactionInfo(`Votre [approbation](${message.url}) a bien été retirée.`));
     }
 
     const disapprovalIndex = proposal.disapprovals.findIndex(
@@ -333,7 +333,7 @@ export default class ApproveCommand extends Command {
   ): Promise<void> {
     const logsChannel = interaction.client.channels.cache.get(logsChannelId) as TextChannel;
 
-    const member = await interaction.guild?.members.fetch(proposal.user_id!).catch(() => null);
+    const member = await interaction.guild?.members.fetch(proposal.user_id!);
     if (member && !member.roles.cache.has(jokerRoleId)) {
       await member.roles.add(jokerRoleId);
     }

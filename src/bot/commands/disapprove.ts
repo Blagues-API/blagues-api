@@ -190,7 +190,7 @@ export default class DisapproveCommand extends Command {
 
       await message.edit({ embeds: [embed] });
 
-      return interaction.reply(interactionInfo(`Votre désapprobation a bien été retirée.`));
+      return interaction.reply(interactionInfo(`Votre [désapprobation](${message.url}) a bien été retirée.`));
     }
 
     const approvalIndex = proposal.approvals.findIndex((approval) => approval.user_id === interaction.user.id);
