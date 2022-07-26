@@ -33,7 +33,8 @@ import {
   interactionValidate,
   isEmbedable,
   messageLink,
-  isParrain
+  isParrain,
+  Declaration
 } from '../utils';
 import Jokes from '../../jokes';
 import { compareTwoStrings } from 'string-similarity';
@@ -60,23 +61,10 @@ export default class ApproveCommand extends Command {
       );
     }
 
-    type declarationTemplate = {
-      WITH_DETERMINANT: string;
-      WITHOUT_DETERMINANT: string;
-      EMBED_FOOTER_WITH_DETERMINANT: string;
-      EMBED_FOOTER_WITHOUT_DETERMINANT: string;
-    }
-
-    const Declaration = {
-      [suggestionsChannelId]: { WITH_DETERMINANT: 'une blague', WITHOUT_DETERMINANT: 'blague', EMBED_FOOTER_WITH_DETERMINANT: 'Cette blague', EMBED_FOOTER_WITHOUT_DETERMINANT: 'Blague' } as declarationTemplate,
-      [correctionsChannelId]: { WITH_DETERMINANT: 'une correction', WITHOUT_DETERMINANT: 'correction', EMBED_FOOTER_WITH_DETERMINANT: 'Cette correction', EMBED_FOOTER_WITHOUT_DETERMINANT: 'Correction' } as declarationTemplate,
-      [reportsChannelId]: { WITH_DETERMINANT: 'un signalement', WITHOUT_DETERMINANT: 'signalement', EMBED_FOOTER_WITH_DETERMINANT: 'Ce signalement', EMBED_FOOTER_WITHOUT_DETERMINANT: 'Signalement' } as declarationTemplate,
-    }[channel.id];
-
     if (message.author.id !== interaction.client.user!.id) {
       return interaction.reply(
         interactionProblem(
-          `Vous ne pouvez pas approuver ${Declaration.WITH_DETERMINANT} qui n'est pas gérée par ${
+          `Vous ne pouvez pas approuver ${Declaration[channel.id].WITH_UNDEFINED_ARTICLE} qui n'est pas gérée par ${
             interaction.client.user
           }.`
         )
@@ -86,7 +74,7 @@ export default class ApproveCommand extends Command {
     if (!isParrain(interaction.member)) {
       return interaction.reply(
         interactionProblem(
-          `Seul un <@&${godfatherRoleId}> peut approuver ${Declaration.WITH_DETERMINANT}.`
+          `Seul un <@&${godfatherRoleId}> peut approuver ${Declaration[channel.id].WITH_UNDEFINED_ARTICLE}.`
         )
       )
     }
@@ -167,14 +155,14 @@ export default class ApproveCommand extends Command {
 
     if (proposal.user_id === interaction.user.id) {
       return interaction.reply(
-        interactionProblem(`Vous ne pouvez pas approuver votre propre ${Declaration.WITHOUT_DETERMINANT}.`)
+        interactionProblem(`Vous ne pouvez pas approuver votre propre ${Declaration[channel.id].WORD}.`)
       );
     }
 
     if (proposal.merged) {
       if (!embed.footer) {
         embed.color = Colors.ACCEPTED;
-        embed.footer = { text: `${Declaration.EMBED_FOOTER_WITHOUT_DETERMINANT} déjà traité${isReport ? '' : 'e'}` };
+        embed.footer = { text: `${Declaration[channel.id].WORD_CAPITALIZED} déjà traité${isReport ? '' : 'e'}` };
 
         const field = embed.fields?.[embed.fields.length - 1];
         if (field) {
@@ -187,14 +175,14 @@ export default class ApproveCommand extends Command {
       }
 
       return interaction.reply(
-        interactionProblem(`${isSuggestion ? 'Cette blague' : isReport ? 'Ce signalement' : 'Cette correction'} a déjà été ajouté${isReport ? '' : 'e'}.`)
+        interactionProblem(`${Declaration.EMBED_FOOTER_WITH_DETERMINANT} a déjà été ajouté${isReport ? '' : 'e'}.`)
       );
     }
 
     if (proposal.refused) {
       if (!embed.footer) {
         embed.color = Colors.REFUSED;
-        embed.footer = { text: `${Declaration.EMBED_FOOTER_WITHOUT_DETERMINANT} refusé${isReport ? '' : 'e'}` };
+        embed.footer = { text: `${Declaration[channel.id].WORD_CAPITALIZED} refusé${isReport ? '' : 'e'}` };
 
         const field = embed.fields?.[embed.fields.length - 1];
         if (field) {
@@ -207,7 +195,7 @@ export default class ApproveCommand extends Command {
       }
 
       return interaction.reply(
-        interactionProblem(`${Declaration.EMBED_FOOTER_WITH_DETERMINANT} a déjà été refusé${isReport ? '' : 'e'}.`)
+        interactionProblem(`${Declaration[channel.id].WITH_DEMONSTRATIVE_DETERMINANT} a déjà été refusé${isReport ? '' : 'e'}.`)
       );
     }
 

@@ -19,6 +19,7 @@ import prisma from '../prisma';
 import { Category, UnsignedJoke } from 'typings';
 import { ProposalType } from '@prisma/client';
 import { jokeById, jokeByQuestion } from '../controllers';
+import { suggestionsChannelId, correctionsChannelId, reportsChannelId } from './constants';
 
 type UniversalInteractionOptions = Omit<InteractionReplyOptions, 'flags'>;
 type UniversalMessageOptions = Omit<MessageOptions, 'flags'>;
@@ -399,3 +400,16 @@ export async function waitForConfirmation(
     });
   });
 }
+
+type declarationTemplate = {
+  WORD: string;
+  WORD_CAPITALIZED: string;
+  WITH_UNDEFINED_ARTICLE: string;
+  WITH_DEMONSTRATIVE_DETERMINANT: string;
+}
+
+export const Declaration = {
+  [suggestionsChannelId]: { WORD: 'blague', WORD_CAPITALIZED: 'Blague', WITH_UNDEFINED_ARTICLE: 'une blague', WITH_DEMONSTRATIVE_DETERMINANT: 'Cette blague' } as declarationTemplate,
+  [correctionsChannelId]: { WORD: 'correction', WORD_CAPITALIZED: 'Correction', WITH_UNDEFINED_ARTICLE: 'une correction', WITH_DEMONSTRATIVE_DETERMINANT: 'Cette correction' } as declarationTemplate,
+  [reportsChannelId]: { WORD: 'signalement', WORD_CAPITALIZED: 'Signalement', WITH_UNDEFINED_ARTICLE: 'un signalement', WITH_DEMONSTRATIVE_DETERMINANT: 'Ce signalement' } as declarationTemplate,
+} as const;
