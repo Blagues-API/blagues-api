@@ -7,8 +7,7 @@ import {
   ComponentType,
   TextChannel,
   APIEmbed,
-  Message,
-  ButtonInteraction
+  Message
 } from 'discord.js';
 import { findBestMatch } from 'string-similarity';
 import Jokes from '../../jokes';
@@ -162,11 +161,11 @@ export default class SuggestCommand extends Command {
       fetchReply: true
     })) as Message<true>;
 
-    const confirmation = (await interactionWaiter({
+    const confirmation = await interactionWaiter({
       component_type: ComponentType.Button,
       message: message,
       user: interaction.user
-    })) as ButtonInteraction<'cached'>;
+    });
 
     if (!confirmation) return;
 

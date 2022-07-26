@@ -7,7 +7,6 @@ import {
   ChatInputCommandInteraction,
   ComponentType,
   Message,
-  SelectMenuInteraction,
   TextChannel
 } from 'discord.js';
 import { jokeById, jokeByQuestion } from '../../controllers';
@@ -188,12 +187,12 @@ export default class CorrectionCommand extends Command {
       fetchReply: true
     })) as Message<true>;
 
-    const buttonInteraction = (await interactionWaiter({
+    const buttonInteraction = await interactionWaiter({
       component_type: ComponentType.Button,
       message: question,
       user: commandInteraction.user,
       idle: 120_000
-    })) as ButtonInteraction<'cached'>;
+    });
 
     if (!buttonInteraction) {
       await commandInteraction.editReply(interactionInfo('Les 2 minutes se sont écoulées.'));
@@ -375,7 +374,7 @@ export default class CorrectionCommand extends Command {
   }
 
   async requestTextChange(
-    buttonInteraction: ButtonInteraction,
+    buttonInteraction: ButtonInteraction<'cached'>,
     commandInteraction: ChatInputCommandInteraction,
     joke: JokeCorrectionPayload,
     textReplyContent: string,
@@ -459,11 +458,11 @@ export default class CorrectionCommand extends Command {
       fetchReply: true
     })) as Message<true>;
 
-    const response = (await interactionWaiter({
+    const response = await interactionWaiter({
       component_type: ComponentType.SelectMenu,
       message: questionMessage,
       user: commandInteraction.user
-    })) as SelectMenuInteraction<'cached'>;
+    });
 
     if (!response) {
       questionMessage.edit(messageInfo('Les 60 secondes se sont écoulées.'));
