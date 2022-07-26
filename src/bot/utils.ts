@@ -4,11 +4,11 @@ import {
   CommandInteraction,
   ComponentType,
   GuildMember,
+  Interaction,
   InteractionReplyOptions,
   Message,
   MessageComponentType,
   MessageOptions,
-  SelectMenuInteraction,
   TextChannel,
   User
 } from 'discord.js';
@@ -18,6 +18,13 @@ import { godfatherRoleId } from './constants';
 
 type UniversalInteractionOptions = Omit<InteractionReplyOptions, 'flags'>;
 type UniversalMessageOptions = Omit<MessageOptions, 'flags'>;
+interface WaitForInteractionOptions {
+  component_type: MessageComponentType;
+  message: Message<true>;
+  user: User;
+  idle?: number;
+  deleteMessage?: boolean;
+}
 
 export function problem(message: string): APIEmbed {
   return {
@@ -122,18 +129,13 @@ export function isGodfather(member: GuildMember): boolean {
   return member.roles.cache.has(godfatherRoleId);
 }
 
-export async function interactionWaiter(
-  componentType: MessageComponentType,
-  message: Message<true>,
-  user: User,
-  idle?: number,
-  deleteMessage?: boolean
-): Promise<ButtonInteraction<'cached'> | SelectMenuInteraction<'cached'>> {
-  return new Promise<ButtonInteraction<'cached'> | SelectMenuInteraction<'cached'>>((resolve, reject) => {
+export async function interactionWaiter(options: WaitForInteractionOptions) {
+  return new Promise<Interaction<'cached'>>((resolve, reject) => {
+    const { component_type, message, user, idle = 60_000, deleteMessage = true } = options;
     message
       .createMessageComponentCollector({
-        componentType: componentType,
-        idle: idle ?? 60_000
+        componentType: component_type,
+        idle: idle
       })
       .on('collect', async (interaction) => {
         if (deleteMessage && message.deletable) await message.delete();
@@ -178,11 +180,11 @@ export async function paginate(
   if (pages.length <= 1) return;
 
   try {
-    const buttonInteraction = (await interactionWaiter(
-      ComponentType.Button,
-      message,
-      interaction.user
-    )) as ButtonInteraction<'cached'>;
+    const buttonInteraction = (await interactionWaiter({
+      component_type: ComponentType.Button,
+      message: message,
+      user: interaction.user
+    })) as ButtonInteraction<'cached'>;
 
     if (!buttonInteraction) return;
 

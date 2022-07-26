@@ -162,11 +162,11 @@ export default class SuggestCommand extends Command {
       fetchReply: true
     })) as Message<true>;
 
-    const confirmation = (await interactionWaiter(
-      ComponentType.Button,
-      message,
-      interaction.user
-    )) as ButtonInteraction<'cached'>;
+    const confirmation = (await interactionWaiter({
+      component_type: ComponentType.Button,
+      message: message,
+      user: interaction.user
+    })) as ButtonInteraction<'cached'>;
 
     if (!confirmation) return;
 

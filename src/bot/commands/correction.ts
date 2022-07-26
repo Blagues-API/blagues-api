@@ -188,12 +188,12 @@ export default class CorrectionCommand extends Command {
       fetchReply: true
     })) as Message<true>;
 
-    const buttonInteraction = (await interactionWaiter(
-      ComponentType.Button,
-      question,
-      commandInteraction.user,
-      120_000
-    )) as ButtonInteraction<'cached'>;
+    const buttonInteraction = (await interactionWaiter({
+      component_type: ComponentType.Button,
+      message: question,
+      user: commandInteraction.user,
+      idle: 120_000
+    })) as ButtonInteraction<'cached'>;
 
     if (!buttonInteraction) {
       await commandInteraction.editReply(interactionInfo('Les 2 minutes se sont écoulées.'));
@@ -459,11 +459,11 @@ export default class CorrectionCommand extends Command {
       fetchReply: true
     })) as Message<true>;
 
-    const response = (await interactionWaiter(
-      ComponentType.SelectMenu,
-      questionMessage,
-      commandInteraction.user
-    )) as SelectMenuInteraction<'cached'>;
+    const response = (await interactionWaiter({
+      component_type: ComponentType.SelectMenu,
+      message: questionMessage,
+      user: commandInteraction.user
+    })) as SelectMenuInteraction<'cached'>;
 
     if (!response) {
       questionMessage.edit(messageInfo('Les 60 secondes se sont écoulées.'));
