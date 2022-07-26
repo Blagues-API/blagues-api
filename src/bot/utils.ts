@@ -4,9 +4,9 @@ import {
   CommandInteraction,
   ComponentType,
   GuildMember,
-  Interaction,
   InteractionReplyOptions,
   Message,
+  MessageComponentInteraction,
   MessageComponentType,
   MessageOptions,
   TextChannel,
@@ -129,8 +129,10 @@ export function isGodfather(member: GuildMember): boolean {
   return member.roles.cache.has(godfatherRoleId);
 }
 
-export async function interactionWaiter(options: WaitForInteractionOptions) {
-  return new Promise<Interaction<'cached'>>((resolve, reject) => {
+export async function interactionWaiter(
+  options: WaitForInteractionOptions
+): Promise<MessageComponentInteraction<'cached'>> {
+  return new Promise<MessageComponentInteraction<'cached'>>((resolve, reject) => {
     const { component_type, message, user, idle = 60_000, deleteMessage = true } = options;
     message
       .createMessageComponentCollector({
