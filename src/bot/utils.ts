@@ -250,30 +250,30 @@ export async function waitForConfirmation(
   });
 }
 
-type declarationTemplate = {
+type DeclarationTemplate = {
   WORD: string;
   WORD_CAPITALIZED: string;
   WITH_UNDEFINED_ARTICLE: string;
   WITH_DEMONSTRATIVE_DETERMINANT: string;
 };
 
-export const Declaration = {
+export const Declaration: Record<string, DeclarationTemplate> = {
   [suggestionsChannelId]: {
     WORD: 'blague',
     WORD_CAPITALIZED: 'Blague',
     WITH_UNDEFINED_ARTICLE: 'une blague',
     WITH_DEMONSTRATIVE_DETERMINANT: 'Cette blague'
-  } as declarationTemplate,
+  },
   [correctionsChannelId]: {
     WORD: 'correction',
     WORD_CAPITALIZED: 'Correction',
     WITH_UNDEFINED_ARTICLE: 'une correction',
     WITH_DEMONSTRATIVE_DETERMINANT: 'Cette correction'
-  } as declarationTemplate,
+  },
   [reportsChannelId]: {
     WORD: 'signalement',
     WORD_CAPITALIZED: 'Signalement',
     WITH_UNDEFINED_ARTICLE: 'un signalement',
     WITH_DEMONSTRATIVE_DETERMINANT: 'Ce signalement'
-  } as declarationTemplate
+  }
 } as const;
