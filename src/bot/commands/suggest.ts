@@ -2,13 +2,12 @@ import { stripIndents } from 'common-tags';
 import {
   ApplicationCommandOptionType,
   ApplicationCommandType,
-  ButtonInteraction,
   ButtonStyle,
   ChatInputCommandInteraction,
   ComponentType,
-  MessageComponentInteraction,
   TextChannel,
-  APIEmbed
+  APIEmbed,
+  Message
 } from 'discord.js';
 import { findBestMatch } from 'string-similarity';
 import Jokes from '../../jokes';
@@ -21,7 +20,7 @@ import {
   commandsChannelId
 } from '../constants';
 import Command from '../lib/command';
-import { interactionInfo, interactionProblem, interactionValidate, isEmbedable } from '../utils';
+import { interactionInfo, interactionProblem, interactionValidate, interactionWaiter, isEmbedable } from '../utils';
 import prisma from '../../prisma';
 import { ProposalType } from '@prisma/client';
 
@@ -136,7 +135,38 @@ export default class SuggestCommand extends Command {
       });
     }
 
-    const confirmation = await this.waitForConfirmation(interaction, embed);
+    const message = (await interaction.reply({
+      content: 'Êtes-vous sûr de vouloir confirmer la proposition de cette blague ?',
+      embeds: [embed],
+      components: [
+        {
+          type: ComponentType.ActionRow,
+          components: [
+            {
+              type: ComponentType.Button,
+              label: 'Envoyer',
+              customId: 'send',
+              style: ButtonStyle.Success
+            },
+            {
+              type: ComponentType.Button,
+              label: 'Annuler',
+              customId: 'cancel',
+              style: ButtonStyle.Danger
+            }
+          ]
+        }
+      ],
+      ephemeral: true,
+      fetchReply: true
+    })) as Message<true>;
+
+    const confirmation = await interactionWaiter({
+      component_type: ComponentType.Button,
+      message: message,
+      user: interaction.user
+    });
+
     if (!confirmation) return;
 
     if (confirmation.customId === 'cancel') {
@@ -172,56 +202,5 @@ export default class SuggestCommand extends Command {
     }
 
     return confirmation.update(interactionValidate(`La [blague](${suggestion.url}) a été envoyé !`, false));
-  }
-
-  async waitForConfirmation(
-    interaction: ChatInputCommandInteraction,
-    embed: APIEmbed
-  ): Promise<ButtonInteraction | null> {
-    const message = await interaction.reply({
-      content: 'Êtes-vous sûr de vouloir confirmer la proposition de cette blague ?',
-      embeds: [embed],
-      components: [
-        {
-          type: ComponentType.ActionRow,
-          components: [
-            {
-              type: ComponentType.Button,
-              label: 'Envoyer',
-              customId: 'send',
-              style: ButtonStyle.Success
-            },
-            {
-              type: ComponentType.Button,
-              label: 'Annuler',
-              customId: 'cancel',
-              style: ButtonStyle.Danger
-            }
-          ]
-        }
-      ],
-      ephemeral: true,
-      fetchReply: true
-    });
-
-    return new Promise((resolve) => {
-      const collector = message.createMessageComponentCollector({
-        max: 1,
-        componentType: ComponentType.Button,
-        filter: (i: MessageComponentInteraction) => i.user.id === interaction.user.id,
-        time: 60_000
-      });
-      collector.once('end', async (interactions, reason) => {
-        const buttonInteraction = interactions.first();
-        if (!buttonInteraction) {
-          if (reason !== 'time') resolve(null);
-          if (message.deletable) await message.delete();
-          await interaction.reply(interactionInfo('Les 60 secondes se sont ecoulées.'));
-          return resolve(null);
-        }
-
-        return resolve(buttonInteraction);
-      });
-    });
   }
 }

@@ -6,7 +6,9 @@ import {
   GuildMember,
   InteractionReplyOptions,
   Message,
+  MessageComponentType,
   MessageOptions,
+  SelectMenuInteraction,
   TextChannel,
   User
 } from 'discord.js';
@@ -16,6 +18,17 @@ import { godfatherRoleId } from './constants';
 
 type UniversalInteractionOptions = Omit<InteractionReplyOptions, 'flags'>;
 type UniversalMessageOptions = Omit<MessageOptions, 'flags'>;
+
+type WaitForInteractionOptions<T extends MessageComponentType> = {
+  component_type: T;
+  message: Message<true>;
+  user: User;
+  idle?: number;
+  deleteMessage?: boolean;
+};
+type WaitForInteraction<T> = T extends WaitForInteractionOptions<ComponentType.Button>
+  ? ButtonInteraction<'cached'>
+  : SelectMenuInteraction<'cached'>;
 
 export function problem(message: string): APIEmbed {
   return {
@@ -120,23 +133,24 @@ export function isGodfather(member: GuildMember): boolean {
   return member.roles.cache.has(godfatherRoleId);
 }
 
-export async function interactionWaiter(message: Message<true>, user: User) {
-  return new Promise<ButtonInteraction<'cached'>>((resolve, reject) => {
-    const collector = message
+export async function interactionWaiter<T extends WaitForInteractionOptions<MessageComponentType>>(options: T) {
+  return new Promise<WaitForInteraction<T>>((resolve, reject) => {
+    const { component_type, message, user, idle = 60_000, deleteMessage = true } = options;
+    message
       .createMessageComponentCollector({
-        componentType: ComponentType.Button,
-        idle: 60_000
+        componentType: component_type,
+        idle: idle
       })
-      .on('collect', async (interaction) => {
+      .on('collect', async (interaction: WaitForInteraction<T>) => {
+        if (deleteMessage && message.deletable) await message.delete();
         if (interaction.user.id !== user.id) {
           await interaction.reply(interactionInfo("Vous n'êtes pas autorisé à interagir avec ce message."));
           return;
         }
-        collector.stop('finish');
         resolve(interaction);
       })
       .once('end', (_interactions, reason) => {
-        if (reason !== 'finish') reject(reason);
+        if (reason !== 'idle') reject(reason);
       });
   });
 }
@@ -170,7 +184,12 @@ export async function paginate(
   if (pages.length <= 1) return;
 
   try {
-    const buttonInteraction = await interactionWaiter(message, interaction.user);
+    const buttonInteraction = await interactionWaiter({
+      component_type: ComponentType.Button,
+      message: message,
+      user: interaction.user
+    });
+
     if (!buttonInteraction) return;
 
     switch (buttonInteraction.customId) {

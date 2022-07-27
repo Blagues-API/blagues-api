@@ -6,7 +6,6 @@ import {
   ButtonStyle,
   ChatInputCommandInteraction,
   ComponentType,
-  Interaction,
   Message,
   TextChannel
 } from 'discord.js';
@@ -35,7 +34,8 @@ import {
   showNegativeDiffs,
   showPositiveDiffs,
   tDelete,
-  info
+  info,
+  interactionWaiter
 } from '../utils';
 
 enum IdType {
@@ -187,13 +187,12 @@ export default class CorrectionCommand extends Command {
       fetchReply: true
     })) as Message<true>;
 
-    const buttonInteraction = await question
-      .awaitMessageComponent({
-        filter: (i: Interaction) => i.user.id === commandInteraction.user.id,
-        componentType: ComponentType.Button,
-        time: 120_000
-      })
-      .catch(() => null);
+    const buttonInteraction = await interactionWaiter({
+      component_type: ComponentType.Button,
+      message: question,
+      user: commandInteraction.user,
+      idle: 120_000
+    });
 
     if (!buttonInteraction) {
       await commandInteraction.editReply(interactionInfo('Les 2 minutes se sont écoulées.'));
@@ -375,7 +374,7 @@ export default class CorrectionCommand extends Command {
   }
 
   async requestTextChange(
-    buttonInteraction: ButtonInteraction,
+    buttonInteraction: ButtonInteraction<'cached'>,
     commandInteraction: ChatInputCommandInteraction,
     joke: JokeCorrectionPayload,
     textReplyContent: string,
@@ -429,7 +428,7 @@ export default class CorrectionCommand extends Command {
     joke: JokeCorrectionPayload
   ): Promise<JokeCorrectionPayload | null> {
     const baseEmbed = buttonInteraction.message.embeds[0].toJSON();
-    const questionMessage = await buttonInteraction.update({
+    const questionMessage = (await buttonInteraction.update({
       embeds: [
         baseEmbed,
         {
@@ -457,15 +456,13 @@ export default class CorrectionCommand extends Command {
         }
       ],
       fetchReply: true
-    });
+    })) as Message<true>;
 
-    const response = await questionMessage
-      .awaitMessageComponent({
-        filter: (i: Interaction) => i.user.id === commandInteraction.user.id,
-        componentType: ComponentType.SelectMenu,
-        time: 60_000
-      })
-      .catch(() => null);
+    const response = await interactionWaiter({
+      component_type: ComponentType.SelectMenu,
+      message: questionMessage,
+      user: commandInteraction.user
+    });
 
     if (!response) {
       questionMessage.edit(messageInfo('Les 60 secondes se sont écoulées.'));
