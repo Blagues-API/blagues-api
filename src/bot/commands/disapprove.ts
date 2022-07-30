@@ -44,7 +44,7 @@ export default class DisapproveCommand extends Command {
     if (![suggestionsChannelId, correctionsChannelId].includes(channel.id)) {
       return interaction.reply(
         interactionProblem(
-          `Vous ne pouvez pas désapprouver une blague ou une correction en dehors des salons <#${suggestionsChannelId}> et <#${correctionsChannelId}>.`
+          `Vous ne pouvez pas désapprouver une suggestion ou une correction en dehors des salons <#${suggestionsChannelId}> et <#${correctionsChannelId}>.`
         )
       );
     }
@@ -52,7 +52,7 @@ export default class DisapproveCommand extends Command {
       return interaction.reply(
         interactionProblem(
           `Vous ne pouvez pas désapprouver une ${
-            isSuggestionChannel ? 'blague' : 'correction'
+            isSuggestionChannel ? 'suggestion' : 'correction'
           } qui n'est pas gérée par ${interaction.client.user}.`
         )
       );
@@ -61,7 +61,7 @@ export default class DisapproveCommand extends Command {
     if (!isGodfather(interaction.member)) {
       return interaction.reply(
         interactionProblem(
-          `Seul un <@${godfatherRoleId}> peut désapprouver une ${isSuggestionChannel ? 'blague' : 'correction'}.`
+          `Seul un <@${godfatherRoleId}> peut désapprouver une ${isSuggestionChannel ? 'suggestion' : 'correction'}.`
         )
       );
     }
@@ -126,13 +126,13 @@ export default class DisapproveCommand extends Command {
 
     if (proposal.merged) {
       return interaction.reply(
-        interactionProblem(`Cette ${isSuggestion ? 'blague' : 'correction'} a déjà été ajoutée.`)
+        interactionProblem(`Cette ${isSuggestion ? 'suggestion' : 'correction'} a déjà été ajoutée.`)
       );
     }
 
     if (proposal.refused) {
       return interaction.reply(
-        interactionProblem(`Cette ${isSuggestion ? 'blague' : 'correction'} a déjà été refusée.`)
+        interactionProblem(`Cette ${isSuggestion ? 'suggestion' : 'correction'} a déjà été refusée.`)
       );
     }
 

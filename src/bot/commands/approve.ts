@@ -47,16 +47,16 @@ export default class ApproveCommand extends Command {
   async run(interaction: MessageContextMenuCommandInteraction<'cached'>) {
     const channel = (interaction.channel as TextChannel)!;
 
-    const message = await interaction.channel?.messages.fetch(interaction.targetId);
-    if (!message) return;
-
     if (![suggestionsChannelId, correctionsChannelId].includes(channel.id)) {
       return interaction.reply(
         interactionProblem(
-          `Vous ne pouvez pas approuver une blague ou une correction en dehors des salons <#${suggestionsChannelId}> et <#${correctionsChannelId}>.`
+          `Vous ne pouvez pas approuver une suggestion ou une correction en dehors des salons <#${suggestionsChannelId}> et <#${correctionsChannelId}>.`
         )
       );
     }
+
+    const message = await interaction.channel?.messages.fetch(interaction.targetId);
+    if (!message) return;
 
     const isSuggestionChannel = channel.id === suggestionsChannelId;
 
@@ -484,7 +484,9 @@ export default class ApproveCommand extends Command {
       });
     }
     await interaction.editReply(
-      interactionValidate(`La [correction](${message.url}) a bien été migrée vers la blague !`)
+      interactionValidate(
+        `La [correction](${message.url}) a bien été migrée vers la ${isPublishedJoke ? 'blague' : 'suggestion'}!`
+      )
     );
 
     if (
