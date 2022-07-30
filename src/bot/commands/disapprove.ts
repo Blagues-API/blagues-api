@@ -272,7 +272,7 @@ export default class DisapproveCommand extends Command {
 
     if (isEmbedable(logsChannel)) {
       await logsChannel.send({
-        content: `${isSuggestion ? 'Blague' : 'Suggestion'} refusée`,
+        content: `${isSuggestion ? 'Suggestion' : 'Correction'} refusée`,
         embeds: [embed]
       });
     }

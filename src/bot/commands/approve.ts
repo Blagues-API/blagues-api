@@ -63,9 +63,9 @@ export default class ApproveCommand extends Command {
     if (message.author.id !== interaction.client.user!.id) {
       return interaction.reply(
         interactionProblem(
-          `Vous ne pouvez pas approuver une ${isSuggestionChannel ? 'blague' : 'correction'} qui n'est pas gérée par ${
-            interaction.client.user
-          }.`
+          `Vous ne pouvez pas approuver une ${
+            isSuggestionChannel ? 'suggestion' : 'correction'
+          } qui n'est pas gérée par ${interaction.client.user}.`
         )
       );
     }
@@ -73,7 +73,7 @@ export default class ApproveCommand extends Command {
     if (!isGodfather(interaction.member)) {
       return interaction.reply(
         interactionProblem(
-          `Seul un <@&${godfatherRoleId}> peut approuver une ${isSuggestionChannel ? 'blague' : 'correction'}.`
+          `Seul un <@&${godfatherRoleId}> peut approuver une ${isSuggestionChannel ? 'suggestion' : 'correction'}.`
         )
       );
     }
@@ -138,14 +138,14 @@ export default class ApproveCommand extends Command {
 
     if (proposal.user_id === interaction.user.id) {
       return interaction.reply(
-        interactionProblem(`Vous ne pouvez pas approuver votre propre ${isSuggestion ? 'blague' : 'correction'}.`)
+        interactionProblem(`Vous ne pouvez pas approuver votre propre ${isSuggestion ? 'suggestion' : 'correction'}.`)
       );
     }
 
     if (proposal.merged) {
       if (!embed.footer) {
         embed.color = Colors.ACCEPTED;
-        embed.footer = { text: `${isSuggestion ? 'Blague' : 'Correction'} déjà traitée` };
+        embed.footer = { text: `${isSuggestion ? 'Suggestion' : 'Correction'} déjà traitée` };
 
         const field = embed.fields?.[embed.fields.length - 1];
         if (field) {
@@ -158,7 +158,7 @@ export default class ApproveCommand extends Command {
       }
 
       return interaction.reply(
-        interactionProblem(`Cette ${isSuggestion ? 'blague' : 'correction'} a déjà été ajoutée.`)
+        interactionProblem(`Cette ${isSuggestion ? 'suggestion' : 'correction'} a déjà été ajoutée.`)
       );
     }
 
@@ -178,7 +178,7 @@ export default class ApproveCommand extends Command {
       }
 
       return interaction.reply(
-        interactionProblem(`Cette ${isSuggestion ? 'blague' : 'correction'} a déjà été refusée.`)
+        interactionProblem(`Cette ${isSuggestion ? 'suggestion' : 'correction'} a déjà été refusée.`)
       );
     }
 
