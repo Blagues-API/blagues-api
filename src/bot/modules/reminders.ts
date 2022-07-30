@@ -89,13 +89,11 @@ export default class Reminders {
       godfatherRole.members.map((member) => getGodfatherEmoji(emojisGuild, member))
     );
 
-    const proposals_sort = proposals.sort(
-      (a, b) => a.approvals.length + a.disapprovals.length - (b.approvals.length + b.disapprovals.length)
-    );
+    proposals.sort((a, b) => a.approvals.length + a.disapprovals.length - (b.approvals.length + b.disapprovals.length));
 
     // Remap proposals with godfathers acceptable decisions
     const entries: Array<{ proposal: ReminderProposal; members_ids: Snowflake[] }> = [];
-    for (const proposal of proposals_sort) {
+    for (const proposal of proposals) {
       if (proposal.type === ProposalType.SUGGESTION) {
         if (proposal.corrections[0]) continue;
       } else {
@@ -264,12 +262,11 @@ export default class Reminders {
     const godfatherRole = guild.roles.cache.get(godfatherRoleId);
     if (!godfatherRole) return;
 
-    const proposals_sort = proposals.sort(
-      (a, b) => a.approvals.length + a.disapprovals.length - (b.approvals.length + b.disapprovals.length)
-    );
+    proposals.sort((a, b) => a.approvals.length + a.disapprovals.length - (b.approvals.length + b.disapprovals.length));
+
     // Remap proposals with godfathers acceptable decisions
     const entries: Array<{ proposal: ReminderProposal; members_ids: Snowflake[] }> = [];
-    for (const proposal of proposals_sort) {
+    for (const proposal of proposals) {
       if (proposal.type === ProposalType.SUGGESTION) {
         if (proposal.corrections[0]) continue;
       } else {

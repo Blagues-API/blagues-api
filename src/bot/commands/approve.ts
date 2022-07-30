@@ -19,8 +19,8 @@ import {
   logsChannelId,
   jokerRoleId,
   correctorRoleId,
-  upReaction,
-  downReaction,
+  upReactionIdentifier,
+  downReactionIdentifier,
   dataSplitRegex,
   godfatherRoleId,
   reportsChannelId
@@ -33,8 +33,8 @@ import {
   interactionValidate,
   isEmbedable,
   messageLink,
-  isParrain,
-  Declaration
+  Declaration,
+  isGodfather
 } from '../utils';
 import Jokes from '../../jokes';
 import { compareTwoStrings } from 'string-similarity';
@@ -71,7 +71,7 @@ export default class ApproveCommand extends Command {
       );
     }
 
-    if (!isParrain(interaction.member)) {
+    if (!isGodfather(interaction.member)) {
       return interaction.reply(
         interactionProblem(
           `Seul un <@&${godfatherRoleId}> peut approuver ${Declaration[channel.id].WITH_UNDEFINED_ARTICLE}.`
@@ -132,7 +132,8 @@ export default class ApproveCommand extends Command {
           }
         },
         approvals: true,
-        disapprovals: true
+        disapprovals: true,
+        votes: true
       }
     })) as Proposals | null;
 
@@ -253,7 +254,7 @@ export default class ApproveCommand extends Command {
 
       await message.edit({ embeds: [embed] });
 
-      return interaction.reply(interactionInfo(`Votre approbation a bien été retirée.`));
+      return interaction.reply(interactionInfo(`Votre [approbation](${message.url}) a bien été retirée.`));
     }
 
     const disapprovalIndex = proposal.disapprovals.findIndex(
@@ -311,6 +312,8 @@ export default class ApproveCommand extends Command {
       embed.description = [base, correction, godfathers].filter(Boolean).join('\n\n');
     }
 
+    await interaction.client.votes.deleteUserVotes(message, interaction.user.id);
+
     if (proposal.approvals.length < neededApprovalsCount) {
       await message.edit({ embeds: [embed] });
 
@@ -363,7 +366,7 @@ export default class ApproveCommand extends Command {
   ): Promise<void> {
     const logsChannel = interaction.client.channels.cache.get(logsChannelId) as TextChannel;
 
-    const member = await interaction.guild?.members.fetch(proposal.user_id!).catch(() => null);
+    const member = await interaction.guild?.members.fetch(proposal.user_id!);
     if (member && !member.roles.cache.has(jokerRoleId)) {
       await member.roles.add(jokerRoleId);
     }
@@ -475,7 +478,7 @@ export default class ApproveCommand extends Command {
     proposal: Correction,
     message: Message,
     embed: APIEmbed
-  ) {
+  ): Promise<void> {
     const logsChannel = interaction.client.channels.cache.get(logsChannelId) as TextChannel;
     const suggestionsChannel = interaction.client.channels.cache.get(suggestionsChannelId) as TextChannel;
     const isPublishedJoke = proposal.type === ProposalType.CORRECTION;
@@ -502,7 +505,7 @@ export default class ApproveCommand extends Command {
       );
       if (diff > 0.5) {
         await suggestionMessage.reactions.removeAll();
-        for (const reaction of [upReaction, downReaction]) {
+        for (const reaction of [upReactionIdentifier, downReactionIdentifier]) {
           await suggestionMessage.react(reaction).catch(() => null);
         }
       }
@@ -581,6 +584,18 @@ export default class ApproveCommand extends Command {
       interactionValidate(`La [correction](${message.url}) a bien été migrée vers la blague !`)
     );
 
-    return suggestionMessage;
+    if (
+      suggestionMessage &&
+      proposal.suggestion &&
+      proposal.suggestion.approvals.length >= neededSuggestionsApprovals
+    ) {
+      await this.approveSuggestion(
+        interaction,
+        proposal.suggestion as Suggestion,
+        suggestionMessage,
+        suggestionMessage.embeds[0].toJSON(),
+        true
+      );
+    }
   }
 }

@@ -2,16 +2,25 @@ import { stripIndents } from 'common-tags';
 import {
   ApplicationCommandOptionType,
   ApplicationCommandType,
+  ButtonStyle,
+  ComponentType,
   ChatInputCommandInteraction,
   TextChannel,
-  APIEmbed
+  APIEmbed,
+  Message
 } from 'discord.js';
 import { findBestMatch } from 'string-similarity';
 import Jokes from '../../jokes';
 import { Category, CategoriesRefs, UnsignedJoke } from '../../typings';
-import { Colors, suggestionsChannelId, upReaction, downReaction, commandsChannelId } from '../constants';
+import {
+  Colors,
+  suggestionsChannelId,
+  upReactionIdentifier,
+  downReactionIdentifier,
+  commandsChannelId
+} from '../constants';
 import Command from '../lib/command';
-import { interactionInfo, interactionProblem, interactionValidate, isEmbedable, waitForConfirmation } from '../utils';
+import { interactionInfo, interactionProblem, interactionValidate, interactionWaiter, isEmbedable } from '../utils';
 import prisma from '../../prisma';
 import { ProposalType } from '@prisma/client';
 
@@ -36,13 +45,15 @@ export default class SuggestCommand extends Command {
           type: ApplicationCommandOptionType.String,
           name: 'joke',
           description: 'Contenue de la blague',
-          required: true
+          required: true,
+          max_length: 130
         },
         {
           type: ApplicationCommandOptionType.String,
           name: 'response',
           description: 'Réponse de la blague',
-          required: true
+          required: true,
+          max_length: 130
         }
       ]
     });
@@ -53,14 +64,6 @@ export default class SuggestCommand extends Command {
       return interaction.reply(
         interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannelId}>.`)
       );
-    }
-
-    if (
-      interaction.options.getString('joke', true).length > 130 ||
-      interaction.options.getString('response', true).length > 130
-    ) {
-      interaction.reply(interactionProblem("Chaque partie d'une blague ne peut pas dépasser les 130 caractères !"));
-      return;
     }
 
     const proposals = await prisma.proposal.findMany({
@@ -132,7 +135,38 @@ export default class SuggestCommand extends Command {
       });
     }
 
-    const confirmation = await waitForConfirmation(interaction, embed, 'suggestion');
+    const message = (await interaction.reply({
+      content: 'Êtes-vous sûr de vouloir confirmer la proposition de cette blague ?',
+      embeds: [embed],
+      components: [
+        {
+          type: ComponentType.ActionRow,
+          components: [
+            {
+              type: ComponentType.Button,
+              label: 'Envoyer',
+              customId: 'send',
+              style: ButtonStyle.Success
+            },
+            {
+              type: ComponentType.Button,
+              label: 'Annuler',
+              customId: 'cancel',
+              style: ButtonStyle.Danger
+            }
+          ]
+        }
+      ],
+      ephemeral: true,
+      fetchReply: true
+    })) as Message<true>;
+
+    const confirmation = await interactionWaiter({
+      component_type: ComponentType.Button,
+      message: message,
+      user: interaction.user
+    });
+
     if (!confirmation) return;
 
     if (confirmation.customId === 'cancel') {
@@ -163,7 +197,7 @@ export default class SuggestCommand extends Command {
       }
     });
 
-    for (const reaction of [upReaction, downReaction]) {
+    for (const reaction of [upReactionIdentifier, downReactionIdentifier]) {
       await suggestion.react(reaction).catch(() => null);
     }
 

@@ -6,7 +6,6 @@ import {
   ButtonStyle,
   ChatInputCommandInteraction,
   ComponentType,
-  Interaction,
   Message,
   TextChannel
 } from 'discord.js';
@@ -17,9 +16,9 @@ import {
   commandsChannelId,
   correctionsChannelId,
   dataSplitRegex,
-  downReaction,
+  downReactionIdentifier,
   suggestionsChannelId,
-  upReaction
+  upReactionIdentifier
 } from '../constants';
 import Command from '../lib/command';
 import clone from 'lodash/clone';
@@ -35,6 +34,7 @@ import {
   info,
   messageProblem,
   tDelete,
+  interactionWaiter
 } from '../utils';
 import { jokeById, jokeByQuestion } from '../../controllers';
 
@@ -112,7 +112,7 @@ export default class CorrectionCommand extends Command {
         idle: 60_000
       });
       collector.on('collect', async (msg: Message) => {
-        if (msg.deletable) setInterval(() => msg.delete().catch(() => null), 5000);
+        if (msg.deletable) await msg.delete();
         const joke = await this.findJoke(interaction, msg.content);
 
         if (joke) {
@@ -187,13 +187,12 @@ export default class CorrectionCommand extends Command {
       fetchReply: true
     })) as Message<true>;
 
-    const buttonInteraction = await question
-      .awaitMessageComponent({
-        filter: (i: Interaction) => i.user.id === commandInteraction.user.id,
-        componentType: ComponentType.Button,
-        time: 120_000
-      })
-      .catch(() => null);
+    const buttonInteraction = await interactionWaiter({
+      component_type: ComponentType.Button,
+      message: question,
+      user: commandInteraction.user,
+      idle: 120_000
+    });
 
     if (!buttonInteraction) {
       await commandInteraction.editReply(interactionInfo('Les 2 minutes se sont écoulées.'));
@@ -241,7 +240,7 @@ export default class CorrectionCommand extends Command {
   }
 
   async requestTextChange(
-    buttonInteraction: ButtonInteraction,
+    buttonInteraction: ButtonInteraction<'cached'>,
     commandInteraction: ChatInputCommandInteraction,
     joke: JokeCorrectionPayload,
     textReplyContent: string,
@@ -260,27 +259,33 @@ export default class CorrectionCommand extends Command {
       components: []
     });
 
-    const messages = await commandInteraction
-      .channel!.awaitMessages({
+    return new Promise((resolve) => {
+      const collector = commandInteraction.channel!.createMessageCollector({
         filter: (m: Message) => m.author.id === commandInteraction.user.id,
-        time: 60_000,
-        max: 1
-      })
-      .catch(() => null);
+        idle: 60_000
+      });
+      collector.on('collect', async (msg: Message) => {
+        if (msg.deletable) await msg.delete();
 
-    // TODO: Vérifier la taille comme pour les suggestions
-
-    const msg = messages?.first();
-    if (!msg) {
-      await buttonInteraction.editReply(interactionInfo('Les 60 secondes se sont écoulées.', false));
-      return null;
-    }
-
-    if (msg.deletable) await msg.delete();
-
-    joke[textReplyContent === 'question' ? 'joke' : 'answer'] = msg.content.replace(/\n/g, ' ');
-
-    return joke;
+        if (msg.content.length > 130) {
+          commandInteraction
+            .channel!.send(
+              interactionProblem(`La ${textReplyContent} d'une blague ne peut pas dépasser 130 caractères.`)
+            )
+            .then(tDelete(5_000));
+        } else {
+          joke[textReplyContent === 'question' ? 'joke' : 'answer'] = msg.content.replace(/\n/g, ' ');
+          collector.stop();
+          return resolve(joke);
+        }
+      });
+      collector.once('end', async (_collected, reason: string) => {
+        if (reason === 'idle') {
+          await commandInteraction.editReply(interactionInfo('Les 60 secondes se sont écoulées.'));
+          return resolve(null);
+        }
+      });
+    });
   }
 
   async requestTypeChange(
@@ -289,7 +294,7 @@ export default class CorrectionCommand extends Command {
     joke: JokeCorrectionPayload
   ): Promise<JokeCorrectionPayload | null> {
     const baseEmbed = buttonInteraction.message.embeds[0].toJSON();
-    const questionMessage = await buttonInteraction.update({
+    const questionMessage = (await buttonInteraction.update({
       embeds: [
         baseEmbed,
         {
@@ -317,15 +322,13 @@ export default class CorrectionCommand extends Command {
         }
       ],
       fetchReply: true
-    });
+    })) as Message<true>;
 
-    const response = await questionMessage
-      .awaitMessageComponent({
-        filter: (i: Interaction) => i.user.id === commandInteraction.user.id,
-        componentType: ComponentType.SelectMenu,
-        time: 60_000
-      })
-      .catch(() => null);
+    const response = await interactionWaiter({
+      component_type: ComponentType.SelectMenu,
+      message: questionMessage,
+      user: commandInteraction.user
+    });
 
     if (!response) {
       questionMessage.edit(messageInfo('Les 60 secondes se sont écoulées.'));
@@ -429,7 +432,7 @@ export default class CorrectionCommand extends Command {
       interactionValidate(`Votre [proposition de correction](${message.url}) a bien été envoyée !`)
     );
 
-    for (const reaction of [upReaction, downReaction]) {
+    for (const reaction of [upReactionIdentifier, downReactionIdentifier]) {
       await message.react(reaction).catch(() => null);
     }
   }
