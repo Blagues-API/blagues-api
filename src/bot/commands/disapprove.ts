@@ -26,7 +26,7 @@ import {
   interactionProblem,
   interactionValidate,
   isEmbedable,
-  isParrain,
+  isGodfather,
   messageLink,
   Declaration
 } from '../utils';
@@ -60,7 +60,7 @@ export default class DisapproveCommand extends Command {
       );
     }
 
-    if (!isParrain(interaction.member)) {
+    if (!isGodfather(interaction.member)) {
       return interaction.reply(
         interactionProblem(
           `Seul un <@${godfatherRoleId}> peut désapprouver ${Declaration[channel.id].WITH_UNDEFINED_ARTICLE}.`
@@ -212,7 +212,7 @@ export default class DisapproveCommand extends Command {
 
       await message.edit({ embeds: [embed] });
 
-      return interaction.reply(interactionInfo(`Votre désapprobation a bien été retirée.`));
+      return interaction.reply(interactionInfo(`Votre [désapprobation](${message.url}) a bien été retirée.`));
     }
 
     const approvalIndex = proposal.approvals.findIndex((approval) => approval.user_id === interaction.user.id);
@@ -263,6 +263,8 @@ export default class DisapproveCommand extends Command {
       const { base, correction } = embed.description!.match(dataSplitRegex)!.groups!;
       embed.description = [base, correction, godfathers].filter(Boolean).join('\n\n');
     }
+
+    await interaction.client.votes.deleteUserVotes(message, interaction.user.id);
 
     if (proposal.disapprovals.length < neededApprovalsCount) {
       await message.edit({ embeds: [embed] });

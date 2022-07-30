@@ -1,4 +1,4 @@
-import { AnyInteraction, Guild, GuildMember, Snowflake } from 'discord.js';
+import { Guild, GuildMember, Interaction, Snowflake } from 'discord.js';
 import prisma from '../../prisma';
 import sharp from 'sharp';
 import got from 'got';
@@ -18,11 +18,7 @@ export async function getGodfatherEmoji(emojisGuild: Guild, member: GuildMember)
     where: { user_id: member.id }
   });
   if (!godfather) {
-    const memberAvatar = member.displayAvatarURL({ size: 128, forceStatic: true, extension: 'png' });
-    const bufferAvatar = await got(memberAvatar).buffer();
-    const bufferEmoji = await sharp(bufferAvatar)
-      .composite([{ input: rect, blend: 'dest-in' }])
-      .toBuffer();
+    const bufferEmoji = await generateEmoji(member);
     const emoji = await emojisGuild.emojis.create({ name: snakeCase(member.displayName), attachment: bufferEmoji });
     godfather = await prisma.godfather.create({
       data: {
@@ -38,7 +34,7 @@ export async function getGodfatherEmoji(emojisGuild: Guild, member: GuildMember)
   return { id: member.id, emoji: `<:vote:${godfather.emoji_id}>` };
 }
 
-export async function renderGodfatherLine(interaction: AnyInteraction<'cached'>, proposal: ProposalExtended) {
+export async function renderGodfatherLine(interaction: Interaction<'cached'>, proposal: ProposalExtended) {
   const emojisGuild = interaction.client.guilds.cache.get(emojisGuildId)!;
   const approvalsIds = proposal.approvals.map((approval) => approval.user_id);
   const disapprovalsIds = proposal.disapprovals.map((disapproval) => disapproval.user_id);
@@ -96,8 +92,7 @@ export async function updateGodfatherEmoji(member: GuildMember) {
 async function generateEmoji(member: GuildMember) {
   const memberAvatar = member.displayAvatarURL({ size: 128, forceStatic: true, extension: 'png' });
   const bufferAvatar = await got(memberAvatar).buffer();
-  const bufferEmoji = await sharp(bufferAvatar)
+  return sharp(bufferAvatar)
     .composite([{ input: rect, blend: 'dest-in' }])
     .toBuffer();
-  return bufferEmoji;
 }
