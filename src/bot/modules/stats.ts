@@ -101,11 +101,15 @@ export default class Stats {
           Décisions totales: **${totalDecisions}**
           Suggestions: **${suggestions.length}**
           Corrections: **${corrections.length}**
-          Ratio: **${
-            approvalsRatio >= disapprovalsRatio
-              ? `${approveEmoji} ${approvalsRatio}%`
-              : `${disapproveEmoji} ${disapprovalsRatio}%`
-          }**
+          ${
+            totalDecisions > 0
+              ? `Ratio: **${
+                  approvalsRatio >= disapprovalsRatio
+                    ? `${approveEmoji} ${approvalsRatio}%`
+                    : `${disapproveEmoji} ${disapprovalsRatio}%`
+                }**`
+              : ``
+          }
         `,
         inline: false
       });
