@@ -34,7 +34,7 @@ export default class SuggestCommand extends Command {
         {
           type: ApplicationCommandOptionType.String,
           name: 'type',
-          description: 'Général, Développeur, Noir, +18, Beauf, Blondes',
+          description: 'Type de la blague',
           required: true,
           choices: Object.entries(CategoriesRefs).map(([key, name]) => ({
             name,
