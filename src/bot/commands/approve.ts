@@ -333,17 +333,7 @@ export default class ApproveCommand extends Command {
           break;
         }
         case ProposalType.CORRECTION: {
-          const suggestion = await this.approveCorrection(interaction, proposal, message, embed);
-
-          if (suggestion && proposal.suggestion && proposal.suggestion.approvals.length >= neededSuggestionsApprovals) {
-            await this.approveSuggestion(
-              interaction,
-              proposal.suggestion as Suggestion,
-              suggestion,
-              suggestion.embeds[0].toJSON(),
-              true
-            );
-          }
+          await this.approveCorrection(interaction, proposal, message, embed);
           break;
         }
       }
