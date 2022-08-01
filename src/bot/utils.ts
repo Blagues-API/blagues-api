@@ -7,20 +7,31 @@ import {
   GuildMember,
   InteractionReplyOptions,
   Message,
+  MessageComponentInteraction,
+  MessageComponentType,
   MessageOptions,
+  SelectMenuInteraction,
   TextChannel,
   User
 } from 'discord.js';
 import { diffWords } from 'diff';
 import { APIEmbed } from 'discord-api-types/v10';
 import { godfatherRoleId } from './constants';
-import prisma from '../prisma';
-import { Category, UnsignedJoke } from 'typings';
-import { ProposalType } from '@prisma/client';
-import { jokeById, jokeByQuestion } from '../controllers';
+import { suggestionsChannelId, correctionsChannelId, reportsChannelId } from './constants';
 
 type UniversalInteractionOptions = Omit<InteractionReplyOptions, 'flags'>;
 type UniversalMessageOptions = Omit<MessageOptions, 'flags'>;
+
+type WaitForInteractionOptions<T extends MessageComponentType> = {
+  component_type: T;
+  message: Message<true>;
+  user: User;
+  idle?: number;
+  deleteMessage?: boolean;
+};
+type WaitForInteraction<T> = T extends WaitForInteractionOptions<ComponentType.Button>
+  ? ButtonInteraction<'cached'>
+  : SelectMenuInteraction<'cached'>;
 
 export function problem(message: string): APIEmbed {
   return {
@@ -108,40 +119,41 @@ export function showNegativeDiffs(oldValue: string, newValue: string): string {
     .join('');
 }
 
-export function isEmbedable(channel: TextChannel) {
+export function isEmbedable(channel: TextChannel): boolean {
   const permissions = channel.permissionsFor(channel.guild.members.me!);
   return permissions?.has(['ViewChannel', 'SendMessages', 'EmbedLinks']);
 }
 
-export function tDelete(timeout = 6000) {
+export function tDelete(timeout = 6000): (message: Message) => NodeJS.Timeout {
   return (message: Message) => setTimeout(() => message.deletable && message.delete().catch(() => null), timeout);
 }
 
-export function messageLink(guildId: string, channelId: string, messageId: string) {
+export function messageLink(guildId: string, channelId: string, messageId: string): string {
   return `https://discord.com/channels/${guildId}/${channelId}/${messageId}`;
 }
 
-export function isParrain(member: GuildMember) {
+export function isGodfather(member: GuildMember): boolean {
   return member.roles.cache.has(godfatherRoleId);
 }
 
-export async function interactionWaiter(message: Message<true>, user: User) {
-  return new Promise<ButtonInteraction<'cached'>>((resolve, reject) => {
-    const collector = message
+export async function interactionWaiter<T extends WaitForInteractionOptions<MessageComponentType>>(options: T) {
+  return new Promise<WaitForInteraction<T>>((resolve, reject) => {
+    const { component_type, message, user, idle = 60_000, deleteMessage = true } = options;
+    message
       .createMessageComponentCollector({
-        componentType: ComponentType.Button,
-        idle: 60_000
+        componentType: component_type,
+        idle: idle
       })
-      .on('collect', async (interaction) => {
+      .on('collect', async (interaction: WaitForInteraction<T>) => {
+        if (deleteMessage && message.deletable) await message.delete();
         if (interaction.user.id !== user.id) {
           await interaction.reply(interactionInfo("Vous n'êtes pas autorisé à interagir avec ce message."));
           return;
         }
-        collector.stop('finish');
         resolve(interaction);
       })
       .once('end', (_interactions, reason) => {
-        if (reason !== 'finish') reject(reason);
+        if (reason !== 'idle') reject(reason);
       });
   });
 }
@@ -175,7 +187,12 @@ export async function paginate(
   if (pages.length <= 1) return;
 
   try {
-    const buttonInteraction = await interactionWaiter(message, interaction.user);
+    const buttonInteraction = await interactionWaiter({
+      component_type: ComponentType.Button,
+      message: message,
+      user: interaction.user
+    });
+
     if (!buttonInteraction) return;
 
     switch (buttonInteraction.customId) {
@@ -198,151 +215,84 @@ export async function paginate(
   return paginate(interaction, embed, pages, page, message);
 }
 
-enum IdType {
-  MESSAGE_ID,
-  JOKE_ID,
-  MESSAGE_QUESTION
-}
-
-export interface JokeCorrectionPayload extends UnsignedJoke {
-  id?: number;
-  correction_type: ProposalType;
-  suggestion: UnsignedJoke & {
-    message_id: string | null;
-    proposal_id: number;
-  };
-}
-
-function getIdType(query: string): IdType {
-  if (isNaN(Number(query))) {
-    return IdType.MESSAGE_QUESTION;
-  }
-  if (query.length > 6) {
-    return IdType.MESSAGE_ID;
-  }
-  return IdType.JOKE_ID;
-}
-
-export async function findJoke(
-  interaction: ChatInputCommandInteraction<'cached'>,
-  query: string
-): Promise<JokeCorrectionPayload | null> {
-  const idType = getIdType(query);
-  if (idType === IdType.MESSAGE_ID) {
-    const proposal = await prisma.proposal.findUnique({
-      where: {
-        message_id: query
-      },
-      include: {
-        corrections: {
-          take: 1,
-          orderBy: {
-            created_at: 'desc'
+export async function waitForConfirmation(
+  interaction: ChatInputCommandInteraction,
+  embed: APIEmbed,
+  sendType: string
+): Promise<ButtonInteraction | null> {
+  const message = await interaction.reply({
+    content: `Êtes-vous sûr de vouloir confirmer la proposition de ce${
+      sendType === 'report' ? ' signalement' : 'tte blague'
+    } ?`,
+    embeds: [embed],
+    components: [
+      {
+        type: ComponentType.ActionRow,
+        components: [
+          {
+            type: ComponentType.Button,
+            label: 'Envoyer',
+            customId: 'send',
+            style: ButtonStyle.Success
           },
-          where: {
-            merged: false,
-            refused: false
+          {
+            type: ComponentType.Button,
+            label: 'Annuler',
+            customId: 'cancel',
+            style: ButtonStyle.Danger
           }
-        },
-        suggestion: {
-          include: {
-            corrections: {
-              take: 1,
-              orderBy: {
-                created_at: 'desc'
-              },
-              where: {
-                merged: false,
-                refused: false
-              }
-            }
-          }
-        }
+        ]
       }
-    });
-    if (!proposal) {
-      interaction.channel
-        ?.send(
-          messageProblem(
-            `Impossible de trouver une blague ou correction liée à cet ID de blague, assurez vous que cet ID provient bien d'un message envoyé par le bot ${interaction.client.user}`
-          )
-        )
-        .then(tDelete(5000));
-      return null;
-    }
-
-    const origin = proposal.type === ProposalType.SUGGESTION ? proposal : proposal.suggestion!;
-
-    return {
-      id: proposal.joke_id ?? undefined,
-      type: (origin.corrections[0]?.joke_type ?? origin.joke_type) as Category,
-      joke: (origin.corrections[0]?.joke_question ?? origin.joke_question)!,
-      answer: (origin.corrections[0]?.joke_answer ?? origin.joke_answer)!,
-      correction_type: origin.merged ? ProposalType.CORRECTION : ProposalType.SUGGESTION_CORRECTION,
-      suggestion: {
-        message_id: origin.message_id,
-        proposal_id: origin.id,
-        type: origin.joke_type as Category,
-        joke: origin.joke_question!,
-        answer: origin.joke_answer!
-      }
-    };
-  }
-
-  const joke = idType === IdType.JOKE_ID ? jokeById(Number(query)) : jokeByQuestion(query);
-  if (!joke) {
-    interaction.channel
-      ?.send(
-        messageProblem(
-          `Impossible de trouver une blague à partir de ${
-            idType === IdType.JOKE_ID ? 'cet identifiant' : 'cette question'
-          }, veuillez réessayer !`
-        )
-      )
-      .then(tDelete(5000));
-    return null;
-  }
-
-  const proposal = await prisma.proposal.upsert({
-    create: {
-      joke_id: joke.id,
-      joke_type: joke.type,
-      joke_question: joke.joke,
-      joke_answer: joke.answer,
-      type: ProposalType.SUGGESTION,
-      merged: true
-    },
-    include: {
-      corrections: {
-        take: 1,
-        orderBy: {
-          created_at: 'desc'
-        },
-        where: {
-          merged: false,
-          refused: false
-        }
-      }
-    },
-    update: {},
-    where: {
-      joke_id: joke.id
-    }
+    ],
+    ephemeral: true,
+    fetchReply: true
   });
 
-  const correction = proposal.corrections[0];
-  return {
-    id: proposal.joke_id!,
-    type: (correction?.joke_type ?? proposal.joke_type) as Category,
-    joke: (correction?.joke_question ?? proposal.joke_question)!,
-    answer: (correction?.joke_answer ?? proposal.joke_answer)!,
-    correction_type: ProposalType.CORRECTION,
-    suggestion: {
-      message_id: proposal.message_id,
-      proposal_id: proposal.id,
-      type: proposal.joke_type as Category,
-      joke: proposal.joke_question!,
-      answer: proposal.joke_answer!
-    }
-  };
+  return new Promise((resolve) => {
+    const collector = message.createMessageComponentCollector({
+      max: 1,
+      componentType: ComponentType.Button,
+      filter: (i: MessageComponentInteraction) => i.user.id === interaction.user.id,
+      time: 60_000
+    });
+    collector.once('end', async (interactions, reason) => {
+      const buttonInteraction = interactions.first();
+      if (!buttonInteraction) {
+        if (reason !== 'time') resolve(null);
+        if (message.deletable) await message.delete();
+        await interaction.reply(interactionInfo('Les 60 secondes se sont ecoulées.'));
+        return resolve(null);
+      }
+
+      return resolve(buttonInteraction);
+    });
+  });
 }
+
+type DeclarationTemplate = {
+  WORD: string;
+  WORD_CAPITALIZED: string;
+  WITH_UNDEFINED_ARTICLE: string;
+  WITH_DEMONSTRATIVE_DETERMINANT: string;
+};
+
+export const Declaration: Record<string, DeclarationTemplate> = {
+  [suggestionsChannelId]: {
+    WORD: 'blague',
+    WORD_CAPITALIZED: 'Blague',
+    WITH_UNDEFINED_ARTICLE: 'une blague',
+    WITH_DEMONSTRATIVE_DETERMINANT: 'Cette blague'
+  },
+  [correctionsChannelId]: {
+    WORD: 'correction',
+    WORD_CAPITALIZED: 'Correction',
+    WITH_UNDEFINED_ARTICLE: 'une correction',
+    WITH_DEMONSTRATIVE_DETERMINANT: 'Cette correction'
+  },
+  [reportsChannelId]: {
+    WORD: 'signalement',
+    WORD_CAPITALIZED: 'Signalement',
+    WITH_UNDEFINED_ARTICLE: 'un signalement',
+    WITH_DEMONSTRATIVE_DETERMINANT: 'Ce signalement'
+  }
+} as const;

@@ -6,20 +6,19 @@ import {
   ButtonStyle,
   ChatInputCommandInteraction,
   ComponentType,
-  Interaction,
   Message,
   TextChannel
 } from 'discord.js';
 import prisma from '../../prisma';
-import { Category, JokeTypesDescriptions, CategoriesRefs, UnsignedJokeKey } from '../../typings';
+import { Category, JokeTypesDescriptions, CategoriesRefs, UnsignedJokeKey, UnsignedJoke } from '../../typings';
 import {
   Colors,
   commandsChannelId,
   correctionsChannelId,
   dataSplitRegex,
-  downReaction,
+  downReactionIdentifier,
   suggestionsChannelId,
-  upReaction
+  upReactionIdentifier
 } from '../constants';
 import Command from '../lib/command';
 import clone from 'lodash/clone';
@@ -33,9 +32,26 @@ import {
   showNegativeDiffs,
   showPositiveDiffs,
   info,
-  JokeCorrectionPayload,
-  findJoke
+  messageProblem,
+  tDelete,
+  interactionWaiter
 } from '../utils';
+import { jokeById, jokeByQuestion } from '../../controllers';
+
+enum IdType {
+  MESSAGE_ID,
+  JOKE_ID,
+  MESSAGE_QUESTION
+}
+
+export interface JokeCorrectionPayload extends UnsignedJoke {
+  id?: number;
+  correction_type: ProposalType;
+  suggestion: UnsignedJoke & {
+    message_id: string | null;
+    proposal_id: number;
+  };
+}
 
 export default class CorrectionCommand extends Command {
   constructor() {
@@ -75,7 +91,7 @@ export default class CorrectionCommand extends Command {
     interaction: ChatInputCommandInteraction<'cached'>,
     query: string
   ): Promise<JokeCorrectionPayload | null> {
-    const joke = await findJoke(interaction, query);
+    const joke = await this.findJoke(interaction, query);
     if (joke) return joke;
 
     const question = await interaction.reply({
@@ -96,8 +112,8 @@ export default class CorrectionCommand extends Command {
         idle: 60_000
       });
       collector.on('collect', async (msg: Message) => {
-        if (msg.deletable) setInterval(() => msg.delete().catch(() => null), 5000);
-        const joke = await findJoke(interaction, msg.content);
+        if (msg.deletable) await msg.delete();
+        const joke = await this.findJoke(interaction, msg.content);
 
         if (joke) {
           collector.stop();
@@ -171,13 +187,12 @@ export default class CorrectionCommand extends Command {
       fetchReply: true
     })) as Message<true>;
 
-    const buttonInteraction = await question
-      .awaitMessageComponent({
-        filter: (i: Interaction) => i.user.id === commandInteraction.user.id,
-        componentType: ComponentType.Button,
-        time: 120_000
-      })
-      .catch(() => null);
+    const buttonInteraction = await interactionWaiter({
+      component_type: ComponentType.Button,
+      message: question,
+      user: commandInteraction.user,
+      idle: 120_000
+    });
 
     if (!buttonInteraction) {
       await commandInteraction.editReply(interactionInfo('Les 2 minutes se sont écoulées.'));
@@ -225,7 +240,7 @@ export default class CorrectionCommand extends Command {
   }
 
   async requestTextChange(
-    buttonInteraction: ButtonInteraction,
+    buttonInteraction: ButtonInteraction<'cached'>,
     commandInteraction: ChatInputCommandInteraction,
     joke: JokeCorrectionPayload,
     textReplyContent: string,
@@ -244,27 +259,33 @@ export default class CorrectionCommand extends Command {
       components: []
     });
 
-    const messages = await commandInteraction
-      .channel!.awaitMessages({
+    return new Promise((resolve) => {
+      const collector = commandInteraction.channel!.createMessageCollector({
         filter: (m: Message) => m.author.id === commandInteraction.user.id,
-        time: 60_000,
-        max: 1
-      })
-      .catch(() => null);
+        idle: 60_000
+      });
+      collector.on('collect', async (msg: Message) => {
+        if (msg.deletable) await msg.delete();
 
-    // TODO: Vérifier la taille comme pour les suggestions
-
-    const msg = messages?.first();
-    if (!msg) {
-      await buttonInteraction.editReply(interactionInfo('Les 60 secondes se sont écoulées.', false));
-      return null;
-    }
-
-    if (msg.deletable) await msg.delete();
-
-    joke[textReplyContent === 'question' ? 'joke' : 'answer'] = msg.content.replace(/\n/g, ' ');
-
-    return joke;
+        if (msg.content.length > 130) {
+          commandInteraction
+            .channel!.send(
+              interactionProblem(`La ${textReplyContent} d'une blague ne peut pas dépasser 130 caractères.`)
+            )
+            .then(tDelete(5_000));
+        } else {
+          joke[textReplyContent === 'question' ? 'joke' : 'answer'] = msg.content.replace(/\n/g, ' ');
+          collector.stop();
+          return resolve(joke);
+        }
+      });
+      collector.once('end', async (_collected, reason: string) => {
+        if (reason === 'idle') {
+          await commandInteraction.editReply(interactionInfo('Les 60 secondes se sont écoulées.'));
+          return resolve(null);
+        }
+      });
+    });
   }
 
   async requestTypeChange(
@@ -273,7 +294,7 @@ export default class CorrectionCommand extends Command {
     joke: JokeCorrectionPayload
   ): Promise<JokeCorrectionPayload | null> {
     const baseEmbed = buttonInteraction.message.embeds[0].toJSON();
-    const questionMessage = await buttonInteraction.update({
+    const questionMessage = (await buttonInteraction.update({
       embeds: [
         baseEmbed,
         {
@@ -301,15 +322,13 @@ export default class CorrectionCommand extends Command {
         }
       ],
       fetchReply: true
-    });
+    })) as Message<true>;
 
-    const response = await questionMessage
-      .awaitMessageComponent({
-        filter: (i: Interaction) => i.user.id === commandInteraction.user.id,
-        componentType: ComponentType.SelectMenu,
-        time: 60_000
-      })
-      .catch(() => null);
+    const response = await interactionWaiter({
+      component_type: ComponentType.SelectMenu,
+      message: questionMessage,
+      user: commandInteraction.user
+    });
 
     if (!response) {
       questionMessage.edit(messageInfo('Les 60 secondes se sont écoulées.'));
@@ -413,8 +432,143 @@ export default class CorrectionCommand extends Command {
       interactionValidate(`Votre [proposition de correction](${message.url}) a bien été envoyée !`)
     );
 
-    for (const reaction of [upReaction, downReaction]) {
+    for (const reaction of [upReactionIdentifier, downReactionIdentifier]) {
       await message.react(reaction).catch(() => null);
     }
   }
+  
+  async findJoke(
+    interaction: ChatInputCommandInteraction<'cached'>,
+    query: string
+  ): Promise<JokeCorrectionPayload | null> {
+    const idType = this.getIdType(query);
+    if (idType === IdType.MESSAGE_ID) {
+      const proposal = await prisma.proposal.findUnique({
+        where: {
+          message_id: query
+        },
+        include: {
+          corrections: {
+            take: 1,
+            orderBy: {
+              created_at: 'desc'
+            },
+            where: {
+              merged: false,
+              refused: false
+            }
+          },
+          suggestion: {
+            include: {
+              corrections: {
+                take: 1,
+                orderBy: {
+                  created_at: 'desc'
+                },
+                where: {
+                  merged: false,
+                  refused: false
+                }
+              }
+            }
+          }
+        }
+      });
+      if (!proposal) {
+        interaction.channel
+          ?.send(
+            messageProblem(
+              `Impossible de trouver une blague ou correction liée à cet ID de blague, assurez vous que cet ID provient bien d'un message envoyé par le bot ${interaction.client.user}`
+            )
+          )
+          .then(tDelete(5000));
+        return null;
+      }
+  
+      const origin = proposal.type === ProposalType.SUGGESTION ? proposal : proposal.suggestion!;
+  
+      return {
+        id: proposal.joke_id ?? undefined,
+        type: (origin.corrections[0]?.joke_type ?? origin.joke_type) as Category,
+        joke: (origin.corrections[0]?.joke_question ?? origin.joke_question)!,
+        answer: (origin.corrections[0]?.joke_answer ?? origin.joke_answer)!,
+        correction_type: origin.merged ? ProposalType.CORRECTION : ProposalType.SUGGESTION_CORRECTION,
+        suggestion: {
+          message_id: origin.message_id,
+          proposal_id: origin.id,
+          type: origin.joke_type as Category,
+          joke: origin.joke_question!,
+          answer: origin.joke_answer!
+        }
+      };
+    }
+  
+    const joke = idType === IdType.JOKE_ID ? jokeById(Number(query)) : jokeByQuestion(query);
+    if (!joke) {
+      interaction.channel
+        ?.send(
+          messageProblem(
+            `Impossible de trouver une blague à partir de ${
+              idType === IdType.JOKE_ID ? 'cet identifiant' : 'cette question'
+            }, veuillez réessayer !`
+          )
+        )
+        .then(tDelete(5000));
+      return null;
+    }
+  
+    const proposal = await prisma.proposal.upsert({
+      create: {
+        joke_id: joke.id,
+        joke_type: joke.type,
+        joke_question: joke.joke,
+        joke_answer: joke.answer,
+        type: ProposalType.SUGGESTION,
+        merged: true
+      },
+      include: {
+        corrections: {
+          take: 1,
+          orderBy: {
+            created_at: 'desc'
+          },
+          where: {
+            merged: false,
+            refused: false
+          }
+        }
+      },
+      update: {},
+      where: {
+        joke_id: joke.id
+      }
+    });
+  
+    const correction = proposal.corrections[0];
+    return {
+      id: proposal.joke_id!,
+      type: (correction?.joke_type ?? proposal.joke_type) as Category,
+      joke: (correction?.joke_question ?? proposal.joke_question)!,
+      answer: (correction?.joke_answer ?? proposal.joke_answer)!,
+      correction_type: ProposalType.CORRECTION,
+      suggestion: {
+        message_id: proposal.message_id,
+        proposal_id: proposal.id,
+        type: proposal.joke_type as Category,
+        joke: proposal.joke_question!,
+        answer: proposal.joke_answer!
+      }
+    };
+  }
+  
+  getIdType(query: string): IdType {
+    if (isNaN(Number(query))) {
+      return IdType.MESSAGE_QUESTION;
+    }
+    if (query.length > 6) {
+      return IdType.MESSAGE_ID;
+    }
+    return IdType.JOKE_ID;
+  }
+  
 }

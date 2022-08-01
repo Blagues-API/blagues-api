@@ -13,9 +13,10 @@ export const reportsChannelId: Snowflake = process.env.REPORTS_CHANNEL ?? '99340
 
 export const neededSuggestionsApprovals: number = Number(process.env.SUGGESTIONS_APPROVALS_COUNT) || 3;
 export const neededCorrectionsApprovals: number = Number(process.env.CORRECTIONS_APPROVALS_COUNT) || 2;
+export const neededReportsApprovals: number = Number(process.env.REPORTS_APPROVALS_COUNT) || 2;
 
-export const upReaction: Snowflake = process.env.UP_REACTION ?? '⬆️';
-export const downReaction: Snowflake = process.env.DOWN_REACTION ?? '⬇️';
+export const upReactionIdentifier: Snowflake = process.env.UP_REACTION ?? '⬆️';
+export const downReactionIdentifier: Snowflake = process.env.DOWN_REACTION ?? '⬇️';
 
 export const approveEmoji: Snowflake = process.env.APPROVE_EMOJI ?? '👍';
 export const disapproveEmoji: Snowflake = process.env.DISAPPROVE_EMOJI ?? '👎';

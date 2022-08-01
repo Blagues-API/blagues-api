@@ -15,22 +15,20 @@ API de Blagues françaises collaborative et Open Source
 
 Afin de simplifier l'utilisation de Blagues API, des modules ont été créés :
 
-- [![npm](https://img.shields.io/badge/Module%20Npm-blagues--api-red?style=flat&logo=npm)](https://www.npmjs.com/package/blagues-api) (ES6,
-  CommonJS, Browser)
-- [![pypi](https://img.shields.io/badge/Module%20Pypi-blagues--api-blue?style=flat&logo=pypi)](https://pypi.org/project/blagues-api) (python >=
-  3.8)
-- [![php](https://img.shields.io/badge/Module%20Packagist-zuruuh%2Fblagues--api-orange?style=flat&logo=packagist)](https://packagist.org/packages/zuruuh/blagues-api) (PHP 7.4+)
+- [![npm](https://img.shields.io/badge/Module%20Npm-blagues--api-red?style=flat&logo=npm)](https://www.npmjs.com/package/blagues-api) ![](https://img.shields.io/badge/-ES6%2C%20CommonJS%2C%20Browser-4f4f4f)
+- [![pypi](https://img.shields.io/badge/Module%20Pypi-blagues--api-blue?style=flat&logo=pypi)](https://pypi.org/project/blagues-api) ![python](https://img.shields.io/pypi/pyversions/blagues-api)
+- [![php](https://img.shields.io/badge/Module%20Packagist-zuruuh%2Fblagues--api-orange?style=flat&logo=packagist)](https://packagist.org/packages/zuruuh/blagues-api) ![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/zuruuh/blagues-api)
 
 > Dans le cas où aucun module n'a été créé vous pouvez utiliser l'api standard.
 
 ## Utilisation
 
-Retrouvez la documentation de l'API ainsi des modules directement sur le site [Blagues-API.fr](https://www.blagues-api.fr).
+Retrouvez la documentation de l'API ainsi des modules directement sur le site [`blagues-api.fr`](https://www.blagues-api.fr).
 
 ## Contribuer
 
 Le projet est open-source ce qui signifie que vous pouvez contribuer et faire évoluer le projet.<br>
-Rendez-vous sur a page des [issues](https://github.com/Blagues-API/blagues-api/issues), sélectionnez une issue qui vous intéresse et faites une demande pour y être assigné.
+Rendez-vous sur la page des [issues](https://github.com/Blagues-API/blagues-api/issues), sélectionnez une issue qui vous intéresse et faites une demande pour y être assigné.
 > Les issues ayant le label `good first issue` sont les plus simples.
 
 ### Installation de Docker
@@ -65,8 +63,7 @@ yarn dev # npm run dev
 ## FAQ
 
 - **Pouvons-nous proposer des blagues ?**
-  - Oui bien sûr en rejoignant le serveur
-    <a href="https://discord.gg/PPNpVaF" target="_blank">`Blagues API`</a>, des commandes telles que `/suggestion` ont été créé afin de rendre la proposition de nouvelles blagues plus facile !
+  - Oui bien sûr en rejoignant le serveur [`Blagues API`](https://discord.gg/PPNpVaF), des commandes telles que `/suggestion` ont été créé afin de rendre la proposition de nouvelles blagues plus facile !
 
 ---
 
@@ -74,12 +71,9 @@ yarn dev # npm run dev
 
 Voici quelques liens pour obtenir de l'aide :
 
-- Site web:
-  <a href="https://www.blagues-api.fr" target="_blank">`www.blagues-api.fr`</a>
-- Discord:
-  <a href="https://discord.gg/PPNpVaF" target="_blank">`Blagues API`</a>
-- Twitter:
-  <a href="http://twitter.com/DraftMan_Dev" target="_blank">`@DraftMan_Dev`</a>
+- Site web: [`www.blagues-api.fr`](https://www.blagues-api.fr)
+- Discord: [`Blagues API`](https://discord.gg/PPNpVaF)
+- Twitter: [`@DraftMan_Dev`](http://twitter.com/DraftMan_Dev)
 
 ---
 
@@ -87,5 +81,4 @@ Voici quelques liens pour obtenir de l'aide :
 
 [![Licence](https://img.shields.io/github/license/Blagues-API/api?style=flat)](https://github.com/Blagues-API/api/blob/master/LICENCE)
 
-Copyright 2020-2022 ©
-<a href="https://www.draftman.fr" target="_blank">DraftMan</a>.
+Copyright 2020-2022 © [DraftMan](https://www.draftman.fr).

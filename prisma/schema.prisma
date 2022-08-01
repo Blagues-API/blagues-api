@@ -45,6 +45,7 @@ model Proposal {
   created_at    DateTime      @default(now())
   approvals     Approval[]
   disapprovals  Disapproval[]
+  votes         Vote[]
 
   suggestion_id Int?
   suggestion    Proposal?     @relation("ProposalToCorrections", fields: [suggestion_id], references: [id], onDelete: Cascade)
@@ -73,8 +74,24 @@ model Disapproval {
   @@map("disapprovals")
 }
 
+model Vote {
+  proposal_id Int
+  user_id     String   @db.VarChar(255)
+  type        VoteType
+  proposal    Proposal @relation(fields: [proposal_id], references: [id], onDelete: Cascade)
+
+  @@id([proposal_id, user_id])
+  @@index([proposal_id], name: "votes_proposal_id")
+  @@map("votes")
+}
+
 enum ProposalType {
   SUGGESTION
   CORRECTION
   SUGGESTION_CORRECTION
+}
+
+enum VoteType {
+  UP
+  DOWN
 }
