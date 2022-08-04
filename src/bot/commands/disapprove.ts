@@ -104,22 +104,6 @@ export default class DisapproveCommand extends Command {
             disapprovals: true
           }
         },
-        report: {
-          include: {
-            corrections: {
-              orderBy: {
-                created_at: 'desc'
-              },
-              where: {
-                merged: false,
-                refused: false,
-                stale: false
-              }
-            },
-            approvals: true,
-            disapprovals: true
-          }
-        },
         approvals: true,
         disapprovals: true
       }

@@ -10,14 +10,14 @@ import {
   SelectMenuInteraction,
   TextChannel
 } from 'discord.js';
-import { CategoriesRefs, Category, ReasonsRefs, Joke, Reason } from '../../typings';
+import { CategoriesRefs, Category, Joke } from '../../typings';
 import { Colors, commandsChannelId, reportsChannelId } from '../constants';
 import Command from '../lib/command';
 import { findBestMatch } from 'string-similarity';
 import { interactionInfo, interactionProblem, isEmbedable, messageInfo, waitForConfirmation } from '../utils';
 import Jokes from '../../jokes';
 import prisma from '../../prisma';
-import { ProposalType } from '@prisma/client';
+import { ReportType } from '@prisma/client';
 export default class ReportCommand extends Command {
   constructor() {
     super({
@@ -36,8 +36,8 @@ export default class ReportCommand extends Command {
           name: 'raison',
           description: 'Raison du signalement de la blague',
           required: true,
-          choices: Object.entries(ReasonsRefs).map(([key, name]) => ({
-            name,
+          choices: Object.entries(ReportType).map(([key, name]) => ({
+            name: name.toLowerCase(),
             value: key
           }))
         },
@@ -64,20 +64,19 @@ export default class ReportCommand extends Command {
     }
 
     const isAlreadyReport = await prisma.proposal.findMany({
-      select: {
-        joke_id: true
-      },
       where: {
-        type: ProposalType.REPORT,
-        merged: true || false,
-        refused: false
+        joke_id: joke.id
+      },
+      select: {
+        reports: true
       }
     });
-    if (isAlreadyReport) {
+
+    if (isAlreadyReport.filter((p) => p.reports).length > 0) {
       return interaction.reply(interactionProblem('Cette blague a déjà été signalée.', true));
     }
 
-    const reason = interaction.options.getString('raison', true);
+    const reason = interaction.options.getString('raison', true) as ReportType;
 
     const embed = {
       author: {
@@ -100,7 +99,7 @@ export default class ReportCommand extends Command {
       color: Colors.PROPOSED
     };
 
-    if (reason === 'duplicate') {
+    if (reason === ReportType.DUPLICATE) {
       const duplicate = await this.getDuplicate(interaction, joke);
       if (!duplicate) return;
 
@@ -118,7 +117,7 @@ export default class ReportCommand extends Command {
     } else {
       embed.fields.push({
         name: 'Raison',
-        value: ReasonsRefs[reason as Reason],
+        value: ReportType[reason].toLowerCase(),
         inline: false
       });
 
@@ -255,9 +254,9 @@ export default class ReportCommand extends Command {
     interaction: ChatInputCommandInteraction<'cached'>,
     joke: Joke,
     embed: APIEmbed,
-    reportReason: string
+    reportReason: ReportType
   ) {
-    const confirmation = await waitForConfirmation(interaction, embed, 'suggestion');
+    const confirmation = await waitForConfirmation(interaction, embed, 'report');
     if (!confirmation) return;
 
     if (confirmation.customId === 'cancel') {
@@ -277,12 +276,18 @@ export default class ReportCommand extends Command {
 
     const message = await reportsChannel.send({ embeds: [embed] });
 
-    await prisma.proposal.create({
+    await prisma.proposal.update({
+      where: {
+        joke_id: joke.id
+      },
       data: {
-        user_id: interaction.user.id,
-        message_id: message.id,
-        type: ProposalType.REPORT,
-        report_reason: reportReason
+        reports: {
+          create: {
+            message_id: message.id,
+            user_id: interaction.user.id,
+            type: reportReason
+          }
+        }
       }
     });
   }

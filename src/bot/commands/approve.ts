@@ -115,22 +115,7 @@ export default class ApproveCommand extends Command {
             disapprovals: true
           }
         },
-        report: {
-          include: {
-            corrections: {
-              orderBy: {
-                created_at: 'desc'
-              },
-              where: {
-                merged: false,
-                refused: false,
-                stale: false
-              }
-            },
-            approvals: true,
-            disapprovals: true
-          }
-        },
+
         approvals: true,
         disapprovals: true,
         votes: true
@@ -335,6 +320,8 @@ export default class ApproveCommand extends Command {
         case ProposalType.CORRECTION: {
           await this.approveCorrection(interaction, proposal, message, embed);
           break;
+        }
+        default: {
         }
       }
     } catch (error) {

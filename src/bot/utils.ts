@@ -7,7 +7,6 @@ import {
   GuildMember,
   InteractionReplyOptions,
   Message,
-  MessageComponentInteraction,
   MessageComponentType,
   MessageOptions,
   SelectMenuInteraction,
@@ -219,8 +218,8 @@ export async function waitForConfirmation(
   interaction: ChatInputCommandInteraction,
   embed: APIEmbed,
   sendType: string
-): Promise<ButtonInteraction | null> {
-  const message = await interaction.reply({
+): Promise<ButtonInteraction<'cached'>> {
+  const message = (await interaction.reply({
     content: `Êtes-vous sûr de vouloir confirmer la proposition de ce${
       sendType === 'report' ? ' signalement' : 'tte blague'
     } ?`,
@@ -246,26 +245,12 @@ export async function waitForConfirmation(
     ],
     ephemeral: true,
     fetchReply: true
-  });
+  })) as Message<true>;
 
-  return new Promise((resolve) => {
-    const collector = message.createMessageComponentCollector({
-      max: 1,
-      componentType: ComponentType.Button,
-      filter: (i: MessageComponentInteraction) => i.user.id === interaction.user.id,
-      time: 60_000
-    });
-    collector.once('end', async (interactions, reason) => {
-      const buttonInteraction = interactions.first();
-      if (!buttonInteraction) {
-        if (reason !== 'time') resolve(null);
-        if (message.deletable) await message.delete();
-        await interaction.reply(interactionInfo('Les 60 secondes se sont ecoulées.'));
-        return resolve(null);
-      }
-
-      return resolve(buttonInteraction);
-    });
+  return interactionWaiter({
+    component_type: ComponentType.Button,
+    message,
+    user: interaction.user
   });
 }
 

@@ -436,7 +436,7 @@ export default class CorrectionCommand extends Command {
       await message.react(reaction).catch(() => null);
     }
   }
-  
+
   async findJoke(
     interaction: ChatInputCommandInteraction<'cached'>,
     query: string
@@ -484,9 +484,9 @@ export default class CorrectionCommand extends Command {
           .then(tDelete(5000));
         return null;
       }
-  
+
       const origin = proposal.type === ProposalType.SUGGESTION ? proposal : proposal.suggestion!;
-  
+
       return {
         id: proposal.joke_id ?? undefined,
         type: (origin.corrections[0]?.joke_type ?? origin.joke_type) as Category,
@@ -502,7 +502,7 @@ export default class CorrectionCommand extends Command {
         }
       };
     }
-  
+
     const joke = idType === IdType.JOKE_ID ? jokeById(Number(query)) : jokeByQuestion(query);
     if (!joke) {
       interaction.channel
@@ -516,7 +516,7 @@ export default class CorrectionCommand extends Command {
         .then(tDelete(5000));
       return null;
     }
-  
+
     const proposal = await prisma.proposal.upsert({
       create: {
         joke_id: joke.id,
@@ -543,7 +543,7 @@ export default class CorrectionCommand extends Command {
         joke_id: joke.id
       }
     });
-  
+
     const correction = proposal.corrections[0];
     return {
       id: proposal.joke_id!,
@@ -560,7 +560,7 @@ export default class CorrectionCommand extends Command {
       }
     };
   }
-  
+
   getIdType(query: string): IdType {
     if (isNaN(Number(query))) {
       return IdType.MESSAGE_QUESTION;
@@ -570,5 +570,4 @@ export default class CorrectionCommand extends Command {
     }
     return IdType.JOKE_ID;
   }
-  
 }

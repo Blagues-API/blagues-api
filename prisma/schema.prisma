@@ -47,9 +47,10 @@ model Proposal {
   disapprovals  Disapproval[]
   votes         Vote[]
 
-  suggestion_id Int?
-  suggestion    Proposal?     @relation("ProposalToCorrections", fields: [suggestion_id], references: [id], onDelete: Cascade)
-  corrections   Proposal[]    @relation("ProposalToCorrections")
+  suggestion_id Int?       @unique
+  suggestion    Proposal?  @relation("ProposalToCorrections", fields: [suggestion_id], references: [id], onDelete: Cascade)
+  corrections   Proposal[] @relation("ProposalToCorrections")
+  reports       Report[]   @relation("ProposalToReports")
 
   @@map("proposals")
 }
@@ -85,10 +86,27 @@ model Vote {
   @@map("votes")
 }
 
+model Report {
+  suggestion_id Int        @unique
+  message_id    String     @unique
+  user_id       String     @db.VarChar(255)
+  type          ReportType
+  suggestion    Proposal   @relation("ProposalToReports", fields: [suggestion_id], references: [suggestion_id])
+
+  @@id([suggestion_id, user_id])
+  @@index([suggestion_id], name: "reports_proposal_id")
+  @@map("reports")
+}
+
 enum ProposalType {
   SUGGESTION
   CORRECTION
   SUGGESTION_CORRECTION
+}
+
+enum ReportType {
+  DUPLICATE
+  INAPPROPRIATE
 }
 
 enum VoteType {

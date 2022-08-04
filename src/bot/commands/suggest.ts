@@ -2,12 +2,9 @@ import { stripIndents } from 'common-tags';
 import {
   ApplicationCommandOptionType,
   ApplicationCommandType,
-  ButtonStyle,
-  ComponentType,
   ChatInputCommandInteraction,
   TextChannel,
-  APIEmbed,
-  Message
+  APIEmbed
 } from 'discord.js';
 import { findBestMatch } from 'string-similarity';
 import Jokes from '../../jokes';
@@ -20,7 +17,7 @@ import {
   commandsChannelId
 } from '../constants';
 import Command from '../lib/command';
-import { interactionInfo, interactionProblem, interactionValidate, interactionWaiter, isEmbedable } from '../utils';
+import { interactionInfo, interactionProblem, interactionValidate, isEmbedable, waitForConfirmation } from '../utils';
 import prisma from '../../prisma';
 import { ProposalType } from '@prisma/client';
 
@@ -135,37 +132,7 @@ export default class SuggestCommand extends Command {
       });
     }
 
-    const message = (await interaction.reply({
-      content: 'Êtes-vous sûr de vouloir confirmer la proposition de cette blague ?',
-      embeds: [embed],
-      components: [
-        {
-          type: ComponentType.ActionRow,
-          components: [
-            {
-              type: ComponentType.Button,
-              label: 'Envoyer',
-              customId: 'send',
-              style: ButtonStyle.Success
-            },
-            {
-              type: ComponentType.Button,
-              label: 'Annuler',
-              customId: 'cancel',
-              style: ButtonStyle.Danger
-            }
-          ]
-        }
-      ],
-      ephemeral: true,
-      fetchReply: true
-    })) as Message<true>;
-
-    const confirmation = await interactionWaiter({
-      component_type: ComponentType.Button,
-      message: message,
-      user: interaction.user
-    });
+    const confirmation = await waitForConfirmation(interaction, embed, 'suggestion');
 
     if (!confirmation) return;
 
