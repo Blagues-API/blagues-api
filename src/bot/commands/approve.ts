@@ -96,7 +96,7 @@ export default class ApproveCommand extends Command {
     if (![suggestionsChannelId, correctionsChannelId, reportsChannelId].includes(channel.id)) {
       return interaction.reply(
         interactionProblem(
-          `Vous ne pouvez pas approuver une blague, une correction ou un signalement en dehors des salons <#${suggestionsChannelId}>, <#${correctionsChannelId}> et <#${reportsChannelId}>.`
+          `Vous ne pouvez pas approuver une suggestion, une correction ou un signalement en dehors des salons <#${suggestionsChannelId}>, <#${correctionsChannelId}> et <#${reportsChannelId}>.`
         )
       );
     }
@@ -661,7 +661,9 @@ export default class ApproveCommand extends Command {
       });
     }
     await interaction.editReply(
-      interactionValidate(`La [correction](${message.url}) a bien été migrée vers la blague !`)
+      interactionValidate(
+        `La [correction](${message.url}) a bien été migrée vers la ${isPublishedJoke ? 'blague' : 'suggestion'}!`
+      )
     );
 
     if (

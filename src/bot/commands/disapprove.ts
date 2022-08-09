@@ -46,7 +46,7 @@ export default class DisapproveCommand extends Command {
     if (![suggestionsChannelId, correctionsChannelId, reportsChannelId].includes(channel.id)) {
       return interaction.reply(
         interactionProblem(
-          `Vous ne pouvez pas désapprouver une blague, une correction, un signalement en dehors des salons <#${suggestionsChannelId}>, <#${correctionsChannelId}> et <#${reportsChannelId}>.`
+          `Vous ne pouvez pas désapprouver une suggestion, une correction, un signalement en dehors des salons <#${suggestionsChannelId}>, <#${correctionsChannelId}> et <#${reportsChannelId}>.`
         )
       );
     }

@@ -1,7 +1,7 @@
 import { ApplicationCommandOptionType, ApplicationCommandType, ChatInputCommandInteraction } from 'discord.js';
 import { commandsChannelId } from '../constants';
 import Command from '../lib/command';
-import { interactionInfo } from '../utils';
+import { interactionInfo, interactionProblem } from '../utils';
 import Stats from '../modules/stats';
 
 export default class StatsCommand extends Command {
@@ -28,6 +28,11 @@ export default class StatsCommand extends Command {
         interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannelId}>.`)
       );
     }
+
+    if (interaction.options.get('user') && !interaction.options.getMember('user')) {
+      return interaction.reply(interactionProblem("L'utilisateur n'est pas dans ce serveur."));
+    }
+
     const member = interaction.options.getMember('user') || interaction.member;
     return Stats.userStats(interaction, member, false);
   }

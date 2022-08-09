@@ -30,7 +30,6 @@ type WaitForInteractionOptions<T extends MessageComponentType> = {
   message: Message<true>;
   user: User;
   idle?: number;
-  deleteMessage?: boolean;
 };
 type WaitForInteraction<T> = T extends WaitForInteractionOptions<ComponentType.Button>
   ? ButtonInteraction<'cached'>
@@ -141,14 +140,13 @@ export function isGodfather(member: GuildMember): boolean {
 
 export async function interactionWaiter<T extends WaitForInteractionOptions<MessageComponentType>>(options: T) {
   return new Promise<WaitForInteraction<T>>((resolve, reject) => {
-    const { component_type, message, user, idle = 60_000, deleteMessage = true } = options;
+    const { component_type, message, user, idle = 60_000 } = options;
     message
       .createMessageComponentCollector({
         componentType: component_type,
         idle: idle
       })
       .on('collect', async (interaction: WaitForInteraction<T>) => {
-        if (deleteMessage && message.deletable) await message.delete();
         if (interaction.user.id !== user.id) {
           await interaction.reply(interactionInfo("Vous n'êtes pas autorisé à interagir avec ce message."));
           return;
