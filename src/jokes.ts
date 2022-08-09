@@ -1,5 +1,5 @@
 import { constants as fsConstants, promises as fs } from 'fs';
-import { Correction, Joke, Suggestion, Report } from './typings';
+import { Correction, Joke, ReportExtended, Suggestion } from './typings';
 import { join } from 'path';
 
 import { AsyncQueue } from '@sapphire/async-queue';
@@ -78,13 +78,13 @@ class JokesLoader {
     }
   }
 
-  public async removeJoke(proposal: Report): Promise<{ success: boolean; joke_id?: number; error?: string }> {
+  public async removeJoke(proposal: ReportExtended): Promise<{ success: boolean; joke_id?: number; error?: string }> {
     const jokesPath = join(__dirname, '../blagues.json');
     try {
       await fs.access(jokesPath, fsConstants.R_OK | fsConstants.W_OK);
     } catch (error) {
       console.log('Missing access', error);
-      return { success: false, error: `Il semblerait que le fichier de blagues soit inaccessible ou innexistant.` };
+      return { success: false, error: 'Il semblerait que le fichier de blagues soit inaccessible ou innexistant.' };
     }
 
     try {
@@ -93,8 +93,8 @@ class JokesLoader {
       const rawData = await fs.readFile(jokesPath, 'utf-8');
       const jokes = (rawData.length ? JSON.parse(rawData) : []) as Joke[];
 
-      const index = jokes.findIndex((joke) => joke.id === proposal.joke_id!);
-      const joke_id = proposal.joke_id!;
+      const index = jokes.findIndex((joke) => joke.id === proposal.suggestion.joke_id!);
+      const joke_id = proposal.suggestion.joke_id!;
       jokes.splice(index, 1);
       for (const joke of jokes.splice(index, jokes.length)) {
         joke.id -= 1;
@@ -107,8 +107,8 @@ class JokesLoader {
 
       return { success: true, joke_id };
     } catch (error) {
-      console.log('Error:', error);
-      return { success: false, error: `Une erreur s'est produite lors de l'ajout de la blague.` };
+      console.error('Error:', error);
+      return { success: false, error: `Une erreur s'est produite lors de la suppression de la blague.` };
     } finally {
       this.loader.shift();
     }

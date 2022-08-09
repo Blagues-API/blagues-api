@@ -1,4 +1,4 @@
-import { Approval, Disapproval, Proposal } from '@prisma/client';
+import { Approval, Disapproval, Proposal, Report } from '@prisma/client';
 
 /**
  * Standard joke interface
@@ -92,10 +92,6 @@ export type Suggestion = ProposalExtended & {
   corrections: ProposalExtended[];
 };
 
-export type Report = ProposalExtended & {
-  type: 'REPORT';
-};
-
 export type ProposalSuggestion = ProposalExtended & {
   type: 'SUGGESTION';
   corrections: Proposal[];
@@ -106,4 +102,10 @@ export type ReminderProposal = ProposalExtended & {
   suggestion: (ProposalExtended & { corrections: Proposal[] }) | null;
 };
 
-export type Proposals = Correction | Suggestion | Report;
+export type ReportExtended = Report & {
+  suggestion: Suggestion;
+  approvals: Approval[];
+  disapprovals: Disapproval[];
+};
+
+export type Proposals = Correction | Suggestion | ReportExtended;

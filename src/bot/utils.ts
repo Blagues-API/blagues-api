@@ -8,6 +8,7 @@ import {
   InteractionReplyOptions,
   Message,
   MessageComponentType,
+  MessageContextMenuCommandInteraction,
   MessageOptions,
   SelectMenuInteraction,
   TextChannel,
@@ -15,8 +16,11 @@ import {
 } from 'discord.js';
 import { diffWords } from 'diff';
 import { APIEmbed } from 'discord-api-types/v10';
-import { godfatherRoleId } from './constants';
+import { Colors, dataSplitRegex, godfatherRoleId } from './constants';
 import { suggestionsChannelId, correctionsChannelId, reportsChannelId } from './constants';
+import { Proposals } from '../typings';
+import { renderGodfatherLine } from './modules/godfathers';
+import { Report } from '@prisma/client';
 
 type UniversalInteractionOptions = Omit<InteractionReplyOptions, 'flags'>;
 type UniversalMessageOptions = Omit<MessageOptions, 'flags'>;
@@ -221,7 +225,7 @@ export async function waitForConfirmation(
 ): Promise<ButtonInteraction<'cached'>> {
   const message = (await interaction.reply({
     content: `Êtes-vous sûr de vouloir confirmer la proposition de ce${
-      sendType === 'report' ? ' signalement' : 'tte blague'
+      sendType === 'report' ? 'ce signalement' : 'cette blague'
     } ?`,
     embeds: [embed],
     components: [
@@ -252,6 +256,71 @@ export async function waitForConfirmation(
     message,
     user: interaction.user
   });
+}
+
+export async function updateProposalsEmbed(
+  interaction: MessageContextMenuCommandInteraction<'cached'>,
+  proposal: Proposals,
+  embed: APIEmbed
+) {
+  const godfathers = await renderGodfatherLine(interaction, proposal);
+  const field = embed.fields?.[embed.fields.length - 1];
+  if (field) {
+    const { base, correction } = field.value.match(dataSplitRegex)!.groups!;
+    field.value = [base, correction, godfathers].filter(Boolean).join('\n\n');
+  } else {
+    const { base, correction } = embed.description!.match(dataSplitRegex)!.groups!;
+    embed.description = [base, correction, godfathers].filter(Boolean).join('\n\n');
+  }
+
+  return embed;
+}
+
+export async function checkProposalsifMergeOrRefused(
+  interaction: MessageContextMenuCommandInteraction,
+  proposal: Proposals | Report,
+  message: Message
+) {
+  const embed = message.embeds[0].toJSON();
+  if (proposal.merged) {
+    if (!embed.footer) {
+      embed.color = Colors.ACCEPTED;
+      embed.footer = { text: `${Declaration[message.channel.id].WORD_CAPITALIZED} déjà traitée` };
+
+      const field = embed.fields?.[embed.fields.length - 1];
+      if (field) {
+        field.value = field.value.match(dataSplitRegex)!.groups!.base;
+      } else {
+        embed.description = embed.description!.match(dataSplitRegex)!.groups!.base;
+      }
+
+      await message.edit({ embeds: [embed] });
+    }
+
+    return interaction.reply(interactionProblem(`${Declaration.EMBED_FOOTER_WITH_DETERMINANT} a déjà été ajoutée.`));
+  }
+
+  if (proposal.refused) {
+    if (!embed.footer) {
+      embed.color = Colors.REFUSED;
+      embed.footer = { text: `${Declaration[message.channel.id].WORD_CAPITALIZED} refusée` };
+
+      const field = embed.fields?.[embed.fields.length - 1];
+      if (field) {
+        field.value = field.value.match(dataSplitRegex)!.groups!.base;
+      } else {
+        embed.description = embed.description!.match(dataSplitRegex)!.groups!.base;
+      }
+
+      await message.edit({ embeds: [embed] });
+    }
+
+    return interaction.reply(
+      interactionProblem(`${Declaration[message.channel.id].WITH_DEMONSTRATIVE_DETERMINANT} a déjà été refusée}.`)
+    );
+  }
+
+  return null;
 }
 
 type DeclarationTemplate = {

@@ -20,7 +20,6 @@ import {
   suggestionsChannelId
 } from '../constants';
 import Command from '../lib/command';
-import { renderGodfatherLine } from '../modules/godfathers';
 import {
   interactionInfo,
   interactionProblem,
@@ -28,7 +27,8 @@ import {
   isEmbedable,
   isGodfather,
   messageLink,
-  Declaration
+  Declaration,
+  updateProposalsEmbed
 } from '../utils';
 
 export default class DisapproveCommand extends Command {
@@ -46,7 +46,7 @@ export default class DisapproveCommand extends Command {
     if (![suggestionsChannelId, correctionsChannelId, reportsChannelId].includes(channel.id)) {
       return interaction.reply(
         interactionProblem(
-          `Vous ne pouvez pas désapprouver une blague, une correction ou un signalement en dehors des salons <#${suggestionsChannelId}>, <#${correctionsChannelId}> et <"${reportsChannelId}>.`
+          `Vous ne pouvez pas désapprouver une blague, une correction, un signalement en dehors des salons <#${suggestionsChannelId}>, <#${correctionsChannelId}> et <#${reportsChannelId}>.`
         )
       );
     }
@@ -68,6 +68,28 @@ export default class DisapproveCommand extends Command {
       );
     }
 
+    try {
+      switch (channel.id) {
+        case correctionsChannelId:
+
+        case suggestionsChannelId:
+
+        case reportsChannelId:
+      }
+    } catch (error) {
+      console.error(error);
+      await interaction.editReply(
+        interactionProblem(
+          `Une erreur s'est produite lors de l'approbation de la [${Declaration[channel.id].WORD}](${
+            message.url
+          }), veuillez contacter le développeur !`
+        )
+      );
+    }
+    return this.disapprove(interaction, proposal, message, newembed);
+  }
+
+  async proposalsCollector(interaction: MessageContextMenuCommandInteraction<'cached'>, message: Message) {
     const proposal = (await prisma.proposal.findUnique({
       where: {
         message_id: message.id
@@ -124,7 +146,6 @@ export default class DisapproveCommand extends Command {
     }
 
     const isSuggestion = proposal.type === ProposalType.SUGGESTION;
-    const isReport = proposal.type === ProposalType.REPORT;
 
     if (proposal.merged) {
       return interaction.reply(
@@ -183,18 +204,8 @@ export default class DisapproveCommand extends Command {
 
       proposal.disapprovals.splice(disapprovalIndex, 1);
 
-      const godfathers = await renderGodfatherLine(interaction, proposal);
-
-      const field = embed.fields?.[embed.fields.length - 1];
-      if (field) {
-        const { base, correction } = field.value.match(dataSplitRegex)!.groups!;
-        field.value = [base, correction, godfathers].filter(Boolean).join('\n\n');
-      } else {
-        const { base, correction } = embed.description!.match(dataSplitRegex)!.groups!;
-        embed.description = [base, correction, godfathers].filter(Boolean).join('\n\n');
-      }
-
-      await message.edit({ embeds: [embed] });
+      const newembed = await updateProposalsEmbed(interaction, proposal, embed);
+      await message.edit({ embeds: [newembed] });
 
       return interaction.reply(interactionInfo(`Votre [désapprobation](${message.url}) a bien été retirée.`));
     }
@@ -237,26 +248,16 @@ export default class DisapproveCommand extends Command {
       );
     }
 
-    const godfathers = await renderGodfatherLine(interaction, proposal);
-
-    const field = embed.fields?.[embed.fields.length - 1];
-    if (field) {
-      const { base, correction } = field.value.match(dataSplitRegex)!.groups!;
-      field.value = [base, correction, godfathers].filter(Boolean).join('\n\n');
-    } else {
-      const { base, correction } = embed.description!.match(dataSplitRegex)!.groups!;
-      embed.description = [base, correction, godfathers].filter(Boolean).join('\n\n');
-    }
+    const newembed = await updateProposalsEmbed(interaction, proposal, embed);
+    await message.edit({ embeds: [newembed] });
 
     await interaction.client.votes.deleteUserVotes(message, interaction.user.id);
 
     if (proposal.disapprovals.length < neededApprovalsCount) {
-      await message.edit({ embeds: [embed] });
+      await message.edit({ embeds: [newembed] });
 
       return interaction.reply(interactionValidate(`Votre [désapprobation](${message.url}) a été prise en compte !`));
     }
-
-    return this.disapprove(interaction, proposal, message, embed);
   }
 
   async disapprove(

@@ -331,7 +331,7 @@ export default class CorrectionCommand extends Command {
     });
 
     if (!response) {
-      questionMessage.edit(messageInfo('Les 60 secondes se sont écoulées.'));
+      await questionMessage.edit(messageInfo('Les 60 secondes se sont écoulées.'));
       return null;
     }
 
