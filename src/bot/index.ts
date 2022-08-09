@@ -73,7 +73,7 @@ export default class Bot extends Client {
 
   async onMessageCreate(message: Message | PartialMessage): Promise<void> {
     if (!message.inGuild()) return;
-    this.stickys.run(message);
+    await this.stickys.run(message);
   }
 
   async onMessageDelete(message: Message | PartialMessage): Promise<void> {

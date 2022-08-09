@@ -47,17 +47,36 @@ model Proposal {
   disapprovals  Disapproval[]
   votes         Vote[]
 
-  suggestion_id Int?
-  suggestion    Proposal?     @relation("ProposalToCorrections", fields: [suggestion_id], references: [id], onDelete: Cascade)
-  corrections   Proposal[]    @relation("ProposalToCorrections")
+  suggestion_id Int?       @unique
+  suggestion    Proposal?  @relation("ProposalToCorrections", fields: [suggestion_id], references: [id], onDelete: Cascade)
+  corrections   Proposal[] @relation("ProposalToCorrections")
+  reports       Report[]   @relation("ProposalToReports")
 
   @@map("proposals")
+}
+
+model Report {
+  proposal_id  Int           @unique
+  user_id      String        @db.VarChar(255)
+  message_id   String?       @unique @db.VarChar(255)
+  type         ReportType
+  merged       Boolean       @default(false)
+  refused      Boolean       @default(false)
+  created_at   DateTime      @default(now())
+  approvals    Approval[]
+  disapprovals Disapproval[]
+  suggestion   Proposal      @relation("ProposalToReports", fields: [proposal_id], references: [id], onDelete: Cascade)
+
+  @@id([proposal_id, user_id])
+  @@index([proposal_id], name: "reports_proposal_id")
+  @@map("reports")
 }
 
 model Approval {
   proposal_id Int
   user_id     String   @db.VarChar(255)
   proposal    Proposal @relation(fields: [proposal_id], references: [id], onDelete: Cascade)
+  report      Report?  @relation(fields: [proposal_id, user_id], references: [proposal_id, user_id])
 
   @@id([proposal_id, user_id])
   @@index([proposal_id], map: "approvals_proposal_id")
@@ -68,6 +87,7 @@ model Disapproval {
   proposal_id Int
   user_id     String   @db.VarChar(255)
   proposal    Proposal @relation(fields: [proposal_id], references: [id], onDelete: Cascade)
+  report      Report?  @relation(fields: [proposal_id, user_id], references: [proposal_id, user_id])
 
   @@id([proposal_id, user_id])
   @@index([proposal_id], map: "disapprovals_proposal_id")
@@ -89,6 +109,11 @@ enum ProposalType {
   SUGGESTION
   CORRECTION
   SUGGESTION_CORRECTION
+}
+
+enum ReportType {
+  DUPLICATE
+  INAPPROPRIATE
 }
 
 enum VoteType {

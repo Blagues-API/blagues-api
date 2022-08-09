@@ -15,5 +15,13 @@
   "conventionalCommits.emojiFormat": "emoji",
   "jest.enableInlineErrorMessages": true,
   "deepscan.enable": true,
-  "conventionalCommits.scopes": ["bot", "api", "nuxt", "ts"]
+  "conventionalCommits.scopes": [
+    "bot",
+    "api",
+    "nuxt",
+    "ts"
+  ],
+  "githubPullRequests.ignoredPullRequestBranches": [
+    "dev"
+  ]
 }

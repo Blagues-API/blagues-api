@@ -16,17 +16,19 @@ import {
   logsChannelId,
   neededCorrectionsApprovals,
   neededSuggestionsApprovals,
+  reportsChannelId,
   suggestionsChannelId
 } from '../constants';
 import Command from '../lib/command';
-import { renderGodfatherLine } from '../modules/godfathers';
 import {
   interactionInfo,
   interactionProblem,
   interactionValidate,
   isEmbedable,
   isGodfather,
-  messageLink
+  messageLink,
+  Declaration,
+  updateProposalsEmbed
 } from '../utils';
 
 export default class DisapproveCommand extends Command {
@@ -39,21 +41,21 @@ export default class DisapproveCommand extends Command {
 
   async run(interaction: MessageContextMenuCommandInteraction<'cached'>) {
     const channel = (interaction.channel as TextChannel)!;
-    const isSuggestionChannel = channel.id === suggestionsChannelId;
     const message = await channel.messages.fetch(interaction.targetId);
-    if (![suggestionsChannelId, correctionsChannelId].includes(channel.id)) {
+
+    if (![suggestionsChannelId, correctionsChannelId, reportsChannelId].includes(channel.id)) {
       return interaction.reply(
         interactionProblem(
-          `Vous ne pouvez pas désapprouver une suggestion ou une correction en dehors des salons <#${suggestionsChannelId}> et <#${correctionsChannelId}>.`
+          `Vous ne pouvez pas désapprouver une suggestion, une correction, un signalement en dehors des salons <#${suggestionsChannelId}>, <#${correctionsChannelId}> et <#${reportsChannelId}>.`
         )
       );
     }
     if (message.author.id !== interaction.client.user!.id) {
       return interaction.reply(
         interactionProblem(
-          `Vous ne pouvez pas désapprouver une ${
-            isSuggestionChannel ? 'suggestion' : 'correction'
-          } qui n'est pas gérée par ${interaction.client.user}.`
+          `Vous ne pouvez pas désapprouver ${Declaration[channel.id].WITH_UNDEFINED_ARTICLE} qui n'est pas gérée par ${
+            interaction.client.user
+          }.`
         )
       );
     }
@@ -61,11 +63,33 @@ export default class DisapproveCommand extends Command {
     if (!isGodfather(interaction.member)) {
       return interaction.reply(
         interactionProblem(
-          `Seul un <@${godfatherRoleId}> peut désapprouver une ${isSuggestionChannel ? 'suggestion' : 'correction'}.`
+          `Seul un <@${godfatherRoleId}> peut désapprouver ${Declaration[channel.id].WITH_UNDEFINED_ARTICLE}.`
         )
       );
     }
 
+    try {
+      switch (channel.id) {
+        case correctionsChannelId:
+
+        case suggestionsChannelId:
+
+        case reportsChannelId:
+      }
+    } catch (error) {
+      console.error(error);
+      await interaction.editReply(
+        interactionProblem(
+          `Une erreur s'est produite lors de l'approbation de la [${Declaration[channel.id].WORD}](${
+            message.url
+          }), veuillez contacter le développeur !`
+        )
+      );
+    }
+    return this.disapprove(interaction, proposal, message, newembed);
+  }
+
+  async proposalsCollector(interaction: MessageContextMenuCommandInteraction<'cached'>, message: Message) {
     const proposal = (await prisma.proposal.findUnique({
       where: {
         message_id: message.id
@@ -74,7 +98,6 @@ export default class DisapproveCommand extends Command {
         suggestion: {
           include: {
             corrections: {
-              take: 1,
               orderBy: {
                 created_at: 'desc'
               },
@@ -84,8 +107,8 @@ export default class DisapproveCommand extends Command {
                 stale: false
               }
             },
-            disapprovals: true,
-            approvals: true
+            approvals: true,
+            disapprovals: true
           }
         },
         corrections: {
@@ -99,12 +122,12 @@ export default class DisapproveCommand extends Command {
             stale: false
           },
           include: {
-            disapprovals: true,
-            approvals: true
+            approvals: true,
+            disapprovals: true
           }
         },
-        disapprovals: true,
-        approvals: true
+        approvals: true,
+        disapprovals: true
       }
     })) as Proposals | null;
 
@@ -126,13 +149,17 @@ export default class DisapproveCommand extends Command {
 
     if (proposal.merged) {
       return interaction.reply(
-        interactionProblem(`Cette ${isSuggestion ? 'suggestion' : 'correction'} a déjà été ajoutée.`)
+        interactionProblem(
+          `${Declaration[channel.id].WITH_DEMONSTRATIVE_DETERMINANT} a déjà été ajouté${isReport ? '' : 'e'}.`
+        )
       );
     }
 
     if (proposal.refused) {
       return interaction.reply(
-        interactionProblem(`Cette ${isSuggestion ? 'suggestion' : 'correction'} a déjà été refusée.`)
+        interactionProblem(
+          `${Declaration[channel.id].WITH_DEMONSTRATIVE_DETERMINANT} a déjà été refusé${isReport ? '' : 'e'}.`
+        )
       );
     }
 
@@ -152,7 +179,7 @@ export default class DisapproveCommand extends Command {
           );
         }
       }
-    } else {
+    } else if (!isReport) {
       const lastCorrection = proposal.suggestion?.corrections[0];
       if (lastCorrection && lastCorrection.id !== proposal.id) {
         const correctionLink = messageLink(interaction.guild.id, correctionsChannelId, lastCorrection.message_id!);
@@ -177,18 +204,8 @@ export default class DisapproveCommand extends Command {
 
       proposal.disapprovals.splice(disapprovalIndex, 1);
 
-      const godfathers = await renderGodfatherLine(interaction, proposal);
-
-      const field = embed.fields?.[embed.fields.length - 1];
-      if (field) {
-        const { base, correction } = field.value.match(dataSplitRegex)!.groups!;
-        field.value = [base, correction, godfathers].filter(Boolean).join('\n\n');
-      } else {
-        const { base, correction } = embed.description!.match(dataSplitRegex)!.groups!;
-        embed.description = [base, correction, godfathers].filter(Boolean).join('\n\n');
-      }
-
-      await message.edit({ embeds: [embed] });
+      const newembed = await updateProposalsEmbed(interaction, proposal, embed);
+      await message.edit({ embeds: [newembed] });
 
       return interaction.reply(interactionInfo(`Votre [désapprobation](${message.url}) a bien été retirée.`));
     }
@@ -231,26 +248,16 @@ export default class DisapproveCommand extends Command {
       );
     }
 
-    const godfathers = await renderGodfatherLine(interaction, proposal);
-
-    const field = embed.fields?.[embed.fields.length - 1];
-    if (field) {
-      const { base, correction } = field.value.match(dataSplitRegex)!.groups!;
-      field.value = [base, correction, godfathers].filter(Boolean).join('\n\n');
-    } else {
-      const { base, correction } = embed.description!.match(dataSplitRegex)!.groups!;
-      embed.description = [base, correction, godfathers].filter(Boolean).join('\n\n');
-    }
+    const newembed = await updateProposalsEmbed(interaction, proposal, embed);
+    await message.edit({ embeds: [newembed] });
 
     await interaction.client.votes.deleteUserVotes(message, interaction.user.id);
 
     if (proposal.disapprovals.length < neededApprovalsCount) {
-      await message.edit({ embeds: [embed] });
+      await message.edit({ embeds: [newembed] });
 
       return interaction.reply(interactionValidate(`Votre [désapprobation](${message.url}) a été prise en compte !`));
     }
-
-    return this.disapprove(interaction, proposal, message, embed);
   }
 
   async disapprove(
@@ -261,7 +268,7 @@ export default class DisapproveCommand extends Command {
     automerge = false
   ) {
     const logsChannel = interaction.client.channels.cache.get(logsChannelId) as TextChannel;
-    const isSuggestion = proposal.type === ProposalType.SUGGESTION;
+    const isReport = proposal.type === ProposalType.REPORT;
 
     await prisma.proposal.update({
       data: { refused: true },
@@ -272,7 +279,7 @@ export default class DisapproveCommand extends Command {
 
     if (isEmbedable(logsChannel)) {
       await logsChannel.send({
-        content: `${isSuggestion ? 'Suggestion' : 'Correction'} refusée`,
+        content: `${Declaration[interaction.channel!.id].WORD_CAPITALIZED} refusé${isReport ? '' : 'e'}`,
         embeds: [embed]
       });
     }
@@ -285,13 +292,13 @@ export default class DisapproveCommand extends Command {
     }
 
     embed.footer = {
-      text: `${isSuggestion ? 'Suggestion' : 'Correction'} refusée`
+      text: `${Declaration[interaction.channel!.id].WORD_CAPITALIZED} refusé${isReport ? '' : 'e'}`
     };
 
     const jokeMessage = await message.edit({ embeds: [embed] });
     await jokeMessage.reactions.removeAll();
 
-    if (!isSuggestion) {
+    if (proposal.type === ProposalType.CORRECTION) {
       const suggestionsChannel = interaction.client.channels.cache.get(suggestionsChannelId) as TextChannel;
       const suggestionMessage = proposal.suggestion?.message_id
         ? await suggestionsChannel.messages.fetch(proposal.suggestion.message_id).catch(() => null)
@@ -329,7 +336,11 @@ export default class DisapproveCommand extends Command {
     await message.reactions.removeAll();
 
     await interaction.reply(
-      interactionValidate(`La [${isSuggestion ? 'suggestion' : 'correction'}](${message.url}) a bien été refusée !`)
+      interactionValidate(
+        `L${isReport ? 'e' : 'a'} [${Declaration[interaction.channel!.id].WORD}](${message.url}) a bien été refusé${
+          isReport ? '' : 'e'
+        } !`
+      )
     );
   }
 }

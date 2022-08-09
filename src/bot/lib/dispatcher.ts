@@ -8,6 +8,7 @@ import JokeCommand from '../commands/joke';
 import ApproveCommand from '../commands/approve';
 import DisapproveCommand from '../commands/disapprove';
 import LeaderboardCommand from '../commands/leaderboard';
+import ReportCommand from '../commands/report';
 import UserStatsCommand from '../commands/userStats';
 import { guildId } from '../constants';
 
@@ -27,6 +28,7 @@ export default class Dispatcher {
       new ApproveCommand(),
       new DisapproveCommand(),
       new LeaderboardCommand(),
+      new ReportCommand(),
       new UserStatsCommand()
     ];
   }

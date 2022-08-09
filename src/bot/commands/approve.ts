@@ -8,7 +8,7 @@ import {
   APIEmbed
 } from 'discord.js';
 import prisma from '../../prisma';
-import { CategoriesRefs, Category, Correction, Proposals, Suggestion } from '../../typings';
+import { CategoriesRefs, Category, Correction, Proposals, ReportExtended, Suggestion } from '../../typings';
 import {
   Colors,
   neededCorrectionsApprovals,
@@ -21,51 +21,92 @@ import {
   upReactionIdentifier,
   downReactionIdentifier,
   dataSplitRegex,
-  godfatherRoleId
+  godfatherRoleId,
+  reportsChannelId,
+  neededReportsApprovals
 } from '../constants';
 import Command from '../lib/command';
-import { renderGodfatherLine } from '../modules/godfathers';
 import {
   interactionProblem,
   interactionInfo,
   interactionValidate,
   isEmbedable,
   messageLink,
-  isGodfather
+  Declaration,
+  isGodfather,
+  updateProposalsEmbed,
+  checkProposalsifMergeOrRefused
 } from '../utils';
 import Jokes from '../../jokes';
+import { renderGodfatherLine } from '../modules/godfathers';
 import { compareTwoStrings } from 'string-similarity';
 
+interface ApproveOptions<T extends Proposals> {
+  interaction: MessageContextMenuCommandInteraction<'cached'>;
+  proposal: T;
+  message: Message;
+  embed: APIEmbed;
+  automerge?: boolean;
+}
+
+interface CollectorOptions {
+  interaction: MessageContextMenuCommandInteraction<'cached'>;
+  message: Message;
+}
+
 export default class ApproveCommand extends Command {
+  private readonly collector: Record<
+    string,
+    (options: CollectorOptions) => Promise<{
+      proposal: Proposals;
+      embed: APIEmbed;
+    } | null>
+  >;
+
+  private readonly approve: Record<
+    string,
+    (options: ApproveOptions<Correction> | ApproveOptions<Suggestion> | ApproveOptions<ReportExtended>) => Promise<void>
+  >;
+
   constructor() {
     super({
       name: 'Approuver',
       type: ApplicationCommandType.Message
     });
+
+    this.collector = {
+      [suggestionsChannelId]: this.proposalsCollector,
+      [correctionsChannelId]: this.proposalsCollector,
+      [reportsChannelId]: this.reportCollector
+    };
+
+    this.approve = {
+      [suggestionsChannelId]: this.approveSuggestion,
+      [correctionsChannelId]: this.approveCorrection,
+      [suggestionsChannelId]: this.approveReport
+    };
   }
 
   async run(interaction: MessageContextMenuCommandInteraction<'cached'>) {
     const channel = (interaction.channel as TextChannel)!;
 
-    if (![suggestionsChannelId, correctionsChannelId].includes(channel.id)) {
+    const message = await interaction.channel?.messages.fetch(interaction.targetId);
+    if (!message) return;
+
+    if (![suggestionsChannelId, correctionsChannelId, reportsChannelId].includes(channel.id)) {
       return interaction.reply(
         interactionProblem(
-          `Vous ne pouvez pas approuver une suggestion ou une correction en dehors des salons <#${suggestionsChannelId}> et <#${correctionsChannelId}>.`
+          `Vous ne pouvez pas approuver une suggestion, une correction ou un signalement en dehors des salons <#${suggestionsChannelId}>, <#${correctionsChannelId}> et <#${reportsChannelId}>.`
         )
       );
     }
 
-    const message = await interaction.channel?.messages.fetch(interaction.targetId);
-    if (!message) return;
-
-    const isSuggestionChannel = channel.id === suggestionsChannelId;
-
     if (message.author.id !== interaction.client.user!.id) {
       return interaction.reply(
         interactionProblem(
-          `Vous ne pouvez pas approuver une ${
-            isSuggestionChannel ? 'suggestion' : 'correction'
-          } qui n'est pas gérée par ${interaction.client.user}.`
+          `Vous ne pouvez pas approuver ${Declaration[channel.id].WITH_UNDEFINED_ARTICLE} qui n'est pas gérée par ${
+            interaction.client.user
+          }.`
         )
       );
     }
@@ -73,14 +114,37 @@ export default class ApproveCommand extends Command {
     if (!isGodfather(interaction.member)) {
       return interaction.reply(
         interactionProblem(
-          `Seul un <@&${godfatherRoleId}> peut approuver une ${isSuggestionChannel ? 'suggestion' : 'correction'}.`
+          `Seul un <@&${godfatherRoleId}> peut approuver ${Declaration[channel.id].WITH_UNDEFINED_ARTICLE}.`
         )
       );
     }
 
+    try {
+      const response = await this.collector[channel.id]({ interaction, message });
+      if (!response) return;
+      await this.approve[channel.id]({
+        message,
+        interaction: interaction,
+        embed: response.embed,
+        proposal: response.proposal as never
+      });
+    } catch (error) {
+      console.error(error);
+      await interaction.editReply(
+        interactionProblem(
+          `Une erreur s'est produite lors de l'approbation de la [${Declaration[channel.id].WORD}](${
+            message.url
+          }), veuillez contacter le développeur !`
+        )
+      );
+    }
+  }
+
+  async proposalsCollector(options: CollectorOptions) {
+    const { interaction, message } = options;
     const proposal = (await prisma.proposal.findUnique({
       where: {
-        message_id: message.id
+        message_id: options.message.id
       },
       include: {
         suggestion: {
@@ -114,14 +178,16 @@ export default class ApproveCommand extends Command {
             disapprovals: true
           }
         },
+
         approvals: true,
         disapprovals: true,
         votes: true
       }
-    })) as Proposals | null;
+    })) as Exclude<Proposals, ReportExtended> | null;
 
     if (!proposal) {
-      return interaction.reply(interactionProblem(`Le message est invalide.`));
+      await interaction.reply(interactionProblem(`Le message est invalide.`));
+      return null;
     }
 
     const isSuggestion = proposal.type === ProposalType.SUGGESTION;
@@ -130,86 +196,106 @@ export default class ApproveCommand extends Command {
     if (!embed) {
       await prisma.proposal.delete({
         where: {
-          id: proposal.id
+          id: proposal.id!
         }
       });
-      return interaction.reply(interactionProblem(`Le message est invalide.`));
+      await interaction.reply(interactionProblem(`Le message est invalide.`));
+      return null;
     }
 
     if (proposal.user_id === interaction.user.id) {
-      return interaction.reply(
-        interactionProblem(`Vous ne pouvez pas approuver votre propre ${isSuggestion ? 'suggestion' : 'correction'}.`)
+      await interaction.reply(
+        interactionProblem(`Vous ne pouvez pas approuver votre propre ${Declaration[message.channel.id].WORD}.`)
       );
+      return null;
     }
 
-    if (proposal.merged) {
-      if (!embed.footer) {
-        embed.color = Colors.ACCEPTED;
-        embed.footer = { text: `${isSuggestion ? 'Suggestion' : 'Correction'} déjà traitée` };
+    const check = await checkProposalsifMergeOrRefused(interaction, proposal, message);
 
-        const field = embed.fields?.[embed.fields.length - 1];
-        if (field) {
-          field.value = field.value.match(dataSplitRegex)!.groups!.base;
-        } else {
-          embed.description = embed.description!.match(dataSplitRegex)!.groups!.base;
-        }
-
-        await message.edit({ embeds: [embed] });
-      }
-
-      return interaction.reply(
-        interactionProblem(`Cette ${isSuggestion ? 'suggestion' : 'correction'} a déjà été ajoutée.`)
-      );
-    }
-
-    if (proposal.refused) {
-      if (!embed.footer) {
-        embed.color = Colors.REFUSED;
-        embed.footer = { text: `${isSuggestion ? 'Suggestion' : 'Correction'} refusée` };
-
-        const field = embed.fields?.[embed.fields.length - 1];
-        if (field) {
-          field.value = field.value.match(dataSplitRegex)!.groups!.base;
-        } else {
-          embed.description = embed.description!.match(dataSplitRegex)!.groups!.base;
-        }
-
-        await message.edit({ embeds: [embed] });
-      }
-
-      return interaction.reply(
-        interactionProblem(`Cette ${isSuggestion ? 'suggestion' : 'correction'} a déjà été refusée.`)
-      );
-    }
+    if (check) return null;
 
     if (isSuggestion) {
       const correction = proposal.corrections[0];
       if (correction) {
         const beenApproved = correction.approvals.some((approval) => approval.user_id === interaction.user.id);
         if (!beenApproved) {
-          const correctionLink = messageLink(interaction.guild.id, correctionsChannelId, correction.message_id!);
-          const suggestionLink = messageLink(interaction.guild.id, suggestionsChannelId, proposal.message_id!);
-          return interaction.reply(
+          const correctionLink = messageLink(interaction.guild!.id, correctionsChannelId, correction.message_id!);
+          const suggestionLink = messageLink(interaction.guild!.id, suggestionsChannelId, proposal.message_id!);
+          await interaction.reply(
             interactionInfo(
               `Il semblerait qu'une [correction aie été proposée](${correctionLink}), veuillez l'approuver avant l'approbation de [cette suggestion](${suggestionLink}).`
             )
           );
+          return null;
         }
       }
     } else {
       const lastCorrection = proposal.suggestion?.corrections[0];
       if (lastCorrection && lastCorrection.id !== proposal.id) {
-        const correctionLink = messageLink(interaction.guild.id, correctionsChannelId, lastCorrection.message_id!);
-        return interaction.reply(
+        const correctionLink = messageLink(interaction.guild!.id, correctionsChannelId, lastCorrection.message_id!);
+        await interaction.reply(
           interactionInfo(
             `Il semblerait qu'une [correction aie été ajoutée](${correctionLink}) par dessus rendant celle-ci obsolète, veuillez approuver la dernière version de la correction.`
           )
         );
+        return null;
       }
     }
 
     const approvalIndex = proposal.approvals.findIndex((approval) => approval.user_id === interaction.user.id);
-    if (approvalIndex !== -1) {
+    if (approvalIndex === -1) {
+      const disapprovalIndex = proposal.disapprovals.findIndex(
+        (disapproval) => disapproval.user_id === interaction.user.id
+      );
+      if (disapprovalIndex !== -1) {
+        await prisma.disapproval.delete({
+          where: {
+            proposal_id_user_id: {
+              proposal_id: proposal.id,
+              user_id: interaction.user.id
+            }
+          }
+        });
+
+        proposal.disapprovals.splice(disapprovalIndex, 1);
+      }
+      proposal.approvals.push(
+        await prisma.approval.create({
+          data: {
+            proposal_id: proposal.id,
+            user_id: interaction.user.id
+          }
+        })
+      );
+      const neededApprovalsCount = isSuggestion ? neededSuggestionsApprovals : neededCorrectionsApprovals;
+      if (isSuggestion && proposal.approvals.length >= neededApprovalsCount && proposal.corrections[0]) {
+        const suggestionLink = messageLink(interaction.guild!.id, suggestionsChannelId, proposal.message_id!);
+        const correctionLink = messageLink(
+          interaction.guild!.id,
+          correctionsChannelId,
+          proposal.corrections[0].message_id!
+        );
+        await interaction.reply(
+          interactionInfo(`
+            Le nombre d'approbations requises pour l'ajout de [cette suggestion](${suggestionLink}) a déjà été atteint, seul [cette correction](${correctionLink}) nécessite encore des approbations.`)
+        );
+        return null;
+      }
+      const newembed = await updateProposalsEmbed(interaction, proposal, embed);
+
+      await interaction.client.votes.deleteUserVotes(message, interaction.user.id);
+      if (proposal.approvals.length < neededApprovalsCount) {
+        await message.edit({ embeds: [embed] });
+
+        await interaction.reply(interactionValidate(`Votre [approbation](${message.url}) a été prise en compte !`));
+        return null;
+      }
+      await interaction.deferReply({ ephemeral: true });
+      return {
+        proposal: proposal,
+        embed: newembed
+      };
+    } else {
       await prisma.approval.delete({
         where: {
           proposal_id_user_id: {
@@ -221,31 +307,102 @@ export default class ApproveCommand extends Command {
 
       proposal.approvals.splice(approvalIndex, 1);
 
-      const godfathers = await renderGodfatherLine(interaction, proposal);
+      const newembed = await updateProposalsEmbed(interaction, proposal, embed);
 
-      const field = embed.fields?.[embed.fields.length - 1];
-      if (field) {
-        const { base, correction } = field.value.match(dataSplitRegex)!.groups!;
-        field.value = [base, correction, godfathers].filter(Boolean).join('\n\n');
-      } else {
-        const { base, correction } = embed.description!.match(dataSplitRegex)!.groups!;
-        embed.description = [base, correction, godfathers].filter(Boolean).join('\n\n');
+      await message.edit({ embeds: [newembed] });
+      await interaction.reply(interactionInfo(`Votre [approbation](${message.url}) a bien été retirée.`));
+      return null;
+    }
+  }
+
+  async reportCollector(options: CollectorOptions) {
+    const { interaction, message } = options;
+    const proposal = (await prisma.report.findUnique({
+      where: {
+        message_id: message.id
+      },
+      include: {
+        suggestion: {
+          include: {
+            approvals: true,
+            disapprovals: true
+          }
+        },
+        approvals: true,
+        disapprovals: true
       }
+    })) as ReportExtended | null;
 
-      await message.edit({ embeds: [embed] });
+    if (!proposal) {
+      await interaction.reply(interactionProblem(`Le message est invalide.`));
+      return null;
+    }
 
-      return interaction.reply(interactionInfo(`Votre [approbation](${message.url}) a bien été retirée.`));
+    const embed = message.embeds[0]?.toJSON();
+    if (!embed) {
+      await prisma.report.delete({
+        where: {
+          proposal_id: proposal.proposal_id
+        }
+      });
+      await interaction.reply(interactionProblem(`Le message est invalide.`));
+      return null;
+    }
+
+    if (proposal.user_id === interaction.user.id) {
+      await interaction.reply(
+        interactionProblem(`Vous ne pouvez pas approuver votre propre ${Declaration[message.channel.id].WORD}.`)
+      );
+      return null;
+    }
+
+    const check = await checkProposalsifMergeOrRefused(interaction, proposal, message);
+
+    if (check) return null;
+
+    const approvalIndex = proposal.approvals.findIndex((approval) => approval.user_id === interaction.user.id);
+    if (approvalIndex !== -1) {
+      await prisma.report.update({
+        where: {
+          message_id: message.id
+        },
+        data: {
+          approvals: {
+            delete: {
+              proposal_id_user_id: {
+                user_id: interaction.user.id,
+                proposal_id: proposal.proposal_id
+              }
+            }
+          }
+        }
+      });
+
+      const newembed = await updateProposalsEmbed(interaction, proposal, embed);
+
+      await message.edit({ embeds: [newembed] });
+
+      await interaction.reply(interactionInfo(`Votre [approbation](${message.url}) a bien été retirée.`));
+      return null;
     }
 
     const disapprovalIndex = proposal.disapprovals.findIndex(
       (disapproval) => disapproval.user_id === interaction.user.id
     );
+
     if (disapprovalIndex !== -1) {
-      await prisma.disapproval.delete({
+      await prisma.report.update({
         where: {
-          proposal_id_user_id: {
-            proposal_id: proposal.id,
-            user_id: interaction.user.id
+          message_id: message.id
+        },
+        data: {
+          disapprovals: {
+            delete: {
+              proposal_id_user_id: {
+                user_id: interaction.user.id,
+                proposal_id: proposal.proposal_id
+              }
+            }
           }
         }
       });
@@ -254,73 +411,47 @@ export default class ApproveCommand extends Command {
     }
 
     proposal.approvals.push(
-      await prisma.approval.create({
+      await prisma.report.update({
+        where: {
+          message_id: message.id
+        },
         data: {
-          proposal_id: proposal.id,
-          user_id: interaction.user.id
+          approvals: {
+            connect: {
+              proposal_id_user_id: {
+                proposal_id: proposal.proposal_id,
+                user_id: interaction.user.id
+              }
+            }
+          }
+        },
+        include: {
+          approvals: true,
+          disapprovals: true
         }
       })
     );
 
-    const neededApprovalsCount = isSuggestion ? neededSuggestionsApprovals : neededCorrectionsApprovals;
-
-    if (isSuggestion && proposal.approvals.length >= neededApprovalsCount && proposal.corrections[0]) {
-      const suggestionLink = messageLink(interaction.guild.id, suggestionsChannelId, proposal.message_id!);
-      const correctionLink = messageLink(
-        interaction.guild.id,
-        correctionsChannelId,
-        proposal.corrections[0].message_id!
-      );
-      return interaction.reply(
-        interactionInfo(`
-          Le nombre d'approbations requises pour l'ajout de [cette suggestion](${suggestionLink}) a déjà été atteint, seul [cette correction](${correctionLink}) nécessite encore des approbations.`)
-      );
-    }
-
-    const godfathers = await renderGodfatherLine(interaction, proposal);
-
-    const field = embed.fields?.[embed.fields.length - 1];
-    if (field) {
-      const { base, correction } = field.value.match(dataSplitRegex)!.groups!;
-      field.value = [base, correction, godfathers].filter(Boolean).join('\n\n');
-    } else {
-      const { base, correction } = embed.description!.match(dataSplitRegex)!.groups!;
-      embed.description = [base, correction, godfathers].filter(Boolean).join('\n\n');
-    }
+    const newembed = await updateProposalsEmbed(interaction, proposal, embed);
 
     await interaction.client.votes.deleteUserVotes(message, interaction.user.id);
 
-    if (proposal.approvals.length < neededApprovalsCount) {
-      await message.edit({ embeds: [embed] });
+    if (proposal.approvals.length < neededReportsApprovals) {
+      await message.edit({ embeds: [newembed] });
 
-      return interaction.reply(interactionValidate(`Votre [approbation](${message.url}) a été prise en compte !`));
+      await interaction.reply(interactionValidate(`Votre [approbation](${message.url}) a été prise en compte !`));
+      return null;
     }
 
     await interaction.deferReply({ ephemeral: true });
-
-    try {
-      if (isSuggestion) {
-        await this.approveSuggestion(interaction, proposal, message, embed);
-      } else {
-        await this.approveCorrection(interaction, proposal, message, embed);
-      }
-    } catch (error) {
-      console.error(error);
-      await interaction.editReply(
-        interactionProblem(
-          `Une erreur s'est produite lors de l'approbation de la [suggestion](${message.url}), veuillez contacter le développeur !`
-        )
-      );
-    }
+    return {
+      proposal: proposal,
+      embed: newembed
+    };
   }
 
-  async approveSuggestion(
-    interaction: MessageContextMenuCommandInteraction,
-    proposal: Suggestion,
-    message: Message,
-    embed: APIEmbed,
-    automerge = false
-  ): Promise<void> {
+  async approveSuggestion(options: ApproveOptions<Suggestion> & { automerge?: boolean }): Promise<void> {
+    const { interaction, proposal, message, embed, automerge } = options;
     const logsChannel = interaction.client.channels.cache.get(logsChannelId) as TextChannel;
 
     const member = await interaction.guild?.members.fetch(proposal.user_id!);
@@ -362,7 +493,7 @@ export default class ApproveCommand extends Command {
     const jokeMessage = await message.edit({ embeds: [embed] });
     await jokeMessage.reactions.removeAll();
 
-    message.client.stickys.reload();
+    await message.client.stickys.reload();
 
     if (automerge) {
       await interaction.followUp(
@@ -376,12 +507,58 @@ export default class ApproveCommand extends Command {
     await interaction.editReply(interactionValidate(`La [suggestion](${message.url}) a bien été ajoutée à l'API !`));
   }
 
-  async approveCorrection(
-    interaction: MessageContextMenuCommandInteraction<'cached'>,
-    proposal: Correction,
-    message: Message,
-    embed: APIEmbed
-  ): Promise<void> {
+  async approveReport(options: ApproveOptions<ReportExtended>): Promise<void> {
+    const { interaction, proposal, message, embed } = options;
+    const logsChannel = interaction.client.channels.cache.get(logsChannelId) as TextChannel;
+
+    const member = await interaction.guild?.members.fetch(proposal.user_id!).catch(() => null);
+    if (member && !member.roles.cache.has(jokerRoleId)) {
+      await member.roles.add(jokerRoleId);
+    }
+
+    const { success, joke_id } = await Jokes.removeJoke(proposal);
+    if (!success) return;
+
+    interaction.client.refreshStatus();
+
+    await prisma.proposal.updateMany({
+      data: {
+        merged: true,
+        joke_id
+      },
+      where: { id: proposal.suggestion.id }
+    });
+
+    embed.color = Colors.ACCEPTED;
+
+    if (isEmbedable(logsChannel)) {
+      await logsChannel.send({
+        content: "Blague retirée à l'API",
+        embeds: [embed]
+      });
+    }
+
+    embed.footer = { text: 'Blague signalée' };
+
+    const field = embed.fields?.[embed.fields.length - 1];
+    if (field) {
+      field.value = field.value.match(dataSplitRegex)!.groups!.base;
+    } else {
+      embed.description = embed.description!.match(dataSplitRegex)!.groups!.base;
+    }
+
+    const jokeMessage = await message.edit({ embeds: [embed] });
+    await jokeMessage.reactions.removeAll();
+
+    await message.client.stickys.reload();
+
+    await interaction.editReply(
+      interactionValidate(`La [blague](${message.url}) a bien été signalée et retirée de l'API !`)
+    );
+  }
+
+  async approveCorrection(options: ApproveOptions<Correction>): Promise<void> {
+    const { interaction, proposal, message, embed } = options;
     const logsChannel = interaction.client.channels.cache.get(logsChannelId) as TextChannel;
     const suggestionsChannel = interaction.client.channels.cache.get(suggestionsChannelId) as TextChannel;
     const isPublishedJoke = proposal.type === ProposalType.CORRECTION;
@@ -494,13 +671,13 @@ export default class ApproveCommand extends Command {
       proposal.suggestion &&
       proposal.suggestion.approvals.length >= neededSuggestionsApprovals
     ) {
-      await this.approveSuggestion(
+      await this.approveSuggestion({
         interaction,
-        proposal.suggestion as Suggestion,
-        suggestionMessage,
-        suggestionMessage.embeds[0].toJSON(),
-        true
-      );
+        proposal: proposal.suggestion as Suggestion,
+        message: suggestionMessage,
+        embed: suggestionMessage.embeds[0].toJSON(),
+        automerge: true
+      });
     }
   }
 }

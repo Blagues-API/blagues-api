@@ -1,6 +1,6 @@
 import { constants as fsConstants, promises as fs } from 'fs';
-import { Correction, Joke, Suggestion } from './typings';
-import path from 'path';
+import { Correction, Joke, ReportExtended, Suggestion } from './typings';
+import { join } from 'path';
 
 import { AsyncQueue } from '@sapphire/async-queue';
 
@@ -20,7 +20,7 @@ class JokesLoader {
   }
 
   private async init() {
-    const jokesPath = path.join(__dirname, '../blagues.json');
+    const jokesPath = join(__dirname, '../blagues.json');
     try {
       await fs.access(jokesPath, fsConstants.R_OK | fsConstants.W_OK);
     } catch (error) {
@@ -37,7 +37,7 @@ class JokesLoader {
   public async mergeJoke(
     proposal: Correction | Suggestion
   ): Promise<{ success: boolean; joke_id?: number; error?: string }> {
-    const jokesPath = path.join(__dirname, '../blagues.json');
+    const jokesPath = join(__dirname, '../blagues.json');
     try {
       await fs.access(jokesPath, fsConstants.R_OK | fsConstants.W_OK);
     } catch (error) {
@@ -73,6 +73,42 @@ class JokesLoader {
     } catch (error) {
       console.log('Error:', error);
       return { success: false, error: `Une erreur s'est produite lors de l'ajout de la blague.` };
+    } finally {
+      this.loader.shift();
+    }
+  }
+
+  public async removeJoke(proposal: ReportExtended): Promise<{ success: boolean; joke_id?: number; error?: string }> {
+    const jokesPath = join(__dirname, '../blagues.json');
+    try {
+      await fs.access(jokesPath, fsConstants.R_OK | fsConstants.W_OK);
+    } catch (error) {
+      console.log('Missing access', error);
+      return { success: false, error: 'Il semblerait que le fichier de blagues soit inaccessible ou innexistant.' };
+    }
+
+    try {
+      await this.loader.wait();
+
+      const rawData = await fs.readFile(jokesPath, 'utf-8');
+      const jokes = (rawData.length ? JSON.parse(rawData) : []) as Joke[];
+
+      const index = jokes.findIndex((joke) => joke.id === proposal.suggestion.joke_id!);
+      const joke_id = proposal.suggestion.joke_id!;
+      jokes.splice(index, 1);
+      for (const joke of jokes.splice(index, jokes.length)) {
+        joke.id -= 1;
+      }
+
+      this.list = jokes;
+      this.count = jokes.length;
+
+      await fs.writeFile(jokesPath, JSON.stringify(jokes, null, 2));
+
+      return { success: true, joke_id };
+    } catch (error) {
+      console.error('Error:', error);
+      return { success: false, error: `Une erreur s'est produite lors de la suppression de la blague.` };
     } finally {
       this.loader.shift();
     }
