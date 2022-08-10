@@ -28,7 +28,7 @@ import {
   isGodfather,
   messageLink,
   Declaration,
-  updateProposalsEmbed
+  updateProposalEmbed
 } from '../utils';
 
 export default class DisapproveCommand extends Command {
@@ -204,7 +204,7 @@ export default class DisapproveCommand extends Command {
 
       proposal.disapprovals.splice(disapprovalIndex, 1);
 
-      const newembed = await updateProposalsEmbed(interaction, proposal, embed);
+      const newembed = await updateProposalEmbed(interaction, proposal, embed);
       await message.edit({ embeds: [newembed] });
 
       return interaction.reply(interactionInfo(`Votre [désapprobation](${message.url}) a bien été retirée.`));
@@ -248,7 +248,7 @@ export default class DisapproveCommand extends Command {
       );
     }
 
-    const newembed = await updateProposalsEmbed(interaction, proposal, embed);
+    const newembed = await updateProposalEmbed(interaction, proposal, embed);
     await message.edit({ embeds: [newembed] });
 
     await interaction.client.votes.deleteUserVotes(message, interaction.user.id);

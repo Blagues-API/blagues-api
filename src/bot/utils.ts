@@ -20,17 +20,17 @@ import { Colors, dataSplitRegex, godfatherRoleId } from './constants';
 import { suggestionsChannelId, correctionsChannelId, reportsChannelId } from './constants';
 import { Proposals } from '../typings';
 import { renderGodfatherLine } from './modules/godfathers';
-import { Report } from '@prisma/client';
 
 type UniversalInteractionOptions = Omit<InteractionReplyOptions, 'flags'>;
 type UniversalMessageOptions = Omit<MessageOptions, 'flags'>;
 
 type WaitForInteractionOptions<T extends MessageComponentType> = {
   component_type: T;
-  message: Message<true>;
+  message: Message;
   user: User;
   idle?: number;
 };
+
 type WaitForInteraction<T> = T extends WaitForInteractionOptions<ComponentType.Button>
   ? ButtonInteraction<'cached'>
   : SelectMenuInteraction<'cached'>;
@@ -221,7 +221,7 @@ export async function waitForConfirmation(
   embed: APIEmbed,
   sendType: string
 ): Promise<ButtonInteraction<'cached'>> {
-  const message = (await interaction.reply({
+  const message = await interaction.reply({
     content: `Êtes-vous sûr de vouloir confirmer la proposition de ce${
       sendType === 'report' ? 'ce signalement' : 'cette blague'
     } ?`,
@@ -247,7 +247,7 @@ export async function waitForConfirmation(
     ],
     ephemeral: true,
     fetchReply: true
-  })) as Message<true>;
+  });
 
   return interactionWaiter({
     component_type: ComponentType.Button,
@@ -256,7 +256,7 @@ export async function waitForConfirmation(
   });
 }
 
-export async function updateProposalsEmbed(
+export async function updateProposalEmbed(
   interaction: MessageContextMenuCommandInteraction<'cached'>,
   proposal: Proposals,
   embed: APIEmbed
@@ -274,9 +274,9 @@ export async function updateProposalsEmbed(
   return embed;
 }
 
-export async function checkProposalsifMergeOrRefused(
-  interaction: MessageContextMenuCommandInteraction,
-  proposal: Proposals | Report,
+export async function checkProposalStatus(
+  interaction: MessageContextMenuCommandInteraction<'cached'>,
+  proposal: Proposals,
   message: Message
 ) {
   const embed = message.embeds[0].toJSON();

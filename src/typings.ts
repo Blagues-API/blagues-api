@@ -68,19 +68,21 @@ export const JokeTypesDescriptions: Record<Category, string> = {
   blondes: 'Blagues ciblées sur les femmes blondes.'
 };
 
-export const Reasons = ['duplicate', 'inappropriate'] as const;
+export const Reasons = ['DUPLICATE', 'INAPPROPRIATE'] as const;
 
 export type Reason = typeof Reasons[number];
 
 export const ReasonsRefs: Record<Reason, string> = {
-  duplicate: 'Doublon',
-  inappropriate: 'Inappropriée'
+  DUPLICATE: 'Doublon',
+  INAPPROPRIATE: 'Inappropriée'
 };
 
-export type ProposalExtended = Proposal & {
+interface GodfathersDecisions {
   approvals: Approval[];
   disapprovals: Disapproval[];
-};
+}
+
+export type ProposalExtended = Proposal & GodfathersDecisions;
 
 export type Correction = ProposalExtended & {
   type: 'SUGGESTION_CORRECTION' | 'CORRECTION';
@@ -102,10 +104,10 @@ export type ReminderProposal = ProposalExtended & {
   suggestion: (ProposalExtended & { corrections: Proposal[] }) | null;
 };
 
-export type ReportExtended = Report & {
-  suggestion: Suggestion;
-  approvals: Approval[];
-  disapprovals: Disapproval[];
-};
+export type Reports = Report & GodfathersDecisions;
 
-export type Proposals = Correction | Suggestion | ReportExtended;
+export interface ReportExtended extends Reports {
+  suggestion: Suggestion;
+}
+
+export type Proposals = Correction | Suggestion | ProposalSuggestion | ReportExtended;

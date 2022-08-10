@@ -10,7 +10,7 @@ import {
   SelectMenuInteraction,
   TextChannel
 } from 'discord.js';
-import { CategoriesRefs, Category, Joke } from '../../typings';
+import { CategoriesRefs, Joke, ReasonsRefs } from '../../typings';
 import { Colors, commandsChannelId, reportsChannelId } from '../constants';
 import Command from '../lib/command';
 import { findBestMatch } from 'string-similarity';
@@ -36,8 +36,8 @@ export default class ReportCommand extends Command {
           name: 'raison',
           description: 'Raison du signalement de la blague',
           required: true,
-          choices: Object.entries(ReportType).map(([key, name]) => ({
-            name: name.toLowerCase(),
+          choices: Object.entries(ReasonsRefs).map(([key, name]) => ({
+            name: name,
             value: key
           }))
         },
@@ -76,7 +76,7 @@ export default class ReportCommand extends Command {
       return interaction.reply(interactionProblem('Cette blague a déjà été signalée.', true));
     }
 
-    const reason = interaction.options.getString('raison', true) as ReportType;
+    const reason = interaction.options.getString('raison', true) as keyof typeof ReasonsRefs;
 
     const embed = {
       author: {
@@ -99,14 +99,14 @@ export default class ReportCommand extends Command {
       color: Colors.PROPOSED
     };
 
-    if (reason === ReportType.DUPLICATE) {
+    if (reason === ReasonsRefs.DUPLICATE) {
       const duplicate = await this.getDuplicate(interaction, joke);
       if (!duplicate) return;
 
       embed.fields.push({
         name: 'Doublon',
         value: `
-        > **Type**: ${CategoriesRefs[duplicate.type as Category]}
+        > **Type**: ${CategoriesRefs[duplicate.type]}
         > **Blague**: ${duplicate.joke}
         > **Réponse**: ${duplicate.answer}
         `,
@@ -117,7 +117,7 @@ export default class ReportCommand extends Command {
     } else {
       embed.fields.push({
         name: 'Raison',
-        value: ReportType[reason].toLowerCase(),
+        value: ReasonsRefs[reason],
         inline: false
       });
 

@@ -1,5 +1,5 @@
 import { constants as fsConstants, promises as fs } from 'fs';
-import { Correction, Joke, ReportExtended, Suggestion } from './typings';
+import { Joke, Proposals, ReportExtended } from './typings';
 import { join } from 'path';
 
 import { AsyncQueue } from '@sapphire/async-queue';
@@ -35,7 +35,7 @@ class JokesLoader {
   }
 
   public async mergeJoke(
-    proposal: Correction | Suggestion
+    proposal: Exclude<Proposals, ReportExtended>
   ): Promise<{ success: boolean; joke_id?: number; error?: string }> {
     const jokesPath = join(__dirname, '../blagues.json');
     try {
