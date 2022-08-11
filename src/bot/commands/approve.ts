@@ -8,15 +8,7 @@ import {
   APIEmbed
 } from 'discord.js';
 import prisma from '../../prisma';
-import {
-  CategoriesRefs,
-  Category,
-  Correction,
-  Proposals,
-  ProposalSuggestion,
-  ReportExtended,
-  Suggestion
-} from '../../typings';
+import { CategoriesRefs, Category, Correction, Proposals, ReportExtended, Suggestion } from '../../typings';
 import {
   Colors,
   neededCorrectionsApprovals,
@@ -49,7 +41,7 @@ import Jokes from '../../jokes';
 import { renderGodfatherLine } from '../modules/godfathers';
 import { compareTwoStrings } from 'string-similarity';
 
-interface ApproveOptions<T extends Proposals> {
+interface ApproveOptions<T extends Proposals | ReportExtended> {
   interaction: MessageContextMenuCommandInteraction<'cached'>;
   proposal: T;
   message: Message;
@@ -66,14 +58,14 @@ export default class ApproveCommand extends Command {
   private readonly collector: Record<
     string,
     (options: CollectorOptions) => Promise<{
-      proposal: Proposals;
+      proposal: Proposals | ReportExtended;
       embed: APIEmbed;
     } | null>
   >;
 
   private readonly approve: Record<
     string,
-    ({ interaction, proposal, message, embed, automerge }: ApproveOptions<Proposals>) => Promise<void>
+    ({ interaction, proposal, message, embed, automerge }: ApproveOptions<Proposals & ReportExtended>) => Promise<void>
   >;
 
   constructor() {
@@ -83,8 +75,8 @@ export default class ApproveCommand extends Command {
     });
 
     this.collector = {
-      [suggestionsChannelId]: this.proposalsCollector,
-      [correctionsChannelId]: this.proposalsCollector,
+      [suggestionsChannelId]: this.proposalsCollector<Suggestion>,
+      [correctionsChannelId]: this.proposalsCollector<Correction>,
       [reportsChannelId]: this.reportCollector
     };
 
@@ -148,11 +140,14 @@ export default class ApproveCommand extends Command {
     }
   }
 
-  async proposalsCollector({ interaction, message }: CollectorOptions): Promise<{
-    proposal: Exclude<Proposals, ReportExtended>;
+  async proposalsCollector<T extends Proposals | null>({
+    interaction,
+    message
+  }: CollectorOptions): Promise<{
+    proposal: T;
     embed: APIEmbed;
   } | null> {
-    const proposal = await prisma.proposal.findUnique({
+    const proposal: T = await prisma.proposal.findUnique({
       where: {
         message_id: message.id
       },
@@ -160,22 +155,17 @@ export default class ApproveCommand extends Command {
         suggestion: {
           include: {
             corrections: {
-              orderBy: {
-                created_at: 'desc'
-              },
-              where: {
-                merged: false,
-                refused: false,
-                stale: false
+              include: {
+                approvals: true,
+                disapprovals: true
               }
-            }
+            },
+            approvals: true,
+            disapprovals: true
           }
         },
         corrections: {
           take: 1,
-          orderBy: {
-            created_at: 'desc'
-          },
           where: {
             merged: false,
             refused: false,
@@ -190,6 +180,7 @@ export default class ApproveCommand extends Command {
         disapprovals: true
       }
     });
+
     if (!proposal) {
       await interaction.reply(interactionProblem(`Le message est invalide.`));
       return null;
@@ -215,12 +206,12 @@ export default class ApproveCommand extends Command {
       return null;
     }
 
-    const check = await checkProposalStatus(interaction, proposal, message);
+    const check = await checkProposalStatus<Proposals>(interaction, proposal, message);
 
     if (check) return null;
 
     if (isSuggestion) {
-      const correction = proposal.corrections[0];
+      const correction = proposal.corrections ? proposal.corrections[0] : null;
       if (correction) {
         const beenApproved = correction.approvals.some((approval) => approval.user_id === interaction.user.id);
         if (!beenApproved) {
@@ -235,7 +226,7 @@ export default class ApproveCommand extends Command {
         }
       }
     } else {
-      const lastCorrection = proposal.suggestion?.corrections[0];
+      const lastCorrection = proposal.suggestion.corrections[0];
       if (lastCorrection && lastCorrection.id !== proposal.id) {
         const correctionLink = messageLink(interaction.guild!.id, correctionsChannelId, lastCorrection.message_id!);
         await interaction.reply(
@@ -333,8 +324,8 @@ export default class ApproveCommand extends Command {
           include: {
             corrections: {
               include: {
-                approvals: true,
-                disapprovals: true
+                disapprovals: true,
+                approvals: true
               }
             },
             approvals: true,
@@ -465,7 +456,7 @@ export default class ApproveCommand extends Command {
     message,
     embed,
     automerge
-  }: ApproveOptions<Suggestion | ProposalSuggestion>): Promise<void> {
+  }: ApproveOptions<Suggestion>): Promise<void> {
     const logsChannel = interaction.client.channels.cache.get(logsChannelId) as TextChannel;
 
     const member = await interaction.guild?.members.fetch(proposal.user_id!);

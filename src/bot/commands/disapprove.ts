@@ -90,7 +90,7 @@ export default class DisapproveCommand extends Command {
   }
 
   async proposalsCollector(interaction: MessageContextMenuCommandInteraction<'cached'>, message: Message) {
-    const proposal = (await prisma.proposal.findUnique({
+    const proposal = await prisma.proposal.findUnique({
       where: {
         message_id: message.id
       },
@@ -129,7 +129,7 @@ export default class DisapproveCommand extends Command {
         approvals: true,
         disapprovals: true
       }
-    })) as Proposals | null;
+    });
 
     if (!proposal) {
       return interaction.reply(interactionProblem(`Le message est invalide.`));

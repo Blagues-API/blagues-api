@@ -10,7 +10,7 @@ import {
   SelectMenuInteraction,
   TextChannel
 } from 'discord.js';
-import { CategoriesRefs, Joke, ReasonsRefs } from '../../typings';
+import { CategoriesRefs, Joke, Reasons } from '../../typings';
 import { Colors, commandsChannelId, reportsChannelId } from '../constants';
 import Command from '../lib/command';
 import { findBestMatch } from 'string-similarity';
@@ -36,7 +36,7 @@ export default class ReportCommand extends Command {
           name: 'raison',
           description: 'Raison du signalement de la blague',
           required: true,
-          choices: Object.entries(ReasonsRefs).map(([key, name]) => ({
+          choices: Object.entries(Reasons).map(([key, name]) => ({
             name: name,
             value: key
           }))
@@ -76,7 +76,7 @@ export default class ReportCommand extends Command {
       return interaction.reply(interactionProblem('Cette blague a déjà été signalée.', true));
     }
 
-    const reason = interaction.options.getString('raison', true) as keyof typeof ReasonsRefs;
+    const reason = interaction.options.getString('raison', true) as keyof typeof Reasons;
 
     const embed = {
       author: {
@@ -99,7 +99,7 @@ export default class ReportCommand extends Command {
       color: Colors.PROPOSED
     };
 
-    if (reason === ReasonsRefs.DUPLICATE) {
+    if (reason === Reasons.DUPLICATE) {
       const duplicate = await this.getDuplicate(interaction, joke);
       if (!duplicate) return;
 
@@ -117,7 +117,7 @@ export default class ReportCommand extends Command {
     } else {
       embed.fields.push({
         name: 'Raison',
-        value: ReasonsRefs[reason],
+        value: Reasons[reason],
         inline: false
       });
 

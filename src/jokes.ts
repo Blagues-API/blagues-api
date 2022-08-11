@@ -34,9 +34,7 @@ class JokesLoader {
     this.count = jokes.length;
   }
 
-  public async mergeJoke(
-    proposal: Exclude<Proposals, ReportExtended>
-  ): Promise<{ success: boolean; joke_id?: number; error?: string }> {
+  public async mergeJoke(proposal: Proposals): Promise<{ success: boolean; joke_id?: number; error?: string }> {
     const jokesPath = join(__dirname, '../blagues.json');
     try {
       await fs.access(jokesPath, fsConstants.R_OK | fsConstants.W_OK);

@@ -1,4 +1,4 @@
-import { Approval, Disapproval, Proposal, Report } from '@prisma/client';
+import { Approval, Disapproval, Proposal, Report, ReportType } from '@prisma/client';
 
 /**
  * Standard joke interface
@@ -68,14 +68,16 @@ export const JokeTypesDescriptions: Record<Category, string> = {
   blondes: 'Blagues ciblées sur les femmes blondes.'
 };
 
-export const Reasons = ['DUPLICATE', 'INAPPROPRIATE'] as const;
-
-export type Reason = typeof Reasons[number];
-
-export const ReasonsRefs: Record<Reason, string> = {
-  DUPLICATE: 'Doublon',
-  INAPPROPRIATE: 'Inappropriée'
+export const Reasons: Record<ReportType, string> = {
+  [ReportType.DUPLICATE]: 'Doublon',
+  [ReportType.INAPPROPRIATE]: 'Inappropriée'
 };
+
+// export enum ProposalType {
+//   SUGGESTION = 'SUGGESTION',
+//   CORRECTION = 'CORRECTION',
+//   SUGGESTION_CORRECTION = 'SUGGESTION_CORRECTION'
+// }
 
 interface GodfathersDecisions {
   approvals: Approval[];
@@ -85,8 +87,8 @@ interface GodfathersDecisions {
 export type ProposalExtended = Proposal & GodfathersDecisions;
 
 export type Correction = ProposalExtended & {
-  type: 'SUGGESTION_CORRECTION' | 'CORRECTION';
-  suggestion: ProposalSuggestion;
+  type: 'CORRECTION' | 'SUGGESTION_CORRECTION';
+  suggestion: Suggestion;
 };
 
 export type Suggestion = ProposalExtended & {
@@ -94,20 +96,14 @@ export type Suggestion = ProposalExtended & {
   corrections: ProposalExtended[];
 };
 
-export type ProposalSuggestion = ProposalExtended & {
-  type: 'SUGGESTION';
-  corrections: Proposal[];
-};
-
 export type ReminderProposal = ProposalExtended & {
   corrections: Proposal[];
   suggestion: (ProposalExtended & { corrections: Proposal[] }) | null;
 };
 
-export type Reports = Report & GodfathersDecisions;
+export type ReportExtended = Report &
+  GodfathersDecisions & {
+    suggestion: ProposalExtended & { corrections: Proposal[] };
+  };
 
-export interface ReportExtended extends Reports {
-  suggestion: Suggestion;
-}
-
-export type Proposals = Correction | Suggestion | ProposalSuggestion | ReportExtended;
+export type Proposals = Correction | Suggestion;

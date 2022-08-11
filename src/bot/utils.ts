@@ -18,7 +18,7 @@ import { diffWords } from 'diff';
 import { APIEmbed } from 'discord-api-types/v10';
 import { Colors, dataSplitRegex, godfatherRoleId } from './constants';
 import { suggestionsChannelId, correctionsChannelId, reportsChannelId } from './constants';
-import { Proposals } from '../typings';
+import { Proposals, ReportExtended } from '../typings';
 import { renderGodfatherLine } from './modules/godfathers';
 
 type UniversalInteractionOptions = Omit<InteractionReplyOptions, 'flags'>;
@@ -258,7 +258,7 @@ export async function waitForConfirmation(
 
 export async function updateProposalEmbed(
   interaction: MessageContextMenuCommandInteraction<'cached'>,
-  proposal: Proposals,
+  proposal: Proposals | ReportExtended,
   embed: APIEmbed
 ) {
   const godfathers = await renderGodfatherLine(interaction, proposal);
@@ -274,9 +274,9 @@ export async function updateProposalEmbed(
   return embed;
 }
 
-export async function checkProposalStatus(
+export async function checkProposalStatus<T extends Proposals | ReportExtended>(
   interaction: MessageContextMenuCommandInteraction<'cached'>,
-  proposal: Proposals,
+  proposal: T,
   message: Message
 ) {
   const embed = message.embeds[0].toJSON();
