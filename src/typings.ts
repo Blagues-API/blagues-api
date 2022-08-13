@@ -73,12 +73,6 @@ export const Reasons: Record<ReportType, string> = {
   [ReportType.INAPPROPRIATE]: 'Inappropriée'
 };
 
-// export enum ProposalType {
-//   SUGGESTION = 'SUGGESTION',
-//   CORRECTION = 'CORRECTION',
-//   SUGGESTION_CORRECTION = 'SUGGESTION_CORRECTION'
-// }
-
 interface GodfathersDecisions {
   approvals: Approval[];
   disapprovals: Disapproval[];
@@ -105,5 +99,3 @@ export type ReportExtended = Report &
   GodfathersDecisions & {
     suggestion: ProposalExtended & { corrections: Proposal[] };
   };
-
-export type Proposals = Correction | Suggestion;

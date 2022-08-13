@@ -76,7 +76,7 @@ export default class ReportCommand extends Command {
       return interaction.reply(interactionProblem('Cette blague a déjà été signalée.', true));
     }
 
-    const reason = interaction.options.getString('raison', true) as keyof typeof Reasons;
+    const reason = interaction.options.getString('raison', true) as ReportType;
 
     const embed = {
       author: {
@@ -99,7 +99,7 @@ export default class ReportCommand extends Command {
       color: Colors.PROPOSED
     };
 
-    if (reason === Reasons.DUPLICATE) {
+    if (reason === ReportType.DUPLICATE) {
       const duplicate = await this.getDuplicate(interaction, joke);
       if (!duplicate) return;
 

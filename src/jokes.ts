@@ -1,8 +1,14 @@
 import { constants as fsConstants, promises as fs } from 'fs';
-import { Joke, Proposals, ReportExtended } from './typings';
+import { Joke, Correction, Suggestion, ReportExtended } from './typings';
 import { join } from 'path';
 
 import { AsyncQueue } from '@sapphire/async-queue';
+
+interface MergeJokeResponse {
+  success: boolean;
+  joke_id?: number;
+  error?: string;
+}
 
 class JokesLoader {
   public count: number;
@@ -34,7 +40,7 @@ class JokesLoader {
     this.count = jokes.length;
   }
 
-  public async mergeJoke(proposal: Proposals): Promise<{ success: boolean; joke_id?: number; error?: string }> {
+  public async mergeJoke(proposal: Correction | Suggestion): Promise<MergeJokeResponse> {
     const jokesPath = join(__dirname, '../blagues.json');
     try {
       await fs.access(jokesPath, fsConstants.R_OK | fsConstants.W_OK);
@@ -76,7 +82,7 @@ class JokesLoader {
     }
   }
 
-  public async removeJoke(proposal: ReportExtended): Promise<{ success: boolean; joke_id?: number; error?: string }> {
+  public async removeJoke(proposal: ReportExtended): Promise<MergeJokeResponse> {
     const jokesPath = join(__dirname, '../blagues.json');
     try {
       await fs.access(jokesPath, fsConstants.R_OK | fsConstants.W_OK);

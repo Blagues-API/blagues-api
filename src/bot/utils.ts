@@ -16,10 +16,19 @@ import {
 } from 'discord.js';
 import { diffWords } from 'diff';
 import { APIEmbed } from 'discord-api-types/v10';
-import { Colors, dataSplitRegex, godfatherRoleId } from './constants';
+import {
+  Colors,
+  dataSplitRegex,
+  godfatherRoleId,
+  neededCorrectionsApprovals,
+  neededReportsApprovals,
+  neededSuggestionsApprovals
+} from './constants';
 import { suggestionsChannelId, correctionsChannelId, reportsChannelId } from './constants';
-import { Proposals, ReportExtended } from '../typings';
+import { Correction, Suggestion, ReportExtended } from '../typings';
 import { renderGodfatherLine } from './modules/godfathers';
+import { ProposalType } from '@prisma/client';
+import prisma from 'prisma';
 
 type UniversalInteractionOptions = Omit<InteractionReplyOptions, 'flags'>;
 type UniversalMessageOptions = Omit<MessageOptions, 'flags'>;
@@ -34,6 +43,38 @@ type WaitForInteractionOptions<T extends MessageComponentType> = {
 type WaitForInteraction<T> = T extends WaitForInteractionOptions<ComponentType.Button>
   ? ButtonInteraction<'cached'>
   : SelectMenuInteraction<'cached'>;
+
+export interface CollectorOptions {
+  interaction: MessageContextMenuCommandInteraction<'cached'>;
+  message: Message;
+}
+
+export interface ApproveOptions<T extends Correction | Suggestion | ReportExtended> {
+  interaction: MessageContextMenuCommandInteraction<'cached'>;
+  proposal: T;
+  message: Message;
+  embed: APIEmbed;
+  automerge?: boolean;
+}
+
+export type Collector = Record<
+  string,
+  (options: CollectorOptions) => Promise<{
+    proposal: Correction | Suggestion | ReportExtended;
+    embed: APIEmbed;
+  } | null>
+>;
+
+export type Approuve = Record<
+  string,
+  ({
+    interaction,
+    proposal,
+    message,
+    embed,
+    automerge
+  }: ApproveOptions<Suggestion | Correction | ReportExtended>) => Promise<void>
+>;
 
 export function problem(message: string): APIEmbed {
   return {
@@ -258,7 +299,7 @@ export async function waitForConfirmation(
 
 export async function updateProposalEmbed(
   interaction: MessageContextMenuCommandInteraction<'cached'>,
-  proposal: Proposals | ReportExtended,
+  proposal: Correction | Suggestion | ReportExtended,
   embed: APIEmbed
 ) {
   const godfathers = await renderGodfatherLine(interaction, proposal);
@@ -274,7 +315,7 @@ export async function updateProposalEmbed(
   return embed;
 }
 
-export async function checkProposalStatus<T extends Proposals | ReportExtended>(
+export async function checkProposalStatus<T extends Correction | Suggestion | ReportExtended>(
   interaction: MessageContextMenuCommandInteraction<'cached'>,
   proposal: T,
   message: Message
@@ -348,3 +389,305 @@ export const Declaration: Record<string, DeclarationTemplate> = {
     WITH_DEMONSTRATIVE_DETERMINANT: 'Ce signalement'
   }
 } as const;
+
+export async function proposalsCollector({ interaction, message }: CollectorOptions): Promise<{
+  proposal: Correction | Suggestion;
+  embed: APIEmbed;
+} | null> {
+  const proposal = (await prisma.proposal.findUnique({
+    where: {
+      message_id: message.id
+    },
+    include: {
+      suggestion: {
+        include: {
+          corrections: {
+            include: {
+              approvals: true,
+              disapprovals: true
+            }
+          },
+          approvals: true,
+          disapprovals: true
+        }
+      },
+      corrections: {
+        take: 1,
+        where: {
+          merged: false,
+          refused: false,
+          stale: false
+        },
+        include: {
+          approvals: true,
+          disapprovals: true
+        }
+      },
+      approvals: true,
+      disapprovals: true
+    }
+  })) as Correction | Suggestion;
+
+  if (!proposal) {
+    await interaction.reply(interactionProblem(`Le message est invalide.`));
+    return null;
+  }
+
+  const isSuggestion = proposal.type === ProposalType.SUGGESTION;
+
+  const oldEmbed = message.embeds[0]?.toJSON();
+  if (!oldEmbed) {
+    await prisma.proposal.delete({
+      where: {
+        id: proposal.id
+      }
+    });
+    await interaction.reply(interactionProblem(`Le message est invalide.`));
+    return null;
+  }
+
+  if (proposal.user_id === interaction.user.id) {
+    await interaction.reply(
+      interactionProblem(`Vous ne pouvez pas approuver votre propre ${Declaration[message.channel.id].WORD}.`)
+    );
+    return null;
+  }
+
+  const check = await checkProposalStatus<Suggestion | Correction>(interaction, proposal, message);
+
+  if (check) return null;
+
+  if (isSuggestion) {
+    const correction = proposal.corrections ? proposal.corrections[0] : null;
+    if (correction) {
+      const beenApproved = correction.approvals.some((approval) => approval.user_id === interaction.user.id);
+      if (!beenApproved) {
+        const correctionLink = messageLink(interaction.guild.id, correctionsChannelId, correction.message_id!);
+        const suggestionLink = messageLink(interaction.guild.id, suggestionsChannelId, proposal.message_id!);
+        await interaction.reply(
+          interactionInfo(
+            `Il semblerait qu'une [correction aie été proposée](${correctionLink}), veuillez l'approuver avant l'approbation de [cette suggestion](${suggestionLink}).`
+          )
+        );
+        return null;
+      }
+    }
+  } else {
+    const lastCorrection = proposal.suggestion.corrections[0];
+    if (lastCorrection && lastCorrection.id !== proposal.id) {
+      const correctionLink = messageLink(interaction.guild!.id, correctionsChannelId, lastCorrection.message_id!);
+      await interaction.reply(
+        interactionInfo(
+          `Il semblerait qu'une [correction aie été ajoutée](${correctionLink}) par dessus rendant celle-ci obsolète, veuillez approuver la dernière version de la correction.`
+        )
+      );
+      return null;
+    }
+  }
+
+  const approvalIndex = proposal.approvals.findIndex((approval) => approval.user_id === interaction.user.id);
+  if (approvalIndex === -1) {
+    const disapprovalIndex = proposal.disapprovals.findIndex(
+      (disapproval) => disapproval.user_id === interaction.user.id
+    );
+    if (disapprovalIndex !== -1) {
+      await prisma.disapproval.delete({
+        where: {
+          proposal_id_user_id: {
+            proposal_id: proposal.id,
+            user_id: interaction.user.id
+          }
+        }
+      });
+
+      proposal.disapprovals.splice(disapprovalIndex, 1);
+    }
+    proposal.approvals.push(
+      await prisma.approval.create({
+        data: {
+          proposal_id: proposal.id,
+          user_id: interaction.user.id
+        }
+      })
+    );
+    const neededApprovalsCount = isSuggestion ? neededSuggestionsApprovals : neededCorrectionsApprovals;
+    if (isSuggestion && proposal.approvals.length >= neededApprovalsCount && proposal.corrections[0]) {
+      const suggestionLink = messageLink(interaction.guild!.id, suggestionsChannelId, proposal.message_id!);
+      const correctionLink = messageLink(
+        interaction.guild!.id,
+        correctionsChannelId,
+        proposal.corrections[0].message_id!
+      );
+      await interaction.reply(
+        interactionInfo(`
+          Le nombre d'approbations requises pour l'ajout de [cette suggestion](${suggestionLink}) a déjà été atteint, seul [cette correction](${correctionLink}) nécessite encore des approbations.`)
+      );
+      return null;
+    }
+    const embed = await updateProposalEmbed(interaction, proposal, oldEmbed);
+
+    await interaction.client.votes.deleteUserVotes(message, interaction.user.id);
+    if (proposal.approvals.length < neededApprovalsCount) {
+      await message.edit({ embeds: [oldEmbed] });
+
+      await interaction.reply(interactionValidate(`Votre [approbation](${message.url}) a été prise en compte !`));
+      return null;
+    }
+    await interaction.deferReply({ ephemeral: true });
+    return {
+      proposal: proposal,
+      embed: embed
+    };
+  } else {
+    await prisma.approval.delete({
+      where: {
+        proposal_id_user_id: {
+          proposal_id: proposal.id,
+          user_id: interaction.user.id
+        }
+      }
+    });
+
+    proposal.approvals.splice(approvalIndex, 1);
+
+    const embed = await updateProposalEmbed(interaction, proposal, oldEmbed);
+
+    await message.edit({ embeds: [embed] });
+    await interaction.reply(interactionInfo(`Votre [approbation](${message.url}) a bien été retirée.`));
+    return null;
+  }
+}
+
+export async function reportCollector({ interaction, message }: CollectorOptions): Promise<{
+  proposal: ReportExtended;
+  embed: APIEmbed;
+} | null> {
+  const proposal = await prisma.report.findUnique({
+    where: {
+      message_id: message.id
+    },
+    include: {
+      suggestion: {
+        include: {
+          corrections: true,
+          approvals: true,
+          disapprovals: true
+        }
+      },
+      approvals: true,
+      disapprovals: true
+    }
+  });
+
+  if (!proposal) {
+    await interaction.reply(interactionProblem(`Le message est invalide.`));
+    return null;
+  }
+
+  const oldEmbed = message.embeds[0]?.toJSON();
+  if (!oldEmbed) {
+    await prisma.report.delete({
+      where: {
+        proposal_id: proposal.proposal_id
+      }
+    });
+    await interaction.reply(interactionProblem(`Le message est invalide.`));
+    return null;
+  }
+
+  if (proposal.user_id === interaction.user.id) {
+    await interaction.reply(
+      interactionProblem(`Vous ne pouvez pas approuver votre propre ${Declaration[message.channel.id].WORD}.`)
+    );
+    return null;
+  }
+
+  const check = await checkProposalStatus(interaction, proposal, message);
+
+  if (check) return null;
+
+  const approvalIndex = proposal.approvals.findIndex((approval) => approval.user_id === interaction.user.id);
+  if (approvalIndex !== -1) {
+    await prisma.report.update({
+      where: {
+        message_id: message.id
+      },
+      data: {
+        approvals: {
+          delete: {
+            proposal_id_user_id: {
+              user_id: interaction.user.id,
+              proposal_id: proposal.proposal_id
+            }
+          }
+        }
+      }
+    });
+
+    const embed = await updateProposalEmbed(interaction, proposal, oldEmbed);
+
+    await message.edit({ embeds: [embed] });
+
+    await interaction.reply(interactionInfo(`Votre [approbation](${message.url}) a bien été retirée.`));
+    return null;
+  }
+
+  const disapprovalIndex = proposal.disapprovals.findIndex(
+    (disapproval) => disapproval.user_id === interaction.user.id
+  );
+
+  if (disapprovalIndex !== -1) {
+    await prisma.report.update({
+      where: {
+        message_id: message.id
+      },
+      data: {
+        disapprovals: {
+          delete: {
+            proposal_id_user_id: {
+              user_id: interaction.user.id,
+              proposal_id: proposal.proposal_id
+            }
+          }
+        }
+      }
+    });
+
+    proposal.disapprovals.splice(disapprovalIndex, 1);
+  }
+
+  proposal.approvals.push(
+    await prisma.report.update({
+      where: {
+        message_id: message.id
+      },
+      data: {
+        approvals: {
+          connect: {
+            proposal_id_user_id: {
+              proposal_id: proposal.proposal_id,
+              user_id: interaction.user.id
+            }
+          }
+        }
+      }
+    })
+  );
+
+  const embed = await updateProposalEmbed(interaction, proposal, oldEmbed);
+
+  await interaction.client.votes.deleteUserVotes(message, interaction.user.id);
+
+  if (proposal.approvals.length < neededReportsApprovals) {
+    await message.edit({ embeds: [embed] });
+
+    await interaction.reply(interactionValidate(`Votre [approbation](${message.url}) a été prise en compte !`));
+    return null;
+  }
+
+  await interaction.deferReply({ ephemeral: true });
+  return {
+    proposal: proposal,
+    embed: embed
+  };
+}

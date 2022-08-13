@@ -6,7 +6,7 @@ import {
   MessageContextMenuCommandInteraction,
   TextChannel
 } from 'discord.js';
-import { Proposals, ProposalSuggestion } from 'typings';
+import { Correction, Suggestion, ProposalSuggestion } from 'typings';
 import prisma from '../../prisma';
 import {
   Colors,
@@ -262,7 +262,7 @@ export default class DisapproveCommand extends Command {
 
   async disapprove(
     interaction: MessageContextMenuCommandInteraction,
-    proposal: Proposals | ProposalSuggestion,
+    proposal: Correction | Suggestion | ProposalSuggestion,
     message: Message,
     embed: APIEmbed,
     automerge = false
