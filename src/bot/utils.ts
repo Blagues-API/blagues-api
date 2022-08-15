@@ -204,7 +204,7 @@ export async function paginate(
 
     await buttonInteraction.update({ embeds: [embed] });
   } catch (error) {
-    // TOOD: Catch les erreurs
+    // TODO : Catch les erreurs
   }
 
   return paginate(interaction, embed, pages, page, message);
