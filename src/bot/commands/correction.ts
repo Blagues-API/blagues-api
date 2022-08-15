@@ -11,7 +11,7 @@ import {
 } from 'discord.js';
 import { jokeById, jokeByQuestion } from '../../controllers';
 import prisma from '../../prisma';
-import { Category, JokeTypesDescriptions, CategoriesRefs, UnsignedJoke, UnsignedJokeKey } from '../../typings';
+import { CategoriesRefs, Category, JokeTypesDescriptions, UnsignedJoke, UnsignedJokeKey } from '../../typings';
 import {
   Colors,
   commandsChannelId,
@@ -25,17 +25,17 @@ import Command from '../lib/command';
 import clone from 'lodash/clone';
 import { ProposalType } from '@prisma/client';
 import {
-  messageInfo,
+  info,
   interactionInfo,
   interactionProblem,
   interactionValidate,
+  interactionWaiter,
   isEmbedable,
+  messageInfo,
   messageProblem,
   showNegativeDiffs,
   showPositiveDiffs,
-  tDelete,
-  info,
-  interactionWaiter
+  tDelete
 } from '../utils';
 
 enum IdType {
@@ -59,6 +59,7 @@ export default class CorrectionCommand extends Command {
       name: 'correction',
       description: 'Proposer une modification de blague',
       type: ApplicationCommandType.ChatInput,
+      channels: [commandsChannelId],
       options: [
         {
           type: ApplicationCommandOptionType.String,
@@ -71,12 +72,6 @@ export default class CorrectionCommand extends Command {
   }
   async run(interaction: ChatInputCommandInteraction<'cached'>) {
     const query = interaction.options.getString('recherche', true);
-
-    if (interaction.channelId !== commandsChannelId) {
-      return interaction.reply(
-        interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannelId}>.`)
-      );
-    }
 
     const joke = await this.resolveJoke(interaction, query);
     if (!joke) return;
@@ -465,7 +460,7 @@ export default class CorrectionCommand extends Command {
     });
 
     if (!response) {
-      questionMessage.edit(messageInfo('Les 60 secondes se sont écoulées.'));
+      await questionMessage.edit(messageInfo('Les 60 secondes se sont écoulées.'));
       return null;
     }
 

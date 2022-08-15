@@ -1,8 +1,8 @@
 import { ApplicationCommandOptionType, ApplicationCommandType, ChatInputCommandInteraction } from 'discord.js';
-import { commandsChannelId } from '../constants';
 import Command from '../lib/command';
-import { interactionInfo, interactionProblem } from '../utils';
+import { interactionProblem } from '../utils';
 import Stats from '../modules/stats';
+import { commandsChannelId } from '../constants';
 
 export default class StatsCommand extends Command {
   constructor() {
@@ -10,6 +10,7 @@ export default class StatsCommand extends Command {
       name: 'stats',
       description: "Afficher les statistiques d'un utilisateur",
       type: ApplicationCommandType.ChatInput,
+      channels: [commandsChannelId],
       options: [
         {
           type: ApplicationCommandOptionType.User,
@@ -23,12 +24,6 @@ export default class StatsCommand extends Command {
   }
 
   async run(interaction: ChatInputCommandInteraction<'cached'>) {
-    if (interaction.channelId !== commandsChannelId) {
-      return interaction.reply(
-        interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannelId}>.`)
-      );
-    }
-
     if (interaction.options.get('user') && !interaction.options.getMember('user')) {
       return interaction.reply(interactionProblem("L'utilisateur n'est pas dans ce serveur."));
     }
