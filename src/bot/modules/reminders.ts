@@ -19,11 +19,7 @@ import { getGodfatherEmoji } from './godfathers';
 import { ReminderProposal } from '../../typings';
 
 export default class Reminders {
-  public client: Client;
-
-  constructor(client: Client) {
-    this.client = client;
-
+  constructor(public client: Client) {
     if (process.env.bot_reminders === 'false') return;
 
     // Every 10 minutes

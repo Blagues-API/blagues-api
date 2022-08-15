@@ -9,15 +9,12 @@ import ApproveCommand from '../commands/approve';
 import DisapproveCommand from '../commands/disapprove';
 import LeaderboardCommand from '../commands/leaderboard';
 import UserStatsCommand from '../commands/userStats';
+import IgnoreCommand from '../commands/ignore';
 import { commandsChannelId, correctionsChannelId, guildId, suggestionsChannelId } from '../constants';
 import { interactionInfo } from '../utils';
 
 export default class Dispatcher {
-  private client: Client;
-
-  constructor(client: Client) {
-    this.client = client;
-  }
+  constructor(private client: Client) {}
 
   public get commands(): Command[] {
     return [
@@ -28,7 +25,8 @@ export default class Dispatcher {
       new ApproveCommand(),
       new DisapproveCommand(),
       new LeaderboardCommand(),
-      new UserStatsCommand()
+      new UserStatsCommand(),
+      new IgnoreCommand()
     ];
   }
 

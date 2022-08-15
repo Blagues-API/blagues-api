@@ -4,13 +4,13 @@ type ApplicationCommandDataWithChannel = ApplicationCommandData & {
   channels?: string[];
 };
 
-export default class Command {
+export default abstract class Command {
   public name: string;
   public channels: string[];
 
   private raw: ApplicationCommandData;
 
-  constructor(data: ApplicationCommandDataWithChannel) {
+  protected constructor(data: ApplicationCommandDataWithChannel) {
     this.name = data.name;
     this.channels = data.channels ?? [];
     this.raw = data;
@@ -32,8 +32,5 @@ export default class Command {
     };
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public async run(_interaction: CommandInteraction): Promise<void | InteractionResponse> {
-    throw new Error('No method run defined');
-  }
+  public abstract run(interaction: CommandInteraction): Promise<void | InteractionResponse>;
 }
