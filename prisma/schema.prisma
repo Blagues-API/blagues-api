@@ -25,7 +25,7 @@ model Godfather {
   id                 Int      @id @default(autoincrement())
   user_id            String   @unique @db.VarChar(255)
   emoji_id           String   @db.VarChar(255)
-  ignored_categories String[]
+  ignored_categories String[] @db.VarChar(255)
 
   @@index([user_id], map: "godfathers_user_id")
   @@map("godfathers")
