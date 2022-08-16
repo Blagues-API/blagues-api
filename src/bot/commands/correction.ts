@@ -11,7 +11,7 @@ import {
 } from 'discord.js';
 import { jokeById, jokeByQuestion } from '../../controllers';
 import prisma from '../../prisma';
-import { Category, JokeTypesDescriptions, CategoriesRefs, UnsignedJoke, UnsignedJokeKey } from '../../typings';
+import { CategoriesRefs, Category, JokeTypesDescriptions, UnsignedJoke, UnsignedJokeKey } from '../../typings';
 import {
   Colors,
   commandsChannelId,
@@ -25,17 +25,17 @@ import Command from '../lib/command';
 import clone from 'lodash/clone';
 import { ProposalType } from '@prisma/client';
 import {
-  messageInfo,
+  info,
   interactionInfo,
   interactionProblem,
   interactionValidate,
   isEmbedable,
+  messageInfo,
   messageProblem,
   showNegativeDiffs,
   showPositiveDiffs,
   tDelete,
-  info,
-  interactionWaiter
+  waitForInteraction
 } from '../utils';
 
 enum IdType {
@@ -187,7 +187,7 @@ export default class CorrectionCommand extends Command {
       fetchReply: true
     })) as Message<true>;
 
-    const buttonInteraction = await interactionWaiter({
+    const buttonInteraction = await waitForInteraction({
       component_type: ComponentType.Button,
       message: question,
       user: commandInteraction.user,
@@ -458,7 +458,7 @@ export default class CorrectionCommand extends Command {
       fetchReply: true
     })) as Message<true>;
 
-    const response = await interactionWaiter({
+    const response = await waitForInteraction({
       component_type: ComponentType.SelectMenu,
       message: questionMessage,
       user: commandInteraction.user
