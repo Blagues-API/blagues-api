@@ -20,7 +20,7 @@ import {
   upReactionIdentifier
 } from '../constants';
 import Command from '../lib/command';
-import { interactionProblem, interactionValidate, interactionWaiter, isEmbedable } from '../utils';
+import { interactionInfo, interactionProblem, interactionValidate, isEmbedable, waitForInteraction } from '../utils';
 import prisma from '../../prisma';
 import { ProposalType } from '@prisma/client';
 
@@ -156,7 +156,7 @@ export default class SuggestCommand extends Command {
       fetchReply: true
     })) as Message<true>;
 
-    const confirmation = await interactionWaiter({
+    const confirmation = await waitForInteraction({
       component_type: ComponentType.Button,
       message: message,
       user: interaction.user

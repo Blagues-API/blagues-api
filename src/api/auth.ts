@@ -14,6 +14,7 @@ declare module 'fastify' {
   interface FastifyRequest {
     auth: AuthPayload | null;
   }
+
   interface FastifyInstance {
     apiAuth(): void;
   }

@@ -19,21 +19,6 @@ class JokesLoader {
     this.init();
   }
 
-  private async init() {
-    const jokesPath = path.join(__dirname, '../blagues.json');
-    try {
-      await fs.access(jokesPath, fsConstants.R_OK | fsConstants.W_OK);
-    } catch (error) {
-      console.log('Missing access', error);
-      return { success: false, error: `Il semblerait que le fichier de blagues soit inaccessible ou innexistant.` };
-    }
-
-    const rawData = await fs.readFile(jokesPath, 'utf-8');
-    const jokes = (rawData.length ? JSON.parse(rawData) : []) as Joke[];
-    this.list = jokes;
-    this.count = jokes.length;
-  }
-
   public async mergeJoke(
     proposal: Correction | Suggestion
   ): Promise<{ success: boolean; joke_id?: number; error?: string }> {
@@ -76,6 +61,21 @@ class JokesLoader {
     } finally {
       this.loader.shift();
     }
+  }
+
+  private async init() {
+    const jokesPath = path.join(__dirname, '../blagues.json');
+    try {
+      await fs.access(jokesPath, fsConstants.R_OK | fsConstants.W_OK);
+    } catch (error) {
+      console.log('Missing access', error);
+      return { success: false, error: `Il semblerait que le fichier de blagues soit inaccessible ou innexistant.` };
+    }
+
+    const rawData = await fs.readFile(jokesPath, 'utf-8');
+    const jokes = (rawData.length ? JSON.parse(rawData) : []) as Joke[];
+    this.list = jokes;
+    this.count = jokes.length;
   }
 }
 

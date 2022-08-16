@@ -1,5 +1,5 @@
 import { stripIndents } from 'common-tags';
-import { Client, Snowflake, TextChannel, APIEmbed, Message } from 'discord.js';
+import { APIEmbed, Client, Message, Snowflake, TextChannel } from 'discord.js';
 import { Colors, commandsChannelId, correctionsChannelId, suggestionsChannelId } from '../constants';
 import Jokes from '../../jokes';
 

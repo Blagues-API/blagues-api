@@ -17,7 +17,7 @@ import {
 } from 'discord.js';
 import Jokes from '../jokes';
 import prisma from '../prisma';
-import { correctionsChannelId, suggestionsChannelId, guildId, godfatherRoleId } from './constants';
+import { correctionsChannelId, godfatherRoleId, guildId, suggestionsChannelId } from './constants';
 import { updateGodfatherEmoji } from './modules/godfathers';
 import Dispatcher from './lib/dispatcher';
 import Reminders from './modules/reminders';
@@ -103,9 +103,7 @@ export default class Bot extends Client {
         try {
           const fetchedMessage = await correctionsChannel.messages.fetch(correction.message_id!);
           if (fetchedMessage.deletable) await fetchedMessage.delete();
-        } catch {
-          continue;
-        }
+        } catch {}
       }
     }
   }
@@ -152,6 +150,7 @@ declare module 'discord.js' {
     dispatcher: Dispatcher;
     stickys: Stickys;
     votes: Votes;
+
     refreshStatus(): void;
   }
 }

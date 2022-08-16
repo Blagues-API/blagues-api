@@ -28,14 +28,14 @@ import {
   info,
   interactionInfo,
   interactionProblem,
-  interactionValidate,
-  interactionWaiter,
+  interactionValidate
   isEmbedable,
   messageInfo,
   messageProblem,
   showNegativeDiffs,
   showPositiveDiffs,
-  tDelete
+  tDelete,
+  waitForInteraction
 } from '../utils';
 
 enum IdType {
@@ -70,6 +70,7 @@ export default class CorrectionCommand extends Command {
       ]
     });
   }
+
   async run(interaction: ChatInputCommandInteraction<'cached'>) {
     const query = interaction.options.getString('recherche', true);
 
@@ -182,7 +183,7 @@ export default class CorrectionCommand extends Command {
       fetchReply: true
     })) as Message<true>;
 
-    const buttonInteraction = await interactionWaiter({
+    const buttonInteraction = await waitForInteraction({
       component_type: ComponentType.Button,
       message: question,
       user: commandInteraction.user,
@@ -453,7 +454,7 @@ export default class CorrectionCommand extends Command {
       fetchReply: true
     })) as Message<true>;
 
-    const response = await interactionWaiter({
+    const response = await waitForInteraction({
       component_type: ComponentType.SelectMenu,
       message: questionMessage,
       user: commandInteraction.user
