@@ -1,37 +1,37 @@
 import { ProposalType } from '@prisma/client';
 import { stripIndents } from 'common-tags';
 import {
+  APIEmbed,
   ApplicationCommandType,
   Message,
   MessageContextMenuCommandInteraction,
-  TextChannel,
-  APIEmbed
+  TextChannel
 } from 'discord.js';
 import prisma from '../../prisma';
 import { CategoriesRefs, Category, Correction, Proposals, Suggestion } from '../../typings';
 import {
   Colors,
+  correctionsChannelId,
+  correctorRoleId,
+  dataSplitRegex,
+  downReactionIdentifier,
+  godfatherRoleId,
+  jokerRoleId,
+  logsChannelId,
   neededCorrectionsApprovals,
   neededSuggestionsApprovals,
-  correctionsChannelId,
   suggestionsChannelId,
-  logsChannelId,
-  jokerRoleId,
-  correctorRoleId,
-  upReactionIdentifier,
-  downReactionIdentifier,
-  dataSplitRegex,
-  godfatherRoleId
+  upReactionIdentifier
 } from '../constants';
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../modules/godfathers';
 import {
-  interactionProblem,
   interactionInfo,
+  interactionProblem,
   interactionValidate,
   isEmbedable,
-  messageLink,
-  isGodfather
+  isGodfather,
+  messageLink
 } from '../utils';
 import Jokes from '../../jokes';
 import { compareTwoStrings } from 'string-similarity';
@@ -40,20 +40,13 @@ export default class ApproveCommand extends Command {
   constructor() {
     super({
       name: 'Approuver',
-      type: ApplicationCommandType.Message
+      type: ApplicationCommandType.Message,
+      channels: [suggestionsChannelId, correctionsChannelId]
     });
   }
 
   async run(interaction: MessageContextMenuCommandInteraction<'cached'>) {
     const channel = (interaction.channel as TextChannel)!;
-
-    if (![suggestionsChannelId, correctionsChannelId].includes(channel.id)) {
-      return interaction.reply(
-        interactionProblem(
-          `Vous ne pouvez pas approuver une suggestion ou une correction en dehors des salons <#${suggestionsChannelId}> et <#${correctionsChannelId}>.`
-        )
-      );
-    }
 
     const message = await interaction.channel?.messages.fetch(interaction.targetId);
     if (!message) return;

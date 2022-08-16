@@ -33,7 +33,8 @@ export default class DisapproveCommand extends Command {
   constructor() {
     super({
       name: 'Désapprouver',
-      type: ApplicationCommandType.Message
+      type: ApplicationCommandType.Message,
+      channels: [suggestionsChannelId, correctionsChannelId]
     });
   }
 
@@ -41,13 +42,7 @@ export default class DisapproveCommand extends Command {
     const channel = (interaction.channel as TextChannel)!;
     const isSuggestionChannel = channel.id === suggestionsChannelId;
     const message = await channel.messages.fetch(interaction.targetId);
-    if (![suggestionsChannelId, correctionsChannelId].includes(channel.id)) {
-      return interaction.reply(
-        interactionProblem(
-          `Vous ne pouvez pas désapprouver une suggestion ou une correction en dehors des salons <#${suggestionsChannelId}> et <#${correctionsChannelId}>.`
-        )
-      );
-    }
+
     if (message.author.id !== interaction.client.user!.id) {
       return interaction.reply(
         interactionProblem(

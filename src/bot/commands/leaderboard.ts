@@ -1,24 +1,19 @@
 import { ApplicationCommandType, ChatInputCommandInteraction } from 'discord.js';
-import { commandsChannelId } from '../constants';
 import Command from '../lib/command';
-import { interactionInfo } from '../utils';
 import Stats from '../modules/stats';
+import { commandsChannelId } from '../constants';
 
 export default class LeaderboardCommand extends Command {
   constructor() {
     super({
       name: 'leaderboard',
       description: 'Afficher les statistiques',
-      type: ApplicationCommandType.ChatInput
+      type: ApplicationCommandType.ChatInput,
+      channels: [commandsChannelId]
     });
   }
 
   async run(interaction: ChatInputCommandInteraction<'cached'>) {
-    if (interaction.channelId !== commandsChannelId) {
-      return interaction.reply(
-        interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannelId}>.`)
-      );
-    }
     return Stats.globalStats(interaction);
   }
 }
