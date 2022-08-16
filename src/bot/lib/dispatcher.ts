@@ -1,5 +1,5 @@
-import { Client, CommandInteraction } from 'discord.js';
-import Command, { AppCommandData } from './command';
+import { ApplicationCommandData, Client, CommandInteraction } from 'discord.js';
+import Command from './command';
 
 import CorrectCommand from '../commands/correction';
 import SuggestCommand from '../commands/suggest';
@@ -10,7 +10,7 @@ import DisapproveCommand from '../commands/disapprove';
 import LeaderboardCommand from '../commands/leaderboard';
 import UserStatsCommand from '../commands/userStats';
 import { commandsChannelId, correctionsChannelId, guildId, suggestionsChannelId } from '../constants';
-import { interactionInfo, interactionProblem } from '../utils';
+import { interactionInfo } from '../utils';
 
 export default class Dispatcher {
   private client: Client;
@@ -32,7 +32,7 @@ export default class Dispatcher {
     ];
   }
 
-  public get commandsData(): AppCommandData[] {
+  public get commandsData(): ApplicationCommandData[] {
     return this.commands.map((command: Command) => command.data);
   }
 
@@ -46,19 +46,24 @@ export default class Dispatcher {
       return;
     }
 
-    if (!command.data.channels?.includes(interaction.channelId)) {
-      if (command.data.channels?.includes(commandsChannelId)) {
-        await interaction.reply(
-          interactionInfo(`Préférez utiliser cette commande dans le salon <#${commandsChannelId}>.`)
-        );
-        return;
-      } else if (command.data.channels?.includes(suggestionsChannelId || correctionsChannelId)) {
-        await interaction.reply(
-          interactionProblem(
-            `Vous ne pouvez pas approuver une suggestion ou une correction en dehors des salons <#${suggestionsChannelId}> et <#${correctionsChannelId}>.`
-          )
-        );
-        return;
+    if (command.channels && !command.channels.includes(interaction.channelId)) {
+      switch (command.channels) {
+        case [commandsChannelId]:
+          {
+            await interaction.reply(
+              interactionInfo(`Préférez utiliser cette commande dans le salon <#${commandsChannelId}>.`)
+            );
+          }
+          break;
+        case [suggestionsChannelId, correctionsChannelId]:
+          {
+            await interaction.reply(
+              interactionInfo(
+                `Vous ne pouvez pas approuver une suggestion ou une correction en dehors des salons <#${suggestionsChannelId}> et <#${correctionsChannelId}>.`
+              )
+            );
+          }
+          break;
       }
     }
 

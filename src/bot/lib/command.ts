@@ -1,34 +1,30 @@
 import { ApplicationCommandData, ApplicationCommandType, CommandInteraction, InteractionResponse } from 'discord.js';
 
-export type AppCommandData = ApplicationCommandData & {
-  channels?: string[] | string;
-};
-
 export default class Command {
   public name: string;
+  public channels: string[];
 
-  private raw: AppCommandData;
+  private raw: ApplicationCommandData;
 
-  constructor(data: AppCommandData) {
+  constructor(data: ApplicationCommandData & { channels?: string[] }) {
     this.name = data.name;
+    this.channels = data.channels ?? [];
     this.raw = data;
   }
 
-  public get data(): AppCommandData {
+  public get data(): ApplicationCommandData {
     if (!this.raw.type || this.raw.type === ApplicationCommandType.ChatInput) {
       return {
         name: this.name,
         description: this.raw.description,
         type: this.raw.type,
-        options: this.raw.options,
-        channels: this.raw.channels
+        options: this.raw.options
       };
     }
 
     return {
       name: this.name,
-      type: this.raw.type,
-      channels: this.raw.channels
+      type: this.raw.type
     };
   }
 
