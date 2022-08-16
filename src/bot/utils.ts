@@ -29,6 +29,10 @@ type WaitForInteraction<T> = T extends WaitForInteractionOptions<ComponentType.B
   ? ButtonInteraction<'cached'>
   : SelectMenuInteraction<'cached'>;
 
+type WaiterOptions = {
+  reject_on_idle?: boolean;
+};
+
 export function problem(message: string): APIEmbed {
   return {
     description: `❌ ${message}`,
@@ -101,6 +105,27 @@ export function interactionValidate(message: string, ephemeral = true): Universa
   };
 }
 
+export function error(message: string): APIEmbed {
+  return { color: 0xd6080f, description: `❌ ${message}` };
+}
+
+export function messageError(message: string): UniversalMessageOptions {
+  return {
+    content: '',
+    embeds: [error(message)],
+    components: []
+  };
+}
+
+export function interactionError(message: string, ephemeral = true): UniversalInteractionOptions {
+  return {
+    content: '',
+    embeds: [error(message)],
+    components: [],
+    ephemeral
+  };
+}
+
 export function showPositiveDiffs(oldValue: string, newValue: string): string {
   return diffWords(oldValue, newValue)
     .filter((part) => !part.removed)
@@ -132,9 +157,14 @@ export function isGodfather(member: GuildMember): boolean {
   return member.roles.cache.has(godfatherRoleId);
 }
 
-export async function interactionWaiter<T extends WaitForInteractionOptions<MessageComponentType>>(options: T) {
+export async function interactionWaiter<T extends WaitForInteractionOptions<MessageComponentType>>(
+  componentOptions: T,
+  waiterOptions: WaiterOptions = {}
+) {
   return new Promise<WaitForInteraction<T>>((resolve, reject) => {
-    const { component_type, message, user, idle = 60_000 } = options;
+    const { component_type, message, user, idle = 60_000 } = componentOptions;
+    const { reject_on_idle = false } = waiterOptions;
+
     message
       .createMessageComponentCollector({
         componentType: component_type,
@@ -148,7 +178,16 @@ export async function interactionWaiter<T extends WaitForInteractionOptions<Mess
         resolve(interaction);
       })
       .once('end', (_interactions, reason) => {
-        if (reason !== 'idle') reject(reason);
+        if (reject_on_idle) {
+          reject(reason);
+
+          return;
+        }
+        if (reason !== 'idle') {
+          reject(reason);
+
+          return;
+        }
       });
   });
 }
