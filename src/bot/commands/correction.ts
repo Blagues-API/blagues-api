@@ -69,6 +69,7 @@ export default class CorrectionCommand extends Command {
       ]
     });
   }
+
   async run(interaction: ChatInputCommandInteraction<'cached'>) {
     const query = interaction.options.getString('recherche', true);
 

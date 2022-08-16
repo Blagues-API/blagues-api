@@ -1,37 +1,37 @@
 import { ProposalType } from '@prisma/client';
 import { stripIndents } from 'common-tags';
 import {
+  APIEmbed,
   ApplicationCommandType,
   Message,
   MessageContextMenuCommandInteraction,
-  TextChannel,
-  APIEmbed
+  TextChannel
 } from 'discord.js';
 import prisma from '../../prisma';
 import { CategoriesRefs, Category, Correction, Proposals, Suggestion } from '../../typings';
 import {
   Colors,
+  correctionsChannelId,
+  correctorRoleId,
+  dataSplitRegex,
+  downReactionIdentifier,
+  godfatherRoleId,
+  jokerRoleId,
+  logsChannelId,
   neededCorrectionsApprovals,
   neededSuggestionsApprovals,
-  correctionsChannelId,
   suggestionsChannelId,
-  logsChannelId,
-  jokerRoleId,
-  correctorRoleId,
-  upReactionIdentifier,
-  downReactionIdentifier,
-  dataSplitRegex,
-  godfatherRoleId
+  upReactionIdentifier
 } from '../constants';
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../modules/godfathers';
 import {
-  interactionProblem,
   interactionInfo,
+  interactionProblem,
   interactionValidate,
   isEmbedable,
-  messageLink,
-  isGodfather
+  isGodfather,
+  messageLink
 } from '../utils';
 import Jokes from '../../jokes';
 import { compareTwoStrings } from 'string-similarity';

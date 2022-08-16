@@ -5,15 +5,15 @@ import { ButtonInteraction, ButtonStyle, Client, Collection, ComponentType, Text
 import schedule from 'node-schedule';
 import prisma from '../../prisma';
 import {
+  Colors,
   correctionsChannelId,
-  suggestionsChannelId,
-  remindersChannelId,
-  guildId,
   emojisGuildId,
   godfatherRoleId,
-  neededSuggestionsApprovals,
+  guildId,
   neededCorrectionsApprovals,
-  Colors
+  neededSuggestionsApprovals,
+  remindersChannelId,
+  suggestionsChannelId
 } from '../constants';
 import { getGodfatherEmoji } from './godfathers';
 import { ReminderProposal } from '../../typings';

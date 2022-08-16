@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { APIUser, OAuth2Routes, RESTPostOAuth2AccessTokenResult } from 'discord-api-types/v9';
 import got from 'got';
-import { jokeById, randomJoke, randomJokeByType, JokeResponse } from '../controllers';
+import { jokeById, JokeResponse, randomJoke, randomJokeByType } from '../controllers';
 import { Categories, CategoriesRefs } from '../typings';
 import { BadRequest, JokeNotFound, MissingKey, NoContent } from './Errors';
 import prisma from '../prisma';

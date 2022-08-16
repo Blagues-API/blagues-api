@@ -3,7 +3,7 @@ import prisma from '../../prisma';
 import sharp from 'sharp';
 import got from 'got';
 import snakeCase from 'lodash/snakeCase';
-import { emojisGuildId, approveEmoji, disapproveEmoji } from '../constants';
+import { approveEmoji, disapproveEmoji, emojisGuildId } from '../constants';
 import { ProposalExtended } from '../../typings';
 
 interface GodfatherEmoji {
