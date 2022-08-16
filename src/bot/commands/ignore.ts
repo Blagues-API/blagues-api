@@ -7,7 +7,7 @@ import {
 import Command from '../lib/command';
 import { CategoriesRefsFull, Category } from '../../typings';
 import { commandsChannelId } from '../constants';
-import { interactionInfo, interactionValidate } from '../utils';
+import { interactionInfo, interactionValidate, isGodfather } from '../utils';
 import prisma from '../../prisma';
 
 export default class IgnoreCommand extends Command {
@@ -39,14 +39,24 @@ export default class IgnoreCommand extends Command {
       );
     }
 
+    if (!isGodfather(interaction.member)) {
+      return interaction.reply(interactionInfo('Seul les parrains peuvent utiliser cette commande.'));
+    }
+
     const godfather = await prisma.godfather.findUnique({
       where: {
         user_id: interaction.user.id
+      },
+      select: {
+        id: true,
+        ignored_categories: true
       }
     });
 
     if (!godfather) {
-      return interaction.reply(interactionInfo('Seul les parrains peuvent utiliser cette commande.'));
+      return interaction.reply(
+        interactionInfo('Veuillez approuver plusieurs blagues avant de faire la fine bouche ! 😜')
+      );
     }
 
     const category = interaction.options.getString('category', true) as Category;
@@ -65,10 +75,9 @@ export default class IgnoreCommand extends Command {
       }
     });
 
-    // Pas exactement sur de la formulation ici
     return interaction.reply(
       interactionValidate(
-        `Vous avez ${isAlreadyIgnored ? 'dé-ignoré' : 'ignoré'} la catégorie \`${
+        `Vous avez ${isAlreadyIgnored ? 'désignoré' : 'ignoré'} la catégorie \`${
           CategoriesRefsFull[category]
         }\` avec succès!`
       )
