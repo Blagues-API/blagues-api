@@ -9,7 +9,7 @@ import {
 } from 'discord.js';
 import { diffWords } from 'diff';
 import { godfatherRoleId } from '../constants';
-import { waitForInteraction } from './interactions';
+import { waitForInteraction } from './waitFor';
 
 export function isEmbedable(channel: TextChannel): boolean {
   const permissions = channel.permissionsFor(channel.guild.members.me!);
