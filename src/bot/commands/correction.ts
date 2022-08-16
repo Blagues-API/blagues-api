@@ -28,7 +28,7 @@ import {
   info,
   interactionInfo,
   interactionProblem,
-  interactionValidate,
+  interactionValidate
   isEmbedable,
   messageInfo,
   messageProblem,
@@ -59,6 +59,7 @@ export default class CorrectionCommand extends Command {
       name: 'correction',
       description: 'Proposer une modification de blague',
       type: ApplicationCommandType.ChatInput,
+      channels: [commandsChannelId],
       options: [
         {
           type: ApplicationCommandOptionType.String,
@@ -72,12 +73,6 @@ export default class CorrectionCommand extends Command {
 
   async run(interaction: ChatInputCommandInteraction<'cached'>) {
     const query = interaction.options.getString('recherche', true);
-
-    if (interaction.channelId !== commandsChannelId) {
-      return interaction.reply(
-        interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannelId}>.`)
-      );
-    }
 
     const joke = await this.resolveJoke(interaction, query);
     if (!joke) return;
@@ -466,7 +461,7 @@ export default class CorrectionCommand extends Command {
     });
 
     if (!response) {
-      questionMessage.edit(messageInfo('Les 60 secondes se sont écoulées.'));
+      await questionMessage.edit(messageInfo('Les 60 secondes se sont écoulées.'));
       return null;
     }
 

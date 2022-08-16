@@ -9,7 +9,8 @@ import ApproveCommand from '../commands/approve';
 import DisapproveCommand from '../commands/disapprove';
 import LeaderboardCommand from '../commands/leaderboard';
 import UserStatsCommand from '../commands/userStats';
-import { guildId } from '../constants';
+import { commandsChannelId, correctionsChannelId, guildId, suggestionsChannelId } from '../constants';
+import { interactionInfo } from '../utils';
 
 export default class Dispatcher {
   private client: Client;
@@ -43,6 +44,27 @@ export default class Dispatcher {
 
       await interaction.guild?.commands.delete(interaction.commandId);
       return;
+    }
+
+    if (command.channels && !command.channels.includes(interaction.channelId)) {
+      switch (command.channels) {
+        case [commandsChannelId]:
+          {
+            await interaction.reply(
+              interactionInfo(`Préférez utiliser cette commande dans le salon <#${commandsChannelId}>.`)
+            );
+          }
+          break;
+        case [suggestionsChannelId, correctionsChannelId]:
+          {
+            await interaction.reply(
+              interactionInfo(
+                `Vous ne pouvez pas approuver une suggestion ou une correction en dehors des salons <#${suggestionsChannelId}> et <#${correctionsChannelId}>.`
+              )
+            );
+          }
+          break;
+      }
     }
 
     try {

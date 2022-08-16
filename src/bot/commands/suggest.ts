@@ -30,6 +30,7 @@ export default class SuggestCommand extends Command {
       name: 'suggestion',
       description: 'Proposer une blague',
       type: ApplicationCommandType.ChatInput,
+      channels: [commandsChannelId],
       options: [
         {
           type: ApplicationCommandOptionType.String,
@@ -60,12 +61,6 @@ export default class SuggestCommand extends Command {
   }
 
   async run(interaction: ChatInputCommandInteraction) {
-    if (interaction.channelId !== commandsChannelId) {
-      return interaction.reply(
-        interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannelId}>.`)
-      );
-    }
-
     const proposals = await prisma.proposal.findMany({
       select: {
         joke_type: true,

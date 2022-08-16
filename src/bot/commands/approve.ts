@@ -40,20 +40,13 @@ export default class ApproveCommand extends Command {
   constructor() {
     super({
       name: 'Approuver',
-      type: ApplicationCommandType.Message
+      type: ApplicationCommandType.Message,
+      channels: [suggestionsChannelId, correctionsChannelId]
     });
   }
 
   async run(interaction: MessageContextMenuCommandInteraction<'cached'>) {
     const channel = (interaction.channel as TextChannel)!;
-
-    if (![suggestionsChannelId, correctionsChannelId].includes(channel.id)) {
-      return interaction.reply(
-        interactionProblem(
-          `Vous ne pouvez pas approuver une suggestion ou une correction en dehors des salons <#${suggestionsChannelId}> et <#${correctionsChannelId}>.`
-        )
-      );
-    }
 
     const message = await interaction.channel?.messages.fetch(interaction.targetId);
     if (!message) return;
