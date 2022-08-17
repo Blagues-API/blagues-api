@@ -28,10 +28,17 @@ import {
 } from '../constants';
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../modules/godfathers';
-import { interactionInfo, interactionProblem, interactionValidate, isEmbedable, isGodfather } from '../utils';
+import {
+  checkProposalStatus,
+  interactionInfo,
+  interactionProblem,
+  interactionValidate,
+  isEmbedable,
+  isGodfather,
+  updateProposalEmbed
+} from '../utils';
 import Jokes from '../../jokes';
 import { compareTwoStrings } from 'string-similarity';
-import { checkProposalStatus, updateProposalEmbed } from '../utils/proposal';
 
 export default class ApproveCommand extends Command {
   constructor() {

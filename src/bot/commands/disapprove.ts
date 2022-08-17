@@ -22,8 +22,15 @@ import {
   suggestionsChannelId
 } from '../constants';
 import Command from '../lib/command';
-import { interactionInfo, interactionProblem, interactionValidate, isEmbedable, isGodfather } from '../utils';
-import { checkProposalStatus, updateProposalEmbed } from '../utils/proposal';
+import {
+  checkProposalStatus,
+  interactionInfo,
+  interactionProblem,
+  interactionValidate,
+  isEmbedable,
+  isGodfather,
+  updateProposalEmbed
+} from '../utils';
 
 export default class DisapproveCommand extends Command {
   constructor() {
