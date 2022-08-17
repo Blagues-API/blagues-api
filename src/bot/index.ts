@@ -134,7 +134,7 @@ export default class Bot extends Client {
   }
 
   async start(): Promise<void> {
-    if (process.env.bot_service !== 'true') {
+    if (process.env.BOT_SERVICE !== 'true') {
       return console.log('Bot service désactivé');
     }
     if (!process.env.BOT_TOKEN) {

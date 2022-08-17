@@ -24,7 +24,7 @@ export default class Reminders {
   constructor(client: Client) {
     this.client = client;
 
-    if (process.env.bot_reminders === 'false') return;
+    if (process.env.BOT_REMINDERS === 'false') return;
 
     // Every 10 minutes
     schedule.scheduleJob('*/10 * * * *', (date) => this.run(date));
