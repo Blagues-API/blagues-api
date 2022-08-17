@@ -370,8 +370,6 @@ export default class ApproveCommand extends Command {
     const jokeMessage = await message.edit({ embeds: [embed] });
     await jokeMessage.reactions.removeAll();
 
-    message.client.stickys.reload();
-
     if (automerge) {
       await interaction.followUp(
         interactionValidate(
@@ -387,6 +385,8 @@ export default class ApproveCommand extends Command {
     await interaction.editReply(
       interactionValidate(`La ${hyperlink('suggestion', message.url)} a bien été ajoutée à l'API !`)
     );
+
+    return message.client.stickys.reload();
   }
 
   async approveCorrection(

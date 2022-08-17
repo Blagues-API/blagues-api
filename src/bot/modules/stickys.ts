@@ -5,7 +5,7 @@ import Jokes from '../../jokes';
 
 export default class Stickys {
   public client: Client;
-  private readonly messages: Record<string, () => APIEmbed>;
+  public readonly messages: Record<string, () => APIEmbed>;
 
   constructor(client: Client) {
     this.client = client;
@@ -18,12 +18,7 @@ export default class Stickys {
 
   async run(message: Message<true>) {
     if (process.env.BOT_STICKIES === 'false') return;
-    if (!(message.channelId in this.messages)) return;
-    if (message.author.id != message.client.user!.id) {
-      if (message.deletable) {
-        return message.delete();
-      }
-    }
+
     return this.check(message.channelId, this.messages[message.channelId]());
   }
 
