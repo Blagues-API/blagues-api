@@ -5,7 +5,7 @@ import Jokes from '../../jokes';
 
 export default class Stickys {
   public client: Client;
-  private messages: Record<string, () => APIEmbed>;
+  private readonly messages: Record<string, () => APIEmbed>;
 
   constructor(client: Client) {
     this.client = client;
