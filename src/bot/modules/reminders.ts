@@ -1,13 +1,16 @@
 import { ProposalType } from '@prisma/client';
 import { Snowflake } from 'discord-api-types/v9';
 import {
+  blockQuote,
   ButtonInteraction,
   ButtonStyle,
   Client,
   Collection,
   ComponentType,
+  hyperlink,
   messageLink,
-  TextChannel
+  TextChannel,
+  userMention
 } from 'discord.js';
 import schedule from 'node-schedule';
 import prisma from '../../prisma';
@@ -137,7 +140,7 @@ export default class Reminders {
 
         if (line.length + acc.current.length > 4090) {
           acc.pages.push(acc.current);
-          acc.current = '>>> ';
+          acc.current = blockQuote(' ');
         }
 
         acc.current += line;
@@ -146,7 +149,7 @@ export default class Reminders {
 
         return acc;
       },
-      { current: '>>> ', pages: [] }
+      { current: blockQuote(' '), pages: [] }
     );
 
     const godFatherMember: Snowflake[] = [...godfatherRole.members.keys()];
@@ -163,7 +166,7 @@ export default class Reminders {
           return acc;
         }, new Collection<Snowflake, number>())
         .filter((score) => score >= 5)
-        .map((_score, member_id) => `<@${member_id}>`)
+        .map((_score, member_id) => userMention(member_id))
         .join(' ');
 
     const remindersChannel = this.client.channels.cache.get(remindersChannelId) as TextChannel;
@@ -181,7 +184,7 @@ export default class Reminders {
           {
             author: isFirstPage
               ? {
-                  name: "Propositions en attente d'approbation:",
+                  name: "Propositions en attente d'approbation :",
                   icon_url: this.client.user!.displayAvatarURL({ extension: 'png', size: 128 })
                 }
               : undefined,
@@ -307,11 +310,14 @@ export default class Reminders {
           return acc;
         }
 
-        const line = `[${proposal.type === ProposalType.SUGGESTION ? 'Suggestion' : 'Correction'}](${messageLink(
-          proposal.type === ProposalType.SUGGESTION ? suggestionsChannelId : correctionsChannelId,
-          proposal.message_id!,
-          guild.id
-        )}) (${Math.max(proposal.approvals.length, proposal.disapprovals.length)}/${neededApprovalsCount})\n`;
+        const line = `${hyperlink(
+          proposal.type === ProposalType.SUGGESTION ? 'Suggestion' : 'Correction',
+          messageLink(
+            proposal.type === ProposalType.SUGGESTION ? suggestionsChannelId : correctionsChannelId,
+            proposal.message_id!,
+            guild.id
+          )
+        )} (${Math.max(proposal.approvals.length, proposal.disapprovals.length)}/${neededApprovalsCount})\n`;
 
         if (line.length + acc.description.length > 4000) {
           if (array.length === index + 1) {
@@ -337,7 +343,7 @@ export default class Reminders {
           author: {
             name: "Propositions en attente d'approbation:"
           },
-          description: `>>> ${description || "Vous n'avez aucune proposition en cours d'approbation."}`,
+          description: blockQuote(description || "Vous n'avez aucune proposition en cours d'approbation."),
           color: Colors.SECONDARY,
           footer: {
             text: 'Blagues API',

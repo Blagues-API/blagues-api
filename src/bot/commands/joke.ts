@@ -1,4 +1,4 @@
-import { ApplicationCommandOptionType, ApplicationCommandType, ChatInputCommandInteraction } from 'discord.js';
+import { ApplicationCommandOptionType, ApplicationCommandType, ChatInputCommandInteraction, spoiler } from 'discord.js';
 import JokesLoader from '../../jokes';
 import { CategoriesRefsFull, Category } from '../../typings';
 import { random } from '../../utils';
@@ -42,7 +42,7 @@ export default class JokeCommand extends Command {
         {
           color: Colors.PRIMARY,
           title: blague.joke,
-          description: `|| ${blague.answer} ||`,
+          description: spoiler(blague.answer),
           timestamp: new Date().toISOString(),
           footer: {
             text: `${CategoriesRefsFull[blague.type]} • (${blague.id})`,

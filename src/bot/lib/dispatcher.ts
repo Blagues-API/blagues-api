@@ -1,4 +1,4 @@
-import { ApplicationCommandData, Client, CommandInteraction } from 'discord.js';
+import { ApplicationCommandData, channelMention, Client, CommandInteraction } from 'discord.js';
 import Command from './command';
 
 import CorrectCommand from '../commands/correction';
@@ -51,7 +51,7 @@ export default class Dispatcher {
         case [commandsChannelId]:
           {
             await interaction.reply(
-              interactionInfo(`Préférez utiliser cette commande dans le salon <#${commandsChannelId}>.`)
+              interactionInfo(`Préférez utiliser cette commande dans le salon ${channelMention(commandsChannelId)}.`)
             );
           }
           break;
@@ -59,7 +59,9 @@ export default class Dispatcher {
           {
             await interaction.reply(
               interactionInfo(
-                `Vous ne pouvez pas approuver une suggestion ou une correction en dehors des salons <#${suggestionsChannelId}> et <#${correctionsChannelId}>.`
+                `Vous ne pouvez pas approuver une suggestion ou une correction en dehors des salons ${channelMention(
+                  suggestionsChannelId
+                )} et ${channelMention(correctionsChannelId)}.`
               )
             );
           }

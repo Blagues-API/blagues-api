@@ -2,9 +2,11 @@ import { ProposalType } from '@prisma/client';
 import {
   APIEmbed,
   ApplicationCommandType,
+  hyperlink,
   Message,
   MessageContextMenuCommandInteraction,
   messageLink,
+  roleMention,
   TextChannel
 } from 'discord.js';
 import { Proposals, ProposalSuggestion } from 'typings';
@@ -50,7 +52,9 @@ export default class DisapproveCommand extends Command {
     if (!isGodfather(interaction.member)) {
       return interaction.reply(
         interactionProblem(
-          `Seul un <@${godfatherRoleId}> peut désapprouver une ${isSuggestionChannel ? 'suggestion' : 'correction'}.`
+          `Seul un ${roleMention(godfatherRoleId)} peut désapprouver une ${
+            isSuggestionChannel ? 'suggestion' : 'correction'
+          }.`
         )
       );
     }
@@ -136,7 +140,10 @@ export default class DisapproveCommand extends Command {
           const suggestionLink = messageLink(suggestionsChannelId, proposal.message_id!, interaction.guild.id);
           return interaction.reply(
             interactionInfo(
-              `Il semblerait qu'une [correction aie été proposée](${correctionLink}), veuillez la désapprouver avant la désapprobation de [cette suggestion](${suggestionLink}).`
+              `Il semblerait qu'une ${hyperlink(
+                'correction aie été proposée',
+                correctionLink
+              )}, veuillez la désapprouver avant la désapprobation de ${hyperlink('cette suggestion', suggestionLink)}.`
             )
           );
         }
@@ -147,7 +154,10 @@ export default class DisapproveCommand extends Command {
         const correctionLink = messageLink(correctionsChannelId, lastCorrection.message_id!, interaction.guild.id);
         return interaction.reply(
           interactionInfo(`
-            Il semblerait qu'une [correction aie été ajoutée](${correctionLink}) par dessus rendant celle ci obsolète, veuillez désapprouver la dernière version de la correction.`)
+            Il semblerait qu'une ${hyperlink(
+              'correction aie été ajoutée',
+              correctionLink
+            )} par dessus rendant celle ci obsolète, veuillez désapprouver la dernière version de la correction.`)
         );
       }
     }
@@ -179,7 +189,9 @@ export default class DisapproveCommand extends Command {
 
       await message.edit({ embeds: [embed] });
 
-      return interaction.reply(interactionInfo(`Votre [désapprobation](${message.url}) a bien été retirée.`));
+      return interaction.reply(
+        interactionInfo(`Votre ${hyperlink('désapprobation', message.url)} a bien été retirée.`)
+      );
     }
 
     const approvalIndex = proposal.approvals.findIndex((approval) => approval.user_id === interaction.user.id);
@@ -216,7 +228,13 @@ export default class DisapproveCommand extends Command {
       );
       return interaction.reply(
         interactionInfo(`
-          Le nombre de désapprobations requises pour le refus de [cette suggestion](${suggestionLink}) a déjà été atteint, seul [cette correction](${correctionLink}) nécessite encore des désapprobations.`)
+          Le nombre de désapprobations requises pour le refus de ${hyperlink(
+            'cette suggestion',
+            suggestionLink
+          )} a déjà été atteint, seul ${hyperlink(
+          'cette correction',
+          correctionLink
+        )} nécessite encore des désapprobations.`)
       );
     }
 
@@ -236,7 +254,9 @@ export default class DisapproveCommand extends Command {
     if (proposal.disapprovals.length < neededApprovalsCount) {
       await message.edit({ embeds: [embed] });
 
-      return interaction.reply(interactionValidate(`Votre [désapprobation](${message.url}) a été prise en compte !`));
+      return interaction.reply(
+        interactionValidate(`Votre ${hyperlink('désapprobation', message.url)} a été prise en compte !`)
+      );
     }
 
     return this.disapprove(interaction, proposal, message, embed);
@@ -309,7 +329,10 @@ export default class DisapproveCommand extends Command {
     if (automerge) {
       await interaction.followUp(
         interactionValidate(
-          `La [suggestion](${message.url}) a bien été automatiquement désapprouvée suite à la désapprobation manquante sur la correction !`
+          `La ${hyperlink(
+            'suggestion',
+            message.url
+          )} a bien été automatiquement désapprouvée suite à la désapprobation manquante sur la correction !`
         )
       );
       return;
@@ -318,7 +341,9 @@ export default class DisapproveCommand extends Command {
     await message.reactions.removeAll();
 
     await interaction.reply(
-      interactionValidate(`La [${isSuggestion ? 'suggestion' : 'correction'}](${message.url}) a bien été refusée !`)
+      interactionValidate(
+        `La ${hyperlink(isSuggestion ? 'suggestion' : 'correction', message.url)} a bien été refusée !`
+      )
     );
   }
 }

@@ -1,5 +1,5 @@
 import { stripIndents } from 'common-tags';
-import { APIEmbed, Client, Message, Snowflake, TextChannel } from 'discord.js';
+import { APIEmbed, channelMention, Client, Message, Snowflake, TextChannel } from 'discord.js';
 import { Colors, commandsChannelId, correctionsChannelId, suggestionsChannelId } from '../constants';
 import Jokes from '../../jokes';
 
@@ -54,10 +54,12 @@ export default class Stickys {
     return {
       title: 'Bienvenue à toi ! 👋',
       description: stripIndents`
-        Si tu le souhaites, tu peux proposer tes blagues afin qu'elles soient ajoutées à l'API Blagues-API, elle regroupe actuellement **${Jokes.count}** blagues françaises.
+        Si tu le souhaites, tu peux proposer tes blagues afin qu'elles soient ajoutées à l'API Blagues-API, elle regroupe actuellement **${
+          Jokes.count
+        }** blagues françaises.
         Elles sont toutes issues de ce salon proposées par la communauté.
 
-        > \`/suggestion\` dans le salon <#${commandsChannelId}>
+        > \`/suggestion\` dans le salon ${channelMention(commandsChannelId)}
       `,
       fields: [
         {
@@ -78,9 +80,11 @@ export default class Stickys {
     return {
       title: 'Bienvenue à toi ! 👋',
       description: stripIndents`
-        Si tu le souhaites, tu peux proposer des corrections aux blagues de l'API Blagues API qui regroupe actuellement **${Jokes.count}** blagues françaises.
+        Si tu le souhaites, tu peux proposer des corrections aux blagues de l'API Blagues API qui regroupe actuellement **${
+          Jokes.count
+        }** blagues françaises.
 
-        > \`/correction\` dans le salon <#${commandsChannelId}>
+        > \`/correction\` dans le salon ${channelMention(commandsChannelId)}
       `,
       color: Colors.SECONDARY
     };

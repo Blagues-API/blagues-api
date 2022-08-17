@@ -3,10 +3,13 @@ import { stripIndents } from 'common-tags';
 import {
   APIEmbed,
   ApplicationCommandType,
+  hyperlink,
   Message,
   MessageContextMenuCommandInteraction,
   messageLink,
-  TextChannel
+  roleMention,
+  TextChannel,
+  userMention
 } from 'discord.js';
 import prisma from '../../prisma';
 import { CategoriesRefs, Category, Correction, Proposals, Suggestion } from '../../typings';
@@ -52,7 +55,7 @@ export default class ApproveCommand extends Command {
         interactionProblem(
           `Vous ne pouvez pas approuver une ${
             isSuggestionChannel ? 'suggestion' : 'correction'
-          } qui n'est pas gérée par ${interaction.client.user}.`
+          } qui n'est pas gérée par ${userMention(interaction.client.user!.id)}.`
         )
       );
     }
@@ -60,7 +63,9 @@ export default class ApproveCommand extends Command {
     if (!isGodfather(interaction.member)) {
       return interaction.reply(
         interactionProblem(
-          `Seul un <@&${godfatherRoleId}> peut approuver une ${isSuggestionChannel ? 'suggestion' : 'correction'}.`
+          `Seul un ${roleMention(godfatherRoleId)} peut approuver une ${
+            isSuggestionChannel ? 'suggestion' : 'correction'
+          }.`
         )
       );
     }
@@ -178,7 +183,10 @@ export default class ApproveCommand extends Command {
           const suggestionLink = messageLink(suggestionsChannelId, proposal.message_id!, interaction.guild.id);
           return interaction.reply(
             interactionInfo(
-              `Il semblerait qu'une [correction aie été proposée](${correctionLink}), veuillez l'approuver avant l'approbation de [cette suggestion](${suggestionLink}).`
+              `Il semblerait qu'une ${hyperlink(
+                'correction aie été proposée',
+                correctionLink
+              )}, veuillez l'approuver avant l'approbation de ${hyperlink('cette suggestion', suggestionLink)}.`
             )
           );
         }
@@ -189,7 +197,10 @@ export default class ApproveCommand extends Command {
         const correctionLink = messageLink(correctionsChannelId, lastCorrection.message_id!, interaction.guild.id);
         return interaction.reply(
           interactionInfo(
-            `Il semblerait qu'une [correction aie été ajoutée](${correctionLink}) par dessus rendant celle-ci obsolète, veuillez approuver la dernière version de la correction.`
+            `Il semblerait qu'une ${hyperlink(
+              'correction aie été ajoutée',
+              correctionLink
+            )} par dessus rendant celle-ci obsolète, veuillez approuver la dernière version de la correction.`
           )
         );
       }
@@ -221,7 +232,7 @@ export default class ApproveCommand extends Command {
 
       await message.edit({ embeds: [embed] });
 
-      return interaction.reply(interactionInfo(`Votre [approbation](${message.url}) a bien été retirée.`));
+      return interaction.reply(interactionInfo(`Votre ${hyperlink('approbation', message.url)} a bien été retirée.`));
     }
 
     const disapprovalIndex = proposal.disapprovals.findIndex(
@@ -260,7 +271,13 @@ export default class ApproveCommand extends Command {
       );
       return interaction.reply(
         interactionInfo(`
-          Le nombre d'approbations requises pour l'ajout de [cette suggestion](${suggestionLink}) a déjà été atteint, seul [cette correction](${correctionLink}) nécessite encore des approbations.`)
+          Le nombre d'approbations requises pour l'ajout de ${hyperlink(
+            'cette suggestion',
+            suggestionLink
+          )} a déjà été atteint, seul ${hyperlink(
+          'cette correction',
+          correctionLink
+        )} nécessite encore des approbations.`)
       );
     }
 
@@ -280,7 +297,9 @@ export default class ApproveCommand extends Command {
     if (proposal.approvals.length < neededApprovalsCount) {
       await message.edit({ embeds: [embed] });
 
-      return interaction.reply(interactionValidate(`Votre [approbation](${message.url}) a été prise en compte !`));
+      return interaction.reply(
+        interactionValidate(`Votre ${hyperlink('approbation', message.url)} a été prise en compte !`)
+      );
     }
 
     await interaction.deferReply({ ephemeral: true });
@@ -295,7 +314,10 @@ export default class ApproveCommand extends Command {
       console.error(error);
       await interaction.editReply(
         interactionProblem(
-          `Une erreur s'est produite lors de l'approbation de la [suggestion](${message.url}), veuillez contacter le développeur !`
+          `Une erreur s'est produite lors de l'approbation de la ${hyperlink(
+            'suggestion',
+            message.url
+          )}, veuillez contacter le développeur !`
         )
       );
     }
@@ -354,13 +376,18 @@ export default class ApproveCommand extends Command {
     if (automerge) {
       await interaction.followUp(
         interactionValidate(
-          `La [suggestion](${message.url}) a bien été automatiquement ajoutée à l'API suite à la validation de la correction manquante !`
+          `La ${hyperlink(
+            'suggestion',
+            message.url
+          )} a bien été automatiquement ajoutée à l'API suite à la validation de la correction manquante !`
         )
       );
       return;
     }
 
-    await interaction.editReply(interactionValidate(`La [suggestion](${message.url}) a bien été ajoutée à l'API !`));
+    await interaction.editReply(
+      interactionValidate(`La ${hyperlink('suggestion', message.url)} a bien été ajoutée à l'API !`)
+    );
   }
 
   async approveCorrection(
@@ -472,7 +499,9 @@ export default class ApproveCommand extends Command {
     }
     await interaction.editReply(
       interactionValidate(
-        `La [correction](${message.url}) a bien été migrée vers la ${isPublishedJoke ? 'blague' : 'suggestion'}!`
+        `La ${hyperlink('correction', message.url)} a bien été migrée vers la ${
+          isPublishedJoke ? 'blague' : 'suggestion'
+        }!`
       )
     );
 

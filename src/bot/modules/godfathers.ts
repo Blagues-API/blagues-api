@@ -1,4 +1,4 @@
-import { Guild, GuildMember, Interaction, Snowflake } from 'discord.js';
+import { formatEmoji, Guild, GuildMember, Interaction, Snowflake } from 'discord.js';
 import prisma from '../../prisma';
 import sharp from 'sharp';
 import got from 'got';
@@ -8,7 +8,7 @@ import { ProposalExtended } from '../../typings';
 
 interface GodfatherEmoji {
   id: Snowflake;
-  emoji: `<:vote:${Snowflake}>`;
+  emoji: `<:_:${string}>`;
 }
 
 const rect = Buffer.from('<svg><rect x="0" y="0" width="128" height="128" rx="64" ry="64"/></svg>');
@@ -31,7 +31,7 @@ export async function getGodfatherEmoji(emojisGuild: Guild, member: GuildMember)
     await prisma.godfather.delete({ where: { id: godfather.id } });
     return getGodfatherEmoji(emojisGuild, member);
   }
-  return { id: member.id, emoji: `<:vote:${godfather.emoji_id}>` };
+  return { id: member.id, emoji: formatEmoji(godfather.emoji_id) };
 }
 
 export async function renderGodfatherLine(interaction: Interaction<'cached'>, proposal: ProposalExtended) {
