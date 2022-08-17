@@ -20,7 +20,7 @@ import {
   upReactionIdentifier
 } from '../constants';
 import Command from '../lib/command';
-import { interactionInfo, interactionProblem, interactionValidate, isEmbedable, waitForInteraction } from '../utils';
+import { interactionProblem, interactionValidate, isEmbedable, waitForInteraction } from '../utils';
 import prisma from '../../prisma';
 import { ProposalType } from '@prisma/client';
 

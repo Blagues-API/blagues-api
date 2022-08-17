@@ -28,7 +28,7 @@ import {
   info,
   interactionInfo,
   interactionProblem,
-  interactionValidate
+  interactionValidate,
   isEmbedable,
   messageInfo,
   messageProblem,
