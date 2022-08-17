@@ -34,8 +34,7 @@ const middleware: FastifyPluginAsync = async (fastify: FastifyInstance): Promise
 
     const token: string = bearerToken.split(' ')[1];
     try {
-      const decoded: AuthPayload = jwt.verify(token, process.env.JWT_TOKEN!) as AuthPayload;
-      request.auth = decoded;
+      request.auth = jwt.verify(token, process.env.JWT_TOKEN!) as AuthPayload;
     } catch (error) {
       return reply.code(401).send(AuthHeaderInvalidToken);
     }
