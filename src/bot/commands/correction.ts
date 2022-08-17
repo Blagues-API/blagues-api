@@ -4,14 +4,12 @@ import {
   ApplicationCommandType,
   ButtonInteraction,
   ButtonStyle,
-  channelMention,
   ChatInputCommandInteraction,
   codeBlock,
   ComponentType,
   hyperlink,
   Message,
-  TextChannel,
-  userMention
+  TextChannel
 } from 'discord.js';
 import { jokeById, jokeByQuestion } from '../../controllers';
 import prisma from '../../prisma';
@@ -290,9 +288,7 @@ export default class CorrectionCommand extends Command {
         interaction.channel
           ?.send(
             messageProblem(
-              `Impossible de trouver une blague ou correction liée à cet ID de blague, assurez vous que cet ID provient bien d\'un message envoyé par le bot ${userMention(
-                interaction.client.user!.id
-              )}.`
+              `Impossible de trouver une blague ou correction liée à cet ID de blague, assurez vous que cet ID provient bien d\'un message envoyé par le bot ${interaction.client.user}.`
             )
           )
           .then(tDelete(5000));
@@ -389,7 +385,7 @@ export default class CorrectionCommand extends Command {
         {
           color: Colors.PRIMARY,
           title: `Par quelle ${textReplyContent} voulez-vous changer la ${textReplyContent} actuelle ?`,
-          description: `${codeBlock(oldValue)}`
+          description: codeBlock(oldValue)
         }
       ],
       components: []
@@ -493,10 +489,7 @@ export default class CorrectionCommand extends Command {
     ) as TextChannel;
     if (!isEmbedable(correctionsChannel)) {
       return commandInteraction.reply(
-        interactionProblem(
-          `Je n'ai pas la permission d'envoyer la correction dans le salon ${channelMention(correctionsChannel.id)}.`,
-          false
-        )
+        interactionProblem(`Je n'ai pas la permission d'envoyer la correction dans le salon ${correctionsChannel}.`)
       );
     }
 

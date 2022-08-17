@@ -68,7 +68,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
 
   fastify.get('/auth/user', async (req: DashboardAuthUser, res) => {
     try {
-      const discordUser = await got('https://discord.com/api/v9/users/@me', {
+      const discordUser = await got('https://discord.com/api/v10/users/@me', {
         headers: {
           Authorization: req.headers.authorization
         }
@@ -104,7 +104,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       })
       .json<RESTPostOAuth2AccessTokenResult>();
 
-    const discordUser = await got('https://discord.com/api/v9/users/@me', {
+    const discordUser = await got('https://discord.com/api/v10/users/@me', {
       headers: {
         Authorization: `Bearer ${authData.access_token}`
       }

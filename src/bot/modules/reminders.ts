@@ -140,7 +140,7 @@ export default class Reminders {
 
         if (line.length + acc.current.length > 4090) {
           acc.pages.push(acc.current);
-          acc.current = blockQuote(' ');
+          acc.current = '>>> ';
         }
 
         acc.current += line;
@@ -149,7 +149,7 @@ export default class Reminders {
 
         return acc;
       },
-      { current: blockQuote(' '), pages: [] }
+      { current: '>>> ', pages: [] }
     );
 
     const godFatherMember: Snowflake[] = [...godfatherRole.members.keys()];

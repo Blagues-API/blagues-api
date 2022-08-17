@@ -61,7 +61,7 @@ export default class Stats {
         inline: true
       },
       {
-        name: 'Corrections:',
+        name: 'Corrections :',
         value: stripIndents`
           Proposées: **${corrections.length}**
           En attente: **${corrections.filter((s) => !s.refused && !s.merged).length}**

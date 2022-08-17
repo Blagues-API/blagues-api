@@ -8,8 +8,7 @@ import {
   MessageContextMenuCommandInteraction,
   messageLink,
   roleMention,
-  TextChannel,
-  userMention
+  TextChannel
 } from 'discord.js';
 import prisma from '../../prisma';
 import { CategoriesRefs, Category, Correction, Proposals, Suggestion } from '../../typings';
@@ -55,7 +54,7 @@ export default class ApproveCommand extends Command {
         interactionProblem(
           `Vous ne pouvez pas approuver une ${
             isSuggestionChannel ? 'suggestion' : 'correction'
-          } qui n'est pas gérée par ${userMention(interaction.client.user!.id)}.`
+          } qui n'est pas gérée par ${interaction.client.user}.`
         )
       );
     }
