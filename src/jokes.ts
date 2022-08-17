@@ -27,7 +27,7 @@ class JokesLoader {
       await fs.access(jokesPath, fsConstants.R_OK | fsConstants.W_OK);
     } catch (error) {
       console.log('Missing access', error);
-      return { success: false, error: `Il semblerait que le fichier de blagues soit inaccessible ou innexistant.` };
+      return { success: false, error: `Il semblerait que le fichier de blagues soit inaccessible ou inexistant.` };
     }
 
     try {
@@ -69,7 +69,7 @@ class JokesLoader {
       await fs.access(jokesPath, fsConstants.R_OK | fsConstants.W_OK);
     } catch (error) {
       console.log('Missing access', error);
-      return { success: false, error: `Il semblerait que le fichier de blagues soit inaccessible ou innexistant.` };
+      return { success: false, error: `Il semblerait que le fichier de blagues soit inaccessible ou inexistant.` };
     }
 
     const rawData = await fs.readFile(jokesPath, 'utf-8');
