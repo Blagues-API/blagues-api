@@ -132,11 +132,17 @@ export default class Reminders {
           .map((members_id) => godfathersEmojis.find(({ id }) => members_id === id)?.emoji)
           .filter((e) => e)
           .join(' ');
-        const line = `[${proposal.type === ProposalType.SUGGESTION ? 'Suggestion' : 'Correction'}](${messageLink(
-          proposal.type === ProposalType.SUGGESTION ? suggestionsChannelId : correctionsChannelId,
-          proposal.message_id!,
-          guild.id
-        )}) ${godfathers}\n`;
+        const member = this.client.guilds.cache.get(guildId)?.members.cache.get(proposal.user_id!);
+        const proposal_type = proposal.type === ProposalType.SUGGESTION ? 'Suggestion' : 'Correction';
+        const line = `${hyperlink(
+          proposal_type,
+          messageLink(
+            proposal.type === ProposalType.SUGGESTION ? suggestionsChannelId : correctionsChannelId,
+            proposal.message_id!,
+            guild.id
+          ),
+          member ? proposal_type + ' de ' + member.displayName : proposal_type
+        )} ${godfathers}\n`;
 
         if (line.length + acc.current.length > 4090) {
           acc.pages.push(acc.current);
