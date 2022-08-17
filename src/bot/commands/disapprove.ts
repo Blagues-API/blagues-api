@@ -22,8 +22,8 @@ import {
   suggestionsChannelId
 } from '../constants';
 import Command from '../lib/command';
-import { renderGodfatherLine } from '../modules/godfathers';
 import { interactionInfo, interactionProblem, interactionValidate, isEmbedable, isGodfather } from '../utils';
+import { checkProposalStatus, updateProposalEmbed } from '../utils/proposal';
 
 export default class DisapproveCommand extends Command {
   constructor() {
@@ -105,8 +105,8 @@ export default class DisapproveCommand extends Command {
       return interaction.reply(interactionProblem(`Le message est invalide.`));
     }
 
-    const embed = message.embeds[0]?.toJSON();
-    if (!embed) {
+    const oldEmbed = message.embeds[0]?.toJSON();
+    if (!oldEmbed) {
       await prisma.proposal.delete({
         where: {
           id: proposal.id
@@ -117,17 +117,9 @@ export default class DisapproveCommand extends Command {
 
     const isSuggestion = proposal.type === ProposalType.SUGGESTION;
 
-    if (proposal.merged) {
-      return interaction.reply(
-        interactionProblem(`Cette ${isSuggestion ? 'suggestion' : 'correction'} a déjà été ajoutée.`)
-      );
-    }
+    const check = await checkProposalStatus(interaction, proposal, message);
 
-    if (proposal.refused) {
-      return interaction.reply(
-        interactionProblem(`Cette ${isSuggestion ? 'suggestion' : 'correction'} a déjà été refusée.`)
-      );
-    }
+    if (check) return;
 
     if (isSuggestion) {
       const correction = proposal.corrections[0];
@@ -176,16 +168,7 @@ export default class DisapproveCommand extends Command {
 
       proposal.disapprovals.splice(disapprovalIndex, 1);
 
-      const godfathers = await renderGodfatherLine(interaction, proposal);
-
-      const field = embed.fields?.[embed.fields.length - 1];
-      if (field) {
-        const { base, correction } = field.value.match(dataSplitRegex)!.groups!;
-        field.value = [base, correction, godfathers].filter(Boolean).join('\n\n');
-      } else {
-        const { base, correction } = embed.description!.match(dataSplitRegex)!.groups!;
-        embed.description = [base, correction, godfathers].filter(Boolean).join('\n\n');
-      }
+      const embed = await updateProposalEmbed(interaction, proposal, oldEmbed);
 
       await message.edit({ embeds: [embed] });
 
@@ -238,16 +221,7 @@ export default class DisapproveCommand extends Command {
       );
     }
 
-    const godfathers = await renderGodfatherLine(interaction, proposal);
-
-    const field = embed.fields?.[embed.fields.length - 1];
-    if (field) {
-      const { base, correction } = field.value.match(dataSplitRegex)!.groups!;
-      field.value = [base, correction, godfathers].filter(Boolean).join('\n\n');
-    } else {
-      const { base, correction } = embed.description!.match(dataSplitRegex)!.groups!;
-      embed.description = [base, correction, godfathers].filter(Boolean).join('\n\n');
-    }
+    const embed = await updateProposalEmbed(interaction, proposal, oldEmbed);
 
     await interaction.client.votes.deleteUserVotes(message, interaction.user.id);
 
