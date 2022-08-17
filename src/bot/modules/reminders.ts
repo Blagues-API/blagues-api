@@ -132,7 +132,7 @@ export default class Reminders {
           .map((members_id) => godfathersEmojis.find(({ id }) => members_id === id)?.emoji)
           .filter((e) => e)
           .join(' ');
-        const member = this.client.guilds.cache.get(guildId)?.members.cache.get(proposal.user_id!);
+        const member = guild.members.cache.get(proposal.user_id!);
         const proposal_type = proposal.type === ProposalType.SUGGESTION ? 'Suggestion' : 'Correction';
         const line = `${hyperlink(
           proposal_type,
