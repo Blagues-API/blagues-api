@@ -5,6 +5,7 @@ import {
   ApplicationCommandType,
   Message,
   MessageContextMenuCommandInteraction,
+  messageLink,
   TextChannel
 } from 'discord.js';
 import prisma from '../../prisma';
@@ -25,14 +26,7 @@ import {
 } from '../constants';
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../modules/godfathers';
-import {
-  interactionInfo,
-  interactionProblem,
-  interactionValidate,
-  isEmbedable,
-  isGodfather,
-  messageLink
-} from '../utils';
+import { interactionInfo, interactionProblem, interactionValidate, isEmbedable, isGodfather } from '../utils';
 import Jokes from '../../jokes';
 import { compareTwoStrings } from 'string-similarity';
 
@@ -180,8 +174,8 @@ export default class ApproveCommand extends Command {
       if (correction) {
         const beenApproved = correction.approvals.some((approval) => approval.user_id === interaction.user.id);
         if (!beenApproved) {
-          const correctionLink = messageLink(interaction.guild.id, correctionsChannelId, correction.message_id!);
-          const suggestionLink = messageLink(interaction.guild.id, suggestionsChannelId, proposal.message_id!);
+          const correctionLink = messageLink(correctionsChannelId, correction.message_id!, interaction.guild.id);
+          const suggestionLink = messageLink(suggestionsChannelId, proposal.message_id!, interaction.guild.id);
           return interaction.reply(
             interactionInfo(
               `Il semblerait qu'une [correction aie été proposée](${correctionLink}), veuillez l'approuver avant l'approbation de [cette suggestion](${suggestionLink}).`
@@ -192,7 +186,7 @@ export default class ApproveCommand extends Command {
     } else {
       const lastCorrection = proposal.suggestion?.corrections[0];
       if (lastCorrection && lastCorrection.id !== proposal.id) {
-        const correctionLink = messageLink(interaction.guild.id, correctionsChannelId, lastCorrection.message_id!);
+        const correctionLink = messageLink(correctionsChannelId, lastCorrection.message_id!, interaction.guild.id);
         return interaction.reply(
           interactionInfo(
             `Il semblerait qu'une [correction aie été ajoutée](${correctionLink}) par dessus rendant celle-ci obsolète, veuillez approuver la dernière version de la correction.`
@@ -258,11 +252,11 @@ export default class ApproveCommand extends Command {
     const neededApprovalsCount = isSuggestion ? neededSuggestionsApprovals : neededCorrectionsApprovals;
 
     if (isSuggestion && proposal.approvals.length >= neededApprovalsCount && proposal.corrections[0]) {
-      const suggestionLink = messageLink(interaction.guild.id, suggestionsChannelId, proposal.message_id!);
+      const suggestionLink = messageLink(suggestionsChannelId, proposal.message_id!, interaction.guild.id);
       const correctionLink = messageLink(
-        interaction.guild.id,
         correctionsChannelId,
-        proposal.corrections[0].message_id!
+        proposal.corrections[0].message_id!,
+        interaction.guild.id
       );
       return interaction.reply(
         interactionInfo(`

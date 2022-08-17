@@ -20,10 +20,6 @@ export function isGodfather(member: GuildMember): boolean {
   return member.roles.cache.has(godfatherRoleId);
 }
 
-export function messageLink(guildId: string, channelId: string, messageId: string): string {
-  return `https://discord.com/channels/${guildId}/${channelId}/${messageId}`;
-}
-
 export function tDelete(timeout = 6000): (message: Message) => NodeJS.Timeout {
   return (message: Message) => setTimeout(() => message.deletable && message.delete().catch(() => null), timeout);
 }

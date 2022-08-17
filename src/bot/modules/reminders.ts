@@ -1,7 +1,14 @@
 import { ProposalType } from '@prisma/client';
-import { messageLink } from '../utils';
 import { Snowflake } from 'discord-api-types/v9';
-import { ButtonInteraction, ButtonStyle, Client, Collection, ComponentType, TextChannel } from 'discord.js';
+import {
+  ButtonInteraction,
+  ButtonStyle,
+  Client,
+  Collection,
+  ComponentType,
+  messageLink,
+  TextChannel
+} from 'discord.js';
 import schedule from 'node-schedule';
 import prisma from '../../prisma';
 import {
@@ -123,9 +130,9 @@ export default class Reminders {
           .filter((e) => e)
           .join(' ');
         const line = `[${proposal.type === ProposalType.SUGGESTION ? 'Suggestion' : 'Correction'}](${messageLink(
-          guild.id,
           proposal.type === ProposalType.SUGGESTION ? suggestionsChannelId : correctionsChannelId,
-          proposal.message_id!
+          proposal.message_id!,
+          guild.id
         )}) ${godfathers}\n`;
 
         if (line.length + acc.current.length > 4090) {
@@ -301,9 +308,9 @@ export default class Reminders {
         }
 
         const line = `[${proposal.type === ProposalType.SUGGESTION ? 'Suggestion' : 'Correction'}](${messageLink(
-          guild.id,
           proposal.type === ProposalType.SUGGESTION ? suggestionsChannelId : correctionsChannelId,
-          proposal.message_id!
+          proposal.message_id!,
+          guild.id
         )}) (${Math.max(proposal.approvals.length, proposal.disapprovals.length)}/${neededApprovalsCount})\n`;
 
         if (line.length + acc.description.length > 4000) {
