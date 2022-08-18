@@ -25,7 +25,7 @@ class JokesLoader {
     const jokesPath = path.join(__dirname, '../blagues.json');
     const req = await this.checkAccess(jokesPath);
 
-    if (req != true) return req;
+    if (!req.success) return req;
 
     try {
       await this.loader.wait();
@@ -64,7 +64,7 @@ class JokesLoader {
     const jokesPath = path.join(__dirname, '../blagues.json');
     const req = await this.checkAccess(jokesPath);
 
-    if (req != true) return req;
+    if (!req.success) return req;
 
     const rawData = await fs.readFile(jokesPath, 'utf-8');
     const jokes = (rawData.length ? JSON.parse(rawData) : []) as Joke[];
@@ -75,7 +75,7 @@ class JokesLoader {
   private async checkAccess(path: string) {
     try {
       await fs.access(path, fsConstants.R_OK | fsConstants.W_OK);
-      return true;
+      return { success: true };
     } catch (error) {
       console.log('Missing access', error);
       return { success: false, error: `Il semblerait que le fichier de blagues soit inaccessible ou inexistant.` };
