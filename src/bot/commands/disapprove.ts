@@ -124,9 +124,9 @@ export default class DisapproveCommand extends Command {
 
     const isSuggestion = proposal.type === ProposalType.SUGGESTION;
 
-    const check = await checkProposalStatus(interaction, proposal, message);
+    const response = await checkProposalStatus(interaction, proposal, message);
 
-    if (check) return;
+    if (!response) return;
 
     if (isSuggestion) {
       const correction = proposal.corrections[0];

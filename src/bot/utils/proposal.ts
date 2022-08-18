@@ -47,7 +47,8 @@ export async function checkProposalStatus<T extends Proposals>(
       await message.edit({ embeds: [embed] });
     }
 
-    return interaction.reply(interactionProblem(`${proposal_type} a déjà été ajoutée.`));
+    await interaction.reply(interactionProblem(`${proposal_type} a déjà été ajoutée.`));
+    return false;
   }
 
   if (proposal.refused) {
@@ -65,8 +66,9 @@ export async function checkProposalStatus<T extends Proposals>(
       await message.edit({ embeds: [embed] });
     }
 
-    return interaction.reply(interactionProblem(`${proposal_type} a déjà été refusée}.`));
+    await interaction.reply(interactionProblem(`${proposal_type} a déjà été refusée}.`));
+    return false;
   }
 
-  return null;
+  return true;
 }

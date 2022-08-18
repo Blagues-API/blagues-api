@@ -140,9 +140,9 @@ export default class ApproveCommand extends Command {
         interactionProblem(`Vous ne pouvez pas approuver votre propre ${isSuggestion ? 'suggestion' : 'correction'}.`)
       );
     }
-    const check = await checkProposalStatus(interaction, proposal, message);
+    const response = await checkProposalStatus(interaction, proposal, message);
 
-    if (check) return;
+    if (!response) return;
 
     if (isSuggestion) {
       const correction = proposal.corrections[0];
