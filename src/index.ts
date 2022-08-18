@@ -1,3 +1,5 @@
+import './sentry';
+
 import Tesseract from './tesseract';
 
 const app = new Tesseract();
