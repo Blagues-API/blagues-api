@@ -1,11 +1,11 @@
 import { stripIndents } from 'common-tags';
-import { CommandInteraction, GuildMember, APIEmbed } from 'discord.js';
+import { APIEmbed, CommandInteraction, formatEmoji, GuildMember, quote, userMention } from 'discord.js';
 import { approveEmoji, Colors, disapproveEmoji, godfatherRoleId } from '../constants';
 import { isGodfather, paginate } from '../utils';
 import prisma from '../../prisma';
 import chunk from 'lodash/chunk';
 import partition from 'lodash/partition';
-import { Proposal, ProposalType, Vote, VoteType, Approval, Disapproval } from '@prisma/client';
+import { Approval, Disapproval, Proposal, ProposalType, Vote, VoteType } from '@prisma/client';
 
 interface MemberProposal extends Proposal {
   votes: Vote[];
@@ -16,8 +16,8 @@ interface MemberProposal extends Proposal {
 }
 
 const reaction = {
-  up: `<:vote_up:1000313060860383365>`,
-  down: `<:vote_down:1000721148444672072>`
+  up: formatEmoji('1000313060860383365'),
+  down: formatEmoji('1000721148444672072')
 };
 
 type GodfathersDecisions = (Approval | Disapproval)[][];
@@ -167,13 +167,13 @@ export default class Stats {
         return { userId, points };
       })
       .sort((a, b) => b.points - a.points)
-      .map((entry) => `<@${entry.userId}> : ${entry.points} ${entry.points !== 1 ? 'points' : 'point'}`);
+      .map((entry) => `${userMention(entry.userId)} : ${entry.points} ${entry.points !== 1 ? 'points' : 'point'}`);
 
     const pages = chunk(membersPoints, 20).map((entries) => entries.join('\n'));
 
     const embed: APIEmbed = {
       title: 'Statistiques',
-      description: pages[0] || "Il n'y a aucune statistiques.",
+      description: pages[0] || quote("Il n'y a aucune statistiques."),
       color: Colors.PRIMARY,
       footer: {
         text: pages.length > 1 ? `Page 1/${pages.length} • Blagues-API` : 'Blagues-API',

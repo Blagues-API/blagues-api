@@ -5,7 +5,9 @@ import {
   ButtonInteraction,
   ButtonStyle,
   ChatInputCommandInteraction,
+  codeBlock,
   ComponentType,
+  hyperlink,
   Message,
   TextChannel
 } from 'discord.js';
@@ -29,13 +31,13 @@ import {
   interactionInfo,
   interactionProblem,
   interactionValidate,
-  interactionWaiter,
   isEmbedable,
   messageInfo,
   messageProblem,
   showNegativeDiffs,
   showPositiveDiffs,
-  tDelete
+  tDelete,
+  waitForInteraction
 } from '../utils';
 
 enum IdType {
@@ -70,6 +72,7 @@ export default class CorrectionCommand extends Command {
       ]
     });
   }
+
   async run(interaction: ChatInputCommandInteraction<'cached'>) {
     const query = interaction.options.getString('recherche', true);
 
@@ -182,7 +185,7 @@ export default class CorrectionCommand extends Command {
       fetchReply: true
     })) as Message<true>;
 
-    const buttonInteraction = await interactionWaiter({
+    const buttonInteraction = await waitForInteraction({
       component_type: ComponentType.Button,
       message: question,
       user: commandInteraction.user,
@@ -285,7 +288,7 @@ export default class CorrectionCommand extends Command {
         interaction.channel
           ?.send(
             messageProblem(
-              `Impossible de trouver une blague ou correction liée à cet ID de blague, assurez vous que cet ID provient bien d\'un message envoyé par le bot ${interaction.client.user}`
+              `Impossible de trouver une blague ou correction liée à cet ID de blague, assurez vous que cet ID provient bien d\'un message envoyé par le bot ${interaction.client.user}.`
             )
           )
           .then(tDelete(5000));
@@ -382,7 +385,7 @@ export default class CorrectionCommand extends Command {
         {
           color: Colors.PRIMARY,
           title: `Par quelle ${textReplyContent} voulez-vous changer la ${textReplyContent} actuelle ?`,
-          description: `\`\`\`${oldValue}\`\`\``
+          description: codeBlock(oldValue)
         }
       ],
       components: []
@@ -453,7 +456,7 @@ export default class CorrectionCommand extends Command {
       fetchReply: true
     })) as Message<true>;
 
-    const response = await interactionWaiter({
+    const response = await waitForInteraction({
       component_type: ComponentType.SelectMenu,
       message: questionMessage,
       user: commandInteraction.user
@@ -486,10 +489,7 @@ export default class CorrectionCommand extends Command {
     ) as TextChannel;
     if (!isEmbedable(correctionsChannel)) {
       return commandInteraction.reply(
-        interactionProblem(
-          `Je n'ai pas la permission d'envoyer la correction dans le salon ${correctionsChannel}.`,
-          false
-        )
+        interactionProblem(`Je n'ai pas la permission d'envoyer la correction dans le salon ${correctionsChannel}.`)
       );
     }
 
@@ -551,14 +551,14 @@ export default class CorrectionCommand extends Command {
 
       const { base, godfathers } = embed.description!.match(dataSplitRegex)!.groups!;
 
-      const correctionText = `⚠️ Une [correction](${message.url}) est en cours.`;
+      const correctionText = `⚠️ Une ${hyperlink('correction', message.url)} est en cours.`;
       embed.description = [base, correctionText, godfathers].filter(Boolean).join('\n\n');
 
       await suggestionMessage.edit({ embeds: [embed] });
     }
 
     await commandInteraction.editReply(
-      interactionValidate(`Votre [proposition de correction](${message.url}) a bien été envoyée !`)
+      interactionValidate(`Votre ${hyperlink('proposition de correction', message.url)} a bien été envoyée !`)
     );
 
     for (const reaction of [upReactionIdentifier, downReactionIdentifier]) {

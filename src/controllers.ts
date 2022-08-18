@@ -1,5 +1,5 @@
 import Jokes from './jokes';
-import { Joke, Categories, Category } from './typings';
+import { Categories, Category, Joke } from './typings';
 import { random } from './utils';
 
 export interface JokeResponse {

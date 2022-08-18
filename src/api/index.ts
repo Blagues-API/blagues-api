@@ -14,7 +14,7 @@ export default class App {
   }
 
   async start(): Promise<void> {
-    if (process.env.api_service !== 'true') {
+    if (process.env.API_SERVICE !== 'true') {
       return console.log('Service api désactivé');
     }
 

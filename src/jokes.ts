@@ -19,31 +19,13 @@ class JokesLoader {
     this.init();
   }
 
-  private async init() {
-    const jokesPath = path.join(__dirname, '../blagues.json');
-    try {
-      await fs.access(jokesPath, fsConstants.R_OK | fsConstants.W_OK);
-    } catch (error) {
-      console.log('Missing access', error);
-      return { success: false, error: `Il semblerait que le fichier de blagues soit inaccessible ou innexistant.` };
-    }
-
-    const rawData = await fs.readFile(jokesPath, 'utf-8');
-    const jokes = (rawData.length ? JSON.parse(rawData) : []) as Joke[];
-    this.list = jokes;
-    this.count = jokes.length;
-  }
-
   public async mergeJoke(
     proposal: Correction | Suggestion
   ): Promise<{ success: boolean; joke_id?: number; error?: string }> {
     const jokesPath = path.join(__dirname, '../blagues.json');
-    try {
-      await fs.access(jokesPath, fsConstants.R_OK | fsConstants.W_OK);
-    } catch (error) {
-      console.log('Missing access', error);
-      return { success: false, error: `Il semblerait que le fichier de blagues soit inaccessible ou innexistant.` };
-    }
+    const req = await this.checkAccess(jokesPath);
+
+    if (!req.success) return req;
 
     try {
       await this.loader.wait();
@@ -75,6 +57,28 @@ class JokesLoader {
       return { success: false, error: `Une erreur s'est produite lors de l'ajout de la blague.` };
     } finally {
       this.loader.shift();
+    }
+  }
+
+  private async init() {
+    const jokesPath = path.join(__dirname, '../blagues.json');
+    const req = await this.checkAccess(jokesPath);
+
+    if (!req.success) return req;
+
+    const rawData = await fs.readFile(jokesPath, 'utf-8');
+    const jokes = (rawData.length ? JSON.parse(rawData) : []) as Joke[];
+    this.list = jokes;
+    this.count = jokes.length;
+  }
+
+  private async checkAccess(path: string) {
+    try {
+      await fs.access(path, fsConstants.R_OK | fsConstants.W_OK);
+      return { success: true };
+    } catch (error) {
+      console.log('Missing access', error);
+      return { success: false, error: `Il semblerait que le fichier de blagues soit inaccessible ou inexistant.` };
     }
   }
 }

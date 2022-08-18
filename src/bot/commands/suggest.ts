@@ -6,6 +6,7 @@ import {
   ButtonStyle,
   ChatInputCommandInteraction,
   ComponentType,
+  hyperlink,
   Message,
   TextChannel
 } from 'discord.js';
@@ -20,7 +21,7 @@ import {
   upReactionIdentifier
 } from '../constants';
 import Command from '../lib/command';
-import { interactionProblem, interactionValidate, interactionWaiter, isEmbedable } from '../utils';
+import { interactionProblem, interactionValidate, isEmbedable, waitForInteraction } from '../utils';
 import prisma from '../../prisma';
 import { ProposalType } from '@prisma/client';
 
@@ -156,7 +157,7 @@ export default class SuggestCommand extends Command {
       fetchReply: true
     })) as Message<true>;
 
-    const confirmation = await interactionWaiter({
+    const confirmation = await waitForInteraction({
       component_type: ComponentType.Button,
       message: message,
       user: interaction.user
@@ -166,7 +167,7 @@ export default class SuggestCommand extends Command {
 
     if (confirmation.customId === 'cancel') {
       return confirmation.update({
-        content: "La blague n'a pas été envoyé",
+        content: "La blague n'a pas été envoyée.",
         components: [],
         embeds: [embed]
       });
@@ -196,6 +197,6 @@ export default class SuggestCommand extends Command {
       await suggestion.react(reaction).catch(() => null);
     }
 
-    return confirmation.update(interactionValidate(`La [blague](${suggestion.url}) a été envoyé !`, false));
+    return confirmation.update(interactionValidate(`La ${hyperlink('blague', suggestion.url)} a été envoyée !`, false));
   }
 }

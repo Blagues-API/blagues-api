@@ -27,6 +27,7 @@ export interface UnpublishedJoke {
   joke: string;
   answer: string;
 }
+
 export type UnpublishedJokeKey = keyof UnpublishedJoke;
 
 /**
