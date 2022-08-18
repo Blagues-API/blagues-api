@@ -1,5 +1,4 @@
 import { ProposalType } from '@prisma/client';
-import { stripIndents } from 'common-tags';
 import {
   APIEmbed,
   ApplicationCommandType,
@@ -30,6 +29,7 @@ import Command from '../lib/command';
 import { renderGodfatherLine } from '../modules/godfathers';
 import {
   checkProposalStatus,
+  FieldValuesJoke,
   interactionInfo,
   interactionProblem,
   interactionValidate,
@@ -439,13 +439,12 @@ export default class ApproveCommand extends Command {
         embeds: [
           {
             ...suggestionMessage.embeds[0].toJSON(),
-            description: stripIndents`
-              > **Type**: ${CategoriesRefs[proposal.joke_type as Category]}
-              > **Blague**: ${proposal.joke_question}
-              > **Réponse**: ${proposal.joke_answer}
-
-              ${godfathers}
-            `
+            description: FieldValuesJoke(
+              CategoriesRefs[proposal.joke_type as Category],
+              proposal.joke_question!,
+              proposal.joke_answer!,
+              godfathers
+            )
           }
         ]
       });
