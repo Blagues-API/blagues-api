@@ -1,12 +1,18 @@
 import { ApplicationCommandData, ApplicationCommandType, CommandInteraction, InteractionResponse } from 'discord.js';
 
+type ApplicationCommandDataWithChannel = ApplicationCommandData & {
+  channels?: string[];
+};
+
 export default class Command {
   public name: string;
+  public channels: string[];
 
   private raw: ApplicationCommandData;
 
-  constructor(data: ApplicationCommandData) {
+  constructor(data: ApplicationCommandDataWithChannel) {
     this.name = data.name;
+    this.channels = data.channels ?? [];
     this.raw = data;
   }
 

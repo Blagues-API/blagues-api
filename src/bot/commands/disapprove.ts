@@ -33,7 +33,8 @@ export default class DisapproveCommand extends Command {
   constructor() {
     super({
       name: 'Désapprouver',
-      type: ApplicationCommandType.Message
+      type: ApplicationCommandType.Message,
+      channels: [suggestionsChannelId, correctionsChannelId]
     });
   }
 
@@ -41,18 +42,12 @@ export default class DisapproveCommand extends Command {
     const channel = (interaction.channel as TextChannel)!;
     const isSuggestionChannel = channel.id === suggestionsChannelId;
     const message = await channel.messages.fetch(interaction.targetId);
-    if (![suggestionsChannelId, correctionsChannelId].includes(channel.id)) {
-      return interaction.reply(
-        interactionProblem(
-          `Vous ne pouvez pas désapprouver une blague ou une correction en dehors des salons <#${suggestionsChannelId}> et <#${correctionsChannelId}>.`
-        )
-      );
-    }
+
     if (message.author.id !== interaction.client.user!.id) {
       return interaction.reply(
         interactionProblem(
           `Vous ne pouvez pas désapprouver une ${
-            isSuggestionChannel ? 'blague' : 'correction'
+            isSuggestionChannel ? 'suggestion' : 'correction'
           } qui n'est pas gérée par ${interaction.client.user}.`
         )
       );
@@ -61,7 +56,7 @@ export default class DisapproveCommand extends Command {
     if (!isGodfather(interaction.member)) {
       return interaction.reply(
         interactionProblem(
-          `Seul un <@${godfatherRoleId}> peut désapprouver une ${isSuggestionChannel ? 'blague' : 'correction'}.`
+          `Seul un <@${godfatherRoleId}> peut désapprouver une ${isSuggestionChannel ? 'suggestion' : 'correction'}.`
         )
       );
     }
@@ -126,13 +121,13 @@ export default class DisapproveCommand extends Command {
 
     if (proposal.merged) {
       return interaction.reply(
-        interactionProblem(`Cette ${isSuggestion ? 'blague' : 'correction'} a déjà été ajoutée.`)
+        interactionProblem(`Cette ${isSuggestion ? 'suggestion' : 'correction'} a déjà été ajoutée.`)
       );
     }
 
     if (proposal.refused) {
       return interaction.reply(
-        interactionProblem(`Cette ${isSuggestion ? 'blague' : 'correction'} a déjà été refusée.`)
+        interactionProblem(`Cette ${isSuggestion ? 'suggestion' : 'correction'} a déjà été refusée.`)
       );
     }
 
@@ -190,7 +185,7 @@ export default class DisapproveCommand extends Command {
 
       await message.edit({ embeds: [embed] });
 
-      return interaction.reply(interactionInfo(`Votre désapprobation a bien été retirée.`));
+      return interaction.reply(interactionInfo(`Votre [désapprobation](${message.url}) a bien été retirée.`));
     }
 
     const approvalIndex = proposal.approvals.findIndex((approval) => approval.user_id === interaction.user.id);
@@ -272,7 +267,7 @@ export default class DisapproveCommand extends Command {
 
     if (isEmbedable(logsChannel)) {
       await logsChannel.send({
-        content: `${isSuggestion ? 'Blague' : 'Suggestion'} refusée`,
+        content: `${isSuggestion ? 'Suggestion' : 'Correction'} refusée`,
         embeds: [embed]
       });
     }

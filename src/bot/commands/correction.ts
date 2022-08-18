@@ -6,13 +6,12 @@ import {
   ButtonStyle,
   ChatInputCommandInteraction,
   ComponentType,
-  Interaction,
   Message,
   TextChannel
 } from 'discord.js';
 import { jokeById, jokeByQuestion } from '../../controllers';
 import prisma from '../../prisma';
-import { Category, JokeTypesDescriptions, CategoriesRefs, UnsignedJoke, UnsignedJokeKey } from '../../typings';
+import { CategoriesRefs, Category, JokeTypesDescriptions, UnsignedJoke, UnsignedJokeKey } from '../../typings';
 import {
   Colors,
   commandsChannelId,
@@ -26,16 +25,17 @@ import Command from '../lib/command';
 import clone from 'lodash/clone';
 import { ProposalType } from '@prisma/client';
 import {
-  messageInfo,
+  info,
   interactionInfo,
   interactionProblem,
   interactionValidate,
+  interactionWaiter,
   isEmbedable,
+  messageInfo,
   messageProblem,
   showNegativeDiffs,
   showPositiveDiffs,
-  tDelete,
-  info
+  tDelete
 } from '../utils';
 
 enum IdType {
@@ -59,6 +59,7 @@ export default class CorrectionCommand extends Command {
       name: 'correction',
       description: 'Proposer une modification de blague',
       type: ApplicationCommandType.ChatInput,
+      channels: [commandsChannelId],
       options: [
         {
           type: ApplicationCommandOptionType.String,
@@ -71,12 +72,6 @@ export default class CorrectionCommand extends Command {
   }
   async run(interaction: ChatInputCommandInteraction<'cached'>) {
     const query = interaction.options.getString('recherche', true);
-
-    if (interaction.channelId !== commandsChannelId) {
-      return interaction.reply(
-        interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannelId}>.`)
-      );
-    }
 
     const joke = await this.resolveJoke(interaction, query);
     if (!joke) return;
@@ -187,13 +182,12 @@ export default class CorrectionCommand extends Command {
       fetchReply: true
     })) as Message<true>;
 
-    const buttonInteraction = await question
-      .awaitMessageComponent({
-        filter: (i: Interaction) => i.user.id === commandInteraction.user.id,
-        componentType: ComponentType.Button,
-        time: 120_000
-      })
-      .catch(() => null);
+    const buttonInteraction = await interactionWaiter({
+      component_type: ComponentType.Button,
+      message: question,
+      user: commandInteraction.user,
+      idle: 120_000
+    });
 
     if (!buttonInteraction) {
       await commandInteraction.editReply(interactionInfo('Les 2 minutes se sont écoulées.'));
@@ -375,7 +369,7 @@ export default class CorrectionCommand extends Command {
   }
 
   async requestTextChange(
-    buttonInteraction: ButtonInteraction,
+    buttonInteraction: ButtonInteraction<'cached'>,
     commandInteraction: ChatInputCommandInteraction,
     joke: JokeCorrectionPayload,
     textReplyContent: string,
@@ -429,7 +423,7 @@ export default class CorrectionCommand extends Command {
     joke: JokeCorrectionPayload
   ): Promise<JokeCorrectionPayload | null> {
     const baseEmbed = buttonInteraction.message.embeds[0].toJSON();
-    const questionMessage = await buttonInteraction.update({
+    const questionMessage = (await buttonInteraction.update({
       embeds: [
         baseEmbed,
         {
@@ -457,18 +451,16 @@ export default class CorrectionCommand extends Command {
         }
       ],
       fetchReply: true
+    })) as Message<true>;
+
+    const response = await interactionWaiter({
+      component_type: ComponentType.SelectMenu,
+      message: questionMessage,
+      user: commandInteraction.user
     });
 
-    const response = await questionMessage
-      .awaitMessageComponent({
-        filter: (i: Interaction) => i.user.id === commandInteraction.user.id,
-        componentType: ComponentType.SelectMenu,
-        time: 60_000
-      })
-      .catch(() => null);
-
     if (!response) {
-      questionMessage.edit(messageInfo('Les 60 secondes se sont écoulées.'));
+      await questionMessage.edit(messageInfo('Les 60 secondes se sont écoulées.'));
       return null;
     }
 
