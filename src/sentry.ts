@@ -22,7 +22,7 @@ if (process.env.SENTRY_DSN) {
 
 process.on('uncaughtException', (error) => {
   if (process.env.SENTRY_DSN) Sentry.captureException(error);
-  console.error(!(error instanceof Error) ? console.trace(error) : error);
+  console.error(error);
 });
 
 process.on('unhandledRejection', (error) => {
