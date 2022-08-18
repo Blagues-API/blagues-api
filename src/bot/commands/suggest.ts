@@ -167,7 +167,7 @@ export default class SuggestCommand extends Command {
 
     if (confirmation.customId === 'cancel') {
       return confirmation.update({
-        content: "La blague n'a pas été envoyé",
+        content: "La blague n'a pas été envoyée.",
         components: [],
         embeds: [embed]
       });
@@ -197,6 +197,6 @@ export default class SuggestCommand extends Command {
       await suggestion.react(reaction).catch(() => null);
     }
 
-    return confirmation.update(interactionValidate(`La ${hyperlink('blague', suggestion.url)} a été envoyé !`, false));
+    return confirmation.update(interactionValidate(`La ${hyperlink('blague', suggestion.url)} a été envoyée !`, false));
   }
 }

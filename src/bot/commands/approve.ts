@@ -273,7 +273,7 @@ export default class ApproveCommand extends Command {
           Le nombre d'approbations requises pour l'ajout de ${hyperlink(
             'cette suggestion',
             suggestionLink
-          )} a déjà été atteint, seul ${hyperlink(
+          )} a déjà été atteint, seule ${hyperlink(
           'cette correction',
           correctionLink
         )} nécessite encore des approbations.`)

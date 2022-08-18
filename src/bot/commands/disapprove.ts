@@ -231,7 +231,7 @@ export default class DisapproveCommand extends Command {
           Le nombre de désapprobations requises pour le refus de ${hyperlink(
             'cette suggestion',
             suggestionLink
-          )} a déjà été atteint, seul ${hyperlink(
+          )} a déjà été atteint, seule ${hyperlink(
           'cette correction',
           correctionLink
         )} nécessite encore des désapprobations.`)
