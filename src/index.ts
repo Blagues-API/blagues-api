@@ -1,4 +1,4 @@
-import './framework/services/Sentry';
+import './sentry';
 
 import Tesseract from './tesseract';
 
