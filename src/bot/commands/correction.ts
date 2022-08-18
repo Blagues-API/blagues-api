@@ -5,13 +5,15 @@ import {
   ButtonInteraction,
   ButtonStyle,
   ChatInputCommandInteraction,
+  codeBlock,
   ComponentType,
+  hyperlink,
   Message,
   TextChannel
 } from 'discord.js';
 import { jokeById, jokeByQuestion } from '../../controllers';
 import prisma from '../../prisma';
-import { Category, JokeTypesDescriptions, CategoriesRefs, UnsignedJoke, UnsignedJokeKey } from '../../typings';
+import { CategoriesRefs, Category, JokeTypesDescriptions, UnsignedJoke, UnsignedJokeKey } from '../../typings';
 import {
   Colors,
   commandsChannelId,
@@ -25,17 +27,17 @@ import Command from '../lib/command';
 import clone from 'lodash/clone';
 import { ProposalType } from '@prisma/client';
 import {
-  messageInfo,
+  info,
   interactionInfo,
   interactionProblem,
   interactionValidate,
   isEmbedable,
+  messageInfo,
   messageProblem,
   showNegativeDiffs,
   showPositiveDiffs,
   tDelete,
-  info,
-  interactionWaiter
+  waitForInteraction
 } from '../utils';
 
 enum IdType {
@@ -59,6 +61,7 @@ export default class CorrectionCommand extends Command {
       name: 'correction',
       description: 'Proposer une modification de blague',
       type: ApplicationCommandType.ChatInput,
+      channels: [commandsChannelId],
       options: [
         {
           type: ApplicationCommandOptionType.String,
@@ -69,14 +72,9 @@ export default class CorrectionCommand extends Command {
       ]
     });
   }
+
   async run(interaction: ChatInputCommandInteraction<'cached'>) {
     const query = interaction.options.getString('recherche', true);
-
-    if (interaction.channelId !== commandsChannelId) {
-      return interaction.reply(
-        interactionInfo(`Préférez utiliser les commandes dans le salon <#${commandsChannelId}>.`)
-      );
-    }
 
     const joke = await this.resolveJoke(interaction, query);
     if (!joke) return;
@@ -187,7 +185,7 @@ export default class CorrectionCommand extends Command {
       fetchReply: true
     })) as Message<true>;
 
-    const buttonInteraction = await interactionWaiter({
+    const buttonInteraction = await waitForInteraction({
       component_type: ComponentType.Button,
       message: question,
       user: commandInteraction.user,
@@ -290,7 +288,7 @@ export default class CorrectionCommand extends Command {
         interaction.channel
           ?.send(
             messageProblem(
-              `Impossible de trouver une blague ou correction liée à cet ID de blague, assurez vous que cet ID provient bien d\'un message envoyé par le bot ${interaction.client.user}`
+              `Impossible de trouver une blague ou correction liée à cet ID de blague, assurez vous que cet ID provient bien d\'un message envoyé par le bot ${interaction.client.user}.`
             )
           )
           .then(tDelete(5000));
@@ -387,7 +385,7 @@ export default class CorrectionCommand extends Command {
         {
           color: Colors.PRIMARY,
           title: `Par quelle ${textReplyContent} voulez-vous changer la ${textReplyContent} actuelle ?`,
-          description: `\`\`\`${oldValue}\`\`\``
+          description: codeBlock(oldValue)
         }
       ],
       components: []
@@ -458,14 +456,14 @@ export default class CorrectionCommand extends Command {
       fetchReply: true
     })) as Message<true>;
 
-    const response = await interactionWaiter({
+    const response = await waitForInteraction({
       component_type: ComponentType.SelectMenu,
       message: questionMessage,
       user: commandInteraction.user
     });
 
     if (!response) {
-      questionMessage.edit(messageInfo('Les 60 secondes se sont écoulées.'));
+      await questionMessage.edit(messageInfo('Les 60 secondes se sont écoulées.'));
       return null;
     }
 
@@ -491,10 +489,7 @@ export default class CorrectionCommand extends Command {
     ) as TextChannel;
     if (!isEmbedable(correctionsChannel)) {
       return commandInteraction.reply(
-        interactionProblem(
-          `Je n'ai pas la permission d'envoyer la correction dans le salon ${correctionsChannel}.`,
-          false
-        )
+        interactionProblem(`Je n'ai pas la permission d'envoyer la correction dans le salon ${correctionsChannel}.`)
       );
     }
 
@@ -556,14 +551,14 @@ export default class CorrectionCommand extends Command {
 
       const { base, godfathers } = embed.description!.match(dataSplitRegex)!.groups!;
 
-      const correctionText = `⚠️ Une [correction](${message.url}) est en cours.`;
+      const correctionText = `⚠️ Une ${hyperlink('correction', message.url)} est en cours.`;
       embed.description = [base, correctionText, godfathers].filter(Boolean).join('\n\n');
 
       await suggestionMessage.edit({ embeds: [embed] });
     }
 
     await commandInteraction.editReply(
-      interactionValidate(`Votre [proposition de correction](${message.url}) a bien été envoyée !`)
+      interactionValidate(`Votre ${hyperlink('proposition de correction', message.url)} a bien été envoyée !`)
     );
 
     for (const reaction of [upReactionIdentifier, downReactionIdentifier]) {

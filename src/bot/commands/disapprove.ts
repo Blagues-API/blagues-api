@@ -2,8 +2,11 @@ import { ProposalType } from '@prisma/client';
 import {
   APIEmbed,
   ApplicationCommandType,
+  hyperlink,
   Message,
   MessageContextMenuCommandInteraction,
+  messageLink,
+  roleMention,
   TextChannel
 } from 'discord.js';
 import { Proposals, ProposalSuggestion } from 'typings';
@@ -19,21 +22,22 @@ import {
   suggestionsChannelId
 } from '../constants';
 import Command from '../lib/command';
-import { renderGodfatherLine } from '../modules/godfathers';
 import {
+  checkProposalStatus,
   interactionInfo,
   interactionProblem,
   interactionValidate,
   isEmbedable,
   isGodfather,
-  messageLink
+  updateProposalEmbed
 } from '../utils';
 
 export default class DisapproveCommand extends Command {
   constructor() {
     super({
       name: 'Désapprouver',
-      type: ApplicationCommandType.Message
+      type: ApplicationCommandType.Message,
+      channels: [suggestionsChannelId, correctionsChannelId]
     });
   }
 
@@ -41,13 +45,7 @@ export default class DisapproveCommand extends Command {
     const channel = (interaction.channel as TextChannel)!;
     const isSuggestionChannel = channel.id === suggestionsChannelId;
     const message = await channel.messages.fetch(interaction.targetId);
-    if (![suggestionsChannelId, correctionsChannelId].includes(channel.id)) {
-      return interaction.reply(
-        interactionProblem(
-          `Vous ne pouvez pas désapprouver une suggestion ou une correction en dehors des salons <#${suggestionsChannelId}> et <#${correctionsChannelId}>.`
-        )
-      );
-    }
+
     if (message.author.id !== interaction.client.user!.id) {
       return interaction.reply(
         interactionProblem(
@@ -61,7 +59,9 @@ export default class DisapproveCommand extends Command {
     if (!isGodfather(interaction.member)) {
       return interaction.reply(
         interactionProblem(
-          `Seul un <@${godfatherRoleId}> peut désapprouver une ${isSuggestionChannel ? 'suggestion' : 'correction'}.`
+          `Seul un ${roleMention(godfatherRoleId)} peut désapprouver une ${
+            isSuggestionChannel ? 'suggestion' : 'correction'
+          }.`
         )
       );
     }
@@ -112,8 +112,8 @@ export default class DisapproveCommand extends Command {
       return interaction.reply(interactionProblem(`Le message est invalide.`));
     }
 
-    const embed = message.embeds[0]?.toJSON();
-    if (!embed) {
+    const oldEmbed = message.embeds[0]?.toJSON();
+    if (!oldEmbed) {
       await prisma.proposal.delete({
         where: {
           id: proposal.id
@@ -124,17 +124,9 @@ export default class DisapproveCommand extends Command {
 
     const isSuggestion = proposal.type === ProposalType.SUGGESTION;
 
-    if (proposal.merged) {
-      return interaction.reply(
-        interactionProblem(`Cette ${isSuggestion ? 'suggestion' : 'correction'} a déjà été ajoutée.`)
-      );
-    }
+    const response = await checkProposalStatus(interaction, proposal, message);
 
-    if (proposal.refused) {
-      return interaction.reply(
-        interactionProblem(`Cette ${isSuggestion ? 'suggestion' : 'correction'} a déjà été refusée.`)
-      );
-    }
+    if (!response) return;
 
     if (isSuggestion) {
       const correction = proposal.corrections[0];
@@ -143,11 +135,14 @@ export default class DisapproveCommand extends Command {
           (disapproval) => disapproval.user_id === interaction.user.id
         );
         if (!beenDisapproved) {
-          const correctionLink = messageLink(interaction.guild.id, correctionsChannelId, correction.message_id!);
-          const suggestionLink = messageLink(interaction.guild.id, suggestionsChannelId, proposal.message_id!);
+          const correctionLink = messageLink(correctionsChannelId, correction.message_id!, interaction.guild.id);
+          const suggestionLink = messageLink(suggestionsChannelId, proposal.message_id!, interaction.guild.id);
           return interaction.reply(
             interactionInfo(
-              `Il semblerait qu'une [correction aie été proposée](${correctionLink}), veuillez la désapprouver avant la désapprobation de [cette suggestion](${suggestionLink}).`
+              `Il semblerait qu'une ${hyperlink(
+                'correction aie été proposée',
+                correctionLink
+              )}, veuillez la désapprouver avant la désapprobation de ${hyperlink('cette suggestion', suggestionLink)}.`
             )
           );
         }
@@ -155,10 +150,13 @@ export default class DisapproveCommand extends Command {
     } else {
       const lastCorrection = proposal.suggestion?.corrections[0];
       if (lastCorrection && lastCorrection.id !== proposal.id) {
-        const correctionLink = messageLink(interaction.guild.id, correctionsChannelId, lastCorrection.message_id!);
+        const correctionLink = messageLink(correctionsChannelId, lastCorrection.message_id!, interaction.guild.id);
         return interaction.reply(
           interactionInfo(`
-            Il semblerait qu'une [correction aie été ajoutée](${correctionLink}) par dessus rendant celle ci obsolète, veuillez désapprouver la dernière version de la correction.`)
+            Il semblerait qu'une ${hyperlink(
+              'correction aie été ajoutée',
+              correctionLink
+            )} par dessus rendant celle ci obsolète, veuillez désapprouver la dernière version de la correction.`)
         );
       }
     }
@@ -177,20 +175,13 @@ export default class DisapproveCommand extends Command {
 
       proposal.disapprovals.splice(disapprovalIndex, 1);
 
-      const godfathers = await renderGodfatherLine(interaction, proposal);
-
-      const field = embed.fields?.[embed.fields.length - 1];
-      if (field) {
-        const { base, correction } = field.value.match(dataSplitRegex)!.groups!;
-        field.value = [base, correction, godfathers].filter(Boolean).join('\n\n');
-      } else {
-        const { base, correction } = embed.description!.match(dataSplitRegex)!.groups!;
-        embed.description = [base, correction, godfathers].filter(Boolean).join('\n\n');
-      }
+      const embed = await updateProposalEmbed(interaction, proposal, oldEmbed);
 
       await message.edit({ embeds: [embed] });
 
-      return interaction.reply(interactionInfo(`Votre [désapprobation](${message.url}) a bien été retirée.`));
+      return interaction.reply(
+        interactionInfo(`Votre ${hyperlink('désapprobation', message.url)} a bien été retirée.`)
+      );
     }
 
     const approvalIndex = proposal.approvals.findIndex((approval) => approval.user_id === interaction.user.id);
@@ -219,35 +210,34 @@ export default class DisapproveCommand extends Command {
     const neededApprovalsCount = isSuggestion ? neededSuggestionsApprovals : neededCorrectionsApprovals;
 
     if (isSuggestion && proposal.disapprovals.length >= neededApprovalsCount && proposal.corrections[0]) {
-      const suggestionLink = messageLink(interaction.guild.id, suggestionsChannelId, proposal.message_id!);
+      const suggestionLink = messageLink(suggestionsChannelId, proposal.message_id!, interaction.guild.id);
       const correctionLink = messageLink(
-        interaction.guild.id,
         correctionsChannelId,
-        proposal.corrections[0].message_id!
+        proposal.corrections[0].message_id!,
+        interaction.guild.id
       );
       return interaction.reply(
         interactionInfo(`
-          Le nombre de désapprobations requises pour le refus de [cette suggestion](${suggestionLink}) a déjà été atteint, seul [cette correction](${correctionLink}) nécessite encore des désapprobations.`)
+          Le nombre de désapprobations requises pour le refus de ${hyperlink(
+            'cette suggestion',
+            suggestionLink
+          )} a déjà été atteint, seule ${hyperlink(
+          'cette correction',
+          correctionLink
+        )} nécessite encore des désapprobations.`)
       );
     }
 
-    const godfathers = await renderGodfatherLine(interaction, proposal);
-
-    const field = embed.fields?.[embed.fields.length - 1];
-    if (field) {
-      const { base, correction } = field.value.match(dataSplitRegex)!.groups!;
-      field.value = [base, correction, godfathers].filter(Boolean).join('\n\n');
-    } else {
-      const { base, correction } = embed.description!.match(dataSplitRegex)!.groups!;
-      embed.description = [base, correction, godfathers].filter(Boolean).join('\n\n');
-    }
+    const embed = await updateProposalEmbed(interaction, proposal, oldEmbed);
 
     await interaction.client.votes.deleteUserVotes(message, interaction.user.id);
 
     if (proposal.disapprovals.length < neededApprovalsCount) {
       await message.edit({ embeds: [embed] });
 
-      return interaction.reply(interactionValidate(`Votre [désapprobation](${message.url}) a été prise en compte !`));
+      return interaction.reply(
+        interactionValidate(`Votre ${hyperlink('désapprobation', message.url)} a été prise en compte !`)
+      );
     }
 
     return this.disapprove(interaction, proposal, message, embed);
@@ -320,7 +310,10 @@ export default class DisapproveCommand extends Command {
     if (automerge) {
       await interaction.followUp(
         interactionValidate(
-          `La [suggestion](${message.url}) a bien été automatiquement désapprouvée suite à la désapprobation manquante sur la correction !`
+          `La ${hyperlink(
+            'suggestion',
+            message.url
+          )} a bien été automatiquement désapprouvée suite à la désapprobation manquante sur la correction !`
         )
       );
       return;
@@ -329,7 +322,9 @@ export default class DisapproveCommand extends Command {
     await message.reactions.removeAll();
 
     await interaction.reply(
-      interactionValidate(`La [${isSuggestion ? 'suggestion' : 'correction'}](${message.url}) a bien été refusée !`)
+      interactionValidate(
+        `La ${hyperlink(isSuggestion ? 'suggestion' : 'correction', message.url)} a bien été refusée !`
+      )
     );
   }
 }

@@ -17,7 +17,7 @@ import {
 } from 'discord.js';
 import Jokes from '../jokes';
 import prisma from '../prisma';
-import { correctionsChannelId, suggestionsChannelId, guildId, godfatherRoleId } from './constants';
+import { correctionsChannelId, godfatherRoleId, guildId, suggestionsChannelId } from './constants';
 import { updateGodfatherEmoji } from './modules/godfathers';
 import Dispatcher from './lib/dispatcher';
 import Reminders from './modules/reminders';
@@ -73,7 +73,12 @@ export default class Bot extends Client {
 
   async onMessageCreate(message: Message | PartialMessage): Promise<void> {
     if (!message.inGuild()) return;
-    this.stickys.run(message);
+    if (!(message.channelId in this.stickys.messages)) return;
+    if (message.author.id != this.user!.id) {
+      message.deletable && (await message.delete());
+      return;
+    }
+    return this.stickys.run(message);
   }
 
   async onMessageDelete(message: Message | PartialMessage): Promise<void> {
@@ -103,9 +108,7 @@ export default class Bot extends Client {
         try {
           const fetchedMessage = await correctionsChannel.messages.fetch(correction.message_id!);
           if (fetchedMessage.deletable) await fetchedMessage.delete();
-        } catch {
-          continue;
-        }
+        } catch {}
       }
     }
   }
@@ -136,7 +139,7 @@ export default class Bot extends Client {
   }
 
   async start(): Promise<void> {
-    if (process.env.bot_service !== 'true') {
+    if (process.env.BOT_SERVICE !== 'true') {
       return console.log('Bot service désactivé');
     }
     if (!process.env.BOT_TOKEN) {
@@ -152,6 +155,7 @@ declare module 'discord.js' {
     dispatcher: Dispatcher;
     stickys: Stickys;
     votes: Votes;
+
     refreshStatus(): void;
   }
 }

@@ -1,10 +1,9 @@
-import { ApplicationCommandOptionType, ApplicationCommandType, ChatInputCommandInteraction } from 'discord.js';
+import { ApplicationCommandOptionType, ApplicationCommandType, ChatInputCommandInteraction, spoiler } from 'discord.js';
 import JokesLoader from '../../jokes';
-import { Category, CategoriesRefsFull } from '../../typings';
+import { CategoriesRefsFull, Category } from '../../typings';
 import { random } from '../../utils';
 import { Colors, commandsChannelId } from '../constants';
 import Command from '../lib/command';
-import { interactionInfo } from '../utils';
 
 const CategoriesList = {
   random: 'Aléatoire',
@@ -17,6 +16,7 @@ export default class JokeCommand extends Command {
       name: 'blague',
       description: 'Afficher une blague aléatoire',
       type: ApplicationCommandType.ChatInput,
+      channels: [commandsChannelId],
       options: [
         {
           type: ApplicationCommandOptionType.String,
@@ -31,14 +31,9 @@ export default class JokeCommand extends Command {
       ]
     });
   }
+
   async run(interaction: ChatInputCommandInteraction<'cached'>) {
     const type = interaction.options.getString('type', true) as Category | 'random';
-
-    if (interaction.channelId !== commandsChannelId) {
-      return interaction.reply(
-        interactionInfo(`Préférez utiliser cette commande dans le salon <#${commandsChannelId}>.`)
-      );
-    }
 
     const blague = random(type === 'random' ? JokesLoader.list : JokesLoader.list.filter((joke) => joke.type === type));
 
@@ -47,7 +42,7 @@ export default class JokeCommand extends Command {
         {
           color: Colors.PRIMARY,
           title: blague.joke,
-          description: `|| ${blague.answer} ||`,
+          description: spoiler(blague.answer),
           timestamp: new Date().toISOString(),
           footer: {
             text: `${CategoriesRefsFull[blague.type]} • (${blague.id})`,

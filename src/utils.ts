@@ -7,8 +7,8 @@ export function random<Type = any>(items: Type[]): Type {
   return items[Math.floor(Math.random() * items.length)];
 }
 
-export const generateAPIToken = (userId: Snowflake, key: string, limit: number) => {
-  return jwt.sign(
+export const generateAPIToken = (userId: Snowflake, key: string, limit: number): string =>
+  jwt.sign(
     {
       user_id: userId,
       limit,
@@ -17,7 +17,6 @@ export const generateAPIToken = (userId: Snowflake, key: string, limit: number) 
     },
     process.env.JWT_TOKEN!
   );
-};
 
 export const generateKey = () => {
   let result = '';

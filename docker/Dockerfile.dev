@@ -12,8 +12,10 @@ COPY --chown=node:node .env .
 
 RUN npx prisma generate
 
-EXPOSE 4000
+ENV NODE_ENV=developement
 
 ENV NODE_OPTIONS="--enable-source-maps"
+
+EXPOSE 4000
 
 CMD npx tsc-watch --onSuccess "node dist/index.js"
