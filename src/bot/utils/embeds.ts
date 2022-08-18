@@ -1,5 +1,5 @@
 import { Colors } from '../constants';
-import { APIEmbed, blockQuote, bold, InteractionReplyOptions, MessageOptions } from 'discord.js';
+import { APIEmbed, bold, InteractionReplyOptions, MessageOptions } from 'discord.js';
 import { stripIndents } from 'common-tags';
 
 type UniversalMessageOptions = Omit<MessageOptions, 'flags'>;
@@ -79,11 +79,9 @@ export function interactionProblem(message: string, ephemeral = true): Universal
 
 export function FieldValuesJoke(type: string, joke: string, answer: string, godfathers?: string): string {
   return stripIndents`
-      ${blockQuote(stripIndents`
-        ${bold('Type:')} ${type}
-        ${bold('Blague:')} ${joke}
-        ${bold('Réponse:')} ${answer}
-      `)}
+      > ${bold('Type:')} ${type}
+      > ${bold('Blague:')} ${joke}
+      > ${bold('Réponse:')} ${answer}
       ${godfathers ? godfathers : ''}
     `;
 }
