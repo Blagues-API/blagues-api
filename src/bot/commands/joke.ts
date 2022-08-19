@@ -1,6 +1,6 @@
 import { ApplicationCommandOptionType, ApplicationCommandType, ChatInputCommandInteraction, spoiler } from 'discord.js';
 import JokesLoader from '../../jokes';
-import { CategoriesRefsFull, Category } from '../../typings';
+import { CategoriesRefsFull } from '../../typings';
 import { random } from '../../utils';
 import { Colors, commandsChannelId } from '../constants';
 import Command from '../lib/command';
@@ -33,7 +33,7 @@ export default class JokeCommand extends Command {
   }
 
   async run(interaction: ChatInputCommandInteraction<'cached'>) {
-    const type = interaction.options.getString('type', true) as Category | 'random';
+    const type = interaction.options.getString('type', true) as keyof typeof CategoriesList;
 
     const blague = random(type === 'random' ? JokesLoader.list : JokesLoader.list.filter((joke) => joke.type === type));
 
