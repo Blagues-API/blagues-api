@@ -1,4 +1,3 @@
-import { stripIndents } from 'common-tags';
 import {
   APIEmbed,
   ApplicationCommandOptionType,
@@ -21,7 +20,7 @@ import {
   upReactionIdentifier
 } from '../constants';
 import Command from '../lib/command';
-import { interactionProblem, interactionValidate, isEmbedable, waitForInteraction } from '../utils';
+import { buildJokeDisplay, interactionProblem, interactionValidate, isEmbedable, waitForInteraction } from '../utils';
 import prisma from '../../prisma';
 import { ProposalType } from '@prisma/client';
 
@@ -102,11 +101,7 @@ export default class SuggestCommand extends Command {
         }),
         name: interaction.user.tag
       },
-      description: stripIndents`
-        > **Type**: ${CategoriesRefs[payload.type]}
-        > **Blague**: ${payload.joke}
-        > **Réponse**: ${payload.answer}
-      `,
+      description: buildJokeDisplay(CategoriesRefs[payload.type], payload.joke, payload.answer),
       color: Colors.PROPOSED
     };
 
@@ -114,11 +109,11 @@ export default class SuggestCommand extends Command {
       embed.fields = [
         {
           name: 'Blague similaire',
-          value: stripIndents`
-              > **Type**: ${CategoriesRefs[currentJokes[bestMatchIndex].type as Category]}
-              > **Blague**: ${currentJokes[bestMatchIndex].joke}
-              > **Réponse**: ${currentJokes[bestMatchIndex].answer}
-            `
+          value: buildJokeDisplay(
+            CategoriesRefs[currentJokes[bestMatchIndex].type as Category],
+            currentJokes[bestMatchIndex].joke!,
+            currentJokes[bestMatchIndex].answer!
+          )
         }
       ];
     }

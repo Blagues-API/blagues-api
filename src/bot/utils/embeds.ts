@@ -1,6 +1,6 @@
-import { APIEmbed } from 'discord-api-types/v10';
 import { Colors } from '../constants';
-import { InteractionReplyOptions, MessageOptions } from 'discord.js';
+import { APIEmbed, bold, InteractionReplyOptions, MessageOptions } from 'discord.js';
+import { stripIndents } from 'common-tags';
 
 type UniversalMessageOptions = Omit<MessageOptions, 'flags'>;
 type UniversalInteractionOptions = Omit<InteractionReplyOptions, 'flags'>;
@@ -75,4 +75,14 @@ export function interactionProblem(message: string, ephemeral = true): Universal
     components: [],
     ephemeral
   };
+}
+
+export function buildJokeDisplay(type: string, joke: string, answer: string, godfathers?: string): string {
+  return stripIndents`
+      > ${bold('Type :')} ${type}
+      > ${bold('Blague :')} ${joke}
+      > ${bold('Réponse :')} ${answer}
+
+      ${godfathers ? godfathers : ''}
+    `;
 }

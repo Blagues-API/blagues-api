@@ -1,4 +1,3 @@
-import { stripIndents } from 'common-tags';
 import {
   ApplicationCommandOptionType,
   ApplicationCommandType,
@@ -27,6 +26,7 @@ import Command from '../lib/command';
 import clone from 'lodash/clone';
 import { ProposalType } from '@prisma/client';
 import {
+  buildJokeDisplay,
   info,
   interactionInfo,
   interactionProblem,
@@ -136,11 +136,7 @@ export default class CorrectionCommand extends Command {
   ): Promise<JokeCorrectionPayload | null> {
     const embed = {
       title: `Quels${changes ? ' autres' : ''} changements voulez-vous faire ?`,
-      description: stripIndents`
-        > **Type:** ${CategoriesRefs[joke.type]}
-        > **Question:** ${joke.joke}
-        > **Réponse:** ${joke.answer}
-      `,
+      description: buildJokeDisplay(CategoriesRefs[joke.type], joke.joke, joke.answer),
       color: Colors.PRIMARY
     };
     const question = (await commandInteraction[commandInteraction.replied ? 'editReply' : 'reply']({
@@ -505,19 +501,19 @@ export default class CorrectionCommand extends Command {
           fields: [
             {
               name: 'Blague initiale',
-              value: stripIndents`
-                > **Type**: ${showNegativeDiffs(CategoriesRefs[newJoke.suggestion.type], CategoriesRefs[newJoke.type])}
-                > **Blague**: ${showNegativeDiffs(newJoke.suggestion.joke, newJoke.joke)}
-                > **Réponse**: ${showNegativeDiffs(newJoke.suggestion.answer, newJoke.answer)}
-              `
+              value: buildJokeDisplay(
+                showNegativeDiffs(CategoriesRefs[newJoke.suggestion.type], CategoriesRefs[newJoke.type]),
+                showNegativeDiffs(newJoke.suggestion.joke, newJoke.joke),
+                showNegativeDiffs(newJoke.suggestion.answer, newJoke.answer)
+              )
             },
             {
               name: 'Blague corrigée',
-              value: stripIndents`
-                > **Type**: ${showPositiveDiffs(CategoriesRefs[newJoke.suggestion.type], CategoriesRefs[newJoke.type])}
-                > **Blague**: ${showPositiveDiffs(newJoke.suggestion.joke, newJoke.joke)}
-                > **Réponse**: ${showPositiveDiffs(newJoke.suggestion.answer, newJoke.answer)}
-              `
+              value: buildJokeDisplay(
+                showPositiveDiffs(CategoriesRefs[newJoke.suggestion.type], CategoriesRefs[newJoke.type]),
+                showPositiveDiffs(newJoke.suggestion.joke, newJoke.joke),
+                showPositiveDiffs(newJoke.suggestion.answer, newJoke.answer)
+              )
             }
           ],
           color: Colors.PROPOSED
