@@ -77,11 +77,12 @@ export function interactionProblem(message: string, ephemeral = true): Universal
   };
 }
 
-export function FieldValuesJoke(type: string, joke: string, answer: string, godfathers?: string): string {
+export function buildJokeDisplay(type: string, joke: string, answer: string, godfathers?: string): string {
   return stripIndents`
-      > ${bold('Type:')} ${type}
-      > ${bold('Blague:')} ${joke}
-      > ${bold('Réponse:')} ${answer}
+      > ${bold('Type :')} ${type}
+      > ${bold('Blague :')} ${joke}
+      > ${bold('Réponse :')} ${answer}
+
       ${godfathers ? godfathers : ''}
     `;
 }

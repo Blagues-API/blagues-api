@@ -20,7 +20,7 @@ import {
   upReactionIdentifier
 } from '../constants';
 import Command from '../lib/command';
-import { FieldValuesJoke, interactionProblem, interactionValidate, isEmbedable, waitForInteraction } from '../utils';
+import { buildJokeDisplay, interactionProblem, interactionValidate, isEmbedable, waitForInteraction } from '../utils';
 import prisma from '../../prisma';
 import { ProposalType } from '@prisma/client';
 
@@ -101,7 +101,7 @@ export default class SuggestCommand extends Command {
         }),
         name: interaction.user.tag
       },
-      description: FieldValuesJoke(CategoriesRefs[payload.type], payload.joke, payload.answer),
+      description: buildJokeDisplay(CategoriesRefs[payload.type], payload.joke, payload.answer),
       color: Colors.PROPOSED
     };
 
@@ -109,7 +109,7 @@ export default class SuggestCommand extends Command {
       embed.fields = [
         {
           name: 'Blague similaire',
-          value: FieldValuesJoke(
+          value: buildJokeDisplay(
             CategoriesRefs[currentJokes[bestMatchIndex].type as Category],
             currentJokes[bestMatchIndex].joke!,
             currentJokes[bestMatchIndex].answer!

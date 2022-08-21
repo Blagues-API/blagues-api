@@ -28,8 +28,8 @@ import {
 import Command from '../lib/command';
 import { renderGodfatherLine } from '../modules/godfathers';
 import {
+  buildJokeDisplay,
   checkProposalStatus,
-  FieldValuesJoke,
   interactionInfo,
   interactionProblem,
   interactionValidate,
@@ -439,7 +439,7 @@ export default class ApproveCommand extends Command {
         embeds: [
           {
             ...suggestionMessage.embeds[0].toJSON(),
-            description: FieldValuesJoke(
+            description: buildJokeDisplay(
               CategoriesRefs[proposal.joke_type as Category],
               proposal.joke_question!,
               proposal.joke_answer!,

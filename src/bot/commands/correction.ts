@@ -26,7 +26,7 @@ import Command from '../lib/command';
 import clone from 'lodash/clone';
 import { ProposalType } from '@prisma/client';
 import {
-  FieldValuesJoke,
+  buildJokeDisplay,
   info,
   interactionInfo,
   interactionProblem,
@@ -136,7 +136,7 @@ export default class CorrectionCommand extends Command {
   ): Promise<JokeCorrectionPayload | null> {
     const embed = {
       title: `Quels${changes ? ' autres' : ''} changements voulez-vous faire ?`,
-      description: FieldValuesJoke(CategoriesRefs[joke.type], joke.joke, joke.answer),
+      description: buildJokeDisplay(CategoriesRefs[joke.type], joke.joke, joke.answer),
       color: Colors.PRIMARY
     };
     const question = (await commandInteraction[commandInteraction.replied ? 'editReply' : 'reply']({
@@ -501,7 +501,7 @@ export default class CorrectionCommand extends Command {
           fields: [
             {
               name: 'Blague initiale',
-              value: FieldValuesJoke(
+              value: buildJokeDisplay(
                 showNegativeDiffs(CategoriesRefs[newJoke.suggestion.type], CategoriesRefs[newJoke.type]),
                 showNegativeDiffs(newJoke.suggestion.joke, newJoke.joke),
                 showNegativeDiffs(newJoke.suggestion.answer, newJoke.answer)
@@ -509,7 +509,7 @@ export default class CorrectionCommand extends Command {
             },
             {
               name: 'Blague corrigée',
-              value: FieldValuesJoke(
+              value: buildJokeDisplay(
                 showPositiveDiffs(CategoriesRefs[newJoke.suggestion.type], CategoriesRefs[newJoke.type]),
                 showPositiveDiffs(newJoke.suggestion.joke, newJoke.joke),
                 showPositiveDiffs(newJoke.suggestion.answer, newJoke.answer)
