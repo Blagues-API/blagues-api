@@ -60,7 +60,7 @@ class JokesLoader {
     }
   }
 
-  public async deleteJoke(proposal: Joke): Promise<{ success: boolean; joke_id?: number; error?: string }> {
+  public async deleteJoke(joke: Joke): Promise<{ success: boolean; joke_id?: number; error?: string }> {
     const jokesPath = path.join(__dirname, '../blagues.json');
     const req = await this.checkAccess(jokesPath);
 
@@ -71,7 +71,7 @@ class JokesLoader {
 
       const rawData = await fs.readFile(jokesPath, 'utf-8');
       const jokes = (rawData.length ? JSON.parse(rawData) : []) as Joke[];
-      const toDelJoke = jokes.find((j) => j.id === proposal.id)!;
+      const toDelJoke = jokes.find((j) => j.id === joke.id)!;
       const index = jokes.indexOf(toDelJoke);
 
       for (const joke of jokes) {
