@@ -9,7 +9,7 @@ import {
   Message,
   roleMention
 } from 'discord.js';
-import { buildJokeDisplay, interactionInfo, waitForInteraction } from '../utils';
+import { buildJokeDisplay, interactionInfo, interactionValidate, waitForInteraction } from '../utils';
 import { CategoriesRefs } from '../../typings';
 import { jokeById, jokeByQuestion } from '../../controllers';
 import { Colors } from '../constants';
@@ -104,5 +104,7 @@ export default class DeleteCommand extends Command {
     await prisma.proposal.delete({
       where: { joke_id: joke.id }
     });
+
+    return confirmation.update(interactionValidate('La blague a bien été supprimée !', true));
   }
 }
