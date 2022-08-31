@@ -60,6 +60,41 @@ class JokesLoader {
     }
   }
 
+  public async deleteJoke(proposal: Joke): Promise<{ success: boolean; joke_id?: number; error?: string }> {
+    const jokesPath = path.join(__dirname, '../blagues.json');
+    const req = await this.checkAccess(jokesPath);
+
+    if (!req.success) return req;
+
+    try {
+      await this.loader.wait();
+
+      const rawData = await fs.readFile(jokesPath, 'utf-8');
+      const jokes = (rawData.length ? JSON.parse(rawData) : []) as Joke[];
+      const toDelJoke = jokes.find((j) => j.id === proposal.id)!;
+      const index = jokes.indexOf(toDelJoke);
+
+      for (const joke of jokes) {
+        const jIndex = jokes.findIndex((j) => j === joke);
+        joke.id -= jIndex > index ? 1 : 0;
+      }
+
+      jokes.splice(index, 1);
+
+      this.list = jokes;
+      this.count = jokes.length;
+
+      await fs.writeFile(jokesPath, JSON.stringify(jokes, null, 2));
+
+      return { success: true };
+    } catch (error) {
+      console.log('Error:', error);
+      return { success: false, error: `Une erreur s'est produite lors de la suppression de la blague.` };
+    } finally {
+      this.loader.shift();
+    }
+  }
+
   private async init() {
     const jokesPath = path.join(__dirname, '../blagues.json');
     const req = await this.checkAccess(jokesPath);
