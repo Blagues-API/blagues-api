@@ -1,5 +1,11 @@
 import Command from '../lib/command';
-import { ApplicationCommandOptionType, ApplicationCommandType, ChatInputCommandInteraction } from 'discord.js';
+import {
+  ApplicationCommandOptionType,
+  ApplicationCommandType,
+  ChatInputCommandInteraction,
+  roleMention
+} from 'discord.js';
+import { interactionInfo } from '../utils';
 
 export default class DeleteCommand extends Command {
   constructor() {
@@ -19,6 +25,10 @@ export default class DeleteCommand extends Command {
   }
 
   async run(interaction: ChatInputCommandInteraction<'cached'>) {
-    interaction; // To avoid typescript errors
+    if (interaction.user.id !== '207190782673813504') {
+      await interaction.reply(
+        interactionInfo(`Seul le ${roleMention('698914163677724753')} du bot peut exécuter cette commande.`)
+      );
+    }
   }
 }
