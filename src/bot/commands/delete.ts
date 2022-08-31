@@ -14,6 +14,7 @@ import { CategoriesRefs } from '../../typings';
 import { jokeById, jokeByQuestion } from '../../controllers';
 import { Colors } from '../constants';
 import Jokes from '../../jokes';
+import prisma from '../../prisma';
 
 export default class DeleteCommand extends Command {
   constructor() {
@@ -99,5 +100,9 @@ export default class DeleteCommand extends Command {
     if (!success) return;
 
     interaction.client.refreshStatus();
+
+    await prisma.proposal.delete({
+      where: { joke_id: joke.id }
+    });
   }
 }
