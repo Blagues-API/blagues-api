@@ -13,6 +13,7 @@ import { buildJokeDisplay, interactionInfo, waitForInteraction } from '../utils'
 import { CategoriesRefs } from '../../typings';
 import { jokeById, jokeByQuestion } from '../../controllers';
 import { Colors } from '../constants';
+import Jokes from '../../jokes';
 
 export default class DeleteCommand extends Command {
   constructor() {
@@ -93,5 +94,10 @@ export default class DeleteCommand extends Command {
         embeds: [embed]
       });
     }
+
+    const { success } = await Jokes.deleteJoke(joke);
+    if (!success) return;
+
+    interaction.client.refreshStatus();
   }
 }
