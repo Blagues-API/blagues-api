@@ -71,12 +71,14 @@ class JokesLoader {
 
       const rawData = await fs.readFile(jokesPath, 'utf-8');
       const jokes = (rawData.length ? JSON.parse(rawData) : []) as Joke[];
-      const toDelJoke = jokes.find((j) => j.id === joke.id)!;
+      const toDelJoke = jokes.find((j) => j.id === joke.id);
+
+      if (!toDelJoke) return { success: false, error: `La blague n'a pas été trouvée.` };
+
       const index = jokes.indexOf(toDelJoke);
 
       for (const joke of jokes) {
-        const jIndex = jokes.findIndex((j) => j === joke);
-        joke.id -= jIndex > index ? 1 : 0;
+        joke.id -= jokes.findIndex((j) => j === joke) > index ? 1 : 0;
       }
 
       jokes.splice(index, 1);

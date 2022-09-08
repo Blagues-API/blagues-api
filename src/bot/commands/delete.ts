@@ -3,18 +3,29 @@ import {
   APIEmbed,
   ApplicationCommandOptionType,
   ApplicationCommandType,
+  bold,
   ButtonStyle,
   ChatInputCommandInteraction,
+  codeBlock,
   ComponentType,
   Message,
-  roleMention
+  roleMention,
+  TextChannel
 } from 'discord.js';
-import { buildJokeDisplay, interactionInfo, interactionValidate, waitForInteraction } from '../utils';
+import {
+  buildJokeDisplay,
+  interactionInfo,
+  interactionProblem,
+  interactionValidate,
+  isEmbedable,
+  waitForInteraction
+} from '../utils';
 import { CategoriesRefs } from '../../typings';
 import { jokeById, jokeByQuestion } from '../../controllers';
-import { Colors } from '../constants';
+import { Colors, logsChannelId } from '../constants';
 import Jokes from '../../jokes';
 import prisma from '../../prisma';
+import { stripIndents } from 'common-tags';
 
 export default class DeleteCommand extends Command {
   constructor() {
@@ -34,7 +45,7 @@ export default class DeleteCommand extends Command {
   }
 
   async run(interaction: ChatInputCommandInteraction<'cached'>) {
-    if (interaction.user.id !== '207190782673813504') {
+    if (interaction.user.id !== process.env.BOT_USER_OWNER) {
       await interaction.reply(
         interactionInfo(`Seul le ${roleMention('698914163677724753')} du bot peut exécuter cette commande.`)
       );
@@ -55,7 +66,7 @@ export default class DeleteCommand extends Command {
     };
 
     const message = (await interaction.reply({
-      content: 'Confirmez-vous vouloir supprimer la blague suivante ?',
+      content: 'Voulez-vous vraiment supprimer la blague suivante ?',
       embeds: [embed],
       components: [
         {
@@ -63,15 +74,15 @@ export default class DeleteCommand extends Command {
           components: [
             {
               type: ComponentType.Button,
-              label: 'Supprimer',
-              customId: 'delete',
-              style: ButtonStyle.Danger
+              label: 'Oui',
+              customId: 'yes',
+              style: ButtonStyle.Success
             },
             {
               type: ComponentType.Button,
-              label: 'Annuler',
-              customId: 'cancel',
-              style: ButtonStyle.Secondary
+              label: 'Oui',
+              customId: 'yes',
+              style: ButtonStyle.Danger
             }
           ]
         }
@@ -90,20 +101,46 @@ export default class DeleteCommand extends Command {
 
     if (confirmation.customId === 'cancel') {
       return confirmation.update({
-        content: "La blague n'a pas été envoyée.",
+        content: 'La suppression de la blague a bien été annulée.',
         components: [],
         embeds: [embed]
       });
     }
 
-    const { success } = await Jokes.deleteJoke(joke);
-    if (!success) return;
+    const { success, error } = await Jokes.deleteJoke(joke);
+
+    if (!success)
+      return confirmation.update(
+        interactionProblem(
+          stripIndents`
+            La blague n'a pas pu être supprimée !
+            ${
+              error
+                ? stripIndents`
+              ${bold('Erreur :')}
+              ${codeBlock(error)}<
+              `
+                : ''
+            }
+          `,
+          true
+        )
+      );
 
     interaction.client.refreshStatus();
 
     await prisma.proposal.delete({
       where: { joke_id: joke.id }
     });
+
+    const logsChannel = interaction.client.channels.cache.get(logsChannelId) as TextChannel;
+
+    if (isEmbedable(logsChannel)) {
+      await logsChannel.send({
+        content: "Blague retirée de l'API",
+        embeds: [embed]
+      });
+    }
 
     return confirmation.update(interactionValidate('La blague a bien été supprimée !', true));
   }
