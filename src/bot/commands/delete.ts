@@ -45,7 +45,7 @@ export default class DeleteCommand extends Command {
   }
 
   async run(interaction: ChatInputCommandInteraction<'cached'>) {
-    if (interaction.user.id !== process.env.BOT_USER_OWNER) {
+    if (interaction.user.id !== process.env.BOT_OWNER_ID) {
       await interaction.reply(
         interactionInfo(`Seul le ${roleMention('698914163677724753')} du bot peut exécuter cette commande.`)
       );
@@ -127,8 +127,6 @@ export default class DeleteCommand extends Command {
         )
       );
 
-    interaction.client.refreshStatus();
-
     await prisma.proposal.delete({
       where: { joke_id: joke.id }
     });
@@ -141,6 +139,8 @@ export default class DeleteCommand extends Command {
         embeds: [embed]
       });
     }
+
+    interaction.client.refreshStatus();
 
     return confirmation.update(interactionValidate('La blague a bien été supprimée !', true));
   }
