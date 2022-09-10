@@ -1,5 +1,5 @@
 import { stripIndents } from 'common-tags';
-import { APIEmbed, CommandInteraction, formatEmoji, GuildMember, quote, userMention } from 'discord.js';
+import { APIEmbed, CommandInteraction, formatEmoji, GuildMember, quote, bold, userMention } from 'discord.js';
 import { approveEmoji, Colors, disapproveEmoji, godfatherRoleId } from '../constants';
 import { isGodfather, paginate } from '../utils';
 import prisma from '../../prisma';
@@ -168,8 +168,8 @@ export default class Stats {
       })
       .sort((a, b) => b.points - a.points)
       .map((entry) => {
-        const sep = entry.userId === interaction.user.id ? '**' : '';
-        return `${userMention(entry.userId)} : ${sep}${entry.points} ${entry.points !== 1 ? 'points' : 'point'}${sep}`;
+        const points = `${entry.points} ${entry.points === 1 ? 'point' : 'points'}`;
+        return `${userMention(entry.userId)} : ${interaction.user.id === entry.userId ? bold(points) : points}`;
       });
 
     const pages = chunk(membersPoints, 20).map((entries) => entries.join('\n'));
