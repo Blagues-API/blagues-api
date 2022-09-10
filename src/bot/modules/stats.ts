@@ -167,7 +167,10 @@ export default class Stats {
         return { userId, points };
       })
       .sort((a, b) => b.points - a.points)
-      .map((entry) => `${userMention(entry.userId)} : ${entry.points} ${entry.points !== 1 ? 'points' : 'point'}`);
+      .map((entry) => {
+        const sep = entry.userId === interaction.user.id ? '**' : '';
+        return `${userMention(entry.userId)} : ${sep}${entry.points} ${entry.points !== 1 ? 'points' : 'point'}${sep}`;
+      });
 
     const pages = chunk(membersPoints, 20).map((entries) => entries.join('\n'));
 
