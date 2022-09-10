@@ -1,35 +1,27 @@
 import { ApplicationCommandData, channelMention, Client, CommandInteraction } from 'discord.js';
 import Command from './command';
 
-import CorrectCommand from '../commands/correction';
-import SuggestCommand from '../commands/suggest';
-import StatsCommand from '../commands/stats';
-import JokeCommand from '../commands/joke';
-import ApproveCommand from '../commands/approve';
-import DisapproveCommand from '../commands/disapprove';
-import LeaderboardCommand from '../commands/leaderboard';
-import UserStatsCommand from '../commands/userStats';
 import { commandsChannelId, correctionsChannelId, guildId, suggestionsChannelId } from '../constants';
 import { interactionInfo } from '../utils';
+
+import requireAll from 'require-all';
+import path from 'path';
+
+type CommandFile = { default: ConstructableCommand };
+
+interface ConstructableCommand {
+  new (): Command;
+}
 
 export default class Dispatcher {
   private client: Client;
 
+  public commands: Command[] = [];
+
   constructor(client: Client) {
     this.client = client;
-  }
 
-  public get commands(): Command[] {
-    return [
-      new SuggestCommand(),
-      new CorrectCommand(),
-      new StatsCommand(),
-      new JokeCommand(),
-      new ApproveCommand(),
-      new DisapproveCommand(),
-      new LeaderboardCommand(),
-      new UserStatsCommand()
-    ];
+    this.loadCommands();
   }
 
   public get commandsData(): ApplicationCommandData[] {
@@ -74,6 +66,16 @@ export default class Dispatcher {
     } catch (error) {
       console.error('[Bot error]', error);
     }
+  }
+
+  loadCommands() {
+    const directoryFiles = requireAll({
+      dirname: path.join(__dirname, '../commands')
+    });
+    const commandsFiles = Object.values<CommandFile>(directoryFiles);
+    this.commands = commandsFiles.map(({ default: commandFile }) => {
+      return new commandFile();
+    });
   }
 
   public async register(): Promise<void> {
