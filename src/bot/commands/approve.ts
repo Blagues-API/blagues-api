@@ -120,7 +120,7 @@ export default class ApproveCommand extends Command {
     })) as Proposals | null;
 
     if (!proposal) {
-      return interaction.reply(interactionProblem(`Le message est invalide.`));
+      return interaction.reply(interactionProblem('Le message est invalide.'));
     }
 
     const isSuggestion = proposal.type === ProposalType.SUGGESTION;
@@ -132,7 +132,7 @@ export default class ApproveCommand extends Command {
           id: proposal.id
         }
       });
-      return interaction.reply(interactionProblem(`Le message est invalide.`));
+      return interaction.reply(interactionProblem('Le message est invalide.'));
     }
 
     if (proposal.user_id === interaction.user.id) {

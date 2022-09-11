@@ -109,7 +109,7 @@ export default class DisapproveCommand extends Command {
     })) as Proposals | null;
 
     if (!proposal) {
-      return interaction.reply(interactionProblem(`Le message est invalide.`));
+      return interaction.reply(interactionProblem('Le message est invalide.'));
     }
 
     const oldEmbed = message.embeds[0]?.toJSON();
@@ -119,7 +119,7 @@ export default class DisapproveCommand extends Command {
           id: proposal.id
         }
       });
-      return interaction.reply(interactionProblem(`Le message est invalide.`));
+      return interaction.reply(interactionProblem('Le message est invalide.'));
     }
 
     const isSuggestion = proposal.type === ProposalType.SUGGESTION;
