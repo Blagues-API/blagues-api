@@ -9,17 +9,9 @@ import {
   codeBlock,
   ComponentType,
   Message,
-  roleMention,
   TextChannel
 } from 'discord.js';
-import {
-  buildJokeDisplay,
-  interactionInfo,
-  interactionProblem,
-  interactionValidate,
-  isEmbedable,
-  waitForInteraction
-} from '../utils';
+import { buildJokeDisplay, interactionProblem, interactionValidate, isEmbedable, waitForInteraction } from '../utils';
 import { CategoriesRefs } from '../../typings';
 import { jokeById, jokeByQuestion } from '../../controllers';
 import { Colors, logsChannelId } from '../constants';
@@ -33,10 +25,12 @@ export default class DeleteCommand extends Command {
       name: 'delete',
       description: 'Supprimer une blague',
       type: ApplicationCommandType.ChatInput,
+      defaultMemberPermissions: 'Administrator',
       options: [
         {
           type: ApplicationCommandOptionType.String,
-          name: 'recherche',
+          name: 'query',
+          nameLocalizations: { fr: 'recherche' },
           description: 'ID ou question de la blague',
           required: true
         }
@@ -45,12 +39,6 @@ export default class DeleteCommand extends Command {
   }
 
   async run(interaction: ChatInputCommandInteraction<'cached'>) {
-    if (interaction.user.id !== process.env.BOT_OWNER_ID) {
-      await interaction.reply(
-        interactionInfo(`Seul le ${roleMention('698914163677724753')} du bot peut exécuter cette commande.`)
-      );
-    }
-
     const query = interaction.options.getString('recherche', true);
     const joke = isNaN(Number(query)) ? jokeByQuestion(query)! : jokeById(Number(query))!;
 
@@ -80,8 +68,8 @@ export default class DeleteCommand extends Command {
             },
             {
               type: ComponentType.Button,
-              label: 'Oui',
-              customId: 'yes',
+              label: 'Non',
+              customId: 'no',
               style: ButtonStyle.Danger
             }
           ]
@@ -99,7 +87,7 @@ export default class DeleteCommand extends Command {
 
     if (!confirmation) return;
 
-    if (confirmation.customId === 'cancel') {
+    if (confirmation.customId === 'no') {
       return confirmation.update({
         content: 'La suppression de la blague a bien été annulée.',
         components: [],
@@ -118,7 +106,7 @@ export default class DeleteCommand extends Command {
               error
                 ? stripIndents`
               ${bold('Erreur :')}
-              ${codeBlock(error)}<
+              ${codeBlock(error)}
               `
                 : ''
             }

@@ -1,6 +1,7 @@
 import { constants as fsConstants, promises as fs } from 'fs';
 import { Correction, Joke, Suggestion } from './typings';
 import path from 'path';
+import prisma from './prisma';
 
 import { AsyncQueue } from '@sapphire/async-queue';
 
@@ -71,17 +72,19 @@ class JokesLoader {
 
       const rawData = await fs.readFile(jokesPath, 'utf-8');
       const jokes = (rawData.length ? JSON.parse(rawData) : []) as Joke[];
-      const jokeToDelete = jokes.find((j) => j.id === joke.id);
-
+      const jokeToDelete = jokes.find((j) => j.id === joke.id)!;
       if (!jokeToDelete) return { success: false, error: `La blague n'a pas été trouvée.` };
 
-      const index = jokes.indexOf(jokeToDelete);
+      const deleteIndex = jokes.indexOf(jokeToDelete);
+      if (deleteIndex === -1) return { success: false, error: `La blague n'a pas été trouvée.` };
 
-      for (const joke of jokes) {
-        joke.id -= jokes.findIndex((j) => j === joke) > index ? 1 : 0;
-      }
+      jokes.at(-1)!.id = deleteIndex;
+      jokes.splice(deleteIndex, 1);
 
-      jokes.splice(index, 1);
+      await prisma.proposal.update({
+        where: { joke_id: jokes.at(-1)!.id },
+        data: { joke_id: jokeToDelete.id }
+      });
 
       this.list = jokes;
       this.count = jokes.length;
