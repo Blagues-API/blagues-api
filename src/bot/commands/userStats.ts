@@ -6,7 +6,10 @@ import { interactionProblem } from '../utils';
 export default class UserStatsCommand extends Command {
   constructor() {
     super({
-      name: 'Statistiques',
+      name: 'statistics',
+      nameLocalizations: {
+        fr: 'Statistiques'
+      },
       type: ApplicationCommandType.User
     });
   }
