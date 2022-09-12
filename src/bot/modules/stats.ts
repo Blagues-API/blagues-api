@@ -105,8 +105,8 @@ export default class Stats {
             totalDecisions > 0
               ? `Ratio: **${
                   approvalsRatio >= disapprovalsRatio
-                    ? `${approveEmoji} ${approvalsRatio}%`
-                    : `${disapproveEmoji} ${disapprovalsRatio}%`
+                    ? `${approveEmoji} ${approvalsRatio.toFixed(0)}%`
+                    : `${disapproveEmoji} ${disapprovalsRatio.toFixed(0)}%`
                 }**`
               : ``
           }
