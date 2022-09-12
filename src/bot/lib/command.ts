@@ -19,7 +19,6 @@ export default class Command {
 
   constructor(data: ApplicationCommandDataWithChannel) {
     this.name = data.name;
-    this.nameLocalization = data.nameLocalizations!;
     this.channels = data.channels ?? [];
     this.raw = data;
   }
