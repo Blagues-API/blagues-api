@@ -59,13 +59,19 @@ export default class CorrectionCommand extends Command {
   constructor() {
     super({
       name: 'correction',
-      description: 'Proposer une modification de blague',
+      nameLocalizations: {
+        fr: 'correction'
+      },
+      description: 'Suggest a joke modification',
       type: ApplicationCommandType.ChatInput,
       channels: [commandsChannelId],
       options: [
         {
           type: ApplicationCommandOptionType.String,
-          name: 'recherche',
+          name: 'query',
+          nameLocalizations: {
+            fr: 'recherche'
+          },
           description: 'ID ou question de la blague ou ID du message',
           required: true
         }

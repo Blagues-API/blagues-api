@@ -7,6 +7,9 @@ export default class LeaderboardCommand extends Command {
   constructor() {
     super({
       name: 'leaderboard',
+      nameLocalizations: {
+        fr: 'classement'
+      },
       description: 'Afficher les statistiques',
       type: ApplicationCommandType.ChatInput,
       channels: [commandsChannelId]

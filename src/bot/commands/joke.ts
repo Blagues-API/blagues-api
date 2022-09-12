@@ -15,7 +15,10 @@ type JokeCategory = keyof typeof JokeCategories;
 export default class JokeCommand extends Command {
   constructor() {
     super({
-      name: 'blague',
+      name: 'joke',
+      nameLocalizations: {
+        fr: 'blague'
+      },
       description: 'Afficher une blague aléatoire',
       type: ApplicationCommandType.ChatInput,
       channels: [commandsChannelId],
@@ -23,6 +26,9 @@ export default class JokeCommand extends Command {
         {
           type: ApplicationCommandOptionType.String,
           name: 'type',
+          nameLocalizations: {
+            fr: 'type'
+          },
           description: 'Aléatoire, Général, Développeur, Noir, +18, Beauf, Blondes',
           required: true,
           choices: Object.entries(JokeCategories).map(([key, name]) => ({
