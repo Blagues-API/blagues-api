@@ -12,14 +12,13 @@ type ApplicationCommandDataWithChannel = ApplicationCommandData & {
 
 export default class Command {
   public name: string;
-  public nameLocalization: LocalizationMap;
+  public nameLocalization: LocalizationMap | undefined;
   public channels: string[];
 
   private raw: ApplicationCommandData;
 
   constructor(data: ApplicationCommandDataWithChannel) {
     this.name = data.name;
-    this.nameLocalization = data.nameLocalizations!;
     this.channels = data.channels ?? [];
     this.raw = data;
   }
@@ -30,7 +29,6 @@ export default class Command {
         name: this.name,
         nameLocalizations: this.nameLocalization,
         description: this.raw.description,
-        descriptionLocalizations: this.raw.descriptionLocalizations,
         type: this.raw.type,
         options: this.raw.options
       };

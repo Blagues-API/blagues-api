@@ -43,7 +43,10 @@ import { compareTwoStrings } from 'string-similarity';
 export default class ApproveCommand extends Command {
   constructor() {
     super({
-      name: 'Approuver',
+      name: 'approve',
+      nameLocalizations: {
+        fr: 'approuver'
+      },
       type: ApplicationCommandType.Message,
       channels: [suggestionsChannelId, correctionsChannelId]
     });
