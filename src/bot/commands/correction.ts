@@ -62,7 +62,7 @@ export default class CorrectionCommand extends Command {
       nameLocalizations: {
         fr: 'correction'
       },
-      description: 'Propose une modification',
+      description: 'Proposer une modification de blague/suggestion',
       type: ApplicationCommandType.ChatInput,
       channels: [commandsChannelId],
       options: [
