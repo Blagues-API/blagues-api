@@ -10,7 +10,7 @@ export default class LeaderboardCommand extends Command {
       nameLocalizations: {
         fr: 'classement'
       },
-      description: 'Afficher les statistiques',
+      description: 'Afficher les statistiques globales du serveur',
       type: ApplicationCommandType.ChatInput,
       channels: [commandsChannelId]
     });
