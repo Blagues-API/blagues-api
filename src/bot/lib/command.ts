@@ -1,10 +1,4 @@
-import {
-  ApplicationCommandData,
-  ApplicationCommandType,
-  CommandInteraction,
-  InteractionResponse,
-  LocalizationMap
-} from 'discord.js';
+import { ApplicationCommandData, ApplicationCommandType, CommandInteraction, InteractionResponse } from 'discord.js';
 
 type ApplicationCommandDataWithChannel = ApplicationCommandData & {
   channels?: string[];
@@ -12,7 +6,6 @@ type ApplicationCommandDataWithChannel = ApplicationCommandData & {
 
 export default class Command {
   public name: string;
-  public nameLocalization: LocalizationMap | undefined;
   public channels: string[];
 
   private raw: ApplicationCommandData;
@@ -27,7 +20,7 @@ export default class Command {
     if (!this.raw.type || this.raw.type === ApplicationCommandType.ChatInput) {
       return {
         name: this.name,
-        nameLocalizations: this.nameLocalization,
+        nameLocalizations: this.raw.nameLocalizations,
         description: this.raw.description,
         type: this.raw.type,
         options: this.raw.options
