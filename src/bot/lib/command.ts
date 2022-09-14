@@ -27,7 +27,7 @@ export default class Command {
     if (!this.raw.type || this.raw.type === ApplicationCommandType.ChatInput) {
       return {
         name: this.name,
-        nameLocalizations: this.nameLocalization,
+        nameLocalizations: this.raw.nameLocalizations,
         description: this.raw.description,
         type: this.raw.type,
         options: this.raw.options
