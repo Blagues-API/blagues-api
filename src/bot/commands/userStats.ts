@@ -6,7 +6,7 @@ import { interactionProblem } from '../utils';
 export default class UserStatsCommand extends Command {
   constructor() {
     super({
-      name: 'statistics',
+      name: 'Statistics',
       nameLocalizations: {
         fr: 'Statistiques'
       },
