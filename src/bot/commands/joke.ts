@@ -26,9 +26,6 @@ export default class JokeCommand extends Command {
         {
           type: ApplicationCommandOptionType.String,
           name: 'type',
-          nameLocalizations: {
-            fr: 'type'
-          },
           description: 'Aléatoire, Général, Développeur, Noir, +18, Beauf, Blondes',
           required: true,
           choices: Object.entries(JokeCategories).map(([key, name]) => ({
