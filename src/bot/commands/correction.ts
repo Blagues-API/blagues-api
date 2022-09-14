@@ -77,7 +77,7 @@ export default class CorrectionCommand extends Command {
   }
 
   async run(interaction: ChatInputCommandInteraction<'cached'>) {
-    const query = interaction.options.getString('recherche', true);
+    const query = interaction.options.getString('query', true);
 
     const joke = await this.resolveJoke(interaction, query);
     if (!joke) return;
