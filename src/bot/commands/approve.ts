@@ -43,9 +43,9 @@ import { compareTwoStrings } from 'string-similarity';
 export default class ApproveCommand extends Command {
   constructor() {
     super({
-      name: 'approve',
+      name: 'Approve',
       nameLocalizations: {
-        fr: 'approuver'
+        fr: 'Approuver'
       },
       type: ApplicationCommandType.Message,
       channels: [suggestionsChannelId, correctionsChannelId]
