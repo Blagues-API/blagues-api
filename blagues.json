@@ -11926,5 +11926,11 @@
     "type": "global",
     "joke": "Quelle est la différence entre un parisien, une cravate et une ceinture ?",
     "answer": "La cravate serre le cou, la ceinture serre la taille, le Parisien sert à rien."
+  },
+  {
+    "id": 2004,
+    "type": "global",
+    "joke": "Quelle est la différence entre un parisien, une cravate et une ceinture ?  ",
+    "answer": "La cravate serre le cou, la ceinture serre la taille, le Parisien sert à    rien."
   }
 ]
