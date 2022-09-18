@@ -35,7 +35,10 @@ import {
 export default class DisapproveCommand extends Command {
   constructor() {
     super({
-      name: 'Désapprouver',
+      name: 'Disapprove',
+      nameLocalizations: {
+        fr: 'Désapprouver'
+      },
       type: ApplicationCommandType.Message,
       channels: [suggestionsChannelId, correctionsChannelId]
     });
