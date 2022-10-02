@@ -1,8 +1,8 @@
 import { Colors } from '../constants';
-import { APIEmbed, bold, InteractionReplyOptions, MessageOptions } from 'discord.js';
+import { APIEmbed, bold, InteractionReplyOptions, BaseMessageOptions } from 'discord.js';
 import { stripIndents } from 'common-tags';
 
-type UniversalMessageOptions = Omit<MessageOptions, 'flags'>;
+type UniversalMessageOptions = Omit<BaseMessageOptions, 'flags'>;
 type UniversalInteractionOptions = Omit<InteractionReplyOptions, 'flags'>;
 
 export function validate(message: string): APIEmbed {
