@@ -54,6 +54,7 @@
   "dependencies": {
     "@fastify/cors": "^8.1.0",
     "@fastify/formbody": "^7.3.0",
+    "@octokit/rest": "^19.0.5",
     "@prisma/client": "^4.4.0",
     "@sapphire/async-queue": "^1.5.0",
     "@sentry/integrations": "^7.14.0",
