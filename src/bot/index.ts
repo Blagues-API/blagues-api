@@ -181,7 +181,7 @@ export default class Bot extends Client {
       console.log(error);
       const channel = this.channels.cache.get(process.env.LOGS_CHANNEL!) as TextChannel;
       await channel.send({
-        ...interactionProblem(`L'erreur suivante est survenur: \`\`\`${error}\`\`\``)
+        ...interactionProblem(`Une erreur suivante est survenue : \`\`\`${error}\`\`\``)
       });
     }
   }
