@@ -1,35 +1,18 @@
 import {
+  ActionRowData,
+  ButtonComponentData,
   ButtonStyle,
   ChatInputCommandInteraction,
   ComponentType,
-  InteractionButtonComponentData,
-  InteractionReplyOptions,
-  InteractionResponse
+  MessageActionRowComponentData
 } from 'discord.js';
 import Command from '../lib/command';
 import { Categories, CategoriesRefs, Category } from '../../typings';
 import { commandsChannelId } from '../constants';
-import {
-  info,
-  interactionInfo,
-  interactionValidate,
-  waitForInteraction,
-  isGodfather,
-  interactionProblem
-} from '../utils';
+import { info, interactionInfo, waitForInteraction, isGodfather } from '../utils';
 import prisma from '../../prisma';
-import type { Godfather } from 'prisma/prisma-client';
-
-type MinimalGodfatherPayload = Pick<Godfather, 'id' | 'ignored_categories'> & {
-  ignored_categories: Category[];
-};
 
 export default class IgnoreCommand extends Command {
-  private static ActionButtonsMapping: Record<string, string> = {
-    discard: 'Annuler',
-    save: 'Enregistrer'
-  };
-
   public constructor() {
     super({
       name: 'ignore',
@@ -38,160 +21,125 @@ export default class IgnoreCommand extends Command {
     });
   }
 
-  public async run(interaction: ChatInputCommandInteraction<'cached'>): Promise<void | InteractionResponse> {
-    let godfather: MinimalGodfatherPayload;
-    try {
-      godfather = await this.checkIsGodfather(interaction);
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return interaction.reply(interactionInfo(e.message));
-      }
-
-      return;
+  public async run(interaction: ChatInputCommandInteraction<'cached'>) {
+    if (!isGodfather(interaction.member)) {
+      return interaction.reply(interactionInfo('Seul les parrains peuvent utiliser cette commande.'));
     }
 
-    const message = await interaction.reply({
-      ...this.generateMessageOptions(godfather.ignored_categories),
-      ephemeral: true,
-      fetchReply: true
+    const godfather = await prisma.godfather.findUnique({
+      select: {
+        id: true,
+        ignored_categories: true
+      },
+      where: {
+        user_id: interaction.user.id
+      }
     });
 
-    let toggledCategories: Category[] = godfather.ignored_categories;
-
-    while (true) {
-      let buttonInteraction;
-      try {
-        buttonInteraction = await waitForInteraction({
-          componentType: ComponentType.Button,
-          message,
-          user: interaction.user,
-          rejectOnIdle: true
-        });
-      } catch (e: unknown) {
-        break;
-      }
-
-      if (!buttonInteraction) {
-        break;
-      }
-
-      if (Categories.includes(buttonInteraction.customId as Category)) {
-        const toggledCategory = buttonInteraction.customId as Category;
-        const isAlreadyIgnored = toggledCategories.includes(toggledCategory);
-
-        toggledCategories = isAlreadyIgnored
-          ? toggledCategories.filter((category) => category !== toggledCategory)
-          : [...toggledCategories, toggledCategory];
-
-        await Promise.all([
-          interaction.editReply(this.generateMessageOptions(toggledCategories)),
-          buttonInteraction.deferUpdate()
-        ]);
-
-        continue;
-      }
-
-      if (buttonInteraction.customId === 'discard') {
-        await Promise.all([
-          interaction.editReply(interactionProblem("Vos modifications n'ont pas été enregistrées.")),
-          buttonInteraction.deferUpdate()
-        ]);
-        toggledCategories = godfather.ignored_categories;
-
-        break;
-      }
-
-      if (buttonInteraction.customId === 'save') {
-        await Promise.all([
-          interaction.editReply(interactionValidate('Vos modifications ont bien été enregistrées.')),
-          buttonInteraction.deferUpdate()
-        ]);
-
-        break;
-      }
+    if (!godfather) {
+      return interaction.reply(
+        interactionInfo('Veuillez approuver plusieurs blagues avant de faire la fine bouche ! 😜')
+      );
     }
-    toggledCategories.sort();
-    godfather.ignored_categories.sort();
 
-    if (
-      toggledCategories.length === godfather.ignored_categories.length &&
-      toggledCategories.every((category, index) => category === godfather.ignored_categories[index])
-    ) {
-      // Categories are the same
-      return;
-    }
+    const newCategories = await this.requestChanges(interaction, godfather.ignored_categories);
+    if (!newCategories) return;
 
     await prisma.godfather.update({
+      data: {
+        ignored_categories: newCategories
+      },
       where: {
         id: godfather.id
-      },
-      data: {
-        ignored_categories: toggledCategories
       }
     });
   }
 
-  private generateMessageOptions(ignoredCategories: Category[]): InteractionReplyOptions {
+  async requestChanges(
+    commandInteraction: ChatInputCommandInteraction<'cached'>,
+    ignoredCategories: string[]
+  ): Promise<string[] | null> {
     const embed = info('Choisissez quels catégories vous souhaitez ignorer / voir à nouveau');
-    const buttons: InteractionButtonComponentData[] = Object.entries(CategoriesRefs).map(([category, name]) => {
-      const isAlreadyIgnored = ignoredCategories.includes(category as Category);
+    const jokesTypesRows = Object.entries(CategoriesRefs).reduce<ActionRowData<MessageActionRowComponentData>[]>(
+      (rows, [category, name]) => {
+        const isAlreadyIgnored = ignoredCategories.includes(category);
+        const element: ButtonComponentData = {
+          type: ComponentType.Button,
+          customId: category,
+          style: isAlreadyIgnored ? ButtonStyle.Secondary : ButtonStyle.Primary,
+          label: isAlreadyIgnored ? `❌ ${name}` : `✅ ${name}`
+        };
 
-      return {
-        type: ComponentType.Button,
-        customId: category,
-        style: isAlreadyIgnored ? ButtonStyle.Secondary : ButtonStyle.Primary,
-        label: isAlreadyIgnored ? `❌ ${name}` : `✅ ${name}`
-      };
-    });
-    const buttonsRows = [buttons.slice(0, 3), buttons.slice(3)];
+        const lastRow = rows[rows.length - 1];
+        if (lastRow.components.length < 5) {
+          lastRow.components.push(element);
+          // 4 because we need the last line for cancel/save
+        } else if (rows.length < 4) {
+          rows.push({ type: ComponentType.ActionRow, components: [element] });
+        }
 
-    return {
+        return rows;
+      },
+      [{ type: ComponentType.ActionRow, components: [] }]
+    );
+
+    const question = await commandInteraction[commandInteraction.replied ? 'editReply' : 'reply']({
       embeds: [embed],
       components: [
-        ...buttonsRows.map((row) => ({
-          type: ComponentType.ActionRow,
-          components: row
-        })),
+        ...jokesTypesRows,
         {
           type: ComponentType.ActionRow,
           components: [
             {
               type: ComponentType.Button,
-              customId: 'discard',
-              label: IgnoreCommand.ActionButtonsMapping.discard,
+              customId: 'cancel',
+              label: 'Annuler',
               style: ButtonStyle.Danger
             },
             {
               type: ComponentType.Button,
               customId: 'save',
-              label: IgnoreCommand.ActionButtonsMapping.save,
+              label: 'Enregistrer',
               style: ButtonStyle.Success
             }
           ]
         }
-      ]
-    };
-  }
-
-  private async checkIsGodfather(interaction: ChatInputCommandInteraction<'cached'>): Promise<MinimalGodfatherPayload> {
-    if (!isGodfather(interaction.member)) {
-      throw new Error('Seul les parrains peuvent utiliser cette commande.');
-    }
-
-    const godfather = await prisma.godfather.findUnique({
-      where: {
-        user_id: interaction.user.id
-      },
-      select: {
-        id: true,
-        ignored_categories: true
-      }
+      ],
+      ephemeral: true,
+      fetchReply: true
     });
 
-    if (!godfather) {
-      throw new Error('Veuillez approuver plusieurs blagues avant de faire la fine bouche ! 😜');
+    const buttonInteraction = await waitForInteraction({
+      componentType: ComponentType.Button,
+      message: question,
+      user: commandInteraction.user
+    });
+
+    if (!buttonInteraction) {
+      await commandInteraction.editReply(interactionInfo("La minute s'est écoulée."));
+      return null;
     }
 
-    return godfather as MinimalGodfatherPayload;
+    switch (buttonInteraction.customId) {
+      case 'cancel': {
+        await commandInteraction.deleteReply();
+        return null;
+      }
+      case 'save': {
+        return ignoredCategories;
+      }
+      default: {
+        if (!Categories.includes(buttonInteraction.customId as Category)) return null;
+
+        const toggledCategory = buttonInteraction.customId as Category;
+        const isAlreadyIgnored = ignoredCategories.includes(toggledCategory);
+
+        ignoredCategories = isAlreadyIgnored
+          ? ignoredCategories.filter((category) => category !== toggledCategory)
+          : [...ignoredCategories, toggledCategory];
+
+        return this.requestChanges(commandInteraction, ignoredCategories);
+      }
+    }
   }
 }
