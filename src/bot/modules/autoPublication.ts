@@ -14,7 +14,7 @@ export async function runGitPush(bot: Bot): Promise<void> {
       // commit files
       file: { path: 'blagues.json', content: fs.readFileSync('./blagues.json', 'utf-8') },
       baseBranch: 'dev',
-      mergeBranch: 'test'
+      mergeBranch: 'chore/autopublish-jokes'
     });
   } catch (error) {
     console.log(error);
