@@ -151,7 +151,10 @@ export default class ApproveCommand extends Command {
       const correction = proposal.corrections[0];
       if (correction) {
         const beenApproved = correction.approvals.some((approval) => approval.user_id === interaction.user.id);
-        if (!beenApproved) {
+        const beenDisapproved = correction.disapprovals.some(
+          (disapproval) => disapproval.user_id === interaction.user.id
+        );
+        if (!beenApproved && !beenDisapproved) {
           const correctionLink = messageLink(correctionsChannelId, correction.message_id!, interaction.guild.id);
           const suggestionLink = messageLink(suggestionsChannelId, proposal.message_id!, interaction.guild.id);
           return interaction.reply(
