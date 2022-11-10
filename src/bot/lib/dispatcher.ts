@@ -1,33 +1,23 @@
-import { ApplicationCommandData, Client, CommandInteraction } from 'discord.js';
+import { ApplicationCommandData, channelMention, Client, CommandInteraction } from 'discord.js';
 import Command from './command';
 
-import CorrectCommand from '../commands/correction';
-import SuggestCommand from '../commands/suggest';
-import StatsCommand from '../commands/stats';
-import JokeCommand from '../commands/joke';
-import ApproveCommand from '../commands/approve';
-import DisapproveCommand from '../commands/disapprove';
-import LeaderboardCommand from '../commands/leaderboard';
-import UserStatsCommand from '../commands/userStats';
-import IgnoreCommand from '../commands/ignore';
 import { commandsChannelId, correctionsChannelId, guildId, suggestionsChannelId } from '../constants';
 import { interactionInfo } from '../utils';
 
-export default class Dispatcher {
-  constructor(private client: Client) {}
+import requireAll from 'require-all';
+import path from 'path';
 
-  public get commands(): Command[] {
-    return [
-      new SuggestCommand(),
-      new CorrectCommand(),
-      new StatsCommand(),
-      new JokeCommand(),
-      new ApproveCommand(),
-      new DisapproveCommand(),
-      new LeaderboardCommand(),
-      new UserStatsCommand(),
-      new IgnoreCommand()
-    ];
+type CommandFile = { default: ConstructableCommand };
+
+interface ConstructableCommand {
+  new (): Command;
+}
+
+export default class Dispatcher {
+  public commands: Command[] = [];
+
+  constructor(private client: Client) {
+    this.loadCommands();
   }
 
   public get commandsData(): ApplicationCommandData[] {
@@ -49,7 +39,7 @@ export default class Dispatcher {
         case [commandsChannelId]:
           {
             await interaction.reply(
-              interactionInfo(`Préférez utiliser cette commande dans le salon <#${commandsChannelId}>.`)
+              interactionInfo(`Préférez utiliser cette commande dans le salon ${channelMention(commandsChannelId)}.`)
             );
           }
           break;
@@ -57,7 +47,9 @@ export default class Dispatcher {
           {
             await interaction.reply(
               interactionInfo(
-                `Vous ne pouvez pas approuver une suggestion ou une correction en dehors des salons <#${suggestionsChannelId}> et <#${correctionsChannelId}>.`
+                `Vous ne pouvez pas approuver une suggestion ou une correction en dehors des salons ${channelMention(
+                  suggestionsChannelId
+                )} et ${channelMention(correctionsChannelId)}.`
               )
             );
           }
@@ -70,6 +62,16 @@ export default class Dispatcher {
     } catch (error) {
       console.error('[Bot error]', error);
     }
+  }
+
+  loadCommands() {
+    const directoryFiles = requireAll({
+      dirname: path.join(__dirname, '../commands')
+    });
+    const commandsFiles = Object.values<CommandFile>(directoryFiles);
+    this.commands = commandsFiles.map(({ default: commandFile }) => {
+      return new commandFile();
+    });
   }
 
   public async register(): Promise<void> {

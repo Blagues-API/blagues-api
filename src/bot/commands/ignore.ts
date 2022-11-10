@@ -2,14 +2,21 @@ import {
   ButtonStyle,
   ChatInputCommandInteraction,
   ComponentType,
+  InteractionButtonComponentData,
   InteractionReplyOptions,
-  InteractionResponse,
-  Message
+  InteractionResponse
 } from 'discord.js';
 import Command from '../lib/command';
 import { Categories, CategoriesRefs, Category } from '../../typings';
 import { commandsChannelId } from '../constants';
-import { info, interactionError, interactionInfo, interactionValidate, interactionWaiter, isGodfather } from '../utils';
+import {
+  info,
+  interactionInfo,
+  interactionValidate,
+  waitForInteraction,
+  isGodfather,
+  interactionProblem
+} from '../utils';
 import prisma from '../../prisma';
 import type { Godfather } from 'prisma/prisma-client';
 
@@ -43,26 +50,23 @@ export default class IgnoreCommand extends Command {
       return;
     }
 
-    const message = (await interaction.reply({
+    const message = await interaction.reply({
       ...this.generateMessageOptions(godfather.ignored_categories),
       ephemeral: true,
       fetchReply: true
-    })) as unknown as Message<true>;
+    });
 
     let toggledCategories: Category[] = godfather.ignored_categories;
 
-    // Ptet refactor la boucle et le interactionWaiter dans un util si jamais on a besoin de ré-implementer un menu dans le style
     while (true) {
       let buttonInteraction;
       try {
-        buttonInteraction = await interactionWaiter(
-          {
-            component_type: ComponentType.Button,
-            message,
-            user: interaction.user
-          },
-          { reject_on_idle: true }
-        );
+        buttonInteraction = await waitForInteraction({
+          componentType: ComponentType.Button,
+          message,
+          user: interaction.user,
+          rejectOnIdle: true
+        });
       } catch (e: unknown) {
         break;
       }
@@ -89,7 +93,7 @@ export default class IgnoreCommand extends Command {
 
       if (buttonInteraction.customId === 'discard') {
         await Promise.all([
-          interaction.editReply(interactionError("Vos modifications n'ont pas été enregistrées.")),
+          interaction.editReply(interactionProblem("Vos modifications n'ont pas été enregistrées.")),
           buttonInteraction.deferUpdate()
         ]);
         toggledCategories = godfather.ignored_categories;
@@ -129,12 +133,12 @@ export default class IgnoreCommand extends Command {
 
   private generateMessageOptions(ignoredCategories: Category[]): InteractionReplyOptions {
     const embed = info('Choisissez quels catégories vous souhaitez ignorer / voir à nouveau');
-    const buttons = Object.entries(CategoriesRefs).map(([category, name]) => {
+    const buttons: InteractionButtonComponentData[] = Object.entries(CategoriesRefs).map(([category, name]) => {
       const isAlreadyIgnored = ignoredCategories.includes(category as Category);
 
       return {
         type: ComponentType.Button,
-        custom_id: category,
+        customId: category,
         style: isAlreadyIgnored ? ButtonStyle.Secondary : ButtonStyle.Primary,
         label: isAlreadyIgnored ? `❌ ${name}` : `✅ ${name}`
       };
@@ -153,20 +157,20 @@ export default class IgnoreCommand extends Command {
           components: [
             {
               type: ComponentType.Button,
-              custom_id: 'discard',
+              customId: 'discard',
               label: IgnoreCommand.ActionButtonsMapping.discard,
               style: ButtonStyle.Danger
             },
             {
               type: ComponentType.Button,
-              custom_id: 'save',
+              customId: 'save',
               label: IgnoreCommand.ActionButtonsMapping.save,
               style: ButtonStyle.Success
             }
           ]
         }
       ]
-    } as InteractionReplyOptions;
+    };
   }
 
   private async checkIsGodfather(interaction: ChatInputCommandInteraction<'cached'>): Promise<MinimalGodfatherPayload> {

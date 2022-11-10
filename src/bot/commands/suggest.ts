@@ -1,4 +1,3 @@
-import { stripIndents } from 'common-tags';
 import {
   APIEmbed,
   ApplicationCommandOptionType,
@@ -6,7 +5,7 @@ import {
   ButtonStyle,
   ChatInputCommandInteraction,
   ComponentType,
-  Message,
+  hyperlink,
   TextChannel
 } from 'discord.js';
 import { findBestMatch } from 'string-similarity';
@@ -20,7 +19,7 @@ import {
   upReactionIdentifier
 } from '../constants';
 import Command from '../lib/command';
-import { interactionProblem, interactionValidate, interactionWaiter, isEmbedable } from '../utils';
+import { buildJokeDisplay, interactionProblem, interactionValidate, isEmbedable, waitForInteraction } from '../utils';
 import prisma from '../../prisma';
 import { ProposalType } from '@prisma/client';
 
@@ -60,7 +59,7 @@ export default class SuggestCommand extends Command {
     });
   }
 
-  async run(interaction: ChatInputCommandInteraction) {
+  async run(interaction: ChatInputCommandInteraction<'cached'>) {
     const proposals = await prisma.proposal.findMany({
       select: {
         joke_type: true,
@@ -101,11 +100,7 @@ export default class SuggestCommand extends Command {
         }),
         name: interaction.user.tag
       },
-      description: stripIndents`
-        > **Type**: ${CategoriesRefs[payload.type]}
-        > **Blague**: ${payload.joke}
-        > **Réponse**: ${payload.answer}
-      `,
+      description: buildJokeDisplay(CategoriesRefs[payload.type], payload.joke, payload.answer),
       color: Colors.PROPOSED
     };
 
@@ -113,11 +108,11 @@ export default class SuggestCommand extends Command {
       embed.fields = [
         {
           name: 'Blague similaire',
-          value: stripIndents`
-              > **Type**: ${CategoriesRefs[currentJokes[bestMatchIndex].type as Category]}
-              > **Blague**: ${currentJokes[bestMatchIndex].joke}
-              > **Réponse**: ${currentJokes[bestMatchIndex].answer}
-            `
+          value: buildJokeDisplay(
+            CategoriesRefs[currentJokes[bestMatchIndex].type as Category],
+            currentJokes[bestMatchIndex].joke!,
+            currentJokes[bestMatchIndex].answer!
+          )
         }
       ];
     }
@@ -130,7 +125,7 @@ export default class SuggestCommand extends Command {
       });
     }
 
-    const message = (await interaction.reply({
+    const message = await interaction.reply({
       content: 'Êtes-vous sûr de vouloir confirmer la proposition de cette blague ?',
       embeds: [embed],
       components: [
@@ -154,11 +149,11 @@ export default class SuggestCommand extends Command {
       ],
       ephemeral: true,
       fetchReply: true
-    })) as Message<true>;
+    });
 
-    const confirmation = await interactionWaiter({
-      component_type: ComponentType.Button,
-      message: message,
+    const confirmation = await waitForInteraction({
+      componentType: ComponentType.Button,
+      message,
       user: interaction.user
     });
 
@@ -166,7 +161,7 @@ export default class SuggestCommand extends Command {
 
     if (confirmation.customId === 'cancel') {
       return confirmation.update({
-        content: "La blague n'a pas été envoyé",
+        content: "La blague n'a pas été envoyée.",
         components: [],
         embeds: [embed]
       });
@@ -196,6 +191,6 @@ export default class SuggestCommand extends Command {
       await suggestion.react(reaction).catch(() => null);
     }
 
-    return confirmation.update(interactionValidate(`La [blague](${suggestion.url}) a été envoyé !`, false));
+    return confirmation.update(interactionValidate(`La ${hyperlink('blague', suggestion.url)} a été envoyée !`, false));
   }
 }

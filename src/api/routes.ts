@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { APIUser, OAuth2Routes, RESTPostOAuth2AccessTokenResult } from 'discord-api-types/v9';
 import got from 'got';
-import { jokeById, randomJoke, randomJokeByType, JokeResponse } from '../controllers';
+import { jokeById, JokeResponse, randomJoke, randomJokeByType } from '../controllers';
 import { Categories, CategoriesRefs } from '../typings';
 import { BadRequest, JokeNotFound, MissingKey, NoContent } from './Errors';
 import prisma from '../prisma';
@@ -68,7 +68,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
 
   fastify.get('/auth/user', async (req: DashboardAuthUser, res) => {
     try {
-      const discordUser = await got('http://discord.com/api/v9/users/@me', {
+      const discordUser = await got('https://discord.com/api/v10/users/@me', {
         headers: {
           Authorization: req.headers.authorization
         }
@@ -104,7 +104,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       })
       .json<RESTPostOAuth2AccessTokenResult>();
 
-    const discordUser = await got('http://discord.com/api/v9/users/@me', {
+    const discordUser = await got('https://discord.com/api/v10/users/@me', {
       headers: {
         Authorization: `Bearer ${authData.access_token}`
       }

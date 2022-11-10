@@ -1,11 +1,12 @@
-import { stripIndents } from 'common-tags';
 import {
   ApplicationCommandOptionType,
   ApplicationCommandType,
   ButtonInteraction,
   ButtonStyle,
   ChatInputCommandInteraction,
+  codeBlock,
   ComponentType,
+  hyperlink,
   Message,
   TextChannel
 } from 'discord.js';
@@ -25,17 +26,18 @@ import Command from '../lib/command';
 import clone from 'lodash/clone';
 import { ProposalType } from '@prisma/client';
 import {
+  buildJokeDisplay,
   info,
   interactionInfo,
   interactionProblem,
   interactionValidate,
-  interactionWaiter,
   isEmbedable,
   messageInfo,
   messageProblem,
   showNegativeDiffs,
   showPositiveDiffs,
-  tDelete
+  tDelete,
+  waitForInteraction
 } from '../utils';
 
 enum IdType {
@@ -57,21 +59,25 @@ export default class CorrectionCommand extends Command {
   constructor() {
     super({
       name: 'correction',
-      description: 'Proposer une modification de blague',
+      description: 'Proposer une modification de blague/suggestion',
       type: ApplicationCommandType.ChatInput,
       channels: [commandsChannelId],
       options: [
         {
           type: ApplicationCommandOptionType.String,
-          name: 'recherche',
+          name: 'query',
+          nameLocalizations: {
+            fr: 'recherche'
+          },
           description: 'ID ou question de la blague ou ID du message',
           required: true
         }
       ]
     });
   }
+
   async run(interaction: ChatInputCommandInteraction<'cached'>) {
-    const query = interaction.options.getString('recherche', true);
+    const query = interaction.options.getString('query', true);
 
     const joke = await this.resolveJoke(interaction, query);
     if (!joke) return;
@@ -133,14 +139,10 @@ export default class CorrectionCommand extends Command {
   ): Promise<JokeCorrectionPayload | null> {
     const embed = {
       title: `Quels${changes ? ' autres' : ''} changements voulez-vous faire ?`,
-      description: stripIndents`
-        > **Type:** ${CategoriesRefs[joke.type]}
-        > **Question:** ${joke.joke}
-        > **Réponse:** ${joke.answer}
-      `,
+      description: buildJokeDisplay(CategoriesRefs[joke.type], joke.joke, joke.answer),
       color: Colors.PRIMARY
     };
-    const question = (await commandInteraction[commandInteraction.replied ? 'editReply' : 'reply']({
+    const question = await commandInteraction[commandInteraction.replied ? 'editReply' : 'reply']({
       embeds: [embed],
       components: [
         {
@@ -180,10 +182,10 @@ export default class CorrectionCommand extends Command {
         }
       ],
       fetchReply: true
-    })) as Message<true>;
+    });
 
-    const buttonInteraction = await interactionWaiter({
-      component_type: ComponentType.Button,
+    const buttonInteraction = await waitForInteraction({
+      componentType: ComponentType.Button,
       message: question,
       user: commandInteraction.user,
       idle: 120_000
@@ -285,7 +287,7 @@ export default class CorrectionCommand extends Command {
         interaction.channel
           ?.send(
             messageProblem(
-              `Impossible de trouver une blague ou correction liée à cet ID de blague, assurez vous que cet ID provient bien d\'un message envoyé par le bot ${interaction.client.user}`
+              `Impossible de trouver une blague ou correction liée à cet ID de blague, assurez vous que cet ID provient bien d\'un message envoyé par le bot ${interaction.client.user}.`
             )
           )
           .then(tDelete(5000));
@@ -382,7 +384,7 @@ export default class CorrectionCommand extends Command {
         {
           color: Colors.PRIMARY,
           title: `Par quelle ${textReplyContent} voulez-vous changer la ${textReplyContent} actuelle ?`,
-          description: `\`\`\`${oldValue}\`\`\``
+          description: codeBlock(oldValue)
         }
       ],
       components: []
@@ -423,7 +425,7 @@ export default class CorrectionCommand extends Command {
     joke: JokeCorrectionPayload
   ): Promise<JokeCorrectionPayload | null> {
     const baseEmbed = buttonInteraction.message.embeds[0].toJSON();
-    const questionMessage = (await buttonInteraction.update({
+    const questionMessage = await buttonInteraction.update({
       embeds: [
         baseEmbed,
         {
@@ -451,10 +453,10 @@ export default class CorrectionCommand extends Command {
         }
       ],
       fetchReply: true
-    })) as Message<true>;
+    });
 
-    const response = await interactionWaiter({
-      component_type: ComponentType.SelectMenu,
+    const response = await waitForInteraction({
+      componentType: ComponentType.SelectMenu,
       message: questionMessage,
       user: commandInteraction.user
     });
@@ -486,10 +488,7 @@ export default class CorrectionCommand extends Command {
     ) as TextChannel;
     if (!isEmbedable(correctionsChannel)) {
       return commandInteraction.reply(
-        interactionProblem(
-          `Je n'ai pas la permission d'envoyer la correction dans le salon ${correctionsChannel}.`,
-          false
-        )
+        interactionProblem(`Je n'ai pas la permission d'envoyer la correction dans le salon ${correctionsChannel}.`)
       );
     }
 
@@ -505,19 +504,19 @@ export default class CorrectionCommand extends Command {
           fields: [
             {
               name: 'Blague initiale',
-              value: stripIndents`
-                > **Type**: ${showNegativeDiffs(CategoriesRefs[newJoke.suggestion.type], CategoriesRefs[newJoke.type])}
-                > **Blague**: ${showNegativeDiffs(newJoke.suggestion.joke, newJoke.joke)}
-                > **Réponse**: ${showNegativeDiffs(newJoke.suggestion.answer, newJoke.answer)}
-              `
+              value: buildJokeDisplay(
+                showNegativeDiffs(CategoriesRefs[newJoke.suggestion.type], CategoriesRefs[newJoke.type]),
+                showNegativeDiffs(newJoke.suggestion.joke, newJoke.joke),
+                showNegativeDiffs(newJoke.suggestion.answer, newJoke.answer)
+              )
             },
             {
               name: 'Blague corrigée',
-              value: stripIndents`
-                > **Type**: ${showPositiveDiffs(CategoriesRefs[newJoke.suggestion.type], CategoriesRefs[newJoke.type])}
-                > **Blague**: ${showPositiveDiffs(newJoke.suggestion.joke, newJoke.joke)}
-                > **Réponse**: ${showPositiveDiffs(newJoke.suggestion.answer, newJoke.answer)}
-              `
+              value: buildJokeDisplay(
+                showPositiveDiffs(CategoriesRefs[newJoke.suggestion.type], CategoriesRefs[newJoke.type]),
+                showPositiveDiffs(newJoke.suggestion.joke, newJoke.joke),
+                showPositiveDiffs(newJoke.suggestion.answer, newJoke.answer)
+              )
             }
           ],
           color: Colors.PROPOSED
@@ -551,14 +550,14 @@ export default class CorrectionCommand extends Command {
 
       const { base, godfathers } = embed.description!.match(dataSplitRegex)!.groups!;
 
-      const correctionText = `⚠️ Une [correction](${message.url}) est en cours.`;
+      const correctionText = `⚠️ Une ${hyperlink('correction', message.url)} est en cours.`;
       embed.description = [base, correctionText, godfathers].filter(Boolean).join('\n\n');
 
       await suggestionMessage.edit({ embeds: [embed] });
     }
 
     await commandInteraction.editReply(
-      interactionValidate(`Votre [proposition de correction](${message.url}) a bien été envoyée !`)
+      interactionValidate(`Votre ${hyperlink('proposition de correction', message.url)} a bien été envoyée !`)
     );
 
     for (const reaction of [upReactionIdentifier, downReactionIdentifier]) {

@@ -20,6 +20,7 @@ export default abstract class Command {
     if (!this.raw.type || this.raw.type === ApplicationCommandType.ChatInput) {
       return {
         name: this.name,
+        nameLocalizations: this.raw.nameLocalizations,
         description: this.raw.description,
         type: this.raw.type,
         options: this.raw.options
