@@ -60,7 +60,7 @@ export default class ApproveCommand extends Command {
 
     const isSuggestionChannel = channel.id === suggestionsChannelId;
 
-    if (message.author.id !== interaction.client.user!.id) {
+    if (message.author.id !== interaction.client.user.id) {
       return interaction.reply(
         interactionProblem(
           `Vous ne pouvez pas approuver une ${

@@ -79,7 +79,7 @@ export default class DeleteCommand extends Command {
     });
 
     const confirmation = await waitForInteraction({
-      component_type: ComponentType.Button,
+      componentType: ComponentType.Button,
       message: message,
       user: interaction.user
     });

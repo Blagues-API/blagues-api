@@ -68,7 +68,7 @@ export async function paginate(
 
   try {
     const buttonInteraction = await waitForInteraction({
-      component_type: ComponentType.Button,
+      componentType: ComponentType.Button,
       message,
       user: interaction.user
     });

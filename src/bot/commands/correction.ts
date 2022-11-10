@@ -185,7 +185,7 @@ export default class CorrectionCommand extends Command {
     });
 
     const buttonInteraction = await waitForInteraction({
-      component_type: ComponentType.Button,
+      componentType: ComponentType.Button,
       message: question,
       user: commandInteraction.user,
       idle: 120_000
@@ -456,7 +456,7 @@ export default class CorrectionCommand extends Command {
     });
 
     const response = await waitForInteraction({
-      component_type: ComponentType.SelectMenu,
+      componentType: ComponentType.SelectMenu,
       message: questionMessage,
       user: commandInteraction.user
     });

@@ -49,7 +49,7 @@ export default class DisapproveCommand extends Command {
     const isSuggestionChannel = channel.id === suggestionsChannelId;
     const message = await channel.messages.fetch(interaction.targetId);
 
-    if (message.author.id !== interaction.client.user!.id) {
+    if (message.author.id !== interaction.client.user.id) {
       return interaction.reply(
         interactionProblem(
           `Vous ne pouvez pas désapprouver une ${
