@@ -78,8 +78,8 @@ class JokesLoader {
       const deleteIndex = jokes.indexOf(jokeToDelete);
       if (deleteIndex === -1) return { success: false, error: `La blague n'a pas été trouvée.` };
 
-      jokes.at(-1)!.id = deleteIndex;
-      jokes.splice(deleteIndex, 1);
+      const [lastJoke] = jokes.splice(-1, 1);
+      jokes[deleteIndex] = { ...lastJoke, id: deleteIndex };
 
       await prisma.proposal.update({
         where: { joke_id: jokes.at(-1)!.id },

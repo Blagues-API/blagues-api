@@ -8,7 +8,6 @@ import {
   ChatInputCommandInteraction,
   codeBlock,
   ComponentType,
-  Message,
   TextChannel
 } from 'discord.js';
 import { buildJokeDisplay, interactionProblem, interactionValidate, isEmbedable, waitForInteraction } from '../utils';
@@ -53,7 +52,7 @@ export default class DeleteCommand extends Command {
       color: Colors.PROPOSED
     };
 
-    const message = (await interaction.reply({
+    const message = await interaction.reply({
       content: 'Voulez-vous vraiment supprimer la blague suivante ?',
       embeds: [embed],
       components: [
@@ -77,7 +76,7 @@ export default class DeleteCommand extends Command {
       ],
       ephemeral: true,
       fetchReply: true
-    })) as Message<true>;
+    });
 
     const confirmation = await waitForInteraction({
       component_type: ComponentType.Button,
@@ -102,14 +101,7 @@ export default class DeleteCommand extends Command {
         interactionProblem(
           stripIndents`
             La blague n'a pas pu être supprimée !
-            ${
-              error
-                ? stripIndents`
-              ${bold('Erreur :')}
-              ${codeBlock(error)}
-              `
-                : ''
-            }
+            ${error ? `${bold('Erreur :')}${codeBlock(error)}` : ''}
           `,
           true
         )
