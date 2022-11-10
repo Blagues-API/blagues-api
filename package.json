@@ -33,7 +33,7 @@
     "@types/diff": "^5.0.2",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/lodash": "^4.14.188",
-    "@types/node": "^16.18.3",
+    "@types/node": "^18.11.9",
     "@types/node-schedule": "^2.1.0",
     "@types/require-all": "^3.0.3",
     "@types/sharp": "^0.31.0",
