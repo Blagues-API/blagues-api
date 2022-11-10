@@ -59,13 +59,16 @@ export default class CorrectionCommand extends Command {
   constructor() {
     super({
       name: 'correction',
-      description: 'Proposer une modification de blague',
+      description: 'Proposer une modification de blague/suggestion',
       type: ApplicationCommandType.ChatInput,
       channels: [commandsChannelId],
       options: [
         {
           type: ApplicationCommandOptionType.String,
-          name: 'recherche',
+          name: 'query',
+          nameLocalizations: {
+            fr: 'recherche'
+          },
           description: 'ID ou question de la blague ou ID du message',
           required: true
         }
@@ -74,7 +77,7 @@ export default class CorrectionCommand extends Command {
   }
 
   async run(interaction: ChatInputCommandInteraction<'cached'>) {
-    const query = interaction.options.getString('recherche', true);
+    const query = interaction.options.getString('query', true);
 
     const joke = await this.resolveJoke(interaction, query);
     if (!joke) return;

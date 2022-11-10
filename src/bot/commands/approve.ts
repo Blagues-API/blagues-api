@@ -43,7 +43,10 @@ import { compareTwoStrings } from 'string-similarity';
 export default class ApproveCommand extends Command {
   constructor() {
     super({
-      name: 'Approuver',
+      name: 'Approve',
+      nameLocalizations: {
+        fr: 'Approuver'
+      },
       type: ApplicationCommandType.Message,
       channels: [suggestionsChannelId, correctionsChannelId]
     });
@@ -120,7 +123,7 @@ export default class ApproveCommand extends Command {
     })) as Proposals | null;
 
     if (!proposal) {
-      return interaction.reply(interactionProblem(`Le message est invalide.`));
+      return interaction.reply(interactionProblem('Le message est invalide.'));
     }
 
     const isSuggestion = proposal.type === ProposalType.SUGGESTION;
@@ -132,7 +135,7 @@ export default class ApproveCommand extends Command {
           id: proposal.id
         }
       });
-      return interaction.reply(interactionProblem(`Le message est invalide.`));
+      return interaction.reply(interactionProblem('Le message est invalide.'));
     }
 
     if (proposal.user_id === interaction.user.id) {
