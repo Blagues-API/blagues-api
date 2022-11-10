@@ -13,7 +13,6 @@ type WaitForInteractionOptions<T extends MessageComponentType> = {
   message: Message<true>;
   user: User;
   idle?: number;
-  rejectOnIdle?: boolean;
 };
 type WaitForInteraction<T> = T extends WaitForInteractionOptions<ComponentType.Button>
   ? ButtonInteraction<'cached'>
@@ -21,7 +20,7 @@ type WaitForInteraction<T> = T extends WaitForInteractionOptions<ComponentType.B
 
 export async function waitForInteraction<T extends WaitForInteractionOptions<MessageComponentType>>(options: T) {
   return new Promise<WaitForInteraction<T>>((resolve, reject) => {
-    const { componentType, message, user, idle = 60_000, rejectOnIdle = false } = options;
+    const { componentType, message, user, idle = 60_000 } = options;
     message
       .createMessageComponentCollector({
         componentType,
@@ -35,7 +34,7 @@ export async function waitForInteraction<T extends WaitForInteractionOptions<Mes
         resolve(interaction);
       })
       .once('end', (_interactions, reason) => {
-        if (!rejectOnIdle && reason === 'idle') return;
+        if (reason === 'idle') return;
         reject(reason);
       });
   });
