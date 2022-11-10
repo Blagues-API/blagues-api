@@ -144,7 +144,27 @@ export default class ApproveCommand extends Command {
 
     if (!response) return;
 
-    if (!isSuggestion) {
+    if (isSuggestion) {
+      const correction = proposal.corrections[0];
+      if (correction) {
+        const beenApproved = correction.approvals.some((approval) => approval.user_id === interaction.user.id);
+        const beenDisapproved = correction.disapprovals.some(
+          (disapproval) => disapproval.user_id === interaction.user.id
+        );
+        if (!beenApproved && !beenDisapproved) {
+          const correctionLink = messageLink(correctionsChannelId, correction.message_id!, interaction.guild.id);
+          const suggestionLink = messageLink(suggestionsChannelId, proposal.message_id!, interaction.guild.id);
+          return interaction.reply(
+            interactionInfo(
+              `Il semblerait qu'une ${hyperlink(
+                'correction aie été proposée',
+                correctionLink
+              )}, veuillez l'approuver avant l'approbation de ${hyperlink('cette suggestion', suggestionLink)}.`
+            )
+          );
+        }
+      }
+    } else {
       const lastCorrection = proposal.suggestion?.corrections[0];
       if (lastCorrection && lastCorrection.id !== proposal.id) {
         const correctionLink = messageLink(correctionsChannelId, lastCorrection.message_id!, interaction.guild.id);
