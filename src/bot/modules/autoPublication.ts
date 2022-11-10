@@ -5,7 +5,6 @@ import { interactionProblem } from '../utils';
 import Bot from 'bot';
 
 export async function runGitPush(bot: Bot): Promise<void> {
-  console.log('Push lancée avec succès !');
 
   try {
     gitCommitPush({
