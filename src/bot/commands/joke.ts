@@ -32,6 +32,15 @@ export default class JokeCommand extends Command {
             name,
             value: key
           }))
+        },
+        {
+          type: ApplicationCommandOptionType.String,
+          name: 'keyword',
+          description: 'truc',
+          nameLocalizations: {
+            fr: 'mot-clé'
+          },
+          required: false
         }
       ]
     });
