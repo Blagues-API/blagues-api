@@ -4,6 +4,8 @@ import { CategoriesRefsFull } from '../../typings';
 import { random } from '../../utils';
 import { Colors, commandsChannelId } from '../constants';
 import Command from '../lib/command';
+import { findBestMatch } from 'string-similarity';
+import { jokeByQuestion } from '../../controllers';
 
 const JokeCategories = {
   random: 'Aléatoire',
@@ -48,8 +50,20 @@ export default class JokeCommand extends Command {
 
   async run(interaction: ChatInputCommandInteraction<'cached'>) {
     const type = interaction.options.getString('type', true) as JokeCategory;
+    const keyword = interaction.options.getString('keyword', true);
 
-    const joke = random(type === 'random' ? JokesLoader.list : JokesLoader.list.filter((joke) => joke.type === type));
+    const jokeString = random(
+      findBestMatch(
+        keyword,
+        type === 'random'
+          ? JokesLoader.list.map((joke) => `${joke.joke}|${joke.answer}`)
+          : JokesLoader.list.filter((joke) => joke.type === type).map((joke) => `${joke.joke}|${joke.answer}`)
+      ).ratings
+    ).target;
+
+    const joke = jokeString
+      ? jokeByQuestion(jokeString.split('|')[0])!
+      : random(type === 'random' ? JokesLoader.list : JokesLoader.list.filter((joke) => joke.type === type));
 
     return interaction.reply({
       embeds: [
