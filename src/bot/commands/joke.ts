@@ -49,17 +49,17 @@ export default class JokeCommand extends Command {
   async run(interaction: ChatInputCommandInteraction<'cached'>) {
     const type = interaction.options.getString('type', true) as JokeCategory;
 
-    const blague = random(type === 'random' ? JokesLoader.list : JokesLoader.list.filter((joke) => joke.type === type));
+    const joke = random(type === 'random' ? JokesLoader.list : JokesLoader.list.filter((joke) => joke.type === type));
 
     return interaction.reply({
       embeds: [
         {
           color: Colors.PRIMARY,
-          title: blague.joke,
-          description: spoiler(blague.answer),
+          title: joke.joke,
+          description: spoiler(joke.answer),
           timestamp: new Date().toISOString(),
           footer: {
-            text: `${CategoriesRefsFull[blague.type]} • (${blague.id})`,
+            text: `${CategoriesRefsFull[joke.type]} • (${joke.id})`,
             icon_url: interaction.guild.iconURL({ size: 32 })!
           }
         }
