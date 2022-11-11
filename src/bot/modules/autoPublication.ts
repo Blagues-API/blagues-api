@@ -2,6 +2,7 @@ import { Client } from 'discord.js';
 import schedule from 'node-schedule';
 import { Octokit } from '@octokit/rest';
 import { stripIndents } from 'common-tags';
+import { readFileSync } from 'fs';
 
 interface GitCommitPushOptions {
   owner: string;
@@ -19,9 +20,15 @@ export class AutoPublish {
   private options: GitCommitPushOptions;
   private octokit: Octokit;
 
-  constructor(client: Client, options: GitCommitPushOptions) {
+  constructor(client: Client) {
     this.client = client;
-    this.options = options;
+    this.options = {
+      owner: process.env.GITHUB_OWNER ?? 'blagues-api',
+      repo: process.env.GITHUB_REPO ?? 'blagues-api',
+      file: { path: 'blagues.json', content: readFileSync('./blagues.json', 'utf-8') },
+      baseBranch: process.env.GITHUB_BASE_BRANCH ?? 'dev',
+      mergeBranch: process.env.GITHUB_MERGE_BRANCH ?? 'chore/autopublish-jokes'
+    };
 
     this.octokit = new Octokit({
       auth: process.env.GITHUB_API_TOKEN

@@ -20,7 +20,6 @@ import prisma from '../prisma';
 import { correctionsChannelId, godfatherRoleId, guildId, suggestionsChannelId } from './constants';
 import Dispatcher from './lib/dispatcher';
 import { AutoPublish, Reminders, Stickys, updateGodfatherEmoji, Votes } from './modules';
-import { readFileSync } from 'fs';
 
 export default class Bot extends Client {
   public dispatcher: Dispatcher;
@@ -44,13 +43,7 @@ export default class Bot extends Client {
     this.stickys = new Stickys(this);
     this.reminders = new Reminders(this);
     this.votes = new Votes(this);
-    this.autoPublish = new AutoPublish(this, {
-      owner: process.env.GITHUB_OWNER ?? 'blagues-api',
-      repo: process.env.GITHUB_REPO ?? 'blagues-api',
-      file: { path: 'blagues.json', content: readFileSync('./blagues.json', 'utf-8') },
-      baseBranch: process.env.GITHUB_BASE_BRANCH ?? 'dev',
-      mergeBranch: process.env.GITHUB_MERGE_BRANCH ?? 'chore/autopublish-jokes'
-    });
+    this.autoPublish = new AutoPublish(this);
 
     this.once('ready', this.onReady.bind(this));
   }
