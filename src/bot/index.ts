@@ -67,7 +67,7 @@ export default class Bot extends Client {
         runGitPush(this);
       }); // On execute runGitPush() tout  les dimanche à 21H => https://www.npmjs.com/package/node-schedule
     } else {
-      console.log('Auto publication des blagues sur gitHub désactivé !');
+      console.log('Auto-publication des blagues sur GitHub désactivée');
     }
     this.registerEvents();
     this.refreshStatus();
