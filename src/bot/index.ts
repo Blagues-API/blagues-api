@@ -18,19 +18,16 @@ import {
 import Jokes from '../jokes';
 import prisma from '../prisma';
 import { correctionsChannelId, godfatherRoleId, guildId, suggestionsChannelId } from './constants';
-import { updateGodfatherEmoji } from './modules/godfathers';
 import Dispatcher from './lib/dispatcher';
-import Reminders from './modules/reminders';
-import Stickys from './modules/stickys';
-import Votes from './modules/votes';
-import schedule from 'node-schedule';
-import { runGitPush } from './modules/autoPublication';
+import { AutoPublish, Reminders, Stickys, updateGodfatherEmoji, Votes } from './modules';
+import { readFileSync } from 'fs';
 
 export default class Bot extends Client {
   public dispatcher: Dispatcher;
   public stickys: Stickys;
   public reminders: Reminders;
   public votes: Votes;
+  public autoPublish: AutoPublish;
 
   constructor() {
     super({
@@ -47,6 +44,13 @@ export default class Bot extends Client {
     this.stickys = new Stickys(this);
     this.reminders = new Reminders(this);
     this.votes = new Votes(this);
+    this.autoPublish = new AutoPublish(this, {
+      owner: process.env.GITHUB_OWNER ?? 'blagues-api',
+      repo: process.env.GITHUB_REPO ?? 'blagues-api',
+      file: { path: 'blagues.json', content: readFileSync('./blagues.json', 'utf-8') },
+      baseBranch: process.env.GITHUB_BASE_BRANCH ?? 'dev',
+      mergeBranch: process.env.GITHUB_MERGE_BRANCH ?? 'chore/autopublish-jokes'
+    });
 
     this.once('ready', this.onReady.bind(this));
   }
@@ -61,14 +65,6 @@ export default class Bot extends Client {
     await this.dispatcher.register();
     await this.stickys.reload();
 
-    if (process.env.JOKES_AUTO_PUBLICATION === 'true') {
-      // At 00:00 on Monday
-      schedule.scheduleJob('0 0 * * 1', () => {
-        runGitPush(this);
-      }); // On execute runGitPush() tout  les dimanche à 21H => https://www.npmjs.com/package/node-schedule
-    } else {
-      console.log('Auto-publication des blagues sur GitHub désactivée');
-    }
     this.registerEvents();
     this.refreshStatus();
   }
@@ -165,6 +161,7 @@ declare module 'discord.js' {
     dispatcher: Dispatcher;
     stickys: Stickys;
     votes: Votes;
+    autoPublish: AutoPublish;
 
     refreshStatus(): void;
   }

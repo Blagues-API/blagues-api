@@ -28,7 +28,7 @@ import {
 import { getGodfatherEmoji } from './godfathers';
 import { ReminderProposal } from '../../typings';
 
-export default class Reminders {
+export class Reminders {
   public client: Client;
 
   constructor(client: Client) {

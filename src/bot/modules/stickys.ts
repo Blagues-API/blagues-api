@@ -3,7 +3,7 @@ import { APIEmbed, blockQuote, bold, channelMention, Client, Message, quote, Sno
 import { Colors, commandsChannelId, correctionsChannelId, suggestionsChannelId } from '../constants';
 import Jokes from '../../jokes';
 
-export default class Stickys {
+export class Stickys {
   public client: Client;
   public readonly messages: Record<string, () => APIEmbed>;
 
