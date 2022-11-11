@@ -19,7 +19,7 @@ export async function runGitPush(bot: Bot): Promise<void> {
     console.log(error);
     const channel = bot.channels.cache.get(process.env.LOGS_CHANNEL!) as TextChannel;
     await channel.send({
-      ...interactionProblem(`L'erreur suivante est survenur: \`\`\`${error}\`\`\``)
+      ...interactionProblem(`L'erreur suivante est survenue : \`\`\`${error}\`\`\``)
     });
   }
 }
