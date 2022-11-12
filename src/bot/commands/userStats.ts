@@ -1,6 +1,6 @@
 import Command from '../lib/command';
 import { ApplicationCommandType, UserContextMenuCommandInteraction } from 'discord.js';
-import Stats from '../modules/stats';
+import { Stats } from '../modules/stats';
 import { interactionProblem } from '../utils';
 
 export default class UserStatsCommand extends Command {
