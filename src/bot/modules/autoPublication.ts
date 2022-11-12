@@ -127,9 +127,7 @@ export class AutoPublish {
     '201': () => console.log('[Auto-Publish] Publication des blagues sur Github effectuée avec succès !'),
     '204': () => console.log('[Auto-Publish] Publication des blagues sur Github déjà effectuée !'),
     '403': () =>
-      console.log(
-        `[Auto-Publish] Permission d'accès manquante au repo "${this.options.owner}/${this.options.repo}"`
-      ),
+      console.log(`[Auto-Publish] Permission d'accès manquante au repo "${this.options.owner}/${this.options.repo}"`),
     '404': () => console.error(`[Auto-Publish] Branche "${this.options.baseBranch}" introuvable !`),
     '409': () => {
       this.octokit.pulls.create({
@@ -150,6 +148,8 @@ export class AutoPublish {
       );
     },
     '422': () =>
-      console.error('[Auto-Publish] Un ratelimit est survenu, la publication des blagues sur Github a été reportée à dimanche prochain !')
+      console.error(
+        '[Auto-Publish] Un ratelimit est survenu, la publication des blagues sur Github a été reportée à dimanche prochain !'
+      )
   };
 }
