@@ -15,6 +15,8 @@ interface GitCommitPushOptions {
   mergeBranch: string;
 }
 
+type Status = 201 | 204 | 403 | 404 | 409 | 422;
+
 export class AutoPublish {
   public client: Client;
   private options: GitCommitPushOptions;
@@ -48,21 +50,7 @@ export class AutoPublish {
 
     const mergeBranch = await this.#mergeReference(branchSha);
 
-    if (mergeBranch.status != 201 && mergeBranch.status === 409) {
-      return await this.octokit.pulls.create({
-        owner: this.options.owner,
-        repo: this.options.repo,
-        title: "[Blagues] Conflit lors de l'ajout des dernières blagues",
-        head: this.options.mergeBranch,
-        base: this.options.baseBranch,
-        body: stripIndents`
-          ⚠️ Conflit détectée lors de l'ajout des dernières blagues !
-
-          Veuillez résoudre ces conflits afin de fusionner la branche manuellement :)
-        `,
-        maintainer_can_modify: true
-      });
-    }
+    return this.#responseWithStatus[mergeBranch.status]();
   }
 
   async #getReferenceCommit(): Promise<string> {
@@ -134,4 +122,34 @@ export class AutoPublish {
       commit_message: 'Merge des dernières blagues'
     });
   }
+
+  #responseWithStatus: Record<Status, () => void> = {
+    '201': () => console.log('[Auto-Publish] La publication des blagues sur Github effectué avec succés !'),
+    '204': () => console.log('[Auto-Publish] La publication des blagues sur Github déja effectué !'),
+    '403': () =>
+      console.log(
+        `[Auto-Publish] Je n'est malheuresement pas la permission d'accéder au repertoire suivant: ${this.options.owner}/${this.options.repo}`
+      ),
+    '404': () => console.error('[Auto-Publish] Branche ou tête introuvable !'),
+    '409': () => {
+      this.octokit.pulls.create({
+        owner: this.options.owner,
+        repo: this.options.repo,
+        title: "[Blagues] Conflit lors de l'ajout des dernières blagues",
+        head: this.options.mergeBranch,
+        base: this.options.baseBranch,
+        body: stripIndents`
+          ⚠️ Conflit détectée lors de l'ajout des dernières blagues !
+
+          Veuillez résoudre ces conflits afin de fusionner la branche manuellement :)
+        `,
+        maintainer_can_modify: true
+      });
+      console.error(
+        `[Auto-Publish] Conflit détécté lors de la publication des blagues sur Github !\n Une Pull-Request a été crée.`
+      );
+    },
+    '422': () =>
+      console.error('[Auto-Publish] La publication des blagues sur Github ou le point de terminaison a été spammé. !')
+  };
 }
