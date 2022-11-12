@@ -117,7 +117,7 @@ export class AutoPublish {
     return this.octokit.rest.repos.merge({
       owner: this.options.owner,
       repo: this.options.repo,
-      base: `${this.options.baseBranch}`,
+      base: this.options.baseBranch,
       head: branchSha,
       commit_message: 'Merge des dernières blagues'
     });
