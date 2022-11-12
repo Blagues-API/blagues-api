@@ -1,6 +1,7 @@
 import { constants as fsConstants, promises as fs } from 'fs';
 import { Correction, Joke, Suggestion } from './typings';
 import path from 'path';
+import prisma from './prisma';
 
 import { AsyncQueue } from '@sapphire/async-queue';
 
@@ -55,6 +56,45 @@ class JokesLoader {
     } catch (error) {
       console.log('Error:', error);
       return { success: false, error: `Une erreur s'est produite lors de l'ajout de la blague.` };
+    } finally {
+      this.loader.shift();
+    }
+  }
+
+  public async deleteJoke(joke: Joke): Promise<{ success: boolean; joke_id?: number; error?: string }> {
+    const jokesPath = path.join(__dirname, '../blagues.json');
+    const req = await this.checkAccess(jokesPath);
+
+    if (!req.success) return req;
+
+    try {
+      await this.loader.wait();
+
+      const rawData = await fs.readFile(jokesPath, 'utf-8');
+      const jokes = (rawData.length ? JSON.parse(rawData) : []) as Joke[];
+      const jokeToDelete = jokes.find((j) => j.id === joke.id)!;
+      if (!jokeToDelete) return { success: false, error: `La blague n'a pas été trouvée.` };
+
+      const deleteIndex = jokes.indexOf(jokeToDelete);
+      if (deleteIndex === -1) return { success: false, error: `La blague n'a pas été trouvée.` };
+
+      const [lastJoke] = jokes.splice(-1, 1);
+      jokes[deleteIndex] = { ...lastJoke, id: deleteIndex };
+
+      await prisma.proposal.update({
+        where: { joke_id: jokes.at(-1)!.id },
+        data: { joke_id: jokeToDelete.id }
+      });
+
+      this.list = jokes;
+      this.count = jokes.length;
+
+      await fs.writeFile(jokesPath, JSON.stringify(jokes, null, 2));
+
+      return { success: true };
+    } catch (error) {
+      console.log('Error:', error);
+      return { success: false, error: `Une erreur s'est produite lors de la suppression de la blague.` };
     } finally {
       this.loader.shift();
     }

@@ -142,7 +142,7 @@ export default class CorrectionCommand extends Command {
       description: buildJokeDisplay(CategoriesRefs[joke.type], joke.joke, joke.answer),
       color: Colors.PRIMARY
     };
-    const question = (await commandInteraction[commandInteraction.replied ? 'editReply' : 'reply']({
+    const question = await commandInteraction[commandInteraction.replied ? 'editReply' : 'reply']({
       embeds: [embed],
       components: [
         {
@@ -182,10 +182,10 @@ export default class CorrectionCommand extends Command {
         }
       ],
       fetchReply: true
-    })) as Message<true>;
+    });
 
     const buttonInteraction = await waitForInteraction({
-      component_type: ComponentType.Button,
+      componentType: ComponentType.Button,
       message: question,
       user: commandInteraction.user,
       idle: 120_000
@@ -425,7 +425,7 @@ export default class CorrectionCommand extends Command {
     joke: JokeCorrectionPayload
   ): Promise<JokeCorrectionPayload | null> {
     const baseEmbed = buttonInteraction.message.embeds[0].toJSON();
-    const questionMessage = (await buttonInteraction.update({
+    const questionMessage = await buttonInteraction.update({
       embeds: [
         baseEmbed,
         {
@@ -453,10 +453,10 @@ export default class CorrectionCommand extends Command {
         }
       ],
       fetchReply: true
-    })) as Message<true>;
+    });
 
     const response = await waitForInteraction({
-      component_type: ComponentType.SelectMenu,
+      componentType: ComponentType.SelectMenu,
       message: questionMessage,
       user: commandInteraction.user
     });

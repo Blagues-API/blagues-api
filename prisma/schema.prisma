@@ -22,9 +22,10 @@ model User {
 }
 
 model Godfather {
-  id       Int    @id @default(autoincrement())
-  user_id  String @unique @db.VarChar(255)
-  emoji_id String @db.VarChar(255)
+  id                 Int      @id @default(autoincrement())
+  user_id            String   @unique @db.VarChar(255)
+  emoji_id           String   @db.VarChar(255)
+  ignored_categories String[] @db.VarChar(255)
 
   @@index([user_id], map: "godfathers_user_id")
   @@map("godfathers")
@@ -48,8 +49,8 @@ model Proposal {
   votes         Vote[]
 
   suggestion_id Int?
-  suggestion    Proposal?     @relation("ProposalToCorrections", fields: [suggestion_id], references: [id], onDelete: Cascade)
-  corrections   Proposal[]    @relation("ProposalToCorrections")
+  suggestion    Proposal?  @relation("ProposalToCorrections", fields: [suggestion_id], references: [id], onDelete: Cascade)
+  corrections   Proposal[] @relation("ProposalToCorrections")
 
   @@map("proposals")
 }

@@ -14,13 +14,9 @@ interface ConstructableCommand {
 }
 
 export default class Dispatcher {
-  private client: Client;
-
   public commands: Command[] = [];
 
-  constructor(client: Client) {
-    this.client = client;
-
+  constructor(private client: Client) {
     this.loadCommands();
   }
 

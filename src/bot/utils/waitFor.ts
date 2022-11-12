@@ -9,7 +9,7 @@ import {
 import { interactionInfo } from './embeds';
 
 type WaitForInteractionOptions<T extends MessageComponentType> = {
-  component_type: T;
+  componentType: T;
   message: Message<true>;
   user: User;
   idle?: number;
@@ -20,11 +20,11 @@ type WaitForInteraction<T> = T extends WaitForInteractionOptions<ComponentType.B
 
 export async function waitForInteraction<T extends WaitForInteractionOptions<MessageComponentType>>(options: T) {
   return new Promise<WaitForInteraction<T>>((resolve, reject) => {
-    const { component_type, message, user, idle = 60_000 } = options;
+    const { componentType, message, user, idle = 60_000 } = options;
     message
       .createMessageComponentCollector({
-        componentType: component_type,
-        idle: idle
+        componentType,
+        idle
       })
       .on('collect', async (interaction: WaitForInteraction<T>) => {
         if (interaction.user.id !== user.id) {
@@ -34,7 +34,8 @@ export async function waitForInteraction<T extends WaitForInteractionOptions<Mes
         resolve(interaction);
       })
       .once('end', (_interactions, reason) => {
-        if (reason !== 'idle') reject(reason);
+        if (reason === 'idle') return;
+        reject(reason);
       });
   });
 }

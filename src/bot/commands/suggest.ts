@@ -6,7 +6,6 @@ import {
   ChatInputCommandInteraction,
   ComponentType,
   hyperlink,
-  Message,
   TextChannel
 } from 'discord.js';
 import { findBestMatch } from 'string-similarity';
@@ -60,7 +59,7 @@ export default class SuggestCommand extends Command {
     });
   }
 
-  async run(interaction: ChatInputCommandInteraction) {
+  async run(interaction: ChatInputCommandInteraction<'cached'>) {
     const proposals = await prisma.proposal.findMany({
       select: {
         joke_type: true,
@@ -126,7 +125,7 @@ export default class SuggestCommand extends Command {
       });
     }
 
-    const message = (await interaction.reply({
+    const message = await interaction.reply({
       content: 'Êtes-vous sûr de vouloir confirmer la proposition de cette blague ?',
       embeds: [embed],
       components: [
@@ -150,11 +149,11 @@ export default class SuggestCommand extends Command {
       ],
       ephemeral: true,
       fetchReply: true
-    })) as Message<true>;
+    });
 
     const confirmation = await waitForInteraction({
-      component_type: ComponentType.Button,
-      message: message,
+      componentType: ComponentType.Button,
+      message,
       user: interaction.user
     });
 
