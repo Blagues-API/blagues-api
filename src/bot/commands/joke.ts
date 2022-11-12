@@ -5,7 +5,7 @@ import { random } from '../../utils';
 import { Colors, commandsChannelId } from '../constants';
 import Command from '../lib/command';
 import { findBestMatch } from 'string-similarity';
-import { jokeByQuestion } from '../../controllers';
+import { jokeById } from '../../controllers';
 
 const JokeCategories = {
   random: 'Aléatoire',
@@ -56,13 +56,13 @@ export default class JokeCommand extends Command {
       findBestMatch(
         keyword,
         type === 'random'
-          ? JokesLoader.list.map((joke) => `${joke.joke}|${joke.answer}`)
-          : JokesLoader.list.filter((joke) => joke.type === type).map((joke) => `${joke.joke}|${joke.answer}`)
+          ? JokesLoader.list.map((joke) => `${joke.joke}${joke.answer}|${joke.id}`)
+          : JokesLoader.list.filter((joke) => joke.type === type).map((joke) => `${joke.joke}${joke.answer}|${joke.id}`)
       ).ratings
     ).target;
 
     const joke = jokeString
-      ? jokeByQuestion(jokeString.split('|')[0])!
+      ? jokeById(+jokeString.split('|')[1])!
       : random(type === 'random' ? JokesLoader.list : JokesLoader.list.filter((joke) => joke.type === type));
 
     return interaction.reply({
