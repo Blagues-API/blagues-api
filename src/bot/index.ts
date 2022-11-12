@@ -18,17 +18,15 @@ import {
 import Jokes from '../jokes';
 import prisma from '../prisma';
 import { correctionsChannelId, godfatherRoleId, guildId, suggestionsChannelId } from './constants';
-import { updateGodfatherEmoji } from './modules/godfathers';
 import Dispatcher from './lib/dispatcher';
-import Reminders from './modules/reminders';
-import Stickys from './modules/stickys';
-import Votes from './modules/votes';
+import { AutoPublish, Reminders, Stickys, updateGodfatherEmoji, Votes } from './modules';
 
 export default class Bot extends Client {
   public dispatcher: Dispatcher;
   public stickys: Stickys;
   public reminders: Reminders;
   public votes: Votes;
+  public autoPublish: AutoPublish;
 
   constructor() {
     super({
@@ -45,6 +43,7 @@ export default class Bot extends Client {
     this.stickys = new Stickys(this);
     this.reminders = new Reminders(this);
     this.votes = new Votes(this);
+    this.autoPublish = new AutoPublish(this);
 
     this.once('ready', this.onReady.bind(this));
   }
@@ -155,6 +154,7 @@ declare module 'discord.js' {
     dispatcher: Dispatcher;
     stickys: Stickys;
     votes: Votes;
+    autoPublish: AutoPublish;
 
     refreshStatus(): void;
   }

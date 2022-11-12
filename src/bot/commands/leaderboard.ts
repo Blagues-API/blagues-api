@@ -1,6 +1,6 @@
 import { ApplicationCommandType, ChatInputCommandInteraction } from 'discord.js';
 import Command from '../lib/command';
-import Stats from '../modules/stats';
+import { Stats } from '../modules';
 import { commandsChannelId } from '../constants';
 
 export default class LeaderboardCommand extends Command {
