@@ -37,12 +37,11 @@ export default class JokeCommand extends Command {
         },
         {
           type: ApplicationCommandOptionType.String,
-          name: 'keyword',
+          name: 'search',
           description: 'truc',
           nameLocalizations: {
-            fr: 'mot-clé'
-          },
-          required: false
+            fr: 'recherche'
+          }
         }
       ]
     });
