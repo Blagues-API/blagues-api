@@ -436,7 +436,7 @@
   integrity sha512-65/TPpOJP1i3K4lBJMnWqPUJ6zuOtzhtagDvydAWbEXpbFYA0oMKKyLb95NFZZP0lSh/4b6K+DQlzvYQJQQePg==
   dependencies:
     "@octokit/openapi-types" "^14.0.0"
-    
+
 "@prisma/client@^4.6.0":
   version "4.6.1"
   resolved "https://registry.yarnpkg.com/@prisma/client/-/client-4.6.1.tgz#e8e1d347ecbff44158d21b6591bb99650c8503a8"
@@ -481,7 +481,7 @@
     "@sentry/utils" "7.19.0"
     tslib "^1.9.3"
 
-"@sentry/integrations@^7.18.0":
+"@sentry/integrations@^7.19.0":
   version "7.19.0"
   resolved "https://registry.yarnpkg.com/@sentry/integrations/-/integrations-7.19.0.tgz#570b7ced7ef9de43a6a56f99f324936148adf6b9"
   integrity sha512-0x5AGU7EBIzOTSqD7TFvD4S5eX6hbqbvb4YCzJt3SIZC3bO4FiBu2t0y+PIZUSsupnqafBIIWsCcGWeKrNHAyA==
@@ -491,7 +491,7 @@
     localforage "^1.8.1"
     tslib "^1.9.3"
 
-"@sentry/node@^7.18.0":
+"@sentry/node@^7.19.0":
   version "7.19.0"
   resolved "https://registry.yarnpkg.com/@sentry/node/-/node-7.19.0.tgz#4c9494d6aaa15d7f22fe4e6c31d0358a365adb2f"
   integrity sha512-yG7Tx32WqOkEHVotFLrumCcT9qlaSDTkFNZ+yLSvZXx74ifsE781DzBA9W7K7bBdYO3op+p2YdsOKzf3nPpAyQ==
@@ -504,7 +504,7 @@
     lru_map "^0.3.3"
     tslib "^1.9.3"
 
-"@sentry/tracing@^7.18.0":
+"@sentry/tracing@^7.19.0":
   version "7.19.0"
   resolved "https://registry.yarnpkg.com/@sentry/tracing/-/tracing-7.19.0.tgz#d69ecea2c0b53d113c5100fc52d0a0acc5c8a129"
   integrity sha512-SWY17M3TsgBePaGowUcSqBwaT0TJQzuNexVnLojuU0k6F57L9hubvP9zaoosoCfARXQ/3NypAFWnlJyf570rFQ==
