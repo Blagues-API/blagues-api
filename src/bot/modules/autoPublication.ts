@@ -124,13 +124,13 @@ export class AutoPublish {
   }
 
   #responseWithStatus: Record<Status, () => void> = {
-    '201': () => console.log('[Auto-Publish] La publication des blagues sur Github effectué avec succés !'),
-    '204': () => console.log('[Auto-Publish] La publication des blagues sur Github déja effectué !'),
+    '201': () => console.log('[Auto-Publish] Publication des blagues sur Github effectuée avec succès !'),
+    '204': () => console.log('[Auto-Publish] Publication des blagues sur Github déjà effectuée !'),
     '403': () =>
       console.log(
-        `[Auto-Publish] Je n'est malheuresement pas la permission d'accéder au repertoire suivant: ${this.options.owner}/${this.options.repo}`
+        `[Auto-Publish] Permission d'accès manquante au repo "${this.options.owner}/${this.options.repo}"`
       ),
-    '404': () => console.error('[Auto-Publish] Branche ou tête introuvable !'),
+    '404': () => console.error(`[Auto-Publish] Branche "${this.options.baseBranch}" introuvable !`),
     '409': () => {
       this.octokit.pulls.create({
         owner: this.options.owner,
@@ -146,10 +146,10 @@ export class AutoPublish {
         maintainer_can_modify: true
       });
       console.error(
-        `[Auto-Publish] Conflit détécté lors de la publication des blagues sur Github !\n Une Pull-Request a été crée.`
+        `[Auto-Publish] Conflit détecté lors de la publication des blagues sur Github !\n Une Pull-Request a été créée.`
       );
     },
     '422': () =>
-      console.error('[Auto-Publish] La publication des blagues sur Github ou le point de terminaison a été spammé. !')
+      console.error('[Auto-Publish] Un ratelimit est survenu, la publication des blagues sur Github a été reportée à dimanche prochain !')
   };
 }
