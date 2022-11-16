@@ -1,14 +1,8 @@
 import { FastifyInstance, FastifyPluginAsync, FastifyReply, FastifyRequest } from 'fastify';
 import fp from 'fastify-plugin';
 import jwt from 'jsonwebtoken';
-import { AuthHeaderBadFormat, AuthHeaderInvalidToken, AuthHeaderMissing } from './Errors';
-
-interface AuthPayload {
-  user_id: string;
-  limit: 100;
-  key: string;
-  created_at: string;
-}
+import { AuthHeaderBadFormat, AuthHeaderInvalidToken, AuthHeaderMissing } from '../Errors';
+import { AuthPayload } from '../types';
 
 declare module 'fastify' {
   interface FastifyRequest {
@@ -33,6 +27,7 @@ const middleware: FastifyPluginAsync = async (fastify: FastifyInstance): Promise
     }
 
     const token: string = bearerToken.split(' ')[1];
+
     try {
       request.auth = jwt.verify(token, process.env.JWT_TOKEN!) as AuthPayload;
     } catch (error) {
