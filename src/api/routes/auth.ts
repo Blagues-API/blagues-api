@@ -3,7 +3,8 @@ import { generateAPIToken, generateKey } from '../../utils';
 import prisma from '../../prisma';
 import got from 'got';
 import { APIUser, OAuth2Routes, RESTPostOAuth2AccessTokenResult } from 'discord-api-types/v9';
-import { DashboardAuthLogin, DashboardAuthUser } from '../types';
+import { DashboardAuthLogin, DashboardAuthUser, RegenerateReply, RegenerateRequest } from '../types';
+import { MissingKey } from 'api/Errors';
 
 export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.route({
@@ -76,6 +77,30 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       });
 
       return res.code(200).send(authData);
+    }
+  });
+  fastify.route({
+    url: '/regenerate',
+    method: 'POST',
+    onRequest: fastify.apiAuth,
+    handler: async (req: RegenerateRequest, res: FastifyReply) => {
+      if (!req.body || req.body.key !== req.auth!.key) {
+        return res.code(400).send(MissingKey);
+      }
+
+      const token_key = generateKey();
+      const token = generateAPIToken(req.auth!.user_id, token_key, 100);
+      const data: RegenerateReply = {
+        token_key,
+        token
+      };
+
+      await prisma.user.update({
+        data,
+        where: { user_id: req.auth!.user_id }
+      });
+
+      return res.code(200).send(data);
     }
   });
 };

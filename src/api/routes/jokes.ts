@@ -7,6 +7,11 @@ import { JokeIdRequest, JokeTypeRequest, OptionalDisallowRequest } from '../type
 
 export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.route({
+    url: '*',
+    method: 'GET',
+    handler: async () => 'Check documentation: https://www.blagues-api.fr/'
+  });
+  fastify.route({
     url: '/count',
     method: 'GET',
     handler: async (_req: FastifyRequest, res) => {
