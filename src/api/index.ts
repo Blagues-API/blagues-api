@@ -2,9 +2,8 @@ import 'dotenv/config';
 import fastify, { FastifyInstance } from 'fastify';
 import formBody from '@fastify/formbody';
 import cors from '@fastify/cors';
-
-import auth from './auth';
-import routes from './routes';
+import AutoRoutes from '@fastify/autoload';
+import path from 'path';
 
 export default class App {
   public fastify: FastifyInstance;
@@ -20,8 +19,13 @@ export default class App {
 
     await this.fastify.register(cors);
     await this.fastify.register(formBody);
-    await this.fastify.register(auth);
-    await this.fastify.register(routes, { prefix: 'api' });
+    await this.fastify.register(AutoRoutes, {
+      dir: path.join(__dirname, 'middleware')
+    });
+    await this.fastify.register(AutoRoutes, {
+      dir: path.join(__dirname, 'routes'),
+      prefix: '/api'
+    });
 
     await this.fastify.listen({
       host: '0.0.0.0',
