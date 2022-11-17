@@ -4,7 +4,7 @@ import prisma from '../../prisma';
 import got from 'got';
 import { APIUser, OAuth2Routes, RESTPostOAuth2AccessTokenResult } from 'discord-api-types/v9';
 import { DashboardAuthLogin, DashboardAuthUser, RegenerateReply, RegenerateRequest } from '../types';
-import { MissingKey } from 'api/Errors';
+import { MissingKey } from '../Errors';
 
 export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.route({
