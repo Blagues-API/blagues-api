@@ -22,7 +22,7 @@ const reaction = {
 
 type GodfathersDecisions = (Approval | Disapproval)[][];
 
-export default class Stats {
+export class Stats {
   static async userStats(interaction: CommandInteraction<'cached'>, member: GuildMember, ephemeral: boolean) {
     const [proposals, votes] = await Promise.all([
       prisma.proposal.findMany({

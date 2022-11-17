@@ -17,7 +17,7 @@ const Reactions = {
   [downReactionIdentifier]: VoteType.DOWN
 };
 
-export default class Votes {
+export class Votes {
   public client: Client;
 
   constructor(client: Client) {

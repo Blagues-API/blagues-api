@@ -28,7 +28,7 @@ import {
 import { getGodfatherEmoji } from './godfathers';
 import { ReminderProposal } from '../../typings';
 
-export default class Reminders {
+export class Reminders {
   constructor(public client: Client) {
     if (process.env.BOT_REMINDERS === 'false') return;
 
