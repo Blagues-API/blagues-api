@@ -1,8 +1,16 @@
-import { ApplicationCommandOptionType, ApplicationCommandType, ChatInputCommandInteraction, spoiler } from 'discord.js';
+import {
+  ApplicationCommandOptionType,
+  ApplicationCommandType,
+  ChatInputCommandInteraction,
+  inlineCode,
+  italic,
+  spoiler
+} from 'discord.js';
 import { CategoriesRefsFull } from '../../typings';
 import { Colors, commandsChannelId } from '../constants';
 import Command from '../lib/command';
 import { jokeByKeyword, randomJoke, randomJokeByType } from '../../controllers';
+import { interactionProblem } from 'bot/utils';
 
 const JokeCategories = {
   random: 'Aléatoire',
@@ -53,6 +61,23 @@ export default class JokeCommand extends Command {
       : type === 'random'
       ? randomJoke().response!
       : randomJokeByType(type).response!;
+
+    if (!joke && keyword) {
+      return interaction.reply(
+        interactionProblem(
+          `Aucune blague${
+            type === 'random' ? '' : ` de type ${inlineCode(CategoriesRefsFull[type])}`
+          } correspondant à la recherche ${inlineCode(keyword)} n'a été trouvée.${
+            type === 'random'
+              ? ''
+              : `\n\n:information_source: ${italic(
+                  'Définir le type de blagues en "Aléatoire" règlera peut-être ce problème.'
+                )}`
+          }`
+        )
+      );
+      // TODO : check si la recherche aboutit peu importe le type de blagues (et si possible, les indiquer)
+    }
 
     return interaction.reply({
       embeds: [
