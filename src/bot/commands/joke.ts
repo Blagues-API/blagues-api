@@ -1,11 +1,8 @@
 import { ApplicationCommandOptionType, ApplicationCommandType, ChatInputCommandInteraction, spoiler } from 'discord.js';
-import JokesLoader from '../../jokes';
 import { CategoriesRefsFull } from '../../typings';
-import { random } from '../../utils';
 import { Colors, commandsChannelId } from '../constants';
 import Command from '../lib/command';
-import { findBestMatch } from 'string-similarity';
-import { jokeById } from '../../controllers';
+import { jokeByKeyword, randomJoke, randomJokeByType } from '../../controllers';
 
 const JokeCategories = {
   random: 'Aléatoire',
@@ -49,20 +46,13 @@ export default class JokeCommand extends Command {
 
   async run(interaction: ChatInputCommandInteraction<'cached'>) {
     const type = interaction.options.getString('type', true) as JokeCategory;
-    const keyword = interaction.options.getString('keyword', true);
+    const keyword = interaction.options.getString('search', false);
 
-    const jokeString = random(
-      findBestMatch(
-        keyword,
-        type === 'random'
-          ? JokesLoader.list.map((joke) => `${joke.joke}${joke.answer}|${joke.id}`)
-          : JokesLoader.list.filter((joke) => joke.type === type).map((joke) => `${joke.joke}${joke.answer}|${joke.id}`)
-      ).ratings
-    ).target;
-
-    const joke = jokeString
-      ? jokeById(+jokeString.split('|')[1])!
-      : random(type === 'random' ? JokesLoader.list : JokesLoader.list.filter((joke) => joke.type === type));
+    const joke = keyword
+      ? jokeByKeyword(keyword, type)!
+      : type === 'random'
+      ? randomJoke().response!
+      : randomJokeByType(type).response!;
 
     return interaction.reply({
       embeds: [
@@ -78,5 +68,7 @@ export default class JokeCommand extends Command {
         }
       ]
     });
+
+    // TODO: Add button to send another joke
   }
 }
