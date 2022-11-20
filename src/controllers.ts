@@ -30,7 +30,6 @@ export function randomJoke(disallow?: string[]): JokeResponse {
 }
 
 export function randomJokeByType(type: string): JokeResponse {
-  // TODO : modifier pour que le type "random" soit accepté
   if (!Categories.includes(type as Category)) {
     return {
       error: true
