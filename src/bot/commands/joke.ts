@@ -6,7 +6,7 @@ import {
   italic,
   spoiler
 } from 'discord.js';
-import { Categories, CategoriesRefsFull, Joke } from '../../typings';
+import { Categories, CategoriesRefsFull, Category, Joke } from '../../typings';
 import { Colors, commandsChannelId } from '../constants';
 import Command from '../lib/command';
 import { jokeByKeyword, randomJoke, randomJokeByType } from '../../controllers';
@@ -66,7 +66,7 @@ export default class JokeCommand extends Command {
 
     if (!joke && keyword) {
       if (jokeByKeyword(keyword, 'random')) {
-        const availableTypes: JokeCategory[] = [];
+        const availableTypes: Category[] = [];
 
         Jokes.list.forEach((joke: Joke) => {
           if (
@@ -82,6 +82,8 @@ export default class JokeCommand extends Command {
             });
           }
         });
+
+        availableTypes.sort((a, b) => Categories.indexOf(a) - Categories.indexOf(b));
 
         return interaction.reply(
           interactionInfo(
