@@ -53,13 +53,16 @@ export function jokeByQuestion(question: string): Joke | null {
 
 export function jokeByKeyword(keyword: string, type: string): Joke | null {
   const jokes = type === 'random' ? Jokes.list : Jokes.list.filter((joke: Joke) => joke.type === type);
-  const joke = random(
-    jokes.filter(
-      (joke: Joke) =>
-        `${joke.joke}${joke.answer}`.toLowerCase().includes(keyword.toLowerCase()) ||
-        `${joke.joke} ${joke.answer}`.split(' ').filter((word: string) => compareTwoStrings(word, keyword) > 0.9)
-    )
-  );
+  const joke =
+    random(
+      jokes.filter(
+        (joke: Joke) =>
+          `${joke.joke} ${joke.answer}`
+            .toLowerCase()
+            .split(' ')
+            .filter((word: string) => compareTwoStrings(word, keyword.toLowerCase()) > 0.95).length !== 0
+      )
+    ) ?? null;
 
   return joke;
 }

@@ -6,11 +6,13 @@ import {
   italic,
   spoiler
 } from 'discord.js';
-import { CategoriesRefsFull } from '../../typings';
+import { Categories, CategoriesRefsFull, Joke } from '../../typings';
 import { Colors, commandsChannelId } from '../constants';
 import Command from '../lib/command';
 import { jokeByKeyword, randomJoke, randomJokeByType } from '../../controllers';
-import { interactionProblem } from 'bot/utils';
+import { interactionInfo } from '../utils';
+import Jokes from '../../jokes';
+import { compareTwoStrings } from 'string-similarity';
 
 const JokeCategories = {
   random: 'Aléatoire',
@@ -63,20 +65,47 @@ export default class JokeCommand extends Command {
       : randomJokeByType(type).response!;
 
     if (!joke && keyword) {
+      if (jokeByKeyword(keyword, 'random')) {
+        const availableTypes: JokeCategory[] = [];
+
+        Jokes.list.forEach((joke: Joke) => {
+          if (
+            `${joke.joke} ${joke.answer}`
+              .toLowerCase()
+              .split(' ')
+              .filter((word: string) => compareTwoStrings(word, keyword.toLowerCase()) > 0.95).length !== 0
+          ) {
+            Categories.forEach((category: string) => {
+              if (joke.type === category && !availableTypes.includes(category)) {
+                availableTypes.push(category);
+              }
+            });
+          }
+        });
+
+        return interaction.reply(
+          interactionInfo(
+            `Aucune blague${
+              type === 'random' ? '' : ` de type ${inlineCode(CategoriesRefsFull[type])}`
+            } correspondant à la recherche ${inlineCode(keyword)} n'a été trouvée.\n\n${
+              type !== 'random'
+                ? ':information_source: ' +
+                  italic(
+                    `Une ou plusieurs blagues correspondant à cette recherche existent en type${
+                      availableTypes.length > 1 ? 's ' : ' '
+                    }${availableTypes
+                      .slice(0, availableTypes.length - 1)
+                      .map((type: string) => inlineCode(JokeCategories[type as JokeCategory]))
+                      .join(', ')} et ${JokeCategories[availableTypes.pop()!]}.`
+                  )
+                : ''
+            }`
+          )
+        );
+      }
       return interaction.reply(
-        interactionProblem(
-          `Aucune blague${
-            type === 'random' ? '' : ` de type ${inlineCode(CategoriesRefsFull[type])}`
-          } correspondant à la recherche ${inlineCode(keyword)} n'a été trouvée.${
-            type === 'random'
-              ? ''
-              : `\n\n:information_source: ${italic(
-                  'Définir le type de blagues en "Aléatoire" règlera peut-être ce problème.'
-                )}`
-          }`
-        )
+        interactionInfo(`Aucune blague correspondant à la recherche ${inlineCode(keyword)} n'existe dans l'API.`)
       );
-      // TODO : check si la recherche aboutit peu importe le type de blagues (et si possible, les indiquer)
     }
 
     return interaction.reply({
