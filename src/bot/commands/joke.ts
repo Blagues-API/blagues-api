@@ -93,10 +93,12 @@ export default class JokeCommand extends Command {
                   italic(
                     `Une ou plusieurs blagues correspondant à cette recherche existent en type${
                       availableTypes.length > 1 ? 's ' : ' '
-                    }${availableTypes
-                      .slice(0, availableTypes.length - 1)
-                      .map((type: string) => inlineCode(JokeCategories[type as JokeCategory]))
-                      .join(', ')} et ${inlineCode(JokeCategories[availableTypes.pop()!])}.`
+                    }${
+                      availableTypes
+                        .slice(0, availableTypes.length - 1)
+                        .map((type: string) => inlineCode(JokeCategories[type as JokeCategory]))
+                        .join(', ') + (availableTypes.length > 1 ? ' et ' : ' ')
+                    }${inlineCode(JokeCategories[availableTypes.pop()!])}.`
                   )
                 : ''
             }`
