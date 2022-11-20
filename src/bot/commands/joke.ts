@@ -96,7 +96,7 @@ export default class JokeCommand extends Command {
                     }${availableTypes
                       .slice(0, availableTypes.length - 1)
                       .map((type: string) => inlineCode(JokeCategories[type as JokeCategory]))
-                      .join(', ')} et ${JokeCategories[availableTypes.pop()!]}.`
+                      .join(', ')} et ${inlineCode(JokeCategories[availableTypes.pop()!])}.`
                   )
                 : ''
             }`
