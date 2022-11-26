@@ -9,10 +9,8 @@ import {
 import { Categories, CategoriesRefsFull, Category, Joke } from '../../typings';
 import { Colors, commandsChannelId } from '../constants';
 import Command from '../lib/command';
-import { jokeByKeyword, randomJoke, randomJokeByType } from '../../controllers';
+import { JokesByKeyword, randomJoke, randomJokeByKeyword, randomJokeByType } from '../../controllers';
 import { interactionInfo } from '../utils';
-import Jokes from '../../jokes';
-import { compareTwoStrings } from 'string-similarity';
 
 const JokeCategories = {
   random: 'Aléatoire',
@@ -56,62 +54,63 @@ export default class JokeCommand extends Command {
 
   async run(interaction: ChatInputCommandInteraction<'cached'>) {
     const type = interaction.options.getString('type', true) as JokeCategory;
-    const keyword = interaction.options.getString('search', false);
+    const keyword = interaction.options.getString('search');
 
-    const joke = keyword
-      ? jokeByKeyword(keyword, type)!
-      : type === 'random'
-      ? randomJoke().response!
-      : randomJokeByType(type).response!;
+    if (keyword) return this.jokeByKeyword(interaction, keyword, type);
+    else return this.randomJoke(interaction, type);
+    // TODO: Add button to send another joke
+  }
 
-    if (!joke && keyword) {
-      if (jokeByKeyword(keyword, 'random')) {
-        const availableTypes: Category[] = [];
+  async jokeByKeyword(interaction: ChatInputCommandInteraction<'cached'>, keyword: string, type: JokeCategory) {
+    const joke = (type === 'random' ? randomJokeByKeyword(keyword) : randomJokeByKeyword(keyword, type))['response'];
 
-        Jokes.list.forEach((joke: Joke) => {
-          if (
-            `${joke.joke} ${joke.answer}`
-              .toLowerCase()
-              .split(' ')
-              .filter((word: string) => compareTwoStrings(word, keyword.toLowerCase()) > 0.95).length !== 0
-          ) {
-            Categories.forEach((category: string) => {
-              if (joke.type === category && !availableTypes.includes(category)) {
-                availableTypes.push(category);
-              }
-            });
-          }
-        });
-
-        availableTypes.sort((a, b) => Categories.indexOf(a) - Categories.indexOf(b));
-
+    if (!joke) {
+      if (type === 'random') {
         return interaction.reply(
-          interactionInfo(
-            `Aucune blague${
-              type === 'random' ? '' : ` de type ${inlineCode(CategoriesRefsFull[type])}`
-            } correspondant à la recherche ${inlineCode(keyword)} n'a été trouvée.\n\n${
-              type !== 'random'
-                ? ':information_source: ' +
-                  italic(
-                    `Une ou plusieurs blagues correspondant à cette recherche existent en type${
-                      availableTypes.length > 1 ? 's ' : ' '
-                    }${
-                      availableTypes
-                        .slice(0, availableTypes.length - 1)
-                        .map((type: string) => inlineCode(JokeCategories[type as JokeCategory]))
-                        .join(', ') + (availableTypes.length > 1 ? ' et ' : ' ')
-                    }${inlineCode(JokeCategories[availableTypes.pop()!])}.`
-                  )
-                : ''
-            }`
-          )
+          interactionInfo(`Aucune blague correspondant à la recherche ${inlineCode(keyword)} n'existe dans l'API.`)
         );
       }
+
+      const possiblesJoke = JokesByKeyword(keyword);
+
+      const availableTypes: Category[] = [];
+
+      possiblesJoke.forEach((joke: Joke) => {
+        if (!availableTypes.includes(joke.type)) availableTypes.push(joke.type);
+      });
+      availableTypes.sort((a, b) => Categories.indexOf(a) - Categories.indexOf(b));
+
       return interaction.reply(
-        interactionInfo(`Aucune blague correspondant à la recherche ${inlineCode(keyword)} n'existe dans l'API.`)
+        interactionInfo(
+          `Aucune blague de type ${inlineCode(CategoriesRefsFull[type])} correspondant à la recherche ${inlineCode(
+            keyword
+          )} n'a été trouvée.\n\n${
+            ':information_source: ' +
+            italic(
+              `Une ou plusieurs blagues correspondant à cette recherche existent en type${
+                availableTypes.length > 1 ? 's ' : ' '
+              }${
+                availableTypes
+                  .slice(0, availableTypes.length - 1)
+                  .map((type: string) => inlineCode(JokeCategories[type as JokeCategory]))
+                  .join(', ') + (availableTypes.length > 1 ? ' et ' : ' ')
+              }${inlineCode(JokeCategories[availableTypes.pop()!])}.`
+            )
+          }`
+        )
       );
     }
 
+    return this.sendJoke(interaction, joke);
+  }
+
+  async randomJoke(interaction: ChatInputCommandInteraction<'cached'>, type: JokeCategory) {
+    const joke = type === 'random' ? randomJoke()['response']! : randomJokeByType(type)['response']!;
+
+    return this.sendJoke(interaction, joke);
+  }
+
+  async sendJoke(interaction: ChatInputCommandInteraction<'cached'>, joke: Joke) {
     return interaction.reply({
       embeds: [
         {
@@ -121,12 +120,10 @@ export default class JokeCommand extends Command {
           timestamp: new Date().toISOString(),
           footer: {
             text: `${CategoriesRefsFull[joke.type]} • (${joke.id})`,
-            icon_url: interaction.guild.iconURL({ size: 32 })!
+            icon_url: interaction.guild.iconURL({ size: 32 }) ?? undefined
           }
         }
       ]
     });
-
-    // TODO: Add button to send another joke
   }
 }

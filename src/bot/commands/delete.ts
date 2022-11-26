@@ -38,7 +38,7 @@ export default class DeleteCommand extends Command {
   }
 
   async run(interaction: ChatInputCommandInteraction<'cached'>) {
-    const query = interaction.options.getString('recherche', true);
+    const query = interaction.options.getString('query', true);
     const joke = isNaN(Number(query)) ? jokeByQuestion(query)! : jokeById(Number(query))!;
 
     const embed: APIEmbed = {

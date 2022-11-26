@@ -1,7 +1,7 @@
+import { compareTwoStrings } from 'string-similarity';
 import Jokes from './jokes';
 import { Categories, Category, Joke } from './typings';
 import { random } from './utils';
-import { compareTwoStrings } from 'string-similarity';
 
 export interface JokeResponse {
   error: boolean;
@@ -38,30 +38,37 @@ export function randomJokeByType(type: string): JokeResponse {
 
   return {
     error: false,
-    response: random(Jokes.list.filter((joke: Joke) => joke.type === type))
+    response: random(Jokes.list.filter((joke) => joke.type === type))
+  };
+}
+
+export function randomJokeByKeyword(key: string, type?: string | string[]): JokeResponse {
+  const joke = random(JokesByKeyword(key, type));
+
+  const response = jokeById(joke.id);
+
+  if (!response) return { error: true };
+
+  return {
+    error: false,
+    response
   };
 }
 
 export function jokeById(id: number): Joke | null {
-  return Jokes.list.find((joke: Joke) => joke.id === id) ?? null;
+  return Jokes.list.find((joke) => joke.id === id) ?? null;
 }
 
 export function jokeByQuestion(question: string): Joke | null {
-  return Jokes.list.find((entry: Joke) => entry.joke === question) ?? null;
+  return Jokes.list.find((entry) => entry.joke === question) ?? null;
 }
 
-export function jokeByKeyword(keyword: string, type: string): Joke | null {
-  const jokes = type === 'random' ? Jokes.list : Jokes.list.filter((joke: Joke) => joke.type === type);
-  const joke =
-    random(
-      jokes.filter(
-        (joke: Joke) =>
-          `${joke.joke} ${joke.answer}`
-            .toLowerCase()
-            .split(' ')
-            .filter((word: string) => compareTwoStrings(word, keyword.toLowerCase()) > 0.95).length !== 0
-      )
-    ) ?? null;
+export function JokesByKeyword(key: string, type?: string | string[]) {
+  const jokes = type ? Jokes.list.filter((joke) => type.includes(joke['type'])) : Jokes['list'];
+  return jokes.filter((joke) => checkKeywordInJoke(joke, key));
+}
 
-  return joke;
+export function checkKeywordInJoke(joke: Joke, key: string) {
+  const word = `${joke.joke} ${joke.answer}`.split(' ');
+  return word.filter((word: string) => compareTwoStrings(word, key.toLowerCase()) > 0.95).length !== 0;
 }

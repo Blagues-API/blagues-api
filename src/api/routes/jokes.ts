@@ -1,9 +1,9 @@
 import { FastifyInstance, FastifyRequest } from 'fastify';
 import Jokes from '../../jokes';
 import { Categories, CategoriesRefs } from '../../typings';
-import { jokeById, randomJoke, randomJokeByType } from '../../controllers';
+import { jokeById, JokesByKeyword, randomJoke, randomJokeByType } from '../../controllers';
 import { BadRequest, JokeNotFound, NoContent } from '../Errors';
-import { JokeIdRequest, JokeTypeRequest, OptionalDisallowRequest } from '../types';
+import { JokeIdRequest, JokeTypeRequest, OptionalDisallowRequest, SearchRequest } from '../types';
 
 export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.route({
@@ -67,6 +67,19 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     onRequest: fastify.apiAuth,
     handler: async (req: JokeIdRequest, res) => {
       const joke = jokeById(req.params.id);
+      if (!joke) {
+        return res.status(404).send(JokeNotFound);
+      }
+      return res.status(200).send(joke);
+    }
+  });
+
+  fastify.route({
+    url: '/search',
+    method: 'GET',
+    onRequest: fastify.apiAuth,
+    handler: async (req: SearchRequest, res) => {
+      const joke = JokesByKeyword(req.query.key, req.query.type);
       if (!joke) {
         return res.status(404).send(JokeNotFound);
       }
