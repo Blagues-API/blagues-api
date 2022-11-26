@@ -43,9 +43,7 @@ export function randomJokeByType(type: string): JokeResponse {
 }
 
 export function randomJokeByKeyword(key: string, type?: string | string[]): JokeResponse {
-  const joke = random(JokesByKeyword(key, type));
-
-  const response = jokeById(joke.id);
+  const response = random(jokesByKeyword(key, type));
 
   if (!response) return { error: true };
 
@@ -63,12 +61,12 @@ export function jokeByQuestion(question: string): Joke | null {
   return Jokes.list.find((entry) => entry.joke === question) ?? null;
 }
 
-export function JokesByKeyword(key: string, type?: string | string[]) {
+export function jokesByKeyword(key: string, type?: string | string[]) {
   const jokes = type ? Jokes.list.filter((joke) => type.includes(joke['type'])) : Jokes['list'];
   return jokes.filter((joke) => checkKeywordInJoke(joke, key));
 }
 
 export function checkKeywordInJoke(joke: Joke, key: string) {
   const word = `${joke.joke} ${joke.answer}`.split(' ');
-  return word.filter((word: string) => compareTwoStrings(word, key.toLowerCase()) > 0.95).length !== 0;
+  return word.filter((word) => compareTwoStrings(word, key.toLowerCase()) > 0.95).length !== 0;
 }

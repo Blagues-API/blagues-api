@@ -6,11 +6,12 @@ import {
   italic,
   spoiler
 } from 'discord.js';
-import { Categories, CategoriesRefsFull, Category, Joke } from '../../typings';
+import { Categories, CategoriesRefsFull, Joke } from '../../typings';
 import { Colors, commandsChannelId } from '../constants';
 import Command from '../lib/command';
-import { JokesByKeyword, randomJoke, randomJokeByKeyword, randomJokeByType } from '../../controllers';
+import { checkKeywordInJoke, randomJoke, randomJokeByKeyword, randomJokeByType } from '../../controllers';
 import { interactionInfo } from '../utils';
+import jokes from 'jokes';
 
 const JokeCategories = {
   random: 'Aléatoire',
@@ -54,9 +55,9 @@ export default class JokeCommand extends Command {
 
   async run(interaction: ChatInputCommandInteraction<'cached'>) {
     const type = interaction.options.getString('type', true) as JokeCategory;
-    const keyword = interaction.options.getString('search');
+    const search = interaction.options.getString('search');
 
-    if (keyword) return this.jokeByKeyword(interaction, keyword, type);
+    if (search) return this.jokeByKeyword(interaction, search, type);
     else return this.randomJoke(interaction, type);
     // TODO: Add button to send another joke
   }
@@ -71,14 +72,8 @@ export default class JokeCommand extends Command {
         );
       }
 
-      const possiblesJoke = JokesByKeyword(keyword);
-
-      const availableTypes: Category[] = [];
-
-      possiblesJoke.forEach((joke: Joke) => {
-        if (!availableTypes.includes(joke.type)) availableTypes.push(joke.type);
-      });
-      availableTypes.sort((a, b) => Categories.indexOf(a) - Categories.indexOf(b));
+      const filtredJokes = jokes.list.filter((joke) => checkKeywordInJoke(joke, keyword));
+      const availableCategories = Categories.filter((category) => filtredJokes.some((joke) => joke.type === category));
 
       return interaction.reply(
         interactionInfo(
@@ -88,13 +83,13 @@ export default class JokeCommand extends Command {
             ':information_source: ' +
             italic(
               `Une ou plusieurs blagues correspondant à cette recherche existent en type${
-                availableTypes.length > 1 ? 's ' : ' '
+                availableCategories.length > 1 ? 's ' : ' '
               }${
-                availableTypes
-                  .slice(0, availableTypes.length - 1)
+                availableCategories
+                  .slice(0, availableCategories.length - 1)
                   .map((type: string) => inlineCode(JokeCategories[type as JokeCategory]))
-                  .join(', ') + (availableTypes.length > 1 ? ' et ' : ' ')
-              }${inlineCode(JokeCategories[availableTypes.pop()!])}.`
+                  .join(', ') + (availableCategories.length > 1 ? ' et ' : ' ')
+              }${inlineCode(JokeCategories[availableCategories.pop()!])}.`
             )
           }`
         )
