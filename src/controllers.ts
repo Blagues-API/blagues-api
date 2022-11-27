@@ -68,5 +68,5 @@ export function jokesByKeyword(key: string, type?: string | string[]) {
 
 export function checkKeywordInJoke(joke: Joke, key: string) {
   const word = `${joke.joke} ${joke.answer}`.split(' ');
-  return word.filter((word) => compareTwoStrings(word, key.toLowerCase()) > 0.95).length !== 0;
+  return word.filter((word) => compareTwoStrings(word, key) > 0.95).length !== 0;
 }
