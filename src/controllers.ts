@@ -42,8 +42,8 @@ export function randomJokeByType(type: string): JokeResponse {
   };
 }
 
-export function randomJokeByKeyword(key: string, type?: string | string[]): JokeResponse {
-  const response = random(jokesByKeyword(key, type));
+export function randomJokeByKeywords(keys: string | string[], type?: string | string[]): JokeResponse {
+  const response = random(jokesByKeyword(keys, type));
 
   if (!response) return { error: true };
 
@@ -61,12 +61,15 @@ export function jokeByQuestion(question: string): Joke | null {
   return Jokes.list.find((entry) => entry.joke === question) ?? null;
 }
 
-export function jokesByKeyword(key: string, type?: string | string[]) {
-  const jokes = type ? Jokes.list.filter((joke) => type.includes(joke['type'])) : Jokes['list'];
-  return jokes.filter((joke) => checkKeywordInJoke(joke, key));
+export function jokesByKeyword(keys: string | string[], type?: string | string[]) {
+  const jokes = !type ? Jokes['list'] : Jokes.list.filter((joke) => type.includes(joke['type']));
+  return jokes.filter((joke) => checkKeywordsInJoke(joke, keys));
 }
 
-export function checkKeywordInJoke(joke: Joke, key: string) {
-  const word = `${joke.joke} ${joke.answer}`.split(' ');
-  return word.filter((word) => compareTwoStrings(word, key) > 0.95).length !== 0;
+export function checkKeywordsInJoke(joke: Joke, keys: string | string[]) {
+  const keywords = Array.isArray(keys) ? keys : Array.of(keys);
+  const word = `${joke.joke} ${joke.answer}`.split(' ').filter((word) => {
+    for (const key of keywords) compareTwoStrings(word, key) >= 0.95;
+  });
+  return Array.from(new Set(word)).length >= keywords.length;
 }

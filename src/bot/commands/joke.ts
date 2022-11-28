@@ -9,9 +9,9 @@ import {
 import { Categories, CategoriesRefsFull, Joke } from '../../typings';
 import { Colors, commandsChannelId } from '../constants';
 import Command from '../lib/command';
-import { checkKeywordInJoke, randomJoke, randomJokeByKeyword, randomJokeByType } from '../../controllers';
+import { checkKeywordsInJoke, randomJoke, randomJokeByKeywords, randomJokeByType } from '../../controllers';
 import { interactionInfo } from '../utils';
-import jokes from 'jokes';
+import Jokes from '../../jokes';
 
 const JokeCategories = {
   random: 'Aléatoire',
@@ -63,7 +63,7 @@ export default class JokeCommand extends Command {
   }
 
   async jokeByKeyword(interaction: ChatInputCommandInteraction<'cached'>, keyword: string, type: JokeCategory) {
-    const joke = (type === 'random' ? randomJokeByKeyword(keyword) : randomJokeByKeyword(keyword, type))['response'];
+    const joke = (type === 'random' ? randomJokeByKeywords(keyword) : randomJokeByKeywords(keyword, type))['response'];
 
     if (!joke) {
       if (type === 'random') {
@@ -72,7 +72,7 @@ export default class JokeCommand extends Command {
         );
       }
 
-      const filtredJokes = jokes.list.filter((joke) => checkKeywordInJoke(joke, keyword));
+      const filtredJokes = Jokes.list.filter((joke) => checkKeywordsInJoke(joke, keyword));
       const availableCategories = Categories.filter((category) => filtredJokes.some((joke) => joke.type === category));
 
       return interaction.reply(

@@ -11,6 +11,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     method: 'GET',
     handler: async () => 'Check documentation: https://www.blagues-api.fr/'
   });
+
   fastify.route({
     url: '/count',
     method: 'GET',
@@ -20,6 +21,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       });
     }
   });
+
   fastify.route({
     url: '/types',
     method: 'GET',
