@@ -44,7 +44,7 @@ export default class JokeCommand extends Command {
         {
           type: ApplicationCommandOptionType.String,
           name: 'search',
-          description: 'truc',
+          description: 'Mots-clés ex: développeur || développeur,métro ',
           nameLocalizations: {
             fr: 'recherche'
           }
@@ -57,18 +57,20 @@ export default class JokeCommand extends Command {
     const type = interaction.options.getString('type', true) as JokeCategory;
     const search = interaction.options.getString('search');
 
-    if (search) return this.jokeByKeyword(interaction, search, type);
+    if (search) return this.jokeByKeyword(interaction, search.split(',') ?? [search], type);
     else return this.randomJoke(interaction, type);
     // TODO: Add button to send another joke
   }
 
-  async jokeByKeyword(interaction: ChatInputCommandInteraction<'cached'>, keyword: string, type: JokeCategory) {
+  async jokeByKeyword(interaction: ChatInputCommandInteraction<'cached'>, keyword: string[], type: JokeCategory) {
     const joke = (type === 'random' ? randomJokeByKeywords(keyword) : randomJokeByKeywords(keyword, type))['response'];
 
     if (!joke) {
       if (type === 'random') {
         return interaction.reply(
-          interactionInfo(`Aucune blague correspondant à la recherche ${inlineCode(keyword)} n'existe dans l'API.`)
+          interactionInfo(
+            `Aucune blague correspondant à la recherche ${inlineCode(keyword.join(', '))} n'existe dans l'API.`
+          )
         );
       }
 
@@ -78,7 +80,7 @@ export default class JokeCommand extends Command {
       return interaction.reply(
         interactionInfo(
           `Aucune blague de type ${inlineCode(CategoriesRefsFull[type])} correspondant à la recherche ${inlineCode(
-            keyword
+            keyword.join(', ')
           )} n'a été trouvée.\n\n${
             ':information_source: ' +
             italic(
