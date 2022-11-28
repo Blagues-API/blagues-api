@@ -43,7 +43,7 @@ export function randomJokeByType(type: string): JokeResponse {
 }
 
 export function randomJokeByKeywords(keys: string | string[], type?: string | string[]): JokeResponse {
-  const response = random(jokesByKeyword(keys, type));
+  const response = random(jokesByKeywords(keys, type));
 
   if (!response) return { error: true };
 
@@ -61,7 +61,7 @@ export function jokeByQuestion(question: string): Joke | null {
   return Jokes.list.find((entry) => entry.joke === question) ?? null;
 }
 
-export function jokesByKeyword(keys: string | string[], type?: string | string[]) {
+export function jokesByKeywords(keys: string | string[], type?: string | string[]) {
   const jokes = !type ? Jokes['list'] : Jokes.list.filter((joke) => type.includes(joke['type']));
   return jokes.filter((joke) => checkKeywordsInJoke(joke, keys));
 }

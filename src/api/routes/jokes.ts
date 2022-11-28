@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyRequest } from 'fastify';
 import Jokes from '../../jokes';
 import { Categories, CategoriesRefs } from '../../typings';
-import { jokeById, jokesByKeyword, randomJoke, randomJokeByType } from '../../controllers';
+import { jokeById, jokesByKeywords, randomJoke, randomJokeByType } from '../../controllers';
 import { BadRequest, JokeNotFound, NoContent } from '../Errors';
 import { JokeIdRequest, JokeTypeRequest, OptionalDisallowRequest, SearchRequest } from '../types';
 
@@ -81,7 +81,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     method: 'GET',
     onRequest: fastify.apiAuth,
     handler: async (req: SearchRequest, res) => {
-      const joke = jokesByKeyword(req.query.key, req.query.type);
+      const joke = jokesByKeywords(req.query.key, req.query.type);
       if (!joke) {
         return res.status(404).send(JokeNotFound);
       }
