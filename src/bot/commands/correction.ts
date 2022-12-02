@@ -8,7 +8,8 @@ import {
   ComponentType,
   hyperlink,
   Message,
-  TextChannel
+  TextChannel,
+  User
 } from 'discord.js';
 import { jokeById, jokeByQuestion } from '../../controllers';
 import prisma from '../../prisma';
@@ -30,10 +31,10 @@ import {
   info,
   interactionInfo,
   interactionProblem,
-  interactionValidate,
   isEmbedable,
   messageInfo,
   messageProblem,
+  messageValidate,
   showNegativeDiffs,
   showPositiveDiffs,
   tDelete,
@@ -46,7 +47,7 @@ enum IdType {
   MESSAGE_QUESTION
 }
 
-interface JokeCorrectionPayload extends UnsignedJoke {
+export interface JokeCorrectionPayload extends UnsignedJoke {
   id?: number;
   correction_type: ProposalType;
   suggestion: UnsignedJoke & {
@@ -85,7 +86,9 @@ export default class CorrectionCommand extends Command {
     const newJoke = await this.requestChanges(interaction, clone(joke));
     if (!newJoke) return;
 
-    await this.editJoke(interaction, joke, newJoke);
+    const message = await interaction.fetchReply();
+
+    await CorrectionCommand.editJoke(message, interaction.user, joke, newJoke);
   }
 
   async resolveJoke(
@@ -198,32 +201,20 @@ export default class CorrectionCommand extends Command {
 
     switch (buttonInteraction.customId) {
       case 'type': {
-        const response = await this.requestTypeChange(buttonInteraction, commandInteraction, joke);
+        const response = await CorrectionCommand.requestTypeChange(buttonInteraction, joke);
         if (!response) return null;
 
         return this.requestChanges(commandInteraction, joke, true);
       }
 
       case 'question': {
-        const response = await this.requestTextChange(
-          buttonInteraction,
-          commandInteraction,
-          joke,
-          'question',
-          joke.joke
-        );
+        const response = await CorrectionCommand.requestTextChange(buttonInteraction, joke, 'question', joke.joke);
         if (!response) return null;
 
         return this.requestChanges(commandInteraction, response, true);
       }
       case 'answer': {
-        const response = await this.requestTextChange(
-          buttonInteraction,
-          commandInteraction,
-          joke,
-          'réponse',
-          joke.answer
-        );
+        const response = await CorrectionCommand.requestTextChange(buttonInteraction, joke, 'réponse', joke.answer);
         if (!response) return null;
 
         return this.requestChanges(commandInteraction, response, true);
@@ -370,15 +361,14 @@ export default class CorrectionCommand extends Command {
     };
   }
 
-  async requestTextChange(
+  static async requestTextChange(
     buttonInteraction: ButtonInteraction<'cached'>,
-    commandInteraction: ChatInputCommandInteraction,
     joke: JokeCorrectionPayload,
     textReplyContent: string,
     oldValue: string
   ): Promise<JokeCorrectionPayload | null> {
     const baseEmbed = buttonInteraction.message.embeds[0].toJSON();
-    await buttonInteraction.update({
+    const questionMessage = await buttonInteraction.update({
       embeds: [
         baseEmbed,
         {
@@ -387,41 +377,45 @@ export default class CorrectionCommand extends Command {
           description: codeBlock(oldValue)
         }
       ],
-      components: []
+      components: [],
+      fetchReply: true
     });
 
-    return new Promise((resolve) => {
-      const collector = commandInteraction.channel!.createMessageCollector({
-        filter: (m: Message) => m.author.id === commandInteraction.user.id,
+    return new Promise((resolve, reject) => {
+      const collector = buttonInteraction.channel!.createMessageCollector({
+        filter: (m: Message) => m.author.id === buttonInteraction.user.id,
         idle: 60_000
       });
       collector.on('collect', async (msg: Message) => {
         if (msg.deletable) await msg.delete();
 
         if (msg.content.length > 130) {
-          commandInteraction
+          buttonInteraction
             .channel!.send(
               interactionProblem(`La ${textReplyContent} d'une blague ne peut pas dépasser 130 caractères.`)
             )
             .then(tDelete(5_000));
         } else {
           joke[textReplyContent === 'question' ? 'joke' : 'answer'] = msg.content.replace(/\n/g, ' ');
-          collector.stop();
-          return resolve(joke);
+
+          return collector.stop('save');
         }
       });
       collector.once('end', async (_collected, reason: string) => {
         if (reason === 'idle') {
-          await commandInteraction.editReply(interactionInfo('Les 60 secondes se sont écoulées.'));
+          await questionMessage.edit(messageInfo('Les 60 secondes se sont écoulées.'));
           return resolve(null);
         }
+        if (reason === 'save') {
+          return resolve(joke);
+        }
+        reject(reason);
       });
     });
   }
 
-  async requestTypeChange(
+  static async requestTypeChange(
     buttonInteraction: ButtonInteraction<'cached'>,
-    commandInteraction: ChatInputCommandInteraction<'cached'>,
     joke: JokeCorrectionPayload
   ): Promise<JokeCorrectionPayload | null> {
     const baseEmbed = buttonInteraction.message.embeds[0].toJSON();
@@ -438,7 +432,7 @@ export default class CorrectionCommand extends Command {
           type: ComponentType.ActionRow,
           components: [
             {
-              type: ComponentType.SelectMenu,
+              type: ComponentType.StringSelect,
               customId: 'type',
               placeholder: 'Nouveau type de blague',
               options: Object.entries(CategoriesRefs).map(([key, name]) => ({
@@ -456,9 +450,9 @@ export default class CorrectionCommand extends Command {
     });
 
     const response = await waitForInteraction({
-      componentType: ComponentType.SelectMenu,
+      componentType: ComponentType.StringSelect,
       message: questionMessage,
-      user: commandInteraction.user
+      user: buttonInteraction.user
     });
 
     if (!response) {
@@ -473,31 +467,30 @@ export default class CorrectionCommand extends Command {
     return joke;
   }
 
-  async editJoke(
-    commandInteraction: ChatInputCommandInteraction<'cached'>,
+  static async editJoke(
+    message: Message<true>,
+    user: User,
     oldJoke: JokeCorrectionPayload,
     newJoke: JokeCorrectionPayload
   ) {
     if (!(['type', 'joke', 'answer'] as UnsignedJokeKey[]).some((key) => newJoke[key] !== oldJoke[key])) {
-      await commandInteraction.editReply(interactionProblem("Aucun élément n'a été modifié"));
+      await message.edit(messageProblem("Aucun élément n'a été modifié"));
       return;
     }
 
-    const correctionsChannel: TextChannel = commandInteraction.client.channels.cache.get(
-      correctionsChannelId
-    ) as TextChannel;
+    const correctionsChannel: TextChannel = message.client.channels.cache.get(correctionsChannelId) as TextChannel;
     if (!isEmbedable(correctionsChannel)) {
-      return commandInteraction.reply(
-        interactionProblem(`Je n'ai pas la permission d'envoyer la correction dans le salon ${correctionsChannel}.`)
+      return message.edit(
+        messageProblem(`Je n'ai pas la permission d'envoyer la correction dans le salon ${correctionsChannel}.`)
       );
     }
 
-    const message = await correctionsChannel.send({
+    const correction = await correctionsChannel.send({
       embeds: [
         {
           author: {
-            name: commandInteraction.user.username,
-            icon_url: commandInteraction.user.displayAvatarURL({
+            name: user.username,
+            icon_url: user.displayAvatarURL({
               size: 32
             })
           },
@@ -526,8 +519,8 @@ export default class CorrectionCommand extends Command {
 
     await prisma.proposal.create({
       data: {
-        user_id: commandInteraction.user.id,
-        message_id: message.id,
+        user_id: user.id,
+        message_id: correction.id,
         type: ProposalType[newJoke.correction_type],
         joke_question: newJoke.joke,
         joke_answer: newJoke.answer,
@@ -541,27 +534,25 @@ export default class CorrectionCommand extends Command {
     });
 
     if (newJoke.suggestion.message_id) {
-      const suggestionsChannel: TextChannel = commandInteraction.client.channels.cache.get(
-        suggestionsChannelId
-      ) as TextChannel;
+      const suggestionsChannel: TextChannel = message.client.channels.cache.get(suggestionsChannelId) as TextChannel;
       const suggestionMessage = await suggestionsChannel.messages.fetch(newJoke.suggestion.message_id);
 
       const embed = suggestionMessage.embeds[0].toJSON();
 
       const { base, godfathers } = embed.description!.match(dataSplitRegex)!.groups!;
 
-      const correctionText = `⚠️ Une ${hyperlink('correction', message.url)} est en cours.`;
+      const correctionText = `⚠️ Une ${hyperlink('correction', correction.url)} est en cours.`;
       embed.description = [base, correctionText, godfathers].filter(Boolean).join('\n\n');
 
       await suggestionMessage.edit({ embeds: [embed] });
     }
 
-    await commandInteraction.editReply(
-      interactionValidate(`Votre ${hyperlink('proposition de correction', message.url)} a bien été envoyée !`)
+    await message.edit(
+      messageValidate(`Votre ${hyperlink('proposition de correction', correction.url)} a bien été envoyée !`)
     );
 
     for (const reaction of [upReactionIdentifier, downReactionIdentifier]) {
-      await message.react(reaction).catch(() => null);
+      await correction.react(reaction).catch(() => null);
     }
   }
 }
