@@ -3,7 +3,7 @@ import {
   ComponentType,
   Message,
   MessageComponentType,
-  SelectMenuInteraction,
+  StringSelectMenuInteraction,
   User
 } from 'discord.js';
 import { interactionInfo } from './embeds';
@@ -14,13 +14,16 @@ type WaitForInteractionOptions<T extends MessageComponentType> = {
   user: User;
   idle?: number;
 };
+
 type WaitForInteraction<T> = T extends WaitForInteractionOptions<ComponentType.Button>
   ? ButtonInteraction<'cached'>
-  : SelectMenuInteraction<'cached'>;
+  : T extends WaitForInteractionOptions<ComponentType.StringSelect>
+  ? StringSelectMenuInteraction<'cached'>
+  : never;
 
 export async function waitForInteraction<T extends WaitForInteractionOptions<MessageComponentType>>(options: T) {
-  return new Promise<WaitForInteraction<T>>((resolve, reject) => {
-    const { componentType, message, user, idle = 60_000 } = options;
+  return new Promise<WaitForInteraction<T> | null>((resolve, reject) => {
+    const { componentType, message, user, idle = 10_000 } = options;
     message
       .createMessageComponentCollector({
         componentType,
@@ -34,7 +37,7 @@ export async function waitForInteraction<T extends WaitForInteractionOptions<Mes
         resolve(interaction);
       })
       .once('end', (_interactions, reason) => {
-        if (reason === 'idle') return;
+        if (reason === 'idle') return resolve(null);
         reject(reason);
       });
   });

@@ -9,7 +9,7 @@ import {
   roleMention,
   TextChannel
 } from 'discord.js';
-import { Proposals, ProposalSuggestion } from 'typings';
+import { Proposals, ProposalSuggestion } from '../../typings';
 import prisma from '../../prisma';
 import {
   Colors,
