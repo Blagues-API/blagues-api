@@ -38,5 +38,5 @@ export type RegenerateRequest = FastifyRequest<{
 }>;
 
 export type SearchRequest = FastifyRequest<{
-  Querystring: { key: string[]; type?: string[] };
+  Querystring: { query: string[]; disallow?: string[] };
 }>;

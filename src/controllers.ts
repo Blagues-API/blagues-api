@@ -61,15 +61,17 @@ export function jokeByQuestion(question: string): Joke | null {
   return Jokes.list.find((entry) => entry.joke === question) ?? null;
 }
 
-export function jokesByKeywords(keys: string | string[], type?: string | string[]) {
-  const jokes = !type ? Jokes['list'] : Jokes.list.filter((joke) => type.includes(joke['type']));
-  return jokes.filter((joke) => checkKeywordsInJoke(joke, keys));
+export function jokesByKeywords(query: string | string[], disallow?: string | string[]) {
+  const jokes = !disallow ? Jokes['list'] : Jokes.list.filter((joke) => !disallow.includes(joke['type']));
+  return jokes.filter((joke) => checkKeywordsInJoke(joke, query));
 }
 
-export function checkKeywordsInJoke(joke: Joke, keys: string | string[]) {
-  const keywords = Array.isArray(keys) ? keys : Array.of(keys);
+export function checkKeywordsInJoke(joke: Joke, query: string | string[]) {
+  const keywords = Array.isArray(query) ? query : Array.of(query);
   const word = `${joke.joke} ${joke.answer}`.split(' ').filter((word) => {
-    for (const key of keywords) compareTwoStrings(word, key) >= 0.95;
+    for (const key of keywords) {
+      if (compareTwoStrings(word, key) >= 0.95) return true;
+    }
   });
   return Array.from(new Set(word)).length >= keywords.length;
 }

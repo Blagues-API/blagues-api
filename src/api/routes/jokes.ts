@@ -81,7 +81,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     method: 'GET',
     onRequest: fastify.apiAuth,
     handler: async (req: SearchRequest, res) => {
-      const joke = jokesByKeywords(req.query.key, req.query.type);
+      const joke = jokesByKeywords(req.query.query, req.query.disallow);
       if (!joke) {
         return res.status(404).send(JokeNotFound);
       }
