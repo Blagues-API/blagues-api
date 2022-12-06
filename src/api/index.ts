@@ -22,7 +22,7 @@ export default class App {
     await this.fastify.register(cors);
     await this.fastify.register(formBody);
     await this.fastify.register(AuthMiddleware);
-    await this.fastify.register(AuthRoute);
+    await this.fastify.register(AuthRoute, { prefix: 'api' });
     await this.fastify.register(JokesRoute, { prefix: 'api' });
 
     await this.fastify.listen({
