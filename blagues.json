@@ -12038,8 +12038,8 @@
   {
     "id": 2024,
     "type": "global",
-    "joke": "Maman, j'ai presque eu 20\/20 ! La mère : Tu as eu combien ?",
-    "answer": "4\/20 mais celui qui était à côté de moi a eu 20\/20 !"
+    "joke": "Maman, j'ai presque eu 20/20 ! La mère : Tu as eu combien ?",
+    "answer": "4/20 mais celui qui était à côté de moi a eu 20/20 !"
   },
   {
     "id": 2025,
@@ -12831,7 +12831,7 @@
     "id": 2174,
     "type": "global",
     "joke": "Chérie, tu ne serais pas née le 10 octobre ?",
-    "answer": "Car tu es 10\/10."
+    "answer": "Car tu es 10/10."
   },
   {
     "id": 2176,
@@ -13144,5 +13144,305 @@
     "type": "global",
     "joke": "Quelle est la différence entre une poule et un canard ?",
     "answer": "Ça n'a rien aviaire."
+  },
+  {
+    "id": 2230,
+    "type": "beauf",
+    "joke": "J'ai un chat dans la gorge...",
+    "answer": "Vu ton haleine tu dois aussi avoir la litière..."
+  },
+  {
+    "id": 2231,
+    "type": "dark",
+    "joke": "\"Chérie, réveille-toi, le bébé pleure encore !\"  Épuisée, la mère se lève en soupirant :  \"C’est bon, je vais aller le changer.\"",
+    "answer": "Ça c'est une bonne idée ! Et ramènes-en un qui casse moins les couilles..."
+  },
+  {
+    "id": 2232,
+    "type": "dev",
+    "joke": "Quel est le 2ème métier d’un développeur ?",
+    "answer": "CSharpentier"
+  },
+  {
+    "id": 2233,
+    "type": "dark",
+    "joke": "Comment écrivent les gros ?",
+    "answer": "En gras"
+  },
+  {
+    "id": 2234,
+    "type": "limit",
+    "joke": "Pourquoi les filles baissent t'elles toujours les yeux quand on leur dit \" je t'aime\" ?",
+    "answer": "Pour voir si c'est vrai."
+  },
+  {
+    "id": 2235,
+    "type": "limit",
+    "joke": "Quelle est la différance entre une femme et une grue ?",
+    "answer": "La grue débite des caisses et la femme encaisse des bites."
+  },
+  {
+    "id": 2236,
+    "type": "dark",
+    "joke": "Maman, maman, est-ce que j'ai été adopté ?",
+    "answer": "Mais non, nous n'avons mis l'annonce qu'hier."
+  },
+  {
+    "id": 2237,
+    "type": "limit",
+    "joke": "Maman,maman, ça prend combien de \"T\" le mot \"bite\" ?",
+    "answer": "Ah tu sais mets en beaucoup, c'est jamais assez long ce genre de chose."
+  },
+  {
+    "id": 2238,
+    "type": "limit",
+    "joke": "Papa, caca. Pas maintenant mon fils. Papa caca. Je t'ai dis plus tard.",
+    "answer": "PAPA, CACA ! Bon ok, je me retire"
+  },
+  {
+    "id": 2239,
+    "type": "limit",
+    "joke": "Un enfant dit à sa mère -\"Maman,maman, j'ai eu 20 aujourd'hui\" -\"Bravo, 20 dans quoi ?\"",
+    "answer": "\"Dans ma bouche\""
+  },
+  {
+    "id": 2240,
+    "type": "global",
+    "joke": "Quel est le comble pour un vétérinaire ?",
+    "answer": "C'est d'être malade comme un chien."
+  },
+  {
+    "id": 2241,
+    "type": "dark",
+    "joke": "Pourquoi les orphelins regardent beaucoup de films pour adultes ?",
+    "answer": "Car il n'y a pas le contrôle parental."
+  },
+  {
+    "id": 2242,
+    "type": "limit",
+    "joke": "Melon et melèche vont voter.",
+    "answer": "Melon cherche l'isoloir et melèche la fente."
+  },
+  {
+    "id": 2243,
+    "type": "limit",
+    "joke": "Melon et melèche veulent faire un couscous.",
+    "answer": "Melon achète la semoule et melèche la saucisse."
+  },
+  {
+    "id": 2244,
+    "type": "dark",
+    "joke": "- Tu préfère draguer ma mère ou ma soeur ? - Bah ta soeur, bien sûr.",
+    "answer": "- Tu vois, papa ? C'est ça ton problème."
+  },
+  {
+    "id": 2245,
+    "type": "dark",
+    "joke": "Dans les pubs pour la lessive, on montre comment se débarrasser des tâches de sang...",
+    "answer": "... mais pas des corps."
+  },
+  {
+    "id": 2246,
+    "type": "dark",
+    "joke": "Vous savez quel est le dernier tableau qu'a vu Princesse Diana ?",
+    "answer": "Le tableau de bord."
+  },
+  {
+    "id": 2247,
+    "type": "dark",
+    "joke": "Un couple vient d'accoucher d'un bébé sans oreille, soudain, l'oncle beauf arrive dans la matérnité et dit :",
+    "answer": "- J'espère qu'il ne sera pas myope, sinon ça sera dûr de porter des lunettes."
+  },
+  {
+    "id": 2248,
+    "type": "dark",
+    "joke": "Qu'est-ce qui disparaît lors des mariages ?",
+    "answer": "La petite Maëlys."
+  },
+  {
+    "id": 2249,
+    "type": "beauf",
+    "joke": "Hey Google, pourquoi je suis célibataire ?",
+    "answer": "D'accord ! J'ouvre la caméra."
+  },
+  {
+    "id": 2250,
+    "type": "beauf",
+    "joke": "Il y'a de l'orage dehors. Mes enfants regardent par la fenêtre, déprimés. Il me font de la peine...",
+    "answer": "Je pense que je vais les faire rentrer."
+  },
+  {
+    "id": 2251,
+    "type": "dark",
+    "joke": "En 2022, on doit plus dire \"pédophile\".",
+    "answer": "On dit \"béta-testeurs\" maintenant."
+  },
+  {
+    "id": 2252,
+    "type": "dark",
+    "joke": "Gordon Ramsey : \"Putain Adolf je t'avais dit de mettre le lapin au four !\"",
+    "answer": "Adolf Hitler : \"Ah ?? Pas le rabbin ?\""
+  },
+  {
+    "id": 2253,
+    "type": "dark",
+    "joke": "Vous saviez que Freddie Mercury était dépressif à la fin de sa vie ?",
+    "answer": "Il était toujours en mode zéro positif"
+  },
+  {
+    "id": 2254,
+    "type": "dark",
+    "joke": "Mon ami est faché car il m'a vu renifler la culotte de ma soeur. Je ne sais pas si c'est parce qu'elle la portait à ce moment...",
+    "answer": "... ou si c'est parce que toute ma famille était là, mais ça a rendu le reste de l'enterrement vraiment difficile"
+  },
+  {
+    "id": 2255,
+    "type": "dark",
+    "joke": "Pourquoi les orphelins regards beaucoup de films pour adulte ?",
+    "answer": "Car il n'y a pas le contrôle parental."
+  },
+  {
+    "id": 2256,
+    "type": "dark",
+    "joke": "Alzheimer possède plusieurs avantages : 1. On peut aller chercher les œufs de Pâques qu'on a nous même cachés.",
+    "answer": "2. On rencontre de nouvelles personnes chaque jour.  3. On peut aller chercher les œufs de Pâques qu'on a nous-même cachés."
+  },
+  {
+    "id": 2257,
+    "type": "dark",
+    "joke": "Vous savez quelle est la différence entre un camion rempli de boules de bowling et un camion rempli de bébé morts ?",
+    "answer": "On ne peut pas vider le camion rempli de boules de bowling à la fourche."
+  },
+  {
+    "id": 2258,
+    "type": "global",
+    "joke": "Le parking est cher ces temps-ci...",
+    "answer": "Chaque jour j'ai une facture de 135 € !"
+  },
+  {
+    "id": 2259,
+    "type": "dev",
+    "joke": "À quel jeu jouent les développeurs russes ?",
+    "answer": "À la roulette-rust."
+  },
+  {
+    "id": 2260,
+    "type": "global",
+    "joke": "Papa ! Papa ! C'est quoi le dernier mot du dictionnaire ?",
+    "answer": "Demande à ta mère, filston. Elle a toujours le dernier mot."
+  },
+  {
+    "id": 2261,
+    "type": "global",
+    "joke": "Que dit-on à un poisson qui parle trop fort ?",
+    "answer": "Baisse d'un thon !"
+  },
+  {
+    "id": 2262,
+    "type": "dark",
+    "joke": "Un enfant demande à sa maman : \"Est-ce que mon petit frère est un ange ?\" La mère répond : \"Bien sûr !\"",
+    "answer": "Il répond donc : \"Mais alors pourquoi il ne s'est pas envolé quand je l'ai jeté par la fenêtre ?\""
+  },
+  {
+    "id": 2263,
+    "type": "dark",
+    "joke": "J'ai acheté une rappe à fromage pour mon ami aveugle à son anniversaire.",
+    "answer": "Il m'a dit plus tard que c'était le livre le plus violent qu'il ait jamais lu !"
+  },
+  {
+    "id": 2264,
+    "type": "dark",
+    "joke": "Mon ex a eu un grave accident. Elle avait besoin d'une perfusion et j'ai indiqué aux médecins le mauvais groupe sanguin...",
+    "answer": "... ainsi elle saura ce qu'est le rejet."
+  },
+  {
+    "id": 2265,
+    "type": "dark",
+    "joke": "Ma femme et moi en avons discuté : nous ne voulons pas d'enfant !",
+    "answer": "Donc si quelqu'un en veut, laissez vos coordonnées et on le dépose le plus tôt possible."
+  },
+  {
+    "id": 2266,
+    "type": "dark",
+    "joke": "Quelle est la différence entre la Princesse Diana et Christiano Ronaldo ?",
+    "answer": "Ronaldo c'est petit pont et but, Diana c'est grand pont et puis poteau."
+  },
+  {
+    "id": 2267,
+    "type": "beauf",
+    "joke": "Il y'a de l'orage dehors. Mes enfants regardent par la fenêtre, déprimes. Il me font de la peine...",
+    "answer": "Je pense que je vais les faire rentrer."
+  },
+  {
+    "id": 2268,
+    "type": "beauf",
+    "joke": "C'est en voyant un moustique se poser sur ses testicules...",
+    "answer": "... qu'on réalise qu'on ne peut pas régler tous ses problèmes par la violence."
+  },
+  {
+    "id": 2269,
+    "type": "global",
+    "joke": "Pourquoi avez-vous frappé cet homme sourd ?",
+    "answer": "C'était un malentendu !"
+  },
+  {
+    "id": 2270,
+    "type": "global",
+    "joke": "Pourquoi votre feuille de maths s'est suicidée ?",
+    "answer": "Parce qu'elle avait trop de problèmes..."
+  },
+  {
+    "id": 2271,
+    "type": "dark",
+    "joke": "Qu'est ce qui disparaît lors des mariages ?",
+    "answer": "La petite Maëlys."
+  },
+  {
+    "id": 2272,
+    "type": "beauf",
+    "joke": "C'est en voyant un moustique se poser sur ses testicules...",
+    "answer": "...qu'on réalise qu'on ne peut pas régler tous ses problèmes par la violence."
+  },
+  {
+    "id": 2273,
+    "type": "global",
+    "joke": "Tu sais ce que Zeus a dis ?",
+    "answer": "Moi aussi j'en ai rien a foudre."
+  },
+  {
+    "id": 2274,
+    "type": "dark",
+    "joke": "Maman,maman, est-ce que j'ai été adopté ?",
+    "answer": "Mais non, nous n'avons mis l'annonce qu'hier."
+  },
+  {
+    "id": 2275,
+    "type": "dark",
+    "joke": "Gordon Ramsey : \"putain Adolf je t'avais dit de mettre le lapin au four !\"",
+    "answer": "Adolf Hitler : \"Ah ?? Pas le rabbin ?\""
+  },
+  {
+    "id": 2276,
+    "type": "global",
+    "joke": "Tu sais ce que Zeus a dis ?",
+    "answer": "Moi non plus Zeus sait pas."
+  },
+  {
+    "id": 2277,
+    "type": "global",
+    "joke": "J'ai adopté un cerf, je l'ai appelé Danette.",
+    "answer": "C'est la crème des cerfs."
+  },
+  {
+    "id": 2278,
+    "type": "dark",
+    "joke": "Vous saviez que Princesse Diane était depressive avant sa mort ?",
+    "answer": "En effet, elle avait tellement de problèmes, elle n'en voyait pas le bout du tunnel !"
+  },
+  {
+    "id": 2279,
+    "type": "dark",
+    "joke": "Quelle est la différence entre Princesse Diana et Christiano Ronaldo ?",
+    "answer": "Ronaldo c'est petit pont et but, Diana c'est grand pont et puis poteau."
   }
 ]
