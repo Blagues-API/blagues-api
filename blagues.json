@@ -3277,7 +3277,7 @@
   },
   {
     "id": 547,
-    "type": "limit",
+    "type": "dark",
     "joke": "J'avais une blague sur les orphelins.",
     "answer": "Mais j'ai décidé de l'abandonner..."
   },
@@ -5720,7 +5720,7 @@
   {
     "id": 956,
     "type": "global",
-    "joke": "Un jour Chuck Norris a eu un zero en latin...",
+    "joke": "Un jour Chuck Norris a eu un zéro en latin...",
     "answer": "Depuis, c'est une langue morte."
   },
   {
@@ -7089,7 +7089,7 @@
     "id": 1187,
     "type": "dev",
     "joke": "J'allais faire une blague sur l'erreur 404...",
-    "answer": "Je ne l'ai pas trouvé..."
+    "answer": "Je ne l'ai pas trouvée..."
   },
   {
     "id": 1188,
@@ -10484,7 +10484,7 @@
   {
     "id": 1763,
     "type": "global",
-    "joke": "Quand est ce que Windows ne bug pas ?",
+    "joke": "Quand est-ce que Windows ne bug pas ?",
     "answer": "Quand l'ordinateur est éteint."
   },
   {
@@ -11726,8 +11726,8 @@
   {
     "id": 1970,
     "type": "global",
-    "joke": "Mr et madame duciel ont 5 filles comment s’appellent-elles ?",
-    "answer": "Betty, Baba, Noël, Candice et Sandra"
+    "joke": "Mr et madame Duciel ont 5 filles, comment s’appellent-elles ?",
+    "answer": "Betty, Baba, Noëlle, Candice et Sandra"
   },
   {
     "id": 1971,
@@ -12699,7 +12699,7 @@
     "id": 2151,
     "type": "global",
     "joke": "C'est l'histoire d'un bar barbare qui va dans un bar se taper des barres avec ses amis et à la fin,",
-    "answer": "il se barre"
+    "answer": "il se barre."
   },
   {
     "id": 2152,
@@ -13274,7 +13274,7 @@
   {
     "id": 2251,
     "type": "dark",
-    "joke": "En 2022, on doit plus dire \"pédophile\".",
+    "joke": "En 2023, on doit plus dire \"pédophile\".",
     "answer": "On dit \"béta-testeurs\" maintenant."
   },
   {
@@ -13444,5 +13444,149 @@
     "type": "dark",
     "joke": "Quelle est la différence entre Princesse Diana et Christiano Ronaldo ?",
     "answer": "Ronaldo c'est petit pont et but, Diana c'est grand pont et puis poteau."
+  },
+  {
+    "id": 2280,
+    "type": "global",
+    "joke": "Faites comme moi, épousez un archéologue.",
+    "answer": "C'est le seul homme qui vous regardera avec de plus en plus d'intérêt à mesure que passeront les années !"
+  },
+  {
+    "id": 2281,
+    "type": "global",
+    "joke": "Quel est le point commun entre un footballeur et un chasseur ?",
+    "answer": "Les deux tirent et but !"
+  },
+  {
+    "id": 2282,
+    "type": "dev",
+    "joke": "J'allais faire une blague sur l'erreur 404...",
+    "answer": "Je ne l'ai pas trouvé..."
+  },
+  {
+    "id": 2283,
+    "type": "dark",
+    "joke": "Qu'est-ce qui mesure 1m80 au début, et 10cm à la fin ?",
+    "answer": "Un juif..."
+  },
+  {
+    "id": 2284,
+    "type": "dark",
+    "joke": "C'est un enfant qui écrit sa lettre au Père Noël : \"Cher Père Noël. Pour Noël, je veux une petite soeur.\"",
+    "answer": "Le Père Noël lui renvoya une lettre, lui disant : \"Pas de problème, amène moi ta mère et on vas s'arranger.\""
+  },
+  {
+    "id": 2285,
+    "type": "global",
+    "joke": "Quelle ligne de métro faut-il prendre pour éviter la station \"Assemblée Nationale\" ?",
+    "answer": "La ligne 49.3"
+  },
+  {
+    "id": 2286,
+    "type": "dark",
+    "joke": "En 2022, on doit plus dire \"pédophile\".",
+    "answer": "On dit \"béta-testeurs\" maintenant."
+  },
+  {
+    "id": 2287,
+    "type": "dark",
+    "joke": "Un enfant africain à son père : « Papa je peux jouer avec ta kékette ? »",
+    "answer": "« D'accord mon chéri mais ne t'éloignes pas trop. »"
+  },
+  {
+    "id": 2288,
+    "type": "beauf",
+    "joke": "Quel est le point commun entre une femme et une piscine ?",
+    "answer": "Ça coûte cher à l'entretien par rapport au temps que l'on passe dedans."
+  },
+  {
+    "id": 2289,
+    "type": "global",
+    "joke": "Il était une froid, un petit glaçon",
+    "answer": "qui vivait avec sa mer."
+  },
+  {
+    "id": 2290,
+    "type": "global",
+    "joke": "Quelle ligne de métro faut il prendre pour éviter la station \"Assemblé National\" ?",
+    "answer": "Ligne 49 3"
+  },
+  {
+    "id": 2291,
+    "type": "dark",
+    "joke": "Arrêtez les blagues sur le 11 septembre, mon père est mort là bas ...",
+    "answer": "Il était le meilleur pilote de toute l'Arabie Saoudite."
+  },
+  {
+    "id": 2292,
+    "type": "global",
+    "joke": "La seule chose qui arrive à la cheville de Chuck Norris...",
+    "answer": "...ce sont ses chaussettes."
+  },
+  {
+    "id": 2293,
+    "type": "global",
+    "joke": "C'est l'histoire d'un bar barbare qui va dans un bar se taper des barres avec ses amis et à la fin,",
+    "answer": "il se barre"
+  },
+  {
+    "id": 2294,
+    "type": "global",
+    "joke": "Mr et madame duciel ont 5 filles comment s’appellent-elles ?",
+    "answer": "Betty, Baba, Noël, Candice et Sandra"
+  },
+  {
+    "id": 2295,
+    "type": "dark",
+    "joke": "Les musulmans envisagent de boycotter Amazon.",
+    "answer": "Ils en ont assez de payer les frais de ports."
+  },
+  {
+    "id": 2296,
+    "type": "global",
+    "joke": "Pourquoi Dieu ne descend-il jamais en enfer et Satan ne monte-il jamais au paradis ?",
+    "answer": "Parce-ce que Chuck Norris est au milieu !"
+  },
+  {
+    "id": 2297,
+    "type": "global",
+    "joke": "Quand Chuck Norris commet un meurtre...",
+    "answer": "... la police est coupable !"
+  },
+  {
+    "id": 2298,
+    "type": "global",
+    "joke": "Un jour Chuck Norris a joué à Mario.",
+    "answer": "Bowser lui a ramené la princesse et s'est excusé."
+  },
+  {
+    "id": 2299,
+    "type": "global",
+    "joke": "Un jour, Chuck Norris a fait un uppercut à un cheval.",
+    "answer": "Depuis, on a appelé ses descendants \"Girafe\"."
+  },
+  {
+    "id": 2300,
+    "type": "global",
+    "joke": "Savez-vous comment on décrit le meilleur fan de Spider-Man ?",
+    "answer": "Il connaît Peter par cœur."
+  },
+  {
+    "id": 2301,
+    "type": "global",
+    "joke": "Chuck Norris en est à sa 392 ème mort...",
+    "answer": "...mais la faucheuse n'a toujours pas le courage de le lui annoncer."
+  },
+  {
+    "id": 2302,
+    "type": "global",
+    "joke": "Quel est la différence entre 1978 et 2022 ?",
+    "answer": "La mort de Claude François aurait couté plus cher en 2022"
+  },
+  {
+    "id": 2303,
+    "type": "dark",
+    "joke": "Tu sais ce que c'est la nouvelle ceinture de sécurité au Sénégal ?",
+    "answer": "Une bande Velcro sur l'appuie-tête !"
   }
 ]
