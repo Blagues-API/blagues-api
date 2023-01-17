@@ -10,7 +10,6 @@ export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.route({
     url: '/auth/user',
     method: 'GET',
-    onRequest: fastify.apiAuth,
     handler: async (req: DashboardAuthUser, res) => {
       try {
         const discordUser = await got('https://discord.com/api/v10/users/@me', {
@@ -38,6 +37,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       }
     }
   });
+
   fastify.route({
     url: '/auth/token',
     method: 'POST',
@@ -79,6 +79,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       return res.code(200).send(authData);
     }
   });
+
   fastify.route({
     url: '/regenerate',
     method: 'POST',
