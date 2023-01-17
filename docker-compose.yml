@@ -30,6 +30,8 @@ services:
       - app
     ports:
       - '3003:3000'
+    networks:
+      - global
 
   postgres:
     container_name: blagues_api_postgres
