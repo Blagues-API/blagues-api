@@ -2403,7 +2403,7 @@
     "id": 401,
     "type": "dark",
     "joke": "Pourquoi personne ne sait nager au Maroc ?",
-    "answer": "Par ce que tous ceux qui savent, sont déjà en France."
+    "answer": "Parce que tous ceux qui savent sont déjà en France."
   },
   {
     "id": 402,
@@ -4322,7 +4322,7 @@
   {
     "id": 723,
     "type": "dark",
-    "joke": "Quelle est la différence de tomber du 1er étage et  étage ?",
+    "joke": "Quelle est la différence entre tomber du 1er étage et tomber du 10ème étage ?",
     "answer": "Tomber du 1er : PAF ! Ahhhhh ! Tomber du 10ème : Ahhhhh ! PAF !"
   },
   {
@@ -6842,7 +6842,7 @@
   {
     "id": 1145,
     "type": "dark",
-    "joke": "Quel est un comble pour un noir ?",
+    "joke": "Quel est le comble pour un noir ?",
     "answer": "Porter des pulls en coton"
   },
   {
@@ -9120,10 +9120,10 @@
     "answer": "La mer Méditerranée"
   },
   {
-    "id": 1535,
-    "type": "dev",
-    "joke": "Pourquoi lorsqu'on mange une poutine le goût arrive 5 secondes après ?",
-    "answer": "Parce que le GouLag"
+    "id": 1520,
+    "type": "global",
+    "joke": "Les Chinois en Chine, les Japonais au Japon et...",
+    "answer": "les mandarins dans la mandarine"
   },
   {
     "id": 1536,
@@ -13581,12 +13581,138 @@
     "id": 2302,
     "type": "global",
     "joke": "Quel est la différence entre 1978 et 2022 ?",
-    "answer": "La mort de Claude François aurait couté plus cher en 2022"
+    "answer": "La mort de Claude François aurait couté plus cher en 2023."
   },
   {
     "id": 2303,
     "type": "dark",
     "joke": "Tu sais ce que c'est la nouvelle ceinture de sécurité au Sénégal ?",
     "answer": "Une bande Velcro sur l'appuie-tête !"
+  },
+  {
+    "id": 2304,
+    "type": "global",
+    "joke": "Quel est la différence entre 1978 et 2022 ?",
+    "answer": "La mort de Claude François aurait couté plus cher en 2022."
+  },
+  {
+    "id": 2305,
+    "type": "global",
+    "joke": "Imaginez un monde envahis par les moustiques. Trois héros les affrontent :",
+    "answer": "Les 3 moustiquaires"
+  },
+  {
+    "id": 2306,
+    "type": "dark",
+    "joke": "Maman, d'ou vient l'expression \"broyer du noir\" ?",
+    "answer": "il y a longtemps, quand les gens n'était pas content, ils broyaient les noirs."
+  },
+  {
+    "id": 2307,
+    "type": "limit",
+    "joke": "Que fais un zoophile dans une ferme ?",
+    "answer": "Il passe du coq à l'âne..."
+  },
+  {
+    "id": 2308,
+    "type": "dark",
+    "joke": "C'est un chat sur une île déserte. Il fait caca, mais il a rien pour s'essuyer. Comment il fait ?",
+    "answer": "Tu donnes ta langue au chat ?"
+  },
+  {
+    "id": 2309,
+    "type": "limit",
+    "joke": "Pourquoi prendre une assurance animalière à sa copine ?",
+    "answer": "Pour lui péter la chatte..."
+  },
+  {
+    "id": 2310,
+    "type": "dark",
+    "joke": "L'humour noir c'est comme les parents...",
+    "answer": "certains en n'ont pas."
+  },
+  {
+    "id": 2311,
+    "type": "dark",
+    "joke": "Où est passé le petit garçon après le bombardement ?",
+    "answer": "Partout..."
+  },
+  {
+    "id": 2312,
+    "type": "limit",
+    "joke": "Que fais un zoophile dans un pré ?",
+    "answer": "Il joue à saute mouton..."
+  },
+  {
+    "id": 2313,
+    "type": "dev",
+    "joke": "Pourquoi vaut il mieux être software que hardware ?",
+    "answer": "Car c’est le hardware qui prend des coups quand le software plante"
+  },
+  {
+    "id": 2314,
+    "type": "global",
+    "joke": "Pourquoi un français répond-il toujours par une question ?",
+    "answer": "Et pourquoi pas ?"
+  },
+  {
+    "id": 2315,
+    "type": "beauf",
+    "joke": "Pourquoi le pervers a connecté sa clé au porc USB ?",
+    "answer": "Pour regarder des clips cochons."
+  },
+  {
+    "id": 2316,
+    "type": "dark",
+    "joke": "Pourquoi Johnny Hallyday s'est fait incinérer ?",
+    "answer": "Parce qu'il a allumé le feu..."
+  },
+  {
+    "id": 2317,
+    "type": "global",
+    "joke": "Combien coûte un manga en Angleterre ?",
+    "answer": "1 piece"
+  },
+  {
+    "id": 2318,
+    "type": "global",
+    "joke": "Quel est le nombre préféré des moustiques ?",
+    "answer": "Le 100"
+  },
+  {
+    "id": 2319,
+    "type": "global",
+    "joke": "Quel est le comble pour un professeur de musique ?",
+    "answer": "Mettre une mauvaise note."
+  },
+  {
+    "id": 2320,
+    "type": "global",
+    "joke": "Quel fruit peut couper les arbres ?",
+    "answer": "Le scie tronc."
+  },
+  {
+    "id": 2321,
+    "type": "global",
+    "joke": "Quels fruits retrouve t-on dans chaque maison ?",
+    "answer": "Les mûres"
+  },
+  {
+    "id": 2322,
+    "type": "global",
+    "joke": "Qu'est ce qui est jaune et qui n'attend pas ?",
+    "answer": "Un citron pressé"
+  },
+  {
+    "id": 2323,
+    "type": "dark",
+    "joke": "C'est un père Noël juif qui entre et qui dit...",
+    "answer": "Bonjour les enfants, qu'est-ce que je vous vends ?"
+  },
+  {
+    "id": 2324,
+    "type": "global",
+    "joke": "Quel est la différence entre 1978 et 2022 ?",
+    "answer": "La mort de Claude François aurait couté plus cher en 2023."
   }
 ]
