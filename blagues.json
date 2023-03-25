@@ -3012,12 +3012,6 @@
     "answer": "Du temps perdu Madame."
   },
   {
-    "id": 503,
-    "type": "dark",
-    "joke": "Des bombardements se succèdent. Où est allé le petit garçon qui se trouvait sur les lieux ?",
-    "answer": "Partout"
-  },
-  {
     "id": 504,
     "type": "beauf",
     "joke": "Tu connais l'histoire du castré décapité ?",
@@ -11336,8 +11330,8 @@
   {
     "id": 1905,
     "type": "dark",
-    "joke": "Quelle est le point commun entre une cigarette, un juif et un ascenseur ?",
-    "answer": "Ca fait des cendres"
+    "joke": "Quel est le point commun entre une cigarette, un juif et un ascenseur ?",
+    "answer": "Ça fait des cendres"
   },
   {
     "id": 1906,
@@ -12594,12 +12588,6 @@
     "answer": "Un chinois qui attend la bonne cuisson de son chien."
   },
   {
-    "id": 2133,
-    "type": "dark",
-    "joke": "Quel est le point commun entre une cigarette, un Juif et un ascenseur ?",
-    "answer": "Ça fait des cendres."
-  },
-  {
     "id": 2134,
     "type": "limit",
     "joke": "Vous savez pourquoi les gameuses aiment beaucoup les jeux vidéos et les PC ?",
@@ -13392,12 +13380,6 @@
     "answer": "Parce qu'elle avait trop de problèmes..."
   },
   {
-    "id": 2271,
-    "type": "dark",
-    "joke": "Qu'est ce qui disparaît lors des mariages ?",
-    "answer": "La petite Maëlys."
-  },
-  {
     "id": 2272,
     "type": "beauf",
     "joke": "C'est en voyant un moustique se poser sur ses testicules...",
@@ -13414,12 +13396,6 @@
     "type": "dark",
     "joke": "Maman,maman, est-ce que j'ai été adopté ?",
     "answer": "Mais non, nous n'avons mis l'annonce qu'hier."
-  },
-  {
-    "id": 2275,
-    "type": "dark",
-    "joke": "Gordon Ramsey : \"putain Adolf je t'avais dit de mettre le lapin au four !\"",
-    "answer": "Adolf Hitler : \"Ah ?? Pas le rabbin ?\""
   },
   {
     "id": 2276,
