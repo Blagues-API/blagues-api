@@ -1196,7 +1196,7 @@
   {
     "id": 200,
     "type": "global",
-    "joke": "Quel est le seul animal qui nourrit lui-même sa voiture ?",
+    "joke": "Quel est le seul animal qui nourrit sa propre voiture ?",
     "answer": "La chèvre, car elle nourrit son cabri au lait !"
   },
   {
@@ -4526,7 +4526,7 @@
   {
     "id": 757,
     "type": "dark",
-    "joke": "Pourquoi les décapiter deviennent-ils toujours fous ?",
+    "joke": "Pourquoi les décapités deviennent-ils fous ?",
     "answer": "Parce qu'ils perdent la tête !"
   },
   {
@@ -5065,8 +5065,8 @@
   },
   {
     "id": 847,
-    "type": "dark",
-    "joke": "Une fille à son frère : Tu sais que tu fais l'amour beaucoup mieux que papa ?",
+    "type": "limit",
+    "joke": "Une fille dit à son frère : \"Tu sais que tu fais l'amour beaucoup mieux que papa ?\"",
     "answer": "Je sais, maman me l'a déjà dit..."
   },
   {
@@ -5847,7 +5847,7 @@
     "id": 977,
     "type": "global",
     "joke": "Quand Chuck Norris fait une erreur lors de l'examen d'histoire...",
-    "answer": "l'histoire change."
+    "answer": "... l'histoire change."
   },
   {
     "id": 978,
@@ -6854,7 +6854,7 @@
   {
     "id": 1147,
     "type": "beauf",
-    "joke": "Comment appelle-t-on une blonde pendu par les pieds dans un garage ?",
+    "joke": "Comment appelle-t-on une blonde pendue par les pieds dans un garage ?",
     "answer": "Une clé à pipe"
   },
   {
@@ -7484,7 +7484,7 @@
   {
     "id": 1253,
     "type": "limit",
-    "joke": "Melon et Meleche trouve une maison à vendre...",
+    "joke": "Melon et Meleche trouvent une maison à vendre...",
     "answer": "…Melon l’achète et Meleche l’habite."
   },
   {
@@ -8745,7 +8745,7 @@
     "id": 1471,
     "type": "blondes",
     "joke": "Où vit une blonde amatrice de fleurs ?",
-    "answer": "Dans un marais, pour être avec plein de vase !"
+    "answer": "Dans un marais, pour être en plein dans le vase !"
   },
   {
     "id": 1472,
@@ -10136,7 +10136,7 @@
   {
     "id": 1705,
     "type": "global",
-    "joke": "Quel est la sauce préférée de Satan ?",
+    "joke": "Quelle est la sauce préférée de Satan ?",
     "answer": "La sauce Tartare"
   },
   {
@@ -10316,8 +10316,8 @@
   {
     "id": 1735,
     "type": "beauf",
-    "joke": "Quel est le point commun entre une pizza brulée et une femme enceinte ?",
-    "answer": "Dans les 2 cas, il y en a un qui l’a pas sorti avant !"
+    "joke": "Quel est le point commun entre une pizza brûlée et une femme enceinte ?",
+    "answer": "Dans les deux cas, il y en a un qui ne l’a pas sorti à temps !"
   },
   {
     "id": 1736,
@@ -10965,7 +10965,7 @@
     "id": 1843,
     "type": "global",
     "joke": "Que dit une imprimante qui ne se sens pas écoutée ?",
-    "answer": "J'ai l'impression que tu n'imprimes rien à ce que je te dis"
+    "answer": "J'ai l'impression que tu n'imprimes rien à ce que je te dis."
   },
   {
     "id": 1844,
@@ -11006,7 +11006,7 @@
   {
     "id": 1850,
     "type": "limit",
-    "joke": "Quel est le point commun entre ta mère et le coupe de la LDC ?",
+    "joke": "Quel est le point commun entre ta mère et la coupe de la LDC ?",
     "answer": "Tout le monde a envie de la soulever."
   },
   {
@@ -12285,7 +12285,7 @@
     "id": 2073,
     "type": "dark",
     "joke": "Pourquoi les Chinois et les Français ne cuisinent pas ensemble ?",
-    "answer": "Car il faut separer le jaune et le blanc."
+    "answer": "Car il faut séparer le jaune du blanc."
   },
   {
     "id": 2074,
@@ -12651,7 +12651,7 @@
     "id": 2143,
     "type": "global",
     "joke": "Quel est le collectif le plus rentable ?",
-    "answer": "Le collectif Mais Tissez !!"
+    "answer": "Le collectif Mais Tissez !"
   },
   {
     "id": 2144,
@@ -13172,7 +13172,7 @@
   {
     "id": 2234,
     "type": "limit",
-    "joke": "Pourquoi les filles baissent t'elles toujours les yeux quand on leur dit \" je t'aime\" ?",
+    "joke": "Pourquoi les filles baissent-elles toujours les yeux quand on leur dit \"Je t'aime\" ?",
     "answer": "Pour voir si c'est vrai."
   },
   {
@@ -13502,8 +13502,8 @@
   {
     "id": 2289,
     "type": "global",
-    "joke": "Il était une froid, un petit glaçon",
-    "answer": "qui vivait avec sa mer."
+    "joke": "Il était une froid, un petit glaçon...",
+    "answer": "... qui vivait avec sa mer."
   },
   {
     "id": 2290,
@@ -13714,5 +13714,551 @@
     "type": "global",
     "joke": "Quel est la différence entre 1978 et 2022 ?",
     "answer": "La mort de Claude François aurait couté plus cher en 2023."
+  },
+  {
+    "id": 2325,
+    "type": "limit",
+    "joke": "Comment on dit bonjour aux femmes qui ont leur règles ?",
+    "answer": "Wesh, bien ou quoi le sang !"
+  },
+  {
+    "id": 2326,
+    "type": "global",
+    "joke": "Que fait un gothique pour allumer la lumière ?",
+    "answer": "Il éteint l'obscurité."
+  },
+  {
+    "id": 2327,
+    "type": "global",
+    "joke": "Quelle est la différence entre le soleil et Toto ?",
+    "answer": "Le premier est un astre, l'autre un désastre..."
+  },
+  {
+    "id": 2328,
+    "type": "dark",
+    "joke": "C'est un père Noël juif qui entre et qui dit...",
+    "answer": "Bonjour les enfants, qu'est-ce que je vous vends ?"
+  },
+  {
+    "id": 2329,
+    "type": "global",
+    "joke": "Quel bonus possède-t'on dans la version agricole de Qui veut gagner des millions ?",
+    "answer": "La pelle à un ami."
+  },
+  {
+    "id": 2330,
+    "type": "global",
+    "joke": "Quel est le comble pour César ?",
+    "answer": "Qu'on lui raconte des salades."
+  },
+  {
+    "id": 2331,
+    "type": "limit",
+    "joke": "Quel plat sent le cul de vache ?",
+    "answer": "La langue de bœuf !"
+  },
+  {
+    "id": 2332,
+    "type": "limit",
+    "joke": "Quel est le point commun entre ta mère et le coupe de la LDC ?",
+    "answer": "Tout le monde a envie de la soulever."
+  },
+  {
+    "id": 2333,
+    "type": "beauf",
+    "joke": "Pourquoi la diarrhée est très répandue ?",
+    "answer": "Car c'est une maladie courante."
+  },
+  {
+    "id": 2334,
+    "type": "limit",
+    "joke": "Comment appelle - t - on une pute qui ne se lave pas ?",
+    "answer": "Une sale pute."
+  },
+  {
+    "id": 2335,
+    "type": "global",
+    "joke": "Qui ne faut-il jamais inviter pour aller à la plage ?",
+    "answer": "Moïse, il peut facilement te niquer tes vacances à la mer."
+  },
+  {
+    "id": 2336,
+    "type": "limit",
+    "joke": "Quel plat sent le cul de vache ?",
+    "answer": "La langue de beuf !"
+  },
+  {
+    "id": 2337,
+    "type": "dark",
+    "joke": "Mon humour est tellement noir...",
+    "answer": "... qu'il traverse la mer Méditerranée."
+  },
+  {
+    "id": 2338,
+    "type": "global",
+    "joke": "Pourquoi les plongeurs plongent-ils toujours en arrière et jamais en avant ?",
+    "answer": "Parce que sinon ils tombent dans le bateau !"
+  },
+  {
+    "id": 2339,
+    "type": "beauf",
+    "joke": "Les genres, c'est comme les tours jumelles.",
+    "answer": "Au bon vieux temps y'en avait deux, maintenant c'est un sujet sensible..."
+  },
+  {
+    "id": 2340,
+    "type": "dark",
+    "joke": "Un pessimiste voit un tunnel sombre. Un optimiste voit la lumière au bout du tunnel. Un réalise voit...",
+    "answer": "un train qui approche"
+  },
+  {
+    "id": 2341,
+    "type": "dark",
+    "joke": "Ma grand-mère a vaincu le cancer.",
+    "answer": "L'héritage attendra."
+  },
+  {
+    "id": 2342,
+    "type": "global",
+    "joke": "Qu'est ce qui n'est pas un pied ?",
+    "answer": "Du papier."
+  },
+  {
+    "id": 2343,
+    "type": "global",
+    "joke": "À l'école j'étais toujours le premier...",
+    "answer": "... à partir."
+  },
+  {
+    "id": 2344,
+    "type": "global",
+    "joke": "La différence entre ma mère et la police.",
+    "answer": "C'est que je peux négocier avec la police."
+  },
+  {
+    "id": 2345,
+    "type": "dark",
+    "joke": "Barman, c'est ici que vous avez des chiottes en or ?",
+    "answer": "Patrick ! J'ai trouvé celui qui a chié dans ton saxo !"
+  },
+  {
+    "id": 2346,
+    "type": "global",
+    "joke": "Les chiens : « Je pense que les Hommes sont mes dieux car ils me nourissent et me protègent »",
+    "answer": "Les chats : « Je pense que je suis un dieu pour les Hommes car ils me nourissent et me protègent »"
+  },
+  {
+    "id": 2347,
+    "type": "limit",
+    "joke": "Pourquoi les filles baissent t'elles toujours les yeux quand on leur dit \" je t'aime\" ?",
+    "answer": "Pour voir si c'est vrai."
+  },
+  {
+    "id": 2348,
+    "type": "global",
+    "joke": "La maîtresse demande à Toto : \"Pourquoi mets tu un S majuscules à savon dans tes dictées ?\"",
+    "answer": "Bah... C'est un nom propre non ?"
+  },
+  {
+    "id": 2349,
+    "type": "global",
+    "joke": "Toto va à la boulangerie. Le boulanger lui dit : \"Aujourd’hui, le deuxième pain au chocolat est offert !\"",
+    "answer": "Alors, donnez-moi juste le deuxième s'il vous plaît."
+  },
+  {
+    "id": 2350,
+    "type": "global",
+    "joke": "Un policier arrête un conducteur : \"Vous n'avez pas vu le feu rouge ?\"",
+    "answer": "Si. C'est vous que je n'avais pas vu."
+  },
+  {
+    "id": 2351,
+    "type": "global",
+    "joke": "La maîtresse à Toto : \"Cite moi un mammifère qui n'a pas de dents.\"",
+    "answer": "Euh... Ma grand-mère ?"
+  },
+  {
+    "id": 2352,
+    "type": "global",
+    "joke": "Quelle est l'insulte préférée des agriculteurs ?",
+    "answer": "Fermier vos granges meules"
+  },
+  {
+    "id": 2353,
+    "type": "beauf",
+    "joke": "Embrasser une fille qui n'est pas ta copine, ce n'est pas tromper.",
+    "answer": "On appelle ça \"Apprendre une langue étrangère\"."
+  },
+  {
+    "id": 2354,
+    "type": "global",
+    "joke": "Toto à son père : \"Dis papa, t'aurais pas deux euros pour un pauvre monsieur dans la rue ?\" Il lui demande pourquoi.",
+    "answer": "Depuis tout à l'heure il crie \"Glace à 2€\"..."
+  },
+  {
+    "id": 2355,
+    "type": "dark",
+    "joke": "Quel dessin animé Disney a pour chanson \"Libérée, délivrée, je ne déporterais plus jamais\" ?",
+    "answer": "L'aryenne des neiges."
+  },
+  {
+    "id": 2356,
+    "type": "dark",
+    "joke": "Si on m'avait donné 1€ à chaque blague raciste...",
+    "answer": "... je me serais déjà fait volé tout mon argent par un bougnoule."
+  },
+  {
+    "id": 2357,
+    "type": "dark",
+    "joke": "Faire un signalement, c'est bien.",
+    "answer": "Faire un signe allemand, c'est moins bien."
+  },
+  {
+    "id": 2358,
+    "type": "dev",
+    "joke": "Comment on appelle une situation qui est gérée ?",
+    "answer": "Une situation sous CTRL"
+  },
+  {
+    "id": 2359,
+    "type": "global",
+    "joke": "On peut dire \"non\" à Poutine.",
+    "answer": "Il faut juste une bonne assurance vie."
+  },
+  {
+    "id": 2360,
+    "type": "global",
+    "joke": "Vladimir Poutine envoyait-t'il des lettres au Père Noël ?",
+    "answer": "Non, il envoyait des ultimatums."
+  },
+  {
+    "id": 2361,
+    "type": "global",
+    "joke": "Fumer tue.",
+    "answer": "Mais moins vite que Poutine."
+  },
+  {
+    "id": 2362,
+    "type": "dark",
+    "joke": "Quand j'étais gamin, j'avais un ami noir.",
+    "answer": "Jusqu'au jour où mon grand-père l'a vendu."
+  },
+  {
+    "id": 2363,
+    "type": "dark",
+    "joke": "Je voulais envoyer des médicaments en Afrique.",
+    "answer": "Mais j'ai remarqué que ça devait être prit après chaque repas."
+  },
+  {
+    "id": 2364,
+    "type": "dark",
+    "joke": "En attendant avec d'autres parents devant la maternelle, on m'a demandé \"C'est lequel le votre ?\"",
+    "answer": "J'ai répondu : \"J'ai pas encore choisi\". Bref j'ai 3 ans ferme."
+  },
+  {
+    "id": 2365,
+    "type": "dark",
+    "joke": "Tu ne peux pas être raciste ...",
+    "answer": "... si tu as exterminé toutes les autres races."
+  },
+  {
+    "id": 2366,
+    "type": "dark",
+    "joke": "Comment s'appelle le meilleur ami de Bon l'éponge ?",
+    "answer": "Le petit Grégory."
+  },
+  {
+    "id": 2367,
+    "type": "dark",
+    "joke": "Tu peux dire \"non\" à Staline.",
+    "answer": "Mais seulement une fois."
+  },
+  {
+    "id": 2368,
+    "type": "global",
+    "joke": "SILENCE ! Aujourd'hui nous allons voir la...",
+    "answer": "liberté d'expression."
+  },
+  {
+    "id": 2369,
+    "type": "dark",
+    "joke": "On m'a demandé pourquoi je frappais tous les SDF.",
+    "answer": "C'est pour qu'ils aient un lit où dormir, à l'hôpital."
+  },
+  {
+    "id": 2370,
+    "type": "dark",
+    "joke": "Ma copine ne transforme pas les chats en pâtés ou en kebabs.",
+    "answer": "Elle les transforme en crêpes sur l'autoroute."
+  },
+  {
+    "id": 2371,
+    "type": "global",
+    "joke": "Je ne prétends pas être Staline.",
+    "answer": "Je dis juste que personne ne m'a jamais vu avec Staline dans la même pièce au même moment."
+  },
+  {
+    "id": 2372,
+    "type": "global",
+    "joke": "Quand Poutine arrive en ville ...",
+    "answer": "... même les trottoirs changent de trottoir."
+  },
+  {
+    "id": 2373,
+    "type": "global",
+    "joke": "Quelle est la différence entre un chien et un chat ?",
+    "answer": "Un chien a des maîtres et un chat a du personnel."
+  },
+  {
+    "id": 2374,
+    "type": "global",
+    "joke": "Quelle fleur pisse encore au lit ?",
+    "answer": "Le pissenlit"
+  },
+  {
+    "id": 2375,
+    "type": "global",
+    "joke": "Toto dit à sa mère : J'aurais aimé vivre au Moyen-Âge.",
+    "answer": "Moins de cours d'histoire à apprendre..."
+  },
+  {
+    "id": 2376,
+    "type": "dev",
+    "joke": "J'ai fait un test de QI en ligne.",
+    "answer": "Apparemment, j'en ai 404."
+  },
+  {
+    "id": 2377,
+    "type": "global",
+    "joke": "Tu peux appeler l'ascenseur s'il te plaît ?",
+    "answer": "ASCENSEUR !!!!!"
+  },
+  {
+    "id": 2378,
+    "type": "dark",
+    "joke": "Pourquoi est-ce que les hommes préfèrent les femmes intelligentes ?",
+    "answer": "Parce que les opposés s'attirent."
+  },
+  {
+    "id": 2379,
+    "type": "global",
+    "joke": "Comme Shrek a des enfants...",
+    "answer": "Est-ce qu'on peut dire que c'est un sale gros père vert ?"
+  },
+  {
+    "id": 2380,
+    "type": "dev",
+    "joke": "Dieu a dit : \"Que Windows soit !\"",
+    "answer": "Et le bug fut."
+  },
+  {
+    "id": 2381,
+    "type": "dev",
+    "joke": "Hier, j'ai renommé mon réseau WIFI \"Hack me if you can\"",
+    "answer": "Aujourd'hui il s'appelle \"Challenge Accepted\"..."
+  },
+  {
+    "id": 2382,
+    "type": "global",
+    "joke": "Quel est le prénom le plus mathématique ?",
+    "answer": "Vingt Cent"
+  },
+  {
+    "id": 2383,
+    "type": "global",
+    "joke": "Pourquoi les mathématiciens détestent-ils les chiffres impairs ?",
+    "answer": "Parce que les chiffres impairs ne peuvent jamais être carrés."
+  },
+  {
+    "id": 2384,
+    "type": "global",
+    "joke": "Monsieur, arrêtez de dire \"ils croivent\", le verbe croiver n'existe pas, et cela m'énerve lorsque les gens parlent mal français.",
+    "answer": "Ah, vous ne le sachiez pas? Autant pour moi."
+  },
+  {
+    "id": 2385,
+    "type": "global",
+    "joke": "Pourquoi les arbres puent-ils ?",
+    "answer": "Parce que les troncs pètent."
+  },
+  {
+    "id": 2386,
+    "type": "dev",
+    "joke": "Pourquoi les développeurs préfèrent-ils la nuit plutôt que le jour ?",
+    "answer": "Parce que les bugs ne se reproduisent pas à cette heure-là."
+  },
+  {
+    "id": 2387,
+    "type": "global",
+    "joke": "Quand deux steak jouent à cache cache, est ce qu'on peut dire qu'ils jouent à...",
+    "answer": "steak-caché"
+  },
+  {
+    "id": 2388,
+    "type": "global",
+    "joke": "Que dit une fleur qui est tombée ?",
+    "answer": "Je me suis planté"
+  },
+  {
+    "id": 2389,
+    "type": "global",
+    "joke": "Pourquoi ton cahier de math est triste ?",
+    "answer": "Car il a trop de problèmes"
+  },
+  {
+    "id": 2390,
+    "type": "global",
+    "joke": "Un homme veut draguer une fille : \"Je suis peut être pas beau physiquement, mais j'ai bon cœur.\"",
+    "answer": "C'est gentil mais je n'ai pas besoin de greffe pour le moment."
+  },
+  {
+    "id": 2391,
+    "type": "dark",
+    "joke": "La Roumanie se lance dans la conquête spatiale.",
+    "answer": "C'est le premier rom sur la Lune."
+  },
+  {
+    "id": 2392,
+    "type": "dark",
+    "joke": "Un pharmacien dit à son client : \"Je ne peux pas vous vendre de l'arsenic sans ordonance\".",
+    "answer": "Et si je montre une photo de ma belle-mère, ça va ?"
+  },
+  {
+    "id": 2393,
+    "type": "global",
+    "joke": "Pourquoi les rois vont souvent chez le dentiste ?",
+    "answer": "Pour se faire poser des couronnes !"
+  },
+  {
+    "id": 2394,
+    "type": "dark",
+    "joke": "Pourquoi Batman ne couvre que le haut de son visage ?",
+    "answer": "Pour que la police voit qu’il est blanc."
+  },
+  {
+    "id": 2395,
+    "type": "global",
+    "joke": "Quand quelqu'un perd un iPhone, est ce qu'on peut dire qu'il l'a...",
+    "answer": "paumé ?"
+  },
+  {
+    "id": 2396,
+    "type": "global",
+    "joke": "Quels sont les plus vieux animaux du monde ?",
+    "answer": "Le zèbre, et le léopard des neiges, car ils sont en noir et blanc !"
+  },
+  {
+    "id": 2397,
+    "type": "dark",
+    "joke": "Pourquoi les Chinois et les Français ne cuisinent pas ensemble ?",
+    "answer": "Car il faut separer le jaune et le blanc."
+  },
+  {
+    "id": 2398,
+    "type": "beauf",
+    "joke": "Comment faire rentrer 3 pédés dans un pub archi-bondé ?",
+    "answer": "Retourner un tabouret."
+  },
+  {
+    "id": 2399,
+    "type": "dark",
+    "joke": "Que fait un policier américain sur un piano ?",
+    "answer": "Il s'entraine à mieux viser les touches noires..."
+  },
+  {
+    "id": 2400,
+    "type": "limit",
+    "joke": "Melon et Meleche trouve une maison à vendre...",
+    "answer": "…Melon l’achète et Meleche l’habite."
+  },
+  {
+    "id": 2401,
+    "type": "global",
+    "joke": "Que dit une imprimante qui ne se sens pas écoutée ?",
+    "answer": "J'ai l'impression que tu n'imprimes rien à ce que je te dis"
+  },
+  {
+    "id": 2402,
+    "type": "global",
+    "joke": "A l'école j'étais toujours le premier...",
+    "answer": "... à partir."
+  },
+  {
+    "id": 2403,
+    "type": "global",
+    "joke": "Quel est le collectif le plus rentable ?",
+    "answer": "Le collectif Mais Tissez !!"
+  },
+  {
+    "id": 2404,
+    "type": "global",
+    "joke": "Il était une froid, un petit glaçon",
+    "answer": "qui vivait avec sa mer."
+  },
+  {
+    "id": 2405,
+    "type": "blondes",
+    "joke": "Où vit une blonde amatrice de fleurs ?",
+    "answer": "Dans un marais, pour être avec plein de vase !"
+  },
+  {
+    "id": 2406,
+    "type": "dark",
+    "joke": "Qu'est-ce qu'un américain qui mange deux menus dans un fast food ?",
+    "answer": "Un américain au régime."
+  },
+  {
+    "id": 2407,
+    "type": "global",
+    "joke": "Police : \"Pourquoi n'avez vous pas porté plainte pour le vol de votre carte bleu ?\"",
+    "answer": "Monsieur : \"Car j'ai découvert que le voleur dépensait moins que ma femme...\""
+  },
+  {
+    "id": 2408,
+    "type": "dark",
+    "joke": "Monsieur Dickinson...",
+    "answer": "Sortez de cet enfant tout de suite !"
+  },
+  {
+    "id": 2409,
+    "type": "dark",
+    "joke": "Que dit un terroriste au centre ville ?",
+    "answer": "Je vais m'éclater."
+  },
+  {
+    "id": 2410,
+    "type": "dark",
+    "joke": "Que dit un terroriste d'une jolie fille ?",
+    "answer": "C'est une bombe."
+  },
+  {
+    "id": 2411,
+    "type": "beauf",
+    "joke": "Ta mère c’est comme Pac-Man...",
+    "answer": "Elle aime manger les boules..."
+  },
+  {
+    "id": 2412,
+    "type": "global",
+    "joke": "Les manifestants sont en colère ...",
+    "answer": "ça grève les yeux."
+  },
+  {
+    "id": 2413,
+    "type": "dark",
+    "joke": "Qu'est-ce qu'un singe qui mange du riz avec des baguettes ?",
+    "answer": "Un Japonègre"
+  },
+  {
+    "id": 2414,
+    "type": "global",
+    "joke": "Quel est le médicament préféré des hiboux ?",
+    "answer": "L'hibouprofen."
+  },
+  {
+    "id": 2415,
+    "type": "beauf",
+    "joke": "Ta mère est tellement grosse que quand elle meurt...",
+    "answer": "elle n’arrive pas à monter au ciel..."
   }
 ]
