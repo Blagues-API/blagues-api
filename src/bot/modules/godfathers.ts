@@ -14,6 +14,8 @@ interface GodfatherEmoji {
 const rect = Buffer.from('<svg><rect x="0" y="0" width="128" height="128" rx="64" ry="64"/></svg>');
 
 export async function getGodfatherEmoji(emojisGuild: Guild, member: GuildMember): Promise<GodfatherEmoji> {
+  const avatarHash = member.avatar || member.user.avatar;
+
   let godfather = await prisma.godfather.findUnique({
     where: { user_id: member.id }
   });
@@ -23,14 +25,25 @@ export async function getGodfatherEmoji(emojisGuild: Guild, member: GuildMember)
     godfather = await prisma.godfather.create({
       data: {
         user_id: member.id,
-        emoji_id: emoji.id
+        emoji_id: emoji.id,
+        hash: avatarHash
       }
     });
   }
+
   if (!emojisGuild.emojis.cache.has(godfather.emoji_id)) {
     await prisma.godfather.delete({ where: { id: godfather.id } });
     return getGodfatherEmoji(emojisGuild, member);
   }
+
+  if (godfather.hash !== avatarHash) {
+    const oldGodfather = await prisma.godfather.delete({ where: { id: godfather.id } });
+
+    await emojisGuild.emojis.delete(oldGodfather.emoji_id);
+
+    return getGodfatherEmoji(emojisGuild, member);
+  }
+
   return { id: member.id, emoji: formatEmoji(godfather.emoji_id) };
 }
 
