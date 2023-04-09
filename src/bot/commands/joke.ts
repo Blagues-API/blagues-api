@@ -4,9 +4,12 @@ import {
   ChatInputCommandInteraction,
   inlineCode,
   italic,
-  spoiler
+  spoiler,
+  ComponentType,
+  ButtonStyle,
+  ButtonInteraction
 } from 'discord.js';
-import { Categories, CategoriesRefsFull, Joke } from '../../typings';
+import { Categories, CategoriesRefsFull } from '../../typings';
 import { Colors, commandsChannelId } from '../constants';
 import Command from '../lib/command';
 import { checkKeywordsInJoke, randomJoke, randomJokeByKeywords, randomJokeByType } from '../../controllers';
@@ -35,7 +38,6 @@ export default class JokeCommand extends Command {
           type: ApplicationCommandOptionType.String,
           name: 'type',
           description: 'Type de blague',
-          required: true,
           choices: Object.entries(JokeCategories).map(([key, name]) => ({
             name,
             value: key
@@ -54,33 +56,100 @@ export default class JokeCommand extends Command {
   }
 
   async run(interaction: ChatInputCommandInteraction<'cached'>) {
-    const type = interaction.options.getString('type', true) as JokeCategory;
+    const type = (interaction.options.getString('type') || 'random') as JokeCategory;
     const search = interaction.options.getString('search');
 
-    if (search) return this.jokeByKeyword(interaction, search.split(',') ?? [search], type);
-    else return this.randomJoke(interaction, type);
-    // TODO: Add button to send another joke
+    const joke = await this.findJoke(interaction, type, search);
+    if (!joke) return;
+
+    return interaction.reply({
+      embeds: [
+        {
+          color: Colors.PRIMARY,
+          title: joke.joke,
+          description: spoiler(joke.answer),
+          timestamp: new Date().toISOString(),
+          footer: {
+            text: `${CategoriesRefsFull[joke.type]} • ID ${joke.id}`,
+            icon_url: interaction.guild.iconURL({ size: 32 }) ?? undefined
+          }
+        }
+      ],
+      components: [
+        {
+          type: ComponentType.ActionRow,
+          components: [
+            {
+              type: ComponentType.Button,
+              style: ButtonStyle.Primary,
+              label: 'Une autre !',
+              customId: `cmd:joke:${interaction.user.id}:${type}:${search ?? ''}`
+            }
+          ]
+        }
+      ]
+    });
   }
 
-  async jokeByKeyword(interaction: ChatInputCommandInteraction<'cached'>, keyword: string[], type: JokeCategory) {
-    const joke = (type === 'random' ? randomJokeByKeywords(keyword) : randomJokeByKeywords(keyword, type))['response'];
+  async button(interaction: ButtonInteraction<'cached'>, [userId, type, search]: string[]) {
+    const joke = await this.findJoke(interaction, type as JokeCategory, search);
+    if (!joke) return;
+
+    const embed = {
+      color: Colors.PRIMARY,
+      title: joke.joke,
+      description: spoiler(joke.answer),
+      timestamp: new Date().toISOString(),
+      footer: {
+        text: `${CategoriesRefsFull[joke.type]} • ID ${joke.id}`,
+        icon_url: interaction.guild.iconURL({ size: 32 }) ?? undefined
+      }
+    };
+
+    if (userId !== interaction.user.id) {
+      return interaction.reply({ embeds: [embed], ephemeral: true });
+    }
+
+    const embeds = interaction.message.embeds.map((e) => e.toJSON());
+
+    embeds.push(embed);
+
+    await interaction.update({ embeds, components: embeds.length < 10 ? interaction.message.components : [] });
+  }
+
+  async findJoke(
+    interaction: ChatInputCommandInteraction<'cached'> | ButtonInteraction<'cached'>,
+    type: JokeCategory,
+    search: string | null
+  ) {
+    if (!search) {
+      const { response: joke } = type === 'random' ? randomJoke() : randomJokeByType(type);
+
+      return joke ?? null;
+    }
+
+    const keyswords = search.split(',');
+
+    const { response: joke } = randomJokeByKeywords(keyswords, type === 'random' ? undefined : type);
 
     if (!joke) {
       if (type === 'random') {
-        return interaction.reply(
+        await interaction.reply(
           interactionInfo(
-            `Aucune blague correspondant à la recherche ${inlineCode(keyword.join(', '))} n'existe dans l'API.`
+            `Aucune blague correspondant à la recherche ${inlineCode(keyswords.join(', '))} n'existe dans l'API.`
           )
         );
+
+        return null;
       }
 
-      const filtredJokes = Jokes.list.filter((joke) => checkKeywordsInJoke(joke, keyword));
+      const filtredJokes = Jokes.list.filter((joke) => checkKeywordsInJoke(joke, keyswords));
       const availableCategories = Categories.filter((category) => filtredJokes.some((joke) => joke.type === category));
 
-      return interaction.reply(
+      await interaction.reply(
         interactionInfo(
           `Aucune blague de type ${inlineCode(CategoriesRefsFull[type])} correspondant à la recherche ${inlineCode(
-            keyword.join(', ')
+            keyswords.join(', ')
           )} n'a été trouvée.\n\n${
             ':information_source: ' +
             italic(
@@ -96,31 +165,10 @@ export default class JokeCommand extends Command {
           }`
         )
       );
+
+      return null;
     }
 
-    return this.sendJoke(interaction, joke);
-  }
-
-  async randomJoke(interaction: ChatInputCommandInteraction<'cached'>, type: JokeCategory) {
-    const joke = type === 'random' ? randomJoke()['response']! : randomJokeByType(type)['response']!;
-
-    return this.sendJoke(interaction, joke);
-  }
-
-  async sendJoke(interaction: ChatInputCommandInteraction<'cached'>, joke: Joke) {
-    return interaction.reply({
-      embeds: [
-        {
-          color: Colors.PRIMARY,
-          title: joke.joke,
-          description: spoiler(joke.answer),
-          timestamp: new Date().toISOString(),
-          footer: {
-            text: `${CategoriesRefsFull[joke.type]} • (${joke.id})`,
-            icon_url: interaction.guild.iconURL({ size: 32 }) ?? undefined
-          }
-        }
-      ]
-    });
+    return joke;
   }
 }
