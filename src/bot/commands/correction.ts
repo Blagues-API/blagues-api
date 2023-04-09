@@ -554,5 +554,7 @@ export default class CorrectionCommand extends Command {
     for (const reaction of [upReactionIdentifier, downReactionIdentifier]) {
       await correction.react(reaction).catch(() => null);
     }
+
+    message.client.summary.askReload();
   }
 }

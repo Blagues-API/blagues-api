@@ -22,24 +22,50 @@ import {
   guildId,
   neededCorrectionsApprovals,
   neededSuggestionsApprovals,
-  remindersChannelId,
+  summaryChannelId,
   suggestionsChannelId
 } from '../constants';
 import { getGodfatherEmoji } from './godfathers';
-import { ReminderProposal } from '../../typings';
+import { SummaryProposal } from '../../typings';
+import dayjs from 'dayjs';
+import { setTimeout as sleep } from 'timers/promises';
 
-export class Reminders {
+export class Summary {
+  private pending = false;
+  private lastUpdate = 0;
+
   constructor(public client: Client) {
-    if (process.env.BOT_REMINDERS === 'false') return;
+    if (process.env.BOT_SUMMARY === 'false') return;
 
-    // Every 10 minutes
-    schedule.scheduleJob('*/10 * * * *', (date) => this.run(date));
+    // At 21:00
+    schedule.scheduleJob('0 21 * * *', () => this.reload(true));
+
+    this.reload();
   }
 
-  async run(date: Date): Promise<void> {
-    const needMentions = date.getHours() === 21 && date.getMinutes() === 0;
+  async askReload() {
+    if (this.pending) return;
+
+    const nextAllowedUpdate = this.lastUpdate + 3;
+
+    if (dayjs().unix() < nextAllowedUpdate) {
+      this.pending = true;
+
+      await sleep(Math.min(nextAllowedUpdate - dayjs().unix(), 0) * 1000);
+
+      this.pending = false;
+    }
+
+    await this.reload();
+
+    this.lastUpdate = dayjs().unix();
+  }
+
+  async reload(needMentions = false): Promise<void> {
+    if (process.env.BOT_SUMMARY === 'false') return;
+
     // Get all open proposals with their dependencies and decisions
-    const proposals: ReminderProposal[] = await prisma.proposal.findMany({
+    const proposals: SummaryProposal[] = await prisma.proposal.findMany({
       where: {
         merged: false,
         refused: false,
@@ -98,7 +124,7 @@ export class Reminders {
     proposals.sort((a, b) => a.approvals.length + a.disapprovals.length - (b.approvals.length + b.disapprovals.length));
 
     // Remap proposals with godfathers acceptable decisions
-    const entries: Array<{ proposal: ReminderProposal; members_ids: Snowflake[] }> = [];
+    const entries: Array<{ proposal: SummaryProposal; members_ids: Snowflake[] }> = [];
     for (const proposal of proposals) {
       if (proposal.type === ProposalType.SUGGESTION) {
         if (proposal.corrections[0]) continue;
@@ -128,17 +154,20 @@ export class Reminders {
           .map((members_id) => godfathersEmojis.find(({ id }) => members_id === id)?.emoji)
           .filter((e) => e)
           .join(' ');
+
         const member = guild.members.cache.get(proposal.user_id!);
-        const proposal_type = proposal.type === ProposalType.SUGGESTION ? 'Suggestion' : 'Correction';
-        const line = `${hyperlink(
-          proposal_type,
+        const proposalType = proposal.type === ProposalType.SUGGESTION ? 'Suggestion' : 'Correction';
+        const link = hyperlink(
+          proposalType,
           messageLink(
             proposal.type === ProposalType.SUGGESTION ? suggestionsChannelId : correctionsChannelId,
             proposal.message_id!,
             guild.id
           ),
-          member ? proposal_type + ' de ' + member.displayName : proposal_type
-        )} ${godfathers}\n`;
+          member ? proposalType + ' de ' + member.displayName : proposalType
+        );
+
+        const line = `${link} ${godfathers}\n`;
 
         if (line.length + acc.current.length > 4090) {
           acc.pages.push(acc.current);
@@ -171,16 +200,16 @@ export class Reminders {
         .map((_score, member_id) => userMention(member_id))
         .join(' ');
 
-    const remindersChannel = this.client.channels.cache.get(remindersChannelId) as TextChannel;
+    const summaryChannel = this.client.channels.cache.get(summaryChannelId) as TextChannel;
 
     // Delete all previous channel messages
-    await remindersChannel.bulkDelete(await remindersChannel.messages.fetch());
+    await summaryChannel.bulkDelete(await summaryChannel.messages.fetch());
 
-    // Send all reminders pages in separate messages
+    // Send all summary pages in separate messages
     for (const index in pages) {
       const isFirstPage = Number(index) === 0;
       const isLastPage = Number(index) === pages.length - 1;
-      await remindersChannel.send({
+      await summaryChannel.send({
         content: (isFirstPage && mentions) || undefined,
         embeds: [
           {
@@ -210,7 +239,7 @@ export class Reminders {
                     type: ComponentType.Button,
                     emoji: '📑',
                     label: 'Mes propositions',
-                    customId: 'user_reminder',
+                    customId: 'user_summary',
                     style: ButtonStyle.Primary
                   }
                 ]
@@ -221,7 +250,7 @@ export class Reminders {
     }
   }
 
-  async pendingUserReminders(interaction: ButtonInteraction) {
+  async pendingUserDecisions(interaction: ButtonInteraction) {
     const proposals = await prisma.proposal.findMany({
       where: {
         merged: false,
@@ -277,7 +306,7 @@ export class Reminders {
     proposals.sort((a, b) => a.approvals.length + a.disapprovals.length - (b.approvals.length + b.disapprovals.length));
 
     // Remap proposals with godfathers acceptable decisions
-    const entries: Array<{ proposal: ReminderProposal; members_ids: Snowflake[] }> = [];
+    const entries: Array<{ proposal: SummaryProposal; members_ids: Snowflake[] }> = [];
     for (const proposal of proposals) {
       if (proposal.type === ProposalType.SUGGESTION) {
         if (proposal.corrections[0]) continue;
@@ -312,16 +341,19 @@ export class Reminders {
           return acc;
         }
 
-        const line = `${hyperlink(
+        const link = hyperlink(
           proposal.type === ProposalType.SUGGESTION ? 'Suggestion' : 'Correction',
           messageLink(
             proposal.type === ProposalType.SUGGESTION ? suggestionsChannelId : correctionsChannelId,
             proposal.message_id!,
             guild.id
           )
-        )} (${Math.max(proposal.approvals.length, proposal.disapprovals.length)}/${neededApprovalsCount})\n`;
+        );
+        const approvalsCount = Math.max(proposal.approvals.length, proposal.disapprovals.length);
 
-        if (line.length + acc.description.length > 4000) {
+        const line = `${link} (${approvalsCount}/${neededApprovalsCount})\n`;
+
+        if (line.length + acc.description.length > 4090) {
           if (array.length === index + 1) {
             acc.description += `Et ${acc.count} autres...`;
             return acc;
@@ -338,7 +370,7 @@ export class Reminders {
       { description: '', count: 0 }
     );
 
-    // Send all reminders pages in separate messages
+    // Send all summary pages in separate messages
     await interaction.reply({
       embeds: [
         {

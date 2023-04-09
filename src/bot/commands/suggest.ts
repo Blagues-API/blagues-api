@@ -167,7 +167,7 @@ export default class SuggestCommand extends Command {
       });
     }
 
-    const suggestionsChannel = interaction.guild!.channels.cache.get(suggestionsChannelId) as TextChannel;
+    const suggestionsChannel = interaction.guild.channels.cache.get(suggestionsChannelId) as TextChannel;
     if (!isEmbedable(suggestionsChannel)) {
       return interaction.reply(
         interactionProblem(`Je n'ai pas la permission d'envoyer la blague dans le salon ${suggestionsChannel}.`, false)
@@ -191,6 +191,8 @@ export default class SuggestCommand extends Command {
       await suggestion.react(reaction).catch(() => null);
     }
 
-    return confirmation.update(interactionValidate(`La ${hyperlink('blague', suggestion.url)} a été envoyée !`, false));
+    await confirmation.update(interactionValidate(`La ${hyperlink('blague', suggestion.url)} a été envoyée !`, false));
+
+    interaction.client.summary.askReload();
   }
 }

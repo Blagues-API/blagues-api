@@ -89,7 +89,7 @@ export type ProposalSuggestion = ProposalExtended & {
   corrections: Proposal[];
 };
 
-export type ReminderProposal = ProposalExtended & {
+export type SummaryProposal = ProposalExtended & {
   corrections: Proposal[];
   suggestion: (ProposalExtended & { corrections: Proposal[] }) | null;
 };

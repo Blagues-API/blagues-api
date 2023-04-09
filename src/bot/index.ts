@@ -19,12 +19,12 @@ import Jokes from '../jokes';
 import prisma from '../prisma';
 import { correctionsChannelId, godfatherRoleId, guildId, suggestionsChannelId } from './constants';
 import Dispatcher from './lib/dispatcher';
-import { AutoPublish, Reminders, Stickys, updateGodfatherEmoji, Votes } from './modules';
+import { AutoPublish, Summary, Stickys, updateGodfatherEmoji, Votes } from './modules';
 
 export default class Bot extends Client {
   public dispatcher: Dispatcher;
   public stickys: Stickys;
-  public reminders: Reminders;
+  public summary: Summary;
   public votes: Votes;
   public autoPublish: AutoPublish;
 
@@ -41,7 +41,7 @@ export default class Bot extends Client {
 
     this.dispatcher = new Dispatcher(this);
     this.stickys = new Stickys(this);
-    this.reminders = new Reminders(this);
+    this.summary = new Summary(this);
     this.votes = new Votes(this);
     this.autoPublish = new AutoPublish(this);
 
@@ -64,9 +64,17 @@ export default class Bot extends Client {
 
   async onInteractionCreate(interaction: Interaction): Promise<void> {
     if (interaction.type === InteractionType.ApplicationCommand) {
-      return this.dispatcher.execute(interaction);
-    } else if (interaction.isButton() && interaction.customId === 'user_reminder') {
-      return this.reminders.pendingUserReminders(interaction);
+      return this.dispatcher.executeCommand(interaction);
+    }
+
+    if (interaction.isButton()) {
+      if (interaction.customId === 'user_summary') {
+        return this.summary.pendingUserDecisions(interaction);
+      }
+
+      if (interaction.customId.startsWith('cmd:')) {
+        return this.dispatcher.executeCommandButton(interaction);
+      }
     }
   }
 
@@ -153,6 +161,7 @@ declare module 'discord.js' {
   interface Client {
     dispatcher: Dispatcher;
     stickys: Stickys;
+    summary: Summary;
     votes: Votes;
     autoPublish: AutoPublish;
 
