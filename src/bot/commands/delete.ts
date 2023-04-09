@@ -122,6 +122,8 @@ export default class DeleteCommand extends Command {
 
     interaction.client.refreshStatus();
 
+    interaction.client.summary.askReload();
+
     return confirmation.update(interactionValidate('La blague a bien été supprimée !', true));
   }
 }

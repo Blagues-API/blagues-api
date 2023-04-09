@@ -199,6 +199,8 @@ export default class ApproveCommand extends Command {
 
       await message.edit({ embeds: [embed] });
 
+      interaction.client.summary.askReload();
+
       return interaction.reply(interactionInfo(`Votre ${hyperlink('approbation', message.url)} a bien été retirée.`));
     }
 
@@ -264,10 +266,12 @@ export default class ApproveCommand extends Command {
 
     try {
       if (isSuggestion) {
-        return this.approveSuggestion(interaction, proposal, message, embed);
+        await this.approveSuggestion(interaction, proposal, message, embed);
       } else {
-        return this.approveCorrection(interaction, proposal, message, embed);
+        await this.approveCorrection(interaction, proposal, message, embed);
       }
+
+      interaction.client.summary.askReload();
     } catch (error) {
       console.error(error);
       await interaction.editReply(
@@ -346,7 +350,7 @@ export default class ApproveCommand extends Command {
       interactionValidate(`La ${hyperlink('suggestion', message.url)} a bien été ajoutée à l'API !`)
     );
 
-    return message.client.stickys.reload();
+    await message.client.stickys.reload();
   }
 
   async approveCorrection(

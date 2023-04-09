@@ -8,7 +8,7 @@ export const suggestionsChannelId: Snowflake = process.env.SUGGESTIONS_CHANNEL ?
 export const correctionsChannelId: Snowflake = process.env.CORRECTIONS_CHANNEL ?? '826856142793736213';
 export const logsChannelId: Snowflake = process.env.LOGS_CHANNEL ?? '763778635857133599';
 export const commandsChannelId: Snowflake = process.env.COMMANDS_CHANNEL ?? '821040840541077545';
-export const remindersChannelId: Snowflake = process.env.REMINDERS_CHANNEL ?? '920277899649613844';
+export const summaryChannelId: Snowflake = process.env.SUMMARY_CHANNEL ?? '920277899649613844';
 
 export const neededSuggestionsApprovals: number = Number(process.env.SUGGESTIONS_APPROVALS_COUNT) || 3;
 export const neededCorrectionsApprovals: number = Number(process.env.CORRECTIONS_APPROVALS_COUNT) || 2;

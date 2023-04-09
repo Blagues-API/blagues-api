@@ -182,6 +182,8 @@ export default class DisapproveCommand extends Command {
 
       await message.edit({ embeds: [embed] });
 
+      interaction.client.summary.askReload();
+
       return interaction.reply(
         interactionInfo(`Votre ${hyperlink('désapprobation', message.url)} a bien été retirée.`)
       );
@@ -243,7 +245,9 @@ export default class DisapproveCommand extends Command {
       );
     }
 
-    return this.disapprove(interaction, proposal, message, embed);
+    await this.disapprove(interaction, proposal, message, embed);
+
+    interaction.client.summary.askReload();
   }
 
   async disapprove(
