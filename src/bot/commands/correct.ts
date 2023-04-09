@@ -126,7 +126,7 @@ export default class CorrectCommand extends Command {
     joke: JokeCorrectionPayload,
     oldMessage: Message<true> | null = null
   ): Promise<{ newJoke: JokeCorrectionPayload; question: Message<true> } | null> {
-    const messageData: MessageCreateOptions = {
+    const messageData: Omit<MessageCreateOptions, 'flags'> = {
       content: user.toString(),
       embeds: [
         {
