@@ -45,7 +45,7 @@ export class AutoPublish {
   async run() {
     const [referenceSha, blobSha] = await Promise.all([this.#getReferenceCommit(), this.#createBlob()]);
     const treeSha = await this.#createTree(referenceSha, blobSha);
-    const commitSha = await this.#createCommit(referenceSha, treeSha);
+    const commitSha = await this.#createCommit(treeSha, referenceSha);
     const branchSha = await this.#createReference(commitSha);
 
     const mergeBranch = await this.#mergeReference(branchSha);
