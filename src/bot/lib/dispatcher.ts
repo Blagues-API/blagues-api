@@ -1,4 +1,4 @@
-import { ApplicationCommandData, channelMention, Client, CommandInteraction } from 'discord.js';
+import { ApplicationCommandData, ButtonInteraction, channelMention, Client, CommandInteraction } from 'discord.js';
 import Command from './command';
 
 import { commandsChannelId, correctionsChannelId, guildId, suggestionsChannelId } from '../constants';
@@ -24,7 +24,7 @@ export default class Dispatcher {
     return this.commands.map((command: Command) => command.data);
   }
 
-  public async execute(interaction: CommandInteraction): Promise<void> {
+  public async executeCommand(interaction: CommandInteraction): Promise<void> {
     const command = this.commands.find((cmd: Command) => cmd.name === interaction.commandName);
 
     if (!command) {
@@ -59,6 +59,24 @@ export default class Dispatcher {
 
     try {
       await command.run(interaction);
+    } catch (error) {
+      console.error('[Bot error]', error);
+    }
+  }
+
+  public async executeCommandButton(interaction: ButtonInteraction): Promise<void> {
+    const match = interaction.customId.match(/cmd:([^:]+)(?::(.*))?$/) as [string, string | undefined] | null;
+    if (!match) return;
+
+    const [, commandName, args = ''] = match;
+
+    const command = this.commands.find((cmd: Command) => cmd.name === commandName);
+    if (!command) return;
+
+    if (!command.button) return;
+
+    try {
+      await command.button(interaction, args.split(':'));
     } catch (error) {
       console.error('[Bot error]', error);
     }

@@ -1,4 +1,10 @@
-import { ApplicationCommandData, ApplicationCommandType, CommandInteraction, InteractionResponse } from 'discord.js';
+import {
+  ApplicationCommandData,
+  ApplicationCommandType,
+  ButtonInteraction,
+  CommandInteraction,
+  InteractionResponse
+} from 'discord.js';
 
 type ApplicationCommandDataWithChannel = ApplicationCommandData & {
   channels?: string[];
@@ -34,4 +40,6 @@ export default abstract class Command {
   }
 
   public abstract run(interaction: CommandInteraction): Promise<void | InteractionResponse>;
+
+  public button?(interaction: ButtonInteraction, args: string[]): Promise<void | InteractionResponse>;
 }
