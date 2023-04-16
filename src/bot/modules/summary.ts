@@ -117,9 +117,13 @@ export class Summary {
     const godfatherRole = guild.roles.cache.get(godfatherRoleId);
     if (!godfatherRole) return;
 
-    const godfathersEmojis = await Promise.all(
-      godfatherRole.members.map((member) => getGodfatherEmoji(emojisGuild, member))
-    );
+    const godfathersEmojis = new Map<string, string>();
+    for (const member of godfatherRole.members.values()) {
+      const emoji = await getGodfatherEmoji(emojisGuild, member);
+      if (!emoji) continue;
+
+      godfathersEmojis.set(member.id, emoji);
+    }
 
     proposals.sort((a, b) => a.approvals.length + a.disapprovals.length - (b.approvals.length + b.disapprovals.length));
 
@@ -151,7 +155,7 @@ export class Summary {
     const { pages } = entries.reduce<{ current: string; pages: string[] }>(
       (acc, { proposal, members_ids }, index, array) => {
         const godfathers = members_ids
-          .map((members_id) => godfathersEmojis.find(({ id }) => members_id === id)?.emoji)
+          .map((member_id) => godfathersEmojis.get(member_id))
           .filter((e) => e)
           .join(' ');
 

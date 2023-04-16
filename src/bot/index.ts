@@ -2,13 +2,11 @@ import {
   ActivityType,
   Client,
   GatewayIntentBits,
-  GuildMember,
   GuildTextBasedChannel,
   Interaction,
   InteractionType,
   Message,
   MessageReaction,
-  PartialGuildMember,
   PartialMessage,
   PartialMessageReaction,
   Partials,
@@ -17,9 +15,9 @@ import {
 } from 'discord.js';
 import Jokes from '../jokes';
 import prisma from '../prisma';
-import { correctionsChannelId, godfatherRoleId, guildId, suggestionsChannelId } from './constants';
+import { correctionsChannelId, suggestionsChannelId } from './constants';
 import Dispatcher from './lib/dispatcher';
-import { AutoPublish, Summary, Stickys, updateGodfatherEmoji, Votes } from './modules';
+import { AutoPublish, Summary, Stickys, Votes } from './modules';
 
 export default class Bot extends Client {
   public dispatcher: Dispatcher;
@@ -124,19 +122,11 @@ export default class Bot extends Client {
     return this.votes.run(reaction, user);
   }
 
-  async onGuildMemberUpdate(oldMember: GuildMember | PartialGuildMember, newMember: GuildMember) {
-    if (newMember.guild.id !== guildId) return;
-    if ((oldMember.avatar ?? oldMember.user.avatar) === (newMember.avatar ?? newMember.user.avatar)) return;
-    if (!newMember.roles.cache.has(godfatherRoleId)) return;
-    await updateGodfatherEmoji(newMember);
-  }
-
   registerEvents(): void {
     this.on('interactionCreate', this.onInteractionCreate.bind(this));
     this.on('messageCreate', this.onMessageCreate.bind(this));
     this.on('messageDelete', this.onMessageDelete.bind(this));
     this.on('messageReactionAdd', this.onMessageReactionAdd.bind(this));
-    this.on('guildMemberUpdate', this.onGuildMemberUpdate.bind(this));
   }
 
   refreshStatus() {

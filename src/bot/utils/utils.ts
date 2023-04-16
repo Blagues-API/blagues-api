@@ -94,3 +94,7 @@ export async function paginate(
 
   return paginate(interaction, embed, pages, page, message);
 }
+
+export function removeNull<Type = unknown>(entry: Type): entry is Exclude<Type, null | undefined | false | ''> {
+  return Boolean(entry);
+}
