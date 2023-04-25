@@ -18,7 +18,7 @@ export type OptionalDisallowRequest = FastifyRequest<{
 }>;
 
 export type JokeIdRequest = FastifyRequest<{
-  Params: { id: number };
+  Params: { id: string };
 }>;
 
 export type JokeTypeRequest = FastifyRequest<{
