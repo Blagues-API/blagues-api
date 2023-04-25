@@ -68,7 +68,7 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     method: 'GET',
     onRequest: fastify.apiAuth,
     handler: async (req: JokeIdRequest, res) => {
-      const joke = jokeById(req.params.id);
+      const joke = jokeById(Number(req.params.id));
       if (!joke) {
         return res.status(404).send(JokeNotFound);
       }
