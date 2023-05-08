@@ -14338,5 +14338,11 @@
     "type": "dark",
     "joke": "Un client rentre dans une animalerie asiatique et dit en pointant du doigt : \"Je voudrais ce chien\"",
     "answer": "L'asiatique lui répond : \"Sur place ou à emporter ?\""
+  },
+  {
+    "id": 2433,
+    "type": "global",
+    "joke": "Qu'est-ce qui est Jaune et qui attend",
+    "answer": "Jonhattan (Jaune Attend)"
   }
 ]
