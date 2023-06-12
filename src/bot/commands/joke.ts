@@ -1,13 +1,13 @@
 import {
   ApplicationCommandOptionType,
   ApplicationCommandType,
+  ButtonInteraction,
+  ButtonStyle,
   ChatInputCommandInteraction,
+  ComponentType,
   inlineCode,
   italic,
-  spoiler,
-  ComponentType,
-  ButtonStyle,
-  ButtonInteraction
+  spoiler
 } from 'discord.js';
 import { Categories, CategoriesRefsFull } from '../../typings';
 import { Colors, commandsChannelId } from '../constants';

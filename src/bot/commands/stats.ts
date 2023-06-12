@@ -1,8 +1,8 @@
 import { ApplicationCommandOptionType, ApplicationCommandType, ChatInputCommandInteraction } from 'discord.js';
-import Command from '../lib/command';
-import { interactionProblem } from '../utils';
-import { Stats } from '../modules/stats';
 import { commandsChannelId } from '../constants';
+import Command from '../lib/command';
+import { Stats } from '../modules/stats';
+import { interactionProblem } from '../utils';
 
 export default class StatsCommand extends Command {
   constructor() {

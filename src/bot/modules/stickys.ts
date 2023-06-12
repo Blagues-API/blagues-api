@@ -1,7 +1,7 @@
 import { stripIndents } from 'common-tags';
 import { APIEmbed, blockQuote, bold, channelMention, Client, Message, quote, Snowflake, TextChannel } from 'discord.js';
-import { Colors, commandsChannelId, correctionsChannelId, suggestionsChannelId } from '../constants';
 import Jokes from '../../jokes';
+import { Colors, commandsChannelId, correctionsChannelId, suggestionsChannelId } from '../constants';
 
 export class Stickys {
   public client: Client;

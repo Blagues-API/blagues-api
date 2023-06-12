@@ -1,5 +1,4 @@
-import { correctionsChannelId, downReactionIdentifier, suggestionsChannelId, upReactionIdentifier } from '../constants';
-import { isGodfather } from '../utils';
+import { VoteType } from '@prisma/client';
 import {
   Client,
   GuildTextBasedChannel,
@@ -10,7 +9,8 @@ import {
   User
 } from 'discord.js';
 import prisma from '../../prisma';
-import { VoteType } from '@prisma/client';
+import { correctionsChannelId, downReactionIdentifier, suggestionsChannelId, upReactionIdentifier } from '../constants';
+import { isGodfather } from '../utils';
 
 const Reactions = {
   [upReactionIdentifier]: VoteType.UP,

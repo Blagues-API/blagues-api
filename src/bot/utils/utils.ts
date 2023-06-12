@@ -1,3 +1,4 @@
+import { diffWords } from 'diff';
 import {
   APIEmbed,
   ButtonStyle,
@@ -7,7 +8,6 @@ import {
   Message,
   TextChannel
 } from 'discord.js';
-import { diffWords } from 'diff';
 import { godfatherRoleId } from '../constants';
 import { waitForInteraction } from './waitFor';
 

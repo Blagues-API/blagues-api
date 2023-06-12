@@ -1,11 +1,11 @@
-import { formatEmoji, Guild, GuildMember, Interaction, Snowflake } from 'discord.js';
-import prisma from '../../prisma';
-import sharp from 'sharp';
-import snakeCase from 'lodash/snakeCase';
-import { approveEmoji, disapproveEmoji, emojisGuildId } from '../constants';
-import { ProposalExtended } from '../../typings';
-import { removeNull } from '../../bot/utils';
 import { fetch, FetchResultTypes } from '@sapphire/fetch';
+import { formatEmoji, Guild, GuildMember, Interaction, Snowflake } from 'discord.js';
+import snakeCase from 'lodash/snakeCase';
+import sharp from 'sharp';
+import { removeNull } from '../../bot/utils';
+import prisma from '../../prisma';
+import { ProposalExtended } from '../../typings';
+import { approveEmoji, disapproveEmoji, emojisGuildId } from '../constants';
 
 const rect = Buffer.from('<svg><rect x="0" y="0" width="128" height="128" rx="64" ry="64"/></svg>');
 

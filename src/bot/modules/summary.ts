@@ -22,8 +22,8 @@ import {
   guildId,
   neededCorrectionsApprovals,
   neededSuggestionsApprovals,
-  summaryChannelId,
-  suggestionsChannelId
+  suggestionsChannelId,
+  summaryChannelId
 } from '../constants';
 import { getGodfatherEmoji } from './godfathers';
 import { SummaryProposal } from '../../typings';

@@ -1,3 +1,4 @@
+import { ProposalType } from '@prisma/client';
 import {
   ApplicationCommandOptionType,
   ApplicationCommandType,
@@ -11,6 +12,7 @@ import {
   TextChannel,
   User
 } from 'discord.js';
+import clone from 'lodash/clone';
 import { jokeById, jokeByQuestion } from '../../controllers';
 import prisma from '../../prisma';
 import { CategoriesRefs, Category, JokeTypesDescriptions, UnsignedJoke, UnsignedJokeKey } from '../../typings';
@@ -24,8 +26,6 @@ import {
   upReactionIdentifier
 } from '../constants';
 import Command from '../lib/command';
-import clone from 'lodash/clone';
-import { ProposalType } from '@prisma/client';
 import {
   buildJokeDisplay,
   info,

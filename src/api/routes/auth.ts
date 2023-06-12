@@ -1,11 +1,11 @@
-import { FastifyInstance, FastifyReply } from 'fastify';
-import { generateAPIToken, generateKey } from '../../utils';
-import prisma from '../../prisma';
 import { FetchResultTypes, fetch } from '@sapphire/fetch';
 import { APIUser, OAuth2Routes, RESTPostOAuth2AccessTokenResult } from 'discord-api-types/v9';
-import { DashboardAuthLogin, DashboardAuthUser, RegenerateReply, RegenerateRequest } from '../types';
-import { MissingKey } from '../Errors';
 import { Routes } from 'discord.js';
+import { FastifyInstance, FastifyReply } from 'fastify';
+import prisma from '../../prisma';
+import { generateAPIToken, generateKey } from '../../utils';
+import { MissingKey } from '../Errors';
+import { DashboardAuthLogin, DashboardAuthUser, RegenerateReply, RegenerateRequest } from '../types';
 
 export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.route({

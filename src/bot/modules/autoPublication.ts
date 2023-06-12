@@ -1,8 +1,8 @@
-import { Client } from 'discord.js';
-import schedule from 'node-schedule';
 import { Octokit } from '@octokit/rest';
 import { stripIndents } from 'common-tags';
+import { Client } from 'discord.js';
 import { readFileSync } from 'fs';
+import schedule from 'node-schedule';
 
 interface GitCommitPushOptions {
   owner: string;

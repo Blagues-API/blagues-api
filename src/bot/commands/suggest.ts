@@ -1,3 +1,4 @@
+import { ProposalType } from '@prisma/client';
 import {
   APIEmbed,
   ApplicationCommandOptionType,
@@ -10,6 +11,7 @@ import {
 } from 'discord.js';
 import { findBestMatch } from 'string-similarity';
 import Jokes from '../../jokes';
+import prisma from '../../prisma';
 import { CategoriesRefs, Category, UnsignedJoke } from '../../typings';
 import {
   Colors,
@@ -20,8 +22,6 @@ import {
 } from '../constants';
 import Command from '../lib/command';
 import { buildJokeDisplay, interactionProblem, interactionValidate, isEmbedable, waitForInteraction } from '../utils';
-import prisma from '../../prisma';
-import { ProposalType } from '@prisma/client';
 
 export default class SuggestCommand extends Command {
   constructor() {

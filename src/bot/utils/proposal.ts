@@ -1,9 +1,9 @@
+import { ProposalType } from '@prisma/client';
 import { APIEmbed, Message, MessageContextMenuCommandInteraction } from 'discord.js';
 import { Proposals } from '../../typings';
-import { renderGodfatherLine } from '../modules/godfathers';
 import { Colors, dataSplitRegex } from '../constants';
+import { renderGodfatherLine } from '../modules/godfathers';
 import { interactionProblem } from './embeds';
-import { ProposalType } from '@prisma/client';
 
 export async function updateProposalEmbed(
   interaction: MessageContextMenuCommandInteraction<'cached'>,

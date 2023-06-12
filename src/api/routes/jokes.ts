@@ -1,7 +1,7 @@
 import { FastifyInstance, FastifyRequest } from 'fastify';
+import { jokeById, jokesByKeywords, randomJoke, randomJokeByType } from '../../controllers';
 import Jokes from '../../jokes';
 import { Categories, CategoriesRefs } from '../../typings';
-import { jokeById, jokesByKeywords, randomJoke, randomJokeByType } from '../../controllers';
 import { BadRequest, JokeNotFound, NoContent } from '../Errors';
 import { JokeIdRequest, JokeTypeRequest, OptionalDisallowRequest, SearchRequest } from '../types';
 

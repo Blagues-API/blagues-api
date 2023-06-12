@@ -9,7 +9,7 @@ import {
 import Command from '../lib/command';
 import { Categories, CategoriesRefs, Category } from '../../typings';
 import { commandsChannelId } from '../constants';
-import { info, interactionInfo, waitForInteraction, isGodfather } from '../utils';
+import { info, interactionInfo, isGodfather, waitForInteraction } from '../utils';
 import prisma from '../../prisma';
 
 export default class IgnoreCommand extends Command {

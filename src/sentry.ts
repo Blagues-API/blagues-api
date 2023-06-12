@@ -1,8 +1,8 @@
-import path from 'path';
-
-import * as Sentry from '@sentry/node';
 import '@sentry/tracing';
+
 import { RewriteFrames } from '@sentry/integrations';
+import * as Sentry from '@sentry/node';
+import path from 'path';
 
 if (process.env.SENTRY_DSN) {
   console.log(`[Sentry] Connexion de Sentry...`);

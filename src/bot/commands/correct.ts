@@ -1,4 +1,4 @@
-import prisma from '../../prisma';
+import { ProposalType } from '@prisma/client';
 import {
   ApplicationCommandType,
   ButtonStyle,
@@ -9,6 +9,9 @@ import {
   TextChannel,
   User
 } from 'discord.js';
+import clone from 'lodash/clone';
+import prisma from '../../prisma';
+import { CategoriesRefs, Category } from '../../typings';
 import { Colors, commandsChannelId, correctionsChannelId, suggestionsChannelId } from '../constants';
 import Command from '../lib/command';
 import {
@@ -19,10 +22,7 @@ import {
   messageInfo,
   waitForInteraction
 } from '../utils';
-import { ProposalType } from '@prisma/client';
-import { CategoriesRefs, Category } from '../../typings';
 import CorrectionCommand, { JokeCorrectionPayload } from './correction';
-import clone from 'lodash/clone';
 
 export default class CorrectCommand extends Command {
   constructor() {

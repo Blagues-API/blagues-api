@@ -1,7 +1,7 @@
 import { constants as fsConstants, promises as fs } from 'fs';
-import { Correction, Joke, Suggestion } from './typings';
 import path from 'path';
 import prisma from './prisma';
+import { Correction, Joke, Suggestion } from './typings';
 
 import { AsyncQueue } from '@sapphire/async-queue';
 

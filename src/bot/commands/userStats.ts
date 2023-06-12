@@ -1,5 +1,5 @@
-import Command from '../lib/command';
 import { ApplicationCommandType, UserContextMenuCommandInteraction } from 'discord.js';
+import Command from '../lib/command';
 import { Stats } from '../modules/stats';
 import { interactionProblem } from '../utils';
 

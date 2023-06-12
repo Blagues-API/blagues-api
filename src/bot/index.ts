@@ -17,7 +17,7 @@ import Jokes from '../jokes';
 import prisma from '../prisma';
 import { correctionsChannelId, suggestionsChannelId } from './constants';
 import Dispatcher from './lib/dispatcher';
-import { AutoPublish, Summary, Stickys, Votes } from './modules';
+import { AutoPublish, Stickys, Summary, Votes } from './modules';
 
 export default class Bot extends Client {
   public dispatcher: Dispatcher;

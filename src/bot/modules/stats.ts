@@ -1,11 +1,11 @@
+import { Approval, Disapproval, Proposal, ProposalType, Vote, VoteType } from '@prisma/client';
 import { stripIndents } from 'common-tags';
-import { APIEmbed, CommandInteraction, formatEmoji, GuildMember, quote, bold, userMention } from 'discord.js';
-import { approveEmoji, Colors, disapproveEmoji, godfatherRoleId } from '../constants';
-import { isGodfather, paginate } from '../utils';
-import prisma from '../../prisma';
+import { APIEmbed, bold, CommandInteraction, formatEmoji, GuildMember, quote, userMention } from 'discord.js';
 import chunk from 'lodash/chunk';
 import partition from 'lodash/partition';
-import { Approval, Disapproval, Proposal, ProposalType, Vote, VoteType } from '@prisma/client';
+import prisma from '../../prisma';
+import { approveEmoji, Colors, disapproveEmoji, godfatherRoleId } from '../constants';
+import { isGodfather, paginate } from '../utils';
 
 interface MemberProposal extends Proposal {
   votes: Vote[];

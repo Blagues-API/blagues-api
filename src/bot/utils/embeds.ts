@@ -1,6 +1,6 @@
-import { Colors } from '../constants';
-import { APIEmbed, bold, InteractionReplyOptions, BaseMessageOptions } from 'discord.js';
 import { stripIndents } from 'common-tags';
+import { APIEmbed, BaseMessageOptions, bold, InteractionReplyOptions } from 'discord.js';
+import { Colors } from '../constants';
 
 type UniversalMessageOptions = Omit<BaseMessageOptions, 'flags'>;
 type UniversalInteractionOptions = Omit<InteractionReplyOptions, 'flags'>;

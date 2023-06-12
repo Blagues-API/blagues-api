@@ -9,6 +9,8 @@ import {
   roleMention,
   TextChannel
 } from 'discord.js';
+import { compareTwoStrings } from 'string-similarity';
+import Jokes from '../../jokes';
 import prisma from '../../prisma';
 import { CategoriesRefs, Category, Correction, Proposals, Suggestion } from '../../typings';
 import {
@@ -37,8 +39,6 @@ import {
   isGodfather,
   updateProposalEmbed
 } from '../utils';
-import Jokes from '../../jokes';
-import { compareTwoStrings } from 'string-similarity';
 
 export default class ApproveCommand extends Command {
   constructor() {

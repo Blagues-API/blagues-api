@@ -1,4 +1,4 @@
-import Command from '../lib/command';
+import { stripIndents } from 'common-tags';
 import {
   APIEmbed,
   ApplicationCommandOptionType,
@@ -10,13 +10,13 @@ import {
   ComponentType,
   TextChannel
 } from 'discord.js';
-import { buildJokeDisplay, interactionProblem, interactionValidate, isEmbedable, waitForInteraction } from '../utils';
-import { CategoriesRefs } from '../../typings';
 import { jokeById, jokeByQuestion } from '../../controllers';
-import { Colors, logsChannelId } from '../constants';
 import Jokes from '../../jokes';
 import prisma from '../../prisma';
-import { stripIndents } from 'common-tags';
+import { CategoriesRefs } from '../../typings';
+import { Colors, logsChannelId } from '../constants';
+import Command from '../lib/command';
+import { buildJokeDisplay, interactionProblem, interactionValidate, isEmbedable, waitForInteraction } from '../utils';
 
 export default class DeleteCommand extends Command {
   constructor() {

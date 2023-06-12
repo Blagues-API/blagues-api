@@ -1,11 +1,9 @@
 import { ApplicationCommandData, ButtonInteraction, channelMention, Client, CommandInteraction } from 'discord.js';
 import Command from './command';
-
 import { commandsChannelId, correctionsChannelId, guildId, suggestionsChannelId } from '../constants';
 import { interactionInfo } from '../utils';
-
-import requireAll from 'require-all';
 import path from 'path';
+import requireAll from 'require-all';
 
 type CommandFile = { default: ConstructableCommand };
 
