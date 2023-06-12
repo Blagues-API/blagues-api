@@ -1,10 +1,11 @@
 import { FastifyInstance, FastifyReply } from 'fastify';
 import { generateAPIToken, generateKey } from '../../utils';
 import prisma from '../../prisma';
-import got from 'got';
+import { FetchResultTypes, fetch } from '@sapphire/fetch';
 import { APIUser, OAuth2Routes, RESTPostOAuth2AccessTokenResult } from 'discord-api-types/v9';
 import { DashboardAuthLogin, DashboardAuthUser, RegenerateReply, RegenerateRequest } from '../types';
 import { MissingKey } from '../Errors';
+import { Routes } from 'discord.js';
 
 export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.route({
@@ -12,11 +13,15 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     method: 'GET',
     handler: async (req: DashboardAuthUser, res) => {
       try {
-        const discordUser = await got('https://discord.com/api/v10/users/@me', {
-          headers: {
-            Authorization: req.headers.authorization
-          }
-        }).json<APIUser>();
+        const discordUser = await fetch<APIUser>(
+          Routes.user(),
+          {
+            headers: {
+              Authorization: req.headers.authorization!
+            }
+          },
+          FetchResultTypes.JSON
+        );
         const user = await prisma.user.findUnique({
           select: { token: true, token_key: true },
           where: { user_id: discordUser.id }
@@ -42,17 +47,16 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     url: '/auth/token',
     method: 'POST',
     handler: async (req: DashboardAuthLogin, res: FastifyReply) => {
-      const authData = await got
-        .post(OAuth2Routes.tokenURL, {
-          form: req.body
-        })
-        .json<RESTPostOAuth2AccessTokenResult>();
+      const url = new URL(OAuth2Routes.tokenURL);
+      url.searchParams.set('code', req.body.code);
 
-      const discordUser = await got('https://discord.com/api/v10/users/@me', {
+      const authData = await fetch<RESTPostOAuth2AccessTokenResult>(url, { method: 'POST' }, FetchResultTypes.JSON);
+
+      const discordUser = await fetch<APIUser>('https://discord.com/api/v10/users/@me', {
         headers: {
           Authorization: `Bearer ${authData.access_token}`
         }
-      }).json<APIUser>();
+      });
 
       const key = generateKey();
       const token = generateAPIToken(discordUser.id, key, 100);

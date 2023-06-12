@@ -1,11 +1,11 @@
 import { formatEmoji, Guild, GuildMember, Interaction, Snowflake } from 'discord.js';
 import prisma from '../../prisma';
 import sharp from 'sharp';
-import got from 'got';
 import snakeCase from 'lodash/snakeCase';
 import { approveEmoji, disapproveEmoji, emojisGuildId } from '../constants';
 import { ProposalExtended } from '../../typings';
 import { removeNull } from '../../bot/utils';
+import { fetch, FetchResultTypes } from '@sapphire/fetch';
 
 const rect = Buffer.from('<svg><rect x="0" y="0" width="128" height="128" rx="64" ry="64"/></svg>');
 
@@ -79,7 +79,7 @@ function mapEmojis(emojis: Map<string, string>, users_ids: Snowflake[]) {
 
 async function generateAvatarEmoji(member: GuildMember) {
   const memberAvatar = member.displayAvatarURL({ size: 128, forceStatic: true, extension: 'png' });
-  const bufferAvatar = await got(memberAvatar).buffer();
+  const bufferAvatar = await fetch(memberAvatar, {}, FetchResultTypes.Buffer);
   return sharp(bufferAvatar)
     .composite([{ input: rect, blend: 'dest-in' }])
     .toBuffer();
