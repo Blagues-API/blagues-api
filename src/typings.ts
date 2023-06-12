@@ -36,7 +36,7 @@ export type UnpublishedJokeKey = keyof UnpublishedJoke;
 
 export const Categories = ['global', 'dev', 'dark', 'limit', 'beauf', 'blondes'] as const;
 
-export type Category = typeof Categories[number];
+export type Category = (typeof Categories)[number];
 
 /**
  * Joke references
