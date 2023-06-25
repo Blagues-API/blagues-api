@@ -4,7 +4,7 @@ WORKDIR /app
 COPY --chown=node:node package.json yarn.lock ./
 COPY --chown=node:node tsconfig.json ./
 
-RUN npm set-script prepare ""
+RUN sed -i 's/"postinstall": "husky install"/"postinstall": ""/' ./package.json
 
 FROM base as builder
 

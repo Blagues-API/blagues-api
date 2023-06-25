@@ -16,7 +16,7 @@
     "dev:down": "docker compose -p blagues_api_dev -f ./docker-compose.dev.yml down",
     "dev:shell:api": "docker exec -it blagues_api_dev bash",
     "dev:shell:website": "docker exec -it blagues_api_dev.fr bash",
-    "prepare": "husky install",
+    "postinstall": "husky install",
     "lint": "eslint --ext .ts,.js ./src",
     "dev:migrate": "docker exec -it blagues_api_dev npx prisma migrate dev",
     "dev:generate": "docker exec -it blagues_api_dev npx prisma generate",
