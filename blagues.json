@@ -14240,20 +14240,20 @@
   {
     "id": 2416,
     "type": "global",
-    "joke": "Que dit une feuille qui se fait annoter alors qu'elle ne veut pas ?",
-    "answer": "Tu te fiche de moi !"
+    "joke": "Pendant mon procès, je ne me suis pas levée même quand le juge me l'a ordonné, car...",
+    "answer": "... c'était une cour d'assises..."
   },
   {
     "id": 2417,
-    "type": "dark",
-    "joke": "On a beau critiquer les pédophiles ...",
-    "answer": "... mais au moins eux, en voiture, ils s'arrêtent devant les écoles."
+    "type": "global",
+    "joke": "Qu'est-ce-qui t'empêches d'être toi même ?",
+    "answer": "Le code pénal."
   },
   {
     "id": 2418,
     "type": "dark",
-    "joke": "On a beau critiquer les pédophiles ...",
-    "answer": "... mais au moins eux, en voiture, ils s'arrêtent devant les écoles."
+    "joke": "Qu’est ce qu’un noir avec un chapeau blanc ?",
+    "answer": "Un pot de Nutella !"
   },
   {
     "id": 2419,
@@ -14263,39 +14263,39 @@
   },
   {
     "id": 2420,
-    "type": "global",
-    "joke": "x² part dans la forêt. Mais il revient sans son carré. Pourquoi ?",
-    "answer": "Parce qu'il s'est pris une racine."
+    "type": "limit",
+    "joke": "Qu’est ce qu’on a avec un soutien-gorge Disney ?",
+    "answer": "Des seins animés."
   },
   {
     "id": 2421,
     "type": "global",
-    "joke": "x² part dans la forêt. Mais il revient sans son carré. Pourquoi ?",
-    "answer": "Parce qu'il s'est pris une racine."
+    "joke": "Un sans abris m'a demandé si j'avais une petite pièce, je lui ai répondu...",
+    "answer": "...non je vis dans une maison"
   },
   {
     "id": 2422,
-    "type": "global",
-    "joke": "x² part dans la forêt. Mais il revient sans son carré. Pourquoi ?",
-    "answer": "Parce qu'il s'est pris une racine."
+    "type": "dark",
+    "joke": "Un SDF m'a dit qu'il avait faim.",
+    "answer": "Je lui ai répondu que c'était normal car il était bientôt midi."
   },
   {
     "id": 2423,
     "type": "global",
-    "joke": "L'essence est un combustible fossile qui vient d'animaux décomposé.",
-    "answer": "Les vegan ne peuvent pas conduire."
+    "joke": "Pourquoi un vegan ne voyage pas dans un autre pays ?",
+    "answer": "Car ils ont besoin d'un passe-porc."
   },
   {
     "id": 2424,
-    "type": "global",
-    "joke": "x² part dans la forêt. Mais il revient sans son carré. Pourquoi ?",
-    "answer": "Parce qu'il s'est pris une racine."
+    "type": "dark",
+    "joke": "Hier il y a eu un concours de sosie en Chine...",
+    "answer": "Et tout le monde a gagné."
   },
   {
     "id": 2425,
-    "type": "global",
-    "joke": "x² part dans la forêt. Mais il revient sans son carré. Pourquoi ?",
-    "answer": "Parce qu'il s'est pris une racine."
+    "type": "dark",
+    "joke": "C'est une femme qui dit à son mari : -\"Chéri, peut tu aller nourrir le bébé ?\" -\"Ok mais j'attend qu'il pleure.\" \"Mais pourquoi ?\"",
+    "answer": "\"Car je le retrouve plus.\""
   },
   {
     "id": 2426,
