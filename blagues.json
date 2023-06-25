@@ -110,8 +110,8 @@
   {
     "id": 19,
     "type": "blondes",
-    "joke": "Pourquoi il y a une baignoire au-dessus des camions de pompiers des blondes ?",
-    "answer": "Pour mettre la sirène"
+    "joke": "Pourquoi y a-t-il une baignoire au-dessus des camions de pompiers des blondes ?",
+    "answer": "Pour y mettre la sirène."
   },
   {
     "id": 20,
@@ -1401,7 +1401,7 @@
     "id": 234,
     "type": "global",
     "joke": "Pour ne plus puer de la gueule...",
-    "answer": "Faut-il arrêter de dire de la merde ?"
+    "answer": "...faut-il arrêter de dire de la merde ?"
   },
   {
     "id": 235,
@@ -2031,7 +2031,7 @@
     "id": 339,
     "type": "beauf",
     "joke": "Que dit une bière quand elle tombe dans l'eau ?",
-    "answer": "Je sais panaché"
+    "answer": "Je sais panaché."
   },
   {
     "id": 340,
@@ -4605,7 +4605,7 @@
     "id": 771,
     "type": "global",
     "joke": "Que dit un chihuahua japonais pour dire bonjour ?",
-    "answer": "Konichihuahua."
+    "answer": "Konichihuahua"
   },
   {
     "id": 772,
@@ -5853,7 +5853,7 @@
     "id": 979,
     "type": "global",
     "joke": "Chuck Norris traverse le terrain d'Olive et Tom...",
-    "answer": "en moins d'un épisode."
+    "answer": "...en moins d'un épisode."
   },
   {
     "id": 980,
@@ -9555,7 +9555,7 @@
     "id": 1608,
     "type": "dark",
     "joke": "Superman vole au-dessus des immeubles, Spiderman vole entre les immeubles...",
-    "answer": "... et Musulmane vole dans les immeubles."
+    "answer": "... et musulman vole dans les immeubles."
   },
   {
     "id": 1609,
@@ -9866,7 +9866,7 @@
   {
     "id": 1660,
     "type": "dark",
-    "joke": "Celui qui l'achète ne s'en sert pas. Celui qui s'en sert ne le voit pas. Que suis-je ?",
+    "joke": "Celui qui m'achète ne s'en sert pas. Celui qui s'en sert ne me voit pas. Que suis-je ?",
     "answer": "Un cercueil"
   },
   {
@@ -10269,7 +10269,7 @@
     "id": 1728,
     "type": "dark",
     "joke": "Pourquoi les femmes ont de plus petits pieds que les hommes ?",
-    "answer": "Pour être plus près de l'évier!"
+    "answer": "Pour être plus près de l'évier !"
   },
   {
     "id": 1729,
@@ -10448,7 +10448,7 @@
   {
     "id": 1758,
     "type": "global",
-    "joke": "Quel est l'met l'plus aprécié des toxicomanes ?",
+    "joke": "Quel est le met le plus apprécié des toxicomanes ?",
     "answer": "L'œuf à la coke"
   },
   {
@@ -11084,8 +11084,8 @@
   {
     "id": 1864,
     "type": "global",
-    "joke": "Quel est le métier le plus sentimentale ?",
-    "answer": "Le jardinier, car tu roules des pelles et tu te prends des râteaux..."
+    "joke": "Quel est le métier le plus sentimental ?",
+    "answer": "Le jardinier, car tu roules des pelles et tu te prends des râteaux."
   },
   {
     "id": 1865,
@@ -12075,7 +12075,7 @@
     "id": 2032,
     "type": "dark",
     "joke": "Comment un policier sauve un homme du suicide ?",
-    "answer": "... en le tuant avant..."
+    "answer": "en le tuant avant"
   },
   {
     "id": 2033,
@@ -12183,7 +12183,7 @@
     "id": 2054,
     "type": "beauf",
     "joke": "L’autre jour, ma femme m’a demandé de lui passer du rouge à lèvres, mais je lui ai accidentellement passé un bâton de colle.",
-    "answer": "Elle ne me parle toujours pas."
+    "answer": "Depuis, elle ne m'a plus reparlé..."
   },
   {
     "id": 2055,
@@ -12596,8 +12596,8 @@
   {
     "id": 2135,
     "type": "global",
-    "joke": "Que fais un hiboux dans une marmite ?",
-    "answer": "Hiboux (il bout)"
+    "joke": "Que fait une chouette dans une marmite ?",
+    "answer": "Hibou"
   },
   {
     "id": 2137,
@@ -14049,7 +14049,7 @@
     "id": 2384,
     "type": "global",
     "joke": "Monsieur, arrêtez de dire \"ils croivent\", le verbe croiver n'existe pas, et cela m'énerve lorsque les gens parlent mal français.",
-    "answer": "Ah, vous ne le sachiez pas? Autant pour moi."
+    "answer": "Ah, vous ne le sachiez pas ? Autant pour moi."
   },
   {
     "id": 2385,
@@ -14338,5 +14338,239 @@
     "type": "dark",
     "joke": "Un client rentre dans une animalerie asiatique et dit en pointant du doigt : \"Je voudrais ce chien\"",
     "answer": "L'asiatique lui répond : \"Sur place ou à emporter ?\""
+  },
+  {
+    "id": 2433,
+    "type": "dark",
+    "joke": "Ma pote a invité son cruch chez elle.  Quand elle lui a demandé ce qu'il voulait manger il a répondu \"es-tu une option ?\"",
+    "answer": "elle a moins rougi dans son assiette..."
+  },
+  {
+    "id": 2434,
+    "type": "dark",
+    "joke": "Deux juifs regardent la mer, quand soudain un dit : \"Regarde David, la mer monte !\"",
+    "answer": "Et David répond : \"Vas-y achètes !\""
+  },
+  {
+    "id": 2435,
+    "type": "dark",
+    "joke": "Pourquoi y a-t-il de l'air conditionné dans les maisons de retraite ?",
+    "answer": "Pour garder les légumes frais."
+  },
+  {
+    "id": 2436,
+    "type": "limit",
+    "joke": "Les actrices porno sont les personnes les plus actives dans la vie.",
+    "answer": "Les autres ne branlent rien."
+  },
+  {
+    "id": 2437,
+    "type": "global",
+    "joke": "Qu'est-ce qui est petit, jaune et gris ?",
+    "answer": "Un poussin avec une mitraillette."
+  },
+  {
+    "id": 2438,
+    "type": "global",
+    "joke": "L'autre jour, je suis allé chez le coiffeur et il m'a demandé comment j'allais...",
+    "answer": "Je lui ai répondu \"au poil\"."
+  },
+  {
+    "id": 2439,
+    "type": "global",
+    "joke": "Quel est le comble pour un oiseau ?",
+    "answer": "Avoir le vertige."
+  },
+  {
+    "id": 2440,
+    "type": "global",
+    "joke": "Toto, demanda sa mère, as-tu changé l’eau du poisson ?",
+    "answer": "Non maman, répondit-il, il n’avait pas tout bu."
+  },
+  {
+    "id": 2441,
+    "type": "global",
+    "joke": "Un canard pond un œuf sur la frontière franco-suisse, à quel pays appartient l’œuf ?",
+    "answer": "T’as déjà vu un canard pondre un œuf ?"
+  },
+  {
+    "id": 2442,
+    "type": "dark",
+    "joke": "Celui qui l'achète ne s'en sert pas. Celui qui s'en sert ne le voit pas. Que suis-je ?",
+    "answer": "Un cercueil"
+  },
+  {
+    "id": 2443,
+    "type": "blondes",
+    "joke": "Que fait une blonde sur une planche de surf ?",
+    "answer": "Elle cherche la voile."
+  },
+  {
+    "id": 2444,
+    "type": "global",
+    "joke": "C'est l'histoire d'un tapis de douche qui dit \"Quelle vie...\"...",
+    "answer": "... et le papier toilette lui répond \"Parles pour toi...\"."
+  },
+  {
+    "id": 2445,
+    "type": "global",
+    "joke": "La personne qui a inventé le correcteur automatique est décédée.",
+    "answer": "Restaurant in peace."
+  },
+  {
+    "id": 2446,
+    "type": "dark",
+    "joke": "Un prêtre dit à un autre : \"Dis, tu aurais pas un peu grandit ?\"",
+    "answer": "Non, je rentre encore dans du 8 ans."
+  },
+  {
+    "id": 2447,
+    "type": "dark",
+    "joke": "Qu'est-ce qui est pire que lancer un bébé en-bas d'un hélicoptère ?",
+    "answer": "Le lancer en-haut"
+  },
+  {
+    "id": 2448,
+    "type": "global",
+    "joke": "Quel est le gâteau préféré des arbres ?",
+    "answer": "Le mille-feuille."
+  },
+  {
+    "id": 2449,
+    "type": "global",
+    "joke": "Que fait un train sur une place de parking ?",
+    "answer": "Il se gare..."
+  },
+  {
+    "id": 2450,
+    "type": "dev",
+    "joke": "Quelle est la console préférée des chats ?",
+    "answer": "La PS cat."
+  },
+  {
+    "id": 2451,
+    "type": "global",
+    "joke": "Que dit un poisson à un autre ?",
+    "answer": "Arrête-toi !"
+  },
+  {
+    "id": 2452,
+    "type": "global",
+    "joke": "C'est une éléphante qui demande à son mari...",
+    "answer": "T'es sûr que tu ne me trompes pas ?"
+  },
+  {
+    "id": 2453,
+    "type": "dark",
+    "joke": "Pourquoi les femmes ont de plus petits pieds que les hommes ?",
+    "answer": "Pour être plus près de l'évier!"
+  },
+  {
+    "id": 2454,
+    "type": "beauf",
+    "joke": "L’autre jour, ma femme m’a demandé de lui passer du rouge à lèvres, mais je lui ai accidentellement passé un bâton de colle.",
+    "answer": "Elle ne me parle toujours pas."
+  },
+  {
+    "id": 2455,
+    "type": "global",
+    "joke": "Quel est l'met l'plus aprécié des toxicomanes ?",
+    "answer": "L'œuf à la coke"
+  },
+  {
+    "id": 2456,
+    "type": "global",
+    "joke": "Quels sont les animaux les plus dangereux ?",
+    "answer": "Le serpent parce qu'il serre et il pend, et la tortue parce qu'elle tord et elle tue !"
+  },
+  {
+    "id": 2457,
+    "type": "dark",
+    "joke": "Que se passe-t-il lorsqu'on écrase un diabétique ?",
+    "answer": "Il y a du caramel partout..."
+  },
+  {
+    "id": 2458,
+    "type": "dark",
+    "joke": "Que crie un Juif quand on le gaze ?",
+    "answer": "Vite vite l'air !"
+  },
+  {
+    "id": 2459,
+    "type": "dev",
+    "joke": "Les villageois de Minecraft ne sont que des images…",
+    "answer": "ce sont des .png."
+  },
+  {
+    "id": 2460,
+    "type": "limit",
+    "joke": "Qu'est ce que le paradis des nécrophiles ?",
+    "answer": "la morgue"
+  },
+  {
+    "id": 2461,
+    "type": "global",
+    "joke": "La prime de rentrée scolaire à 390 € c'est abusé.",
+    "answer": "La PS5 coûte 400 €."
+  },
+  {
+    "id": 2462,
+    "type": "dark",
+    "joke": "Pourquoi les orphelins ne vont pas à la plage ?",
+    "answer": "Pour ne pas voir la mer"
+  },
+  {
+    "id": 2463,
+    "type": "dark",
+    "joke": "Un docteur à son patient : J'ai 2 mauvaises nouvelles. Il vous reste 3 jours à vivre...",
+    "answer": "Et ça fait 3 jours que j'essaie de vous contacter..."
+  },
+  {
+    "id": 2464,
+    "type": "limit",
+    "joke": "Les actrices de porno sont les personnes les plus actives dans la vie.",
+    "answer": "Les autres ne branlent rien."
+  },
+  {
+    "id": 2465,
+    "type": "global",
+    "joke": "Quel est le comble pour une abeille ?",
+    "answer": "Être allergique au pollen."
+  },
+  {
+    "id": 2466,
+    "type": "dark",
+    "joke": "Comment un policier sauve un homme du suicide ?",
+    "answer": "... en le tuant avant..."
+  },
+  {
+    "id": 2467,
+    "type": "dev",
+    "joke": "Qu'est ce qu'un pirateur fait le mieux ?",
+    "answer": "Ce qui lui tient hackeur (à cœur) !"
+  },
+  {
+    "id": 2468,
+    "type": "global",
+    "joke": "Qui est la sœur de Guillaume Tell ?",
+    "answer": "Taglia."
+  },
+  {
+    "id": 2469,
+    "type": "dev",
+    "joke": "Qu'est-ce qu'un pirate informatique fait le mieux ?",
+    "answer": "Ce qui lui tient hackeur !"
+  },
+  {
+    "id": 2470,
+    "type": "dark",
+    "joke": "Qu'est-ce qui a 5 bras, 3 jambes et 2 pieds ?",
+    "answer": "La ligne d’arrivée du marathon de Boston."
+  },
+  {
+    "id": 2471,
+    "type": "global",
+    "joke": "Monsieur, arrêtez de dire \"ils croivent\", le verbe croiver n'existe pas, et cela m'énerve lorsque les gens parlent mal français.",
+    "answer": "Ah, vous ne le sachiez pas? Autant pour moi."
   }
 ]
