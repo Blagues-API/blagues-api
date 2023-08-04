@@ -13605,7 +13605,7 @@
     "id": 2310,
     "type": "dark",
     "joke": "L'humour noir c'est comme les parents...",
-    "answer": "certains en n'ont pas."
+    "answer": "... certains n'en n'ont pas."
   },
   {
     "id": 2311,
@@ -13623,7 +13623,7 @@
     "id": 2313,
     "type": "dev",
     "joke": "Pourquoi vaut il mieux être software que hardware ?",
-    "answer": "Car c’est le hardware qui prend des coups quand le software plante"
+    "answer": "Car c’est le hardware qui prend des coups quand le software plante."
   },
   {
     "id": 2314,
@@ -14282,8 +14282,8 @@
   {
     "id": 2423,
     "type": "global",
-    "joke": "Pourquoi un vegan ne voyage pas dans un autre pays ?",
-    "answer": "Car ils ont besoin d'un passe-porc."
+    "joke": "Pourquoi un vegan ne voyage pas ailleurs qu'en Europe ?",
+    "answer": "Car il a besoin d'un passe-porc."
   },
   {
     "id": 2424,
@@ -14306,8 +14306,8 @@
   {
     "id": 2427,
     "type": "global",
-    "joke": "L'essence est un combustible fossile qui vient d'animaux décomposé.",
-    "answer": "Les vegan ne peuvent pas conduire."
+    "joke": "L'essence est un combustible fossile qui vient d'animaux décomposés.",
+    "answer": "Les vegans ne peuvent donc pas conduire."
   },
   {
     "id": 2428,
@@ -14572,5 +14572,149 @@
     "type": "global",
     "joke": "Monsieur, arrêtez de dire \"ils croivent\", le verbe croiver n'existe pas, et cela m'énerve lorsque les gens parlent mal français.",
     "answer": "Ah, vous ne le sachiez pas? Autant pour moi."
+  },
+  {
+    "id": 2472,
+    "type": "global",
+    "joke": "Pourquoi un vegan ne voyage pas dans un autre pays ?",
+    "answer": "Car ils ont besoin d'un passe-porc."
+  },
+  {
+    "id": 2473,
+    "type": "dev",
+    "joke": "Comment appelle-t-on un bug sur une plateforme musicale ?",
+    "answer": "Une Spoti-faille."
+  },
+  {
+    "id": 2474,
+    "type": "global",
+    "joke": "L'essence est un combustible fossile qui vient d'animaux décomposé.",
+    "answer": "Les vegan ne peuvent pas conduire."
+  },
+  {
+    "id": 2475,
+    "type": "dark",
+    "joke": "Est-ce qu'un aveugle...",
+    "answer": "...peut donner son point de vue ?"
+  },
+  {
+    "id": 2476,
+    "type": "dark",
+    "joke": "Est-ce qu'un muet...",
+    "answer": "...peut donner sa parole ?"
+  },
+  {
+    "id": 2477,
+    "type": "dark",
+    "joke": "Quel est la différence entre une Tesla et un tas de bébé mort ?",
+    "answer": "Je n'ai pas de Tesla dans ma cave."
+  },
+  {
+    "id": 2478,
+    "type": "dev",
+    "joke": "Pourquoi vaut il mieux être software que hardware ?",
+    "answer": "Car c’est le hardware qui prend des coups quand le software plante"
+  },
+  {
+    "id": 2479,
+    "type": "dark",
+    "joke": "Arrêtez les blagues sur les aveugles...",
+    "answer": "Imaginez qu'ils le voient..."
+  },
+  {
+    "id": 2480,
+    "type": "dark",
+    "joke": "L'humour noir c'est comme les parents...",
+    "answer": "... certains en n'ont pas."
+  },
+  {
+    "id": 2481,
+    "type": "dark",
+    "joke": "L'humour noir c'est comme les parents...",
+    "answer": "... certains n'en n'ont pas."
+  },
+  {
+    "id": 2482,
+    "type": "beauf",
+    "joke": "Si à la Saint Valentin elle te tient la main...",
+    "answer": "...vivement la Sainte Marguerite."
+  },
+  {
+    "id": 2483,
+    "type": "global",
+    "joke": "Mes parents m'ont acheté un nouveau lit alors que j'avais demandé un PC gamer et...",
+    "answer": "... Ils m'ont dit \"C'est pour que tu continues de rêver\"."
+  },
+  {
+    "id": 2484,
+    "type": "global",
+    "joke": "C'est l'histoire d'un cochon transexuel. Il a commencé Henri...",
+    "answer": "...et a terminé en rillettes."
+  },
+  {
+    "id": 2485,
+    "type": "dark",
+    "joke": "Une mère chinoise emmena son fils au parc. Il trouva un chien et se mit à jouer avec lui. Soudain, sa mère cria :",
+    "answer": "Chen Li ! Combien de fois dois-je te le répéter ? On ne joue pas avec la nourriture !"
+  },
+  {
+    "id": 2486,
+    "type": "dark",
+    "joke": "Combien d'arabe faut-il pour démarrer une émeute ?",
+    "answer": "-1"
+  },
+  {
+    "id": 2487,
+    "type": "limit",
+    "joke": "Un homme demande à une femme son métier, la femme lui répond « Je suis pro. » L’homme répond « Pro ? Dans quel domaine ? »",
+    "answer": "La femme répliqua « Je suis pro stituée ! »"
+  },
+  {
+    "id": 2488,
+    "type": "dark",
+    "joke": "Comment appelle-ton une femme parisienne en train de brûler ?",
+    "answer": "On l’appelle Notre Dame de Paris"
+  },
+  {
+    "id": 2489,
+    "type": "dark",
+    "joke": "Qu'est ce qu'il ne faut jamais dire à une personne sur chaise roulante ?",
+    "answer": "\"On est partie du mauvais pied tout les deux\""
+  },
+  {
+    "id": 2490,
+    "type": "global",
+    "joke": "Qu'est-ce qu'un yaourt qui court dans les bois ?",
+    "answer": "Un yaourt nature !"
+  },
+  {
+    "id": 2491,
+    "type": "beauf",
+    "joke": "Il ne faut pas donner du pain aux canards...",
+    "answer": "Aux connards non plus !"
+  },
+  {
+    "id": 2492,
+    "type": "global",
+    "joke": "Que dit un footballeur lorsque il est énervé ?",
+    "answer": "Tu te foot du monde !"
+  },
+  {
+    "id": 2493,
+    "type": "global",
+    "joke": "Que dit-on d'une voyante qui lit dans le sucre ?",
+    "answer": "Qu'elle est extra-glucide !"
+  },
+  {
+    "id": 2494,
+    "type": "dark",
+    "joke": "Que dit on à un arabe en costard ?",
+    "answer": "accusé, levez vous !"
+  },
+  {
+    "id": 2495,
+    "type": "global",
+    "joke": "Qu'es ce qu'un chinois qui rate son car ?",
+    "answer": "Un caraté."
   }
 ]
