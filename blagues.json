@@ -14606,7 +14606,7 @@
   {
     "id": 2477,
     "type": "dark",
-    "joke": "Quel est la différence entre une Tesla et un tas de bébé mort ?",
+    "joke": "Quel est la différence entre une Tesla et un tas de bébés morts ?",
     "answer": "Je n'ai pas de Tesla dans ma cave."
   },
   {
@@ -14655,7 +14655,7 @@
     "id": 2485,
     "type": "dark",
     "joke": "Une mère chinoise emmena son fils au parc. Il trouva un chien et se mit à jouer avec lui. Soudain, sa mère cria :",
-    "answer": "Chen Li ! Combien de fois dois-je te le répéter ? On ne joue pas avec la nourriture !"
+    "answer": "Chen-Li ! Combien de fois dois-je te le répéter ? On ne joue pas avec la nourriture !"
   },
   {
     "id": 2486,
@@ -14716,5 +14716,65 @@
     "type": "global",
     "joke": "Qu'es ce qu'un chinois qui rate son car ?",
     "answer": "Un caraté."
+  },
+  {
+    "id": 2496,
+    "type": "dark",
+    "joke": "Quel est la différence entre une Tesla et un tas de bébé mort ?",
+    "answer": "Je n'ai pas de Tesla dans ma cave."
+  },
+  {
+    "id": 2497,
+    "type": "dark",
+    "joke": "Pourquoi un orphelin n'a pas un bon pc ?",
+    "answer": "Car il n'a pas de carte mère."
+  },
+  {
+    "id": 2498,
+    "type": "dark",
+    "joke": "Un élève demande à son professeur d'être plus clair mais...",
+    "answer": "... son professeur est noir."
+  },
+  {
+    "id": 2499,
+    "type": "dark",
+    "joke": "Une mère chinoise emmena son fils au parc. Il trouva un chien et se mit à jouer avec lui. Soudain, sa mère cria :",
+    "answer": "Chen Li ! Combien de fois dois-je te le répéter ? On ne joue pas avec la nourriture !"
+  },
+  {
+    "id": 2500,
+    "type": "dark",
+    "joke": "Quelle est la différence entre une sortie scolaire et un nuage ?",
+    "answer": "J'ai roulé droit dans l'un, mais pas dans l'autre."
+  },
+  {
+    "id": 2501,
+    "type": "global",
+    "joke": "Quel est l'animé préférée des pompiers ?",
+    "answer": "Hunter extincteur."
+  },
+  {
+    "id": 2502,
+    "type": "dark",
+    "joke": "Quel est le nom de ma femme de ménage ?",
+    "answer": "Sarah Masse."
+  },
+  {
+    "id": 2503,
+    "type": "dark",
+    "joke": "Qu'elle est le nom de ma femme de ménage ?",
+    "answer": "Sarah Masse."
+  },
+  {
+    "id": 2504,
+    "type": "beauf",
+    "joke": "Quel est le point commun entre un homme et un tiroir ?",
+    "answer": "Les deux sont des fourre-tout."
+  },
+  {
+    "id": 2505,
+    "type": "beauf",
+    "joke": "Pourquoi Lenny trace un trait sur la phrase ?",
+    "answer": "Parce que Lenny barre !"
   }
 ]
