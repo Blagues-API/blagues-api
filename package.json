@@ -47,7 +47,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^13.3.0",
     "prettier": "^2.8.8",
-    "prisma": "4.15.0",
+    "prisma": "4.16.2",
     "tsc-watch": "^6.0.4",
     "typescript": "^4.9.5"
   },
@@ -55,7 +55,7 @@
     "@fastify/cors": "^8.3.0",
     "@fastify/formbody": "^7.4.0",
     "@octokit/rest": "^19.0.11",
-    "@prisma/client": "^4.15.0",
+    "@prisma/client": "^4.16.2",
     "@sapphire/async-queue": "^1.5.0",
     "@sentry/integrations": "^7.54.0",
     "@sentry/node": "^7.54.0",
