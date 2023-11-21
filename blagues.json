@@ -12823,9 +12823,9 @@
   },
   {
     "id": 2176,
-    "type": "dark",
+    "type": "global",
     "joke": "Pourquoi voulez-vous cet emploi ?",
-    "answer": "Le fait de ne pas mourir de faim me passionne depuis toujours."
+    "answer": "En fait, le fait de ne pas mourir de faim me passionne depuis toujours !"
   },
   {
     "id": 2177,
@@ -13178,8 +13178,8 @@
   {
     "id": 2237,
     "type": "limit",
-    "joke": "Maman,maman, ça prend combien de \"T\" le mot \"bite\" ?",
-    "answer": "Ah tu sais mets en beaucoup, c'est jamais assez long ce genre de chose."
+    "joke": "Maman, maman, ça prend combien de \"T\" le mot \"bite\" ?",
+    "answer": "Ah, tu sais, mets en beaucoup. C'est jamais assez long ce genre de chose..."
   },
   {
     "id": 2238,
@@ -13556,7 +13556,7 @@
   {
     "id": 2302,
     "type": "global",
-    "joke": "Quel est la différence entre 1978 et 2022 ?",
+    "joke": "Quelle est la différence entre 1978 et 2023 ?",
     "answer": "La mort de Claude François aurait couté plus cher en 2023."
   },
   {
@@ -14776,5 +14776,107 @@
     "type": "beauf",
     "joke": "Pourquoi Lenny trace un trait sur la phrase ?",
     "answer": "Parce que Lenny barre !"
+  },
+  {
+    "id": 2506,
+    "type": "global",
+    "joke": "Quelle est la différence entre un rat et un porc ?",
+    "answer": "Aucun rapport !"
+  },
+  {
+    "id": 2507,
+    "type": "dark",
+    "joke": "Pourquoi voulez-vous cet emploi ?",
+    "answer": "Le fait de ne pas mourir de faim me passionne depuis toujours."
+  },
+  {
+    "id": 2508,
+    "type": "global",
+    "joke": "Quel est le jeu vidéo préféré des chats ?",
+    "answer": "Croquette League"
+  },
+  {
+    "id": 2509,
+    "type": "limit",
+    "joke": "Quel est le point commun entre un vieux marseillais et une prostituée ?",
+    "answer": "Les deux aiment jouer avec des boules."
+  },
+  {
+    "id": 2510,
+    "type": "dev",
+    "joke": "Quelles sont les îles les plus instables au monde ?",
+    "answer": "Ce sont les Îles Canaries."
+  },
+  {
+    "id": 2511,
+    "type": "dark",
+    "joke": "Quelle est la seule solde qu'Eric Zemmour ne veut pas faire ?",
+    "answer": "Le Black Friday."
+  },
+  {
+    "id": 2512,
+    "type": "global",
+    "joke": "Pourquoi les japonais sont-ils stressés ?",
+    "answer": "Parce qu'ils se font trop de sushis !"
+  },
+  {
+    "id": 2513,
+    "type": "global",
+    "joke": "Maman, la maîtresse veut qu'on ramène du scotch à l'école.",
+    "answer": "Elle ne peut pas boire de la bière ou du vin comme tout le monde ?"
+  },
+  {
+    "id": 2514,
+    "type": "dark",
+    "joke": "Quel est la seul solde que Eric Zemmour ne veut pas faire ?",
+    "answer": "Le Black Friday."
+  },
+  {
+    "id": 2515,
+    "type": "limit",
+    "joke": "Maman, maman, ça prend combien de \"T\" le mot \"bite\" ?",
+    "answer": "Ah, tu sais, mets en beaucoup ; c'est jamais assez long ce genre de chose."
+  },
+  {
+    "id": 2516,
+    "type": "global",
+    "joke": "Qu’est-ce qui est jaune et qui attend ?",
+    "answer": "Un bus scolaire dans un embouteillage."
+  },
+  {
+    "id": 2517,
+    "type": "limit",
+    "joke": "Maman, maman, ça prend combien de \"T\" le mot \"bite\" ?",
+    "answer": "Ah, tu sais, mets en beaucoup. C'est jamais assez long ce genre de chose..."
+  },
+  {
+    "id": 2518,
+    "type": "dark",
+    "joke": "L'amour n'a pas d'âge...",
+    "answer": "mais le juge n'était pas de cet avis..."
+  },
+  {
+    "id": 2519,
+    "type": "global",
+    "joke": "Quel est le métier où l'on travaille le plus d'arrache-pied ?",
+    "answer": "Démineur"
+  },
+  {
+    "id": 2520,
+    "type": "dev",
+    "joke": "$ npm find LaFemmeDeMaVie",
+    "answer": "Error: Unable to find package ‘LaFemmeDeMaVie’"
+  },
+  {
+    "id": 2521,
+    "type": "global",
+    "joke": "Lutter contre la calvitie...",
+    "answer": "C'est peigne perdu."
+  },
+  {
+    "id": 2522,
+    "type": "dark",
+    "joke": "Alarme qui se propage...",
+    "answer": "Mamadou dans les parages."
   }
 ]
