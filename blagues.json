@@ -6015,7 +6015,7 @@
     "id": 1006,
     "type": "dev",
     "joke": "Quel est le comble pour la mémoire vive ?",
-    "answer": "C'est quelle RAM."
+    "answer": "C'est qu'elle RAM."
   },
   {
     "id": 1007,
@@ -6151,7 +6151,7 @@
   },
   {
     "id": 1030,
-    "type": "dark",
+    "type": "global",
     "joke": "Je vais appeler mon enfant Plainte.",
     "answer": "Au moins, je pourrais porter Plainte."
   },
@@ -11079,7 +11079,7 @@
     "id": 1863,
     "type": "limit",
     "joke": "Que fait un nain pour se torcher?",
-    "answer": "Il cour dans l'herbe....."
+    "answer": "Il court dans l'herbe..."
   },
   {
     "id": 1864,
@@ -11678,7 +11678,7 @@
   {
     "id": 1963,
     "type": "blondes",
-    "joke": "Que fait un blonde quand elle a une idée dérrière la tête ?",
+    "joke": "Que fait une blonde quand elle a une idée derrière la tête ?",
     "answer": "Elle se retourne"
   },
   {
@@ -14878,5 +14878,89 @@
     "type": "dark",
     "joke": "Alarme qui se propage...",
     "answer": "Mamadou dans les parages."
+  },
+  {
+    "id": 2523,
+    "type": "dark",
+    "joke": "Mr. et Mme. Palairbiensolidecesdeuxtours ont un fils. Comment s'appele-t-il ?",
+    "answer": "Ousama Palairbiensolidecesdeuxtours"
+  },
+  {
+    "id": 2524,
+    "type": "limit",
+    "joke": "Que fait un nain pour se torcher?",
+    "answer": "Il cour dans l'herbe....."
+  },
+  {
+    "id": 2525,
+    "type": "global",
+    "joke": "Sonic et Flash font la course dans un stade. Qui est le plus rapide ?",
+    "answer": "Le caméraman"
+  },
+  {
+    "id": 2526,
+    "type": "dark",
+    "joke": "Qu'est ce qui est jaune et qui attend ?",
+    "answer": "Un Ouïghours à l'entrée du camp"
+  },
+  {
+    "id": 2527,
+    "type": "dark",
+    "joke": "Pourquoi un raciste ne peut-il pas aller en prison ?",
+    "answer": "Car elles sont pleines d'arabes."
+  },
+  {
+    "id": 2528,
+    "type": "blondes",
+    "joke": "Que fait un blonde quand elle a une idée dérrière la tête ?",
+    "answer": "Elle se retourne"
+  },
+  {
+    "id": 2529,
+    "type": "dark",
+    "joke": "Pourquoi Zemmour enlève-t-il tous les poils blancs de son derrière ?",
+    "answer": "Pour laisser tous les noirs dans la merde"
+  },
+  {
+    "id": 2530,
+    "type": "dark",
+    "joke": "Qu'est-ce qui est pire que se faire torturer à mort ?",
+    "answer": "Se faire réanimer..."
+  },
+  {
+    "id": 2531,
+    "type": "dark",
+    "joke": "Qu'es ce que un arabe sans bras ?",
+    "answer": "Une personne de confiance."
+  },
+  {
+    "id": 2532,
+    "type": "dark",
+    "joke": "Mon humour est tellement noir...",
+    "answer": "... qu'il manque d'eau et de nourriture."
+  },
+  {
+    "id": 2533,
+    "type": "dark",
+    "joke": "Mon humour est tellement noir...",
+    "answer": "qu'il passe pas les frontières."
+  },
+  {
+    "id": 2534,
+    "type": "dark",
+    "joke": "Arrêtez les blagues sur les nains.",
+    "answer": "Il faut grandir un peu."
+  },
+  {
+    "id": 2535,
+    "type": "dark",
+    "joke": "Comment nomme-t-on la poussette des juifs ?",
+    "answer": "Un barbecue"
+  },
+  {
+    "id": 2536,
+    "type": "dark",
+    "joke": "Quel est la voiture préférée des kamikazes ?",
+    "answer": "La Citroën C4."
   }
 ]
