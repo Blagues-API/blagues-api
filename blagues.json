@@ -14900,8 +14900,8 @@
   {
     "id": 2526,
     "type": "dark",
-    "joke": "Qu'est ce qui est jaune et qui attend ?",
-    "answer": "Un Ouïghours à l'entrée du camp"
+    "joke": "Qu'est-ce qui est jaune et qui attend ?",
+    "answer": "Un Ouïghours à l'entrée du camp."
   },
   {
     "id": 2527,
@@ -14962,5 +14962,71 @@
     "type": "dark",
     "joke": "Quel est la voiture préférée des kamikazes ?",
     "answer": "La Citroën C4."
+  },
+  {
+    "id": 2537,
+    "type": "dark",
+    "joke": "L'humour noir, c'est raciste.",
+    "answer": "Alors pourquoi on ne crée pas l'humour blanc ?"
+  },
+  {
+    "id": 2538,
+    "type": "dark",
+    "joke": "Quel est la youtubeuse préférée des allemands ?",
+    "answer": "Lena zi"
+  },
+  {
+    "id": 2539,
+    "type": "global",
+    "joke": "Si un gay m'attaque dans la rue...",
+    "answer": "On peut dire que c'est un guet-apens ?"
+  },
+  {
+    "id": 2540,
+    "type": "dark",
+    "joke": "Qu'est ce qui est jaune et qui attend ?",
+    "answer": "Un Ouïghours à l'entrée du camp"
+  },
+  {
+    "id": 2541,
+    "type": "dark",
+    "joke": "Je vais arrêter de dire des blagues sur les orphelins…",
+    "answer": "… sinon ils vont aller le dire à leurs parents."
+  },
+  {
+    "id": 2542,
+    "type": "dark",
+    "joke": "qui a remporté le marathon de New-York de 2001 ?",
+    "answer": "Ben Laden, il avait deux tour d'avance."
+  },
+  {
+    "id": 2543,
+    "type": "global",
+    "joke": "Les réveillons pour un végan",
+    "answer": "C’est sans foie ni l’oie."
+  },
+  {
+    "id": 2544,
+    "type": "dark",
+    "joke": "je vais arrêter de dire des blagues sur les orphelins,",
+    "answer": "ils vont aller le dire a leurs parents."
+  },
+  {
+    "id": 2545,
+    "type": "global",
+    "joke": "Quel est l'aliment le plus drôle ?",
+    "answer": "Le riz."
+  },
+  {
+    "id": 2546,
+    "type": "global",
+    "joke": "Où vont les poules en hiver ?",
+    "answer": "À Liverpool."
+  },
+  {
+    "id": 2547,
+    "type": "dark",
+    "joke": "Mon rire est tellement jaune...",
+    "answer": "... qu'il mange avec des baguettes."
   }
 ]
