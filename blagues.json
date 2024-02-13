@@ -12920,7 +12920,7 @@
   {
     "id": 2193,
     "type": "beauf",
-    "joke": "Lorsqu'une consonne suit une voyelle entre 2 mots. On doit faire la liaison. Mais il y a des exceptions.",
+    "joke": "Lorsqu'une consonne est suivie d'une voyelle entre 2 mots, on doit faire la liaison. Mais il y a des exceptions.",
     "answer": "\"L'habit à papa\" et \"l'achat à maman\" par exemple."
   },
   {
@@ -13166,7 +13166,7 @@
   {
     "id": 2235,
     "type": "limit",
-    "joke": "Quelle est la différance entre une femme et une grue ?",
+    "joke": "Quelle est la différence entre une femme et une grue ?",
     "answer": "La grue débite des caisses et la femme encaisse des bites."
   },
   {
@@ -14960,7 +14960,7 @@
   {
     "id": 2536,
     "type": "dark",
-    "joke": "Quel est la voiture préférée des kamikazes ?",
+    "joke": "Quelle est la voiture préférée des kamikazes ?",
     "answer": "La Citroën C4."
   },
   {
@@ -15028,5 +15028,77 @@
     "type": "dark",
     "joke": "Mon rire est tellement jaune...",
     "answer": "... qu'il mange avec des baguettes."
+  },
+  {
+    "id": 2548,
+    "type": "dark",
+    "joke": "Quelle est la fête préféré des kamikazes ?",
+    "answer": "Une boum"
+  },
+  {
+    "id": 2549,
+    "type": "global",
+    "joke": "Comment appelle-t-on un nain handicapé ?",
+    "answer": "Un invalide."
+  },
+  {
+    "id": 2550,
+    "type": "dark",
+    "joke": "Quel est la voiture préférée des kamikazes ?",
+    "answer": "La Citroën C4."
+  },
+  {
+    "id": 2551,
+    "type": "limit",
+    "joke": "Quelle est la différance entre une femme et une grue ?",
+    "answer": "La grue débite des caisses et la femme encaisse des bites."
+  },
+  {
+    "id": 2552,
+    "type": "beauf",
+    "joke": "Lorsqu'une consonne suit une voyelle entre 2 mots. On doit faire la liaison. Mais il y a des exceptions.",
+    "answer": "\"L'habit à papa\" et \"l'achat à maman\" par exemple."
+  },
+  {
+    "id": 2553,
+    "type": "dark",
+    "joke": "Je ne comprends pas les gens qui me disent que je n'aime pas les noirs.",
+    "answer": "Je trouve même dommage qu'on ne puisse plus les acheter !"
+  },
+  {
+    "id": 2554,
+    "type": "dark",
+    "joke": "Des scientifiques ont trouvé de l'eau sur Mars !",
+    "answer": "Mars 1 - 0 Afrique"
+  },
+  {
+    "id": 2555,
+    "type": "dark",
+    "joke": "Violoncelle",
+    "answer": "... qui court le plus vite."
+  },
+  {
+    "id": 2556,
+    "type": "global",
+    "joke": "Que dit un français après une blague nulle ?",
+    "answer": "C'est Paris Golo"
+  },
+  {
+    "id": 2557,
+    "type": "dark",
+    "joke": "Mamadou, au tableau!",
+    "answer": "J'y suis déjà, madame..."
+  },
+  {
+    "id": 2558,
+    "type": "dark",
+    "joke": "Quelle est la carte pokémon la plus rare en Afrique ?",
+    "answer": "L'énergie eau."
+  },
+  {
+    "id": 2559,
+    "type": "beauf",
+    "joke": "Quel est le point commun entre une diarrhée et une voiture électrique ?",
+    "answer": "La peur de ne pas arriver à la maison !"
   }
 ]
