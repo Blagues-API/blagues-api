@@ -2173,8 +2173,8 @@
   },
   {
     "id": 363,
-    "type": "dark",
-    "joke": "Ma b*te, je l'ai appelée la vie.",
+    "type": "limit",
+    "joke": "Ma bite, je l'ai appelée la vie.",
     "answer": "Parce que la vie est dure..."
   },
   {
@@ -12302,8 +12302,8 @@
   {
     "id": 2077,
     "type": "limit",
-    "joke": "maman maman comment tu ma fait ?",
-    "answer": "tu sais il y a plusieurs facteurs qui sont rentrés dans ta conception"
+    "joke": "Maman maman, comment tu m'as fait ?",
+    "answer": "Tu sais il y a plusieurs facteurs qui sont rentrés dans ta conception."
   },
   {
     "id": 2078,
@@ -13089,7 +13089,7 @@
     "id": 2222,
     "type": "dark",
     "joke": "Pourquoi un breton préfère avoir Parkinson qu'Alzheimer ?",
-    "answer": "Il vaut mieux reverser la moitié de son verre que d'oublier de le boire."
+    "answer": "Il vaut mieux renverser la moitié de son verre que d'oublier de le boire."
   },
   {
     "id": 2223,
@@ -15100,5 +15100,245 @@
     "type": "beauf",
     "joke": "Quel est le point commun entre une diarrhée et une voiture électrique ?",
     "answer": "La peur de ne pas arriver à la maison !"
+  },
+  {
+    "id": 2560,
+    "type": "dark",
+    "joke": "Pourquoi un breton préfère avoir Parkinson qu'Alzheimer ?",
+    "answer": "Il vaut mieux reverser la moitié de son verre que d'oublier de le boire."
+  },
+  {
+    "id": 2561,
+    "type": "global",
+    "joke": "Quelle est la différence entre une poule et un chapon ?",
+    "answer": "Une poule cha pond mais un chapon cha pond pas."
+  },
+  {
+    "id": 2562,
+    "type": "limit",
+    "joke": "Comment ça se fait que tu regardes tout le temps des émissions de cuisine et que tu saches toujours pas cuisiner ?",
+    "answer": "C'est un peu comme toi avec les films de cul, tu sais pas niquer !"
+  },
+  {
+    "id": 2563,
+    "type": "global",
+    "joke": "J’ai tellement de sommeil en retard…",
+    "answer": "… que dans mes rêves je paie en Francs"
+  },
+  {
+    "id": 2564,
+    "type": "dark",
+    "joke": "Comment a été élu Vladimir Poutine ?",
+    "answer": "Par élimination."
+  },
+  {
+    "id": 2565,
+    "type": "dark",
+    "joke": "Quel est le point commun entre un aveugle et un orphelin ?",
+    "answer": "Ils ne verront jamais leur parents..."
+  },
+  {
+    "id": 2566,
+    "type": "dark",
+    "joke": "Comment un terroriste dit \"au revoir\" ?",
+    "answer": "A un de C4."
+  },
+  {
+    "id": 2567,
+    "type": "beauf",
+    "joke": "Un mari demande a sa femme : \"Est-ce que je t'ai déjà dit une fois que tu cuisines bien ?\"  - Non pourquoi ?",
+    "answer": "Alors pourquoi tu continues ?"
+  },
+  {
+    "id": 2568,
+    "type": "dark",
+    "joke": "- Chang, fait moi 20 pompes !",
+    "answer": "- D'accord Monsieur, quelle pointure ?"
+  },
+  {
+    "id": 2569,
+    "type": "global",
+    "joke": "Le voleur vole, mais l'oiseau vole aussi.",
+    "answer": "La seule différence est que l'oiseau fait son nid alors que le voleur nie son fait."
+  },
+  {
+    "id": 2570,
+    "type": "global",
+    "joke": "Qu'est ce qu'un titan qui ne sait pas nager ?",
+    "answer": "Un Titanic."
+  },
+  {
+    "id": 2571,
+    "type": "global",
+    "joke": "Qu'est ce que du ciment dans un pot ?",
+    "answer": "De la confiture de mur."
+  },
+  {
+    "id": 2572,
+    "type": "global",
+    "joke": "Un jour j'irai vivre en Théorie...",
+    "answer": "Parce qu'en Théorie tout va bien."
+  },
+  {
+    "id": 2573,
+    "type": "dark",
+    "joke": "Que cause une éclipse durant le ramadan ?",
+    "answer": "3 minutes pour vite manger."
+  },
+  {
+    "id": 2574,
+    "type": "dev",
+    "joke": "Qu’est ce qu’un code obèse ?",
+    "answer": "Un code qui ne run pas."
+  },
+  {
+    "id": 2575,
+    "type": "dark",
+    "joke": "Qu'elle est la salle de sport préféré des obèses ?",
+    "answer": "Le Basic Frite."
+  },
+  {
+    "id": 2576,
+    "type": "global",
+    "joke": "Un écrivain qui se livre…",
+    "answer": "C’est comme un canard qui se confie."
+  },
+  {
+    "id": 2577,
+    "type": "dark",
+    "joke": "Quelle est l'ouverture préférée des terroristes aux échecs ?",
+    "answer": "Le pion en C4."
+  },
+  {
+    "id": 2578,
+    "type": "dev",
+    "joke": "Le protocole RIP...",
+    "answer": "Est-ce qu'on peut dire qu'il est mort ?"
+  },
+  {
+    "id": 2579,
+    "type": "global",
+    "joke": "Pourquoi les films Star Wars sont sortis dans l'ordre 4, 5, 6, 1, 2, 3 ?",
+    "answer": "De la production, j'étais en charge. Yoda"
+  },
+  {
+    "id": 2580,
+    "type": "global",
+    "joke": "Quelle différence y-a-t-il entre Gabriel Attal et Emmanuel Macron ?",
+    "answer": "L'un a sauté une classe et l'autre a sauté la prof."
+  },
+  {
+    "id": 2581,
+    "type": "limit",
+    "joke": "maman maman comment tu m'as fait ?",
+    "answer": "tu sais il y a plusieurs facteurs qui sont rentrés dans ta conception"
+  },
+  {
+    "id": 2582,
+    "type": "dark",
+    "joke": "Comment appelle-t-on une africaine enceinte ?",
+    "answer": "Deux pour le prix d'un"
+  },
+  {
+    "id": 2583,
+    "type": "dark",
+    "joke": "Mimie Mathy est née en 1957.",
+    "answer": "Le temps passe vite, on ne l’a pas vue grandir !"
+  },
+  {
+    "id": 2584,
+    "type": "dark",
+    "joke": "Quelle est la différence entre Harry Potter et un Juif ?",
+    "answer": "Un seul des deux sort de la chambre."
+  },
+  {
+    "id": 2585,
+    "type": "limit",
+    "joke": "Maman maman, comment tu m'as fait ?",
+    "answer": "Tu sais il y a plusieurs facteurs qui sont rentrés dans ta conception."
+  },
+  {
+    "id": 2586,
+    "type": "dark",
+    "joke": "Une relation c'est comme le taxi,",
+    "answer": "Plus ça va loin, plus c'est cher quand ça s'arrête."
+  },
+  {
+    "id": 2587,
+    "type": "dark",
+    "joke": "Tu préfères ammener un noir à Auchan ou...",
+    "answer": "ammener un noir au champ ?"
+  },
+  {
+    "id": 2588,
+    "type": "dark",
+    "joke": "Voici la tranche d'âge pour faire une bonne dictature :",
+    "answer": "Commencez à 39 ans et finissez à 45."
+  },
+  {
+    "id": 2589,
+    "type": "beauf",
+    "joke": "Pourquoi les hommes ne respecte t'il pas la loi ?",
+    "answer": "Parce qu'elle n'est pas au masculin."
+  },
+  {
+    "id": 2590,
+    "type": "dark",
+    "joke": "La France, c'est comme un paquet de Dragibus.",
+    "answer": "Il y a de toutes les couleurs."
+  },
+  {
+    "id": 2591,
+    "type": "global",
+    "joke": "Que disait Pythagore lorsqu’il voulait promener son chien ?",
+    "answer": "On va se promener, va chercher Thalès."
+  },
+  {
+    "id": 2592,
+    "type": "limit",
+    "joke": "Le sexe, c'est un peu comme les équations.",
+    "answer": "A partir de 3 inconnues ça devient intéressant."
+  },
+  {
+    "id": 2593,
+    "type": "global",
+    "joke": "Ça paie bien le métier de géologue ?",
+    "answer": "Environ six smics."
+  },
+  {
+    "id": 2594,
+    "type": "dark",
+    "joke": "Que dit-on à un esclave couturier ?",
+    "answer": "Mais tisse !!"
+  },
+  {
+    "id": 2595,
+    "type": "global",
+    "joke": "J'inspire puis...",
+    "answer": "Shakespeare."
+  },
+  {
+    "id": 2596,
+    "type": "dark",
+    "joke": "Comment appelle-t-on un Lézard qui ne mange pas de porc ?",
+    "answer": "Lézard Abe."
+  },
+  {
+    "id": 2597,
+    "type": "dark",
+    "joke": "Que dit un arabe avant de faire un plongeon ?",
+    "answer": "Allah une, Allah deux, Allahu akbar..."
+  },
+  {
+    "id": 2598,
+    "type": "dark",
+    "joke": "Pourquoi les chinois sont cons ?",
+    "answer": "Parce que les cons plissent..."
+  },
+  {
+    "id": 2599,
+    "type": "dark",
+    "joke": "Quel est le chiffre préféré des arabes ?",
+    "answer": "C'est 4. (C4)"
   }
 ]
