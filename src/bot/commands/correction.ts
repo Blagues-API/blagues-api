@@ -28,7 +28,6 @@ import clone from 'lodash/clone';
 import { ProposalType } from '@prisma/client';
 import {
   buildJokeDisplay,
-  info,
   interactionInfo,
   interactionProblem,
   isEmbedable,
@@ -80,7 +79,7 @@ export default class CorrectionCommand extends Command {
   async run(interaction: ChatInputCommandInteraction<'cached'>) {
     const query = interaction.options.getString('query', true);
 
-    const joke = await this.resolveJoke(interaction, query);
+    const joke = await this.findJoke(interaction, query);
     if (!joke) return;
 
     const newJoke = await this.requestChanges(interaction, clone(joke));
@@ -89,50 +88,6 @@ export default class CorrectionCommand extends Command {
     const message = await interaction.fetchReply();
 
     await CorrectionCommand.editJoke(message, interaction.user, joke, newJoke);
-  }
-
-  async resolveJoke(
-    interaction: ChatInputCommandInteraction<'cached'>,
-    query: string
-  ): Promise<JokeCorrectionPayload | null> {
-    const joke = await this.findJoke(interaction, query);
-    if (joke) return joke;
-
-    const question = await interaction.reply({
-      embeds: [
-        {
-          title: 'Quelle blague voulez-vous corriger ?',
-          description:
-            "Il faut tout d'abord identifier la blague. Pour cela, il faut l'identifiant de la blague, l'identifiant du message la proposant ou la question de celle-ci.",
-          color: Colors.PRIMARY
-        }
-      ],
-      fetchReply: true
-    });
-
-    return new Promise((resolve) => {
-      const collector = question.channel.createMessageCollector({
-        filter: (m: Message) => m.author.id === interaction.user.id,
-        idle: 60_000
-      });
-      collector.on('collect', async (msg: Message) => {
-        if (msg.deletable) await msg.delete();
-        const joke = await this.findJoke(interaction, msg.content);
-
-        if (joke) {
-          collector.stop();
-          return resolve(joke);
-        }
-      });
-      collector.once('end', async (_collected, reason: string) => {
-        if (reason === 'idle') {
-          await interaction.editReply({
-            embeds: [question.embeds[0], info('Les 60 secondes se sont écoulées.')]
-          });
-          return resolve(null);
-        }
-      });
-    });
   }
 
   async requestChanges(
@@ -204,7 +159,7 @@ export default class CorrectionCommand extends Command {
         const response = await CorrectionCommand.requestTypeChange(buttonInteraction, joke);
         if (!response) return null;
 
-        return this.requestChanges(commandInteraction, joke, true);
+        return this.requestChanges(commandInteraction, response, true);
       }
 
       case 'question': {
@@ -275,13 +230,11 @@ export default class CorrectionCommand extends Command {
         }
       });
       if (!proposal) {
-        interaction.channel
-          ?.send(
-            messageProblem(
-              `Impossible de trouver une blague ou correction liée à cet ID de blague, assurez vous que cet ID provient bien d\'un message envoyé par le bot ${interaction.client.user}.`
-            )
+        await interaction.reply(
+          interactionProblem(
+            `Impossible de trouver une blague ou correction liée à cet ID de blague, assurez vous que cet ID provient bien d\'un message envoyé par le bot ${interaction.client.user}.`
           )
-          .then(tDelete(5000));
+        );
         return null;
       }
 
@@ -305,15 +258,13 @@ export default class CorrectionCommand extends Command {
 
     const joke = idType === IdType.JOKE_ID ? jokeById(Number(query)) : jokeByQuestion(query);
     if (!joke) {
-      interaction.channel
-        ?.send(
-          messageProblem(
-            `Impossible de trouver une blague à partir de ${
-              idType === IdType.JOKE_ID ? 'cet identifiant' : 'cette question'
-            }, veuillez réessayer !`
-          )
+      await interaction.reply(
+        interactionProblem(
+          `Impossible de trouver une blague à partir de ${
+            idType === IdType.JOKE_ID ? 'cet identifiant' : 'cette question'
+          }, veuillez réessayer !`
         )
-        .then(tDelete(5000));
+      );
       return null;
     }
 
