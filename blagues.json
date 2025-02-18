@@ -1645,7 +1645,7 @@
   },
   {
     "id": 275,
-    "type": "limit",
+    "type": "global",
     "joke": "Les parents sont deux êtres qui t'apprennent à marcher et à parler...",
     "answer": "Pour ensuite te dire de t'asseoir et de fermer ta gueule."
   },
@@ -3248,8 +3248,8 @@
   {
     "id": 543,
     "type": "dark",
-    "joke": "Quand est-ce qu'arrive un bœuf chez le boucher ?",
-    "answer": "Tard-Tard."
+    "joke": "Quand est-ce qu'un bœuf arrive chez le boucher ?",
+    "answer": "Tard-tard."
   },
   {
     "id": 544,
@@ -4369,7 +4369,7 @@
   },
   {
     "id": 732,
-    "type": "global",
+    "type": "dark",
     "joke": "Un sanglier croise un cochon et lui dit :",
     "answer": "Alors, ça va mieux ta chimio ?"
   },
@@ -6080,7 +6080,7 @@
   {
     "id": 1017,
     "type": "dark",
-    "joke": "Les blagues noires, c'est comme les enfants qui ont le cancer,",
+    "joke": "L'humour noir, c'est comme les enfants qui ont le cancer,",
     "answer": "ça ne vieillit jamais..."
   },
   {
@@ -6225,7 +6225,7 @@
     "id": 1042,
     "type": "dark",
     "joke": "Quel est le point commun entre un ami et un arbre ?",
-    "answer": "Ils tombent tous les deux au sol quand on abat à la hache !"
+    "answer": "Ils tombent tous les deux au sol quand on les abat à la hache !"
   },
   {
     "id": 1043,
@@ -8055,7 +8055,7 @@
     "id": 1352,
     "type": "dark",
     "joke": "Comment on appelle un bébé musulman ?",
-    "answer": "Un Baby Bommer"
+    "answer": "Un Baby Boomer"
   },
   {
     "id": 1353,
@@ -9698,8 +9698,8 @@
   {
     "id": 1632,
     "type": "limit",
-    "joke": "Comment on sait quand il faut rompre ?",
-    "answer": "C'est quand elle te casse plus les couilles que ce qu'elle te les vides."
+    "joke": "Comment sait-on quand il faut rompre ?",
+    "answer": "C'est quand elle te casse plus les couilles qu'elle ne te les vide."
   },
   {
     "id": 1633,
@@ -10718,7 +10718,7 @@
   {
     "id": 1803,
     "type": "beauf",
-    "joke": "En quel objet veut être récussiter un clochard ?",
+    "joke": "En quel objet veut être ressuscité un clochard ?",
     "answer": "En casserole pour avoir le ventre plein, le cul au chaud et la queue dans les mains d’une femme."
   },
   {
@@ -12764,7 +12764,7 @@
   {
     "id": 2165,
     "type": "dark",
-    "joke": "Pourquoi s'embêter a créé des grenades,",
+    "joke": "Pourquoi s'embêter à créer des grenades...",
     "answer": "quand on peut laisser la petite cuillère dans le micro-onde ?"
   },
   {
@@ -15237,7 +15237,7 @@
     "id": 2582,
     "type": "dark",
     "joke": "Comment appelle-t-on une africaine enceinte ?",
-    "answer": "Deux pour le prix d'un"
+    "answer": "Deux pour le prix d'un."
   },
   {
     "id": 2583,
@@ -15410,7 +15410,7 @@
   {
     "id": 2611,
     "type": "dark",
-    "joke": "J’ai une blague sur les arabes !",
+    "joke": "J'avais une blague sur les arabes...",
     "answer": "Mais ils me l’ont volé…"
   },
   {
@@ -15814,5 +15814,269 @@
     "type": "dark",
     "joke": "Si un schizophrène, ...",
     "answer": "... l'autre accélère ?"
+  },
+  {
+    "id": 2679,
+    "type": "dark",
+    "joke": "Un aveugle rentre dans un bar ...",
+    "answer": "... puis dans une table."
+  },
+  {
+    "id": 2680,
+    "type": "dark",
+    "joke": "Que dit un homme tronc à un homme valide ?",
+    "answer": "Tu as des membres alors que moignon."
+  },
+  {
+    "id": 2681,
+    "type": "global",
+    "joke": "Pourquoi se débarrasse-t-on de l’eau ?",
+    "answer": "Car l’oxy et l’hydro gênent."
+  },
+  {
+    "id": 2682,
+    "type": "global",
+    "joke": "D’après ma voyante, si j’aperçois un grand canard blanc dans un lac…",
+    "answer": "C’est peut-être un signe."
+  },
+  {
+    "id": 2683,
+    "type": "limit",
+    "joke": "Comment on sait quand il faut rompre ?",
+    "answer": "C'est quand elle te casse plus les couilles que ce qu'elle te les vides."
+  },
+  {
+    "id": 2684,
+    "type": "dark",
+    "joke": "J’ai une blague sur les arabes !",
+    "answer": "Mais ils me l’ont volé…"
+  },
+  {
+    "id": 2685,
+    "type": "global",
+    "joke": "La légende raconte que si tu fais une queue de poisson à une voiture de police…",
+    "answer": "Tu entendras le chant des sirènes."
+  },
+  {
+    "id": 2686,
+    "type": "beauf",
+    "joke": "Arriver à un certain âge, lorsqu'un femme vous demande si vous en avez une petite ou une grosse, …",
+    "answer": "… elle parle de votre retraite."
+  },
+  {
+    "id": 2687,
+    "type": "dark",
+    "joke": "Comment appelle-t-on une africaine enceinte ?",
+    "answer": "Deux pour le prix d'un"
+  },
+  {
+    "id": 2688,
+    "type": "dark",
+    "joke": "Pourquoi s'embêter a créé des grenades,",
+    "answer": "quand on peut laisser la petite cuillère dans le micro-onde ?"
+  },
+  {
+    "id": 2689,
+    "type": "beauf",
+    "joke": "En quel objet veut être récussiter un clochard ?",
+    "answer": "En casserole pour avoir le ventre plein, le cul au chaud et la queue dans les mains d’une femme."
+  },
+  {
+    "id": 2690,
+    "type": "global",
+    "joke": "Dans la vie, il y a ceux qui finissent leur blague...",
+    "answer": "."
+  },
+  {
+    "id": 2691,
+    "type": "global",
+    "joke": "Dans la vie, il y a trois types de personnes :",
+    "answer": "Ceux qui savent compter, et ceux qui ne savent pas."
+  },
+  {
+    "id": 2692,
+    "type": "dark",
+    "joke": "C'est un professeur d'une école de kamikazes qui dit à ses élèves :",
+    "answer": "Regardez bien, je ne le vous montrerai qu'une seule fois."
+  },
+  {
+    "id": 2693,
+    "type": "dark",
+    "joke": "Un mendiant demande de l'argent à un juif.",
+    "answer": "\"Non, torah rien !\""
+  },
+  {
+    "id": 2694,
+    "type": "beauf",
+    "joke": "Certaines femmes aiment les hommes qui assument leur côté féminin.",
+    "answer": "Mesdames, sachez que je viens de rater un créneau."
+  },
+  {
+    "id": 2695,
+    "type": "dark",
+    "joke": "Plus cancéreux que moi ?",
+    "answer": "Tumeur."
+  },
+  {
+    "id": 2696,
+    "type": "dark",
+    "joke": "Comment s'assurer qu'un sourd-muet gardera un secret ?",
+    "answer": "Offre lui des moufles."
+  },
+  {
+    "id": 2697,
+    "type": "dark",
+    "joke": "Je ne dis pas que mon professeur est sadique.",
+    "answer": "Il a simplement convoqué les parents de Théo, l'orphelin."
+  },
+  {
+    "id": 2698,
+    "type": "dark",
+    "joke": "Quel point commun y-a-t'il entre le Père Noël et un pédophile ?",
+    "answer": "Ils vident leur sac pour les enfants."
+  },
+  {
+    "id": 2699,
+    "type": "dark",
+    "joke": "Quel est l'animal le plus rapide du monde ?",
+    "answer": "Le poulet qui traverse le village Somalien."
+  },
+  {
+    "id": 2700,
+    "type": "dark",
+    "joke": "Qu'est-ce-qui a une grande cape et qui s'envole ?",
+    "answer": "Une femme syrienne sur une mine antipersonelle."
+  },
+  {
+    "id": 2701,
+    "type": "global",
+    "joke": "Jouer à cache-cache avec un banquier est une très mauvaise idée.",
+    "answer": "Vous finirez toujours par être découvert."
+  },
+  {
+    "id": 2702,
+    "type": "dark",
+    "joke": "Un passant demande à un pêcheur : \"Vous n'auriez pas vu ma fille passer ?\"",
+    "answer": "Le pêcheur répond : \"Si je l'ai vue. Mais avec le courant ça m'étonnerait que vous puissiez la rattraper !\""
+  },
+  {
+    "id": 2703,
+    "type": "dark",
+    "joke": "Un petit garçon demande à sa maman : \"Tu es sûre que c'est comme ça qu'on prépare un rôti ?\"",
+    "answer": "\"Tais-toi et rentre dans le four !\""
+  },
+  {
+    "id": 2704,
+    "type": "global",
+    "joke": "Si tu entends une voix qui te dit ce que tu dois faire, surtout ne t'affole pas.",
+    "answer": "Tu n'es pas schizophrène, juste en couple."
+  },
+  {
+    "id": 2705,
+    "type": "global",
+    "joke": "Gilbert Montagné pratique habituellement le tutoiement.",
+    "answer": "Il ne vouvoie pas."
+  },
+  {
+    "id": 2706,
+    "type": "dark",
+    "joke": "J'ai arrêté de fumer il y a 13 ans.",
+    "answer": "Mais je suis encore loin du record de Jeanne d'Arc qui a arrêté il y a 592 ans."
+  },
+  {
+    "id": 2707,
+    "type": "dark",
+    "joke": "Qu'est-ce que 4 noirs dans une voiture ?",
+    "answer": "Des vitres teintées"
+  },
+  {
+    "id": 2708,
+    "type": "global",
+    "joke": "Je viens de croiser un agent SNCF en train de courir.",
+    "answer": "Il est peut-être en retard pour faire grève."
+  },
+  {
+    "id": 2709,
+    "type": "dark",
+    "joke": "Pourquoi les noirs ont l'intérieur des mains et des pieds blancs ?",
+    "answer": "Car ils étaient à quatre pattes quand Dieu les a peints."
+  },
+  {
+    "id": 2710,
+    "type": "dark",
+    "joke": "Quel est le language de programmation préféré de Hitler ?",
+    "answer": "Le CSS"
+  },
+  {
+    "id": 2711,
+    "type": "dark",
+    "joke": "Quel était le couteau préféré de Jean-Marie Le Pen ?",
+    "answer": "Le couteau à beur."
+  },
+  {
+    "id": 2712,
+    "type": "dark",
+    "joke": "Les gens vous rendent malade ?",
+    "answer": "Augmentez le temps de cuisson."
+  },
+  {
+    "id": 2713,
+    "type": "dark",
+    "joke": "Quel est le point commun entre un pokémon et un cancer ?",
+    "answer": "Ils évoluent."
+  },
+  {
+    "id": 2714,
+    "type": "dark",
+    "joke": "Quelle solution ont trouvé les chinois pour faire le travail de 100 hommes ?",
+    "answer": "10 enfants."
+  },
+  {
+    "id": 2715,
+    "type": "limit",
+    "joke": "Mon pénis est déjà rentré dans le guinness book.",
+    "answer": "Mais le libraire m'a demandé de le retirer."
+  },
+  {
+    "id": 2716,
+    "type": "dark",
+    "joke": "Quelle est la partie le plus brillante chez les arabes ?",
+    "answer": "Les menottes."
+  },
+  {
+    "id": 2717,
+    "type": "dark",
+    "joke": "Pourquoi les Somaliennes font-elles beaucoup d'enfants ?",
+    "answer": "Parce que c'est le seul moment où elles ont un peu de viande dans le ventre !"
+  },
+  {
+    "id": 2718,
+    "type": "dark",
+    "joke": "Professeur : \"Quel était l'outil agricole le plus utilisé au 18ème siècle ?\". Mamadou lève la main.",
+    "answer": "Exact !"
+  },
+  {
+    "id": 2719,
+    "type": "limit",
+    "joke": "Le point commun entre une fille vierge et une chaussette mouillée ?",
+    "answer": "Elles sont toutes les deux difficiles à enfiler"
+  },
+  {
+    "id": 2720,
+    "type": "dark",
+    "joke": "Comment le chirurgien procède-t-il en cas de grève de l'anesthésiste ?",
+    "answer": "Il met des boules Quiès."
+  },
+  {
+    "id": 2721,
+    "type": "limit",
+    "joke": "J'ai nommé ma bite Bidou.",
+    "answer": "Parce que à chaque fois que je vais aux toilettes, je s'coue Bidou."
+  },
+  {
+    "id": 2722,
+    "type": "dark",
+    "joke": "Ce n’est pas l’habit qui fait le moine, …",
+    "answer": "… mais c’est le chinois qui fait l’habit."
   }
 ]
