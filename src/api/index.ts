@@ -2,6 +2,7 @@ import 'dotenv/config';
 import fastify, { FastifyInstance } from 'fastify';
 import formBody from '@fastify/formbody';
 import cors from '@fastify/cors';
+import cookie from '@fastify/cookie';
 
 import AuthMiddleware from './middleware/auth';
 import AuthRoute from './routes/auth';
@@ -20,6 +21,7 @@ export default class App {
     }
 
     await this.fastify.register(cors);
+    await this.fastify.register(cookie, { secret: process.env.COOKIE_TOKEN, hook: false });
     await this.fastify.register(formBody);
     await this.fastify.register(AuthMiddleware);
     await this.fastify.register(AuthRoute, { prefix: 'api' });
