@@ -16078,5 +16078,17 @@
     "type": "dark",
     "joke": "Ce n’est pas l’habit qui fait le moine, …",
     "answer": "… mais c’est le chinois qui fait l’habit."
+  },
+  {
+    "id": 2723,
+    "type": "global",
+    "joke": "Que fait un démon pour montrer l’étendue de ses pouvoirs ?",
+    "answer": "Une démonstration."
+  },
+  {
+    "id": 2724,
+    "type": "dark",
+    "joke": "Quand on dit qu'un homme est cuit, c'est du second degré ...",
+    "answer": "... quand on dit qu'un juif est cuit, c'est du 270 degrés."
   }
 ]
