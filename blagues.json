@@ -3068,7 +3068,7 @@
   {
     "id": 513,
     "type": "dark",
-    "joke": "Un Arabe s'embrouille avec un Français. Ce dernier lui dit \"Occupe toi de tes affaires !\".",
+    "joke": "Un Français s'embrouille avec un Arabe. Ce dernier lui dit \"Occupe toi de tes affaires !\".",
     "answer": "Le Français répond alors \"Bah rend les moi !\"."
   },
   {
@@ -3560,7 +3560,7 @@
   {
     "id": 597,
     "type": "dark",
-    "joke": "- Maman, je suis juif ou arabe ? - Je suis Algérienne et ton père est juif, donc les deux, pourquoi ?",
+    "joke": "- Maman, je suis juif ou arabe ? - Je suis juive et ton père est algérien, donc les deux, pourquoi ?",
     "answer": "Il y a un scooter là-bas, et j'hésite entre le voler ou le vendre."
   },
   {
@@ -15530,7 +15530,7 @@
   {
     "id": 2631,
     "type": "dark",
-    "joke": "Quel est la voiture préférée des arabes ?",
+    "joke": "Quelles sont les voitures préférées des arabes ?",
     "answer": "Les voitures sans surveillances."
   },
   {
@@ -16090,5 +16090,137 @@
     "type": "dark",
     "joke": "Quand on dit qu'un homme est cuit, c'est du second degré ...",
     "answer": "... quand on dit qu'un juif est cuit, c'est du 270 degrés."
+  },
+  {
+    "id": 2725,
+    "type": "global",
+    "joke": "Je pleure quand on me tourne la tête, qui suis-je ?",
+    "answer": "Un robinet !"
+  },
+  {
+    "id": 2726,
+    "type": "dark",
+    "joke": "Quel est la voiture préférée des arabes ?",
+    "answer": "Les voitures sans surveillances."
+  },
+  {
+    "id": 2727,
+    "type": "limit",
+    "joke": "Quelle est la phrase que l'on peut dire en voiture et dans une cave ?",
+    "answer": "« Je ne savais pas qu’il y avait autant de place dans une 2008. »"
+  },
+  {
+    "id": 2728,
+    "type": "dark",
+    "joke": "Vous savez ce qui m'empêche de réaliser mes projets ?",
+    "answer": "La convention de Genève."
+  },
+  {
+    "id": 2729,
+    "type": "global",
+    "joke": "Comment appelle-t-on l'adjointe du pape ?",
+    "answer": "La sous-pape."
+  },
+  {
+    "id": 2730,
+    "type": "dark",
+    "joke": "Un arabe et un français s'ennuient dans une salle. Ils font un concours de pets. Qui pètent en premier ?",
+    "answer": "La salle."
+  },
+  {
+    "id": 2731,
+    "type": "dark",
+    "joke": "Qu'est-ce qui est plus terrifiant que la gestapo pour les juifs ?",
+    "answer": "Le fisc..."
+  },
+  {
+    "id": 2732,
+    "type": "dark",
+    "joke": "Quelle est la note de piano préférée des prêtres ?",
+    "answer": "La mineur."
+  },
+  {
+    "id": 2733,
+    "type": "global",
+    "joke": "Quel est le comble pour un policier ?",
+    "answer": "Arrêter les oiseaux parce qu'ils volent !"
+  },
+  {
+    "id": 2734,
+    "type": "global",
+    "joke": "Quelle est la nourriture préférée d'un cannibal ?",
+    "answer": "Le croque-monsieur."
+  },
+  {
+    "id": 2735,
+    "type": "dark",
+    "joke": "Quelle est la pire expression pour un musulman ?",
+    "answer": "Tout est bon dans le cochon."
+  },
+  {
+    "id": 2736,
+    "type": "dark",
+    "joke": "Quand tu sers la main à un musulman,",
+    "answer": "Et que tu te rappelles des morceaux de jambon sur ta main que tu avais mangés juste avant."
+  },
+  {
+    "id": 2737,
+    "type": "limit",
+    "joke": "Je pense que l’imprimeur à côté de chez moi dissimule un club libertin.",
+    "answer": "Il m’a proposé un plan A3, A4 et même A5."
+  },
+  {
+    "id": 2738,
+    "type": "global",
+    "joke": "Qu'est ce que du gaz froid ?",
+    "answer": "Du gazpacho !"
+  },
+  {
+    "id": 2739,
+    "type": "dark",
+    "joke": "Quel est le point commun entre un clown et un noir ?",
+    "answer": "Le nez gros..."
+  },
+  {
+    "id": 2740,
+    "type": "dev",
+    "joke": "Quand Chuck Norris se retrouve face à un null pointer exception...",
+    "answer": "Il change la variable sans modifier le code."
+  },
+  {
+    "id": 2741,
+    "type": "dark",
+    "joke": "Pourquoi le numéro 10 a peur ?",
+    "answer": "Parce qu'il est entre 9/11."
+  },
+  {
+    "id": 2742,
+    "type": "global",
+    "joke": "Quel est le comble pour un collectionneur de cartes Pokemon ?",
+    "answer": "D'avoir plus d'EX dans la vraie vie qu'en carte."
+  },
+  {
+    "id": 2743,
+    "type": "global",
+    "joke": "Toto, à quoi sert un fusil ? À fusilier !  À quoi sert une mitraillette ?  À mitrailler ! Et à quoi sert un tank ?",
+    "answer": "À tankuler !"
+  },
+  {
+    "id": 2744,
+    "type": "dark",
+    "joke": "Comment appelle-t-on les artistes arabes ?",
+    "answer": "Les arabes straits."
+  },
+  {
+    "id": 2745,
+    "type": "dark",
+    "joke": "Quelle est la différence entre un Ricard et un migrant ?",
+    "answer": "Le Ricard, il ne faut pas le noyer."
+  },
+  {
+    "id": 2746,
+    "type": "dark",
+    "joke": "Ceux de droite sont racistes...",
+    "answer": "... il ne faut pas se voiler la face."
   }
 ]
