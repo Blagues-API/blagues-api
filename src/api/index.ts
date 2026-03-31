@@ -11,7 +11,27 @@ export default class App {
   public fastify: FastifyInstance;
 
   constructor() {
-    this.fastify = fastify({ logger: false });
+    this.fastify = fastify({
+      logger: {
+        level: 'info',
+        redact: ['req.headers.authorization'],
+        serializers: {
+          req(request) {
+            return {
+              method: request.method,
+              url: request.url,
+              ip: request.ip
+            };
+          },
+          res(reply) {
+            return {
+              statusCode: reply.statusCode,
+              discord_id: reply.request?.auth?.user_id
+            };
+          }
+        }
+      }
+    });
   }
 
   async start(): Promise<void> {
