@@ -5,6 +5,8 @@ import got from 'got';
 import { APIUser, OAuth2Routes, RESTPostOAuth2AccessTokenResult } from 'discord-api-types/v9';
 import { DashboardAuthLogin, DashboardAuthUser, RegenerateReply, RegenerateRequest } from '../types';
 import { MissingKey } from '../Errors';
+import { randomUUID } from 'node:crypto';
+import path from 'node:path';
 
 export default async (fastify: FastifyInstance): Promise<void> => {
   fastify.route({
@@ -39,7 +41,27 @@ export default async (fastify: FastifyInstance): Promise<void> => {
   });
 
   fastify.route({
-    url: '/auth/token',
+    url: '/auth/login',
+    method: 'POST',
+    handler: async (req, res) => {
+      const state = randomUUID();
+
+      return res
+        .setCookie('state', state)
+        .redirect(
+          307,
+          'https://discord.com/api/oauth2/authorize' +
+            `?client_id=${process.env.clientId}` +
+            `&redirect_uri=${path.join(process.env.BASE_URL!, '/api/auth/callback')}` +
+            '&response_type=code' +
+            '&scope=identify email' +
+            `&state=${state}`
+        );
+    }
+  });
+
+  fastify.route({
+    url: '/auth/callback',
     method: 'POST',
     handler: async (req: DashboardAuthLogin, res: FastifyReply) => {
       const authData = await got
@@ -77,6 +99,31 @@ export default async (fastify: FastifyInstance): Promise<void> => {
       });
 
       return res.code(200).send(authData);
+    }
+  });
+
+  fastify.route({
+    url: '/regenerate',
+    method: 'POST',
+    onRequest: fastify.apiAuth,
+    handler: async (req: RegenerateRequest, res: FastifyReply) => {
+      if (!req.body || req.body.key !== req.auth!.key) {
+        return res.code(400).send(MissingKey);
+      }
+
+      const token_key = generateKey();
+      const token = generateAPIToken(req.auth!.user_id, token_key, 100);
+      const data: RegenerateReply = {
+        token_key,
+        token
+      };
+
+      await prisma.user.update({
+        data,
+        where: { user_id: req.auth!.user_id }
+      });
+
+      return res.code(200).send(data);
     }
   });
 
