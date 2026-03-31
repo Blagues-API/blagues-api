@@ -2,7 +2,7 @@ import { FastifyInstance, FastifyRequest } from 'fastify';
 import Jokes from '../../jokes';
 import { Categories, CategoriesRefs } from '../../typings';
 import { jokeById, jokesByKeywords, randomJoke, randomJokeByType } from '../../controllers';
-import { BadRequest, JokeNotFound, NoContent } from '../Errors';
+import { BadRequest, JokeNotFound, NoContent, SearchRequestKeywordTooLong, SearchTooManyKeywords } from '../Errors';
 import { JokeIdRequest, JokeTypeRequest, OptionalDisallowRequest, SearchRequest } from '../types';
 
 export default async (fastify: FastifyInstance): Promise<void> => {
@@ -81,6 +81,15 @@ export default async (fastify: FastifyInstance): Promise<void> => {
     method: 'GET',
     onRequest: fastify.apiAuth,
     handler: async (req: SearchRequest, res) => {
+      if (!req.query.query) {
+        return res.status(400).send(BadRequest);
+      }
+      if (typeof req.query.query === 'object' && req.query.query.length > 3) {
+        return res.status(400).send(SearchTooManyKeywords);
+      }
+      if (req.query.query.some((keyword) => keyword.length > 64)) {
+        return res.status(400).send(SearchRequestKeywordTooLong);
+      }
       const joke = jokesByKeywords(req.query.query, req.query.disallow);
       if (!joke) {
         return res.status(404).send(JokeNotFound);

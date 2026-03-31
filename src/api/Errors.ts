@@ -70,3 +70,15 @@ export const JokeNotFound: Error = {
   error: 'Not found',
   message: 'Joke not found'
 };
+
+export const SearchTooManyKeywords: Error = {
+  status: 400,
+  error: 'Bad Request',
+  message: 'A maximum of 3 keywords can be submitted'
+};
+
+export const SearchRequestKeywordTooLong: Error = {
+  status: 400,
+  error: 'Bad Request',
+  message: 'Each keyword cannot exceed 64 characters'
+};
