@@ -19,15 +19,15 @@ Afin de simplifier l'utilisation de Blagues API, des modules ont été créés 
 - [![pypi](https://img.shields.io/badge/Module%20Pypi-blagues--api-blue?style=flat&logo=pypi)](https://pypi.org/project/blagues-api) ![python](https://img.shields.io/pypi/pyversions/blagues-api)
 - [![php](https://img.shields.io/badge/Module%20Packagist-zuruuh%2Fblagues--api-orange?style=flat&logo=packagist)](https://packagist.org/packages/zuruuh/blagues-api) ![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/zuruuh/blagues-api)
 
-> Dans le cas où aucun module n'a été créé vous pouvez utiliser l'api standard.
+> Dans le cas où aucun module n'a été créé, vous pouvez utiliser l'API standard.
 
 ## Utilisation
 
-Retrouvez la documentation de l'API ainsi des modules directement sur le site [`blagues-api.fr`](https://www.blagues-api.fr).
+Retrouvez la documentation de l'API ainsi que des modules directement sur le site [`blagues-api.fr`](https://www.blagues-api.fr).
 
 ## Contribuer
 
-Le projet est open-source ce qui signifie que vous pouvez contribuer et faire évoluer le projet.<br>
+Le projet est open source, ce qui signifie que vous pouvez contribuer et faire évoluer le projet.<br>
 Rendez-vous sur la page des [issues](https://github.com/Blagues-API/blagues-api/issues), sélectionnez une issue qui vous intéresse et faites une demande pour y être assigné.
 > Les issues ayant le label `good first issue` sont les plus simples.
 
@@ -36,7 +36,7 @@ Rendez-vous sur la page des [issues](https://github.com/Blagues-API/blagues-api/
 Le projet fonctionne avec Docker, il vous permettra d'obtenir le même environnement qu'en production.<br>
 Si vous êtes sous Windows ou Mac, il vous faudra installer [Docker Desktop](https://www.docker.com/products/docker-desktop).
 
-⚠️ Si vous souhaitez tout de même contribuer au projet sans utiliser Docker veillez à installer et exécuter les mêmes scripts que ceux qui sont faits dans le fichier [Dockerfile.dev](https://github.com/Blagues-API/blagues-api/blob/dev/docker/Dockerfile.dev) de développement, ensuite lancez l'instance de développement avec la commande `yarn dev:legacy`.
+⚠️ Si vous souhaitez tout de même contribuer au projet sans utiliser Docker, veillez à installer et exécuter les mêmes scripts que ceux qui sont faits dans le fichier [Dockerfile.dev](https://github.com/Blagues-API/blagues-api/blob/dev/docker/Dockerfile.dev) de développement, ensuite lancez l'instance de développement avec la commande `yarn dev:legacy`.
 
 ### Installation des dépendances du projet
 
@@ -63,7 +63,7 @@ yarn dev # npm run dev
 ## FAQ
 
 - **Pouvons-nous proposer des blagues ?**
-  - Oui bien sûr en rejoignant le serveur [`Blagues API`](https://discord.gg/PPNpVaF), des commandes telles que `/suggestion` ont été créé afin de rendre la proposition de nouvelles blagues plus facile !
+  - Oui bien sûr en rejoignant le serveur [`Blagues API`](https://discord.gg/PPNpVaF), des commandes telles que `/suggestion` ont été créées afin de rendre la proposition de nouvelles blagues plus facile !
 
 ---
 
