@@ -301,13 +301,13 @@
     ajv-formats "^2.1.1"
     fast-uri "^2.0.0"
 
-"@fastify/cors@^8.3.0":
-  version "8.3.0"
-  resolved "https://registry.yarnpkg.com/@fastify/cors/-/cors-8.3.0.tgz#f03d745731b770793a1a15344da7220ca0d19619"
-  integrity sha512-oj9xkka2Tg0MrwuKhsSUumcAkfp2YCnKxmFEusi01pjk1YrdDsuSYTHXEelWNW+ilSy/ApZq0c2SvhKrLX0H1g==
+"@fastify/cors@^11.3.0":
+  version "11.3.0"
+  resolved "https://registry.yarnpkg.com/@fastify/cors/-/cors-11.3.0.tgz#5e4fe2dc9bd3988b393a585605d631f3635c2968"
+  integrity sha512-ggQGua+xHv1MvePbPr0v//xLYEsCXbWspquXCJS9Ot5YoRXq8J8ZWzHnxDBVnbtXosvistXo6LtNzOJswf64Fw==
   dependencies:
-    fastify-plugin "^4.0.0"
-    mnemonist "0.39.5"
+    fastify-plugin "^6.0.0"
+    toad-cache "^3.7.0"
 
 "@fastify/deepmerge@^1.0.0":
   version "1.3.0"
@@ -1754,6 +1754,11 @@ fastify-plugin@^4.0.0, fastify-plugin@^4.5.0:
   resolved "https://registry.yarnpkg.com/fastify-plugin/-/fastify-plugin-4.5.0.tgz#8b853923a0bba6ab6921bb8f35b81224e6988d91"
   integrity sha512-79ak0JxddO0utAXAQ5ccKhvs6vX2MGyHHMMsmZkBANrq3hXc1CHzvNPHOcvTsVMEPl5I+NT+RO4YKMGehOfSIg==
 
+fastify-plugin@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/fastify-plugin/-/fastify-plugin-6.0.0.tgz#7cd659c6aad5f3bf07b4c59205412351a47d39c8"
+  integrity sha512-fZOty7z3O7vOliF6d8bHE3wiEh1KcNnKEQensSgTk9C1DvN6nRLS++XVd86v33Hw/8u9Un8A1zDrQ8ujcQDHEg==
+
 fastify@^4.18.0:
   version "4.18.0"
   resolved "https://registry.yarnpkg.com/fastify/-/fastify-4.18.0.tgz#d369630ac1dcedb218e6a933380ed81447c3af11"
@@ -2574,13 +2579,6 @@ mkdirp-classic@^0.5.2, mkdirp-classic@^0.5.3:
   resolved "https://registry.yarnpkg.com/mkdirp-classic/-/mkdirp-classic-0.5.3.tgz#fa10c9115cc6d8865be221ba47ee9bed78601113"
   integrity sha512-gKLcREMhtuZRwRAfqP3RFW+TK4JqApVBtOIftVgjuABpAtpxhPGaDcfvbhNvD0B8iD1oUr/txX35NjcaY6Ns/A==
 
-mnemonist@0.39.5:
-  version "0.39.5"
-  resolved "https://registry.yarnpkg.com/mnemonist/-/mnemonist-0.39.5.tgz#5850d9b30d1b2bc57cc8787e5caa40f6c3420477"
-  integrity sha512-FPUtkhtJ0efmEFGpU14x7jGbTB+s18LrzRL2KgoWz9YvcY3cPomz8tih01GbHwnGk/OmkOKfqd/RAQoc8Lm7DQ==
-  dependencies:
-    obliterator "^2.0.1"
-
 ms@2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
@@ -2677,11 +2675,6 @@ npm-run-path@^5.1.0:
   integrity sha512-sJOdmRGrY2sjNTRMbSvluQqg+8X7ZK61yvzBEIDhz4f8z1TZFYABsqjjCBd/0PUNE9M6QDgHJXQkGUEm7Q+l9Q==
   dependencies:
     path-key "^4.0.0"
-
-obliterator@^2.0.1:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/obliterator/-/obliterator-2.0.4.tgz#fa650e019b2d075d745e44f1effeb13a2adbe816"
-  integrity sha512-lgHwxlxV1qIg1Eap7LgIeoBWIMFibOjbrYPIPJZcI1mmGAI2m3lNYpK12Y+GBdPQ0U1hRwSord7GIaawz962qQ==
 
 on-exit-leak-free@^2.1.0:
   version "2.1.0"
@@ -3470,6 +3463,11 @@ to-regex-range@^5.0.1:
   integrity sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==
   dependencies:
     is-number "^7.0.0"
+
+toad-cache@^3.7.0:
+  version "3.7.4"
+  resolved "https://registry.yarnpkg.com/toad-cache/-/toad-cache-3.7.4.tgz#211e72605bb7862dfc68e1c0df9d0fe3dc2dec07"
+  integrity sha512-m1TdR/rvT7kgGJZhspNtXdsdYk0fddFpJJFlG5s+UkPFo6lkLoZ3YLOaovPYjq1R75NP5JfeTlSHaOsE09peCg==
 
 token-types@^5.0.1:
   version "5.0.1"
